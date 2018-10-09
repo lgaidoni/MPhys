@@ -1,5 +1,5 @@
 #define MyAnalysis_cxx
-#include "MyAnalysis.h"
+#include "Headers/MyAnalysis.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
@@ -28,8 +28,8 @@ void MyAnalysis::DrawHistos() {
 
   TFile *Histograms;
 
-  if (gSystem->AccessPathName("Histograms.root") == 1) TFile *Histograms = new TFile("Histograms.root","NEW");
-  else if (gSystem->AccessPathName("Histograms.root") == 0) TFile *Histograms = new TFile("Histograms.root","RECREATE");
+  if (gSystem->AccessPathName("../Root-Files/Histograms.root") == 1) TFile *Histograms = new TFile("../Root-Files/Histograms.root","NEW");
+  else if (gSystem->AccessPathName("../Root-Files/Histograms.root") == 0) TFile *Histograms = new TFile("../Root-Files/Histograms.root","RECREATE");
   else cout << "Something's gone horribly wrong" << endl;
 
   //Create a canvas with an appropriate name, of size wxh 600x400
@@ -54,19 +54,19 @@ void MyAnalysis::DrawHistos() {
   TCanvas *c_u0_pT = new TCanvas("c_u0_pT", "", 600, 400);
   //Draw the histogram in the most recent canvas
   h_u0_pT->Draw();
-  c_u0_pT->Write("Muon_0_Momentum.png");
+  c_u0_pT->Write("Muon_0_Momentum");
 
   //Create a canvas with an appropriate name
   TCanvas *c_u1_pT = new TCanvas("c_u1_pT", "", 600, 400);
   //Draw the histogram in the most recent canvas
   h_u1_pT->Draw();
-  c_u1_pT->Write("Muon_1_Momentum.png");
+  c_u1_pT->Write("Muon_1_Momentum");
 
   //Create a canvas with an appropriate name
   TCanvas *c_u0u1_MX = new TCanvas("c_u0u1_MX", "", 600, 400);
   //Draw the histogram in the most recent canvas
   h_u0u1_MX->Draw();
-  c_u0u1_MX->Write("Muon_0-Muon_1-Invariant_Mass.png");
+  c_u0u1_MX->Write("Muon_0-Muon_1-Invariant_Mass");
 
   Histograms->Close();
 
