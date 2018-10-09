@@ -214,6 +214,8 @@ void MyAnalysis::Loop()
 
    cout << "Number of Entries = " << nentries << endl;    //Output the number of entries
 
+   cout << "Analysis Finished" << endl;
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
