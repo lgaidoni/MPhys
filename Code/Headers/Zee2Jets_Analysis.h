@@ -53,15 +53,34 @@ void MC_Analysis::Zee2Jets_FillAllData() {
 void MC_Analysis::Zee2Jets_DrawHistos() {
 
 	TFile *Histograms;
-	string FilePath = "../Root-Files/Zee2Jets_Histograms.root";
+	string ROOTFilePath = "../Root-Files/Zee2Jets_Histograms.root";
 
-	if (gSystem->AccessPathName(FilePath.c_str()) == 1) TFile *Histograms = new TFile(FilePath.c_str(),"NEW");
-	else if (gSystem->AccessPathName(FilePath.c_str()) == 0) TFile *Histograms = new TFile(FilePath.c_str(),"RECREATE");
+	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
+	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
 	else cout << "Something's gone horribly wrong" << endl;
 
 	//Draw histogram function takes the following:
-	//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis)
-	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", "", 600, 400, true);
+	//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
+
+	//et cone histograms
+	DrawHistogram(h_elec_0_iso_etcone20, "h_elec_0_iso_etcone20", "h_elec_0_iso_etcone20", "", 600, 400, true, "h_elec_0_iso_etcone20.pdf");
+	DrawHistogram(h_elec_0_iso_etcone30, "h_elec_0_iso_etcone30", "h_elec_0_iso_etcone30", "", 600, 400, true, "h_elec_0_iso_etcone30.pdf");
+	DrawHistogram(h_elec_0_iso_etcone40, "h_elec_0_iso_etcone40", "h_elec_0_iso_etcone40", "", 600, 400, true, "h_elec_0_iso_etcone40.pdf");
+
+	//pt cone histograms
+	DrawHistogram(h_elec_0_iso_ptcone20, "h_elec_0_iso_ptcone20", "h_elec_0_iso_ptcone20", "", 600, 400, true, "h_elec_0_iso_ptcone20.pdf");
+	DrawHistogram(h_elec_0_iso_ptcone30, "h_elec_0_iso_ptcone30", "h_elec_0_iso_ptcone30", "", 600, 400, true, "h_elec_0_iso_ptcone30.pdf");
+	DrawHistogram(h_elec_0_iso_ptcone40, "h_elec_0_iso_ptcone40", "h_elec_0_iso_ptcone40", "", 600, 400, true, "h_elec_0_iso_ptcone40.pdf");
+
+	//ptvar cone histograms
+	DrawHistogram(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20", "", 600, 400, true, "h_elec_0_iso_ptvarcone20.pdf");
+	DrawHistogram(h_elec_0_iso_ptvarcone30, "h_elec_0_iso_ptvarcone30", "h_elec_0_iso_ptvarcone30", "", 600, 400, true, "h_elec_0_iso_ptvarcone30.pdf");
+	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40", "", 600, 400, true, "h_elec_0_iso_ptvarcone40.pdf");
+
+	//topoet cone histograms
+	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", "", 600, 400, true, "h_elec_0_iso_topoetcone20.pdf");
+	DrawHistogram(h_elec_0_iso_topoetcone30, "h_elec_0_iso_topoetcone30", "h_elec_0_iso_topoetcone30", "", 600, 400, true, "h_elec_0_iso_topoetcone30.pdf");
+	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40", "", 600, 400, true, "h_elec_0_iso_topoetcone40.pdf");
 
 }
 
