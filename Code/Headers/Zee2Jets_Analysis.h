@@ -59,9 +59,9 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	else if (gSystem->AccessPathName(FilePath.c_str()) == 0) TFile *Histograms = new TFile(FilePath.c_str(),"RECREATE");
 	else cout << "Something's gone horribly wrong" << endl;
 
-	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", 600, 400, false);
-	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20log", "h_elec_0_iso_topoetcone20log", 600, 400, true);
-	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40", 600, 400, false);
+	//Draw histogram function takes the following:
+	//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis)
+	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", "", 600, 400, true);
 
 }
 

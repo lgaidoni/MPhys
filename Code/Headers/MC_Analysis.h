@@ -79,12 +79,12 @@ public :
    Float_t         NOMINAL_pileup_combined_weight;
    UInt_t          NOMINAL_pileup_random_run_number;
    UInt_t          bjet_0;
-   Float_t         bjet_0_NOMINAL_central_jets_effSF_JVT;
-   Float_t         bjet_0_NOMINAL_central_jets_ineffSF_JVT;
-   Float_t         bjet_0_NOMINAL_effSF_MV2c10;
-   Float_t         bjet_0_NOMINAL_forward_jets_effSF_JVT;
-   Float_t         bjet_0_NOMINAL_forward_jets_ineffSF_JVT;
-   Float_t         bjet_0_NOMINAL_ineffSF_MV2c10;
+   Float_t         bjet_0_NOMINAL_central_jets_effSF_JVT;///MC ONLY
+   Float_t         bjet_0_NOMINAL_central_jets_ineffSF_JVT;///MC ONLY
+   Float_t         bjet_0_NOMINAL_effSF_MV2c10;///MC ONLY
+   Float_t         bjet_0_NOMINAL_forward_jets_effSF_JVT;///MC ONLY
+   Float_t         bjet_0_NOMINAL_forward_jets_ineffSF_JVT;///MC ONLY
+   Float_t         bjet_0_NOMINAL_ineffSF_MV2c10;///MC ONLY
    Int_t           bjet_0_b_tag_quantile;
    Float_t         bjet_0_b_tag_score;
    Int_t           bjet_0_b_tagged;
@@ -94,27 +94,27 @@ public :
    Int_t           bjet_0_flavorlabel_part;
    Int_t           bjet_0_is_Jvt_HS;
    Float_t         bjet_0_jvt;
-   UInt_t          bjet_0_matched;
-   Int_t           bjet_0_matched_mother_pdgId;
-   Int_t           bjet_0_matched_mother_status;
-   Int_t           bjet_0_matched_origin;
-   TLorentzVector  *bjet_0_matched_p4;
-   Int_t           bjet_0_matched_pdgId;
-   Float_t         bjet_0_matched_q;
-   Int_t           bjet_0_matched_status;
-   Int_t           bjet_0_matched_type;
+   UInt_t          bjet_0_matched;///MC ONLY
+   Int_t           bjet_0_matched_mother_pdgId;///MC ONLY
+   Int_t           bjet_0_matched_mother_status;///MC ONLY
+   Int_t           bjet_0_matched_origin;///MC ONLY
+   TLorentzVector  *bjet_0_matched_p4;///MC ONLY
+   Int_t           bjet_0_matched_pdgId;///MC ONLY
+   Float_t         bjet_0_matched_q;///MC ONLY
+   Int_t           bjet_0_matched_status;///MC ONLY
+   Int_t           bjet_0_matched_type;///MC ONLY
    Int_t           bjet_0_origin;
    TLorentzVector  *bjet_0_p4;
    Float_t         bjet_0_q;
    Int_t           bjet_0_type;
    Float_t         bjet_0_width;
    UInt_t          bjet_1;
-   Float_t         bjet_1_NOMINAL_central_jets_effSF_JVT;
-   Float_t         bjet_1_NOMINAL_central_jets_ineffSF_JVT;
-   Float_t         bjet_1_NOMINAL_effSF_MV2c10;
-   Float_t         bjet_1_NOMINAL_forward_jets_effSF_JVT;
-   Float_t         bjet_1_NOMINAL_forward_jets_ineffSF_JVT;
-   Float_t         bjet_1_NOMINAL_ineffSF_MV2c10;
+   Float_t         bjet_1_NOMINAL_central_jets_effSF_JVT;///MC ONLY
+   Float_t         bjet_1_NOMINAL_central_jets_ineffSF_JVT;///MC ONLY
+   Float_t         bjet_1_NOMINAL_effSF_MV2c10;///MC ONLY
+   Float_t         bjet_1_NOMINAL_forward_jets_effSF_JVT;///MC ONLY
+   Float_t         bjet_1_NOMINAL_forward_jets_ineffSF_JVT;///MC ONLY
+   Float_t         bjet_1_NOMINAL_ineffSF_MV2c10;///MC ONLY
    Int_t           bjet_1_b_tag_quantile;
    Float_t         bjet_1_b_tag_score;
    Int_t           bjet_1_b_tagged;
@@ -124,15 +124,15 @@ public :
    Int_t           bjet_1_flavorlabel_part;
    Int_t           bjet_1_is_Jvt_HS;
    Float_t         bjet_1_jvt;
-   UInt_t          bjet_1_matched;
-   Int_t           bjet_1_matched_mother_pdgId;
-   Int_t           bjet_1_matched_mother_status;
-   Int_t           bjet_1_matched_origin;
-   TLorentzVector  *bjet_1_matched_p4;
-   Int_t           bjet_1_matched_pdgId;
-   Float_t         bjet_1_matched_q;
-   Int_t           bjet_1_matched_status;
-   Int_t           bjet_1_matched_type;
+   UInt_t          bjet_1_matched;///MC ONLY
+   Int_t           bjet_1_matched_mother_pdgId;///MC ONLY
+   Int_t           bjet_1_matched_mother_status;///MC ONLY
+   Int_t           bjet_1_matched_origin;///MC ONLY
+   TLorentzVector  *bjet_1_matched_p4;///MC ONLY
+   Int_t           bjet_1_matched_pdgId;///MC ONLY
+   Float_t         bjet_1_matched_q;///MC ONLY
+   Int_t           bjet_1_matched_status;///MC ONLY
+   Int_t           bjet_1_matched_type;///MC ONLY
    Int_t           bjet_1_origin;
    TLorentzVector  *bjet_1_p4;
    Float_t         bjet_1_q;
@@ -2549,46 +2549,10 @@ Int_t MC_Analysis::Cut(Long64_t entry)
    return 1;
 }
 
-///These functions will book the histograms for sets of data
-
-///-------------------------- ELEC 0 ------------------------------------------------------///
-
-void MC_Analysis::Book_elec_0_etcone(int bins, double cone_min, double cone_max) {
-	//et cone histograms
-	h_elec_0_iso_etcone20 = new TH1F("h_elec_0_iso_etcone20", "", bins, cone_min, cone_max);
-	h_elec_0_iso_etcone30 = new TH1F("h_elec_0_iso_etcone30", "", bins, cone_min, cone_max);
-	h_elec_0_iso_etcone40 = new TH1F("h_elec_0_iso_etcone40", "", bins, cone_min, cone_max);
-}
-
-void MC_Analysis::Book_elec_0_ptcone(int bins, double cone_min, double cone_max) {
-	//pt cone histograms
-	h_elec_0_iso_ptcone20 = new TH1F("h_elec_0_iso_ptcone20", "", bins, cone_min, cone_max);
-	h_elec_0_iso_ptcone30 = new TH1F("h_elec_0_iso_ptcone30", "", bins, cone_min, cone_max);
-	h_elec_0_iso_ptcone40 = new TH1F("h_elec_0_iso_ptcone40", "", bins, cone_min, cone_max);
-}
-
-void MC_Analysis::Book_elec_0_ptvarcone(int bins, double cone_min, double cone_max) {
-	//ptvar cone histograms
-	h_elec_0_iso_ptvarcone20 = new TH1F("h_elec_0_iso_ptvarcone20", "", bins, cone_min, cone_max);
-	h_elec_0_iso_ptvarcone30 = new TH1F("h_elec_0_iso_ptvarcone30", "", bins, cone_min, cone_max);
-	h_elec_0_iso_ptvarcone40 = new TH1F("h_elec_0_iso_ptvarcone40", "", bins, cone_min, cone_max);
-}
-
-void MC_Analysis::Book_elec_0_topoetcone(int bins, double cone_min, double cone_max) {
-	//topoet cone histograms
-	h_elec_0_iso_topoetcone20 = new TH1F("h_elec_0_iso_topoetcone20", "", bins, cone_min, cone_max);
-	h_elec_0_iso_topoetcone30 = new TH1F("h_elec_0_iso_topoetcone30", "", bins, cone_min, cone_max);
-	h_elec_0_iso_topoetcone40 = new TH1F("h_elec_0_iso_topoetcone40", "", bins, cone_min, cone_max);
-}
-
-void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, int X, int Y, bool log) {
-
-	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
-	histogram->Draw();
-	if (log == true) canvas->SetLogy();
-	canvas->Write(histogramName.c_str());
-
-}
+//Include lives here, because root will have read the class information by the time it gets here
+//This means MC_Analysis will exist when this header is loaded
+#include "Histo_Book_Functions.h"
+#include "Generic_Functions.h"
 
 
 
