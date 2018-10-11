@@ -1,12 +1,36 @@
 #ifndef Zee2Jets_Analysis_h
 #define Zee2Jets_Analysis_h
 
-void MC_Analysis::Zee2Jets_BookHistos() {
+//This function will define and book all relevant histograms
+void Zee2Jets_BookHistos() {
 
 	int bins = 100;
 	int cone_min = 0;
 	int cone_max = 100;
 
+	/////---------------------------------DEFINITIONS----------------------------------/////
+	///------------------------------------ elec_0 --------------------------------------///
+	//et cone histograms
+	TH1F	*h_elec_0_iso_etcone20;
+	TH1F	*h_elec_0_iso_etcone30;
+	TH1F	*h_elec_0_iso_etcone40;
+
+	//pt cone histograms
+	TH1F	*h_elec_0_iso_ptcone20;
+	TH1F	*h_elec_0_iso_ptcone30;
+	TH1F	*h_elec_0_iso_ptcone40;
+
+	//ptvar cone histograms
+	TH1F	*h_elec_0_iso_ptvarcone20;
+	TH1F	*h_elec_0_iso_ptvarcone30;
+	TH1F	*h_elec_0_iso_ptvarcone40;
+
+	//topoet cone histograms
+	TH1F	*h_elec_0_iso_topoetcone20;
+	TH1F	*h_elec_0_iso_topoetcone30;
+	TH1F	*h_elec_0_iso_topoetcone40;
+
+	/////----------------------------------BOOKINGS------------------------------------/////
 	///------------------------------------ elec_0 --------------------------------------///
 	//et cone histograms
 	h_elec_0_iso_etcone20 = new TH1F("h_elec_0_iso_etcone20", "", bins, cone_min, cone_max);
@@ -30,7 +54,7 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 
 }
 
-void MC_Analysis::Zee2Jets_FillAllData() {
+void Zee2Jets_FillAllData() {
 
 	
 
