@@ -25,6 +25,7 @@
 
 #define MC_Analysis_cxx
 #include "Headers/MC_Analysis.h"
+#include "Headers/Zee2Jets_Analysis.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h>
@@ -48,8 +49,18 @@ void MC_Analysis::Loop() {
       if (ientry < 0) break;
       nb = fChain->GetEntry(jentry);   nbytes += nb;
 
-      
-      
+      ///-----------------------USER INFORMATION ABOUT ITERATION ----------------------///
 
+      //Let the user know the program is working, and not just frozen
+      double entry_count = jentry;
+      double max_entries = nentries;
+      if (jentry % 10000 == 0) cout << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%" << endl;
+ 
+	     Zee2Jets_FillAllData();
+ 
    }
+
+   cout << "100.0%" << endl;
+   cout << "Number of Entries = " << nentries << endl;    //Output the number of entries
+
 }

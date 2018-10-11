@@ -21,6 +21,40 @@ public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
 
+	///---------------------------- OUR FUNCTION DEFINITIONS ---------------------------///
+
+	//Zee2Jets Definitions
+	virtual void Zee2Jets_BookHistos();
+	virtual void Zee2Jets_FillAllData();
+	virtual void Zee2Jets_DrawHistos();
+
+	/////----------------------------HISTOGRAM DEFINITIONS-----------------------------/////
+	///------------------------------------ elec_0 --------------------------------------///
+	//et cone histograms
+	virtual void Book_elec_0_etcone(int bins, double cone_min, double cone_max);
+	TH1F	*h_elec_0_iso_etcone20;
+	TH1F	*h_elec_0_iso_etcone30;
+	TH1F	*h_elec_0_iso_etcone40;
+
+	//pt cone histograms
+	virtual void Book_elec_0_ptcone(int bins, double cone_min, double cone_max);
+	TH1F	*h_elec_0_iso_ptcone20;
+	TH1F	*h_elec_0_iso_ptcone30;
+	TH1F	*h_elec_0_iso_ptcone40;
+
+	//ptvar cone histograms
+	virtual void Book_elec_0_ptvarcone(int bins, double cone_min, double cone_max);
+	TH1F	*h_elec_0_iso_ptvarcone20;
+	TH1F	*h_elec_0_iso_ptvarcone30;
+	TH1F	*h_elec_0_iso_ptvarcone40;
+
+	//topoet cone histograms
+	virtual void Book_elec_0_topoetcone(int bins, double cone_min, double cone_max);
+	TH1F	*h_elec_0_iso_topoetcone20;
+	TH1F	*h_elec_0_iso_topoetcone30;
+	TH1F	*h_elec_0_iso_topoetcone40;
+
+
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
    // Declaration of leaf types
@@ -1587,6 +1621,7 @@ public :
    virtual void     Loop();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
+
 };
 
 #endif
@@ -2513,4 +2548,50 @@ Int_t MC_Analysis::Cut(Long64_t entry)
 // returns -1 otherwise.
    return 1;
 }
+
+///These functions will book the histograms for sets of data
+
+///-------------------------- ELEC 0 ------------------------------------------------------///
+
+void MC_Analysis::Book_elec_0_etcone(int bins, double cone_min, double cone_max) {
+	//et cone histograms
+	h_elec_0_iso_etcone20 = new TH1F("h_elec_0_iso_etcone20", "", bins, cone_min, cone_max);
+	h_elec_0_iso_etcone30 = new TH1F("h_elec_0_iso_etcone30", "", bins, cone_min, cone_max);
+	h_elec_0_iso_etcone40 = new TH1F("h_elec_0_iso_etcone40", "", bins, cone_min, cone_max);
+}
+
+void MC_Analysis::Book_elec_0_ptcone(int bins, double cone_min, double cone_max) {
+	//pt cone histograms
+	h_elec_0_iso_ptcone20 = new TH1F("h_elec_0_iso_ptcone20", "", bins, cone_min, cone_max);
+	h_elec_0_iso_ptcone30 = new TH1F("h_elec_0_iso_ptcone30", "", bins, cone_min, cone_max);
+	h_elec_0_iso_ptcone40 = new TH1F("h_elec_0_iso_ptcone40", "", bins, cone_min, cone_max);
+}
+
+void MC_Analysis::Book_elec_0_ptvarcone(int bins, double cone_min, double cone_max) {
+	//ptvar cone histograms
+	h_elec_0_iso_ptvarcone20 = new TH1F("h_elec_0_iso_ptvarcone20", "", bins, cone_min, cone_max);
+	h_elec_0_iso_ptvarcone30 = new TH1F("h_elec_0_iso_ptvarcone30", "", bins, cone_min, cone_max);
+	h_elec_0_iso_ptvarcone40 = new TH1F("h_elec_0_iso_ptvarcone40", "", bins, cone_min, cone_max);
+}
+
+void MC_Analysis::Book_elec_0_topoetcone(int bins, double cone_min, double cone_max) {
+	//topoet cone histograms
+	h_elec_0_iso_topoetcone20 = new TH1F("h_elec_0_iso_topoetcone20", "", bins, cone_min, cone_max);
+	h_elec_0_iso_topoetcone30 = new TH1F("h_elec_0_iso_topoetcone30", "", bins, cone_min, cone_max);
+	h_elec_0_iso_topoetcone40 = new TH1F("h_elec_0_iso_topoetcone40", "", bins, cone_min, cone_max);
+}
+
+void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, int X, int Y, bool log) {
+
+	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+	histogram->Draw();
+	if (log == true) canvas->SetLogy();
+	canvas->Write(histogramName.c_str());
+
+}
+
+
+
+
+
 #endif // #ifdef MC_Analysis_cxx
