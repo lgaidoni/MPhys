@@ -11,9 +11,7 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	/////----------------------------------BOOKINGS------------------------------------/////
 	///------------------------------------ elec_0 --------------------------------------///
 	//et cone histograms
-	h_elec_0_iso_etcone20 = new TH1F("h_elec_0_iso_etcone20", "", bins, cone_min, cone_max);
-	h_elec_0_iso_etcone30 = new TH1F("h_elec_0_iso_etcone30", "", bins, cone_min, cone_max);
-	h_elec_0_iso_etcone40 = new TH1F("h_elec_0_iso_etcone40", "", bins, cone_min, cone_max);
+	Book_elec_0_etcone(bins, cone_min, cone_max);
 
 	//pt cone histograms
 	h_elec_0_iso_ptcone20 = new TH1F("h_elec_0_iso_ptcone20", "", bins, cone_min, cone_max);

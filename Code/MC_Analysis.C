@@ -55,13 +55,12 @@ void MC_Analysis::Loop() {
       double entry_count = jentry;
       double max_entries = nentries;
       if (jentry % 10000 == 0) cout << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%" << endl << endl;
-      
-      
-
+ 
+	     
+ 
    }
 
    cout << "100.0%" << endl;
-
    cout << "Number of Entries = " << nentries << endl;    //Output the number of entries
 
 }
