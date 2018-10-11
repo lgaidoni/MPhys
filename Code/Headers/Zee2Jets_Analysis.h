@@ -2,7 +2,7 @@
 #define Zee2Jets_Analysis_h
 
 //This function will define and book all relevant histograms
-void Zee2Jets_BookHistos() {
+void MC_Analysis::Zee2Jets_BookHistos() {
 
 	int bins = 100;
 	int cone_min = 0;
@@ -54,7 +54,7 @@ void Zee2Jets_BookHistos() {
 
 }
 
-void Zee2Jets_FillAllData() {
+void MC_Analysis::Zee2Jets_FillAllData() {
 
 	
 

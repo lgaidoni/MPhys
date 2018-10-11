@@ -1587,6 +1587,16 @@ public :
    virtual void     Loop();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
+
+   ///////////////////////////////////////////////////////////////////////////////////////
+   ///---------------------------- OUR FUNCTION DEFINITIONS ---------------------------///
+   ///////////////////////////////////////////////////////////////////////////////////////
+
+   //Zee2Jets Definitions
+   virtual void Zee2Jets_BookHistos();
+   virtual void Zee2Jets_FillAllData();
+
+
 };
 
 #endif
