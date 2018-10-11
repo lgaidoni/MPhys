@@ -54,9 +54,9 @@ void MC_Analysis::Loop() {
       //Let the user know the program is working, and not just frozen
       double entry_count = jentry;
       double max_entries = nentries;
-      if (jentry % 10000 == 0) cout << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%" << endl << endl;
+      if (jentry % 10000 == 0) cout << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%" << endl;
  
-	     
+	     Zee2Jets_FillAllData();
  
    }
 
