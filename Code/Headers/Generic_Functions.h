@@ -32,4 +32,12 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 
 }
 
+//This Fucntion will calculate invariant mass of two TLorentzVectors
+double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double mass = ((*Vector1)+(*Vector2)).M();
+	return mass;
+
+}
+
 #endif

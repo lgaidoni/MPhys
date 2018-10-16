@@ -2,7 +2,7 @@
 #define Histo_Book_Functions_h
 
 ///These functions will book the histograms for sets of data
-///-------------------------- ELEC 0 ------------------------------------------------------///
+///-------------------------- elec_0 ------------------------------------------------------///
 
 void MC_Analysis::Book_elec_0_etcone(int bins, double cone_min, double cone_max) {
 	//et cone histograms
@@ -30,6 +30,20 @@ void MC_Analysis::Book_elec_0_topoetcone(int bins, double cone_min, double cone_
 	h_elec_0_iso_topoetcone20 = new TH1F("h_elec_0_iso_topoetcone20", "", bins, cone_min, cone_max);
 	h_elec_0_iso_topoetcone30 = new TH1F("h_elec_0_iso_topoetcone30", "", bins, cone_min, cone_max);
 	h_elec_0_iso_topoetcone40 = new TH1F("h_elec_0_iso_topoetcone40", "", bins, cone_min, cone_max);
+}
+
+///------------------------- elec_0 & elec_1 ----------------------------------------///
+
+void MC_Analysis::Book_elec_0_elec_1_mass_PRECUT(int bins, double min, double max) {
+	//Electron 0 & Electron 1 Invariant Mass before cuts are made
+	h_elec_0_elec_1_mass_PRECUT = new TH1F("h_elec_0_elec_1_mass_PRECUT", "", bins, min, max);
+
+}
+
+void MC_Analysis::Book_elec_0_elec_1_mass(int bins, double min, double max) {
+	//Electron 0 & Electron 1 Invariant Mass
+	h_elec_0_elec_1_mass = new TH1F("h_elec_0_elec_1_mass", "", bins, min, max);
+
 }
 
 #endif

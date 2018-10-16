@@ -22,10 +22,41 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	//topoet cone histograms
 	Book_elec_0_topoetcone(bins, 0, 800000);
 
+	///-------------------------------- elec_0 & elec_1 ----------------------------------///
+	//invariant mass pre cut
+	Book_elec_0_elec_1_mass_PRECUT(bins, 0, 200);
+
+	//invariant mass post cut
+	Book_elec_0_elec_1_mass(bins, 0, 200);
 }
 
-//This function will fill all the histograms
-void MC_Analysis::Zee2Jets_FillAllData() {
+//This function will generate variables, put them in a vector, and return said vector
+void MC_Analysis::Zee2Jets_GenerateVariables() {
+
+	elec_0_elec_1_Mass = InvariantMass(elec_0_p4, elec_1_p4);
+
+}
+
+//Rhis function will fill the histograms that need to be filled before cuts are made
+void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
+
+	//Invariant mass
+	h_elec_0_elec_1_mass_PRECUT->Fill(elec_0_elec_1_Mass);
+
+}
+
+//This function will determine if event is cut
+//Returns bool, for ease of use in if statements
+bool MC_Analysis::Zee2Jets_Cut() {
+
+	if (elec_0 != 0 && elec_1 != 0) return false;	
+
+	return true;
+
+}
+
+//This function will fill all the histograms after cuts are made
+void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 
 	//et cone histograms
 	h_elec_0_iso_etcone20->Fill(elec_0_iso_etcone20);
@@ -46,6 +77,9 @@ void MC_Analysis::Zee2Jets_FillAllData() {
 	h_elec_0_iso_topoetcone20->Fill(elec_0_iso_topoetcone20);
 	h_elec_0_iso_topoetcone30->Fill(elec_0_iso_topoetcone30);
 	h_elec_0_iso_topoetcone40->Fill(elec_0_iso_topoetcone40);
+
+	//Invariant mass
+	h_elec_0_elec_1_mass->Fill(elec_0_elec_1_Mass);
 
 }
 
@@ -81,6 +115,10 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", "", 600, 400, true, "h_elec_0_iso_topoetcone20.pdf");
 	DrawHistogram(h_elec_0_iso_topoetcone30, "h_elec_0_iso_topoetcone30", "h_elec_0_iso_topoetcone30", "", 600, 400, true, "h_elec_0_iso_topoetcone30.pdf");
 	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40", "", 600, 400, true, "h_elec_0_iso_topoetcone40.pdf");
+
+	//Elec 0 & Elec 1 histograms
+	DrawHistogram(h_elec_0_elec_1_mass_PRECUT, "h_elec_0_elec_1_mass_PRECUT", "h_elec_0_elec_1_mass_PRECUT", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRECUT.pdf");
+	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass.pdf");
 
 }
 
