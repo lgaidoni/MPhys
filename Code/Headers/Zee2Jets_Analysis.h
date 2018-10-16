@@ -49,11 +49,16 @@ void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 //Returns bool, for ease of use in if statements
 bool MC_Analysis::Zee2Jets_Cut() {
 
-	if (elec_0 != 0 && elec_1 != 0) return false;	
-
+	if (elec_0 != 0 && elec_1 != 0) {// is elec_0 and elec_1 an electron?
+		 
+		if (ljet_0 !=0 && ljet_1 != 0) return false;
+		
+	}
+	
 	return true;
 
 }
+
 
 //This function will fill all the histograms after cuts are made
 void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
