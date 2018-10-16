@@ -11,6 +11,7 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include <vector>
 
 // Header file for the classes stored in the TTree if any.
 #include "TLorentzVector.h"
@@ -25,7 +26,10 @@ public :
 
 	//Zee2Jets Definitions
 	virtual void Zee2Jets_BookHistos();
-	virtual void Zee2Jets_FillAllData();
+	virtual void Zee2Jets_GenerateVariables();
+	virtual void Zee2Jets_FillAllData_PreCut();
+	virtual bool Zee2Jets_Cut();
+	virtual void Zee2Jets_FillAllData_PostCut();
 	virtual void Zee2Jets_DrawHistos();
 
 	/////----------------------------HISTOGRAM DEFINITIONS-----------------------------/////
@@ -53,6 +57,18 @@ public :
 	TH1F	*h_elec_0_iso_topoetcone20;
 	TH1F	*h_elec_0_iso_topoetcone30;
 	TH1F	*h_elec_0_iso_topoetcone40;
+
+	///------------------------------- elec_0 & elec_1 ---------------------------------///
+	//Invariant Mass PRECUT
+	virtual void Book_elec_0_elec_1_mass_PRECUT(int bins, double min, double max);
+	TH1F	*h_elec_0_elec_1_mass_PRECUT;
+
+	//Invariant Mass
+	virtual void Book_elec_0_elec_1_mass(int bins, double min, double max);
+	TH1F	*h_elec_0_elec_1_mass;
+
+	///---------------------------------- Custom Variables -----------------------------///
+	double elec_0_elec_1_Mass;
 
 
 // Fixed size dimensions of array or collections stored in the TTree if any.

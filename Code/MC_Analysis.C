@@ -55,8 +55,15 @@ void MC_Analysis::Loop() {
       double entry_count = jentry;
       double max_entries = nentries;
       if (jentry % 10000 == 0) cout << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%" << endl;
+
+	///------------------- ACTUAL ANALYSIS -----------------///
  
-	     Zee2Jets_FillAllData();
+	Zee2Jets_GenerateVariables();
+	Zee2Jets_FillAllData_PreCut();
+	if (Zee2Jets_Cut() == false) {
+		Zee2Jets_FillAllData_PostCut();
+	}
+
  
    }
 
