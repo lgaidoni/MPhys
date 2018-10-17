@@ -32,7 +32,7 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 
 	///-------------------------------- elec_0 & elec_1 ----------------------------------///
 	//invariant mass pre cut
-	Book_elec_0_elec_1_mass_PRECUT(bins, 0, 200);
+	Book_elec_0_elec_1_mass_PRE(bins, 0, 200);
 
 	//invariant mass post cut
 	Book_elec_0_elec_1_mass(bins, 0, 200);
@@ -49,7 +49,7 @@ void MC_Analysis::Zee2Jets_GenerateVariables() {
 void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 
 	//Invariant mass
-	h_elec_0_elec_1_mass_PRECUT->Fill(elec_0_elec_1_Mass);
+	h_elec_0_elec_1_mass_PRE->Fill(elec_0_elec_1_Mass);
 
 }
 
@@ -142,7 +142,7 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40", "", 600, 400, true, "h_elec_0_iso_topoetcone40.pdf");
 
 	//Elec 0 & Elec 1 histograms
-	DrawHistogram(h_elec_0_elec_1_mass_PRECUT, "h_elec_0_elec_1_mass_PRECUT", "h_elec_0_elec_1_mass_PRECUT", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRECUT.pdf");
+	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRE.pdf");
 	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass.pdf");
 
 }
