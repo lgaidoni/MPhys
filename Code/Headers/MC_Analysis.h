@@ -32,18 +32,12 @@ public :
 	virtual void Zee2Jets_FillAllData_PostCut();
 	virtual void Zee2Jets_DrawHistos();
 
-	/////----------------------------HISTOGRAM DEFINITIONS-----------------------------/////
+	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program
 	#include "Histo_Book_Definitions_AutoGen.h"
 
 	/////-------------------------CUSTOM HISTOGRAM DEFINITIONS------------------------/////
 	#include "Histo_Book_Definitions_Custom.h"
-
-
-	/////---------------------------CUSTOM VARIABLE DEFINITIONS-----------------------/////
-	///---------------------------------- Custom Variables -----------------------------///
-	double elec_0_elec_1_Mass;
-
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
