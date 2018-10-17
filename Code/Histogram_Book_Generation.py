@@ -1,5 +1,5 @@
 Histo_Book_Functions_AutoGen = open("Headers/Histo_Book_Functions_AutoGen.h", "w")
-Histo_Definitions = open("Copy-Into-MC_Analysis.txt", "w")
+Histo_Definitions = open("Headers/Histo_Book_Definitions_AutoGen.h", "w")
 MC_Analysis = open("Headers/MC_Analysis.h", "r")
 
 reader = 0
@@ -28,7 +28,42 @@ for line in MC_Analysis:
 	if reader == 1:
 		#If the leaf is a TLorentzVector
 		if line[3:17] == "TLorentzVector":
-			print("This is a TLorentzVector: " + line)
+
+			#Find the semicolon at the end of the line, use it to get the leafName
+			semicolonpos = line.find(";")
+			leafName = line[20:semicolonpos]
+
+			#Indicate that what follows is a TLorentzVector set of information
+			Histo_Definitions.write("\t/// ---- Histogram booking functions and declarations for TLorentzVector " + leafName + " ---- ///\n")
+			Histo_Book_Functions_AutoGen.write("// ----- HISTOGRAM BOOKING FUNCTIONS FOR TLorentzVector " + leafName + " ----- //\n")
+
+			#Open the TLorentzVector_Leaves.txt file for reading (Can't be done at beginning, needs to happen every time the loop runs)
+			TLorentzVector_Leaves = open("TLorentzVector_Leaves.txt", "r")
+
+			for lorentzline in TLorentzVector_Leaves:
+				TLorentzName = lorentzline[0:len(lorentzline)-1]
+
+				#Write out the histogram booking functions to the Histo Definitions file
+				Histo_Definitions.write("\t\t//Histogram booking functions and declarations for " + leafName + "_" + TLorentzName + "\n")
+				Histo_Definitions.write("\t\tvirtual void Book_" + leafName + "_" + TLorentzName + "(int bins, double min, double max);\n")
+				Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + ";\n")
+				Histo_Definitions.write("\t\tvirtual void Book_" + leafName + "_" + TLorentzName + "_PRE(int bins, double min, double max);\n")
+				Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + "_PRE;\n")
+
+				#Write out the histogram booking functions to the histogram booking functions file
+				Histo_Book_Functions_AutoGen.write("\t//Histogram booking function for " + leafName + "_" + TLorentzName + "\n")
+				Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "(int bins, double min, double max) {\n")
+				Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + " = new TH1F(\"h_" + leafName + "_" + TLorentzName + "\",\"\", bins, min, max);\n")
+				Histo_Book_Functions_AutoGen.write("\t}\n")
+				Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "_PRE(int bins, double min, double max) {\n")
+				Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_PRE = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_PRE\",\"\", bins, min, max);\n")
+				Histo_Book_Functions_AutoGen.write("\t}\n")
+
+			Histo_Definitions.write("\t/// ---- End of booking functions and declarations for TLorentzVector " + leafName + " ---- ///\n\n")
+			Histo_Book_Functions_AutoGen.write("/// ----- END OF HISTOGRAM BOOKING FUNCTIONS FOR TLorentzVector " + leafName + " ----- ///\n\n")
+
+			TLorentzVector_Leaves.close()
+
 		#If the leaf is a TVector3
 		elif line[3:11] == "TVector3":
 			print("This is a TVector3: " + line)
@@ -43,10 +78,12 @@ for line in MC_Analysis:
 			semicolonpos = line.find(";")
 			leafName = line[19:semicolonpos]
 
-			#Write out the section to be pasted into the MC_Analysis.h file
+			#Write out the section to be included in the class definition
 			Histo_Definitions.write("\t//Histogram declaration and booking function for " + leafName + "\n")
 			Histo_Definitions.write("\tvirtual void Book_" + leafName + "(int bins, double min, double max);\n")
 			Histo_Definitions.write("\tTH1F\t*h_" + leafName + ";\n")
+			Histo_Definitions.write("\tvirtual void Book_" + leafName + "_PRE(int bins, double min, double max);\n")
+			Histo_Definitions.write("\tTH1F\t*h_" + leafName + "_PRE;\n")
 			Histo_Definitions.write("\n")
 
 			#Write out the Histogram Booking Functions header
@@ -99,9 +136,13 @@ for line in MC_Analysis:
 					Histo_Book_Functions_AutoGen.write("\n\n///------------------------------- tau_1 ---------------------------///\n\n")
 					tau1found = 1
 
+			#Write out the booking functions to be included at the end of MC_Analysis.C
 			Histo_Book_Functions_AutoGen.write("//Histogram booking function for " + leafName + "\n")
 			Histo_Book_Functions_AutoGen.write("void MC_Analysis::Book_" + leafName + "(int bins, double min, double max) {\n")
 			Histo_Book_Functions_AutoGen.write("\th_" + leafName + " = new TH1F(\"h_" + leafName + "\", \"\", bins, min, max);\n")
+			Histo_Book_Functions_AutoGen.write("}\n")
+			Histo_Book_Functions_AutoGen.write("void MC_Analysis::Book_" + leafName + "_PRE(int bins, double min, double max) {\n")
+			Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_PRE = new TH1F(\"h_" + leafName + "\", \"\", bins, min, max);\n")
 			Histo_Book_Functions_AutoGen.write("}\n\n")
 			
 			

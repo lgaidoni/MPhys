@@ -11,16 +11,24 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	/////----------------------------------BOOKINGS------------------------------------/////
 	///------------------------------------ elec_0 --------------------------------------///
 	//et cone histograms
-	Book_elec_0_etcone(bins, 0, 1);
+	Book_elec_0_iso_etcone20(bins, 0, 1);
+	Book_elec_0_iso_etcone30(bins, 0, 1);
+	Book_elec_0_iso_etcone40(bins, 0, 1);
 
 	//pt cone histograms
-	Book_elec_0_ptcone(bins, 0, 1);
+	Book_elec_0_iso_ptcone20(bins, 0, 1);
+	Book_elec_0_iso_ptcone30(bins, 0, 1);
+	Book_elec_0_iso_ptcone40(bins, 0, 1);
 
 	//ptvar cone histograms
-	Book_elec_0_ptvarcone(bins, 0, 100000);
+	Book_elec_0_iso_ptvarcone20(bins, 0, 100000);
+	Book_elec_0_iso_ptvarcone30(bins, 0, 100000);
+	Book_elec_0_iso_ptvarcone40(bins, 0, 100000);
 
 	//topoet cone histograms
-	Book_elec_0_topoetcone(bins, 0, 800000);
+	Book_elec_0_iso_topoetcone20(bins, 0, 800000);
+	Book_elec_0_iso_topoetcone30(bins, 0, 800000);
+	Book_elec_0_iso_topoetcone40(bins, 0, 800000);
 
 	///-------------------------------- elec_0 & elec_1 ----------------------------------///
 	//invariant mass pre cut
@@ -49,12 +57,24 @@ void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 //Returns bool, for ease of use in if statements
 bool MC_Analysis::Zee2Jets_Cut() {
 
-	if (elec_0 != 0 && elec_1 != 0) {// is elec_0 and elec_1 an electron?
-		 
-		if (ljet_0 !=0 && ljet_1 != 0) return false;
-		
+	//Setting up conditions
+	bool two_electrons = false;
+	bool two_or_more_jets = false;
+	bool electrons_opposite_charges = false;
+	bool no_bjets = false;
+
+	//Condition Checking
+	if (elec_0 != 0 && elec_1 != 0) { //If two electrons or positrons are found
+		two_electrons = true;
+		if (elec_0_q != elec_1_q) electrons_opposite_charges = true;  //If electron positron pair found
 	}
-	
+
+	if (bjet_0 == 0 && bjet_1 == 0) no_bjets = true;  //If there are no bjets
+	if (ljet_0 !=0 && ljet_1 != 0) two_or_more_jets = true;  //If two or more jets were found
+
+	// If the conditions are met, don't cut
+	if (two_electrons && two_or_more_jets && electrons_opposite_charges && no_bjets) return false;
+	//Otherwise, cut
 	return true;
 
 }
@@ -117,7 +137,7 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40", "", 600, 400, true, "h_elec_0_iso_ptvarcone40.pdf");
 
 	//topoet cone histograms
-	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", "", 600, 400, true, "h_elec_0_iso_topoetcone20.pdf");
+	DrawHistogram_OldCanvas(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", "", 600, 400, true, "h_elec_0_iso_topoetcone20.pdf");
 	DrawHistogram(h_elec_0_iso_topoetcone30, "h_elec_0_iso_topoetcone30", "h_elec_0_iso_topoetcone30", "", 600, 400, true, "h_elec_0_iso_topoetcone30.pdf");
 	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40", "", 600, 400, true, "h_elec_0_iso_topoetcone40.pdf");
 

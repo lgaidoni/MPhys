@@ -33,31 +33,10 @@ public :
 	virtual void Zee2Jets_DrawHistos();
 
 	/////----------------------------HISTOGRAM DEFINITIONS-----------------------------/////
-	///------------------------------------ elec_0 --------------------------------------///
-	//et cone histograms
-	virtual void Book_elec_0_etcone(int bins, double cone_min, double cone_max);
-	TH1F	*h_elec_0_iso_etcone20;
-	TH1F	*h_elec_0_iso_etcone30;
-	TH1F	*h_elec_0_iso_etcone40;
+	//This will include the auto generated default histograms for this program
+	#include "Histo_Book_Definitions_AutoGen.h"
 
-	//pt cone histograms
-	virtual void Book_elec_0_ptcone(int bins, double cone_min, double cone_max);
-	TH1F	*h_elec_0_iso_ptcone20;
-	TH1F	*h_elec_0_iso_ptcone30;
-	TH1F	*h_elec_0_iso_ptcone40;
-
-	//ptvar cone histograms
-	virtual void Book_elec_0_ptvarcone(int bins, double cone_min, double cone_max);
-	TH1F	*h_elec_0_iso_ptvarcone20;
-	TH1F	*h_elec_0_iso_ptvarcone30;
-	TH1F	*h_elec_0_iso_ptvarcone40;
-
-	//topoet cone histograms
-	virtual void Book_elec_0_topoetcone(int bins, double cone_min, double cone_max);
-	TH1F	*h_elec_0_iso_topoetcone20;
-	TH1F	*h_elec_0_iso_topoetcone30;
-	TH1F	*h_elec_0_iso_topoetcone40;
-
+	/////-------------------------CUSTOM HISTOGRAM DEFINITIONS------------------------/////
 	///------------------------------- elec_0 & elec_1 ---------------------------------///
 	//Invariant Mass PRECUT
 	virtual void Book_elec_0_elec_1_mass_PRECUT(int bins, double min, double max);
@@ -67,6 +46,8 @@ public :
 	virtual void Book_elec_0_elec_1_mass(int bins, double min, double max);
 	TH1F	*h_elec_0_elec_1_mass;
 
+
+	/////---------------------------CUSTOM VARIABLE DEFINITIONS-----------------------/////
 	///---------------------------------- Custom Variables -----------------------------///
 	double elec_0_elec_1_Mass;
 
@@ -2567,7 +2548,8 @@ Int_t MC_Analysis::Cut(Long64_t entry)
 
 //Include lives here, because root will have read the class information by the time it gets here
 //This means MC_Analysis will exist when this header is loaded
-#include "Histo_Book_Functions.h"
+#include "Histo_Book_Functions_AutoGen.h"
+#include "Histo_Book_Functions_Custom.h"
 #include "Generic_Functions.h"
 
 
