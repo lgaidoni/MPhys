@@ -25,13 +25,8 @@ public :
 	///---------------------------- OUR FUNCTION DEFINITIONS ---------------------------///
 
 	//Zee2Jets Definitions
-	virtual void Zee2Jets_BookHistos();
-	virtual bool Zee2Jets_InitialCut();
-	virtual void Zee2Jets_GenerateVariables();
-	virtual void Zee2Jets_FillAllData_PreCut();
-	virtual bool Zee2Jets_Cut();
-	virtual void Zee2Jets_FillAllData_PostCut();
-	virtual void Zee2Jets_DrawHistos();
+	#include "Zee2Jets_Function_Definitions.h"
+
 
 	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program
