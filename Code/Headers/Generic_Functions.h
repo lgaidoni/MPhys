@@ -6,7 +6,7 @@
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
 void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string xTitle, int X, int Y, bool log, string OutputFileName) {
 
-	string OutputFilePath = "../Output-Files/";
+	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + OutputFileName;
 
 	//Create a new canvas using canvasName
@@ -37,7 +37,7 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
 void DrawHistogram_OldCanvas(TH1F *histogram, string canvasName, string histogramName, string xTitle, int X, int Y, bool log, string OutputFileName) {
 
-	string OutputFilePath = "../Output-Files/";
+	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + OutputFileName;
 
 	//Sets the X axis title
