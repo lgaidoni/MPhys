@@ -59,19 +59,23 @@ void MC_Analysis::Loop() {
 
 	///------------------- ACTUAL ANALYSIS -----------------///
  	/// Zee2Jets
-	if (Zee2Jets_InitialCut() == false) { // if we're not cutting
-		Zee2Jets_GenerateVariables();
-		Zee2Jets_FillAllData_PreCut();
-		if (Zee2Jets_Cut() == false) {
-			Zee2Jets_FillAllData_PostCut();
+	if (AnalysisType == "Zee2Jets") {
+		if (Zee2Jets_InitialCut() == false) { // if we're not cutting
+			Zee2Jets_GenerateVariables();
+			Zee2Jets_FillAllData_PreCut();
+			if (Zee2Jets_Cut() == false) {
+				Zee2Jets_FillAllData_PostCut();
+			}
 		}
 	}
 	/// Zmumu2Jets
-	if (Zmumu2Jets_InitialCut() == false) { // if we're not cutting
-		Zmumu2Jets_GenerateVariables();
-		Zmumu2Jets_FillAllData_PreCut();
-		if (Zmumu2Jets_Cut() == false) {
-			Zmumu2Jets_FillAllData_PostCut();
+	if (AnalysisType == "Zmumu2jets") {
+		if (Zmumu2Jets_InitialCut() == false) { // if we're not cutting
+			Zmumu2Jets_GenerateVariables();
+			Zmumu2Jets_FillAllData_PreCut();
+			if (Zmumu2Jets_Cut() == false) {
+				Zmumu2Jets_FillAllData_PostCut();
+			}
 		}
 	}
 
