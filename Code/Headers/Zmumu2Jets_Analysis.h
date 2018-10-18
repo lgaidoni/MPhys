@@ -1,16 +1,17 @@
+// This is the analysis file for VBF process for a Z boson decaying to mu mu 
 #ifndef Zmumu2Jets_Analysis_h
 #define Zmumu2Jets_Analysis_h
-// This is the analysis file for VBF process for a Z boson decaying to mu mu 
-// This folder contains 
-	// 1. Booking histograms for Jets in VBF mu mu data set
-	// 2. Invariant mass calculations for the 1st and 2nd muon
-	// 3. Vector generation for physics variables used in analysis
-	// 4. Pre-selection cuts
-	// 5. Filling of pre selection data histograms
-	// 6. Selection cuts
-	// 7. Filling of selection data histograms
-	// 8. Drawing of ALL histograms and writing to a file
 
+
+///--------------------- ORDER OF OPERATIONS ---------------------------///
+
+///	1. Book Histograms
+///	2. Initial Selection Cut
+///	3. Generate Variables
+///	4. Fill Histograms Pre Selection Cut
+///	5. Selection Cut
+///	6. Fill Histograms Post Selection Cut
+///	7. Draw/Save Histograms
 
 // This function will book all relevant histograms
 
@@ -50,19 +51,9 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	Book_muon_0_muon_1_mass(bins, 0, 200);
 }
 
-
-// This function will generate physics variables, put them in a vector, and return said vector
-void MC_Analysis::Zmumu2Jets_GenerateVariables() {
-
-	muon_0_muon_1_Mass = InvariantMass(muon_0_p4, muon_1_p4);
-
-}
-
-// Analysis starts here
-// Cuts return bool, for ease in if statements
 // Pre-Selection cut functions (dummy cuts)
-
-bool MC_Analysis::Zmumu2Jets_Cut() {
+// Cuts return bool, for ease in if statements
+bool MC_Analysis::Zmumu2Jets_InitialCut() {
 
 	// Set conditions
 	bool two_muons = false;
@@ -75,10 +66,27 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 		two_muons = true;
 		if (muon_0_q != muon_1_q) muons_opposite_charges = true;  // if muon anti-muon pair found
 	}
+}
 
+// This function will generate physics variables, put them in a vector, and return said vector
+void MC_Analysis::Zmumu2Jets_GenerateVariables() {
+
+	muon_0_muon_1_Mass = InvariantMass(muon_0_p4, muon_1_p4);
 
 }
+
+// This function will fill the histograms that need to be filled BEFORE initial cuts are made
+void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
+
+	//Invariant mass
+	h_muon_0_muon_1_mass_PRE->Fill(muon_0_muon_1_Mass);
+
+}
+
+// Analysis starts here
+// Cuts return bool, for ease in if statements
 // Selection cut functions (more sophistocated cuts)
+
 	if (bjet_0 == 0 && bjet_1 == 0) no_bjets = true;  //If there are no bjets
 	if (ljet_0 !=0 && ljet_1 != 0) two_or_more_jets = true;  //If two or more jets were found
 
@@ -88,14 +96,63 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 	return true;
 
 
-// This function will fill the histograms that need to be filled before cuts are made
-void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
+// This function will fill the histograms that need to be filled AFTER initial cuts are made
+void MC_Analysis::Zmumu2Jets_FillAllData_PostCut() {
 
-	//Invariant mass
-	h_muon_0_muon_1_mass_PRE->Fill(muon_0_muon_1_Mass);
+	// pt cone histograms
+	h_muon_0_iso_ptcone20->Fill(muon_0_iso_ptcone20);
+	h_muon_0_iso_ptcone30->Fill(muon_0_iso_ptcone30);
+	h_muon_0_iso_ptcone40->Fill(muon_0_iso_ptcone40);
+
+	// ptvar cone histograms
+	h_muon_0_iso_ptvarcone20->Fill(muon_0_iso_ptvarcone20);
+	h_muon_0_iso_ptvarcone30->Fill(muon_0_iso_ptvarcone30);
+	h_muon_0_iso_ptvarcone40->Fill(muon_0_iso_ptvarcone40);
+
+	// topoet cone histograms
+	h_muon_0_iso_topoetcone20->Fill(muon_0_iso_topoetcone20);
+	h_muon_0_iso_topoetcone30->Fill(muon_0_iso_topoetcone30);
+	h_muon_0_iso_topoetcone40->Fill(muon_0_iso_topoetcone40);
+
+	// Invariant mass
+	h_muon_0_muon_1_mass->Fill(muon_0_muon_1_Mass);
 
 }
 
 
+// This functinon will Draw all the histograms, and write them to a file
+void MC_Analysis::Zmumu2Jets_DrawHistos() {
+
+	TFile *Histograms;
+	string ROOTFilePath = "../../Root-Files/Zmumu2Jets_Histograms.root";
+
+	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
+	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
+	else cout << "Something's gone horribly wrong" << endl;
+
+	// Draw histogram function takes the following:
+	// DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
+
+	// ptcone histograms
+	DrawHistogram(h_muon_0_iso_ptcone20, "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20", "", 600, 400, true, "h_muon_0_iso_ptcone20.pdf");
+	DrawHistogram_OldCanvas(h_muon_0_iso_ptcone30, "h_muon_0_iso_ptcone30", "h_muon_0_iso_ptcone30", "", 600, 400, true, "h_muon_0_iso_ptcone30.pdf");
+	DrawHistogram_OldCanvas(h_muon_0_iso_ptcone40, "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40", "", 600, 400, true, "h_muon_0_iso_ptcone40.pdf");
+
+	// topoetcone histograms
+	DrawHistogram_OldCanvas(h_muon_0_iso_topoetcone20, "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20", "", 600, 400, true, "h_muon_0_iso_topoetcone20.pdf");
+	DrawHistogram_OldCanvas(h_muon_0_iso_topoetcone30, "h_muon_0_iso_topoetcone30", "h_muon_0_iso_topoetcone30", "", 600, 400, true, "h_muon_0_iso_topoetcone30.pdf");
+	DrawHistogram_OldCanvas(h_muon_0_iso_topoetcone40, "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40", "", 600, 400, true, "h_muon_0_iso_topoetcone40.pdf");
+	
+	// ptvarcone histograms
+	DrawHistogram_OldCanvas(h_muon_0_iso_ptvarcone20, "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20", "", 600, 400, true, "h_muon_0_iso_ptvarcone20.pdf");
+	DrawHistogram_OldCanvas(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone30", "h_muon_0_iso_ptvarcone30", "", 600, 400, true, "h_muon_0_iso_ptvarcone30.pdf");
+	DrawHistogram_OldCanvas(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40", "", 600, 400, true, "h_muon_0_iso_ptvarcone40.pdf");
+	
+	// muon 0 & muon 1 histograms
+	DrawHistogram_OldCanvas(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_elec_0_elec_1_mass_PRE", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass_PRE.pdf");
+	DrawHistogram_OldCanvas(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass.pdf");
+
+
+}
 
 #endif
