@@ -19,25 +19,7 @@
 /// ----------------END OF FORMATTING OF CUSTOM HISTOGRAM DEFINITIONS---------------///
 ///////////////////////////////////////////////////////////////////////////////////////
 
-
-/// -------- RECYCLABLE VARIABLES ------ ///
-
-///----------Delta R---------------------------------///
-/// -- Variable to be plotted in histogram
-double DeltaR;
-
-/// -- Virtual book function to book the histogram
-virtual void Book_DeltaR(int bins, double min, double max);
-TH1F	*h_DeltaR;
-
-/// -- Virtual book function to book the histogram (PRE version)
-virtual void Book_DeltaR_PRE(int bins, double min, double max);
-TH1F	*h_DeltaR_PRE;
-
-
-/// ----------- ELECTRONS ------------- ///
-
-///-------------Invariant mass of electron 0 and electron 1-----------------///
+///---------------------Invariant mass of electron 0 and electron 1-----------------///
 /// -- Variable to be plotted in histogram
 double elec_0_elec_1_Mass;
 
@@ -49,20 +31,15 @@ TH1F	*h_elec_0_elec_1_mass;
 virtual void Book_elec_0_elec_1_mass_PRE(int bins, double min, double max);
 TH1F	*h_elec_0_elec_1_mass_PRE;
 
-
-/// ----------- MUONS ------------- ///
-
-///-------------Invariant mass of muon 0 and muon 1-----------------///
+///-----------------------------------------Delta R---------------------------------///
 /// -- Variable to be plotted in histogram
-double muon_0_muon_1_Mass;
+double DeltaR;
 
 /// -- Virtual book function to book the histogram
-virtual void Book_muon_0_muon_1_mass(int bins, double min, double max);
-TH1F	*h_muon_0_muon_1_mass;
+virtual void Book_DeltaR(int bins, double min, double max);
+TH1F	*h_DeltaR;
 
 /// -- Virtual book function to book the histogram (PRE version)
-virtual void Book_muon_0_muon_1_mass_PRE(int bins, double min, double max);
-TH1F	*h_muon_0_muon_1_mass_PRE;
-
-
+virtual void Book_DeltaR_PRE(int bins, double min, double max);
+TH1F	*h_DeltaR_PRE;
 
