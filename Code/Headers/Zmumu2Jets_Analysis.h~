@@ -183,8 +183,8 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram_OldCanvas(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass.pdf");
 
 	// Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_muon", "", 600, 400, false, "h_DeltaR_PRE_muon.pdf");
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_muon", "", 600, 400, false, "h_DeltaR_muon.pdf");
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE", "", 600, 400, false, "h_DeltaR_PRE.pdf");
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR", "", 600, 400, false, "h_DeltaR.pdf");
 
 
 }
