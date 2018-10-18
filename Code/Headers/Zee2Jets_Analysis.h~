@@ -139,20 +139,20 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
 
 	//ptvar cone histograms
-	DrawHistogram(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20", "", 600, 400, true, "h_elec_0_iso_ptvarcone20.pdf");
-	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40", "", 600, 400, true, "h_elec_0_iso_ptvarcone40.pdf");
+	DrawHistogram(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20", "", 600, 400, true, "h_elec_0_iso_ptvarcone20.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40", "", 600, 400, true, "h_elec_0_iso_ptvarcone40.pdf", AnalysisType);
 
 	//topoet cone histograms
-	DrawHistogram_OldCanvas(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", "", 600, 400, true, "h_elec_0_iso_topoetcone20.pdf");
-	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40", "", 600, 400, true, "h_elec_0_iso_topoetcone40.pdf");
+	DrawHistogram_OldCanvas(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", "", 600, 400, true, "h_elec_0_iso_topoetcone20.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40", "", 600, 400, true, "h_elec_0_iso_topoetcone40.pdf", AnalysisType);
 
 	//Elec 0 & Elec 1 histograms
-	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRE.pdf");
-	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass.pdf");
+	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRE.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass.pdf", AnalysisType);
 
 	//Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE", "", 600, 400, false, "h_DeltaR_PRE.pdf");
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR", "", 600, 400, false, "h_DeltaR.pdf");
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE", "", 600, 400, false, "h_DeltaR_PRE.pdf", "Zee2Jets");
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR", "", 600, 400, false, "h_DeltaR.pdf", "Zee2Jets");
 
 }
 

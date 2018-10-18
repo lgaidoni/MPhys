@@ -37,6 +37,9 @@ public :
 	/////-------------------------CUSTOM HISTOGRAM DEFINITIONS------------------------/////
 	#include "Histo_Book_Definitions_Custom.h"
 
+	/////-------------------------CUSTOM VARIABLE DEFINITIONS-------------------------/////
+	string AnalysisType;
+
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
    // Declaration of leaf types
@@ -1594,7 +1597,8 @@ public :
    TBranch        *b_weight_total;   //!
 
    MC_Analysis(TTree *tree=0);
-   MC_Analysis(string fileLocation);
+   MC_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
+   MC_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~MC_Analysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
@@ -1640,6 +1644,19 @@ MC_Analysis::MC_Analysis(string fileLocation) : fChain(0)
     }
     f->GetObject("NOMINAL",tree);
     Init(tree);
+}
+
+//This will read in a file located at fileLocation (Will only read MC data)
+MC_Analysis::MC_Analysis(string fileLocation, string analysistype) : fChain(0) 
+{
+    TTree *tree;
+    TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fileLocation.c_str());
+    if (!f || !f->IsOpen()) {
+       f = new TFile(fileLocation.c_str());
+    }
+    f->GetObject("NOMINAL",tree);
+    Init(tree);
+    AnalysisType = analysistype;
 }
 
 Int_t MC_Analysis::GetEntry(Long64_t entry)
