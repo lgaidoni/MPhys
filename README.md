@@ -1,4 +1,3 @@
-# MPhys
-Vector Boson Fusion
+# MPhys - Vector Boson Fusion Analysis
 
-This is the code to perform analysis on vector boson fusion
+This is the source code used in my MPhys Project, which will perfrom analysis on Vector Boson Fusion
