@@ -58,10 +58,12 @@ void MC_Analysis::Loop() {
 
 	///------------------- ACTUAL ANALYSIS -----------------///
  
-	Zee2Jets_GenerateVariables();
-	Zee2Jets_FillAllData_PreCut();
-	if (Zee2Jets_Cut() == false) {
-		Zee2Jets_FillAllData_PostCut();
+	if (Zee2Jets_InitialCut() == false) {
+		Zee2Jets_GenerateVariables();
+		Zee2Jets_FillAllData_PreCut();
+		if (Zee2Jets_Cut() == false) {
+			Zee2Jets_FillAllData_PostCut();
+		}
 	}
 
  
