@@ -94,6 +94,4 @@ double DeltaRCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
 }
 
-
-
 #endif
