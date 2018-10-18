@@ -38,14 +38,14 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	Book_elec_0_elec_1_mass(bins, 0, 200);
 }
 
-//This function will generate physics variables, put them in a vector, and return said vector
+//This function will generate variables, put them in a vector, and return said vector
 void MC_Analysis::Zee2Jets_GenerateVariables() {
 
 	elec_0_elec_1_Mass = InvariantMass(elec_0_p4, elec_1_p4);
 
 }
 
-//This function will fill the histograms that need to be filled before cuts are made
+//Rhis function will fill the histograms that need to be filled before cuts are made
 void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 
 	//Invariant mass
@@ -54,9 +54,6 @@ void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 }
 
 //This function will determine if event is cut
-// Pre-Selection cuts (dummy cuts)
-// Selection cuts (more sophistocated cuts)
-
 //Returns bool, for ease of use in if statements
 bool MC_Analysis::Zee2Jets_Cut() {
 
