@@ -6,7 +6,7 @@
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
 void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string xTitle, int X, int Y, bool log, string OutputFileName) {
 
-	string OutputFilePath = "../Output-Files/";
+	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + OutputFileName;
 
 	//Create a new canvas using canvasName
@@ -37,7 +37,7 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
 void DrawHistogram_OldCanvas(TH1F *histogram, string canvasName, string histogramName, string xTitle, int X, int Y, bool log, string OutputFileName) {
 
-	string OutputFilePath = "../Output-Files/";
+	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + OutputFileName;
 
 	//Sets the X axis title
@@ -69,5 +69,31 @@ double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 	return mass;
 
 }
+
+//This Function will calculate delta phi (Phi = Polar angle in the transverse plane)
+double DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaPhi = Vector1->Phi() - Vector2->Phi();
+	return DeltaPhi;
+
+}
+
+//This Function will calculate delta eta (Eta = Rapidity)
+double DeltaEta(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaEta = Vector1->Eta() - Vector2->Eta();
+	return DeltaEta;
+
+}
+
+//This Function will calculate delta R (Distance in the R space)
+double DeltaRCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaRVal = sqrt( pow(DeltaPhi(Vector1, Vector2), 2) + pow(DeltaEta(Vector1, Vector2), 2) );
+	return DeltaRVal;
+
+}
+
+
 
 #endif

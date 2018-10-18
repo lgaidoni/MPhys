@@ -32,5 +32,16 @@ void MC_Analysis::Book_elec_0_elec_1_mass_PRE(int bins, double min, double max) 
 	h_elec_0_elec_1_mass_PRE = new TH1F("h_elec_0_elec_1_mass_PRE", "", bins, min, max);
 }
 
+///---------------------------------------Delta R-----------------------------------///
+
+//Delta R
+void MC_Analysis::Book_DeltaR(int bins, double min, double max) {
+	h_DeltaR = new TH1F("h_DeltaR", "", bins, min, max);
+}
+
+//Delta R PRE
+void MC_Analysis::Book_DeltaR_PRE(int bins, double min, double max) {
+	h_DeltaR_PRE = new TH1F("h_DeltaR_PRE", "", bins, min, max);
+}
 
 #endif

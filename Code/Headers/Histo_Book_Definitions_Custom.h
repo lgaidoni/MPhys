@@ -31,3 +31,15 @@ TH1F	*h_elec_0_elec_1_mass;
 virtual void Book_elec_0_elec_1_mass_PRE(int bins, double min, double max);
 TH1F	*h_elec_0_elec_1_mass_PRE;
 
+///-----------------------------------------Delta R---------------------------------///
+/// -- Variable to be plotted in histogram
+double DeltaR;
+
+/// -- Virtual book function to book the histogram
+virtual void Book_DeltaR(int bins, double min, double max);
+TH1F	*h_DeltaR;
+
+/// -- Virtual book function to book the histogram (PRE version)
+virtual void Book_DeltaR_PRE(int bins, double min, double max);
+TH1F	*h_DeltaR_PRE;
+
