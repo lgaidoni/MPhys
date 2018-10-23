@@ -78,13 +78,22 @@ double DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
 }
 
-//This Function will calculate delta eta (Eta = Rapidity)
+//This Function will calculate delta eta (Eta = PseudoRapidity)
 double DeltaEta(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
 	double DeltaEta = Vector1->Eta() - Vector2->Eta();
 	return DeltaEta;
 
 }
+
+//This Function will calculate delta rapidity (Rapidity = Rapidity)
+double DeltaRapidity(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaRapidity = Vector1->Rapidity() - Vector2->Rapidity();
+	return DeltaRapidity;
+
+}
+
 
 //This Function will calculate delta R (Distance in the R space)
 double DeltaRCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
