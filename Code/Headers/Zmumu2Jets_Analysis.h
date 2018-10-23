@@ -29,19 +29,22 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	//Book_muon_0_iso_etcone40(bins, -12, 1); commented out as have peak at -11: warning not to use data
 
 	//pt cone histograms
-	Book_muon_0_iso_ptcone20(bins, -12, 1);
-	Book_muon_0_iso_ptcone30(bins, -12, 1);
-	Book_muon_0_iso_ptcone40(bins, -12, 1);
+	Book_muon_0_iso_ptcone20(bins, 0, 10000);
+	Book_muon_0_iso_ptcone30(bins, 0, 10000);
+	Book_muon_0_iso_ptcone40(bins, 0, 10000);
 
 	//ptvar cone histograms
-	Book_muon_0_iso_ptvarcone20(bins, -12, 100000);
-	Book_muon_0_iso_ptvarcone30(bins, -12, 100000);
-	Book_muon_0_iso_ptvarcone40(bins, -12, 100000);
+	Book_muon_0_iso_ptvarcone20(bins, 0, 800000);
+	Book_muon_0_iso_ptvarcone30(bins, 0, 800000);
+	Book_muon_0_iso_ptvarcone40(bins, 0, 800000);
 
 	//topoet cone histograms
-	Book_muon_0_iso_topoetcone20(bins, -12, 800000);
-	Book_muon_0_iso_topoetcone30(bins, -12, 800000);
-	Book_muon_0_iso_topoetcone40(bins, -12, 800000);
+	Book_muon_0_iso_topoetcone20(bins, 0, 800000);
+	Book_muon_0_iso_topoetcone30(bins, 0, 800000);
+	Book_muon_0_iso_topoetcone40(bins, 0, 800000);
+
+	// muon_p4.Pt() 
+	Book_muon_0_p4_Pt(bins, 0, 200);
 
 	///-------------------------------- muon_0 & muon_1 ----------------------------------///
 	//invariant mass pre cut
@@ -68,7 +71,10 @@ bool MC_Analysis::Zmumu2Jets_InitialCut() {
 	bool two_or_more_jets = false;
 	bool muons_opposite_charges = false;
 	bool no_bjets = false;
-
+	bool Pt_threshold = false;
+	
+	// Event reconstruction checking
+	
 	//Condition Checking
 	if (muon_0 != 0 && muon_1 != 0) { // if two muons or anti-muons, or one of each are found
 		two_muons = true;
@@ -112,7 +118,15 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 // Selection cut functions (more sophistocated cuts)
 bool MC_Analysis::Zmumu2Jets_Cut() {
 
-	//Setting up conditions
+	// search region cuts from Section 6, page 7, REF: ATLAS doi:10.1007/JHEP04(2014)031
+	// Z boson defined as 2 opp charged same flavour leptons with a dilepton invariant mass of 81 < m_{ll} < 101 GeV
+	// Transverse momentum of dilepton pair p_T^{ll} > 20GeV
+	
+	// At least 2 jets that satisfy p_T^{j1} > 55 GeV, p_T^{j2} > 45 GeV 
+	// j1 j2 highest and second highest order transverse momentum jets
+	// invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
+	// no additional jest with p_T > 25 GeV in rapidity interval between two leading jets
+	// p_T balance required to be less than 0.15
 
 	//Condition Checking
 
@@ -141,6 +155,9 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PostCut() {
 	h_muon_0_iso_topoetcone30->Fill(muon_0_iso_topoetcone30);
 	h_muon_0_iso_topoetcone40->Fill(muon_0_iso_topoetcone40);
 
+	// muon_0_p4.Pt
+	h_muon_0_p4_Pt->Fill(muon_0_p4->Pt()); // to access the Pt Lorentz Vector
+
 	// Invariant mass
 	h_muon_0_muon_1_mass->Fill(muon_0_muon_1_Mass);
 
@@ -165,22 +182,25 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 
 	// ptcone histograms
 	DrawHistogram(h_muon_0_iso_ptcone20, "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20", "", 600, 400, true, "h_muon_0_iso_ptcone20.pdf", AnalysisType);
-	DrawHistogram_OldCanvas(h_muon_0_iso_ptcone30, "h_muon_0_iso_ptcone30", "h_muon_0_iso_ptcone30", "", 600, 400, true, "h_muon_0_iso_ptcone30.pdf", AnalysisType);
-	DrawHistogram_OldCanvas(h_muon_0_iso_ptcone40, "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40", "", 600, 400, true, "h_muon_0_iso_ptcone40.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptcone30, "h_muon_0_iso_ptcone30", "h_muon_0_iso_ptcone30", "", 600, 400, true, "h_muon_0_iso_ptcone30.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptcone40, "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40", "", 600, 400, true, "h_muon_0_iso_ptcone40.pdf", AnalysisType);
 
 	// topoetcone histograms
-	DrawHistogram_OldCanvas(h_muon_0_iso_topoetcone20, "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20", "", 600, 400, true, "h_muon_0_iso_topoetcone20.pdf", AnalysisType);
-	DrawHistogram_OldCanvas(h_muon_0_iso_topoetcone30, "h_muon_0_iso_topoetcone30", "h_muon_0_iso_topoetcone30", "", 600, 400, true, "h_muon_0_iso_topoetcone30.pdf", AnalysisType);
-	DrawHistogram_OldCanvas(h_muon_0_iso_topoetcone40, "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40", "", 600, 400, true, "h_muon_0_iso_topoetcone40.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_topoetcone20, "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20", "", 600, 400, true, "h_muon_0_iso_topoetcone20.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_topoetcone30, "h_muon_0_iso_topoetcone30", "h_muon_0_iso_topoetcone30", "", 600, 400, true, "h_muon_0_iso_topoetcone30.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_topoetcone40, "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40", "", 600, 400, true, "h_muon_0_iso_topoetcone40.pdf", AnalysisType);
 	
 	// ptvarcone histograms
-	DrawHistogram_OldCanvas(h_muon_0_iso_ptvarcone20, "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20", "", 600, 400, true, "h_muon_0_iso_ptvarcone20.pdf", AnalysisType);
-	DrawHistogram_OldCanvas(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone30", "h_muon_0_iso_ptvarcone30", "", 600, 400, true, "h_muon_0_iso_ptvarcone30.pdf", AnalysisType);
-	DrawHistogram_OldCanvas(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40", "", 600, 400, true, "h_muon_0_iso_ptvarcone40.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptvarcone20, "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20", "", 600, 400, true, "h_muon_0_iso_ptvarcone20.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone30", "h_muon_0_iso_ptvarcone30", "", 600, 400, true, "h_muon_0_iso_ptvarcone30.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40", "", 600, 400, true, "h_muon_0_iso_ptvarcone40.pdf", AnalysisType);
 	
+	// muon_0_p4_Pt
+	DrawHistogram(h_muon_0_p4_Pt, "h_muon_0_p4_Pt", "h_muon_0_p4_Pt", "", 600, 400, true, "h_muon_0_p4_Pt.pdf", AnalysisType);
+
 	// muon 0 & muon 1 histograms
-	DrawHistogram_OldCanvas(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_elec_0_elec_1_mass_PRE", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass_PRE.pdf", AnalysisType);
-	DrawHistogram_OldCanvas(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_elec_0_elec_1_mass_PRE", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass_PRE.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass.pdf", AnalysisType);
 
 	// Delta R Histograms
 	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_muon", "", 600, 400, false, "h_DeltaR_PRE_muon.pdf", AnalysisType);
