@@ -14,8 +14,18 @@
 void MC_Analysis::Zee2Jets_BookHistos() {
 
 	int bins = 100;
+	int PtMin = 0; //GeV/c
+	int PtMax = 500; //GeV/c
+	int PhiMin = -4;
+	int PhiMax = 4;
+	int RapidityMin = -4;
+	int RapidityMax = 4;
+	int EtaMin = -4;
+	int EtaMax = 4;
 
 	/////----------------------------------BOOKINGS------------------------------------/////
+
+	#include "_BookHistos.h"
 
 	///------------------------------------ elec_0 --------------------------------------///
 	//ptvar cone histograms
@@ -25,10 +35,6 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	//topoet cone histograms
 	Book_elec_0_iso_topoetcone20(bins, 0, 800000);
 	Book_elec_0_iso_topoetcone40(bins, 0, 800000);
-
-	//elec_0 pT
-	Book_elec_0_p4_Pt(bins, 0, 200);
-
 
 	///-------------------------------- elec_0 & elec_1 ----------------------------------///
 	//invariant mass pre cut
@@ -49,35 +55,6 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 
 	//Delta R PRE
 	Book_DeltaR_PRE(bins, 0, 10);
-
-	///------------------------------- Electron Rapidity ---------------------------------///
-	Book_elec_0_p4_Rapidity(bins, -4, 4);
-	Book_elec_1_p4_Rapidity(bins, -4, 4);
-
-	///---------------------------------ljet Rapidity ------------------------------------///
-	Book_ljet_0_p4_Rapidity(bins, -4, 4);
-	Book_ljet_1_p4_Rapidity(bins, -4, 4);
-	Book_ljet_2_p4_Rapidity(bins, -4, 4);
-	Book_ljet_3_p4_Rapidity(bins, -4, 4);
-
-	///------------------------------- Electron PseudoRapidity ---------------------------------///
-	Book_elec_0_p4_Eta(bins, -4, 4);
-	Book_elec_1_p4_Eta(bins, -4, 4);
-
-	///---------------------------------ljet PseudoRapidity ------------------------------------///
-	Book_ljet_0_p4_Eta(bins, -4, 4);
-	Book_ljet_1_p4_Eta(bins, -4, 4);
-	Book_ljet_2_p4_Eta(bins, -4, 4);
-	Book_ljet_3_p4_Eta(bins, -4, 4);
-
-	///---------------------------ljet transverse momentum--------------------------------///
-	Book_ljet_0_p4_Pt(bins, 0, 300);
-	Book_ljet_1_p4_Pt(bins, 0, 300);
-	Book_ljet_2_p4_Pt(bins, 0, 300);
-
-	Book_ljet_0_p4_Pt_PRE(bins, 0, 300);
-	Book_ljet_1_p4_Pt_PRE(bins, 0, 300);
-	Book_ljet_2_p4_Pt_PRE(bins, 0, 300);
 
 	///---------------------------------ljet_0 & ljet_1-----------------------------------///
 	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
@@ -130,6 +107,8 @@ void MC_Analysis::Zee2Jets_GenerateVariables() {
 //Rhis function will fill the histograms that need to be filled before cuts are made
 void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 
+	#include "_FillAllData_PreCut.h"
+
 	//Invariant mass
 	h_elec_0_elec_1_mass_PRE->Fill(elec_0_elec_1_Mass);
 	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass);
@@ -139,11 +118,6 @@ void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 
 	//Delta R
 	h_DeltaR_PRE->Fill(DeltaR);
-
-	//ljet transverse momenta
-	h_ljet_0_p4_Pt_PRE->Fill(ljet_0_p4->Pt());
-	h_ljet_1_p4_Pt_PRE->Fill(ljet_1_p4->Pt());
-	h_ljet_2_p4_Pt_PRE->Fill(ljet_2_p4->Pt());
 
 }
 
@@ -174,6 +148,8 @@ bool MC_Analysis::Zee2Jets_Cut() {
 
 //This function will fill all the histograms after cuts are made
 void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
+	
+	#include "_FillAllData_PostCut.h"
 
 	//ptvar cone histograms
 	h_elec_0_iso_ptvarcone20->Fill(elec_0_iso_ptvarcone20);
@@ -182,9 +158,6 @@ void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 	//topoet cone histograms
 	h_elec_0_iso_topoetcone20->Fill(elec_0_iso_topoetcone20);
 	h_elec_0_iso_topoetcone40->Fill(elec_0_iso_topoetcone40);
-
-	//electron 0 momentum
-	h_elec_0_p4_Pt->Fill(elec_0_p4->Pt());
 
 	//Invariant mass
 	h_elec_0_elec_1_mass->Fill(elec_0_elec_1_Mass);
@@ -195,31 +168,6 @@ void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 
 	//Delta R for two electrons
 	h_DeltaR->Fill(DeltaR);
-
-	//Electron Rapidity
-	h_elec_0_p4_Rapidity->Fill(elec_0_p4->Rapidity());
-	h_elec_1_p4_Rapidity->Fill(elec_1_p4->Rapidity());
-
-	//ljet Rapidity
-	h_ljet_0_p4_Rapidity->Fill(ljet_0_p4->Rapidity());
-	h_ljet_1_p4_Rapidity->Fill(ljet_1_p4->Rapidity());
-	h_ljet_2_p4_Rapidity->Fill(ljet_2_p4->Rapidity());
-	h_ljet_3_p4_Rapidity->Fill(ljet_3_p4->Rapidity());
-
-	//Electron PseudoRapidity
-	h_elec_0_p4_Eta->Fill(elec_0_p4->Eta());
-	h_elec_1_p4_Eta->Fill(elec_1_p4->Eta());
-
-	//ljet PseudoRapidity
-	h_ljet_0_p4_Eta->Fill(ljet_0_p4->Eta());
-	h_ljet_1_p4_Eta->Fill(ljet_1_p4->Eta());
-	h_ljet_2_p4_Eta->Fill(ljet_2_p4->Eta());
-	h_ljet_3_p4_Eta->Fill(ljet_3_p4->Eta());
-
-	//ljet transverse momenta
-	h_ljet_0_p4_Pt->Fill(ljet_0_p4->Pt());
-	h_ljet_1_p4_Pt->Fill(ljet_1_p4->Pt());
-	h_ljet_2_p4_Pt->Fill(ljet_2_p4->Pt());
 
 }
 
@@ -235,22 +183,19 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 
 	//Draw histogram function takes the following:
 	//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
+	#include "_DrawHistos.h"
 
 	//ptvar cone histograms
-	DrawHistogram(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20_Zee2Jets", "", 600, 400, true, "h_elec_0_iso_ptvarcone20_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40_Zee2Jets", "", 600, 400, true, "h_elec_0_iso_ptvarcone40_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20_Zee2JetsTest", "", 600, 400, true, "h_elec_0_iso_ptvarcone20_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40_" + AnalysisType, "", 600, 400, true, "h_elec_0_iso_ptvarcone40_Zee2Jets.pdf", AnalysisType);
 
 	//topoet cone histograms
 	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20_Zee2Jets", "", 600, 400, true, "h_elec_0_iso_topoetcone20_Zee2Jets.pdf", AnalysisType);
 	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40_Zee2Jets", "", 600, 400, true, "h_elec_0_iso_topoetcone40_Zee2Jets.pdf", AnalysisType);
 
-	//electron 0 momentum
-	DrawHistogram(h_elec_0_p4_Pt, "h_elec_0_p4_Pt", "h_elec_0_p4_Pt_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_elec_0_p4_Pt_Zee2Jets.pdf", AnalysisType);
-
 	//combined lepton momentum
 	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_elec_0_elec_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
 	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_elec_0_elec_1_mass_Zee2Jets.pdf", AnalysisType);
-
 
 	//Elec 0 & Elec 1 histograms
 	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
@@ -263,15 +208,6 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	//leading jets invariant masses
 	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
 	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_Zee2Jets.pdf", AnalysisType);
-
-	//ljet transverse momenta
-	DrawHistogram(h_ljet_0_p4_Pt, "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_0_p4_Pt_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_ljet_1_p4_Pt, "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_1_p4_Pt_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_ljet_2_p4_Pt, "h_ljet_2_p4_Pt", "h_ljet_2_p4_Pt_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_2_p4_Pt_Zee2Jets.pdf", AnalysisType);
-
-	DrawHistogram(h_ljet_0_p4_Pt_PRE, "h_ljet_0_p4_Pt_PRE", "h_ljet_0_p4_Pt_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_0_p4_Pt_PRE_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_ljet_1_p4_Pt_PRE, "h_ljet_1_p4_Pt_PRE", "h_ljet_1_p4_Pt_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_1_p4_Pt_PRE_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_ljet_2_p4_Pt_PRE, "h_ljet_2_p4_Pt_PRE", "h_ljet_2_p4_Pt_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_2_p4_Pt_PRE_Zee2Jets.pdf", AnalysisType);
 	
 }
 

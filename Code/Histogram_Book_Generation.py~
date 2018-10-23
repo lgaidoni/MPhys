@@ -39,7 +39,7 @@ muon1found = 0
 tau0found = 0
 tau1found = 0
 
-def AnalysisAutoGen(InputTLorentzName, DesiredTLorentzName, Units):
+def AnalysisAutoGen(InputTLorentzName, DesiredTLorentzName, Units, File):
 	if InputTLorentzName == DesiredTLorentzName:
 		#To fill the _BookHistos Function inside SOMETHING_Analysis.h
 		_BookHistos.write("\t//Histogram Bookings for " + leafName + "_" + TLorentzName + "\n")
@@ -55,9 +55,9 @@ def AnalysisAutoGen(InputTLorentzName, DesiredTLorentzName, Units):
 		_FillAllData_PostCut.write("\th_" + leafName + "_" + TLorentzName + "->Fill(" + leafName + "->" + TLorentzName + "());\n\n")
 
 		#To fill the _DrawHistos Function inside SOMETHING_Analysis.h
-		_DrawHistos.write("\t//Histogram Draw Functions for " + leafName + "_" + TLorentzName + "\n")
-		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + ", \"" + leafName + "_" + TLorentzName + "\", \"" + leafName + "_" + TLorentzName + "_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_\" + AnalysisType + \".pdf\", AnalysisType);\n")
-		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_PRE, \"" + leafName + "_" + TLorentzName + "_PRE\", \"" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType + \".pdf\", AnalysisType);\n\n")
+		File.write("\t//Histogram Draw Functions for " + leafName + "_" + TLorentzName + "\n")
+		File.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + ", \"" + leafName + "_" + TLorentzName + "\", \"" + leafName + "_" + TLorentzName + "_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_\" + AnalysisType + \".pdf\", AnalysisType);\n")
+		File.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_PRE, \"" + leafName + "_" + TLorentzName + "_PRE\", \"" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType + \".pdf\", AnalysisType);\n\n")
 
 
 for line in MC_Analysis:
@@ -97,10 +97,10 @@ for line in MC_Analysis:
 				Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_PRE = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_PRE\",\"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("\t}\n")
 
-				AnalysisAutoGen(TLorentzName, "Pt", "Momentum [GeV/c^{2}]")
-				AnalysisAutoGen(TLorentzName, "Phi", "")
-				AnalysisAutoGen(TLorentzName, "Eta", "")
-				AnalysisAutoGen(TLorentzName, "Rapidity", "")
+				AnalysisAutoGen(TLorentzName, "Pt", "Momentum [GeV/c^{2}]", _DrawHistos)
+				AnalysisAutoGen(TLorentzName, "Phi", "", _DrawHistos)
+				AnalysisAutoGen(TLorentzName, "Eta", "", _DrawHistos)
+				AnalysisAutoGen(TLorentzName, "Rapidity", "", _DrawHistos)
 
 
 			Histo_Definitions.write("\t/// ---- End of booking functions and declarations for TLorentzVector " + leafName + " ---- ///\n\n")
