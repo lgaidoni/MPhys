@@ -92,7 +92,7 @@ bool MC_Analysis::Zee2Jets_InitialCut() {
 void MC_Analysis::Zee2Jets_GenerateVariables() {
 
 	//Invariant Mass
-	elec_0_elec_1_Mass = InvariantMass(elec_0_p4, elec_1_p4);
+	elec_0_elec_1_mass = InvariantMass(elec_0_p4, elec_1_p4);
 	ljet_0_ljet_1_mass = InvariantMass(ljet_0_p4, ljet_1_p4);
 
 	//Delta R
@@ -104,13 +104,13 @@ void MC_Analysis::Zee2Jets_GenerateVariables() {
 
 }
 
-//Rhis function will fill the histograms that need to be filled before cuts are made
+// This function will fill the histograms that need to be filled before cuts are made
 void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 
 	#include "_FillAllData_PreCut.h"
 
 	//Invariant mass
-	h_elec_0_elec_1_mass_PRE->Fill(elec_0_elec_1_Mass);
+	h_elec_0_elec_1_mass_PRE->Fill(elec_0_elec_1_mass);
 	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass);
 
 	//Combined lepton pt
@@ -131,8 +131,10 @@ bool MC_Analysis::Zee2Jets_Cut() {
 	bool ljet_0_pt_greater = false;
 	bool ljet_1_pt_greater = false;
 	bool ljet_2_pt_less = false;
-
+	
 	//Condition Checking
+
+	// search region cuts from Section 6, page 7, REF: ATLAS doi:10.1007/JHEP04(2014)031
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true;
 	if (ljet_0_p4->Pt() > 50) ljet_0_pt_greater = true;
 	if (ljet_1_p4->Pt() > 50) ljet_1_pt_greater = true;
@@ -160,10 +162,10 @@ void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 	h_elec_0_iso_topoetcone40->Fill(elec_0_iso_topoetcone40);
 
 	//Invariant mass
-	h_elec_0_elec_1_mass->Fill(elec_0_elec_1_Mass);
-	h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass);
+	h_elec_0_elec_1_mass->Fill(elec_0_elec_1_mass); // two electrons
+	h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass); // two jets
 
-	//Combined lepton pt
+	//Combined lepton (electron) pT
 	h_elec_0_elec_1_pt->Fill(elec_0_elec_1_pt);
 
 	//Delta R for two electrons
@@ -208,7 +210,7 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	//leading jets invariant masses
 	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
 	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_Zee2Jets.pdf", AnalysisType);
-	
+
 }
 
 #endif
