@@ -1,6 +1,23 @@
+#Histogram Booking Functions
 Histo_Book_Functions_AutoGen = open("Headers/Histo_Book_Functions_AutoGen.h", "w")
+
+#Histogram Definitions
 Histo_Definitions = open("Headers/Histo_Book_Definitions_AutoGen.h", "w")
+
+#MC_Analysis to be read
 MC_Analysis = open("Headers/MC_Analysis.h", "r")
+
+#To fill the BookHistos Function inside SOMETHING_Analysis.h
+_BookHistos = open("Headers/_BookHistos.h", "w")
+
+#To fill the _FillAllData_PreCut Function inside SOMETHING_Analysis.h
+_FillAllData_PreCut = open("Headers/_FillAllData_PreCut.h", "w")
+
+#To fill the _FillAllData_PostCut Function inside SOMETHING_Analysis.h
+_FillAllData_PostCut = open("Headers/_FillAllData_PostCut.h", "w")
+
+#To fill the _DrawHistos Function inside SOMETHING_Analysis.h
+_DrawHistos = open("Headers/_DrawHistos.h", "w")
 
 reader = 0
 oldLeafName = ""
