@@ -35,6 +35,7 @@ TH1F	*h_DeltaR;
 virtual void Book_DeltaR_PRE(int bins, double min, double max);
 TH1F	*h_DeltaR_PRE;
 
+
 ///----------- Leading Jets Invariant Mass ------------///
 
 ///Leading jets invariant mass
@@ -51,6 +52,11 @@ virtual void Book_ljet_0_ljet_1_mass_PRE(int bins, double min, double max);
 TH1F	*h_ljet_0_ljet_1_mass_PRE;
 
 
+
+
+
+
+
 /// ----------- ELECTRONS ------------- ///
 
 ///-------------Invariant mass of electron 0 and electron 1-----------------///
@@ -64,6 +70,26 @@ TH1F	*h_elec_0_elec_1_mass;
 /// -- Virtual book function to book the histogram (PRE version)
 virtual void Book_elec_0_elec_1_mass_PRE(int bins, double min, double max);
 TH1F	*h_elec_0_elec_1_mass_PRE;
+
+
+/////---------------------elec_0 & elec_1 combined pt---------------------/////
+/// -- Variable to be plotted in histogram
+double elec_0_elec_1_pt;
+
+/// -- Virtual book function to book the histogram
+virtual void Book_elec_0_elec_1_pt(int bins, double min, double max);
+/// -- Declaration of Histogram
+TH1F	*h_elec_0_elec_1_pt;
+
+/// -- Virtual book function to book the histogram (PRE version)
+virtual void Book_elec_0_elec_1_pt_PRE(int bins, double min, double max);
+/// -- Declaration of Histogram (PRE version)
+TH1F	*h_elec_0_elec_1_pt_PRE;
+
+
+
+
+
 
 
 /// ----------- MUONS ------------- ///

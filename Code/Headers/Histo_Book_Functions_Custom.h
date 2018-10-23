@@ -48,6 +48,18 @@ void MC_Analysis::Book_elec_0_elec_1_mass_PRE(int bins, double min, double max) 
 	h_elec_0_elec_1_mass_PRE = new TH1F("h_elec_0_elec_1_mass_PRE", "", bins, min, max);
 }
 
+///-------------Combined pT of electron 0 and electron 1-----------------///
+
+//Electron 0 & Electron 1 pT
+void MC_Analysis::Book_elec_0_elec_1_pt(int bins, double min, double max) {
+	h_elec_0_elec_1_pt = new TH1F("h_elec_0_elec_1_pt", "", bins, min, max);
+}
+
+//Electron 0 & Electron 1 pT before cuts are made
+void MC_Analysis::Book_elec_0_elec_1_pt_PRE(int bins, double min, double max) {
+	h_elec_0_elec_1_pt_PRE = new TH1F("h_elec_0_elec_1_pt_PRE", "", bins, min, max);
+}
+
 
 /// ----------- MUONS ------------- ///
 

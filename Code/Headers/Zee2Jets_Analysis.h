@@ -37,6 +37,12 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	//invariant mass post cut
 	Book_elec_0_elec_1_mass(bins, 0, 200);
 
+	//pt pre cut
+	Book_elec_0_elec_1_pt_PRE(bins, 0, 200);
+
+	//pt post cut
+	Book_elec_0_elec_1_pt(bins, 0, 200);
+
 	///---------------------------------- Delta R ----------------------------------------///
 	//Delta R
 	Book_DeltaR(bins, 0, 10);
@@ -54,9 +60,18 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	Book_ljet_2_p4_Rapidity(bins, -4, 4);
 	Book_ljet_3_p4_Rapidity(bins, -4, 4);
 
+	///---------------------------ljet transverse momentum--------------------------------///
+	Book_ljet_0_p4_Pt(bins, 0, 300);
+	Book_ljet_1_p4_Pt(bins, 0, 300);
+	Book_ljet_2_p4_Pt(bins, 0, 300);
+
+	Book_ljet_0_p4_Pt_PRE(bins, 0, 300);
+	Book_ljet_1_p4_Pt_PRE(bins, 0, 300);
+	Book_ljet_2_p4_Pt_PRE(bins, 0, 300);
+
 	///---------------------------------ljet_0 & ljet_1-----------------------------------///
-	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1000);
-	Book_ljet_0_ljet_1_mass(bins, 0, 1000);
+	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
+	Book_ljet_0_ljet_1_mass(bins, 0, 1500);
 
 }
 
@@ -96,6 +111,9 @@ void MC_Analysis::Zee2Jets_GenerateVariables() {
 	//Delta R
 	DeltaR = DeltaRCalc(elec_0_p4, elec_1_p4);
 
+	//Combined Lepton momentum
+	elec_0_elec_1_pt = CombinedTransverseMomentum(elec_0_p4, elec_1_p4);
+
 
 }
 
@@ -106,8 +124,16 @@ void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 	h_elec_0_elec_1_mass_PRE->Fill(elec_0_elec_1_Mass);
 	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass);
 
-	// Delta R
+	//Combined lepton pt
+	h_elec_0_elec_1_pt_PRE->Fill(elec_0_elec_1_pt);
+
+	//Delta R
 	h_DeltaR_PRE->Fill(DeltaR);
+
+	//ljet transverse momenta
+	h_ljet_0_p4_Pt_PRE->Fill(ljet_0_p4->Pt());
+	h_ljet_1_p4_Pt_PRE->Fill(ljet_1_p4->Pt());
+	h_ljet_2_p4_Pt_PRE->Fill(ljet_2_p4->Pt());
 
 }
 
@@ -124,9 +150,12 @@ bool MC_Analysis::Zee2Jets_Cut() {
 
 	//Condition Checking
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true;
+	if (ljet_0_p4->Pt() > 50) ljet_0_pt_greater = true;
+	if (ljet_1_p4->Pt() > 50) ljet_1_pt_greater = true;
+	if (elec_0_elec_1_pt > 20) combined_lepton_pt = true;
 
 	//If the conditions are met, don't cut
-	if (leading_jets_invariant_mass) return false;	
+	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && combined_lepton_pt) return false;	
 	//Otherwise, cut
 	return true;
 
@@ -151,6 +180,9 @@ void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 	h_elec_0_elec_1_mass->Fill(elec_0_elec_1_Mass);
 	h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass);
 
+	//Combined lepton pt
+	h_elec_0_elec_1_pt->Fill(elec_0_elec_1_pt);
+
 	//Delta R for two electrons
 	h_DeltaR->Fill(DeltaR);
 
@@ -163,6 +195,11 @@ void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 	h_ljet_1_p4_Rapidity->Fill(ljet_1_p4->Rapidity());
 	h_ljet_2_p4_Rapidity->Fill(ljet_2_p4->Rapidity());
 	h_ljet_3_p4_Rapidity->Fill(ljet_3_p4->Rapidity());
+
+	//ljet transverse momenta
+	h_ljet_0_p4_Pt->Fill(ljet_0_p4->Pt());
+	h_ljet_1_p4_Pt->Fill(ljet_1_p4->Pt());
+	h_ljet_2_p4_Pt->Fill(ljet_2_p4->Pt());
 
 }
 
@@ -188,7 +225,12 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40_Zee2Jets", "", 600, 400, true, "h_elec_0_iso_topoetcone40_Zee2Jets.pdf", AnalysisType);
 
 	//electron 0 momentum
-	DrawHistogram(h_elec_0_p4_Pt, "h_elec_0_p4_Pt", "h_elec_0_p4_Pt_Zee2Jets", "", 600, 400, false, "h_elec_0_p4_Pt_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_p4_Pt, "h_elec_0_p4_Pt", "h_elec_0_p4_Pt_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_elec_0_p4_Pt_Zee2Jets.pdf", AnalysisType);
+
+	//combined lepton momentum
+	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_elec_0_elec_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_elec_0_elec_1_mass_Zee2Jets.pdf", AnalysisType);
+
 
 	//Elec 0 & Elec 1 histograms
 	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
@@ -199,9 +241,18 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_Zee2Jets", "", 600, 400, false, "h_DeltaR_Zee2Jets.pdf", AnalysisType);
 
 	//leading jets invariant masses
-	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_Zee2Jets", "", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_Zee2Jets", "", 600, 400, false, "h_ljet_0_ljet_1_mass_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_Zee2Jets.pdf", AnalysisType);
 
+	//ljet transverse momenta
+	DrawHistogram(h_ljet_0_p4_Pt, "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_0_p4_Pt_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_ljet_1_p4_Pt, "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_1_p4_Pt_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_ljet_2_p4_Pt, "h_ljet_2_p4_Pt", "h_ljet_2_p4_Pt_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_2_p4_Pt_Zee2Jets.pdf", AnalysisType);
+
+	DrawHistogram(h_ljet_0_p4_Pt_PRE, "h_ljet_0_p4_Pt_PRE", "h_ljet_0_p4_Pt_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_0_p4_Pt_PRE_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_ljet_1_p4_Pt_PRE, "h_ljet_1_p4_Pt_PRE", "h_ljet_1_p4_Pt_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_1_p4_Pt_PRE_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_ljet_2_p4_Pt_PRE, "h_ljet_2_p4_Pt_PRE", "h_ljet_2_p4_Pt_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_2_p4_Pt_PRE_Zee2Jets.pdf", AnalysisType);
+	
 }
 
 #endif
