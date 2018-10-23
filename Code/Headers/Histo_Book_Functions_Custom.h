@@ -63,5 +63,19 @@ void MC_Analysis::Book_muon_0_muon_1_mass_PRE(int bins, double min, double max) 
 	h_muon_0_muon_1_mass_PRE = new TH1F("h_muon_0_muon_1_mass_PRE", "", bins, min, max);
 }
 
+/// ---------- JETS --------------///
+
+//Function for booking leading jets invariant mass
+void MC_Analysis::Book_ljet_0_ljet_1_mass(int bins, double min, double max) {
+	h_ljet_0_ljet_1_mass = new TH1F("h_ljet_0_ljet_1_mass", "", bins, min, max);
+}
+
+//Function for booking leading jets invariant mass
+void MC_Analysis::Book_ljet_0_ljet_1_mass_PRE(int bins, double min, double max) {
+	h_ljet_0_ljet_1_mass_PRE = new TH1F("h_ljet_0_ljet_1_mass_PRE", "", bins, min, max);
+}
+
+
+
 
 #endif

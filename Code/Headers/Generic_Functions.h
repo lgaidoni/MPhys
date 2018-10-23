@@ -30,7 +30,12 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
+	canvas->Close();
+
 }
+
+
+/////////////////////////////-------------THIS FUNCTION IS DEPRECATED, PLEASE REMOVE FROM ANY ANALYSES----------/////////////////////////////////////////////////////////////////
 
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
@@ -60,7 +65,7 @@ void DrawHistogram_OldCanvas(TH1F *histogram, string canvasName, string histogra
 
 }
 
-
+//////////////////////////////////////////-----------------------------------------------------------------------/////////////////////////////////////////////////////////////////
 
 //This Fucntion will calculate invariant mass of two TLorentzVectors
 double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
@@ -91,6 +96,14 @@ double DeltaRCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
 	double DeltaRVal = sqrt( pow(DeltaPhi(Vector1, Vector2), 2) + pow(DeltaEta(Vector1, Vector2), 2) );
 	return DeltaRVal;
+
+}
+
+//This Function will calculate combined transverse momentum
+double CombinedTransverseMomentum(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double pT = ((*Vector1)+(*Vector2)).Pt();
+	return pT;
 
 }
 

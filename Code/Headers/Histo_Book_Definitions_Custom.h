@@ -23,6 +23,7 @@
 /// -------- RECYCLABLE VARIABLES ------ ///
 
 ///----------Delta R---------------------------------///
+
 /// -- Variable to be plotted in histogram
 double DeltaR;
 
@@ -33,6 +34,21 @@ TH1F	*h_DeltaR;
 /// -- Virtual book function to book the histogram (PRE version)
 virtual void Book_DeltaR_PRE(int bins, double min, double max);
 TH1F	*h_DeltaR_PRE;
+
+///----------- Leading Jets Invariant Mass ------------///
+
+///Leading jets invariant mass
+double ljet_0_ljet_1_mass; 
+
+/// -- Virtual book function to book the histogram
+virtual void Book_ljet_0_ljet_1_mass(int bins, double min, double max);
+/// -- Declaration of Histogram
+TH1F	*h_ljet_0_ljet_1_mass;
+
+/// -- Virtual book function to book the histogram (PRE version)
+virtual void Book_ljet_0_ljet_1_mass_PRE(int bins, double min, double max);
+/// -- Declaration of Histogram (PRE version)
+TH1F	*h_ljet_0_ljet_1_mass_PRE;
 
 
 /// ----------- ELECTRONS ------------- ///
