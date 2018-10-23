@@ -60,6 +60,16 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	Book_ljet_2_p4_Rapidity(bins, -4, 4);
 	Book_ljet_3_p4_Rapidity(bins, -4, 4);
 
+	///------------------------------- Electron PseudoRapidity ---------------------------------///
+	Book_elec_0_p4_Eta(bins, -4, 4);
+	Book_elec_1_p4_Eta(bins, -4, 4);
+
+	///---------------------------------ljet PseudoRapidity ------------------------------------///
+	Book_ljet_0_p4_Eta(bins, -4, 4);
+	Book_ljet_1_p4_Eta(bins, -4, 4);
+	Book_ljet_2_p4_Eta(bins, -4, 4);
+	Book_ljet_3_p4_Eta(bins, -4, 4);
+
 	///---------------------------ljet transverse momentum--------------------------------///
 	Book_ljet_0_p4_Pt(bins, 0, 300);
 	Book_ljet_1_p4_Pt(bins, 0, 300);
@@ -195,6 +205,16 @@ void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 	h_ljet_1_p4_Rapidity->Fill(ljet_1_p4->Rapidity());
 	h_ljet_2_p4_Rapidity->Fill(ljet_2_p4->Rapidity());
 	h_ljet_3_p4_Rapidity->Fill(ljet_3_p4->Rapidity());
+
+	//Electron PseudoRapidity
+	h_elec_0_p4_Eta->Fill(elec_0_p4->Eta());
+	h_elec_1_p4_Eta->Fill(elec_1_p4->Eta());
+
+	//ljet PseudoRapidity
+	h_ljet_0_p4_Eta->Fill(ljet_0_p4->Eta());
+	h_ljet_1_p4_Eta->Fill(ljet_1_p4->Eta());
+	h_ljet_2_p4_Eta->Fill(ljet_2_p4->Eta());
+	h_ljet_3_p4_Eta->Fill(ljet_3_p4->Eta());
 
 	//ljet transverse momenta
 	h_ljet_0_p4_Pt->Fill(ljet_0_p4->Pt());
