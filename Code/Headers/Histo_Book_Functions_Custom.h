@@ -7,12 +7,12 @@
 
 // BOOK KEEPING: please can we keep things in chronological order (of use, eg. pre before after cuts!)
 
-/// -- Virtual book function to book the histogram
+/// -- Virtual book function to book the histogram (PRE version)
 //void MC_Analysis::Book_variable(int bins, double min, double max) {
 //	h_variable = new TH1F("h_variable", "", bins, min, max);
 //}
 
-/// -- Virtual book function to book the histogram (PRE version)
+/// -- Virtual book function to book the histogram
 //void MC_Analysis::Book_variable(int bins, double min, double max) {
 //	h_variable = new TH1F("h_variable", "", bins, min, max);
 //}
@@ -25,14 +25,14 @@
 
 ///----------Delta R---------------------///
 
-//Delta R
-void MC_Analysis::Book_DeltaR(int bins, double min, double max) {
-	h_DeltaR = new TH1F("h_DeltaR", "", bins, min, max);
-}
-
 //Delta R PRE
 void MC_Analysis::Book_DeltaR_PRE(int bins, double min, double max) {
 	h_DeltaR_PRE = new TH1F("h_DeltaR_PRE", "", bins, min, max);
+}
+
+//Delta R
+void MC_Analysis::Book_DeltaR(int bins, double min, double max) {
+	h_DeltaR = new TH1F("h_DeltaR", "", bins, min, max);
 }
 
 
