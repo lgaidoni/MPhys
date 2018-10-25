@@ -8,8 +8,8 @@
 // BOOK KEEPING: please can we keep things in chronological order (of use, eg. pre before after cuts!)
 
 /// -- Virtual book function to book the histogram (PRE version)
-//void MC_Analysis::Book_variable(int bins, double min, double max) {
-//	h_variable = new TH1F("h_variable", "", bins, min, max);
+//void MC_Analysis::Book_variable_PRE(int bins, double min, double max) {
+//	h_variable_PRE = new TH1F("h_variable_PRE", "", bins, min, max);
 //}
 
 /// -- Virtual book function to book the histogram

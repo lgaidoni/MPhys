@@ -19,6 +19,15 @@ _FillAllData_PostCut = open("Headers/_FillAllData_PostCut.h", "w")
 #To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 _DrawHistos = open("Headers/_DrawHistos.h", "w")
 
+#Custom histograms to be created
+Custom_Histos = open("Custom_Histogram_Names.txt", "r")
+
+#Histogram Booking Functions for Custom Histograms
+Histo_Custom_Book_Functions = open("Headers/Histo_Book_Functions_AutoGen_Custom.h", "w")
+
+#Histogram Booking Definitions for Custom Histograms
+Histo_Custom_Book_Definitions = open("Headers/Histo_Book_Definitions_AutoGen_Custom.h", "w")
+
 reader = 0
 oldLeafName = ""
 
@@ -197,4 +206,54 @@ for line in MC_Analysis:
 	#If the lines is the one at the beginning of the list of branches (end of leaf types)
 	if line.find("// List of branches", 0, len(line)) != -1:
 		reader = 0
+
+#Header Declaration for C++ headers
+Histo_Custom_Book_Functions.write("#ifndef Histo_Book_Functions_AutoGen_Custom_h\n")
+Histo_Custom_Book_Functions.write("#define Histo_Book_Functions_AutoGen_Custom_h\n\n")
+
+#Header Declaration for C++ headers
+Histo_Custom_Book_Definitions.write("#ifndef Histo_Book_Definitions_AutoGen_Custom_h\n")
+Histo_Custom_Book_Definitions.write("#define Histo_Book_Definitions_AutoGen_Custom_h\n\n")
+
+for line in Custom_Histos:
+	
+	colonPos = line.find(":") #Find the position of the colon in the file, this separates the variable name from the comment
+
+	if line[0:2] == "##": # If the line is a comment for separating things out
+		Histo_Custom_Book_Functions.write("/// ------------------- " + line[2:len(line)-1] + " ---------------- ///\n\n")
+		Histo_Custom_Book_Definitions.write("/// ------------------- " + line[2:len(line)-1] + " ---------------- ///\n\n")
+	elif line[0:len(line) - 1] == "": # If the line is empty
+		print("LINE IS EMPTY, PLEASE REMOVE EMPTY LINE")
+	else: # Otherwise, output the line and comment to the files
+		Histo_Custom_Book_Definitions.write("// -- " + line[colonPos + 1:len(line)-1] + "\n")
+		Histo_Custom_Book_Functions.write("// -- " + line[colonPos + 1:len(line)-1] + "\n")
+
+		Histo_Custom_Book_Definitions.write("double " + line[0:colonPos] + ";\n\n")
+
+		Histo_Custom_Book_Definitions.write("virtual void Book_" + line[0:colonPos] + "_PRE(int bins, double min, double max); // PRE VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_PRE; // PRE VERSION\n\n")
+
+		Histo_Custom_Book_Definitions.write("virtual void Book_" + line[0:colonPos] + "_CONTROL(int bins, double min, double max); // CONTROL VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_CONTROL; // CONTROL VERSION\n\n")
+
+		Histo_Custom_Book_Definitions.write("virtual void Book_" + line[0:colonPos] + "(int bins, double min, double max); // SEARCH VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "; // SEARCH VERSION\n\n\n")
+
+	
+		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "_PRE(int bins, double min, double max) {\n")
+		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_PRE = new TH1F(\"h_" + line[0:colonPos] + "_PRE\", \"\", bins, min, max);\n")
+		Histo_Custom_Book_Functions.write("}\n")
+
+		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "_CONTROL(int bins, double min, double max) {\n")
+		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_CONTROL = new TH1F(\"h_" + line[0:colonPos] + "_COTNROL\", \"\", bins, min, max);\n")
+		Histo_Custom_Book_Functions.write("}\n")
+
+		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "(int bins, double min, double max) {\n")
+		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + " = new TH1F(\"h_" + line[0:colonPos] + "\", \"\", bins, min, max);\n")
+		Histo_Custom_Book_Functions.write("}\n\n\n")
+
+
+#Header Endings for C++ headers
+Histo_Custom_Book_Definitions.write("#endif")
+Histo_Custom_Book_Functions.write("#endif")
 
