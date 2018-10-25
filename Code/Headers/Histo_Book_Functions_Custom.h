@@ -101,16 +101,4 @@ void MC_Analysis::Book_ljet_0_ljet_1_mass(int bins, double min, double max) {
 	h_ljet_0_ljet_1_mass = new TH1F("h_ljet_0_ljet_1_mass", "", bins, min, max);
 }
 
-///-------------Combined pT of muon 0 and muon 1-----------------///
-
-// muon 0 & muon 1 pT before cuts are made
-void MC_Analysis::Book_muon_0_muon_1_pt_PRE(int bins, double min, double max) {
-	h_muon_0_muon_1_pt_PRE = new TH1F("h_muon_0_muon_1_pt_PRE", "", bins, min, max);
-}
-
-// muon 0 & muon 1 pT
-void MC_Analysis::Book_muon_0_muon_1_pt(int bins, double min, double max) {
-	h_muon_0_muon_1_pt = new TH1F("h_muon_0_muon_1_pt", "", bins, min, max);
-}
-
 #endif
