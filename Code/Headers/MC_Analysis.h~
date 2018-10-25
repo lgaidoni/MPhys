@@ -30,6 +30,8 @@ public :
 	//Zmumu2Jets Definitions
 	#include "Zmumu2Jets_Function_Definitions.h"
 
+	virtual void AddChainFriend();
+
 	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program
 	#include "Histo_Book_Definitions_AutoGen.h"
@@ -1597,8 +1599,8 @@ public :
    TBranch        *b_weight_total;   //!
 
    MC_Analysis(TTree *tree=0);
-   MC_Analysis(string fileLocation);
-   MC_Analysis(string fileLocation, string analysistype); 
+   MC_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
+   MC_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~MC_Analysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);

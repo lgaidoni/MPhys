@@ -27,6 +27,7 @@
 #include "Headers/MC_Analysis.h"
 #include "Headers/Zee2Jets_Analysis.h"
 #include "Headers/Zmumu2Jets_Analysis.h"
+#include "Headers/AddChainFriend.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h> 
@@ -69,7 +70,7 @@ void MC_Analysis::Loop() {
 		}
 	}
 	/// Zmumu2Jets
-	if (AnalysisType == "Zmumu2jets") {
+	if (AnalysisType == "Zmumu2Jets") {
 		if (Zmumu2Jets_InitialCut() == false) { // if we're not cutting
 			Zmumu2Jets_GenerateVariables();
 			Zmumu2Jets_FillAllData_PreCut();
