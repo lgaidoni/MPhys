@@ -38,6 +38,16 @@ TH1F	*h_DeltaR_PRE;
 virtual void Book_DeltaR(int bins, double min, double max);
 TH1F	*h_DeltaR;
 
+/// -- Variable to be plotted in histogram
+double pT_balance;
+
+/// -- lepton_0 lepton_1 ljet_0 ljet_1 pT balance histogram PRE CUT
+virtual void Book_pT_balance_PRE(int bins, double min, double max);
+TH1F	*h_pT_balance_PRE;
+
+/// -- lepton_0 lepton_1 ljet_0 ljet_1 pT balance histogram POST CUT
+virtual void Book_pT_balance(int bins, double min, double max);
+TH1F	*h_pT_balance;
 
 /// ----------- JETS ------------- ///
 
@@ -108,11 +118,10 @@ virtual void Book_muon_0_muon_1_pt_PRE(int bins, double min, double max);
 /// -- Declaration of Histogram (PRE version)
 TH1F	*h_muon_0_muon_1_pt_PRE;
 
-/// -- Virtual book function to book the histogram
+/// -- muon0_muon1 invariant mass histogram
 virtual void Book_muon_0_muon_1_pt(int bins, double min, double max);
 /// -- Declaration of Histogram
 TH1F	*h_muon_0_muon_1_pt;
-
 
 
 
