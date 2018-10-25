@@ -53,6 +53,13 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	//invariant mass post cut
 	Book_muon_0_muon_1_mass(bins, 0, 200);
 
+	// transverse momentum both muons pre cut
+	Book_muon_0_muon_1_pt_PRE(bins, 0, 200);
+
+	// transverse momentum both muons post cut
+	Book_muon_0_muon_1_pt(bins, 0, 200);
+
+
 	///---------------------------------- Delta R ----------------------------------------///
 	//Delta R
 	Book_DeltaR(bins, 0, 10);
@@ -74,6 +81,12 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 
 	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass(bins, 0, 1500);
+
+	///------------------ pT balance for muon_0 & muon_1 ljet_0 & ljet_1-----------------///
+
+
+	Book_pT_balance_PRE(bins, -800000, 800000);
+	Book_pT_balance(bins, -800000, 800000);
 
 }
 
@@ -121,6 +134,9 @@ void MC_Analysis::Zmumu2Jets_GenerateVariables() {
 	// Combined muon transverse momentum
 	muon_0_muon_1_pt = CombinedTransverseMomentum(muon_0_p4, muon_1_p4);
 
+	// p_T_Balance 
+	pT_balance = pTBalanceCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4);
+
 }
 
 // This function will fill the histograms that need to be filled BEFORE initial cuts are made
@@ -141,6 +157,12 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 	h_ljet_1_p4_Pt_PRE->Fill(ljet_1_p4->Pt());
 	h_ljet_2_p4_Pt_PRE->Fill(ljet_2_p4->Pt());
 
+	// pT balance PRE
+	h_pT_balance_PRE->Fill(pT_balance); // 2 muons 2 jets
+
+
+
+
 }
 
 // Analysis starts here
@@ -153,8 +175,7 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 	bool ljet_0_pt_greater = false;
 	bool ljet_1_pt_greater = false;
 	bool leading_jets_invariant_mass = false;
-
-	// Condition Checking
+	bool pT_balance_limit = false;
 	
 	// REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7
 	if (muon_0_muon_1_pt > 20) combined_lepton_pt = true; // Transverse momentum of dilepton pair p_T^{ll} > 20GeV
@@ -167,10 +188,11 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 	// additional cuts to add from same ref
 	// Z boson defined as 2 opp charged same flavour leptons with a dilepton invariant mass of 81 < m_{ll} < 101 GeV	
 	// no additional jest with p_T > 25 GeV in rapidity interval between two leading jets
-	// p_T balance required to be less than 0.15
+	
+	if (pT_balance < 0.15) pT_balance_limit = true; // p_T balance required to be less than 0.15
 
 	//If the conditions are met, don't cut
-	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && combined_lepton_pt) return false;	
+	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && combined_lepton_pt && pT_balance_limit) return false;	
 
 	//Otherwise, cut
 	return true;
@@ -213,6 +235,10 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PostCut() {
 	h_ljet_1_p4_Pt->Fill(ljet_1_p4->Pt());
 	h_ljet_2_p4_Pt->Fill(ljet_2_p4->Pt());
 	
+	// pT balance
+	h_pT_balance->Fill(pT_balance); // 2 muons 2 jets
+
+
 	// ljet rapidity
 	// muon rapidity 
 
@@ -259,8 +285,8 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_muon.pdf", AnalysisType);
 
 	// combined lepton momentum
-	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_Zmumu2Jets", "Momentum [GeV/c]", 600, 400, false, "h_muon_0_muon_1_mass_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_Zmumu2Jets", "Momentum [GeV/c]", 600, 400, false, "h_muon_0_muon_1_mass_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_Zmumu2Jets", "Momentum [GeV/c]", 600, 400, false, "h_muon_0_muon_1_pt_PRE_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_Zmumu2Jets", "Momentum [GeV/c]", 600, 400, false, "h_muon_0_muon_1_pt_Zmumu2Jets.pdf", AnalysisType);
 
 	// leading jets invariant masses
 	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_Zmumu2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_Zmumu2Jets.pdf", AnalysisType);
@@ -276,8 +302,9 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_ljet_1_p4_Pt, "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_Zmumu2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_1_p4_Pt_Zmumu2Jets.pdf", AnalysisType);
 	DrawHistogram(h_ljet_2_p4_Pt, "h_ljet_2_p4_Pt", "h_ljet_2_p4_Pt_Zmumu2Jets", "Momentum [GeV/c]", 600, 400, false, "h_ljet_2_p4_Pt_Zmumu2Jets.pdf", AnalysisType);
 
-
-
+	// pT balance
+	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_Zmumu2Jets", "p_T^{balance} [GeV/c]", 600, 400, false, "h_pT_balance_PRE_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_Zmumu2Jets", "p_T^{balance} [GeV/c]", 600, 400, false, "h_pT_balance_Zmumu2Jets.pdf", AnalysisType);
 }
 
 #endif

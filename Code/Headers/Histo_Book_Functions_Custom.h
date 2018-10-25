@@ -35,6 +35,16 @@ void MC_Analysis::Book_DeltaR(int bins, double min, double max) {
 	h_DeltaR = new TH1F("h_DeltaR", "", bins, min, max);
 }
 
+// pT balance for lepton_0, lepton_1, ljet_0 and ljet_1 PRE CUT
+void MC_Analysis::Book_pT_balance_PRE(int bins, double min, double max) {
+	h_pT_balance_PRE = new TH1F("h_pT_balance_PRE", "", bins, min, max);
+}
+
+// pT balance for lepton_0, lepton_1, ljet_0 and ljet_1 POST CUT
+void MC_Analysis::Book_pT_balance(int bins, double min, double max) {
+	h_pT_balance = new TH1F("h_pT_balance", "", bins, min, max);
+}
+
 
 /// ----------- ELECTRONS ------------- ///
 
