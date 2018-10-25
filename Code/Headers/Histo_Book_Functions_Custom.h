@@ -97,7 +97,7 @@ void MC_Analysis::Book_muon_0_muon_1_pt_PRE(int bins, double min, double max) {
 
 // muon 0 & muon 1 pT
 void MC_Analysis::Book_muon_0_muon_1_pt(int bins, double min, double max) {
-	h_emuon_0_muon_1_pt = new TH1F("h_muon_0_muon_1_pt", "", bins, min, max);
+	h_muon_0_muon_1_pt = new TH1F("h_muon_0_muon_1_pt", "", bins, min, max);
 }
 
 #endif
