@@ -29,9 +29,9 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	//Book_muon_0_iso_etcone40(bins, -12, 1); commented out as have peak at -11: warning not to use data
 
 	//pt cone histograms
-	Book_muon_0_iso_ptcone20(bins, 0, 10000);
-	Book_muon_0_iso_ptcone30(bins, 0, 10000);
-	Book_muon_0_iso_ptcone40(bins, 0, 10000);
+	Book_muon_0_iso_ptcone20(bins, 0, 800000);
+	Book_muon_0_iso_ptcone30(bins, 0, 800000);
+	Book_muon_0_iso_ptcone40(bins, 0, 800000);
 
 	//ptvar cone histograms
 	Book_muon_0_iso_ptvarcone20(bins, 0, 800000);
@@ -274,15 +274,15 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_Zmumu2Jets", "", 600, 400, true, "h_muon_0_iso_ptvarcone40_Zmumu2Jets.pdf", AnalysisType);
 	
 	// muon_0_p4_Pt
-	DrawHistogram(h_muon_0_p4_Pt, "h_muon_0_p4_Pt", "h_muon_0_p4_Pt_Zmumu2Jets", "", 600, 400, true, "h_muon_0_p4_Pt.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_p4_Pt, "h_muon_0_p4_Pt", "h_muon_0_p4_Pt_Zmumu2Jets", "", 600, 400, true, "h_muon_0_p4_Pt_Zmumu2Jets.pdf", AnalysisType);
 
 	// muon 0 & muon 1 histograms
 	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_Zmumu2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass_PRE_Zmumu2Jets.pdf", AnalysisType);
 	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_Zmumu2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass_Zmumu2Jets.pdf", AnalysisType);
 
 	// Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_PRE_muon.pdf", AnalysisType);
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_muon.pdf", AnalysisType);
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_PRE_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_Zmumu2Jets.pdf", AnalysisType);
 
 	// combined lepton momentum
 	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_Zmumu2Jets", "Momentum [GeV/c]", 600, 400, false, "h_muon_0_muon_1_pt_PRE_Zmumu2Jets.pdf", AnalysisType);

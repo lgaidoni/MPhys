@@ -103,7 +103,20 @@ bool MC_Analysis::Zmumu2Jets_InitialCut() {
 	
 	// Event reconstruction checking
 	
+	//Condition Checking
+	if(n_muons ==2 ){ // if two muons or anti-muons, or one of each are found
+		two_muons = true;
+		if (muon_0_q != muon_1_q) muons_opposite_charges = true;  // if muon anti-muon pair found
+	}
+	
+	// bjet cuts
+	if (n_bjets == 0) no_bjets = true;  //If there are no bjets
+	if (n_jets >= 2) two_or_more_jets = true;  //If two or more jets were found
 
+	// If the conditions are met, don't cut
+	if (two_muons && two_or_more_jets && muons_opposite_charges && no_bjets) return false;
+	//Otherwise, cut
+	return true;
 
 
 }
@@ -156,21 +169,6 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 // Cuts return bool, for ease in if statements
 // Selection cut functions (more sophistocated cuts)
 bool MC_Analysis::Zmumu2Jets_Cut() {
-
-	//Condition Checking
-	if(n_muons ==2 ){ // if two muons or anti-muons, or one of each are found
-		two_muons = true;
-		if (muon_0_q != muon_1_q) muons_opposite_charges = true;  // if muon anti-muon pair found
-	}
-	
-	// bjet cuts
-	if (n_bjets == 0) no_bjets = true;  //If there are no bjets
-	if (n_jets >= 2) two_or_more_jets = true;  //If two or more jets were found
-
-	// If the conditions are met, don't cut
-	if (two_muons && two_or_more_jets && muons_opposite_charges && no_bjets) return false;
-	//Otherwise, cut
-	return true;
 
 	// Initialise bool conditions
 	bool combined_lepton_pt = false;
@@ -276,15 +274,15 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_Zmumu2Jets", "", 600, 400, true, "h_muon_0_iso_ptvarcone40_Zmumu2Jets.pdf", AnalysisType);
 	
 	// muon_0_p4_Pt
-	DrawHistogram(h_muon_0_p4_Pt, "h_muon_0_p4_Pt", "h_muon_0_p4_Pt_Zmumu2Jets", "", 600, 400, true, "h_muon_0_p4_Pt.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_p4_Pt, "h_muon_0_p4_Pt", "h_muon_0_p4_Pt_Zmumu2Jets", "", 600, 400, true, "h_muon_0_p4_Pt_Zmumu2Jets.pdf", AnalysisType);
 
 	// muon 0 & muon 1 histograms
 	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_Zmumu2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass_PRE_Zmumu2Jets.pdf", AnalysisType);
 	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_Zmumu2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_muon_0_muon_1_mass_Zmumu2Jets.pdf", AnalysisType);
 
 	// Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_PRE_muon.pdf", AnalysisType);
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_muon.pdf", AnalysisType);
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_PRE_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_Zmumu2Jets", "", 600, 400, false, "h_DeltaR_Zmumu2Jets.pdf", AnalysisType);
 
 	// combined lepton momentum
 	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_Zmumu2Jets", "Momentum [GeV/c]", 600, 400, false, "h_muon_0_muon_1_pt_PRE_Zmumu2Jets.pdf", AnalysisType);
