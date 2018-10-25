@@ -44,6 +44,7 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	Book_muon_0_iso_topoetcone40(bins, 0, 800000);
 
 	// muon_p4.Pt() 
+	Book_muon_0_p4_Pt_PRE(bins, 0, 200);
 	Book_muon_0_p4_Pt(bins, 0, 200);
 
 	///-------------------------------- muon_0 & muon_1 ----------------------------------///
@@ -91,7 +92,7 @@ bool MC_Analysis::Zmumu2Jets_InitialCut() {
 	// Event reconstruction checking
 	
 	//Condition Checking
-	if(n_muons ==2 ){ // if two muons or anti-muons, or one of each are found
+	if(n_muons == 2 ){ // if two muons or anti-muons, or one of each are found
 		two_muons = true;
 		if (muon_0_q != muon_1_q) muons_opposite_charges = true;  // if muon anti-muon pair found
 	}
