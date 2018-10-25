@@ -30,6 +30,8 @@ public :
 	//Zmumu2Jets Definitions
 	#include "Zmumu2Jets_Function_Definitions.h"
 
+	virtual void MergerTest();
+
 	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program
 	#include "Histo_Book_Definitions_AutoGen.h"
