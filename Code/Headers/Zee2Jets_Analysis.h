@@ -70,12 +70,11 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass(bins, 0, 1500);
 
-	///------------------ pT balance for muon_0 & muon_1 ljet_0 & ljet_1-----------------///
-
+	///------------------ pT balance for elec_0 & elec_1 ljet_0 & ljet_1-----------------///
 
 	Book_pT_balance_PRE(bins, -800000, 800000);
 	Book_pT_balance(bins, -800000, 800000);
-
+	Book_pT_balance_CONTROL(bins, -800000, 800000);
 }
 
 
@@ -117,7 +116,6 @@ void MC_Analysis::Zee2Jets_GenerateVariables() {
 	//Combined Lepton momentum
 	elec_0_elec_1_pt = CombinedTransverseMomentum(elec_0_p4, elec_1_p4);
 
-	
 	// p_T_Balance 
 	pT_balance = pTBalanceCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4);
 
@@ -148,26 +146,40 @@ void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 //Returns bool, for ease of use in if statements
 bool MC_Analysis::Zee2Jets_Cut() {
 
-	//Setting up conditions
+	// Initialise bool conditions
+	bool Z_mass_condition = false;
 	bool combined_lepton_pt = false;
-	bool leading_jets_invariant_mass = false;
 	bool ljet_0_pt_greater = false;
 	bool ljet_1_pt_greater = false;
-	bool ljet_2_pt_less = false;
-	
-	//Condition Checking
+	bool leading_jets_invariant_mass = false;
+	bool pT_balance_limit = false;
+	bool ptvarcone_20 = false;
+	bool ptvarcone_40 = false;
+	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4); // Rapidity interval jets have momentum greater than 25GeV
 
-	// search region cuts from Section 6, page 7, REF: ATLAS doi:10.1007/JHEP04(2014)031
-	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true;
+	// REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7
+	if (elec_0_elec_1_mass >= 81 && elec_0_elec_1_mass <= 101 ) Z_mass_condition = true; // Z boson defined as 2 opp charged same flavour leptons with a dilepton invariant mass of 81 < m_{ll} < 101 GeV	
+
+	if (elec_0_elec_1_pt > 20) combined_lepton_pt = true; // Transverse momentum of dilepton pair p_T^{ll} > 20GeV
+
+	// At least 2 jets that satisfy p_T^{j1} > 55 GeV, p_T^{j2} > 45 GeV 
 	if (ljet_0_p4->Pt() > 50) ljet_0_pt_greater = true;
 	if (ljet_1_p4->Pt() > 50) ljet_1_pt_greater = true;
-	if (elec_0_elec_1_pt > 20) combined_lepton_pt = true;
+	// j1 j2 highest and second highest order transverse momentum jets
+	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
+	if (pT_balance < 0.15) pT_balance_limit = true; // p_T balance required to be less than 0.15
+
+
+	// EXTRA cuts. not from any source.
+	// ptvarcone required to be less than 0.1, high momentum suggests non-isolated events which we are not interested in
+	if (elec_0_iso_ptvarcone20 < 0.1) ptvarcone_20 = true; 
+	if (elec_0_iso_ptvarcone40 < 0.1) ptvarcone_40 = true; 
 
 	//If the conditions are met, don't cut
-	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && combined_lepton_pt) return false;	
+	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && pT_balance_limit && Z_mass_condition && combined_lepton_pt && rap_int_condition && ptvarcone_20 && ptvarcone_40) return false;//   
+
 	//Otherwise, cut
 	return true;
-
 }
 
 //This function will determine if event is cut for the search
@@ -258,6 +270,7 @@ void MC_Analysis::Zee2Jets_FillAllData_ControlCut() {
 	h_pT_balance_CONTROL->Fill(pT_balance);
 
 
+
 }
 
 //This functinon will Draw all the histograms, and write them to a file
@@ -298,6 +311,11 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	//leading jets invariant masses
 	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
+
+	// pT balance
+	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_Zmumu2Jets.pdf", AnalysisType);
+	
 
 }
 
