@@ -3,8 +3,8 @@
 
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
-//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
-void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string xTitle, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
+void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
 
 	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
@@ -12,11 +12,8 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
 
-	//Sets the X axis title
-	histogram->GetXaxis()->SetTitle(xTitle.c_str());
-
-	//Sets the Y axis title
-	histogram->GetYaxis()->SetTitle("Entries");
+	//Sets the Titles
+	histogram->SetTitle(title.c_str());
 
 	//Draw the histogram
 	histogram->Draw();
@@ -34,38 +31,24 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 
 }
 
-
-/////////////////////////////-------------THIS FUNCTION IS DEPRECATED, PLEASE REMOVE FROM ANY ANALYSES----------/////////////////////////////////////////////////////////////////
-
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
-//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
-void DrawHistogram_OldCanvas(TH1F *histogram, string canvasName, string histogramName, string xTitle, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
+void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
 
 	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
 
 	//Sets the X axis title
-	histogram->GetXaxis()->SetTitle(xTitle.c_str());
-
-	//Sets the Y axis title
-	histogram->GetYaxis()->SetTitle("Entries");
+	histogram->SetTitle(title.c_str());
 
 	//Draw the histogram
 	histogram->Draw();
 
-	//If the user wants the axis to be a log axis, do it
-	if (log == true) gPad->SetLogy();
-
 	//Write out to a ROOT file
-	gPad->Write(histogramName.c_str());
-	
-	//Write out to a PDF file
-	gPad->SaveAs(FullOutputFilePath.c_str());
+	histogram->Write(histogramName.c_str());
 
 }
-
-//////////////////////////////////////////-----------------------------------------------------------------------/////////////////////////////////////////////////////////////////
 
 //This Fucntion will calculate invariant mass of two TLorentzVectors
 double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {

@@ -30,12 +30,14 @@ public :
 	//Zmumu2Jets Definitions
 	#include "Zmumu2Jets_Function_Definitions.h"
 
+	virtual void MergerTest();
+
 	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program
 	#include "Histo_Book_Definitions_AutoGen.h"
 
 	/////-------------------------CUSTOM HISTOGRAM DEFINITIONS------------------------/////
-	#include "Histo_Book_Definitions_Custom.h"
+	#include "Histo_Book_Definitions_AutoGen_Custom.h"
 
 	/////-------------------------CUSTOM VARIABLE DEFINITIONS-------------------------/////
 	string AnalysisType;
@@ -2551,7 +2553,7 @@ Int_t MC_Analysis::Cut(Long64_t entry)
 //Include lives here, because root will have read the class information by the time it gets here
 //This means MC_Analysis will exist when this header is loaded
 #include "Histo_Book_Functions_AutoGen.h"
-#include "Histo_Book_Functions_Custom.h"
+#include "Histo_Book_Functions_AutoGen_Custom.h"
 #include "Generic_Functions.h"
 
 

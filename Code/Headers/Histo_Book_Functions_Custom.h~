@@ -111,5 +111,4 @@ void MC_Analysis::Book_ljet_0_ljet_1_mass(int bins, double min, double max) {
 	h_ljet_0_ljet_1_mass = new TH1F("h_ljet_0_ljet_1_mass", "", bins, min, max);
 }
 
-
 #endif
