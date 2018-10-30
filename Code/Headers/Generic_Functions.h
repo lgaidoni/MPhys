@@ -50,6 +50,53 @@ void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramNam
 
 }
 
+//This function will draw a generic histogram, for simple histograms, it will be faster to use this
+//Draw histogram function takes the following:
+//DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
+void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+
+	string OutputFilePath = "../../Output-Files/";
+	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
+
+	//Create a new canvas using canvasName
+	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+
+	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
+
+	histogram1->SetLineColor(kRed);
+	histogram2->SetLineColor(kBlue);
+	histogram3->SetLineColor(kGreen);
+
+	histogramStack->Add(histogram1);
+	histogramStack->Add(histogram2);
+	histogramStack->Add(histogram3);
+
+	//Sets the Titles
+	histogramStack->SetTitle(title.c_str());
+
+	//Draw the histogram
+	histogramStack->Draw("nostack");
+
+	auto legend = new TLegend(0.99,0.95,0.75,0.75);
+	legend->SetHeader(legendName.c_str());
+	legend->AddEntry(histogram1, histo1Name.c_str());
+	legend->AddEntry(histogram2, histo2Name.c_str());
+	legend->AddEntry(histogram3, histo3Name.c_str());
+	legend->Draw();
+
+	//If the user wants the axis to be a log axis, do it
+	if (log == true) canvas->SetLogy();
+
+	//Write out to a ROOT file
+	canvas->Write(histogramName.c_str());
+	
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+	canvas->Close();
+
+}
+
 //This Fucntion will calculate invariant mass of two TLorentzVectors
 double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
