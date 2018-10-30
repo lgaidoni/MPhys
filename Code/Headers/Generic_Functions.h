@@ -99,6 +99,32 @@ double CombinedTransverseMomentum(TLorentzVector *Vector1, TLorentzVector *Vecto
 
 }
 
+//If Vector 3 lies between Vector 1 and Vector 2, with pT greater than 25GeV
+bool RapidityIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3) {
+
+	bool rap_int_condition = true;
+	
+	// no additional jets with p_T > 25 GeV in rapidity interval between two leading jets
+	// first, need to find which leading jet is max and min and assign them these names
+	// define the variables outside
+	double maxjet;
+	double minjet; 
+
+	if (Vector1->Rapidity() > Vector2->Rapidity()) { // if ljet_0 is greater than ljet_1, assign it as max
+	maxjet = Vector1->Rapidity();
+	minjet = Vector2->Rapidity();
+	} 
+	else { // if it is smaller, assign it as the min
+	minjet = Vector1->Rapidity();
+	maxjet = Vector2->Rapidity();	
+	}
+
+	if (minjet <= Vector3->Rapidity() <= maxjet && Vector3->Pt() > 25) rap_int_condition = false; // if additional jet_2 is between this rapidity interval, and have pT > 25, cut
+
+	return rap_int_condition;
+
+}
+
 // This function calculated the p_T^{balance} 
 // defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
 double pTBalanceCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){

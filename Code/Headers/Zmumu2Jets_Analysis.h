@@ -175,7 +175,6 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 	bool ljet_1_pt_greater = false;
 	bool leading_jets_invariant_mass = false;
 	bool pT_balance_limit = false;
-	bool rap_int_condition = false;
 
 	// REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7
 	if (muon_0_muon_1_mass >= 81 && muon_0_muon_1_mass <= 101 ) Z_mass_condition = true; // Z boson defined as 2 opp charged same flavour leptons with a dilepton invariant mass of 81 < m_{ll} < 101 GeV	
@@ -190,22 +189,7 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
 	if (pT_balance < 0.15) pT_balance_limit = true; // p_T balance required to be less than 0.15
 
-	// no additional jets with p_T > 25 GeV in rapidity interval between two leading jets
-	// first, need to find which leading jet is max and min and assign them these names
-	// define the variables outside
-	double maxjet;
-	double minjet; 
-
-	if (ljet_0_p4->Rapidity() > ljet_1_p4->Rapidity()) { // if ljet_0 is greater than ljet_1, assign it as max
-	maxjet = ljet_0_p4->Rapidity();
-	minjet = ljet_1_p4->Rapidity();
-	} 
-	else { // if it is smaller, assign it as the min
-	minjet = ljet_0_p4->Rapidity();
-	maxjet = ljet_1_p4->Rapidity();	
-	}
-
-	if (minjet <= ljet_2_p4->Rapidity() <= maxjet && ljet_2_p4->Pt() > 25) rap_int_condition = true; // if additional jet_2 is between this rapidity interval, and have pT > 25, cut
+	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	//If the conditions are met, don't cut
 	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && pT_balance_limit && Z_mass_condition && combined_lepton_pt && rap_int_condition) return false;//   
