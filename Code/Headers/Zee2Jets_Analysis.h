@@ -70,6 +70,12 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass(bins, 0, 1500);
 
+	///------------------ pT balance for muon_0 & muon_1 ljet_0 & ljet_1-----------------///
+
+
+	Book_pT_balance_PRE(bins, -800000, 800000);
+	Book_pT_balance(bins, -800000, 800000);
+
 }
 
 
@@ -111,6 +117,10 @@ void MC_Analysis::Zee2Jets_GenerateVariables() {
 	//Combined Lepton momentum
 	elec_0_elec_1_pt = CombinedTransverseMomentum(elec_0_p4, elec_1_p4);
 
+	
+	// p_T_Balance 
+	pT_balance = pTBalanceCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4);
+
 
 }
 
@@ -128,6 +138,9 @@ void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 
 	//Delta R
 	h_DeltaR_PRE->Fill(DeltaR);
+
+	// pT balance PRE
+	h_pT_balance_PRE->Fill(pT_balance);
 
 }
 
@@ -163,12 +176,15 @@ bool MC_Analysis::Zee2Jets_SearchCut() {
 
 	//Setting up conditions
 	bool cut_pass = false;
+	bool pT_balance_limit = false;
+	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	//Condition Checking
 	if (Zee2Jets_Cut() == false) cut_pass = true;
+	if (pT_balance < 0.15) pT_balance_limit = true; // p_T balance required to be less than 0.15
 
 	//If the conditions are met, don't cut
-	if (cut_pass) return false;	
+	if (cut_pass && pT_balance_limit && rap_int_condition) return false;	
 	//Otherwise, cut
 	return true;
 
@@ -180,12 +196,14 @@ bool MC_Analysis::Zee2Jets_ControlCut() {
 
 	//Setting up conditions
 	bool cut_pass = false;
+	bool pT_balance3_limit = false;
+	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	//Condition Checking
 	if (Zee2Jets_Cut() == false) cut_pass = true;
 
 	//If the conditions are met, don't cut
-	if (cut_pass) return false;	
+	if (cut_pass && pT_balance3_limit && rap_int_condition) return false;	
 	//Otherwise, cut
 	return true;
 
@@ -215,6 +233,10 @@ void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 	//Delta R for two electrons
 	h_DeltaR->Fill(DeltaR);
 
+	// pT balance
+	h_pT_balance->Fill(pT_balance);
+
+
 }
 
 //This function will fill all the histograms after cuts are made
@@ -231,6 +253,10 @@ void MC_Analysis::Zee2Jets_FillAllData_ControlCut() {
 
 	//Delta R for two electrons
 	h_DeltaR_CONTROL->Fill(DeltaR);
+
+	// pT balance CONTROL
+	h_pT_balance_CONTROL->Fill(pT_balance);
+
 
 }
 
