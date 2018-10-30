@@ -37,11 +37,17 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	Book_elec_0_iso_topoetcone40(bins, 0, 800000);
 
 	///-------------------------------- elec_0 & elec_1 ----------------------------------///
+	//invariant mass control cut
+	Book_elec_0_elec_1_mass_CONTROL(bins, 0, 200);
+	
 	//invariant mass pre cut
 	Book_elec_0_elec_1_mass_PRE(bins, 0, 200);
 
 	//invariant mass post cut
 	Book_elec_0_elec_1_mass(bins, 0, 200);
+
+	//pt control cut
+	Book_elec_0_elec_1_pt_CONTROL(bins, 0, 200);
 
 	//pt pre cut
 	Book_elec_0_elec_1_pt_PRE(bins, 0, 200);
@@ -56,7 +62,11 @@ void MC_Analysis::Zee2Jets_BookHistos() {
 	//Delta R PRE
 	Book_DeltaR_PRE(bins, 0, 10);
 
+	//Delta R CONTROL
+	Book_DeltaR_CONTROL(bins, 0, 10);
+
 	///---------------------------------ljet_0 & ljet_1-----------------------------------///
+	Book_ljet_0_ljet_1_mass_CONTROL(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass(bins, 0, 1500);
 
@@ -121,7 +131,7 @@ void MC_Analysis::Zee2Jets_FillAllData_PreCut() {
 
 }
 
-//This function will determine if event is cut
+//This function will determine if event is cut for the search
 //Returns bool, for ease of use in if statements
 bool MC_Analysis::Zee2Jets_Cut() {
 
@@ -142,6 +152,40 @@ bool MC_Analysis::Zee2Jets_Cut() {
 
 	//If the conditions are met, don't cut
 	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && combined_lepton_pt) return false;	
+	//Otherwise, cut
+	return true;
+
+}
+
+//This function will determine if event is cut for the search
+//Returns bool, for ease of use in if statements
+bool MC_Analysis::Zee2Jets_SearchCut() {
+
+	//Setting up conditions
+	bool cut_pass = false;
+
+	//Condition Checking
+	if (Zee2Jets_Cut() == false) cut_pass = true;
+
+	//If the conditions are met, don't cut
+	if (cut_pass) return false;	
+	//Otherwise, cut
+	return true;
+
+}
+
+//This function will determine if event is cut for the control
+//Returns bool, for ease of use in if statements
+bool MC_Analysis::Zee2Jets_ControlCut() {
+
+	//Setting up conditions
+	bool cut_pass = false;
+
+	//Condition Checking
+	if (Zee2Jets_Cut() == false) cut_pass = true;
+
+	//If the conditions are met, don't cut
+	if (cut_pass) return false;	
 	//Otherwise, cut
 	return true;
 
@@ -173,11 +217,28 @@ void MC_Analysis::Zee2Jets_FillAllData_PostCut() {
 
 }
 
+//This function will fill all the histograms after cuts are made
+void MC_Analysis::Zee2Jets_FillAllData_ControlCut() {
+	
+	#include "_FillAllData_ControlCut.h"
+
+	//Invariant mass
+	h_elec_0_elec_1_mass_CONTROL->Fill(elec_0_elec_1_mass); // two electrons
+	h_ljet_0_ljet_1_mass_CONTROL->Fill(ljet_0_ljet_1_mass); // two jets
+
+	//Combined lepton (electron) pT
+	h_elec_0_elec_1_pt_CONTROL->Fill(elec_0_elec_1_pt);
+
+	//Delta R for two electrons
+	h_DeltaR_CONTROL->Fill(DeltaR);
+
+}
+
 //This functinon will Draw all the histograms, and write them to a file
 void MC_Analysis::Zee2Jets_DrawHistos() {
 
 	TFile *Histograms;
-	string ROOTFilePath = "../../Root-Files/Zee2Jets_Histograms.root";
+	string ROOTFilePath = "../../Root-Files/" + AnalysisType + "_Histograms.root";
 
 	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
 	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
@@ -188,28 +249,29 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	#include "_DrawHistos.h"
 
 	//ptvar cone histograms
-	DrawHistogram(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20_Zee2JetsTest", "", 600, 400, true, "h_elec_0_iso_ptvarcone20_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40_" + AnalysisType, "", 600, 400, true, "h_elec_0_iso_ptvarcone40_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20_" + AnalysisType, "", 600, 400, true, "h_elec_0_iso_ptvarcone20_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40_" + AnalysisType, "", 600, 400, true, "h_elec_0_iso_ptvarcone40_" + AnalysisType + ".pdf", AnalysisType);
 
 	//topoet cone histograms
-	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20_Zee2Jets", "", 600, 400, true, "h_elec_0_iso_topoetcone20_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40_Zee2Jets", "", 600, 400, true, "h_elec_0_iso_topoetcone40_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20_" + AnalysisType, "", 600, 400, true, "h_elec_0_iso_topoetcone20_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40_" + AnalysisType, "", 600, 400, true, "h_elec_0_iso_topoetcone40_" + AnalysisType + ".pdf", AnalysisType);
 
 	//combined lepton momentum
-	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_elec_0_elec_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_Zee2Jets", "Momentum [GeV/c]", 600, 400, false, "h_elec_0_elec_1_mass_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_" + AnalysisType, "Momentum [GeV/c]", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType, "Momentum [GeV/c]", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 
 	//Elec 0 & Elec 1 histograms
-	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_" + AnalysisType, "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass_CONTROL, "h_elec_0_elec_1_mass_CONTROL", "h_elec_0_elec_1_mass_CONTROL_" + AnalysisType, "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType, "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 
 	//Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_Zee2Jets", "", 600, 400, false, "h_DeltaR_PRE_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_Zee2Jets", "", 600, 400, false, "h_DeltaR_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType, "", 600, 400, false, "h_DeltaR_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType, "", 600, 400, false, "h_DeltaR_" + AnalysisType + ".pdf", AnalysisType);
 
 	//leading jets invariant masses
-	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_Zee2Jets.pdf", AnalysisType);
-	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_Zee2Jets", "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_Zee2Jets.pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType, "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType, "Invariant Mass [GeV/c^{2}]", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 
 }
 
