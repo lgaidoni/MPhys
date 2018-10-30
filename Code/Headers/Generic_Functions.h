@@ -4,7 +4,7 @@
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string xTitle, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
 
 	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
@@ -12,11 +12,8 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
 
-	//Sets the X axis title
-	histogram->GetXaxis()->SetTitle(xTitle.c_str());
-
-	//Sets the Y axis title
-	histogram->GetYaxis()->SetTitle("Entries");
+	//Sets the Titles
+	histogram->SetTitle(title.c_str());
 
 	//Draw the histogram
 	histogram->Draw();
@@ -37,16 +34,13 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramName, string xTitle, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
 
 	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
 
 	//Sets the X axis title
-	histogram->GetXaxis()->SetTitle(xTitle.c_str());
-
-	//Sets the Y axis title
-	histogram->GetYaxis()->SetTitle("Entries");
+	histogram->SetTitle(title.c_str());
 
 	//Draw the histogram
 	histogram->Draw();

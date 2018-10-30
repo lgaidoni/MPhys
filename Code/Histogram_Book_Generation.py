@@ -120,10 +120,10 @@ for line in MC_Analysis:
 				Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_PRE = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_PRE\",\"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("\t}\n")
 
-				AnalysisAutoGen(TLorentzName, "Pt", "Momentum [GeV/c^{2}]")
-				AnalysisAutoGen(TLorentzName, "Phi", "")
-				AnalysisAutoGen(TLorentzName, "Eta", "")
-				AnalysisAutoGen(TLorentzName, "Rapidity", "")
+				AnalysisAutoGen(TLorentzName, "Pt", ";Momentum [GeV/c^{2}];Entries")
+				AnalysisAutoGen(TLorentzName, "Phi", ";;Entries")
+				AnalysisAutoGen(TLorentzName, "Eta", ";;Entries")
+				AnalysisAutoGen(TLorentzName, "Rapidity", ";;Entries")
 
 
 			Histo_Definitions.write("\t/// ---- End of booking functions and declarations for TLorentzVector " + leafName + " ---- ///\n\n")
