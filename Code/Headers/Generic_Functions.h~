@@ -128,7 +128,7 @@ double pTBalanceCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 
  
 	double absvalEach = abspTl1 + abspTl2 + abspTj1 + abspTj2; // absolute value of each
-	double absvalAll = sqrt( pow(sumall, 2)); // absolute value of them all
+	double absvalAll = sqrt( pow(sumAll, 2)); // absolute value of them all
 
 	// pTBalance here
 	double pTBalance = absvalAll/absvalEach; // pT balance calculation
