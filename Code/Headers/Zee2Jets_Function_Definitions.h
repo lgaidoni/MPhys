@@ -3,5 +3,8 @@
 	virtual void Zee2Jets_GenerateVariables();
 	virtual void Zee2Jets_FillAllData_PreCut();
 	virtual bool Zee2Jets_Cut();
+	virtual bool Zee2Jets_SearchCut();
+	virtual bool Zee2Jets_ControlCut();
 	virtual void Zee2Jets_FillAllData_PostCut();
+	virtual void Zee2Jets_FillAllData_ControlCut();
 	virtual void Zee2Jets_DrawHistos();
