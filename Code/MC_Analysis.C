@@ -27,6 +27,7 @@
 #include "Headers/MC_Analysis.h"
 #include "Headers/Zee2Jets_Analysis.h"
 #include "Headers/Zmumu2Jets_Analysis.h"
+#include "Headers/Zee_Analysis.h"
 #include "Headers/AddChainFriend.h"
 #include <TH2.h>
 #include <TStyle.h>
@@ -59,6 +60,7 @@ void MC_Analysis::Loop() {
       if (jentry % 10000 == 0) cout << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%" << endl;
 
 	///------------------- ACTUAL ANALYSIS -----------------///
+	// EW
  	/// Zee2Jets
 	if (AnalysisType == "Zee2Jets") {
 		if (Zee2Jets_InitialCut() == false) { // if we're not cutting
@@ -83,8 +85,24 @@ void MC_Analysis::Loop() {
 		}
 	}
 
-   }
+   
+	// QCD
+	/// Zee
+	if (AnalysisType == "Zee") {
+		if (Zee_InitialCut() == false) { // if we're not cutting
+			Zee_GenerateVariables();
+			Zee_FillAllData_PreCut();
+			if (true) {
+				Zee_FillAllData_PostCut();
+			}
+			else if (Zee_ControlCut() == false) {
+				Zee_FillAllData_ControlCut();
+			}
+		}
+	}
 
+	
+      }
    cout << "100.0%" << endl;
    cout << "Number of Entries = " << nentries << endl;    //Output the number of entries
 

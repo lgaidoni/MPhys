@@ -23,12 +23,20 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
 
 	///---------------------------- OUR FUNCTION DEFINITIONS ---------------------------///
-
+	// EW
 	//Zee2Jets Definitions
 	#include "Zee2Jets_Function_Definitions.h"
 
 	//Zmumu2Jets Definitions
 	#include "Zmumu2Jets_Function_Definitions.h"
+
+	// QCD
+	//Zee Definitions
+	#include "Zee_Function_Definitions.h"
+
+	//Zmumu Definitions
+	//#include "Zmumu_Function_Definitions.h"
+
 
 	virtual void MergerTest();
 
