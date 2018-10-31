@@ -322,8 +322,9 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
 	else cout << "Something's gone horribly wrong" << endl;
 
-	// Draw histogram function takes the following:
-	// DrawHistogram(histogram, canvas name, histogram name;x-axis;y-axis, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
+	//Draw histogram function takes the following:
+	//DrawHistogram(histogram, canvas name, histogram name, title string, canvas x size, canvas y size, bool for log y axis, output file name, analysis type)
+	#include "_DrawHistos.h"
 
 	// ptcone histograms
 	DrawHistogram(h_muon_0_iso_ptcone20, "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone20_Zmumu2Jets.pdf", AnalysisType);
