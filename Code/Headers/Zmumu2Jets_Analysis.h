@@ -322,48 +322,49 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
 	else cout << "Something's gone horribly wrong" << endl;
 
-	// Draw histogram function takes the following:
-	// DrawHistogram(histogram, canvas name, histogram name;x-axis;y-axis, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
+	//Draw histogram function takes the following:
+	//DrawHistogram(histogram, canvas name, histogram name, title string, canvas x size, canvas y size, bool for log y axis, output file name, analysis type)
+	#include "_DrawHistos.h"
 
 	// ptcone histograms
-	DrawHistogram(h_muon_0_iso_ptcone20, "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone20_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptcone30, "h_muon_0_iso_ptcone30", "h_muon_0_iso_ptcone30_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c]Entries", 600, 400, true, "h_muon_0_iso_ptcone30_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptcone40, "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone40_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptcone20, "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone20_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptcone30, "h_muon_0_iso_ptcone30", "h_muon_0_iso_ptcone30_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c]Entries", 600, 400, true, "h_muon_0_iso_ptcone30_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptcone40, "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone40_" + AnalysisType + ".pdf", AnalysisType);
 
 	// topoetcone histograms
-	DrawHistogram(h_muon_0_iso_topoetcone20, "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone20_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_topoetcone30, "h_muon_0_iso_topoetcone30", "h_muon_0_iso_topoetcone30_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone30_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_topoetcone40, "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone40_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_topoetcone20, "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone20_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_topoetcone30, "h_muon_0_iso_topoetcone30", "h_muon_0_iso_topoetcone30_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone30_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_topoetcone40, "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone40_" + AnalysisType + ".pdf", AnalysisType);
 	
 	// ptvarcone histograms
-	DrawHistogram(h_muon_0_iso_ptvarcone20, "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone20_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone30", "h_muon_0_iso_ptvarcone30_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone30_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptvarcone20, "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone20_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone30", "h_muon_0_iso_ptvarcone30_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone30_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + AnalysisType + ".pdf", AnalysisType);
 	
 	// muon 0 & muon 1 histograms
-	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_" + AnalysisType , "Invariant mass of muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType , "Invariant mass of muon_0 and muon_1 from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_" + AnalysisType , "Invariant mass of muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType , "Invariant mass of muon_0 and muon_1 from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 
 	// Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType , "\\Delta R with initial selection cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , "\\Delta R with further cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType , "\\Delta R with initial selection cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , "\\Delta R with further cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + ".pdf", AnalysisType);
 
 	// combined lepton momentum
-	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + ".pdf", AnalysisType);
 
 	// leading jets invariant masses
-	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 
 	// pT balance
-	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
 	
 	// Rapidity interval
-//	DrawHistogram(h_Rapidity_Interval_PRE, "h_Rapidity_Interval_PRE", "h_Rapidity_Interval_PRE_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with initial selection cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval__PRE_Zmumu2Jets.pdf", AnalysisType);
-///	DrawHistogram(h_Rapidity_Interval, "h_Rapidity_Interval", "h_Rapidity_Interval_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with further cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval_Zmumu2Jets.pdf", AnalysisType);
-//	DrawHistogram(h_Rapidity_Interval_CONTROL, "h_Rapidity_Interval_CONTROL", "h_Rapidity_Interval_CONTROL_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with CONTROL cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval__CONTROL_Zmumu2Jets.pdf", AnalysisType);
+//	DrawHistogram(h_Rapidity_Interval_PRE, "h_Rapidity_Interval_PRE", "h_Rapidity_Interval_PRE_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with initial selection cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval__PRE_" + AnalysisType + ".pdf", AnalysisType);
+///	DrawHistogram(h_Rapidity_Interval, "h_Rapidity_Interval", "h_Rapidity_Interval_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with further cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval_" + AnalysisType + ".pdf", AnalysisType);
+//	DrawHistogram(h_Rapidity_Interval_CONTROL, "h_Rapidity_Interval_CONTROL", "h_Rapidity_Interval_CONTROL_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with CONTROL cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval__CONTROL_" + AnalysisType + ".pdf", AnalysisType);
 
 }
 

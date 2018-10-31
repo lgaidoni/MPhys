@@ -22,7 +22,7 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 	if (log == true) canvas->SetLogy();
 
 	//Write out to a ROOT file
-	canvas->Write(histogramName.c_str());
+	histogram->Write(histogramName.c_str());
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
@@ -50,7 +50,7 @@ void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramNam
 
 }
 
-//This function will draw a generic histogram, for simple histograms, it will be faster to use this
+//This function will draw a stack of 3 histograms, used for overlaying PRE, SEARCH, and CONTROL
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
 void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
@@ -88,12 +88,69 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 	if (log == true) canvas->SetLogy();
 
 	//Write out to a ROOT file
-	canvas->Write(histogramName.c_str());
+	histogramStack->Write(histogramName.c_str());
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
 	canvas->Close();
+
+}
+
+//This function will overlay two histograms over each other. First in Red, Second in Blue
+void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string AnalysisType1, string AnalysisType2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ComboType) {
+
+	string Histogram1RealName = "h_" + DataType + "_" + AnalysisType1 + ";1"; //Create the real(seen by code) name for histogram 1
+	string Histogram2RealName = "h_" + DataType + "_" + AnalysisType2 + ";1"; //Create the real(seen by code) name for histogram 2
+
+	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
+	TH1F *histogram2 = (TH1F*)file2->Get(Histogram2RealName.c_str());
+
+	string OutputFilePath = "../../Output-Files/";
+	string FullOutputFilePath = OutputFilePath + ComboType + "/" + OutputFileName;
+
+	//Create a new canvas using canvasName
+	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+
+	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
+
+	histogram1->SetLineColor(kRed);
+	histogram2->SetLineColor(kBlue);
+
+	histogramStack->Add(histogram1);
+	histogramStack->Add(histogram2);
+
+	//Sets the Titles
+	histogramStack->SetTitle(title.c_str());
+
+	//Draw the histogram
+	histogramStack->Draw("nostack");
+
+	auto legend = new TLegend(0.99,0.95,0.75,0.75);
+	legend->SetHeader(legendName.c_str());
+	legend->AddEntry(histogram1, histo1Name.c_str());
+	legend->AddEntry(histogram2, histo2Name.c_str());
+	legend->Draw();
+
+	//If the user wants the axis to be a log axis, do it
+	if (log == true) canvas->SetLogy();
+
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+	canvas->Close();
+
+}
+
+//This function is a quick way of drawing two histograms overlain
+void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string AnalysisType1, string AnalysisType2) {
+
+	string AnalysisTypeCombo = AnalysisType1 + "_" + AnalysisType2; //Combine the analysis types
+	string Name1 = DataType + " " + AnalysisType1; //Make a histogram name for histogram 1
+	string Name2 = DataType + " " + AnalysisType2; //Make a histogram name for histogram 2
+	string FileName = DataType + "_" + AnalysisType1 + "_" + AnalysisType2; //Combine everything into the file name
+
+	DrawHistogram_Overlay_Two(file1, file2, DataType, AnalysisType1, AnalysisType2, AnalysisTypeCombo, Name1, Name2, FileName, FileName, FileName, 600, 400, false, FileName + "_Combo.pdf", AnalysisTypeCombo);
 
 }
 
