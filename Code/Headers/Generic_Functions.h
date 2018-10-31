@@ -100,8 +100,8 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 //This function will overlay two histograms over each other. First in Red, Second in Blue
 void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string AnalysisType1, string AnalysisType2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ComboType) {
 
-	string Histogram1RealName = "h_" + DataType + "_" + AnalysisType1;
-	string Histogram2RealName = "h_" + DataType + "_" + AnalysisType2;
+	string Histogram1RealName = "h_" + DataType + "_" + AnalysisType1 + ";1"; //Create the real(seen by code) name for histogram 1
+	string Histogram2RealName = "h_" + DataType + "_" + AnalysisType2 + ";1"; //Create the real(seen by code) name for histogram 2
 
 	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
 	TH1F *histogram2 = (TH1F*)file2->Get(Histogram2RealName.c_str());
@@ -135,9 +135,6 @@ void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, stri
 	//If the user wants the axis to be a log axis, do it
 	if (log == true) canvas->SetLogy();
 
-	//Write out to a ROOT file
-	histogramStack->Write(histogramName.c_str());
-	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
@@ -145,9 +142,15 @@ void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, stri
 
 }
 
-void TestOverlay(TFile *file1, TFile *file2) {
+//This function is a quick way of drawing two histograms overlain
+void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string AnalysisType1, string AnalysisType2) {
 
-	DrawHistogram_Overlay_Two(file1, file2, "DeltaR", "Zee2Jets", "Zmumu2Jets", "legendName", "h1n", "h2n", "cnvn", "hn", "ttl", 600, 400, false, "file.pdf", "Zee2Jets_Zmumu2Jets");
+	string AnalysisTypeCombo = AnalysisType1 + "_" + AnalysisType2; //Combine the analysis types
+	string Name1 = DataType + " " + AnalysisType1; //Make a histogram name for histogram 1
+	string Name2 = DataType + " " + AnalysisType2; //Make a histogram name for histogram 2
+	string FileName = DataType + "_" + AnalysisType1 + "_" + AnalysisType2; //Combine everything into the file name
+
+	DrawHistogram_Overlay_Two(file1, file2, DataType, AnalysisType1, AnalysisType2, AnalysisTypeCombo, Name1, Name2, FileName, FileName, FileName, 600, 400, false, FileName + "_Combo.pdf", AnalysisTypeCombo);
 
 }
 

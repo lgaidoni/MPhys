@@ -62,11 +62,11 @@ void MC_Analysis::Loop() {
       double entry_count = jentry;
       double max_entries = nentries;
 
-      if (jentry % 1000 == 0) {
+      if (jentry % 500 == 0) {
 	
 	if (current_indicator == 0) {cout << "                     " << "|"; current_indicator = 1;}
 	else if (current_indicator == 1) {cout << "                     " << "/"; current_indicator = 2;}
-	else if (current_indicator == 2) {cout << "                     " << "-"; current_indicator = 3;}
+	else if (current_indicator == 2) {cout << "                     " << "—"; current_indicator = 3;}
 	else if (current_indicator == 3) {cout << "                     " << "\\"; current_indicator = 0;}
 	cout << " " << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%\r";
 	cout.flush();
@@ -105,7 +105,7 @@ void MC_Analysis::Loop() {
 		if (Zee_InitialCut() == false) { // if we're not cutting
 			Zee_GenerateVariables();
 			Zee_FillAllData_PreCut();
-			if (true) {
+			if (Zee_SearchCut() == false) {
 				Zee_FillAllData_PostCut();
 			}
 			else if (Zee_ControlCut() == false) {

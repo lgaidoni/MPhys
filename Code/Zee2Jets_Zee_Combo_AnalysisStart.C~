@@ -11,11 +11,11 @@ void Zee2Jets_Zmumu2Jets_Combo_AnalysisStart() {
 	gROOT->ProcessLine("Zee2JetsAnalysis->Loop()");
 	gROOT->ProcessLine("Zee2JetsAnalysis->Zee2Jets_DrawHistos()");
 
-	gROOT->ProcessLine("Zmumu2JetsAnalysis = new MC_Analysis(\"/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308093.Sh221_PDF30_Zmm2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14357860._000001.hist-output.root\", \"Zmumu2Jets\")");
-	gROOT->ProcessLine("Zmumu2JetsAnalysis->Zmumu2Jets_BookHistos()");
-	gROOT->ProcessLine("Zmumu2JetsAnalysis->Loop()");
-	gROOT->ProcessLine("Zmumu2JetsAnalysis->Zmumu2Jets_DrawHistos()");
+	gROOT->ProcessLine("ZeeAnalysis = new MC_Analysis(\"/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.364127.Sh221_PDF30_Zee_MV1000_E_CMS.D1.e5299_s3126_r9364_r9315_p3371.sv1_hist/user.sdysch.14362844._000003.hist-output.root\", \"Zee\")");
+	gROOT->ProcessLine("ZeeAnalysis->Zee_BookHistos()");
+	gROOT->ProcessLine("ZeeAnalysis->Loop()");
+	gROOT->ProcessLine("ZeeAnalysis->Zee_DrawHistos()");
 
-	gROOT->ProcessLine("Zee2Jets_Zmumu2Jets_Overlay()");
+	gROOT->ProcessLine("Zee2Jets_Zee_Overlay()");
 
 }

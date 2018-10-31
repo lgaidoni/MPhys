@@ -16,9 +16,6 @@ void Zee2Jets_Zmumu2Jets_Combo_AnalysisStart() {
 	gROOT->ProcessLine("Zmumu2JetsAnalysis->Loop()");
 	gROOT->ProcessLine("Zmumu2JetsAnalysis->Zmumu2Jets_DrawHistos()");
 
-	gROOT->ProcessLine("TFile *file1 = new TFile(\"~/Root-Files/Zee2Jets_Histograms.root\")");
-	gROOT->ProcessLine("TFile *file2 = new TFile(\"~/Root-Files/Zmumu2Jets_Histograms.root\")");
-
-	gROOT->ProcessLine("TestOverlay()");
+	gROOT->ProcessLine("Zee2Jets_Zmumu2Jets_Overlay()");
 
 }
