@@ -22,7 +22,7 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 	if (log == true) canvas->SetLogy();
 
 	//Write out to a ROOT file
-	canvas->Write(histogramName.c_str());
+	histogram->Write(histogramName.c_str());
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
@@ -50,7 +50,7 @@ void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramNam
 
 }
 
-//This function will draw a generic histogram, for simple histograms, it will be faster to use this
+//This function will draw a stack of 3 histograms, used for overlaying PRE, SEARCH, and CONTROL
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
 void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
@@ -88,12 +88,74 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 	if (log == true) canvas->SetLogy();
 
 	//Write out to a ROOT file
-	canvas->Write(histogramName.c_str());
+	histogramStack->Write(histogramName.c_str());
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
 	canvas->Close();
+
+}
+
+void DrawHistogram_Overlay_Two(TH1F *histogram1, TH1F *histogram2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+
+	string OutputFilePath = "../../Output-Files/";
+	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
+
+	cout << "Creating Canvas" << endl;
+	//Create a new canvas using canvasName
+	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+
+	cout << "Creating Stack" << endl;
+	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
+
+	cout << "Setting Histogram Line Colour" << endl;
+	histogram1->SetLineColor(kRed);
+	histogram2->SetLineColor(kBlue);
+
+	cout << "Adding histograms to stack" << endl;
+	histogramStack->Add(histogram1);
+	histogramStack->Add(histogram2);
+	cout << "Histograms added to stack" << endl;
+
+	//Sets the Titles
+	histogramStack->SetTitle(title.c_str());
+	cout << "Set the Stack Titles" << endl;
+
+	//Draw the histogram
+	histogramStack->Draw("nostack");
+
+	auto legend = new TLegend(0.99,0.95,0.75,0.75);
+	legend->SetHeader(legendName.c_str());
+	legend->AddEntry(histogram1, histo1Name.c_str());
+	legend->AddEntry(histogram2, histo2Name.c_str());
+	legend->Draw();
+
+	//If the user wants the axis to be a log axis, do it
+	if (log == true) canvas->SetLogy();
+
+	//Write out to a ROOT file
+	histogramStack->Write(histogramName.c_str());
+	
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+	canvas->Close();
+
+}
+
+void TestOverlay() {
+	
+	cout << "OPENING FILES" << endl;
+	TFile *file1 = new TFile("~/Root-Files/Zee2Jets_Histograms.root");
+	TFile *file2 = new TFile("~/Root-Files/Zmumu2Jets_Histograms.root");
+	cout << "Running Function" << endl;
+
+	TH1F *hist1 = (TH1F*)file1->Get("h_DeltaR_Zee2Jets");
+	TH1F *hist2 = (TH1F*)file2->Get("h_DeltaR_Zmumu2Jets");
+	
+
+	DrawHistogram_Overlay_Two(hist1, hist2, "legendName", "h1n", "h2n", "cnvn", "hn", "ttl", 600, 400, false, "file.pdf", "Zee2Jets");
 
 }
 
