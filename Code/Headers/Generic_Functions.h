@@ -97,30 +97,31 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 
 }
 
-void DrawHistogram_Overlay_Two(TH1F *histogram1, TH1F *histogram2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+//This function will overlay two histograms over each other. First in Red, Second in Blue
+void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string AnalysisType1, string AnalysisType2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ComboType) {
+
+	string Histogram1RealName = "h_" + DataType + "_" + AnalysisType1;
+	string Histogram2RealName = "h_" + DataType + "_" + AnalysisType2;
+
+	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
+	TH1F *histogram2 = (TH1F*)file2->Get(Histogram2RealName.c_str());
 
 	string OutputFilePath = "../../Output-Files/";
-	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
+	string FullOutputFilePath = OutputFilePath + ComboType + "/" + OutputFileName;
 
-	cout << "Creating Canvas" << endl;
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
 
-	cout << "Creating Stack" << endl;
 	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
 
-	cout << "Setting Histogram Line Colour" << endl;
 	histogram1->SetLineColor(kRed);
 	histogram2->SetLineColor(kBlue);
 
-	cout << "Adding histograms to stack" << endl;
 	histogramStack->Add(histogram1);
 	histogramStack->Add(histogram2);
-	cout << "Histograms added to stack" << endl;
 
 	//Sets the Titles
 	histogramStack->SetTitle(title.c_str());
-	cout << "Set the Stack Titles" << endl;
 
 	//Draw the histogram
 	histogramStack->Draw("nostack");
@@ -144,18 +145,9 @@ void DrawHistogram_Overlay_Two(TH1F *histogram1, TH1F *histogram2, string legend
 
 }
 
-void TestOverlay() {
-	
-	cout << "OPENING FILES" << endl;
-	TFile *file1 = new TFile("~/Root-Files/Zee2Jets_Histograms.root");
-	TFile *file2 = new TFile("~/Root-Files/Zmumu2Jets_Histograms.root");
-	cout << "Running Function" << endl;
+void TestOverlay(TFile *file1, TFile *file2) {
 
-	TH1F *hist1 = (TH1F*)file1->Get("h_DeltaR_Zee2Jets");
-	TH1F *hist2 = (TH1F*)file2->Get("h_DeltaR_Zmumu2Jets");
-	
-
-	DrawHistogram_Overlay_Two(hist1, hist2, "legendName", "h1n", "h2n", "cnvn", "hn", "ttl", 600, 400, false, "file.pdf", "Zee2Jets");
+	DrawHistogram_Overlay_Two(file1, file2, "DeltaR", "Zee2Jets", "Zmumu2Jets", "legendName", "h1n", "h2n", "cnvn", "hn", "ttl", 600, 400, false, "file.pdf", "Zee2Jets_Zmumu2Jets");
 
 }
 
