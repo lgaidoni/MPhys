@@ -135,7 +135,7 @@ void DrawHistogram_Overlay_Two(TH1F *histogram1, TH1F *histogram2, string legend
 	if (log == true) canvas->SetLogy();
 
 	//Write out to a ROOT file
-	canvas->Write(histogramName.c_str());
+	histogramStack->Write(histogramName.c_str());
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
