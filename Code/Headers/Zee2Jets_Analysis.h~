@@ -120,7 +120,7 @@ void MC_Analysis::Zee2Jets_GenerateVariables() {
 	pT_balance = pTBalanceCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4);
 	
 	// p_T_Balance_3
-	pT_balance = pTBalanceCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4);
+	pT_balance_3 = pTBalanceThreeCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 
 }
@@ -149,7 +149,7 @@ void MC_Analysis::Zee2Jets_CutAndFill() {
 
 	//false means failed the cut, true means passed the cut
 
-	// Initialise bool conditions
+	// Initialise common bool conditions
 	bool Z_mass_condition = false;
 	bool combined_lepton_pt = false;
 	bool ljet_0_pt_greater = false;
@@ -157,7 +157,10 @@ void MC_Analysis::Zee2Jets_CutAndFill() {
 	bool leading_jets_invariant_mass = false;
 	bool ptvarcone_20 = false;
 	bool ptvarcone_40 = false;
+
+	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
+	bool pT_balance_3_limit = false;
 	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	//Z Boson Mass Cut
@@ -174,6 +177,12 @@ void MC_Analysis::Zee2Jets_CutAndFill() {
 
 	//Leading Jets Combined Invariant mass
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
+
+	//pt balance limit Cut Condition
+	if (pt_balance < 0.15) pT_balance_limit = true;
+
+	//pt balance 3 Cut Condition
+	if (pt_balance_3 < 0.15) pT_balance_3_limit = true;
 
 	//ptvarcone cuts
 	if (elec_0_iso_ptvarcone20 < 0.1) ptvarcone_20 = true; 
@@ -313,7 +322,7 @@ void MC_Analysis::Zee2Jets_CutAndFill() {
 
 	}
 	
-	else if (common_cuts && !(rap_int_condition)) {
+	else if (common_cuts && !(rap_int_condition) && pT_balance_3_limit) {
 
 		#include "_FillAllData_ControlCut.h"
 
