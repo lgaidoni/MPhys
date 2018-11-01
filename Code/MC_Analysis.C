@@ -87,12 +87,14 @@ void MC_Analysis::Loop() {
 		if (Zmumu2Jets_InitialCut() == false) { // if we're not cutting
 			Zmumu2Jets_GenerateVariables();
 			Zmumu2Jets_FillAllData_PreCut();
-			if (Zmumu2Jets_Cut() == false) {
+			if (Zmumu2Jets_SearchCut() == false) {
 				Zmumu2Jets_FillAllData_PostCut();
+			}
+			else {
+				Zmumu2Jets_FillAllData_ControlCut();
 			}
 		}
 	}
-
    
 	// QCD
 	/// Zee
@@ -103,7 +105,7 @@ void MC_Analysis::Loop() {
 			if (Zee_SearchCut() == false) {
 				Zee_FillAllData_PostCut();
 			}
-			else if (Zee_ControlCut() == false) {
+			else {
 				Zee_FillAllData_ControlCut();
 			}
 		}
