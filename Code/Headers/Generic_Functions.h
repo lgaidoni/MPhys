@@ -97,6 +97,60 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 
 }
 
+//This function will draw a stack of 4 histograms, used for overlaying PRE, SEARCH, CONTROL, and EXCEPT
+//Draw histogram function takes the following:
+//DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, histogram EXCEPT, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
+void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+
+	string OutputFilePath = "../../Output-Files/";
+	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
+
+	//Create a new canvas using canvasName
+	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+
+	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
+
+	histogram1->SetLineColor(kBlue-3);
+	histogram2->SetLineColor(kOrange+7);
+	histogram2->SetFillColor(kOrange+7);
+	histogram2->SetFillStyle(3003);
+	histogram3->SetLineColor(kAzure+10);
+	histogram3->SetFillColor(kAzure+10);
+	histogram3->SetFillStyle(3002);
+	histogram4->SetLineColor(kOrange);
+
+	histogramStack->Add(histogram1);
+	histogramStack->Add(histogram2);
+	histogramStack->Add(histogram3);
+	histogramStack->Add(histogram4);
+
+	//Sets the Titles
+	histogramStack->SetTitle(title.c_str());
+
+	//Draw the histogram
+	histogramStack->Draw("nostack");
+
+	auto legend = new TLegend(0.99,0.95,0.75,0.75);
+	legend->SetHeader(legendName.c_str());
+	legend->AddEntry(histogram1, histo1Name.c_str());
+	legend->AddEntry(histogram2, histo2Name.c_str());
+	legend->AddEntry(histogram3, histo3Name.c_str());
+	legend->AddEntry(histogram4, histo4Name.c_str());
+	legend->Draw();
+
+	//If the user wants the axis to be a log axis, do it
+	if (log == true) canvas->SetLogy();
+
+	//Write out to a ROOT file
+	histogramStack->Write(histogramName.c_str());
+	
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+	canvas->Close();
+
+}
+
 //This function will overlay two histograms over each other. First in Red, Second in Blue
 void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string AnalysisType1, string AnalysisType2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ComboType) {
 

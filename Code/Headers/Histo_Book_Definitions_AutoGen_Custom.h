@@ -12,6 +12,9 @@ TH1F	*h_DeltaR_PRE; // PRE VERSION
 virtual void Book_DeltaR_CONTROL(int bins, double min, double max); // CONTROL VERSION
 TH1F	*h_DeltaR_CONTROL; // CONTROL VERSION
 
+virtual void Book_DeltaR_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_DeltaR_EXCEPT; // EXCEPT VERSION
+
 virtual void Book_DeltaR(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_DeltaR; // SEARCH VERSION
 
@@ -25,6 +28,9 @@ TH1F	*h_pT_balance_PRE; // PRE VERSION
 virtual void Book_pT_balance_CONTROL(int bins, double min, double max); // CONTROL VERSION
 TH1F	*h_pT_balance_CONTROL; // CONTROL VERSION
 
+virtual void Book_pT_balance_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_pT_balance_EXCEPT; // EXCEPT VERSION
+
 virtual void Book_pT_balance(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_pT_balance; // SEARCH VERSION
 
@@ -37,6 +43,9 @@ TH1F	*h_pT_balance_3_PRE; // PRE VERSION
 
 virtual void Book_pT_balance_3_CONTROL(int bins, double min, double max); // CONTROL VERSION
 TH1F	*h_pT_balance_3_CONTROL; // CONTROL VERSION
+
+virtual void Book_pT_balance_3_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_pT_balance_3_EXCEPT; // EXCEPT VERSION
 
 virtual void Book_pT_balance_3(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_pT_balance_3; // SEARCH VERSION
@@ -53,6 +62,9 @@ TH1F	*h_elec_0_elec_1_mass_PRE; // PRE VERSION
 virtual void Book_elec_0_elec_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
 TH1F	*h_elec_0_elec_1_mass_CONTROL; // CONTROL VERSION
 
+virtual void Book_elec_0_elec_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_elec_0_elec_1_mass_EXCEPT; // EXCEPT VERSION
+
 virtual void Book_elec_0_elec_1_mass(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_elec_0_elec_1_mass; // SEARCH VERSION
 
@@ -65,6 +77,9 @@ TH1F	*h_elec_0_elec_1_pt_PRE; // PRE VERSION
 
 virtual void Book_elec_0_elec_1_pt_CONTROL(int bins, double min, double max); // CONTROL VERSION
 TH1F	*h_elec_0_elec_1_pt_CONTROL; // CONTROL VERSION
+
+virtual void Book_elec_0_elec_1_pt_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_elec_0_elec_1_pt_EXCEPT; // EXCEPT VERSION
 
 virtual void Book_elec_0_elec_1_pt(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_elec_0_elec_1_pt; // SEARCH VERSION
@@ -81,6 +96,9 @@ TH1F	*h_muon_0_muon_1_mass_PRE; // PRE VERSION
 virtual void Book_muon_0_muon_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
 TH1F	*h_muon_0_muon_1_mass_CONTROL; // CONTROL VERSION
 
+virtual void Book_muon_0_muon_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_muon_0_muon_1_mass_EXCEPT; // EXCEPT VERSION
+
 virtual void Book_muon_0_muon_1_mass(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_muon_0_muon_1_mass; // SEARCH VERSION
 
@@ -93,6 +111,9 @@ TH1F	*h_muon_0_muon_1_pt_PRE; // PRE VERSION
 
 virtual void Book_muon_0_muon_1_pt_CONTROL(int bins, double min, double max); // CONTROL VERSION
 TH1F	*h_muon_0_muon_1_pt_CONTROL; // CONTROL VERSION
+
+virtual void Book_muon_0_muon_1_pt_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_muon_0_muon_1_pt_EXCEPT; // EXCEPT VERSION
 
 virtual void Book_muon_0_muon_1_pt(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_muon_0_muon_1_pt; // SEARCH VERSION
@@ -108,6 +129,9 @@ TH1F	*h_ljet_0_ljet_1_mass_PRE; // PRE VERSION
 
 virtual void Book_ljet_0_ljet_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
 TH1F	*h_ljet_0_ljet_1_mass_CONTROL; // CONTROL VERSION
+
+virtual void Book_ljet_0_ljet_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_ljet_0_ljet_1_mass_EXCEPT; // EXCEPT VERSION
 
 virtual void Book_ljet_0_ljet_1_mass(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_ljet_0_ljet_1_mass; // SEARCH VERSION
