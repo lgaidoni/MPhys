@@ -6,6 +6,8 @@
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
 void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
 
+	histogram->Scale(ScaleFactor);
+
 	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
 
@@ -35,6 +37,8 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
 void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+
+	histogram->Scale(ScaleFactor);
 
 	string OutputFilePath = "../../Output-Files/";
 	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
@@ -150,7 +154,7 @@ void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType,
 	string Name2 = DataType + " " + AnalysisType2; //Make a histogram name for histogram 2
 	string FileName = DataType + "_" + AnalysisType1 + "_" + AnalysisType2; //Combine everything into the file name
 
-	DrawHistogram_Overlay_Two(file1, file2, DataType, AnalysisType1, AnalysisType2, AnalysisTypeCombo, Name1, Name2, AnalysisTypeCombo, AnalysisTypeCombo, AnalysisTypeCombo, 600, 400, false, FileName + "_Combo.pdf", AnalysisTypeCombo);
+	DrawHistogram_Overlay_Two(file1, file2, DataType, AnalysisType1, AnalysisType2, AnalysisTypeCombo, Name1, Name2, FileName, FileName, FileName, 600, 400, false, FileName + "_Combo.pdf", AnalysisTypeCombo);
 
 }
 

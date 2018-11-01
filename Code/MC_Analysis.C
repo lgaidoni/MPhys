@@ -79,12 +79,7 @@ void MC_Analysis::Loop() {
 		if (Zee2Jets_InitialCut() == false) { // if we're not cutting
 			Zee2Jets_GenerateVariables();
 			Zee2Jets_FillAllData_PreCut();
-			if (Zee2Jets_SearchCut() == false) {
-				Zee2Jets_FillAllData_PostCut();
-			}
-			else if (Zee2Jets_ControlCut() == false) {
-				Zee2Jets_FillAllData_ControlCut();
-			}
+			Zee2Jets_CutAndFill();
 		}
 	}
 	/// Zmumu2Jets
