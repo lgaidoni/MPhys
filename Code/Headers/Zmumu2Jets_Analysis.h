@@ -86,6 +86,12 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	Book_pT_balance(bins, -800000, 800000);
 	Book_pT_balance_CONTROL(bins, -800000, 800000);
 
+	///------------------ pT balance 3 for muon_0 & muon_1 ljet_0 & ljet_1 and ljet_2 -----------------///
+
+	Book_pT_balance_3_PRE(bins, -800000, 800000);
+	Book_pT_balance_3(bins, -800000, 800000);
+	Book_pT_balance_3_CONTROL(bins, -800000, 800000);
+
 }
 
 // Pre-Selection cut functions (dummy cuts)
@@ -135,6 +141,10 @@ void MC_Analysis::Zmumu2Jets_GenerateVariables() {
 	// p_T_Balance 
 	pT_balance = pTBalanceCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4);
 
+	// p_T_Balance_Three 
+	pT_balance_3 = pTBalanceThreeCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
+
+
 }
 
 // This function will fill the histograms that need to be filled BEFORE initial cuts are made
@@ -152,13 +162,12 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 	// Delta R
 	h_DeltaR_PRE->Fill(DeltaR);
 
-	//ljet transverse momenta
-	h_ljet_0_p4_Pt_PRE->Fill(ljet_0_p4->Pt());
-	h_ljet_1_p4_Pt_PRE->Fill(ljet_1_p4->Pt());
-	h_ljet_2_p4_Pt_PRE->Fill(ljet_2_p4->Pt());
-
 	// pT balance PRE
 	h_pT_balance_PRE->Fill(pT_balance); // 2 muons 2 jets
+
+	// pT balance 3 PRE
+	h_pT_balance_3_PRE->Fill(pT_balance_3); // 2 muons 3 jets
+
 
 }
 
@@ -176,7 +185,7 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 	bool pT_balance_limit = false;
 	bool ptvarcone_20 = false;
 	bool ptvarcone_40 = false;
-	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4); // Rapidity interval jets have momentum greater than 25GeV
+
 
 	// REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7
 	if (muon_0_muon_1_mass >= 81 && muon_0_muon_1_mass <= 101 ) Z_mass_condition = true; // Z boson defined as 2 opp charged same flavour leptons with a dilepton invariant mass of 81 < m_{ll} < 101 GeV	
@@ -188,8 +197,6 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 	if (ljet_1_p4->Pt() > 50) ljet_1_pt_greater = true;
 	// j1 j2 highest and second highest order transverse momentum jets
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
-	if (pT_balance < 0.15) pT_balance_limit = true; // p_T balance required to be less than 0.15
-
 
 	// EXTRA cuts. not from any source.
 	// ptvarcone required to be less than 0.1, high momentum suggests non-isolated events which we are not interested in
@@ -197,7 +204,7 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 	if (muon_0_iso_ptvarcone40 < 0.1) ptvarcone_40 = true; 
 
 	//If the conditions are met, don't cut
-	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && pT_balance_limit && Z_mass_condition && combined_lepton_pt && rap_int_condition && ptvarcone_20 && ptvarcone_40) return false;//   
+	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && pT_balance_limit && Z_mass_condition && combined_lepton_pt && ptvarcone_20 && ptvarcone_40) return false;//   
 
 	//Otherwise, cut
 	return true;
@@ -205,11 +212,13 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 }
 
 
-// ---------------------------------- CONTROL CUT AND SEARCH CUT ADDITION FROM ELECTRON ANALYSIS ----------------------- //
+// ---------------------------------- CONTROL CUT AND SEARCH CUT ADDITION ----------------------- //
 
 
 //This function will determine if event is cut for the search
 //Returns bool, for ease of use in if statements
+// REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7 Table 1
+
 bool MC_Analysis::Zmumu2Jets_SearchCut() {
 
 	//Setting up conditions
@@ -231,18 +240,19 @@ bool MC_Analysis::Zmumu2Jets_SearchCut() {
 
 //This function will determine if event is cut for the control
 //Returns bool, for ease of use in if statements
+// REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7 Table 1
 bool MC_Analysis::Zmumu2Jets_ControlCut() {
 
 	//Setting up conditions
 	bool cut_pass = false;
-	bool pT_balance3_limit = false;
-	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4);
+	bool pT_balance_3_limit = false;
 
 	//Condition Checking
 	if (Zmumu2Jets_Cut() == false) cut_pass = true;
+	if (pT_balance_3 < 0.15) pT_balance_3_limit = true; // p_T balance_Three required to be less than 0.15
 
 	//If the conditions are met, don't cut
-	if (cut_pass && pT_balance3_limit && rap_int_condition) return false;	
+	if (cut_pass && pT_balance_3_limit) return false;	
 
 	//Otherwise, cut
 	return true;
@@ -286,6 +296,8 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PostCut() {
 	// pT balance
 	h_pT_balance->Fill(pT_balance); // 2 muons 2 jets
 
+	// pT balance 3
+	h_pT_balance_3->Fill(pT_balance_3); // 2 muons 2 jets
 
 }
 
@@ -307,7 +319,8 @@ void MC_Analysis::Zmumu2Jets_FillAllData_ControlCut() {
 	// pT balance CONTROL
 	h_pT_balance_CONTROL->Fill(pT_balance);
 
-
+	// pT balance CONTROL
+	h_pT_balance_3_CONTROL->Fill(pT_balance_3);
 
 }
 
@@ -360,11 +373,10 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_Zmumu2Jets.pdf", AnalysisType);
 	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_Zmumu2Jets.pdf", AnalysisType);
 	
-	// Rapidity interval
-//	DrawHistogram(h_Rapidity_Interval_PRE, "h_Rapidity_Interval_PRE", "h_Rapidity_Interval_PRE_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with initial selection cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval__PRE_Zmumu2Jets.pdf", AnalysisType);
-///	DrawHistogram(h_Rapidity_Interval, "h_Rapidity_Interval", "h_Rapidity_Interval_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with further cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval_Zmumu2Jets.pdf", AnalysisType);
-//	DrawHistogram(h_Rapidity_Interval_CONTROL, "h_Rapidity_Interval_CONTROL", "h_Rapidity_Interval_CONTROL_" + AnalysisType , "Rapidity Interval between ljet_0 and ljet_1 with CONTROL cuts from " + AnalysisType + " data set;Rapidity Interval;Entries", 600, 400, false, "h_Rapidity_Interval__CONTROL_Zmumu2Jets.pdf", AnalysisType);
-
+	// pT balance
+	DrawHistogram(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_3, "h_pT_balance_3", "h_pT_balance_3_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_Zmumu2Jets.pdf", AnalysisType);
+	
 }
 
 

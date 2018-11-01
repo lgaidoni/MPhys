@@ -146,5 +146,28 @@ double pTBalanceCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 }
 
 
+// This function calculated the p_T^{balance} 
+// defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
+double pTBalanceThreeCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4, TLorentzVector *Vector5){
+	
+	double sumAll = ((*Vector1) + (*Vector2) + (*Vector3) + (*Vector4) + (*Vector5)).Pt(); // absolute value of all vectors
+	double abspTl1 = sqrt( pow (Vector1->Pt(),2)); // absolute value of lepton 1 transverse momentum
+	double abspTl2 = sqrt( pow (Vector2->Pt(),2)); // absolute value of lepton 2
+	double abspTj1 = sqrt( pow (Vector3->Pt(),2)); // absolute value of jet 1
+	double abspTj2 = sqrt( pow (Vector4->Pt(),2)); // absolute value of jet 2
+	double abspTj3 = sqrt( pow (Vector5->Pt(),2)); // absolute value of jet 3
+ 
+	double absvalEach = abspTl1 + abspTl2 + abspTj1 + abspTj2 + abspTj3; // absolute value of each
+	double absvalAll = sqrt( pow(sumAll, 2)); // absolute value of them all
+
+	// pTBalance here
+	double pTBalanceThree = absvalAll/absvalEach; // pT balance calculation
+	return pTBalanceThree;
+
+}
+
+
+
+
 
 #endif

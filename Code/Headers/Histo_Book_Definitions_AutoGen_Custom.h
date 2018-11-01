@@ -29,6 +29,19 @@ virtual void Book_pT_balance(int bins, double min, double max); // SEARCH VERSIO
 TH1F	*h_pT_balance; // SEARCH VERSION
 
 
+// -- PT Balance Three - Normalised transverse momentum balance between the two leptons and the three highest transverse momentum jets
+double pT_balance_3;
+
+virtual void Book_pT_balance_3_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_pT_balance_3_PRE; // PRE VERSION
+
+virtual void Book_pT_balance_3_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_pT_balance_3_CONTROL; // CONTROL VERSION
+
+virtual void Book_pT_balance_3(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_pT_balance_3; // SEARCH VERSION
+
+
 /// ------------------- ELECTRONS ---------------- ///
 
 // -- Invariant mass of electron 0 and electron 1
