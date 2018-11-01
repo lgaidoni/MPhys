@@ -155,7 +155,6 @@ bool MC_Analysis::Zee2Jets_Cut() {
 	bool pT_balance_limit = false;
 	bool ptvarcone_20 = false;
 	bool ptvarcone_40 = false;
-	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4); // Rapidity interval jets have momentum greater than 25GeV
 
 	// REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7
 	if (elec_0_elec_1_mass >= 81 && elec_0_elec_1_mass <= 101 ) Z_mass_condition = true; // Z boson defined as 2 opp charged same flavour leptons with a dilepton invariant mass of 81 < m_{ll} < 101 GeV	
@@ -167,8 +166,6 @@ bool MC_Analysis::Zee2Jets_Cut() {
 	if (ljet_1_p4->Pt() > 50) ljet_1_pt_greater = true;
 	// j1 j2 highest and second highest order transverse momentum jets
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
-	if (pT_balance < 0.15) pT_balance_limit = true; // p_T balance required to be less than 0.15
-
 
 	// EXTRA cuts. not from any source.
 	// ptvarcone required to be less than 0.1, high momentum suggests non-isolated events which we are not interested in
@@ -176,7 +173,7 @@ bool MC_Analysis::Zee2Jets_Cut() {
 	if (elec_0_iso_ptvarcone40 < 0.1) ptvarcone_40 = true; 
 
 	//If the conditions are met, don't cut
-	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && pT_balance_limit && Z_mass_condition && combined_lepton_pt && rap_int_condition && ptvarcone_20 && ptvarcone_40) return false;//   
+	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && Z_mass_condition && combined_lepton_pt && ptvarcone_20 && ptvarcone_40) return false;//   
 
 	//Otherwise, cut
 	return true;
@@ -296,25 +293,28 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_topoetcone40_" + AnalysisType + ".pdf", AnalysisType);
 
 	//combined lepton momentum
-	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + ".pdf", AnalysisType);
-
+	DrawHistogram(h_elec_0_elec_1_pt_PRE, "h_elec_0_elec_1_pt_PRE", "h_elec_0_elec_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined elec system elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_pt, "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt_" + AnalysisType , "Transverse momentum of combined elec system elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_elec_0_elec_1_pt_PRE, h_elec_0_elec_1_pt, h_elec_0_elec_1_pt_CONTROL, "Electron Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	
 	//Elec 0 & Elec 1 histograms
-	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_elec_0_elec_1_mass_CONTROL, "h_elec_0_elec_1_mass_CONTROL", "h_elec_0_elec_1_mass_CONTROL_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_" + AnalysisType , "Invariant mass of elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType , "Invariant mass of elec_0 and elec_1 from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_elec_0_elec_1_mass_PRE, h_elec_0_elec_1_mass, h_elec_0_elec_1_mass_CONTROL, "Electron Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 	//Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType, ";;Entries", 600, 400, false, "h_DeltaR_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType, ";;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType , "\\Delta R PRE - " + AnalysisType + ";\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , "\\Delta R SEARCH - " + AnalysisType + ";\\Delta R;Entries", 600, 400, false, "h_DeltaR_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR_" + AnalysisType, ";Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 	//leading jets invariant masses
-	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_0_ljet_1_mass_PRE, h_ljet_0_ljet_1_mass, h_ljet_0_ljet_1_mass_CONTROL, "Leading Jets Combined Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 	// pT balance
-	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
 	
 
 }

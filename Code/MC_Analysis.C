@@ -43,6 +43,10 @@ void MC_Analysis::Loop() {
 
    ///---------------------------------- ACTUAL FOR LOOP ------------------------------///
 
+
+   cout << endl << "-------------------- " << AnalysisType << endl;
+   int current_indicator = 0;
+
    //Loop over all the entries in jentry
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
 
@@ -57,8 +61,17 @@ void MC_Analysis::Loop() {
       //Let the user know the program is working, and not just frozen
       double entry_count = jentry;
       double max_entries = nentries;
-      if (jentry % 10000 == 0) cout << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%" << endl;
 
+      if (jentry % 500 == 0) {
+	
+	if (current_indicator == 0) {cout << "                     " << "|"; current_indicator = 1;}
+	else if (current_indicator == 1) {cout << "                     " << "/"; current_indicator = 2;}
+	else if (current_indicator == 2) {cout << "                     " << "—"; current_indicator = 3;}
+	else if (current_indicator == 3) {cout << "                     " << "\\"; current_indicator = 0;}
+	cout << " " << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%\r";
+	cout.flush();
+
+      }
 	///------------------- ACTUAL ANALYSIS -----------------///
 	// EW
  	/// Zee2Jets
@@ -105,7 +118,8 @@ void MC_Analysis::Loop() {
 
 	
       }
-   cout << "100.0%" << endl;
-   cout << "Number of Entries = " << nentries << endl;    //Output the number of entries
+   cout << "                     * 100.0%" << endl;
+   cout << "-------------------- Complete" << endl << endl;
+   cout << "Number of Entries = " << nentries << endl << endl;    //Output the number of entries
 
 }
