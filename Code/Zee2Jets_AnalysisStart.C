@@ -4,7 +4,9 @@ using namespace std;
 
 void Zee2Jets_AnalysisStart() {
 
+	gROOT->ProcessLine("double ScaleFactor = 1");
 	gROOT->ProcessLine(".x MC_Analysis.C");
+
 	gROOT->ProcessLine("Zee2JetsAnalysis = new MC_Analysis(\"/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308092.Sh221_PDF30_Zee2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14357856._000001.hist-output.root\", \"Zee2Jets\")");
 	gROOT->ProcessLine("Zee2JetsAnalysis->Zee2Jets_BookHistos()");
 	gROOT->ProcessLine("Zee2JetsAnalysis->Loop()");
