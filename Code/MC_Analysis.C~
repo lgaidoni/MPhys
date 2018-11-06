@@ -106,7 +106,8 @@ void MC_Analysis::Loop() {
 	if (AnalysisType == "Zee") {
 		if (Zee_InitialCut() == false) { // if we're not cutting
 			Zee_GenerateVariables();
-
+			Zee_FillAllData_PreCut();
+			if (Zee_SearchCut() == false) {
 				Zee_FillAllData_PostCut();
 			}
 			else {
