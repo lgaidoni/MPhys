@@ -19,7 +19,7 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 	histogram->SetTitle(title.c_str());
 
 	//Draw the histogram
-	histogram->Draw();
+	histogram->Draw("HIST");
 
 	//If the user wants the axis to be a log axis, do it
 	if (log == true) canvas->SetLogy();
@@ -347,6 +347,76 @@ double pTBalanceThreeCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLor
 
 }
 
+//This function will return a vector of doubles, containing information about luminosity weighting for a given file ID
+vector<double> csv_reader(string ID) {
+
+	string Line, prevLine;
+	vector <double> info;
+	int matchPos = 0;
+	bool counterActive = true;
+
+	ifstream file ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); //Open the file
+	getline(file, Line, '\n');  //Get a new line
+	
+	while(!file.eof()){  //While not at the end of the file
+		getline(file,Line);  //Get a new line
+		if(counterActive) matchPos++;  //Increment the counter if the counter is active
+		if( Line.substr(0,6) == ID ) counterActive = false; //If the ID finds a match for line number, deactivate the counter
+	}
+
+	file.close(); // Close the File
+	ifstream file2 ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); //Open the file
+
+	for(int i = 0; i < matchPos; i++) getline(file2, Line);
+	
+	double SampleID;
+	double xsectioninpb;
+	double kfactor;
+	double filterefficiency;
+	double xsecunc;
+
+	getline(file2, Line, ',');
+	SampleID = stod(Line);
+	info.push_back(SampleID);
+	
+	getline(file2, Line, ',');
+	getline(file2, Line, ',');
+	xsectioninpb = stod(Line);
+	info.push_back(xsectioninpb);
+	
+	getline(file2, Line, ',');
+	kfactor = stod(Line);
+	info.push_back(kfactor);
+
+	getline(file2, Line, ',');
+	filterefficiency = stod(Line);
+	info.push_back(filterefficiency);
+	
+	getline(file2, Line, '\n');
+	xsecunc = stod(Line);
+	info.push_back(xsecunc);
+
+	return info;
+
+}
+
+// Luminosity weighting function
+// extra weight to apply is xs*L/N (xs = cross section, L = luminosity (L given by k*eff_filter, where k=correction on xs calculation, eff_filter = filtering efficiency), N=initial # of generated MC events)
+// so have Lum_weighting = xs * k * eff_filter / N
+// need to access the data
+double luminosity_weighting_function(vector<double> info, double N, double luminosity) {
+	
+	double xs = info[1];
+	double k = info[2];
+	double eff_filter = info[3];
+	double extra_weight;
+
+	extra_weight =  (xs*k*eff_filter)/N; //formula for extra luminosity weighting
+
+	return extra_weight;
+
+}
+
 double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
 // function for calculatig Centrality for Z boson
 // Z* = |eta_Z-(eta_j1+eta_j2)/2)/|Delta(eta_jj)| (where Delta(eta_jj) is the pseudorapidity separation	
@@ -368,4 +438,5 @@ double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 	return Centrality;
 
 }
+
 #endif
