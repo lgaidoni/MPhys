@@ -1,7 +1,12 @@
+##TITLE
+##FunctionName:Comment
 ##GENERIC
 DeltaR:Distance in R space between two detections (ljet, elec, muon, etc)
 pT_balance:PT Balance - Normalised transverse momentum balance between the two leptons and the two highest transverse momentum jets
 pT_balance_3:PT Balance Three - Normalised transverse momentum balance between the two leptons and the three highest transverse momentum jets
+Centrality:Centrality of pseudorapidity of Z boson between two leading jets
+RapidityDijet:Rapidity of a dijet pair
+RapidityDilepton:Rapidity of a dilepton pair
 ##ELECTRONS
 elec_0_elec_1_mass:Invariant mass of electron 0 and electron 1
 elec_0_elec_1_pt:Combined transverse momentum of electron 0 and electron 1
