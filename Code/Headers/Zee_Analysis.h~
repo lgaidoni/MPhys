@@ -61,16 +61,14 @@ void MC_Analysis::Zee_BookHistos() {
 	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass(bins, 0, 1500);
 
-	///------------------ pT balance for elec_0 & elec_1 ljet_0 & ljet_1-----------------///
+	///------------------ pT balance for elec_0 & elec_1 and ljet_0 & ljet_1-----------------///
 
 	Book_pT_balance_PRE(bins, 0, 1);
 	Book_pT_balance(bins, 0, 1);
 	Book_pT_balance_CONTROL(bins, 0, 1);
 
-	///------------------ pT balance for elec_0 & elec_1 ljet_0 & ljet_1 & ljet_2 -----------------///
+	///------------------ pT balance 3 for elec_0 & elec_1 and ljet_0 & ljet_1 & ljet_2 -----------------///
 
-	Book_pT_balance_3_PRE(bins, 0, 1);
-	Book_pT_balance_3(bins, 0, 1);
 	Book_pT_balance_3_CONTROL(bins, 0, 1);
 }
 
@@ -119,6 +117,8 @@ void MC_Analysis::Zee_GenerateVariables() {
 	// p_T_Balance_3
 	pT_balance_3 = pTBalanceThreeCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
+	// get data from csv file for Luminosity weighting, from LepUniv_xsec.csv # Z+jets, # e, Zee 
+	int ID[14] = {364116,364119,364122,364125,364114,364117,364120,364123,364126,364127,364115,364118,364121,364124};// contains all the ID's for Zee data sets
 
 }
 
@@ -388,7 +388,7 @@ void MC_Analysis::Zee_DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL(h_elec_0_elec_1_pt_PRE, h_elec_0_elec_1_pt, h_elec_0_elec_1_pt_CONTROL, "Electron Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_elec_1_pt_PRE, h_elec_0_elec_1_pt, h_elec_0_elec_1_pt_CONTROL, h_elec_0_elec_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre-Cut", "Post Cut", "Control", "Except", "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);	
 
-	//Elec 0 & Elec 1 histograms
+	//Elec 0 & Elec 1 invariant mass histograms
 	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_" + AnalysisType , "Invariant mass of elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType , "Invariant mass of elec_0 and elec_1 from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_elec_0_elec_1_mass_PRE, h_elec_0_elec_1_mass, h_elec_0_elec_1_mass_CONTROL, "Electron Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
@@ -408,12 +408,11 @@ void MC_Analysis::Zee_DrawHistos() {
 	// pT balance
 	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
-		
-	// pT balance 3
-	DrawHistogram(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , "p_T^{balance, 3} for transverse momentum of ljet_0, ljet_1, ljet_2 and elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_CONTROL, "h_pT_balance_CONTROL", "h_pT_balance_CONTROL_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+
+	// pT balance 3 - only filled in control scenario (see ATLAS paper Table 1.)
 	DrawHistogram(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , "p_T^{balance, 3} for transverse momentum of ljet_0, ljet_1, ljet_2 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
 	
-
 	//Leading Jet Histograms
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre-Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_0_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre-Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_1_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
