@@ -1,5 +1,8 @@
 #ifndef Generic_Functions_h
 #define Generic_Functions_h
+#include <vector>
+
+
 
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
@@ -339,6 +342,46 @@ double pTBalanceThreeCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLor
 
 
 
+vector<double> csv_reader(int ID) {// for csv file where info is separated by comma
 
+	// integers to put into vector
+	string line, category;	// wont run because this isnt double
+	double xsectioninpb;
+	double kfactor;
+	double filterefficiency;
+
+	ifstream file ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); // declare file stream
+	vector <double> info;
+	while(getline(file,line,',')){		// this gets the line and also splits it up
+	if (line[0,1,2,3,4,5]) == ID[0,1,2,3,4,5]{
+		
+		info.pushback(stod(category), xsectioninpb, kfactor, filterefficiency)// pushback into vector (converts string to double for category)	
+		
+		} // end if
+	} // end while
+
+	return info;
+
+}
+
+double luminosity_weighting_function(double xsectioninpb, double kfactor, double filterefficiency, double N){
+	
+	double xs;
+	double k;
+	double eff_filter;
+	double N;
+	double extra weight;
+
+	extra_weight =  (xs*k*eff_filter)/N; //formula for extra luminosity weighting
+
+}
+
+
+
+
+// Luminosity weighting function
+// extra weight to apply is xs*L/N (xs = cross section, L = luminosity (L given by k*eff_filter, where k=correction on xs calculation, eff_filter = filtering efficiency), N=initial # of generated MC events)
+// so have Lum_weighting = xs * k * eff_filter / N
+// need to access the data
 
 #endif
