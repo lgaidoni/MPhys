@@ -10,6 +10,9 @@ void MC_Analysis::Book_DeltaR_PRE(int bins, double min, double max) {
 void MC_Analysis::Book_DeltaR_CONTROL(int bins, double min, double max) {
 	h_DeltaR_CONTROL = new TH1F("h_DeltaR_CONTROL", "", bins, min, max);
 }
+void MC_Analysis::Book_DeltaR_EXCEPT(int bins, double min, double max) {
+	h_DeltaR_EXCEPT = new TH1F("h_DeltaR_EXCEPT", "", bins, min, max);
+}
 void MC_Analysis::Book_DeltaR(int bins, double min, double max) {
 	h_DeltaR = new TH1F("h_DeltaR", "", bins, min, max);
 }
@@ -22,6 +25,9 @@ void MC_Analysis::Book_pT_balance_PRE(int bins, double min, double max) {
 void MC_Analysis::Book_pT_balance_CONTROL(int bins, double min, double max) {
 	h_pT_balance_CONTROL = new TH1F("h_pT_balance_CONTROL", "", bins, min, max);
 }
+void MC_Analysis::Book_pT_balance_EXCEPT(int bins, double min, double max) {
+	h_pT_balance_EXCEPT = new TH1F("h_pT_balance_EXCEPT", "", bins, min, max);
+}
 void MC_Analysis::Book_pT_balance(int bins, double min, double max) {
 	h_pT_balance = new TH1F("h_pT_balance", "", bins, min, max);
 }
@@ -33,6 +39,9 @@ void MC_Analysis::Book_pT_balance_3_PRE(int bins, double min, double max) {
 }
 void MC_Analysis::Book_pT_balance_3_CONTROL(int bins, double min, double max) {
 	h_pT_balance_3_CONTROL = new TH1F("h_pT_balance_3_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_pT_balance_3_EXCEPT(int bins, double min, double max) {
+	h_pT_balance_3_EXCEPT = new TH1F("h_pT_balance_3_EXCEPT", "", bins, min, max);
 }
 void MC_Analysis::Book_pT_balance_3(int bins, double min, double max) {
 	h_pT_balance_3 = new TH1F("h_pT_balance_3", "", bins, min, max);
@@ -48,6 +57,9 @@ void MC_Analysis::Book_elec_0_elec_1_mass_PRE(int bins, double min, double max) 
 void MC_Analysis::Book_elec_0_elec_1_mass_CONTROL(int bins, double min, double max) {
 	h_elec_0_elec_1_mass_CONTROL = new TH1F("h_elec_0_elec_1_mass_CONTROL", "", bins, min, max);
 }
+void MC_Analysis::Book_elec_0_elec_1_mass_EXCEPT(int bins, double min, double max) {
+	h_elec_0_elec_1_mass_EXCEPT = new TH1F("h_elec_0_elec_1_mass_EXCEPT", "", bins, min, max);
+}
 void MC_Analysis::Book_elec_0_elec_1_mass(int bins, double min, double max) {
 	h_elec_0_elec_1_mass = new TH1F("h_elec_0_elec_1_mass", "", bins, min, max);
 }
@@ -59,6 +71,9 @@ void MC_Analysis::Book_elec_0_elec_1_pt_PRE(int bins, double min, double max) {
 }
 void MC_Analysis::Book_elec_0_elec_1_pt_CONTROL(int bins, double min, double max) {
 	h_elec_0_elec_1_pt_CONTROL = new TH1F("h_elec_0_elec_1_pt_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_elec_0_elec_1_pt_EXCEPT(int bins, double min, double max) {
+	h_elec_0_elec_1_pt_EXCEPT = new TH1F("h_elec_0_elec_1_pt_EXCEPT", "", bins, min, max);
 }
 void MC_Analysis::Book_elec_0_elec_1_pt(int bins, double min, double max) {
 	h_elec_0_elec_1_pt = new TH1F("h_elec_0_elec_1_pt", "", bins, min, max);
@@ -74,6 +89,9 @@ void MC_Analysis::Book_muon_0_muon_1_mass_PRE(int bins, double min, double max) 
 void MC_Analysis::Book_muon_0_muon_1_mass_CONTROL(int bins, double min, double max) {
 	h_muon_0_muon_1_mass_CONTROL = new TH1F("h_muon_0_muon_1_mass_CONTROL", "", bins, min, max);
 }
+void MC_Analysis::Book_muon_0_muon_1_mass_EXCEPT(int bins, double min, double max) {
+	h_muon_0_muon_1_mass_EXCEPT = new TH1F("h_muon_0_muon_1_mass_EXCEPT", "", bins, min, max);
+}
 void MC_Analysis::Book_muon_0_muon_1_mass(int bins, double min, double max) {
 	h_muon_0_muon_1_mass = new TH1F("h_muon_0_muon_1_mass", "", bins, min, max);
 }
@@ -85,6 +103,9 @@ void MC_Analysis::Book_muon_0_muon_1_pt_PRE(int bins, double min, double max) {
 }
 void MC_Analysis::Book_muon_0_muon_1_pt_CONTROL(int bins, double min, double max) {
 	h_muon_0_muon_1_pt_CONTROL = new TH1F("h_muon_0_muon_1_pt_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_muon_0_muon_1_pt_EXCEPT(int bins, double min, double max) {
+	h_muon_0_muon_1_pt_EXCEPT = new TH1F("h_muon_0_muon_1_pt_EXCEPT", "", bins, min, max);
 }
 void MC_Analysis::Book_muon_0_muon_1_pt(int bins, double min, double max) {
 	h_muon_0_muon_1_pt = new TH1F("h_muon_0_muon_1_pt", "", bins, min, max);
@@ -99,6 +120,9 @@ void MC_Analysis::Book_ljet_0_ljet_1_mass_PRE(int bins, double min, double max) 
 }
 void MC_Analysis::Book_ljet_0_ljet_1_mass_CONTROL(int bins, double min, double max) {
 	h_ljet_0_ljet_1_mass_CONTROL = new TH1F("h_ljet_0_ljet_1_mass_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_ljet_0_ljet_1_mass_EXCEPT(int bins, double min, double max) {
+	h_ljet_0_ljet_1_mass_EXCEPT = new TH1F("h_ljet_0_ljet_1_mass_EXCEPT", "", bins, min, max);
 }
 void MC_Analysis::Book_ljet_0_ljet_1_mass(int bins, double min, double max) {
 	h_ljet_0_ljet_1_mass = new TH1F("h_ljet_0_ljet_1_mass", "", bins, min, max);
