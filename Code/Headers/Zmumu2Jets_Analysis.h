@@ -265,20 +265,7 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PostCut() {
 	
 	#include "_FillAllData_PostCut.h"
 
-	// pt cone histograms
-	h_muon_0_iso_ptcone20->Fill(muon_0_iso_ptcone20);
-	h_muon_0_iso_ptcone30->Fill(muon_0_iso_ptcone30);
-	h_muon_0_iso_ptcone40->Fill(muon_0_iso_ptcone40);
 
-	// ptvar cone histograms
-	h_muon_0_iso_ptvarcone20->Fill(muon_0_iso_ptvarcone20);
-	h_muon_0_iso_ptvarcone30->Fill(muon_0_iso_ptvarcone30);
-	h_muon_0_iso_ptvarcone40->Fill(muon_0_iso_ptvarcone40);
-
-	// topoet cone histograms
-	h_muon_0_iso_topoetcone20->Fill(muon_0_iso_topoetcone20);
-	h_muon_0_iso_topoetcone30->Fill(muon_0_iso_topoetcone30);
-	h_muon_0_iso_topoetcone40->Fill(muon_0_iso_topoetcone40);
 
 	// muon 0 momentum
 	h_muon_0_p4_Pt->Fill(muon_0_p4->Pt());
@@ -375,8 +362,8 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
   
 	// pT balance
-	DrawHistogram(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_pT_balance_3, "h_pT_balance_3", "h_pT_balance_3_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_3, "h_pT_balance_3", "h_pT_balance_3_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_" + AnalysisType + ".pdf", AnalysisType);
 	
 
 }
