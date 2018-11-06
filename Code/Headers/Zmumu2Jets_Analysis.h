@@ -6,11 +6,11 @@
 ///--------------------- ORDER OF OPERATIONS ---------------------------///
 
 ///	1. Book Histograms
-///	2. Initial Smuontion Cut
+///	2. Initial selection Cut
 ///	3. Generate Variables
-///	4. Fill Histograms Pre Smuontion Cut
-///	5. Smuontion Cut
-///	6. Fill Histograms Post Smuontion Cut
+///	4. Fill Histograms Pre selection Cut
+///	5. selection Cut
+///	6. Fill Histograms Post selection Cut
 ///	7. Draw/Save Histograms
 
 // This function will book all relevant histograms
@@ -62,6 +62,16 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	Book_muon_0_muon_1_mass_PRE(bins, 0, 200);
 	Book_muon_0_muon_1_mass(bins, 0, 200);
 
+	//dilepton rapidity
+	Book_RapidityDilepton_CONTROL(bins, 0, 4.5);
+	Book_RapidityDilepton_PRE(bins, 0, 4.5);
+	Book_RapidityDilepton(bins, 0, 4.5);
+
+	//diljet rapidity
+	Book_RapidityDijet_CONTROL(bins, 0, 4.5);
+	Book_RapidityDijet_PRE(bins, 0, 4.5);
+	Book_RapidityDijet(bins, 0, 4.5);
+
 	//dilepton pt
 	Book_muon_0_muon_1_pt_EXCEPT(bins, 0, 200);
 	Book_muon_0_muon_1_pt_CONTROL(bins, 0, 200);
@@ -90,9 +100,15 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 
 	Book_pT_balance_3_CONTROL(bins, 0, 1);
 
+	///------------------Centrality plot for Z boson inside rapidity interval of ljet_0 & ljet_1 -----------------///
+
+	Book_Centrality_PRE(bins, 0, 20);
+	Book_Centrality(bins, 0, 20);
+	Book_Centrality_CONTROL(bins, 0, 20);
+
 }
 
-// Pre-Smuontion cut functions (dummy cuts)
+// Pre-selection cut functions (dummy cuts)
 // Cuts return bool, for ease in if statements
 bool MC_Analysis::Zmumu2Jets_InitialCut() {
 
@@ -130,6 +146,12 @@ void MC_Analysis::Zmumu2Jets_GenerateVariables() {
 	muon_0_muon_1_mass = InvariantMass(muon_0_p4, muon_1_p4);
 	ljet_0_ljet_1_mass = InvariantMass(ljet_0_p4, ljet_1_p4);
 
+	// Rapidity of dilepton pair
+	RapidityDilepton = RapidityDisomethingCalc(muon_0_p4, muon_1_p4);
+
+	// Rapidity of dijet pair
+	RapidityDijet = RapidityDisomethingCalc(ljet_0_p4, ljet_1_p4);
+
 	//Delta R
 	DeltaR = DeltaRCalc(muon_0_p4, muon_1_p4);
 
@@ -142,6 +164,8 @@ void MC_Analysis::Zmumu2Jets_GenerateVariables() {
 	// p_T_Balance_Three 
 	pT_balance_3 = pTBalanceThreeCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
+	// Centrality of Z boson between two leading jets calc using rapidity
+	Centrality = CentralityCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4);
 
 }
 
@@ -154,14 +178,19 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 	h_muon_0_muon_1_mass_PRE->Fill(muon_0_muon_1_mass); // 2 muons
 	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass); // 2 jets
 
-	// Combined muon transverse momentum
-	h_muon_0_muon_1_pt_PRE->Fill(muon_0_muon_1_pt);
+	// Combined
+	h_RapidityDilepton_PRE->Fill(RapidityDilepton);// dilepton rapidity
+	h_RapidityDijet_PRE->Fill(RapidityDijet);// dijet rapidity	
+	h_muon_0_muon_1_pt_PRE->Fill(muon_0_muon_1_pt); // muon transverse momentum
 
 	// Delta R
 	h_DeltaR_PRE->Fill(DeltaR);
 
 	// pT balance PRE
 	h_pT_balance_PRE->Fill(pT_balance); // 2 muons 2 jets
+
+	// Centrality
+	h_Centrality_PRE->Fill(Centrality);
 
 }
 
@@ -344,9 +373,11 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 		//Invariant mass
 		h_muon_0_muon_1_mass->Fill(muon_0_muon_1_mass); // two muons
 		h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass); // two jets
-
-		//Combined lepton (muon) pT
-		h_muon_0_muon_1_pt->Fill(muon_0_muon_1_pt);
+		
+		//Combined lepton
+		h_RapidityDilepton->Fill(RapidityDilepton);// (muon) dilepton rapidity
+		h_RapidityDijet->Fill(RapidityDijet);// (jet) dijet rapidity
+		h_muon_0_muon_1_pt->Fill(muon_0_muon_1_pt);// pT
 
 		//Delta R for two muons
 		h_DeltaR->Fill(DeltaR);
@@ -355,6 +386,10 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 		h_pT_balance->Fill(pT_balance);	
 
 		if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN WHY DID YOU DO THIS TO ME" << endl;
+
+		// Centrality
+		h_Centrality->Fill(Centrality);
+
 
 	}
 	
@@ -365,9 +400,11 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 		//Invariant mass
 		h_muon_0_muon_1_mass_CONTROL->Fill(muon_0_muon_1_mass); // two muons
 		h_ljet_0_ljet_1_mass_CONTROL->Fill(ljet_0_ljet_1_mass); // two jets
-
-		//Combined lepton (muon) pT
-		h_muon_0_muon_1_pt_CONTROL->Fill(muon_0_muon_1_pt);
+		
+		//Combined 
+		h_RapidityDilepton_CONTROL->Fill(RapidityDilepton); // lepton (muon) dilepton rapidity
+		h_RapidityDijet_CONTROL->Fill(RapidityDijet); // ljet dijet rapidity
+		h_muon_0_muon_1_pt_CONTROL->Fill(muon_0_muon_1_pt); // lepton (muon) pT
 
 		//Delta R for two muons
 		h_DeltaR_CONTROL->Fill(DeltaR);
@@ -377,6 +414,9 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 		
 		// pT balance 3 CONTROL
 		h_pT_balance_3_CONTROL->Fill(pT_balance_3);
+		
+		// Centrality CONTROL
+		h_Centrality_CONTROL->Fill(Centrality);
 
 	}
 
@@ -415,38 +455,52 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + AnalysisType + ".pdf", AnalysisType);
 	
 	// muon 0 & muon 1 invariant mass histograms
-	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_" + AnalysisType , "Invariant mass of muon_0 and muon_1 with initial smuontion cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_" + AnalysisType , "Invariant mass of muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType , "Invariant mass of muon_0 and muon_1 from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, "Muon Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, h_muon_0_muon_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
-	// Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType , "\\Delta R with initial smuontion cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , "\\Delta R with further cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR_" + AnalysisType, ";Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + "_Combo.pdf", AnalysisType);
-
-	// combined lepton momentum
-	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with initial smuontion cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, h_muon_0_muon_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);	
-
 	// leading jets invariant masses
-	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with initial smuontion cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, "Muon Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, h_muon_0_muon_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
+	// Dilepton Rapidity
+	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", "h_RapidityDilepton_PRE_" + AnalysisType , "Dilepton rapidity of muon_0 and muon_1  with initial selection cuts from " + AnalysisType + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", "h_RapidityDilepton_" + AnalysisType , "Dilepton rapidity of muon_0 and muon_1  with further cuts from " + AnalysisType + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", "h_RapidityDilepton_CONTROL_" + AnalysisType , "Dilepton rapidity of muon_0 and muon_1  with control cuts from " + AnalysisType + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+
+	// Dijet Rapidity
+	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", "h_muon_0_muon_1_RapidityDijet_PRE_" + AnalysisType , "Dijet rapidity of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", "h_muon_0_muon_1_RapidityDijet_" + AnalysisType , "Dijet rapidity of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_muon_0_muon_1_RapidityDijet_CONTROL_" + AnalysisType , "Dijet rapidity of ljet_0 and ljet_1  with control cuts from " + AnalysisType + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+
+	// Delta R Histograms
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType , "\\Delta R with initial selection cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , "\\Delta R with further cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR_" + AnalysisType, ";Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + "_Combo.pdf", AnalysisType);
+
+	// combined lepton momentum
+	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, h_muon_0_muon_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+
 	// pT balance
-	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial smuontion cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_pT_balance_CONTROL, "h_pT_balance_CONTROL", "h_pT_balance_CONTROL_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_CONTROL, "h_pT_balance_CONTROL", "h_pT_balance_CONTROL_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with control cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
 
 	// pT balance 3 - only filled in control scenario (see ATLAS paper Table 1.)
 	DrawHistogram(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , "p_T^{balance, 3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
-	
+
+	// Centrality
+	DrawHistogram(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with initial selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_Centrality, "h_Centrality", "h_Centrality_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with further selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+
 
 }
-
 
 #endif

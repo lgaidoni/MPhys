@@ -1,6 +1,10 @@
 #ifndef Histo_Book_Functions_AutoGen_Custom_h
 #define Histo_Book_Functions_AutoGen_Custom_h
 
+/// ------------------- TITLE ---------------- ///
+
+/// ------------------- FunctionName:Comment ---------------- ///
+
 /// ------------------- GENERIC ---------------- ///
 
 // -- Distance in R space between two detections (ljet, elec, muon, etc)
@@ -45,6 +49,51 @@ void MC_Analysis::Book_pT_balance_3_EXCEPT(int bins, double min, double max) {
 }
 void MC_Analysis::Book_pT_balance_3(int bins, double min, double max) {
 	h_pT_balance_3 = new TH1F("h_pT_balance_3", "", bins, min, max);
+}
+
+
+// -- Centrality of pseudorapidity of Z boson between two leading jets
+void MC_Analysis::Book_Centrality_PRE(int bins, double min, double max) {
+	h_Centrality_PRE = new TH1F("h_Centrality_PRE", "", bins, min, max);
+}
+void MC_Analysis::Book_Centrality_CONTROL(int bins, double min, double max) {
+	h_Centrality_CONTROL = new TH1F("h_Centrality_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_Centrality_EXCEPT(int bins, double min, double max) {
+	h_Centrality_EXCEPT = new TH1F("h_Centrality_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_Centrality(int bins, double min, double max) {
+	h_Centrality = new TH1F("h_Centrality", "", bins, min, max);
+}
+
+
+// -- Rapidity of a dijet pair
+void MC_Analysis::Book_RapidityDijet_PRE(int bins, double min, double max) {
+	h_RapidityDijet_PRE = new TH1F("h_RapidityDijet_PRE", "", bins, min, max);
+}
+void MC_Analysis::Book_RapidityDijet_CONTROL(int bins, double min, double max) {
+	h_RapidityDijet_CONTROL = new TH1F("h_RapidityDijet_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_RapidityDijet_EXCEPT(int bins, double min, double max) {
+	h_RapidityDijet_EXCEPT = new TH1F("h_RapidityDijet_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_RapidityDijet(int bins, double min, double max) {
+	h_RapidityDijet = new TH1F("h_RapidityDijet", "", bins, min, max);
+}
+
+
+// -- Rapidity of a dilepton pair
+void MC_Analysis::Book_RapidityDilepton_PRE(int bins, double min, double max) {
+	h_RapidityDilepton_PRE = new TH1F("h_RapidityDilepton_PRE", "", bins, min, max);
+}
+void MC_Analysis::Book_RapidityDilepton_CONTROL(int bins, double min, double max) {
+	h_RapidityDilepton_CONTROL = new TH1F("h_RapidityDilepton_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_RapidityDilepton_EXCEPT(int bins, double min, double max) {
+	h_RapidityDilepton_EXCEPT = new TH1F("h_RapidityDilepton_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_RapidityDilepton(int bins, double min, double max) {
+	h_RapidityDilepton = new TH1F("h_RapidityDilepton", "", bins, min, max);
 }
 
 
