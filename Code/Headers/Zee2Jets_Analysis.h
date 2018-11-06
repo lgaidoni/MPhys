@@ -418,6 +418,8 @@ void MC_Analysis::Zee2Jets_DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre-Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_0_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre-Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_1_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
+	Histograms->Close();
+
 }
 
 #endif
