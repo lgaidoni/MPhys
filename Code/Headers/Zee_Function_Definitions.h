@@ -2,9 +2,5 @@
 	virtual bool Zee_InitialCut();
 	virtual void Zee_GenerateVariables();
 	virtual void Zee_FillAllData_PreCut();
-	virtual bool Zee_Cut();
-	virtual bool Zee_SearchCut();
-	virtual bool Zee_ControlCut();
-	virtual void Zee_FillAllData_PostCut();
-	virtual void Zee_FillAllData_ControlCut();
 	virtual void Zee_DrawHistos();
+	virtual void Zee_CutAndFill();

@@ -88,12 +88,7 @@ void MC_Analysis::Loop() {
 		if (Zmumu2Jets_InitialCut() == false) { // if we're not cutting
 			Zmumu2Jets_GenerateVariables();
 			Zmumu2Jets_FillAllData_PreCut();
-			if (Zmumu2Jets_SearchCut() == false) {
-				Zmumu2Jets_FillAllData_PostCut();
-			}
-			else {
-				Zmumu2Jets_FillAllData_ControlCut();
-			}
+			Zmumu2Jets_CutAndFill();
 		}
 	}
    
@@ -103,26 +98,17 @@ void MC_Analysis::Loop() {
 		if (Zee_InitialCut() == false) { // if we're not cutting
 			Zee_GenerateVariables();
 			Zee_FillAllData_PreCut();
-			if (Zee_SearchCut() == false) {
-				Zee_FillAllData_PostCut();
-			}
-			else {
-				Zee_FillAllData_ControlCut();
-			}
+			Zee_CutAndFill();
 		}
 	}
+   
 
 	/// Zmumu
 	if (AnalysisType == "Zmumu") {
 		if (Zmumu_InitialCut() == false) { // if we're not cutting
 			Zmumu_GenerateVariables();
 			Zmumu_FillAllData_PreCut();
-			if (Zmumu_SearchCut() == false) {
-				Zmumu_FillAllData_PostCut();
-			}
-			else {
-				Zmumu_FillAllData_ControlCut();
-			}
+			Zmumu_CutAndFill();
 		}
 	}
 

@@ -28,6 +28,7 @@
 #include "Headers/Zee2Jets_Analysis.h"
 #include "Headers/Zmumu2Jets_Analysis.h"
 #include "Headers/Zee_Analysis.h"
+#include "Headers/Zmumu_Analysis.h"
 #include "Headers/AddChainFriend.h"
 #include <TH2.h>
 #include <TStyle.h>
@@ -62,7 +63,7 @@ void MC_Analysis::Loop() {
       double entry_count = jentry;
       double max_entries = nentries;
 
-      if (jentry % 500 == 0) {
+      if (jentry % 500 == 0) { // 1st IF
 	
 	if (current_indicator == 0) {cout << "                     " << "|"; current_indicator = 1;}
 	else if (current_indicator == 1) {cout << "                     " << "/"; current_indicator = 2;}
@@ -79,12 +80,7 @@ void MC_Analysis::Loop() {
 		if (Zee2Jets_InitialCut() == false) { // if we're not cutting
 			Zee2Jets_GenerateVariables();
 			Zee2Jets_FillAllData_PreCut();
-			if (Zee2Jets_SearchCut() == false) {
-				Zee2Jets_FillAllData_PostCut();
-			}
-			else {
-				Zee2Jets_FillAllData_ControlCut();
-			}
+			Zee2Jets_CutAndFill();
 		}
 	}
 	/// Zmumu2Jets
@@ -116,8 +112,24 @@ void MC_Analysis::Loop() {
 		}
 	}
 
+	/// Zmumu
+	if (AnalysisType == "Zmumu") {
+		if (Zmumu_InitialCut() == false) { // if we're not cutting
+			Zmumu_GenerateVariables();
+			Zmumu_FillAllData_PreCut();
+			if (Zmumu_SearchCut() == false) {
+				Zmumu_FillAllData_PostCut();
+			}
+			else {
+				Zmumu_FillAllData_ControlCut();
+			}
+		}
+	}
+
+
+
 	
-      }
+      } // END of 1st IF
    cout << "                     * 100.0%" << endl;
    cout << "-------------------- Complete" << endl << endl;
    cout << "Number of Entries = " << nentries << endl << endl;    //Output the number of entries
