@@ -211,6 +211,7 @@ void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType,
 
 }
 
+//This function will quick draw all desired overlay histograms for given .root files and analysis types
 void QuickDrawOverlayAll(string path1, string path2, string AnalysisType1, string AnalysisType2) {
 
 	TFile *file1 = new TFile(path1.c_str());
