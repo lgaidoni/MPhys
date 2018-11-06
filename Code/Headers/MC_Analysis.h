@@ -12,6 +12,7 @@
 #include <TChain.h>
 #include <TFile.h>
 #include <vector>
+#include <thread>
 
 // Header file for the classes stored in the TTree if any.
 #include "TLorentzVector.h"
@@ -36,9 +37,6 @@ public :
 
 	//Zmumu Definitions
 	#include "Zmumu_Function_Definitions.h"
-
-
-	virtual void MergerTest();
 
 	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program

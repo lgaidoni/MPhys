@@ -121,7 +121,6 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 	histogram3->SetFillColor(kAzure+10);
 	histogram3->SetFillStyle(3002);
 	histogram4->SetLineColor(kOrange);
-
 	histogramStack->Add(histogram1);
 	histogramStack->Add(histogram2);
 	histogramStack->Add(histogram3);
@@ -211,6 +210,7 @@ void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType,
 
 }
 
+//This function will quick draw all desired overlay histograms for given .root files and analysis types
 void QuickDrawOverlayAll(string path1, string path2, string AnalysisType1, string AnalysisType2) {
 
 	TFile *file1 = new TFile(path1.c_str());
@@ -266,7 +266,6 @@ double RapidityDisomethingCalc(TLorentzVector *Vector1, TLorentzVector *Vector2)
 	return RapidityDisomething;
 }
 
-
 //This Function will calculate delta R (Distance in the R space)
 double DeltaRCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
@@ -318,8 +317,7 @@ double pTBalanceCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 	double abspTl2 = sqrt( pow (Vector2->Pt(),2)); // absolute value of lepton 2
 	double abspTj1 = sqrt( pow (Vector3->Pt(),2)); // absolute value of jet 1
 	double abspTj2 = sqrt( pow (Vector4->Pt(),2)); // absolute value of jet 2
-
- 
+  
 	double absvalEach = abspTl1 + abspTl2 + abspTj1 + abspTj2; // absolute value of each
 	double absvalAll = sqrt( pow(sumAll, 2)); // absolute value of them all
 
@@ -328,7 +326,6 @@ double pTBalanceCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 	return pTBalance;
 
 }
-
 
 // This function calculated the p_T^{balance} 
 // defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
@@ -350,48 +347,6 @@ double pTBalanceThreeCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLor
 
 }
 
-
-
-//vector<double> csv_reader(int ID) {// for csv file where info is separated by comma
-
-	// integers to put into vector
-//	string line, category;	// wont run because this isnt double
-//	double xsectioninpb;
-//	double kfactor;
-//	double filterefficiency;
-
-//	ifstream file ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); // declare file stream
-//	vector <double> info;
-//	while(getline(file,line,',')){		// this gets the line and also splits it up
-//	if (line[0,1,2,3,4,5]) == ID[0,1,2,3,4,5]{
-		
-//		info.pushback(stod(category), xsectioninpb, kfactor, filterefficiency)// pushback into vector (converts string to double for category)	
-//		
-//		} // end if
-//	} // end while
-
-//	return info;
-
-//}
-
-
-// Luminosity weighting function
-// extra weight to apply is xs*L/N (xs = cross section, L = luminosity (L given by k*eff_filter, where k=correction on xs calculation, eff_filter = filtering efficiency), N=initial # of generated MC events)
-// so have Lum_weighting = xs * k * eff_filter / N
-// need to access the data
-//double luminosity_weighting_function(double xsectioninpb, double kfactor, double filterefficiency, double N){
-	
-//	double xs;
-//	double k;
-//	double eff_filter;
-//	double N;
-//	double extra weight;
-//
-//	extra_weight =  (xs*k*eff_filter)/N; //formula for extra luminosity weighting
-
-//}
-
-
 double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
 // function for calculatig Centrality for Z boson
 // Z* = |eta_Z-(eta_j1+eta_j2)/2)/|Delta(eta_jj)| (where Delta(eta_jj) is the pseudorapidity separation	
@@ -408,14 +363,9 @@ double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 	double absval_sum1 = sqrt(pow(sum1,2)); // absolute value of sum 1
 	double absval_DeltaRapidity = sqrt(pow(DeltaRapidity(Vector2, Vector3),2)); // absolute value of rapidity separation
 
-
-
 	// calculate Centrality
 	double Centrality = absval_sum1/absval_DeltaRapidity;
 	return Centrality;
 
 }
-
-
-
 #endif
