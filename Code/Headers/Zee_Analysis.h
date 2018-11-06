@@ -118,9 +118,9 @@ void MC_Analysis::Zee_GenerateVariables() {
 	pT_balance_3 = pTBalanceThreeCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	// get data from csv file for Luminosity weighting, from LepUniv_xsec.csv # Z+jets, # e, Zee 
-	int ID[14] = {364116,364119,364122,364125,364114,364117,364120,364123,364126,364127,364115,364118,364121,364124};// contains all the ID's for Zee data sets
+	//int ID[14] = {364116,364119,364122,364125,364114,364117,364120,364123,364126,364127,364115,364118,364121,364124};// contains all the ID's for Zee data sets
 	// need to turn the data back into doubles to then use luminosity_weighting_function
-	extra_weighting = luminosity_weighting_function();
+	//extra_weighting = luminosity_weighting_function();
 }
 
 // This function will fill the histograms that need to be filled before cuts are made
