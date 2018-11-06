@@ -1,9 +1,9 @@
 #ifndef Generic_Functions_h
 #define Generic_Functions_h
 #include <vector>
-
-
-
+/////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
+/////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
+/////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
@@ -211,6 +211,22 @@ void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType,
 
 }
 
+void QuickDrawOverlayAll(string path1, string path2, string AnalysisType1, string AnalysisType2) {
+
+	TFile *file1 = new TFile(path1.c_str());
+	TFile *file2 = new TFile(path2.c_str());
+
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_ljet_1_mass", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "DeltaR", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "pT_balance", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_p4_Pt", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_1_p4_Pt", AnalysisType1.c_str(), AnalysisType2.c_str());
+
+}
+
+/////////////////////////////// VARIABLES /////////////////////////////// 
+/////////////////////////////// VARIABLES /////////////////////////////// 
+/////////////////////////////// VARIABLES /////////////////////////////// 
 //This Fucntion will calculate invariant mass of two TLorentzVectors
 double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
@@ -241,6 +257,13 @@ double DeltaRapidity(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 	double DeltaRapidity = Vector1->Rapidity() - Vector2->Rapidity();
 	return DeltaRapidity;
 
+}
+
+//This Function will calculate rapidity of the dilepton pair / dijet pair
+double RapidityDisomethingCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double RapidityDisomething = ((*Vector1)+(*Vector2)).Rapidity();
+	return RapidityDisomething;
 }
 
 
@@ -329,35 +352,70 @@ double pTBalanceThreeCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLor
 
 
 
-vector<double> csv_reader(int ID) {// for csv file where info is separated by comma
+//vector<double> csv_reader(int ID) {// for csv file where info is separated by comma
 
 	// integers to put into vector
-	string line, category;	// wont run because this isnt double
-	double xsectioninpb;
-	double kfactor;
-	double filterefficiency;
+//	string line, category;	// wont run because this isnt double
+//	double xsectioninpb;
+//	double kfactor;
+//	double filterefficiency;
 
-	ifstream file ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); // declare file stream
-	vector <double> info;
-	while(getline(file,line,',')){		// this gets the line and also splits it up
-	if (line[0,1,2,3,4,5]) == ID[0,1,2,3,4,5]{
+//	ifstream file ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); // declare file stream
+//	vector <double> info;
+//	while(getline(file,line,',')){		// this gets the line and also splits it up
+//	if (line[0,1,2,3,4,5]) == ID[0,1,2,3,4,5]{
 		
-		info.pushback(stod(category), xsectioninpb, kfactor, filterefficiency)// pushback into vector (converts string to double for category)	
-		
-		} // end if
-	} // end while
+//		info.pushback(stod(category), xsectioninpb, kfactor, filterefficiency)// pushback into vector (converts string to double for category)	
+//		
+//		} // end if
+//	} // end while
 
-	return info;
+//	return info;
 
-}
-
-
-
+//}
 
 
 // Luminosity weighting function
 // extra weight to apply is xs*L/N (xs = cross section, L = luminosity (L given by k*eff_filter, where k=correction on xs calculation, eff_filter = filtering efficiency), N=initial # of generated MC events)
 // so have Lum_weighting = xs * k * eff_filter / N
 // need to access the data
+//double luminosity_weighting_function(double xsectioninpb, double kfactor, double filterefficiency, double N){
+	
+//	double xs;
+//	double k;
+//	double eff_filter;
+//	double N;
+//	double extra weight;
+//
+//	extra_weight =  (xs*k*eff_filter)/N; //formula for extra luminosity weighting
+
+//}
+
+
+double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
+// function for calculatig Centrality for Z boson
+// Z* = |eta_Z-(eta_j1+eta_j2)/2)/|Delta(eta_jj)| (where Delta(eta_jj) is the pseudorapidity separation	
+
+	// to Calculate Z* need:
+ 	// double DeltaRapidity - already calculated see function double DeltaRapidity
+	double Z_rapidity = Vector1->Eta(); // Z boson rapidity
+	double j1_rapidity = Vector2->Eta();// jet 1 rapidity
+	double j2_rapidity = Vector3->Eta();// jet 2 rapidity	
+
+	double sum1 = Z_rapidity - (j1_rapidity + j2_rapidity)/2; // sum 1 to break things up
+
+	// calculate absoulute values:
+	double absval_sum1 = sqrt(pow(sum1,2)); // absolute value of sum 1
+	double absval_DeltaRapidity = sqrt(pow(DeltaRapidity(Vector2, Vector3),2)); // absolute value of rapidity separation
+
+
+
+	// calculate Centrality
+	double Centrality = absval_sum1/absval_DeltaRapidity;
+	return Centrality;
+
+}
+
+
 
 #endif

@@ -1,6 +1,10 @@
 #ifndef Histo_Book_Definitions_AutoGen_Custom_h
 #define Histo_Book_Definitions_AutoGen_Custom_h
 
+/// ------------------- TITLE ---------------- ///
+
+/// ------------------- FunctionName:Comment ---------------- ///
+
 /// ------------------- GENERIC ---------------- ///
 
 // -- Distance in R space between two detections (ljet, elec, muon, etc)
@@ -49,6 +53,54 @@ TH1F	*h_pT_balance_3_EXCEPT; // EXCEPT VERSION
 
 virtual void Book_pT_balance_3(int bins, double min, double max); // SEARCH VERSION
 TH1F	*h_pT_balance_3; // SEARCH VERSION
+
+
+// -- Centrality of pseudorapidity of Z boson between two leading jets
+double Centrality;
+
+virtual void Book_Centrality_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_Centrality_PRE; // PRE VERSION
+
+virtual void Book_Centrality_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_Centrality_CONTROL; // CONTROL VERSION
+
+virtual void Book_Centrality_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_Centrality_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_Centrality(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_Centrality; // SEARCH VERSION
+
+
+// -- Rapidity of a dijet pair
+double RapidityDijet;
+
+virtual void Book_RapidityDijet_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_RapidityDijet_PRE; // PRE VERSION
+
+virtual void Book_RapidityDijet_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_RapidityDijet_CONTROL; // CONTROL VERSION
+
+virtual void Book_RapidityDijet_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_RapidityDijet_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_RapidityDijet(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_RapidityDijet; // SEARCH VERSION
+
+
+// -- Rapidity of a dilepton pair
+double RapidityDilepton;
+
+virtual void Book_RapidityDilepton_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_RapidityDilepton_PRE; // PRE VERSION
+
+virtual void Book_RapidityDilepton_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_RapidityDilepton_CONTROL; // CONTROL VERSION
+
+virtual void Book_RapidityDilepton_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_RapidityDilepton_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_RapidityDilepton(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_RapidityDilepton; // SEARCH VERSION
 
 
 /// ------------------- ELECTRONS ---------------- ///
