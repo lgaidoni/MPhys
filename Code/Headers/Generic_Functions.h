@@ -208,6 +208,19 @@ void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType,
 
 }
 
+void QuickDrawOverlayAll(string path1, string path2, string AnalysisType1, string AnalysisType2) {
+
+	TFile *file1 = new TFile(path1.c_str());
+	TFile *file2 = new TFile(path2.c_str());
+
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_ljet_1_mass", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "DeltaR", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "pT_balance", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_p4_Pt", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_1_p4_Pt", AnalysisType1.c_str(), AnalysisType2.c_str());
+
+}
+
 //This Fucntion will calculate invariant mass of two TLorentzVectors
 double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
