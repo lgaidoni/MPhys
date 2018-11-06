@@ -1,6 +1,6 @@
 // This is the analysis file for VBF process for a Z boson decaying to mu mu 
-#ifndef Zmumu2Jets_Analysis_h
-#define Zmumu2Jets_Analysis_h
+#ifndef Zmumu_Analysis_h
+#define Zmumu_Analysis_h
 
 
 ///--------------------- ORDER OF OPERATIONS ---------------------------///
@@ -15,7 +15,7 @@
 
 // This function will book all relevant histograms
 
-void MC_Analysis::Zmumu2Jets_BookHistos() {
+void MC_Analysis::Zmumu_BookHistos() {
 
 	double cone_min = -11.5;
 	double cone_max = -10.5;
@@ -96,7 +96,7 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 
 // Pre-Selection cut functions (dummy cuts)
 // Cuts return bool, for ease in if statements
-bool MC_Analysis::Zmumu2Jets_InitialCut() {
+bool MC_Analysis::Zmumu_InitialCut() {
 
 	// Set conditions
 	bool two_muons = false;
@@ -126,7 +126,7 @@ bool MC_Analysis::Zmumu2Jets_InitialCut() {
 }
 
 // This function will generate physics variables, put them in a vector, and return said vector
-void MC_Analysis::Zmumu2Jets_GenerateVariables() {
+void MC_Analysis::Zmumu_GenerateVariables() {
 
 	// Invariant Mass
 	muon_0_muon_1_mass = InvariantMass(muon_0_p4, muon_1_p4);
@@ -148,10 +148,9 @@ void MC_Analysis::Zmumu2Jets_GenerateVariables() {
 }
 
 // This function will fill the histograms that need to be filled BEFORE initial cuts are made
-void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
+void MC_Analysis::Zmumu_FillAllData_PreCut() {
 
 	#include "_FillAllData_PreCut.h"
-
 
 	//Invariant mass
 	h_muon_0_muon_1_mass_PRE->Fill(muon_0_muon_1_mass); // 2 muons
@@ -175,7 +174,7 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 // Analysis starts here
 // Cuts return bool, for ease in if statements
 // Selection cut functions (more sophistocated cuts)
-bool MC_Analysis::Zmumu2Jets_Cut() {
+bool MC_Analysis::Zmumu_Cut() {
 
 	// Initialise bool conditions
 	bool Z_mass_condition = false;
@@ -201,8 +200,8 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 
 	// EXTRA cuts. not from any source.
 	// ptvarcone required to be less than 0.1, high momentum suggests non-isolated events which we are not interested in
-	if (muon_0_iso_ptvarcone20 < 100000) ptvarcone_20 = true; 
-	if (muon_0_iso_ptvarcone40 < 100000) ptvarcone_40 = true; 
+	if (muon_0_iso_ptvarcone20 < 0.1) ptvarcone_20 = true; 
+	if (muon_0_iso_ptvarcone40 < 0.1) ptvarcone_40 = true; 
 
 	//If the conditions are met, don't cut
 	if (leading_jets_invariant_mass && ljet_0_pt_greater && ljet_1_pt_greater && pT_balance_limit && Z_mass_condition && combined_lepton_pt && ptvarcone_20 && ptvarcone_40) return false;//   
@@ -220,7 +219,7 @@ bool MC_Analysis::Zmumu2Jets_Cut() {
 //Returns bool, for ease of use in if statements
 // REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7 Table 1
 
-bool MC_Analysis::Zmumu2Jets_SearchCut() {
+bool MC_Analysis::Zmumu_SearchCut() {
 
 	//Setting up conditions
 	bool cut_pass = false;
@@ -228,7 +227,7 @@ bool MC_Analysis::Zmumu2Jets_SearchCut() {
 	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	//Condition Checking
-	if (Zmumu2Jets_Cut() == false) cut_pass = true;
+	if (Zmumu_Cut() == false) cut_pass = true;
 	if (pT_balance < 0.15) pT_balance_limit = true; // p_T balance required to be less than 0.15
 
 	//If the conditions are met, don't cut
@@ -242,14 +241,14 @@ bool MC_Analysis::Zmumu2Jets_SearchCut() {
 //This function will determine if event is cut for the control
 //Returns bool, for ease of use in if statements
 // REF: ATLAS doi:10.1007/JHEP04(2014)031: search region cuts from Section 6, page 7 Table 1
-bool MC_Analysis::Zmumu2Jets_ControlCut() {
+bool MC_Analysis::Zmumu_ControlCut() {
 
 	//Setting up conditions
 	bool cut_pass = false;
 	bool pT_balance_3_limit = false;
 
 	//Condition Checking
-	if (Zmumu2Jets_Cut() == false) cut_pass = true;
+	if (Zmumu_Cut() == false) cut_pass = true;
 	if (pT_balance_3 < 0.15) pT_balance_3_limit = true; // p_T balance_Three required to be less than 0.15
 
 	//If the conditions are met, don't cut
@@ -262,11 +261,24 @@ bool MC_Analysis::Zmumu2Jets_ControlCut() {
 
 
 //This function will fill all the histograms after cuts are made
-void MC_Analysis::Zmumu2Jets_FillAllData_PostCut() {
+void MC_Analysis::Zmumu_FillAllData_PostCut() {
 	
 	#include "_FillAllData_PostCut.h"
 
+	// pt cone histograms
+	h_muon_0_iso_ptcone20->Fill(muon_0_iso_ptcone20);
+	h_muon_0_iso_ptcone30->Fill(muon_0_iso_ptcone30);
+	h_muon_0_iso_ptcone40->Fill(muon_0_iso_ptcone40);
 
+	// ptvar cone histograms
+	h_muon_0_iso_ptvarcone20->Fill(muon_0_iso_ptvarcone20);
+	h_muon_0_iso_ptvarcone30->Fill(muon_0_iso_ptvarcone30);
+	h_muon_0_iso_ptvarcone40->Fill(muon_0_iso_ptvarcone40);
+
+	// topoet cone histograms
+	h_muon_0_iso_topoetcone20->Fill(muon_0_iso_topoetcone20);
+	h_muon_0_iso_topoetcone30->Fill(muon_0_iso_topoetcone30);
+	h_muon_0_iso_topoetcone40->Fill(muon_0_iso_topoetcone40);
 
 	// muon 0 momentum
 	h_muon_0_p4_Pt->Fill(muon_0_p4->Pt());
@@ -290,7 +302,7 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PostCut() {
 }
 
 //This function will fill all the histograms after cuts are made
-void MC_Analysis::Zmumu2Jets_FillAllData_ControlCut() {
+void MC_Analysis::Zmumu_FillAllData_ControlCut() {
 	
 	#include "_FillAllData_ControlCut.h"
 
@@ -314,10 +326,10 @@ void MC_Analysis::Zmumu2Jets_FillAllData_ControlCut() {
 
 // Histograms draw everything that belongs to TLorentzVector automatically except cones, and the ones we define - our "Custom" ones, all of which are defined below.
 // This functinon will Draw all the histograms, and write them to a file
-void MC_Analysis::Zmumu2Jets_DrawHistos() {
+void MC_Analysis::Zmumu_DrawHistos() {
 
 	TFile *Histograms;
-	string ROOTFilePath = "../../Root-Files/Zmumu2Jets_Histograms.root";
+	string ROOTFilePath = "../../Root-Files/Zmumu_Histograms.root";
 
 	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
 	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
@@ -363,8 +375,8 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
   
 	// pT balance
-	DrawHistogram(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_pT_balance_3, "h_pT_balance_3", "h_pT_balance_3_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_"  + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_pT_balance_3, "h_pT_balance_3", "h_pT_balance_3_" + AnalysisType , "p_T^{balance,3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance,3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_"  + AnalysisType +  ".pdf", AnalysisType);
 	
 
 }
