@@ -17,6 +17,7 @@ void Zee2Jets_Zee_Combo_AnalysisStart() {
 	gROOT->ProcessLine("ZeeAnalysis->Loop()");
 	gROOT->ProcessLine("ZeeAnalysis->Zee_DrawHistos()");
 
-	gROOT->ProcessLine("QuickDrawOverlayAll(\"~/Root-Files/Zee2Jets_Histograms.root\",\"~/Root-Files/Zee_Histograms.root\",\"Zee2Jets\",\"Zee\")");
+	//gROOT->ProcessLine("QuickDrawOverlayAll(\"~/Root-Files/Zee2Jets_Histograms.root\",\"~/Root-Files/Zee_Histograms.root\",\"Zee2Jets\",\"Zee\")");
+	gROOT->ProcessLine("Zee2Jets_Zee_Overlay()");
 
 }

@@ -51,31 +51,31 @@ muon1found = 0
 tau0found = 0
 tau1found = 0
 
-def AnalysisAutoGen(InputTLorentzName, DesiredTLorentzName, Units):
+def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 	if InputTLorentzName == DesiredTLorentzName:
 		#To fill the _BookHistos Function inside SOMETHING_Analysis.h
 		_BookHistos.write("\t//Histogram Bookings for " + leafName + "_" + TLorentzName + "\n")
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
-		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_CONTROL(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n\n")
-		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_EXCEPT(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n\n")
+		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_CONTROL(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
+		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_EXCEPT(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_PRE(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n\n")
 
 		#To fill the _FillAllData_PreCut Function inside SOMETHING_Analysis.h
 		_FillAllData_PreCut.write("\t//Pre-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_PreCut.write("\th_" + leafName + "_" + TLorentzName + "_PRE->Fill(" + leafName + "->" + TLorentzName + "());\n\n")
+		_FillAllData_PreCut.write("\th_" + leafName + "_" + TLorentzName + "_PRE->Fill(" + leafName + "->" + TLorentzName + "(), weight_total);\n\n")
 
 		#To fill the ControlCut section inside SOMETHING_Analysis.h
 		_FillAllData_ControlCut.write("\t//Control-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_ControlCut.write("\th_" + leafName + "_" + TLorentzName + "_CONTROL->Fill(" + leafName + "->" + TLorentzName + "());\n\n")
+		_FillAllData_ControlCut.write("\th_" + leafName + "_" + TLorentzName + "_CONTROL->Fill(" + leafName + "->" + TLorentzName + "(), weight_total);\n\n")
 
 		#To fill the PostCut Section inside SOMETHING_Analysis.h
 		_FillAllData_PostCut.write("\t//Post-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_PostCut.write("\th_" + leafName + "_" + TLorentzName + "->Fill(" + leafName + "->" + TLorentzName + "());\n\n")
+		_FillAllData_PostCut.write("\th_" + leafName + "_" + TLorentzName + "->Fill(" + leafName + "->" + TLorentzName + "(), weight_total);\n\n")
 
 		#To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 		_DrawHistos.write("\t//Histogram Draw (Quiet) Functions for " + leafName + "_" + TLorentzName + "\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + ", \"h_" + leafName + "_" + TLorentzName + "\", \"h_" + leafName + "_" + TLorentzName + "_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_\" + AnalysisType + \".pdf\", AnalysisType);\n")
-		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_PRE, \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType + \".pdf\", AnalysisType);\n\n")
+		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_PRE, \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType + \".pdf\", AnalysisType);\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + AnalysisType + \".pdf\", AnalysisType);\n\n")
 
 
@@ -116,20 +116,20 @@ for line in MC_Analysis:
 				Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "(int bins, double min, double max) {\n")
 				Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + " = new TH1F(\"h_" + leafName + "_" + TLorentzName + "\",\"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("\t}\n")
-				Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "_CONTROL(int bins, double min, double max) {")
+				Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "_CONTROL(int bins, double min, double max) {\n")
 				Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_CONTROL = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_CONTROL\",\"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("\t}\n")
-				Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "_EXCEPT(int bins, double min, double max) {")
+				Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "_EXCEPT(int bins, double min, double max) {\n")
 				Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_EXCEPT = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_EXCEPT\",\"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("\t}\n")
 				Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "_PRE(int bins, double min, double max) {\n")
 				Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_PRE = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_PRE\",\"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("\t}\n")
 
-				AnalysisAutoGen(TLorentzName, "Pt", ";Momentum [GeV/c^{2}];Entries")
-				AnalysisAutoGen(TLorentzName, "Phi", ";;Entries")
-				AnalysisAutoGen(TLorentzName, "Eta", ";;Entries")
-				AnalysisAutoGen(TLorentzName, "Rapidity", ";;Entries")
+				AnalysisAutoGen_TLorentz(TLorentzName, "Pt", ";Momentum [GeV/c^{2}];Entries")
+				AnalysisAutoGen_TLorentz(TLorentzName, "Phi", ";;Entries")
+				AnalysisAutoGen_TLorentz(TLorentzName, "Eta", ";;Entries")
+				AnalysisAutoGen_TLorentz(TLorentzName, "Rapidity", ";;Entries")
 
 
 			Histo_Definitions.write("\t/// ---- End of booking functions and declarations for TLorentzVector " + leafName + " ---- ///\n\n")
@@ -221,13 +221,13 @@ for line in MC_Analysis:
 			Histo_Book_Functions_AutoGen.write("\th_" + leafName + " = new TH1F(\"h_" + leafName + "\", \"\", bins, min, max);\n")
 			Histo_Book_Functions_AutoGen.write("}\n")
 			Histo_Book_Functions_AutoGen.write("void MC_Analysis::Book_" + leafName + "_CONTROL(int bins, double min, double max) {\n")
-			Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_CONTROL = new TH1F(\"h_" + leafName + "\", \"\", bins, min, max);\n")
+			Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_CONTROL = new TH1F(\"h_" + leafName + "_CONTROL\", \"\", bins, min, max);\n")
 			Histo_Book_Functions_AutoGen.write("}\n\n")
 			Histo_Book_Functions_AutoGen.write("void MC_Analysis::Book_" + leafName + "_EXCEPT(int bins, double min, double max) {\n")
-			Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_EXCEPT = new TH1F(\"h_" + leafName + "\", \"\", bins, min, max);\n")
+			Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_EXCEPT = new TH1F(\"h_" + leafName + "_EXCEPT\", \"\", bins, min, max);\n")
 			Histo_Book_Functions_AutoGen.write("}\n\n")
 			Histo_Book_Functions_AutoGen.write("void MC_Analysis::Book_" + leafName + "_PRE(int bins, double min, double max) {\n")
-			Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_PRE = new TH1F(\"h_" + leafName + "\", \"\", bins, min, max);\n")
+			Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_PRE = new TH1F(\"h_" + leafName + "_PRE\", \"\", bins, min, max);\n")
 			Histo_Book_Functions_AutoGen.write("}\n\n")
 			
 

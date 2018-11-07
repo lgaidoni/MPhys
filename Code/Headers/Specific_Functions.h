@@ -13,7 +13,6 @@ void Zee2Jets_Zmumu2Jets_Overlay() {
 	QuickDrawHistogram_Overlay_Two(file1,file2, "pT_balance", "Zee2Jets", "Zmumu2Jets");
 	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_p4_Pt", "Zee2Jets", "Zmumu2Jets");
 	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_1_p4_Pt", "Zee2Jets", "Zmumu2Jets");
-	QuickDrawHistogram_Overlay_Two(file1,file2, "elec_0_elec_1_mass", "Zee2Jets", "Zmumu2Jets");
 }
 
 //This function will draw all the desired combined histograms for Zee2Jets and Zee
@@ -28,6 +27,7 @@ void Zee2Jets_Zee_Overlay() {
 	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_p4_Pt", "Zee2Jets", "Zee");
 	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_1_p4_Pt", "Zee2Jets", "Zee");
 	QuickDrawHistogram_Overlay_Two(file1,file2, "elec_0_elec_1_mass", "Zee2Jets", "Zee");
+	QuickDrawHistogram_Overlay_Two(file1,file2, "elec_0_elec_1_pt", "Zee2Jets", "Zee");
 }
 
 
