@@ -29,8 +29,15 @@ void MC_Analysis::Zee_BookHistos() {
 
 	///------------------------------------ elec_0 --------------------------------------///
 	//ptvar cone histograms
-	Book_elec_0_iso_ptvarcone20(bins, 0, 100000);
-	Book_elec_0_iso_ptvarcone40(bins, 0, 100000);
+	Book_elec_0_iso_ptvarcone20(bins, 0, 20000);
+	Book_elec_0_iso_ptvarcone20_PRE(bins, 0, 20000);
+	Book_elec_0_iso_ptvarcone20_CONTROL(bins, 0, 20000);
+	Book_elec_0_iso_ptvarcone20_EXCEPT(bins, 0, 20000);
+
+	Book_elec_0_iso_ptvarcone40(bins, 0, 20000);
+	Book_elec_0_iso_ptvarcone40_PRE(bins, 0, 20000);
+	Book_elec_0_iso_ptvarcone40_CONTROL(bins, 0, 20000);
+	Book_elec_0_iso_ptvarcone40_EXCEPT(bins, 0, 20000);
 
 	//topoet cone histograms
 	Book_elec_0_iso_topoetcone20(bins, 0, 800000);
@@ -50,26 +57,31 @@ void MC_Analysis::Zee_BookHistos() {
 	Book_elec_0_elec_1_pt(bins, 0, 200);
 
 	///---------------------------------- Delta R ----------------------------------------///
-	//Delta R
+
 	Book_DeltaR(bins, 0, 10);
 	Book_DeltaR_PRE(bins, 0, 10);
 	Book_DeltaR_CONTROL(bins, 0, 10);
 
 	///---------------------------------ljet_0 & ljet_1-----------------------------------///
+
 	Book_ljet_0_ljet_1_mass_EXCEPT(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass_CONTROL(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
 	Book_ljet_0_ljet_1_mass(bins, 0, 1500);
 
-	///------------------ pT balance for elec_0 & elec_1 and ljet_0 & ljet_1-----------------///
+	///------------------ pT balance for elec_0 & elec_1 ljet_0 & ljet_1-----------------///
 
 	Book_pT_balance_PRE(bins, 0, 1);
 	Book_pT_balance(bins, 0, 1);
 	Book_pT_balance_CONTROL(bins, 0, 1);
+	Book_pT_balance_EXCEPT(bins, 0, 1);
 
-	///------------------ pT balance 3 for elec_0 & elec_1 and ljet_0 & ljet_1 & ljet_2 -----------------///
+	///------------------ pT balance for elec_0 & elec_1 ljet_0 & ljet_1 & ljet_2 -----------------///
 
+	Book_pT_balance_3_PRE(bins, 0, 1);
+	Book_pT_balance_3(bins, 0, 1);
 	Book_pT_balance_3_CONTROL(bins, 0, 1);
+	Book_pT_balance_3_EXCEPT(bins, 0, 1);
 }
 
 
@@ -117,16 +129,17 @@ void MC_Analysis::Zee_GenerateVariables() {
 	// p_T_Balance_3
 	pT_balance_3 = pTBalanceThreeCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
-	// get data from csv file for Luminosity weighting, from LepUniv_xsec.csv # Z+jets, # e, Zee 
-	//int ID[14] = {364116,364119,364122,364125,364114,364117,364120,364123,364126,364127,364115,364118,364121,364124};// contains all the ID's for Zee data sets
-	// need to turn the data back into doubles to then use luminosity_weighting_function
-	//extra_weighting = luminosity_weighting_function();
+
 }
 
 // This function will fill the histograms that need to be filled before cuts are made
 void MC_Analysis::Zee_FillAllData_PreCut() {
 
 	#include "_FillAllData_PreCut.h"
+
+	//ptvarcones
+	h_elec_0_iso_ptvarcone20_PRE->Fill(elec_0_iso_ptvarcone20, weight_total);
+	h_elec_0_iso_ptvarcone40_PRE->Fill(elec_0_iso_ptvarcone40, weight_total);
 
 	//Invariant mass
 	h_elec_0_elec_1_mass_PRE->Fill(elec_0_elec_1_mass,weight_total);
@@ -291,7 +304,7 @@ void MC_Analysis::Zee_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		double value;//Fill the EXCEPT histogram for ptvarcone20
+		h_elec_0_iso_ptvarcone20_EXCEPT->Fill(elec_0_iso_ptvarcone20,weight_total);
 
 	}
 
@@ -306,7 +319,37 @@ void MC_Analysis::Zee_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		double value;//Fill the EXCEPT histogram for ptvarcone40
+		h_elec_0_iso_ptvarcone40_EXCEPT->Fill(elec_0_iso_ptvarcone40,weight_total);
+
+	}
+
+	if(Z_mass_condition && 			// Z Boson Mass Cut
+	   combined_lepton_pt && 		// Dilepton Pt Cut
+	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
+	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
+	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
+	   ptvarcone_20 &&			// ptvarcone_20 Cut
+	   ptvarcone_40 && 			// ptvarcone_40 Cut
+	   rap_int_condition			// rapidity interval condition
+	   //pT_balance_limit)			// pT balance limit ABSENT
+	) {
+	
+		h_pT_balance_EXCEPT->Fill(pT_balance, weight_total);
+
+	}
+
+	if(Z_mass_condition && 			// Z Boson Mass Cut
+	   combined_lepton_pt && 		// Dilepton Pt Cut
+	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
+	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
+	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
+	   ptvarcone_20 &&			// ptvarcone_20 Cut
+	   ptvarcone_40 && 			// ptvarcone_40 Cut ABSENT
+	   !(rap_int_condition)			// rapidity interval condition
+	   //pT_balance_3_limit)		// pT balance 3 limit
+	) {
+	
+		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, weight_total);
 
 	}
 
@@ -343,6 +386,10 @@ void MC_Analysis::Zee_CutAndFill() {
 
 		#include "_FillAllData_ControlCut.h"
 
+		//ptvar cone histograms
+		h_elec_0_iso_ptvarcone20_CONTROL->Fill(elec_0_iso_ptvarcone20,weight_total);
+		h_elec_0_iso_ptvarcone40_CONTROL->Fill(elec_0_iso_ptvarcone40,weight_total);
+
 		//Invariant mass
 		h_elec_0_elec_1_mass_CONTROL->Fill(elec_0_elec_1_mass,weight_total); // two electrons
 		h_ljet_0_ljet_1_mass_CONTROL->Fill(ljet_0_ljet_1_mass,weight_total); // two jets
@@ -376,44 +423,48 @@ void MC_Analysis::Zee_DrawHistos() {
 	#include "_DrawHistos.h"
 
 	//ptvar cone histograms
-	DrawHistogram(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_ptvarcone20_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_ptvarcone40_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_ptvarcone20_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_ptvarcone40_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_iso_ptvarcone20_PRE, h_elec_0_iso_ptvarcone20, h_elec_0_iso_ptvarcone20_CONTROL, h_elec_0_iso_ptvarcone20_EXCEPT, "ptvarcone20 for electron 0", "Pre Cut", "Post Cut", "Control", "Except", "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_ptvarcone20_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_iso_ptvarcone40_PRE, h_elec_0_iso_ptvarcone40, h_elec_0_iso_ptvarcone40_CONTROL, h_elec_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for electron 0", "Pre Cut", "Post Cut", "Control", "Except", "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_ptvarcone40_" + AnalysisType + "_Combo.pdf", AnalysisType);	
 
 	//topoet cone histograms
 	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_topoetcone20_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_elec_0_iso_topoetcone40_" + AnalysisType + ".pdf", AnalysisType);
 
 	//combined lepton momentum
-	DrawHistogram(h_elec_0_elec_1_pt_PRE, "h_elec_0_elec_1_pt_PRE", "h_elec_0_elec_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined elec system elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_elec_0_elec_1_pt, "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt_" + AnalysisType , "Transverse momentum of combined elec system elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_elec_1_pt_PRE, h_elec_0_elec_1_pt, h_elec_0_elec_1_pt_CONTROL, h_elec_0_elec_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre-Cut", "Post Cut", "Control", "Except", "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram_Quiet(h_elec_0_elec_1_pt_PRE, "h_elec_0_elec_1_pt_PRE", "h_elec_0_elec_1_pt_PRE_" + AnalysisType , ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_elec_0_elec_1_pt, "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt_" + AnalysisType , ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_elec_1_pt_PRE, h_elec_0_elec_1_pt, h_elec_0_elec_1_pt_CONTROL, h_elec_0_elec_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_elec_0_elec_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);	
 
-	//Elec 0 & Elec 1 invariant mass histograms
-	DrawHistogram(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_" + AnalysisType , "Invariant mass of elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType , "Invariant mass of elec_0 and elec_1 from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_elec_1_mass_PRE, h_elec_0_elec_1_mass, h_elec_0_elec_1_mass_CONTROL, h_elec_0_elec_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	//Elec 0 & Elec 1 histograms
+	DrawHistogram_Quiet(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE_" + AnalysisType , ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType , ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_elec_0_elec_1_mass_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_elec_1_mass_PRE, h_elec_0_elec_1_mass, h_elec_0_elec_1_mass_CONTROL, h_elec_0_elec_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, true, "h_elec_0_elec_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 	//Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType , "\\Delta R PRE - " + AnalysisType + ";\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_Zmumu2Jets.pdf", AnalysisType);
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , "\\Delta R SEARCH - " + AnalysisType + ";\\Delta R;Entries", 600, 400, false, "h_DeltaR_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram_Quiet(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType , ";\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_Zmumu2Jets.pdf", AnalysisType);
+	DrawHistogram_Quiet(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , ";\\Delta R;Entries", 600, 400, false, "h_DeltaR_Zmumu2Jets.pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR_" + AnalysisType, ";Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 	//leading jets invariant masses
-	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_ljet_1_mass_PRE, h_ljet_0_ljet_1_mass, h_ljet_0_ljet_1_mass_CONTROL, h_ljet_0_ljet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram_Quiet(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType , ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_ljet_1_mass_PRE, h_ljet_0_ljet_1_mass, h_ljet_0_ljet_1_mass_CONTROL, h_ljet_0_ljet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 	// pT balance
-	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_pT_balance_CONTROL, "h_pT_balance_CONTROL", "h_pT_balance_CONTROL_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
-
-	// pT balance 3 - only filled in control scenario (see ATLAS paper Table 1.)
-	DrawHistogram(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , "p_T^{balance, 3} for transverse momentum of ljet_0, ljet_1, ljet_2 and elec_0 and elec_1 with further cuts from " + AnalysisType + " data set;p_T^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , ";p_{T}^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , ";p_{T}^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", "h_pT_balance_" + AnalysisType, ";pT Balance;Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	
+	// pT balance 3
+	DrawHistogram_Quiet(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , ";p_{T}^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , ";p_{T}^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", "h_pT_balance_3_" + AnalysisType, ";pT Balance 3;Entries", 600, 400, false, "h_pT_balance_3_" + AnalysisType + "_Combo.pdf", AnalysisType);	
 
 	//Leading Jet Histograms
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre-Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_0_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre-Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_1_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_0_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_1_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 }
 
