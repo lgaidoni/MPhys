@@ -175,22 +175,22 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 	#include "_FillAllData_PreCut.h"
 
 	//Invariant mass
-	h_muon_0_muon_1_mass_PRE->Fill(muon_0_muon_1_mass); // 2 muons
-	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass); // 2 jets
+	h_muon_0_muon_1_mass_PRE->Fill(muon_0_muon_1_mass,weight_total); // 2 muons
+	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass,weight_total); // 2 jets
 
 	// Combined
-	h_RapidityDilepton_PRE->Fill(RapidityDilepton);// dilepton rapidity
-	h_RapidityDijet_PRE->Fill(RapidityDijet);// dijet rapidity	
-	h_muon_0_muon_1_pt_PRE->Fill(muon_0_muon_1_pt); // muon transverse momentum
+	h_RapidityDilepton_PRE->Fill(RapidityDilepton,weight_total);// dilepton rapidity
+	h_RapidityDijet_PRE->Fill(RapidityDijet,weight_total);// dijet rapidity	
+	h_muon_0_muon_1_pt_PRE->Fill(muon_0_muon_1_pt,weight_total); // muon transverse momentum
 
 	// Delta R
-	h_DeltaR_PRE->Fill(DeltaR);
+	h_DeltaR_PRE->Fill(DeltaR,weight_total);
 
 	// pT balance PRE
-	h_pT_balance_PRE->Fill(pT_balance); // 2 muons 2 jets
+	h_pT_balance_PRE->Fill(pT_balance,weight_total); // 2 muons 2 jets
 
 	// Centrality
-	h_Centrality_PRE->Fill(Centrality);
+	h_Centrality_PRE->Fill(Centrality,weight_total);
 
 }
 
@@ -264,7 +264,7 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_muon_0_muon_1_mass_EXCEPT->Fill(muon_0_muon_1_mass);//Fill the EXCEPT histogram for mass
+		h_muon_0_muon_1_mass_EXCEPT->Fill(muon_0_muon_1_mass,weight_total);//Fill the EXCEPT histogram for mass
 
 	}
 
@@ -279,7 +279,7 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_muon_0_muon_1_pt_EXCEPT->Fill(muon_0_muon_1_pt);//Fill the EXCEPT histogram for combined lepton pt
+		h_muon_0_muon_1_pt_EXCEPT->Fill(muon_0_muon_1_pt,weight_total);//Fill the EXCEPT histogram for combined lepton pt
 
 	}
 
@@ -294,7 +294,7 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt());//Fill the EXCEPT histogram for ljet_0_pt
+		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(),weight_total);//Fill the EXCEPT histogram for ljet_0_pt
 
 	}
 
@@ -309,7 +309,7 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt());//Fill the EXCEPT histogram for ljet_1_pt
+		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(),weight_total);//Fill the EXCEPT histogram for ljet_1_pt
 
 	}
 
@@ -324,7 +324,7 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_ljet_0_ljet_1_mass_EXCEPT->Fill(ljet_0_ljet_1_mass);//Fill the EXCEPT histogram for leading jets combined invariant mass
+		h_ljet_0_ljet_1_mass_EXCEPT->Fill(ljet_0_ljet_1_mass,weight_total);//Fill the EXCEPT histogram for leading jets combined invariant mass
 
 	}
 
@@ -363,32 +363,32 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 		#include "_FillAllData_PostCut.h"
 
 		//ptvar cone histograms
-		h_muon_0_iso_ptvarcone20->Fill(muon_0_iso_ptvarcone20);
-		h_muon_0_iso_ptvarcone40->Fill(muon_0_iso_ptvarcone40);
+		h_muon_0_iso_ptvarcone20->Fill(muon_0_iso_ptvarcone20,weight_total);
+		h_muon_0_iso_ptvarcone40->Fill(muon_0_iso_ptvarcone40,weight_total);
 
 		//topoet cone histograms
-		h_muon_0_iso_topoetcone20->Fill(muon_0_iso_topoetcone20);
-		h_muon_0_iso_topoetcone40->Fill(muon_0_iso_topoetcone40);
+		h_muon_0_iso_topoetcone20->Fill(muon_0_iso_topoetcone20,weight_total);
+		h_muon_0_iso_topoetcone40->Fill(muon_0_iso_topoetcone40,weight_total);
 
 		//Invariant mass
-		h_muon_0_muon_1_mass->Fill(muon_0_muon_1_mass); // two muons
-		h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass); // two jets
+		h_muon_0_muon_1_mass->Fill(muon_0_muon_1_mass,weight_total); // two muons
+		h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass,weight_total); // two jets
 		
 		//Combined lepton
-		h_RapidityDilepton->Fill(RapidityDilepton);// (muon) dilepton rapidity
-		h_RapidityDijet->Fill(RapidityDijet);// (jet) dijet rapidity
-		h_muon_0_muon_1_pt->Fill(muon_0_muon_1_pt);// pT
+		h_RapidityDilepton->Fill(RapidityDilepton,weight_total);// (muon) dilepton rapidity
+		h_RapidityDijet->Fill(RapidityDijet,weight_total);// (jet) dijet rapidity
+		h_muon_0_muon_1_pt->Fill(muon_0_muon_1_pt,weight_total);// pT
 
 		//Delta R for two muons
-		h_DeltaR->Fill(DeltaR);
+		h_DeltaR->Fill(DeltaR,weight_total);
 
 		// pT balance
-		h_pT_balance->Fill(pT_balance);	
+		h_pT_balance->Fill(pT_balance,weight_total);	
 
 		if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN WHY DID YOU DO THIS TO ME" << endl;
 
 		// Centrality
-		h_Centrality->Fill(Centrality);
+		h_Centrality->Fill(Centrality,weight_total);
 
 
 	}
@@ -398,25 +398,25 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 		#include "_FillAllData_ControlCut.h"
 
 		//Invariant mass
-		h_muon_0_muon_1_mass_CONTROL->Fill(muon_0_muon_1_mass); // two muons
-		h_ljet_0_ljet_1_mass_CONTROL->Fill(ljet_0_ljet_1_mass); // two jets
+		h_muon_0_muon_1_mass_CONTROL->Fill(muon_0_muon_1_mass,weight_total); // two muons
+		h_ljet_0_ljet_1_mass_CONTROL->Fill(ljet_0_ljet_1_mass,weight_total); // two jets
 		
 		//Combined 
-		h_RapidityDilepton_CONTROL->Fill(RapidityDilepton); // lepton (muon) dilepton rapidity
-		h_RapidityDijet_CONTROL->Fill(RapidityDijet); // ljet dijet rapidity
-		h_muon_0_muon_1_pt_CONTROL->Fill(muon_0_muon_1_pt); // lepton (muon) pT
+		h_RapidityDilepton_CONTROL->Fill(RapidityDilepton,weight_total); // lepton (muon) dilepton rapidity
+		h_RapidityDijet_CONTROL->Fill(RapidityDijet,weight_total); // ljet dijet rapidity
+		h_muon_0_muon_1_pt_CONTROL->Fill(muon_0_muon_1_pt,weight_total); // lepton (muon) pT
 
 		//Delta R for two muons
-		h_DeltaR_CONTROL->Fill(DeltaR);
+		h_DeltaR_CONTROL->Fill(DeltaR,weight_total);
 		
 		// pT balance CONTROL
-		h_pT_balance_CONTROL->Fill(pT_balance);
+		h_pT_balance_CONTROL->Fill(pT_balance,weight_total);
 		
 		// pT balance 3 CONTROL
-		h_pT_balance_3_CONTROL->Fill(pT_balance_3);
+		h_pT_balance_3_CONTROL->Fill(pT_balance_3,weight_total);
 		
 		// Centrality CONTROL
-		h_Centrality_CONTROL->Fill(Centrality);
+		h_Centrality_CONTROL->Fill(Centrality,weight_total);
 
 	}
 
@@ -495,7 +495,7 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	// pT balance 3 - only filled in control scenario (see ATLAS paper Table 1.)
 	DrawHistogram(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , "p_T^{balance, 3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
 
-	// Centrality
+	// Centrality histograms
 	DrawHistogram(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with initial selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_Centrality, "h_Centrality", "h_Centrality_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with further selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
