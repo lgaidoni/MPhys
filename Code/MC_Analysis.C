@@ -39,7 +39,7 @@ void MC_Analysis::Loop() {
    ///------------------------------- DATA EXISTANCE CHECKS ---------------------------///
 
    if (fChain == 0) return;
-   Long64_t nentries = fChain->GetEntriesFast();
+   Long64_t nentries = fChain->GetEntries();
    Long64_t nbytes = 0, nb = 0;
 
    ///---------------------------------- ACTUAL FOR LOOP ------------------------------///
@@ -69,7 +69,7 @@ void MC_Analysis::Loop() {
 	else if (current_indicator == 1) {cout << "                     " << "/"; current_indicator = 2;}
 	else if (current_indicator == 2) {cout << "                     " << "—"; current_indicator = 3;}
 	else if (current_indicator == 3) {cout << "                     " << "\\"; current_indicator = 0;}
-	cout << " " << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%\r";
+	cout << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%\r";
 	cout.flush();
 
       }

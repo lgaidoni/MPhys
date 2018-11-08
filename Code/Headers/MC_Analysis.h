@@ -47,6 +47,7 @@ public :
 
 	/////-------------------------CUSTOM VARIABLE DEFINITIONS-------------------------/////
 	string AnalysisType;
+	string ChainName;
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
@@ -1605,6 +1606,7 @@ public :
    TBranch        *b_weight_total;   //!
 
    MC_Analysis(TTree *tree=0);
+   MC_Analysis(TTree *tree, string analysistype, string chainname);
    MC_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
    MC_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~MC_Analysis();
@@ -1634,6 +1636,23 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
 
    }
    Init(tree);
+}
+
+MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname) : fChain(0) 
+{
+// if parameter tree is not specified (or zero), connect the file
+// used to generate this class and read the Tree.
+   if (tree == 0) {
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+      if (!f || !f->IsOpen()) {
+         f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+      }
+      f->GetObject("NOMINAL",tree);
+
+   }
+   Init(tree);
+   AnalysisType = analysistype;
+   ChainName = chainname;
 }
 
 MC_Analysis::~MC_Analysis()
@@ -2562,6 +2581,8 @@ Int_t MC_Analysis::Cut(Long64_t entry)
 #include "Histo_Book_Functions_AutoGen_Custom.h"
 #include "Generic_Functions.h"
 #include "Specific_Functions.h"
+#include "Chain_Functions.h"
+#include "N_Functions.h"
 
 
 
