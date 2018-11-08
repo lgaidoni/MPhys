@@ -495,7 +495,7 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	// pT balance 3 - only filled in control scenario (see ATLAS paper Table 1.)
 	DrawHistogram(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , "p_T^{balance, 3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
 
-	// Centrality
+	// Centrality histograms
 	DrawHistogram(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with initial selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_Centrality, "h_Centrality", "h_Centrality_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with further selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
