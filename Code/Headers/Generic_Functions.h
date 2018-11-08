@@ -243,9 +243,9 @@ double DeltaRapidity(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 }
 
 //This Function will calculate rapidity of the dilepton pair / dijet pair
-double RapidityDisomethingCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+double RapidityDisomething(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
-	double RapidityDisomething = ((*Vector1)+(*Vector2)).Rapidity();
+	double RapidityDisomething = Vector1->Rapidity() + Vector2->Rapidity();
 	return RapidityDisomething;
 }
 
@@ -400,26 +400,45 @@ double luminosity_weighting_function(vector<double> info, double N, double lumin
 
 }
 
-double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
+double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){ // muon 1 muon 2 ljet 1 ljet 2
 // function for calculatig Centrality for Z boson
 // Z* = |eta_Z-(eta_j1+eta_j2)/2)/|Delta(eta_jj)| (where Delta(eta_jj) is the pseudorapidity separation	
 
+	
 	// to Calculate Z* need:
  	// double DeltaRapidity - already calculated see function double DeltaRapidity
-	double Z_rapidity = Vector1->Eta(); // Z boson rapidity
-	double j1_rapidity = Vector2->Eta();// jet 1 rapidity
-	double j2_rapidity = Vector3->Eta();// jet 2 rapidity	
+	double Z_rapidity = RapidityDisomething(Vector1, Vector2); // Z boson rapidity using muon 4 vectors
+	double j1_rapidity = Vector3->Eta();// jet 1 rapidity
+	double j2_rapidity = Vector4->Eta();// jet 2 rapidity	
 
 	double sum1 = Z_rapidity - (j1_rapidity + j2_rapidity)/2; // sum 1 to break things up
 
 	// calculate absoulute values:
-	double absval_sum1 = sqrt(pow(sum1,2)); // absolute value of sum 1
-	double absval_DeltaRapidity = sqrt(pow(DeltaRapidity(Vector2, Vector3),2)); // absolute value of rapidity separation
+	//double absval_sum1 = sqrt(pow(sum1,2)); // absolute value of sum 1
+	//double absval_DeltaRapidity = sqrt(pow(DeltaRapidity(Vector3, Vector4),2)); // absolute value of rapidity separation of jets
 
 	// calculate Centrality
-	double Centrality = absval_sum1/absval_DeltaRapidity;
+	double Centrality = sum1/DeltaRapidity(Vector3, Vector4);
 	return Centrality;
 
 }
 
+double CentralityCalc2(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
+// Another function for calculatig Centrality for Z boson
+// Z* = y_Z - y_j2 / y_j1 - y_j2	
+
+	// to Calculate Z* need:
+ 	// double DeltaRapidity - already calculated see function double DeltaRapidity
+	double Z_rapidity = RapidityDisomething(Vector1, Vector2); // Z boson rapidity
+	double j1_rapidity = Vector2->Eta();// jet 1 rapidity
+	double j2_rapidity = Vector3->Eta();// jet 2 rapidity	
+
+	double sum1 = Z_rapidity - j2_rapidity; // sum 1 to break things up
+	double sum2 = j1_rapidity - j2_rapidity; // sum 1 to break things up
+
+	// calculate Centrality
+	double Centrality = sum1/sum2;
+	return Centrality;
+
+}
 #endif
