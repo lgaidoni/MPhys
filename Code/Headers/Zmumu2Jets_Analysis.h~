@@ -63,14 +63,14 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	Book_muon_0_muon_1_mass(bins, 0, 200);
 
 	//dilepton rapidity
-	Book_RapidityDilepton_CONTROL(bins, 0, 200);
-	Book_RapidityDilepton_PRE(bins, 0, 200);
-	Book_RapidityDilepton(bins, 0, 200);
+	Book_RapidityDilepton_CONTROL(bins, 0, 4.5);
+	Book_RapidityDilepton_PRE(bins, 0, 4.5);
+	Book_RapidityDilepton(bins, 0, 4.5);
 
 	//diljet rapidity
-	Book_RapidityDijet_CONTROL(bins, 0, 200);
-	Book_RapidityDijet_PRE(bins, 0, 200);
-	Book_RapidityDijet(bins, 0, 200);
+	Book_RapidityDijet_CONTROL(bins, 0, 4.5);
+	Book_RapidityDijet_PRE(bins, 0, 4.5);
+	Book_RapidityDijet(bins, 0, 4.5);
 
 	//dilepton pt
 	Book_muon_0_muon_1_pt_EXCEPT(bins, 0, 200);
