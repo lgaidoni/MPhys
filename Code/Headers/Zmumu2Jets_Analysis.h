@@ -41,19 +41,34 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	//Book_muon_0_iso_etcone40(bins, -12, 1); commented out as have peak at -11: warning not to use data
 
 	//pt cone histograms
+	Book_muon_0_iso_ptcone20_PRE(bins, 0, 800000);
+	Book_muon_0_iso_ptcone40_PRE(bins, 0, 800000);
 	Book_muon_0_iso_ptcone20(bins, 0, 800000);
-	Book_muon_0_iso_ptcone30(bins, 0, 800000);
 	Book_muon_0_iso_ptcone40(bins, 0, 800000);
+	Book_muon_0_iso_ptcone20_CONTROL(bins, 0, 800000);
+	Book_muon_0_iso_ptcone40_CONTROL(bins, 0, 800000);
+	Book_muon_0_iso_ptcone20_EXCEPT(bins, 0, 800000);
+	Book_muon_0_iso_ptcone40_EXCEPT(bins, 0, 800000);
 
 	//ptvar cone histograms
+	Book_muon_0_iso_ptvarcone20_PRE(bins, 0, 800000);
+	Book_muon_0_iso_ptvarcone40_PRE(bins, 0, 800000);
 	Book_muon_0_iso_ptvarcone20(bins, 0, 800000);
-	Book_muon_0_iso_ptvarcone30(bins, 0, 800000);
 	Book_muon_0_iso_ptvarcone40(bins, 0, 800000);
+	Book_muon_0_iso_ptvarcone20_CONTROL(bins, 0, 800000);
+	Book_muon_0_iso_ptvarcone40_CONTROL(bins, 0, 800000);
+	Book_muon_0_iso_ptvarcone20_EXCEPT(bins, 0, 800000);
+	Book_muon_0_iso_ptvarcone40_EXCEPT(bins, 0, 800000);
 
 	//topoet cone histograms
+	Book_muon_0_iso_topoetcone20_PRE(bins, 0, 800000);
+	Book_muon_0_iso_topoetcone40_PRE(bins, 0, 800000);
 	Book_muon_0_iso_topoetcone20(bins, 0, 800000);
-	Book_muon_0_iso_topoetcone30(bins, 0, 800000);
 	Book_muon_0_iso_topoetcone40(bins, 0, 800000);
+	Book_muon_0_iso_topoetcone20_CONTROL(bins, 0, 800000);
+	Book_muon_0_iso_topoetcone40_CONTROL(bins, 0, 800000);
+	Book_muon_0_iso_topoetcone20_EXCEPT(bins, 0, 800000);
+	Book_muon_0_iso_topoetcone40_EXCEPT(bins, 0, 800000);
 
 	///-------------------------------- muon_0 & muon_1 ----------------------------------///
 	//dilepton invariant mass
@@ -95,16 +110,20 @@ void MC_Analysis::Zmumu2Jets_BookHistos() {
 	Book_pT_balance_PRE(bins, 0, 1);
 	Book_pT_balance(bins, 0, 1);
 	Book_pT_balance_CONTROL(bins, 0, 1);
+	Book_pT_balance_EXCEPT(bins, 0, 1);
 
 	///------------------ pT balance 3 for muon_0 & muon_1 and ljet_0 & ljet_1 & ljet_2 -----------------///
 
+	Book_pT_balance_3_PRE(bins, 0, 1);	
+	Book_pT_balance_3(bins, 0, 1);	
+	Book_pT_balance_3_EXCEPT(bins, 0, 1);
 	Book_pT_balance_3_CONTROL(bins, 0, 1);
 
 	///------------------Centrality plot for Z boson inside rapidity interval of ljet_0 & ljet_1 -----------------///
 
-	Book_Centrality_PRE(bins, 0, 20);
-	Book_Centrality(bins, 0, 20);
-	Book_Centrality_CONTROL(bins, 0, 20);
+	Book_Centrality_PRE(bins, -8, 8);
+	Book_Centrality(bins, -8, 8);
+	Book_Centrality_CONTROL(bins, -8, 8);
 
 }
 
@@ -147,10 +166,10 @@ void MC_Analysis::Zmumu2Jets_GenerateVariables() {
 	ljet_0_ljet_1_mass = InvariantMass(ljet_0_p4, ljet_1_p4);
 
 	// Rapidity of dilepton pair
-	RapidityDilepton = RapidityDisomethingCalc(muon_0_p4, muon_1_p4);
+	RapidityDilepton = RapidityDisomething(muon_0_p4, muon_1_p4);
 
 	// Rapidity of dijet pair
-	RapidityDijet = RapidityDisomethingCalc(ljet_0_p4, ljet_1_p4);
+	RapidityDijet = RapidityDisomething(ljet_0_p4, ljet_1_p4);
 
 	//Delta R
 	DeltaR = DeltaRCalc(muon_0_p4, muon_1_p4);
@@ -165,7 +184,7 @@ void MC_Analysis::Zmumu2Jets_GenerateVariables() {
 	pT_balance_3 = pTBalanceThreeCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	// Centrality of Z boson between two leading jets calc using rapidity
-	Centrality = CentralityCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4);
+	Centrality = CentralityCalc2(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4);
 
 }
 
@@ -173,6 +192,18 @@ void MC_Analysis::Zmumu2Jets_GenerateVariables() {
 void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 
 	#include "_FillAllData_PreCut.h"
+
+	// ptcone
+	h_muon_0_iso_ptcone20_PRE->Fill(muon_0_iso_ptcone20, weight_total);
+	h_muon_0_iso_ptcone40_PRE->Fill(muon_0_iso_ptcone40, weight_total);
+
+	//ptvarcones
+	h_muon_0_iso_ptvarcone20_PRE->Fill(muon_0_iso_ptvarcone20, weight_total);
+	h_muon_0_iso_ptvarcone40_PRE->Fill(muon_0_iso_ptvarcone40, weight_total);
+
+	//topoetcone
+	h_muon_0_iso_topoetcone20_PRE->Fill(muon_0_iso_topoetcone20, weight_total);
+	h_muon_0_iso_topoetcone40_PRE->Fill(muon_0_iso_topoetcone40, weight_total);
 
 	//Invariant mass
 	h_muon_0_muon_1_mass_PRE->Fill(muon_0_muon_1_mass,weight_total); // 2 muons
@@ -188,6 +219,9 @@ void MC_Analysis::Zmumu2Jets_FillAllData_PreCut() {
 
 	// pT balance PRE
 	h_pT_balance_PRE->Fill(pT_balance,weight_total); // 2 muons 2 jets
+
+	// pT balance PRE
+	h_pT_balance_3_PRE->Fill(pT_balance_3,weight_total); // 2 muons 2 jets
 
 	// Centrality
 	h_Centrality_PRE->Fill(Centrality,weight_total);
@@ -339,7 +373,7 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		double value;//Fill the EXCEPT histogram for ptvarcone20
+		h_muon_0_iso_ptvarcone20_EXCEPT->Fill(muon_0_iso_ptvarcone20,weight_total);
 
 	}
 
@@ -354,7 +388,37 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		double value;//Fill the EXCEPT histogram for ptvarcone40
+		h_muon_0_iso_ptvarcone40_EXCEPT->Fill(muon_0_iso_ptvarcone40,weight_total);
+
+	}
+
+	if(Z_mass_condition && 			// Z Boson Mass Cut
+	   combined_lepton_pt && 		// Dilepton Pt Cut
+	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
+	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
+	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
+	   ptvarcone_20 &&			// ptvarcone_20 Cut
+	   ptvarcone_40 && 			// ptvarcone_40 Cut
+	   rap_int_condition			// rapidity interval condition
+	   //pT_balance_limit)			// pT balance limit ABSENT
+	) {
+	
+		h_pT_balance_EXCEPT->Fill(pT_balance, weight_total);
+
+	}
+
+	if(Z_mass_condition && 			// Z Boson Mass Cut
+	   combined_lepton_pt && 		// Dilepton Pt Cut
+	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
+	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
+	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
+	   ptvarcone_20 &&			// ptvarcone_20 Cut
+	   ptvarcone_40 && 			// ptvarcone_40 Cut ABSENT
+	   !(rap_int_condition)			// rapidity interval condition
+	   //pT_balance_3_limit)		// pT balance 3 limit
+	) {
+	
+		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, weight_total);
 
 	}
 
@@ -362,7 +426,11 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 
 		#include "_FillAllData_PostCut.h"
 
-		//ptvar cone histograms
+		//ptcone histograms
+		h_muon_0_iso_ptcone20->Fill(muon_0_iso_ptcone20,weight_total);
+		h_muon_0_iso_ptcone40->Fill(muon_0_iso_ptcone40,weight_total);
+
+		//ptvarcone histograms
 		h_muon_0_iso_ptvarcone20->Fill(muon_0_iso_ptvarcone20,weight_total);
 		h_muon_0_iso_ptvarcone40->Fill(muon_0_iso_ptvarcone40,weight_total);
 
@@ -396,6 +464,18 @@ void MC_Analysis::Zmumu2Jets_CutAndFill() {
 	else if (common_cuts && !(rap_int_condition) && pT_balance_3_limit) {
 
 		#include "_FillAllData_ControlCut.h"
+
+		//ptcone histograms
+		h_muon_0_iso_ptcone20_CONTROL->Fill(muon_0_iso_ptcone20,weight_total);
+		h_muon_0_iso_ptcone40_CONTROL->Fill(muon_0_iso_ptcone40,weight_total);
+
+		//ptvarcone histograms
+		h_muon_0_iso_ptvarcone20_CONTROL->Fill(muon_0_iso_ptvarcone20,weight_total);
+		h_muon_0_iso_ptvarcone40_CONTROL->Fill(muon_0_iso_ptvarcone40,weight_total);
+	
+		//topoetcone histograms
+		h_muon_0_iso_topoetcone20_CONTROL->Fill(muon_0_iso_topoetcone20,weight_total);
+		h_muon_0_iso_topoetcone40_CONTROL->Fill(muon_0_iso_topoetcone40,weight_total);
 
 		//Invariant mass
 		h_muon_0_muon_1_mass_CONTROL->Fill(muon_0_muon_1_mass,weight_total); // two muons
@@ -441,30 +521,43 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 
 	// ptcone histograms
 	DrawHistogram(h_muon_0_iso_ptcone20, "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone20_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptcone30, "h_muon_0_iso_ptcone30", "h_muon_0_iso_ptcone30_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c]Entries", 600, 400, true, "h_muon_0_iso_ptcone30_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_muon_0_iso_ptcone40, "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone40_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptcone20_PRE, h_muon_0_iso_ptcone20, h_muon_0_iso_ptcone20_CONTROL, h_muon_0_iso_ptcone20_EXCEPT, "ptcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_ptcone20_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptcone40_PRE, h_muon_0_iso_ptcone40, h_muon_0_iso_ptcone40_CONTROL, h_muon_0_iso_ptcone40_EXCEPT, "ptcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_ptcone40_" + AnalysisType + "_Combo.pdf", AnalysisType);	
 
 	// topoetcone histograms
 	DrawHistogram(h_muon_0_iso_topoetcone20, "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone20_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_topoetcone30, "h_muon_0_iso_topoetcone30", "h_muon_0_iso_topoetcone30_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone30_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_muon_0_iso_topoetcone40, "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone40_" + AnalysisType + ".pdf", AnalysisType);
-	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_topoetcone20_PRE, h_muon_0_iso_topoetcone20, h_muon_0_iso_topoetcone20_CONTROL, h_muon_0_iso_topoetcone20_EXCEPT, "topoetcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_topoetcone20_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_topoetcone40_PRE, h_muon_0_iso_topoetcone40, h_muon_0_iso_topoetcone40_CONTROL, h_muon_0_iso_topoetcone40_EXCEPT, "topoetcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_topoetcone40_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+
 	// ptvarcone histograms
 	DrawHistogram(h_muon_0_iso_ptvarcone20, "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone20_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone30", "h_muon_0_iso_ptvarcone30_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.3 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone30_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptvarcone30, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + AnalysisType + ".pdf", AnalysisType);
-	
-	// muon 0 & muon 1 invariant mass histograms
+	DrawHistogram(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptvarcone20_PRE, h_muon_0_iso_ptvarcone20, h_muon_0_iso_ptvarcone20_CONTROL, h_muon_0_iso_ptvarcone20_EXCEPT, "ptvarcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_ptvarcone20_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptvarcone40_PRE, h_muon_0_iso_ptvarcone40, h_muon_0_iso_ptvarcone40_CONTROL, h_muon_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+
+	//combined lepton  muon 0 & muon 1 invariant mass
 	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_" + AnalysisType , "Invariant mass of muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType , "Invariant mass of muon_0 and muon_1 from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, "Muon Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, h_muon_0_muon_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	
+	// combined lepton  muon 0 & muon 1 momentum
+	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, h_muon_0_muon_1_pt_EXCEPT, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);	
 
 	// leading jets invariant masses
 	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, "Muon Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, h_muon_0_muon_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
+
+	//leading jets ljet_0 ljet_1 transverse momentum 
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_0_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_1_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 	// Dilepton Rapidity
 	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", "h_RapidityDilepton_PRE_" + AnalysisType , "Dilepton rapidity of muon_0 and muon_1  with initial selection cuts from " + AnalysisType + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_PRE_" + AnalysisType + ".pdf", AnalysisType);
@@ -481,25 +574,21 @@ void MC_Analysis::Zmumu2Jets_DrawHistos() {
 	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , "\\Delta R with further cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR_" + AnalysisType, ";Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
-	// combined lepton momentum
-	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, h_muon_0_muon_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);	
-
 	// pT balance
-	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_pT_balance_CONTROL, "h_pT_balance_CONTROL", "h_pT_balance_CONTROL_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with control cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", "h_pT_balance_" + AnalysisType, ";pT Balance;Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
-	// pT balance 3 - only filled in control scenario (see ATLAS paper Table 1.)
-	DrawHistogram(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , "p_T^{balance, 3} for transverse momentum of ljet_0, ljet_1, ljet_2 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	// pT balance 3
+	DrawHistogram_Quiet(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , ";p_{T}^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , ";p_{T}^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", "h_pT_balance_3_" + AnalysisType, ";pT Balance 3;Entries", 600, 400, false, "h_pT_balance_3_" + AnalysisType + "_Combo.pdf", AnalysisType);	
 
 	// Centrality histograms
 	DrawHistogram(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with initial selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_PRE_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_Centrality, "h_Centrality", "h_Centrality_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with further selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_" + AnalysisType + ".pdf", AnalysisType);
 	DrawHistogram(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
-
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality_" + AnalysisType, ";Centrality;Entries", 600, 400, false, "h_Centrality_" + AnalysisType + "_Combo.pdf", AnalysisType);
 
 }
 
