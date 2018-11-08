@@ -68,6 +68,9 @@ void MyAnalysis::DrawHistos() {
   h_u0u1_MX->Draw();
   c_u0u1_MX->Write("Muon_0-Muon_1-Invariant_Mass");
 
+
+  cout << "Histograms finished now!" << endl;
+
   Histograms->Close();
 
 }
@@ -210,6 +213,8 @@ void MyAnalysis::Loop()
    cout << "100.0%" << endl;
 
    cout << "Number of Entries = " << nentries << endl;    //Output the number of entries
+
+   cout << "Analysis Finished" << endl;
 
 }
 
