@@ -62,21 +62,21 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 
 		#To fill the _FillAllData_PreCut Function inside SOMETHING_Analysis.h
 		_FillAllData_PreCut.write("\t//Pre-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_PreCut.write("\th_" + leafName + "_" + TLorentzName + "_PRE->Fill(" + leafName + "->" + TLorentzName + "(), weight_total);\n\n")
+		_FillAllData_PreCut.write("\th_" + leafName + "_" + TLorentzName + "_PRE->Fill(" + leafName + "->" + TLorentzName + "(), Luminosity_Weight * weight_total);\n\n")
 
 		#To fill the ControlCut section inside SOMETHING_Analysis.h
 		_FillAllData_ControlCut.write("\t//Control-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_ControlCut.write("\th_" + leafName + "_" + TLorentzName + "_CONTROL->Fill(" + leafName + "->" + TLorentzName + "(), weight_total);\n\n")
+		_FillAllData_ControlCut.write("\th_" + leafName + "_" + TLorentzName + "_CONTROL->Fill(" + leafName + "->" + TLorentzName + "(), Luminosity_Weight * weight_total);\n\n")
 
 		#To fill the PostCut Section inside SOMETHING_Analysis.h
 		_FillAllData_PostCut.write("\t//Post-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_PostCut.write("\th_" + leafName + "_" + TLorentzName + "->Fill(" + leafName + "->" + TLorentzName + "(), weight_total);\n\n")
+		_FillAllData_PostCut.write("\th_" + leafName + "_" + TLorentzName + "->Fill(" + leafName + "->" + TLorentzName + "(), Luminosity_Weight * weight_total);\n\n")
 
 		#To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 		_DrawHistos.write("\t//Histogram Draw (Quiet) Functions for " + leafName + "_" + TLorentzName + "\n")
-		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + ", \"h_" + leafName + "_" + TLorentzName + "\", \"h_" + leafName + "_" + TLorentzName + "_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_\" + AnalysisType + \".pdf\", AnalysisType);\n")
-		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_PRE, \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType + \".pdf\", AnalysisType);\n")
-		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + AnalysisType + \".pdf\", AnalysisType);\n\n")
+		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + ", \"h_" + leafName + "_" + TLorentzName + "\", \"h_" + leafName + "_" + TLorentzName + "_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_\" + AnalysisType + \".pdf\", ChainName, AnalysisType);\n")
+		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_PRE, \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + AnalysisType + \".pdf\", ChainName, AnalysisType);\n")
+		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + AnalysisType, \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + AnalysisType + \".pdf\", ChainName, AnalysisType);\n\n")
 
 
 for line in MC_Analysis:

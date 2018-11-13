@@ -7,10 +7,10 @@
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
 
-	string OutputFilePath = "../../Output-Files/";
-	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
@@ -37,10 +37,10 @@ void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, str
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
 
-	string OutputFilePath = "../../Output-Files/";
-	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Sets the X axis title
 	histogram->SetTitle(title.c_str());
@@ -56,10 +56,10 @@ void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramNam
 //This function will draw a stack of 3 histograms, used for overlaying PRE, SEARCH, and CONTROL
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
 
-	string OutputFilePath = "../../Output-Files/";
-	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
@@ -96,10 +96,10 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 //This function will draw a stack of 4 histograms, used for overlaying PRE, SEARCH, CONTROL, and EXCEPT
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, histogram EXCEPT, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string AnalysisType) {
+void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
 
-	string OutputFilePath = "../../Output-Files/";
-	string FullOutputFilePath = OutputFilePath + AnalysisType + "/" + OutputFileName;
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
@@ -137,15 +137,15 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 }
 
 //This function will overlay two histograms over each other. First in Red, Second in Blue
-void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string AnalysisType1, string AnalysisType2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ComboType) {
+void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string ChainName1, string ChainName2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ComboType, string AnalysisType) {
 
-	string Histogram1RealName = "h_" + DataType + "_" + AnalysisType1 + ";1"; //Create the real(seen by code) name for histogram 1
-	string Histogram2RealName = "h_" + DataType + "_" + AnalysisType2 + ";1"; //Create the real(seen by code) name for histogram 2
+	string Histogram1RealName = "h_" + DataType + "_" + ChainName1 + ";1"; //Create the real(seen by code) name for histogram 1
+	string Histogram2RealName = "h_" + DataType + "_" + ChainName2 + ";1"; //Create the real(seen by code) name for histogram 2
 
 	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
 	TH1F *histogram2 = (TH1F*)file2->Get(Histogram2RealName.c_str());
 
-	string OutputFilePath = "../../Output-Files/";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ComboType + "/" + OutputFileName;
 
 	//Create a new canvas using canvasName
@@ -182,34 +182,35 @@ void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, stri
 }
 
 //This function is a quick way of drawing two histograms overlain
-void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string AnalysisType1, string AnalysisType2) {
+void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string ChainName1, string ChainName2, string AnalysisType) {
 
-	string AnalysisTypeCombo = AnalysisType1 + "_" + AnalysisType2; //Combine the analysis types
-	string Name1 = DataType + " " + AnalysisType1; //Make a histogram name for histogram 1
-	string Name2 = DataType + " " + AnalysisType2; //Make a histogram name for histogram 2
-	string FileName = DataType + "_" + AnalysisType1 + "_" + AnalysisType2; //Combine everything into the file name
+	string ChainNameCombo = ChainName1 + "_" + ChainName2; //Combine the analysis types
+	string Name1 = DataType + " " + ChainName1; //Make a histogram name for histogram 1
+	string Name2 = DataType + " " + ChainName2; //Make a histogram name for histogram 2
+	string FileName = DataType + "_" + ChainName1 + "_" + ChainName2; //Combine everything into the file name
 
-	DrawHistogram_Overlay_Two(file1, file2, DataType, AnalysisType1, AnalysisType2, AnalysisTypeCombo, Name1, Name2, FileName, FileName, FileName, 600, 400, false, FileName + "_Combo.pdf", AnalysisTypeCombo);
+	DrawHistogram_Overlay_Two(file1, file2, DataType, ChainName1, ChainName2, ChainNameCombo, Name1, Name2, FileName, FileName, FileName, 600, 400, false, FileName + "_Combo.pdf", ChainNameCombo, AnalysisType);
 
 }
 
 //This function will quick draw all desired overlay histograms for given .root files and analysis types
-void QuickDrawOverlayAll(string path1, string path2, string AnalysisType1, string AnalysisType2) {
+void QuickDrawOverlayAll(string path1, string path2, string ChainName1, string ChainName2, string AnalysisType) {
 
 	TFile *file1 = new TFile(path1.c_str());
 	TFile *file2 = new TFile(path2.c_str());
 
-	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_ljet_1_mass", AnalysisType1.c_str(), AnalysisType2.c_str());
-	QuickDrawHistogram_Overlay_Two(file1,file2, "DeltaR", AnalysisType1.c_str(), AnalysisType2.c_str());
-	QuickDrawHistogram_Overlay_Two(file1,file2, "pT_balance", AnalysisType1.c_str(), AnalysisType2.c_str());
-	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_p4_Pt", AnalysisType1.c_str(), AnalysisType2.c_str());
-	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_1_p4_Pt", AnalysisType1.c_str(), AnalysisType2.c_str());
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_ljet_1_mass", ChainName1.c_str(), ChainName2.c_str(), AnalysisType);
+	QuickDrawHistogram_Overlay_Two(file1,file2, "DeltaR", ChainName1.c_str(), ChainName2.c_str(), AnalysisType);
+	QuickDrawHistogram_Overlay_Two(file1,file2, "pT_balance", ChainName1.c_str(), ChainName2.c_str(), AnalysisType);
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_0_p4_Pt", ChainName1.c_str(), ChainName2.c_str(), AnalysisType);
+	QuickDrawHistogram_Overlay_Two(file1,file2, "ljet_1_p4_Pt", ChainName1.c_str(), ChainName2.c_str(), AnalysisType);
 
 }
 
 /////////////////////////////// VARIABLES /////////////////////////////// 
 /////////////////////////////// VARIABLES /////////////////////////////// 
-/////////////////////////////// VARIABLES /////////////////////////////// 
+/////////////////////////////// VARIABLES ///////////////////////////////
+ 
 //This Fucntion will calculate invariant mass of two TLorentzVectors
 double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 

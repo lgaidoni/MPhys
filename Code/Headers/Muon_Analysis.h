@@ -1,6 +1,6 @@
 // This is the analysis file for VBF process for a Z boson decaying to mu mu 
-#ifndef Zmumu_Analysis_h
-#define Zmumu_Analysis_h
+#ifndef Muon_Analysis_h
+#define Muon_Analysis_h
 
 
 ///--------------------- ORDER OF OPERATIONS ---------------------------///
@@ -15,7 +15,7 @@
 
 // This function will book all relevant histograms
 
-void MC_Analysis::Zmumu_BookHistos() {
+void MC_Analysis::Muon_BookHistos() {
 
 	double cone_min = -11.5;
 	double cone_max = -10.5;
@@ -129,7 +129,7 @@ void MC_Analysis::Zmumu_BookHistos() {
 
 // Pre-selection cut functions (dummy cuts)
 // Cuts return bool, for ease in if statements
-bool MC_Analysis::Zmumu_InitialCut() {
+bool MC_Analysis::Muon_InitialCut() {
 
 	// Set conditions
 	bool two_muons = false;
@@ -159,7 +159,7 @@ bool MC_Analysis::Zmumu_InitialCut() {
 }
 
 // This function will generate physics variables, put them in a vector, and return said vector
-void MC_Analysis::Zmumu_GenerateVariables() {
+void MC_Analysis::Muon_GenerateVariables() {
 
 	// Invariant Mass
 	muon_0_muon_1_mass = InvariantMass(muon_0_p4, muon_1_p4);
@@ -189,7 +189,7 @@ void MC_Analysis::Zmumu_GenerateVariables() {
 }
 
 // This function will fill the histograms that need to be filled BEFORE initial cuts are made
-void MC_Analysis::Zmumu_FillAllData_PreCut() {
+void MC_Analysis::Muon_FillAllData_PreCut() {
 
 	#include "_FillAllData_PreCut.h"
 
@@ -228,7 +228,7 @@ void MC_Analysis::Zmumu_FillAllData_PreCut() {
 
 }
 
-void MC_Analysis::Zmumu_CutAndFill() {
+void MC_Analysis::Muon_CutAndFill() {
 
 	//false means failed the cut, true means passed the cut
 
@@ -506,10 +506,10 @@ void MC_Analysis::Zmumu_CutAndFill() {
 
 // Histograms draw everything that belongs to TLorentzVector automatically except cones, and the ones we define - our "Custom" ones, all of which are defined below.
 // This functinon will Draw all the histograms, and write them to a file
-void MC_Analysis::Zmumu_DrawHistos() {
+void MC_Analysis::Muon_DrawHistos() {
 
 	TFile *Histograms;
-	string ROOTFilePath = "../../Root-Files/Zmumu_Histograms.root";
+	string ROOTFilePath = "../../Root-Files/Muon_Histograms.root";
 
 	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
 	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
@@ -520,75 +520,75 @@ void MC_Analysis::Zmumu_DrawHistos() {
 	#include "_DrawHistos.h"
 
 	// ptcone histograms
-	DrawHistogram(h_muon_0_iso_ptcone20, "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone20_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptcone40, "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone40_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptcone20_PRE, h_muon_0_iso_ptcone20, h_muon_0_iso_ptcone20_CONTROL, h_muon_0_iso_ptcone20_EXCEPT, "ptcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_ptcone20_" + AnalysisType + "_Combo.pdf", AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptcone40_PRE, h_muon_0_iso_ptcone40, h_muon_0_iso_ptcone40_CONTROL, h_muon_0_iso_ptcone40_EXCEPT, "ptcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_ptcone40_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram(h_muon_0_iso_ptcone20, "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + ChainName , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + ChainName + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone20_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptcone40, "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40_" + ChainName , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + ChainName + " data set ptcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptcone40_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptcone20_PRE, h_muon_0_iso_ptcone20, h_muon_0_iso_ptcone20_CONTROL, h_muon_0_iso_ptcone20_EXCEPT, "ptcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptcone20", "h_muon_0_iso_ptcone20_" + ChainName, ";;Entries", 600, 400, true, "h_muon_0_iso_ptcone20_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptcone40_PRE, h_muon_0_iso_ptcone40, h_muon_0_iso_ptcone40_CONTROL, h_muon_0_iso_ptcone40_EXCEPT, "ptcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptcone40", "h_muon_0_iso_ptcone40_" + ChainName, ";;Entries", 600, 400, true, "h_muon_0_iso_ptcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// topoetcone histograms
-	DrawHistogram(h_muon_0_iso_topoetcone20, "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone20_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_topoetcone40, "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40_" + AnalysisType , "Total energy around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone40_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_topoetcone20_PRE, h_muon_0_iso_topoetcone20, h_muon_0_iso_topoetcone20_CONTROL, h_muon_0_iso_topoetcone20_EXCEPT, "topoetcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_topoetcone20_" + AnalysisType + "_Combo.pdf", AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_topoetcone40_PRE, h_muon_0_iso_topoetcone40, h_muon_0_iso_topoetcone40_CONTROL, h_muon_0_iso_topoetcone40_EXCEPT, "topoetcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_topoetcone40_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram(h_muon_0_iso_topoetcone20, "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20_" + ChainName , "Total energy around muon_0 cone-size \\Delta R = 0.2 from " + ChainName + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone20_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_muon_0_iso_topoetcone40, "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40_" + ChainName , "Total energy around muon_0 cone-size \\Delta R = 0.4 from " + ChainName + " data set topoetcone;Total energy [GeV];Entries", 600, 400, true, "h_muon_0_iso_topoetcone40_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_topoetcone20_PRE, h_muon_0_iso_topoetcone20, h_muon_0_iso_topoetcone20_CONTROL, h_muon_0_iso_topoetcone20_EXCEPT, "topoetcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_topoetcone20", "h_muon_0_iso_topoetcone20_" + ChainName, ";;Entries", 600, 400, true, "h_muon_0_iso_topoetcone20_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_topoetcone40_PRE, h_muon_0_iso_topoetcone40, h_muon_0_iso_topoetcone40_CONTROL, h_muon_0_iso_topoetcone40_EXCEPT, "topoetcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_topoetcone40", "h_muon_0_iso_topoetcone40_" + ChainName, ";;Entries", 600, 400, true, "h_muon_0_iso_topoetcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// ptvarcone histograms
-	DrawHistogram(h_muon_0_iso_ptvarcone20, "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone20_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + AnalysisType , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + AnalysisType + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptvarcone20_PRE, h_muon_0_iso_ptvarcone20, h_muon_0_iso_ptvarcone20_CONTROL, h_muon_0_iso_ptvarcone20_EXCEPT, "ptvarcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_ptvarcone20_" + AnalysisType + "_Combo.pdf", AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptvarcone40_PRE, h_muon_0_iso_ptvarcone40, h_muon_0_iso_ptvarcone40_CONTROL, h_muon_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + AnalysisType, ";;Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram(h_muon_0_iso_ptvarcone20, "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20_" + ChainName , "Total momentum around muon_0 cone-size \\Delta R = 0.2 from " + ChainName + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone20_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_muon_0_iso_ptvarcone40, "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + ChainName , "Total momentum around muon_0 cone-size \\Delta R = 0.4 from " + ChainName + " data set ptvarcone;Total momentum [GeV/c];Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptvarcone20_PRE, h_muon_0_iso_ptvarcone20, h_muon_0_iso_ptvarcone20_CONTROL, h_muon_0_iso_ptvarcone20_EXCEPT, "ptvarcone20 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptvarcone20", "h_muon_0_iso_ptvarcone20_" + ChainName, ";;Entries", 600, 400, true, "h_muon_0_iso_ptvarcone20_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_iso_ptvarcone40_PRE, h_muon_0_iso_ptvarcone40, h_muon_0_iso_ptvarcone40_CONTROL, h_muon_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for muon 0", "Pre Cut", "Post Cut", "Control", "Except", "h_muon_0_iso_ptvarcone40", "h_muon_0_iso_ptvarcone40_" + ChainName, ";;Entries", 600, 400, true, "h_muon_0_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	//combined lepton  muon 0 & muon 1 invariant mass
-	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_" + AnalysisType , "Invariant mass of muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType , "Invariant mass of muon_0 and muon_1 from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, "Muon Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, h_muon_0_muon_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_mass_PRE, "h_muon_0_muon_1_mass_PRE", "h_muon_0_muon_1_mass_PRE_" + ChainName , "Invariant mass of muon_0 and muon_1 with initial selection cuts from " + ChainName + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_mass, "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + ChainName , "Invariant mass of muon_0 and muon_1 from " + ChainName + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, "Muon Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + ChainName, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, h_muon_0_muon_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + ChainName, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 	
 	// combined lepton  muon 0 & muon 1 momentum
-	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType , "Transverse momentum of combined muon system muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, h_muon_0_muon_1_pt_EXCEPT, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram(h_muon_0_muon_1_pt_PRE, "h_muon_0_muon_1_pt_PRE", "h_muon_0_muon_1_pt_PRE_" + ChainName , "Transverse momentum of combined muon system muon_0 and muon_1 with initial selection cuts from " + ChainName + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_muon_0_muon_1_pt, "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + ChainName , "Transverse momentum of combined muon system muon_0 and muon_1 with further cuts from " + ChainName + " data set;Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + ChainName, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_pt_PRE, h_muon_0_muon_1_pt, h_muon_0_muon_1_pt_CONTROL, h_muon_0_muon_1_pt_EXCEPT, "Muon Pair Transverse Momentum", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_pt", "h_muon_0_muon_1_pt_" + ChainName, ";Momentum [GeV/c];Entries", 600, 400, false, "h_muon_0_muon_1_pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// leading jets invariant masses
-	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + AnalysisType , "Combined Invariant Mass of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, "Muon Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, h_muon_0_muon_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + AnalysisType, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE_" + ChainName , "Combined Invariant Mass of ljet_0 and ljet_1  with initial selection cuts from " + ChainName + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass_" + ChainName , "Combined Invariant Mass of ljet_0 and ljet_1  with further cuts from " + ChainName + " data set;Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_ljet_0_ljet_1_mass_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, "Muon Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + ChainName, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_muon_0_muon_1_mass_PRE, h_muon_0_muon_1_mass, h_muon_0_muon_1_mass_CONTROL, h_muon_0_muon_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre-Cut", "Post Cut", "Control", "Except", "h_muon_0_muon_1_mass", "h_muon_0_muon_1_mass_" + ChainName, ";Invariant Mass [GeV/c^{2}];Entries", 600, 400, false, "h_muon_0_muon_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	//leading jets ljet_0 ljet_1 transverse momentum 
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_0_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_" + AnalysisType, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_1_p4_Pt_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt_" + ChainName, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_0_p4_Pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_" + ChainName, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_1_p4_Pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	// Dilepton Rapidity
-	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", "h_RapidityDilepton_PRE_" + AnalysisType , "Dilepton rapidity of muon_0 and muon_1  with initial selection cuts from " + AnalysisType + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", "h_RapidityDilepton_" + AnalysisType , "Dilepton rapidity of muon_0 and muon_1  with further cuts from " + AnalysisType + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", "h_RapidityDilepton_CONTROL_" + AnalysisType , "Dilepton rapidity of muon_0 and muon_1  with control cuts from " + AnalysisType + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", "h_RapidityDilepton_PRE_" + ChainName , "Dilepton rapidity of muon_0 and muon_1  with initial selection cuts from " + ChainName + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", "h_RapidityDilepton_" + ChainName , "Dilepton rapidity of muon_0 and muon_1  with further cuts from " + ChainName + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", "h_RapidityDilepton_CONTROL_" + ChainName , "Dilepton rapidity of muon_0 and muon_1  with control cuts from " + ChainName + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	// Dijet Rapidity
-	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", "h_muon_0_muon_1_RapidityDijet_PRE_" + AnalysisType , "Dijet rapidity of ljet_0 and ljet_1  with initial selection cuts from " + AnalysisType + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", "h_muon_0_muon_1_RapidityDijet_" + AnalysisType , "Dijet rapidity of ljet_0 and ljet_1  with further cuts from " + AnalysisType + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_muon_0_muon_1_RapidityDijet_CONTROL_" + AnalysisType , "Dijet rapidity of ljet_0 and ljet_1  with control cuts from " + AnalysisType + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
+	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", "h_muon_0_muon_1_RapidityDijet_PRE_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with initial selection cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", "h_muon_0_muon_1_RapidityDijet_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with further cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_muon_0_muon_1_RapidityDijet_CONTROL_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with control cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	// Delta R Histograms
-	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + AnalysisType , "\\Delta R with initial selection cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + AnalysisType , "\\Delta R with further cuts from " + AnalysisType + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR_" + AnalysisType, ";Delta R;Entries", 600, 400, false, "h_DeltaR_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + ChainName , "\\Delta R with initial selection cuts from " + ChainName + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_DeltaR, "h_DeltaR", "h_DeltaR_" + ChainName , "\\Delta R with further cuts from " + ChainName + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR_" + ChainName, ";Delta R;Entries", 600, 400, false, "h_DeltaR_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	// pT balance
-	DrawHistogram(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial selection cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_pT_balance, "h_pT_balance", "h_pT_balance_" + AnalysisType , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + AnalysisType + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", "h_pT_balance_" + AnalysisType, ";pT Balance;Entries", 600, 400, false, "h_pT_balance_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE_" + ChainName , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with initial selection cuts from " + ChainName + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance, "h_pT_balance", "h_pT_balance_" + ChainName , "p_T^{balance} for transverse momentum of ljet_0, ljet_1 and muon_0 and muon_1 with further cuts from " + ChainName + " data set;p_T^{balance} [GeV/c];Entries", 600, 400, false, "h_pT_balance_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", "h_pT_balance_" + ChainName, ";pT Balance;Entries", 600, 400, false, "h_pT_balance_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	// pT balance 3
-	DrawHistogram(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + AnalysisType , ";p_{T}^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + AnalysisType , ";p_{T}^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", "h_pT_balance_3_" + AnalysisType, ";pT Balance 3;Entries", 600, 400, false, "h_pT_balance_3_" + AnalysisType + "_Combo.pdf", AnalysisType);	
+	DrawHistogram_Quiet(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE_" + ChainName , ";p_{T}^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL_" + ChainName , ";p_{T}^{balance, 3} [GeV/c];Entries", 600, 400, false, "h_pT_balance_3_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", "h_pT_balance_3_" + ChainName, ";pT Balance 3;Entries", 600, 400, false, "h_pT_balance_3_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// Centrality histograms
-	DrawHistogram(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with initial selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_PRE_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_Centrality, "h_Centrality", "h_Centrality_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with further selection cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL_" + AnalysisType , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + AnalysisType + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_CONTROL_" + AnalysisType + ".pdf", AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality_" + AnalysisType, ";Centrality;Entries", 600, 400, false, "h_Centrality_" + AnalysisType + "_Combo.pdf", AnalysisType);
+	DrawHistogram(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE_" + ChainName , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with initial selection cuts from " + ChainName + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_Centrality, "h_Centrality", "h_Centrality_" + ChainName , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with further selection cuts from " + ChainName + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL_" + ChainName , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + ChainName + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality_" + ChainName, ";Centrality;Entries", 600, 400, false, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 }
 

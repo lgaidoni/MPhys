@@ -2,6 +2,8 @@ mc_locations = open("MC_Paths.txt", "r") # Open the MC Paths for files that need
 chain_functions = open("Headers/Chain_Functions.h", "w") # Open the file to be written to
 N_functions = open("Headers/N_Functions.h", "w") # Open the file to be written to
 
+import os
+
 chain_functions.write("#ifndef Chain_Functions_h\n")
 chain_functions.write("#define Chain_Functions_h\n\n")
 
@@ -33,6 +35,21 @@ for line in mc_locations:
 		N_functions.write("//N Return function for " + name + "\n")
 		N_functions.write("Long64_t N_" + name + "() {\n\n")
 		N_functions.write("\tLong64_t N = 0;\n")
+
+		try:
+			os.makedirs("../../Output-Files/Electron/" + name)
+			os.makedirs("../../Output-Files/Muon/" + name)
+			os.makedirs("../../Output-Files/Tau/" + name)
+			print("../../Output-Files/Electron/" + name + " Created")
+			print("../../Output-Files/Muon/" + name + " Created")
+			print("../../Output-Files/Tau/" + name + " Created")
+		except:
+			print("../../Output-Files/Electron/" + name + " Already Exists")
+			print("../../Output-Files/Muon/" + name + " Already Exists")
+			print("../../Output-Files/Tau/" + name + " Already Exists")
+
+		####### ELECTRON FILE WRITTEN HERE #######
+		electron_analysis = open("../Init/Electron/Start_" + name + ".C", "w")
 
 	elif line[0:2] == "@@":
 		ID = line[2:len(line)-1]

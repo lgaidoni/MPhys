@@ -24,19 +24,11 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
 
 	///---------------------------- OUR FUNCTION DEFINITIONS ---------------------------///
-	// EW
-	//Zee2Jets Definitions
-	#include "Zee2Jets_Function_Definitions.h"
+	//Electron Definitions
+	#include "Electron_Function_Definitions.h"
 
-	//Zmumu2Jets Definitions
-	#include "Zmumu2Jets_Function_Definitions.h"
-
-	// QCD
-	//Zee Definitions
-	#include "Zee_Function_Definitions.h"
-
-	//Zmumu Definitions
-	#include "Zmumu_Function_Definitions.h"
+	//Muon Definitions
+	#include "Muon_Function_Definitions.h"
 
 	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program
@@ -48,6 +40,7 @@ public :
 	/////-------------------------CUSTOM VARIABLE DEFINITIONS-------------------------/////
 	string AnalysisType;
 	string ChainName;
+	double Luminosity_Weight;
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
@@ -1606,7 +1599,7 @@ public :
    TBranch        *b_weight_total;   //!
 
    MC_Analysis(TTree *tree=0);
-   MC_Analysis(TTree *tree, string analysistype, string chainname);
+   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight);
    MC_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
    MC_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~MC_Analysis();
@@ -1638,7 +1631,7 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname) : fChain(0) 
+MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
@@ -1653,6 +1646,7 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname) : f
    Init(tree);
    AnalysisType = analysistype;
    ChainName = chainname;
+   Luminosity_Weight = luminosity_weight;
 }
 
 MC_Analysis::~MC_Analysis()
