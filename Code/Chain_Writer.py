@@ -5,11 +5,15 @@ electron_analysis_start_functions = open("Headers/Electron_Analysis_Start_Functi
 muon_analysis_start_functions = open("Headers/Muon_Analysis_Start_Functions.h", "w")
 tau_analysis_start_functions = open("Headers/Tau_Analysis_Start_Functions.h", "w")
 
+run_all_electron_analyses = open("../Init/Run_All_Electron_Analyses.C", "w")
+run_all_muon_analyses = open("../Init/Run_All_Muon_Analyses.C", "w")
+run_all_tau_analyses = open("../Init/Run_All_Tau_Analyses.C", "w")
+
 import os
 
 def analysis_start_function_writer(inputFile, IDtag, Name, AnalysisType):
 	inputFile.write("void Start_" + AnalysisType + "_" + Name + "_Analysis() {\n")
-	inputFile.write("\tgErrorIgnoreLevel = kWarning;\n")
+	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
 	inputFile.write("\tvector<double> luminosity_info = csv_reader(\"" + IDtag + "\");\n")
 	inputFile.write("\tdouble lum_weight = luminosity_weighting_function(luminosity_info, N_" + Name + "(), 36200);\n")
@@ -20,6 +24,17 @@ def analysis_start_function_writer(inputFile, IDtag, Name, AnalysisType):
 	inputFile.write("\t" + Name + "->" + AnalysisType + "_DrawHistos();\n")
 	
 	inputFile.write("}\n\n")
+
+def run_all_analyses_writer_top(inputFile, AnalysisType):
+	inputFile.write("#include <iostream>\n")
+	inputFile.write("#include \"TROOT.h\"\n")
+	inputFile.write("using namespace std;\n")
+	inputFile.write("void Run_All_" + AnalysisType + "_Analyses() {\n\n")
+	inputFile.write("gROOT->ProcessLine(\".x ../Code/MC_Analysis.C\");")
+
+def run_all_analyses_writer_centre(inputFile, Name, AnalysisType):
+	inputFile.write("\tgROOT->ProcessLine(\"Start_" + AnalysisType + "_" + Name + "_Analysis()\");\n")
+	
 
 chain_functions.write("#ifndef Chain_Functions_h\n")
 chain_functions.write("#define Chain_Functions_h\n\n")
@@ -36,6 +51,10 @@ muon_analysis_start_functions.write("#define Muon_Analysis_Start_Functions_h\n\n
 
 tau_analysis_start_functions.write("#ifndef Tau_Analysis_Start_Functions_h\n")
 tau_analysis_start_functions.write("#define Tau_Analysis_Start_Functions_h\n\n")
+
+run_all_analyses_writer_top(run_all_electron_analyses, "Electron")
+run_all_analyses_writer_top(run_all_muon_analyses, "Muon")
+run_all_analyses_writer_top(run_all_tau_analyses, "Tau")
 
 initial_function = 0
 name = ""
@@ -79,6 +98,10 @@ for line in mc_locations:
 	elif line[0:2] == "@@":
 		ID = line[2:len(line)-1]
 		chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
+		
+		run_all_analyses_writer_centre(run_all_electron_analyses, name, "Electron")
+		run_all_analyses_writer_centre(run_all_muon_analyses, name, "Muon")
+		run_all_analyses_writer_centre(run_all_tau_analyses, name, "Tau")
 
 		analysis_start_function_writer(electron_analysis_start_functions, ID, name, "Electron")
 		analysis_start_function_writer(muon_analysis_start_functions, ID, name, "Muon")
@@ -103,3 +126,7 @@ N_functions.write("#endif")
 electron_analysis_start_functions.write("#endif")
 muon_analysis_start_functions.write("#endif")
 tau_analysis_start_functions.write("#endif")
+
+run_all_electron_analyses.write("\n}\n")
+run_all_muon_analyses.write("\n}\n")
+run_all_tau_analyses.write("\n}\n")
