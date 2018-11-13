@@ -153,7 +153,7 @@ void MC_Analysis::Electron_GenerateVariables() {
 	pT_balance_3 = pTBalanceThreeCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
 	
 	// Centrality of Z boson between two leading jets calc using rapidity
-	Centrality = CentralityCalc2(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4);
+	Centrality = CentralityCalc(elec_0_p4, elec_1_p4, ljet_0_p4, ljet_1_p4);
 
 
 }
@@ -492,14 +492,14 @@ void MC_Analysis::Electron_DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt_" + ChainName, ";Momentum [GeV/c];Entries", 600, 400, false, "h_ljet_1_p4_Pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	// Dilepton Rapidity
-	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", "h_RapidityDilepton_PRE_" + ChainName , "Dilepton rapidity of elec_0 and elec_1  with initial selection cuts from " + ChainName + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", "h_RapidityDilepton_" + ChainName , "Dilepton rapidity of elec_0 and elec_1  with further cuts from " + ChainName + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", "h_RapidityDilepton_PRE_" + ChainName , ";Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", "h_RapidityDilepton_" + ChainName , ";Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", "h_RapidityDilepton_CONTROL_" + ChainName , "Dilepton rapidity of elec_0 and elec_1  with control cuts from " + ChainName + " data set;Dilepton Rapidity [rads];Entries", 600, 400, false, "h_RapidityDilepton_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	// Dijet Rapidity
-	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", "h_elec_0_elec_1_RapidityDijet_PRE_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with initial selection cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", "h_elec_0_elec_1_RapidityDijet_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with further cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_elec_0_elec_1_RapidityDijet_CONTROL_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with control cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", "h_RapidityDijet_PRE_" + ChainName , ";Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", "h_RapidityDijet_" + ChainName , ";Entries", 600, 400, false, "h_RapidityDijet_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_RapidityDijet_CONTROL_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with control cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	//Delta R Histograms
 	DrawHistogram_Quiet(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + ChainName , ";\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_Zmumu2Jets.pdf", ChainName, AnalysisType);
@@ -517,10 +517,12 @@ void MC_Analysis::Electron_DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", "h_pT_balance_3_" + ChainName, ";pT Balance 3;Entries", 600, 400, false, "h_pT_balance_3_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// Centrality histograms
-	DrawHistogram_Quiet(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE_" + ChainName , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with initial selection cuts from " + ChainName + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_Centrality, "h_Centrality", "h_Centrality_" + ChainName , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with further selection cuts from " + ChainName + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE_" + ChainName , ";Centrality;Entries", 600, 400, false, "h_Centrality_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_Centrality, "h_Centrality", "h_Centrality_" + ChainName , ";Centrality;Entries", 600, 400, false, "h_Centrality_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL_" + ChainName , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + ChainName + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality_" + ChainName, ";Centrality;Entries", 600, 400, false, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+
+//	Histograms->Close();
 
 }
 

@@ -151,19 +151,24 @@ void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, stri
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
 
-	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
+//	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
 
 	histogram1->SetLineColor(kRed);
 	histogram2->SetLineColor(kBlue);
 
-	histogramStack->Add(histogram1);
-	histogramStack->Add(histogram2);
+	// CHANGED STACK TO DRAWING CANVAS
+	histogram1->Draw("HIST");	
+	histogram2->Draw("SAME HIST");	
+//	histogramStack->Add(histogram1);
+//	histogramStack->Add(histogram2);
 
 	//Sets the Titles
-	histogramStack->SetTitle(title.c_str());
+//	histogramStack->SetTitle(title.c_str());
+	canvas->SetTitle(title.c_str());
 
 	//Draw the histogram
-	histogramStack->Draw("nostack");
+//	histogramStack->Draw("nostack");
+	canvas->Draw("nostack");
 
 	auto legend = new TLegend(0.99,0.95,0.75,0.75);
 	legend->SetHeader(legendName.c_str());
@@ -184,7 +189,7 @@ void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, stri
 //This function is a quick way of drawing two histograms overlain
 void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string ChainName1, string ChainName2, string AnalysisType) {
 
-	string ChainNameCombo = ChainName1 + "_" + ChainName2; //Combine the analysis types
+	string ChainNameCombo = "COMBO_" + ChainName1 + "_" + ChainName2; //Combine the analysis types
 	string Name1 = DataType + " " + ChainName1; //Make a histogram name for histogram 1
 	string Name2 = DataType + " " + ChainName2; //Make a histogram name for histogram 2
 	string FileName = DataType + "_" + ChainName1 + "_" + ChainName2; //Combine everything into the file name

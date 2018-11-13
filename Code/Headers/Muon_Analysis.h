@@ -184,7 +184,7 @@ void MC_Analysis::Muon_GenerateVariables() {
 	pT_balance_3 = pTBalanceThreeCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	// Centrality of Z boson between two leading jets calc using rapidity
-	Centrality = CentralityCalc2(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4);
+	Centrality = CentralityCalc(muon_0_p4, muon_1_p4, ljet_0_p4, ljet_1_p4);
 
 }
 
@@ -566,8 +566,8 @@ void MC_Analysis::Muon_DrawHistos() {
 
 	// Dijet Rapidity
 	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", "h_muon_0_muon_1_RapidityDijet_PRE_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with initial selection cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", "h_muon_0_muon_1_RapidityDijet_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with further cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_muon_0_muon_1_RapidityDijet_CONTROL_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with control cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", "h_RapidityDijet_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with further cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_RapidityDijet_CONTROL_" + ChainName , "Dijet rapidity of ljet_0 and ljet_1  with control cuts from " + ChainName + " data set;Dijet Rapidity [rads];Entries", 600, 400, false, "h_RapidityDijet_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	// Delta R Histograms
 	DrawHistogram(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE_" + ChainName , "\\Delta R with initial selection cuts from " + ChainName + " data set;\\Delta R;Entries", 600, 400, false, "h_DeltaR_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
