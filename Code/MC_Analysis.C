@@ -26,7 +26,9 @@
 #define MC_Analysis_cxx
 #include "Headers/MC_Analysis.h"
 #include "Headers/Electron_Analysis.h"
+#include "Headers/Electron_Analysis_Start_Functions.h"
 #include "Headers/Muon_Analysis.h"
+#include "Headers/AnalysisStartTest.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h> 
