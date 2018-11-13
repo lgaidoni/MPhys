@@ -4,12 +4,16 @@ using namespace std;
 
 void Zee2Jets_AnalysisStart() {
 
-	gROOT->ProcessLine(".x MC_Analysis.C");
-	gROOT->ProcessLine("gErrorIgnoreLevel = kWarning");
+	//General Setup
+	gROOT->ProcessLine(".x MC_Analysis.C"); //Processing of MC_Analysis Files
+	gROOT->ProcessLine("gErrorIgnoreLevel = kWarning");  //Suppression of INFO messages
 
-	gROOT->ProcessLine("Zee2JetsAnalysis = new MC_Analysis(\"/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308092.Sh221_PDF30_Zee2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14357856._000001.hist-output.root\", \"Zee2Jets\")");
-	gROOT->ProcessLine("Zee2JetsAnalysis->Zee2Jets_BookHistos()");
+	gROOT->ProcessLine("vector<double> luminosity_info = csv_reader(\"308092\")");  //Creation of luminosity information vector
+	gROOT->ProcessLine("double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee2jets_Min_N_TChannel(), 36200)");  //Generation of luminosity weight
+		
+	gROOT->ProcessLine("Zee2JetsAnalysis = new MC_Analysis(Chain_Sh221_PDF30_Zee2jets_Min_N_TChannel(), \"Electron\", \"Sh221_PDF30_Zee2jets_Min_N_TChannel\", lum_weight)");
+	gROOT->ProcessLine("Zee2JetsAnalysis->Electron_BookHistos()");
 	gROOT->ProcessLine("Zee2JetsAnalysis->Loop()");
-	gROOT->ProcessLine("Zee2JetsAnalysis->Zee2Jets_DrawHistos()");
+	gROOT->ProcessLine("Zee2JetsAnalysis->Electron_DrawHistos()");
 
 }

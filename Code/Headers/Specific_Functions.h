@@ -2,6 +2,10 @@
 #define Specific_Functions_h
 //This file contains specific functions that don't belong to the MC_Analysis Class
 
+///-------THESE HAVE BEEN COMMENTED OUT UNTIL WE NEED TO PERFORM THESE FUNCTIONS AGAIN--------///
+
+/*
+
 //This function will draw all the desired combined histograms for Zee2Jets and Zmumu2Jets
 void Zee2Jets_Zmumu2Jets_Overlay() {
 
@@ -29,6 +33,8 @@ void Zee2Jets_Zee_Overlay() {
 	QuickDrawHistogram_Overlay_Two(file1,file2, "elec_0_elec_1_mass", "Zee2Jets", "Zee");
 	QuickDrawHistogram_Overlay_Two(file1,file2, "elec_0_elec_1_pt", "Zee2Jets", "Zee");
 }
+
+*/
 
 
 #endif

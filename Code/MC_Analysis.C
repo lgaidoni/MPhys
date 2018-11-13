@@ -25,11 +25,8 @@
 
 #define MC_Analysis_cxx
 #include "Headers/MC_Analysis.h"
-#include "Headers/Zee2Jets_Analysis.h"
-#include "Headers/Zmumu2Jets_Analysis.h"
-#include "Headers/Zee_Analysis.h"
-#include "Headers/Zmumu_Analysis.h"
-#include "Headers/AddChainFriend.h"
+#include "Headers/Electron_Analysis.h"
+#include "Headers/Muon_Analysis.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h> 
@@ -74,41 +71,20 @@ void MC_Analysis::Loop() {
 
       }
 	///------------------- ACTUAL ANALYSIS -----------------///
-	// EW
- 	/// Zee2Jets
-	if (AnalysisType == "Zee2Jets") {
-		if (Zee2Jets_InitialCut() == false) { // if we're not cutting
-			Zee2Jets_GenerateVariables();
-			Zee2Jets_FillAllData_PreCut();
-			Zee2Jets_CutAndFill();
+	/// Electron Analysis
+	if (AnalysisType == "Electron") {
+		if (Electron_InitialCut() == false) { // if we're not cutting
+			Electron_GenerateVariables();
+			Electron_FillAllData_PreCut();
+			Electron_CutAndFill();
 		}
 	}
 	/// Zmumu2Jets
-	if (AnalysisType == "Zmumu2Jets") {
-		if (Zmumu2Jets_InitialCut() == false) { // if we're not cutting
-			Zmumu2Jets_GenerateVariables();
-			Zmumu2Jets_FillAllData_PreCut();
-			Zmumu2Jets_CutAndFill();
-		}
-	}
-   
-	// QCD
-	/// Zee
-	if (AnalysisType == "Zee") {
-		if (Zee_InitialCut() == false) { // if we're not cutting
-			Zee_GenerateVariables();
-			Zee_FillAllData_PreCut();
-			Zee_CutAndFill();
-		}
-	}
-   
-
-	/// Zmumu
-	if (AnalysisType == "Zmumu") {
-		if (Zmumu_InitialCut() == false) { // if we're not cutting
-			Zmumu_GenerateVariables();
-			Zmumu_FillAllData_PreCut();
-			Zmumu_CutAndFill();
+	if (AnalysisType == "Muon") {
+		if (Muon_InitialCut() == false) { // if we're not cutting
+			Muon_GenerateVariables();
+			Muon_FillAllData_PreCut();
+			Muon_CutAndFill();
 		}
 	}
 
