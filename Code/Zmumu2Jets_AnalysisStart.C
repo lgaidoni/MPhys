@@ -2,13 +2,21 @@
 #include "TROOT.h"
 using namespace std;
 
-void Zmumu2Jets_AnalysisStart() {
+void Zmm2Jets_AnalysisStart() {
 
 	gROOT->ProcessLine(".x MC_Analysis.C");
 
-	gROOT->ProcessLine("Zmumu2JetsAnalysis = new MC_Analysis(\"/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308093.Sh221_PDF30_Zmm2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14357860._000001.hist-output.root\", \"Zmumu2Jets\")");
-	gROOT->ProcessLine("Zmumu2JetsAnalysis->Zmumu2Jets_BookHistos()");
-	gROOT->ProcessLine("Zmumu2JetsAnalysis->Loop()");
-	gROOT->ProcessLine("Zmumu2JetsAnalysis->Zmumu2Jets_DrawHistos()");
+	gROOT->ProcessLine("vector<double> luminosity_info = csv_reader(\"308092\")");  //Creation of luminosity information vector
+	gROOT->ProcessLine("double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmm2jets_Min_N_TChannel(), 36200)");  //Generation of luminosity weight
+		
+	gROOT->ProcessLine("Zmm2JetsAnalysis = new MC_Analysis(Chain_Sh221_PDF30_Zmm2jets_Min_N_TChannel(), \"Muon\", \"Sh221_PDF30_Zmm2jets_Min_N_TChannel\", lum_weight)");
+	gROOT->ProcessLine("Zmm2JetsAnalysis->Muon_BookHistos()");
+	gROOT->ProcessLine("Zmm2JetsAnalysis->Loop()");
+	gROOT->ProcessLine("Zmm2JetsAnalysis->Muon_DrawHistos()");
+
+	//Overlay histograms
+	gROOT->ProcessLine("Zmm2Jets_Zmm_Overlay()");
+
+
 
 }
