@@ -28,6 +28,7 @@
 #include "Headers/Electron_Analysis.h"
 #include "Headers/Electron_Analysis_Start_Functions.h"
 #include "Headers/Muon_Analysis.h"
+#include "Headers/Muon_Analysis_Start_Functions.h"
 #include "Headers/AnalysisStartTest.h"
 #include <TH2.h>
 #include <TStyle.h>
@@ -35,17 +36,34 @@
 
 void MC_Analysis::Loop() {
 
-   ///------------------------------- DATA EXISTANCE CHECKS ---------------------------///
+   ///------------------------------- INITIAL VARIABLE SETUP ---------------------------///
 
    if (fChain == 0) return;
    Long64_t nentries = fChain->GetEntries();
    Long64_t nbytes = 0, nb = 0;
 
+   clock_t start;
+   clock_t one_second_in;
+   double entries_per_second;
+   double completion_time_double;
+   double prev_entries = 0;
+   double remaining_entries = 0;
+   clock_t completion_time;
+   int second_ticker = 5;
+
+   start = clock();
+   completion_time = clock();
+   int current_indicator = 0;
+
    ///---------------------------------- ACTUAL FOR LOOP ------------------------------///
 
-
+   cout << endl << "-------------------- " << AnalysisType << " analysis of " << ChainName << endl << endl;
+   cout << "Number of Entries:   " << nentries << endl;
+   cout << "Analysis Type:       " << AnalysisType << endl;
+   cout << "Chain Name:          " << ChainName << endl;
+   cout << "Luminosity Weight:   " << Luminosity_Weight << endl;
+   cout << "Start Time:          " << start/CLOCKS_PER_SEC << endl;
    cout << endl << "-------------------- " << AnalysisType << endl;
-   int current_indicator = 0;
 
    //Loop over all the entries in jentry
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
@@ -62,16 +80,27 @@ void MC_Analysis::Loop() {
       double entry_count = jentry;
       double max_entries = nentries;
 
-      if (jentry % 500 == 0) { // 1st IF
-	
-	if (current_indicator == 0) {cout << "                     " << "|"; current_indicator = 1;}
-	else if (current_indicator == 1) {cout << "                     " << "/"; current_indicator = 2;}
-	else if (current_indicator == 2) {cout << "                     " << "—"; current_indicator = 3;}
-	else if (current_indicator == 3) {cout << "                     " << "\\"; current_indicator = 0;}
-	cout << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%\r";
-	cout.flush();
+	if ((clock() - start)/CLOCKS_PER_SEC >= second_ticker) {
+		second_ticker += 5;
+		entries_per_second = entry_count - prev_entries;
+		prev_entries = entry_count;
+		completion_time_double = max_entries/(entries_per_second/5);
+		completion_time = start + completion_time_double*CLOCKS_PER_SEC;
+		//cout << "CTD: " << completion_time_double << " CT: " << completion_time/CLOCKS_PER_SEC <<  " REMENT: " << remaining_entries <<  " EP5: " << entries_per_second << endl;
+	}
 
-      }
+	if (jentry % 500 == 0) {
+	
+		if (current_indicator == 0)      {cout << "                     " << "|"; current_indicator = 1;}
+		else if (current_indicator == 1) {cout << "                     " << "/"; current_indicator = 2;}
+		else if (current_indicator == 2) {cout << "                     " << "—"; current_indicator = 3;}
+		else if (current_indicator == 3) {cout << "                     " << "\\"; current_indicator = 0;}
+
+		cout << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%\r" << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << "\r";
+		cout.flush();
+
+	}
+
 	///------------------- ACTUAL ANALYSIS -----------------///
 	/// Electron Analysis
 	if (AnalysisType == "Electron") {
@@ -93,9 +122,8 @@ void MC_Analysis::Loop() {
 
 
 	
-      } // END of 1st IF
+      }
    cout << "                     * 100.0%" << endl;
    cout << "-------------------- Complete" << endl << endl;
-   cout << "Number of Entries = " << nentries << endl << endl;    //Output the number of entries
 
 }
