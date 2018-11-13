@@ -48,8 +48,6 @@ for line in mc_locations:
 			print("../../Output-Files/Muon/" + name + " Already Exists")
 			print("../../Output-Files/Tau/" + name + " Already Exists")
 
-		####### ELECTRON FILE WRITTEN HERE #######
-		electron_analysis = open("../Init/Electron/Start_" + name + ".C", "w")
 
 	elif line[0:2] == "@@":
 		ID = line[2:len(line)-1]
