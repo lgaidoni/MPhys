@@ -522,7 +522,7 @@ void MC_Analysis::Electron_DrawHistos() {
 	DrawHistogram_Quiet(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL_" + ChainName , "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + ChainName + " data set;Centrality;Entries", 600, 400, false, "h_Centrality_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality_" + ChainName, ";Centrality;Entries", 600, 400, false, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
-//	Histograms->Close();
+	Histograms->Close();
 
 }
 
