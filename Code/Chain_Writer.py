@@ -76,10 +76,6 @@ for line in mc_locations:
 			print("../../Output-Files/Muon/" + name + " Already Exists")
 			print("../../Output-Files/Tau/" + name + " Already Exists")
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 13c84bebb10a5eee6da015e26b41c3f4927d675e
 	elif line[0:2] == "@@":
 		ID = line[2:len(line)-1]
 		chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
