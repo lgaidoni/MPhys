@@ -212,6 +212,95 @@ void QuickDrawOverlayAll(string path1, string path2, string ChainName1, string C
 
 }
 
+void Stack_Four_Overlay_One(string ChainName1, string ChainName2, string ChainName3, string ChainName4, string ChainName5, string DataType, string AnalysisType, string OutputFileName) {
+
+	//Sh221_PDF30_Zee_MV0_70_BFil
+	//Sh221_PDF30_Zee_MV70_140_BFil
+	//Sh221_PDF30_Zee_MV140_280_BFil
+	//Sh221_PDF30_Zee_MV280_500_BFil
+
+	//Create the canves
+	TCanvas *canvas = new TCanvas("NAME", "", 600, 400);
+
+	//Create the file names for the stack of four energies, 0-70, 70-140, 140-280, 280-500
+	string name1 = "~/Root-Files/" + AnalysisType + "/" + ChainName1 + "_Histograms.root";
+	string name2 = "~/Root-Files/" + AnalysisType + "/" + ChainName2 + "_Histograms.root";
+	string name3 = "~/Root-Files/" + AnalysisType + "/" + ChainName3 + "_Histograms.root";
+	string name4 = "~/Root-Files/" + AnalysisType + "/" + ChainName4 + "_Histograms.root";
+
+	//Create the file name for the EW process to be overlain
+	string name5 = "~/Root-Files/" + AnalysisType + "/" + ChainName5 + "_Histograms.root";
+
+	//Load in all the files
+	TFile *file1 = new TFile(name1.c_str());
+	TFile *file2 = new TFile(name2.c_str());
+	TFile *file3 = new TFile(name3.c_str());
+	TFile *file4 = new TFile(name4.c_str());
+	TFile *file5 = new TFile(name5.c_str());
+
+	//Create names for the histograms to be stacked
+	string Histogram1RealName = "h_" + DataType + "_" + ChainName1 + ";1"; //Create the real(seen by code) name for histogram 1
+	string Histogram2RealName = "h_" + DataType + "_" + ChainName2 + ";1"; //Create the real(seen by code) name for histogram 2
+	string Histogram3RealName = "h_" + DataType + "_" + ChainName3 + ";1"; //Create the real(seen by code) name for histogram 3
+	string Histogram4RealName = "h_" + DataType + "_" + ChainName4 + ";1"; //Create the real(seen by code) name for histogram 4
+
+	//Create the name for the EW histogram to be overlain
+	string Histogram5RealName = "h_" + DataType + "_" + ChainName5 + ";1"; //Create the real(seen by code) name for histogram 4
+
+	//Get all the histograms from files
+	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
+	TH1F *histogram2 = (TH1F*)file2->Get(Histogram2RealName.c_str());
+	TH1F *histogram3 = (TH1F*)file3->Get(Histogram3RealName.c_str());
+	TH1F *histogram4 = (TH1F*)file4->Get(Histogram4RealName.c_str());
+	TH1F *histogram5 = (TH1F*)file5->Get(Histogram5RealName.c_str());
+
+	//Set the line colours for all the histograms
+	histogram1->SetLineColor(kRed);
+	histogram2->SetLineColor(kRed+1);
+	histogram3->SetLineColor(kRed+2);
+	histogram4->SetLineColor(kRed+3);
+	histogram5->SetLineColor(kBlue);
+
+	//Create the stack
+	THStack *histogramStack = new THStack("histogramStack", DataType.c_str());
+
+	//Add all the histograms to the stack
+	histogramStack->Add(histogram1);
+	histogramStack->Add(histogram2);
+	histogramStack->Add(histogram3);
+	histogramStack->Add(histogram4);
+
+	//Draw the stack, actually stacking (no "nostack")
+	histogramStack->Draw("");
+	
+	//Draw the EW histogram over the top
+	histogram5->Draw("SAME HIST");
+
+	//Create all the names for the legend
+	string Histogram1DrawName = "h_" + DataType + "_" + ChainName1 + ";1"; //Create the real(seen by code) name for histogram 1
+	string Histogram2DrawName = "h_" + DataType + "_" + ChainName2 + ";1"; //Create the real(seen by code) name for histogram 2
+	string Histogram3DrawName = "h_" + DataType + "_" + ChainName3 + ";1"; //Create the real(seen by code) name for histogram 3
+	string Histogram4DrawName = "h_" + DataType + "_" + ChainName4 + ";1"; //Create the real(seen by code) name for histogram 4
+	string Histogram5DrawName = "h_" + DataType + "_" + ChainName5 + ";1"; //Create the real(seen by code) name for histogram 5
+
+	//Create the legend
+	auto legend = new TLegend(0.99,0.93,0.50,0.66);
+	legend->SetHeader(DataType.c_str());
+	legend->AddEntry(histogram1, Histogram1DrawName.c_str());
+	legend->AddEntry(histogram2, Histogram2DrawName.c_str());
+	legend->AddEntry(histogram3, Histogram3DrawName.c_str());
+	legend->AddEntry(histogram4, Histogram4DrawName.c_str());
+	legend->AddEntry(histogram5, Histogram5DrawName.c_str());
+	legend->Draw();
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Combo_Graphs/"+ DataType + "_" + OutputFileName;
+	
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+}
+
 /////////////////////////////// VARIABLES /////////////////////////////// 
 /////////////////////////////// VARIABLES /////////////////////////////// 
 /////////////////////////////// VARIABLES ///////////////////////////////
