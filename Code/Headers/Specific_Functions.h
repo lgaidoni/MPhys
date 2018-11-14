@@ -63,5 +63,32 @@ void COMBO_Sh221_PDF30_Zee2jets_Min_N_TChannel_Sh221_PDF30_Zee_MV0_70_CFilBVet_O
 
 }
 
+void Zee_Zee2Jets_Combo_Overlay() {
+
+	//QCD chains with different energies to be stacked
+	string name1 = "Sh221_PDF30_Zee_MV0_70_BFil";
+	string name2 = "Sh221_PDF30_Zee_MV70_140_BFil";
+	string name3 = "Sh221_PDF30_Zee_MV140_280_BFil";
+	string name4 = "Sh221_PDF30_Zee_MV280_500_BFil";
+
+	//EW chain to be overlain
+	string name5 = "Sh221_PDF30_Zee2jets_Min_N_TChannel";
+
+	
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "ljet_0_p4_Pt", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "ljet_1_p4_Pt", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "elec_0_elec_1_mass", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "ljet_0_ljet_1_mass", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "RapidityDilepton", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "RapidityDijet", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "elec_0_elec_1_pt", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "DeltaR", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "pT_balance", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "pT_balance_3_CONTROL", "Electron", "Electron_EW_QCD_Overlay.pdf");
+	Stack_Four_Overlay_One(name1, name2, name3, name4, name5, "Centrality", "Electron", "Electron_EW_QCD_Overlay.pdf");
+
+
+}
+
 
 #endif
