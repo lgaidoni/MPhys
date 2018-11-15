@@ -1,7 +1,7 @@
 #include <iostream>
 #include "TROOT.h"
 using namespace std;
-void Run_All_Electron_Analyses() {
+void Run_All_Zee_Analyses() {
 
 	gROOT->ProcessLine(".x ../Code/MC_Analysis.C");
 	gROOT->ProcessLine("Start_Electron_Sh221_PDF30_Zee_MV280_500_CFilBVet_Analysis()");
