@@ -1,9 +1,11 @@
 #ifndef Generic_Functions_h
 #define Generic_Functions_h
 #include <vector>
+
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
+
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
@@ -214,11 +216,6 @@ void QuickDrawOverlayAll(string path1, string path2, string ChainName1, string C
 
 void Stack_Four_Overlay_One(string ChainName1, string ChainName2, string ChainName3, string ChainName4, string ChainName5, string DataType, string AnalysisType, string OutputFileName) {
 
-	//Sh221_PDF30_Zee_MV0_70_BFil
-	//Sh221_PDF30_Zee_MV70_140_BFil
-	//Sh221_PDF30_Zee_MV140_280_BFil
-	//Sh221_PDF30_Zee_MV280_500_BFil
-
 	//Create the canves
 	TCanvas *canvas = new TCanvas("NAME", "", 600, 400);
 
@@ -239,13 +236,13 @@ void Stack_Four_Overlay_One(string ChainName1, string ChainName2, string ChainNa
 	TFile *file5 = new TFile(name5.c_str());
 
 	//Create names for the histograms to be stacked
-	string Histogram1RealName = "h_" + DataType + "_" + ChainName1 + ";1"; //Create the real(seen by code) name for histogram 1
-	string Histogram2RealName = "h_" + DataType + "_" + ChainName2 + ";1"; //Create the real(seen by code) name for histogram 2
-	string Histogram3RealName = "h_" + DataType + "_" + ChainName3 + ";1"; //Create the real(seen by code) name for histogram 3
-	string Histogram4RealName = "h_" + DataType + "_" + ChainName4 + ";1"; //Create the real(seen by code) name for histogram 4
+	string Histogram1RealName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 1
+	string Histogram2RealName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 2
+	string Histogram3RealName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 3
+	string Histogram4RealName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 4
 
 	//Create the name for the EW histogram to be overlain
-	string Histogram5RealName = "h_" + DataType + "_" + ChainName5 + ";1"; //Create the real(seen by code) name for histogram 4
+	string Histogram5RealName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 4
 
 	//Get all the histograms from files
 	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
