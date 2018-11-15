@@ -90,5 +90,25 @@ void Zee_Zee2Jets_Combo_Overlay() {
 
 }
 
+void Zee_MV_140_280_Flavour_Overlay() {
+
+	string name1 = "Sh221_PDF30_Zee_MV140_280_BFil";
+	string name2 = "Sh221_PDF30_Zee_MV140_280_CFilBVet";
+	string name3 = "Sh221_PDF30_Zee_MV140_280_CVetBVet";
+
+	Overlay_Flavour_Strengths(name1, name2, name3, "ljet_0_p4_Pt", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");	
+	Overlay_Flavour_Strengths(name1, name2, name3, "ljet_1_p4_Pt", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");	
+	Overlay_Flavour_Strengths(name1, name2, name3, "elec_0_elec_1_mass", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");	
+	Overlay_Flavour_Strengths(name1, name2, name3, "ljet_0_ljet_1_mass", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");
+	Overlay_Flavour_Strengths(name1, name2, name3, "RapidityDilepton", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");
+	Overlay_Flavour_Strengths(name1, name2, name3, "RapidityDijet", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");
+	Overlay_Flavour_Strengths(name1, name2, name3, "elec_0_elec_1_pt", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");	
+	Overlay_Flavour_Strengths(name1, name2, name3, "DeltaR", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");
+	Overlay_Flavour_Strengths(name1, name2, name3, "pT_balance", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");	
+	Overlay_Flavour_Strengths(name1, name2, name3, "pT_balance_3_CONTROL", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");	
+	Overlay_Flavour_Strengths(name1, name2, name3, "Centrality", "Electron", "Electron_Zee_MV140-280_Flavour_Overlay.pdf");
+
+}
+
 
 #endif
