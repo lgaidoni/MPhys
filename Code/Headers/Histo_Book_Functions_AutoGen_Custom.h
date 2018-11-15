@@ -129,6 +129,21 @@ void MC_Analysis::Book_elec_0_elec_1_pt(int bins, double min, double max) {
 }
 
 
+// -- True Combined transverse momentum of electron 0 and electron 1
+void MC_Analysis::Book_elec_0_elec_1_pt_TRUTH_PRE(int bins, double min, double max) {
+	h_elec_0_elec_1_pt_TRUTH_PRE = new TH1F("h_elec_0_elec_1_pt_TRUTH_PRE", "", bins, min, max);
+}
+void MC_Analysis::Book_elec_0_elec_1_pt_TRUTH_CONTROL(int bins, double min, double max) {
+	h_elec_0_elec_1_pt_TRUTH_CONTROL = new TH1F("h_elec_0_elec_1_pt_TRUTH_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_elec_0_elec_1_pt_TRUTH_EXCEPT(int bins, double min, double max) {
+	h_elec_0_elec_1_pt_TRUTH_EXCEPT = new TH1F("h_elec_0_elec_1_pt_TRUTH_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_elec_0_elec_1_pt_TRUTH(int bins, double min, double max) {
+	h_elec_0_elec_1_pt_TRUTH = new TH1F("h_elec_0_elec_1_pt_TRUTH", "", bins, min, max);
+}
+
+
 /// ------------------- MUONS ---------------- ///
 
 // -- Invariant mass of muon 0 and muon 1

@@ -10,6 +10,7 @@ RapidityDilepton:Rapidity of a dilepton pair
 ##ELECTRONS
 elec_0_elec_1_mass:Invariant mass of electron 0 and electron 1
 elec_0_elec_1_pt:Combined transverse momentum of electron 0 and electron 1
+elec_0_elec_1_pt_TRUTH:True Combined transverse momentum of electron 0 and electron 1
 ##MUONS
 muon_0_muon_1_mass:Invariant mass of muon 0 and muon 1
 muon_0_muon_1_pt:Combined transverse momentum of muon 0 and muon 1

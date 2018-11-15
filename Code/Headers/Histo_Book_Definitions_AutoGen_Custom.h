@@ -137,6 +137,22 @@ virtual void Book_elec_0_elec_1_pt(int bins, double min, double max); // SEARCH 
 TH1F	*h_elec_0_elec_1_pt; // SEARCH VERSION
 
 
+// -- True Combined transverse momentum of electron 0 and electron 1
+double elec_0_elec_1_pt_TRUTH;
+
+virtual void Book_elec_0_elec_1_pt_TRUTH_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_elec_0_elec_1_pt_TRUTH_PRE; // PRE VERSION
+
+virtual void Book_elec_0_elec_1_pt_TRUTH_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_elec_0_elec_1_pt_TRUTH_CONTROL; // CONTROL VERSION
+
+virtual void Book_elec_0_elec_1_pt_TRUTH_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_elec_0_elec_1_pt_TRUTH_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_elec_0_elec_1_pt_TRUTH(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_elec_0_elec_1_pt_TRUTH; // SEARCH VERSION
+
+
 /// ------------------- MUONS ---------------- ///
 
 // -- Invariant mass of muon 0 and muon 1

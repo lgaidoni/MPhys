@@ -147,7 +147,7 @@ void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, stri
 	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
 	TH1F *histogram2 = (TH1F*)file2->Get(Histogram2RealName.c_str());
 
-	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string OutputFilePath = "~/Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ComboType + "/" + OutputFileName;
 
 	//Create a new canvas using canvasName
@@ -214,16 +214,17 @@ void QuickDrawOverlayAll(string path1, string path2, string ChainName1, string C
 
 }
 
+//This function will stack four histograms (Four different energ levels) and overlay one (EW)
 void Stack_Four_Overlay_One(string ChainName1, string ChainName2, string ChainName3, string ChainName4, string ChainName5, string DataType, string AnalysisType, string OutputFileName) {
 
 	//Create the canves
 	TCanvas *canvas = new TCanvas("NAME", "", 600, 400);
 
 	//Create the file names for the stack of four energies, 0-70, 70-140, 140-280, 280-500
-	string name1 = "~/Root-Files/" + AnalysisType + "/" + ChainName1 + "_Histograms.root";
-	string name2 = "~/Root-Files/" + AnalysisType + "/" + ChainName2 + "_Histograms.root";
-	string name3 = "~/Root-Files/" + AnalysisType + "/" + ChainName3 + "_Histograms.root";
-	string name4 = "~/Root-Files/" + AnalysisType + "/" + ChainName4 + "_Histograms.root";
+	string name1 = "../../Root-Files/" + AnalysisType + "/" + ChainName1 + "_Histograms.root";
+	string name2 = "../../Root-Files/" + AnalysisType + "/" + ChainName2 + "_Histograms.root";
+	string name3 = "../../Root-Files/" + AnalysisType + "/" + ChainName3 + "_Histograms.root";
+	string name4 = "../../Root-Files/" + AnalysisType + "/" + ChainName4 + "_Histograms.root";
 
 	//Create the file name for the EW process to be overlain
 	string name5 = "~/Root-Files/" + AnalysisType + "/" + ChainName5 + "_Histograms.root";
@@ -262,10 +263,10 @@ void Stack_Four_Overlay_One(string ChainName1, string ChainName2, string ChainNa
 	THStack *histogramStack = new THStack("histogramStack", DataType.c_str());
 
 	//Add all the histograms to the stack
-	histogramStack->Add(histogram1);
-	histogramStack->Add(histogram2);
-	histogramStack->Add(histogram3);
-	histogramStack->Add(histogram4);
+	histogramStack->Add(histogram1, "hist");
+	histogramStack->Add(histogram2, "hist");
+	histogramStack->Add(histogram3, "hist");
+	histogramStack->Add(histogram4, "hist");
 
 	//Draw the stack, actually stacking (no "nostack")
 	histogramStack->Draw("");
@@ -295,6 +296,107 @@ void Stack_Four_Overlay_One(string ChainName1, string ChainName2, string ChainNa
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
+
+}
+
+//This function is to overlay the different flavour strengths for a given set of inputs
+void Overlay_Flavour_Strengths(string ChainName1, string ChainName2, string ChainName3, string DataType, string AnalysisType, string OutputFileName) {
+
+	//Create the canves
+	TCanvas *canvas = new TCanvas("NAME", "", 600, 400);
+
+	//Create the file names for the stack of four energies, 0-70, 70-140, 140-280, 280-500
+	string name1 = "../../Root-Files/" + AnalysisType + "/" + ChainName1 + "_Histograms.root";
+	string name2 = "../../Root-Files/" + AnalysisType + "/" + ChainName2 + "_Histograms.root";
+	string name3 = "../../Root-Files/" + AnalysisType + "/" + ChainName3 + "_Histograms.root";
+
+	//Load in all the files
+	TFile *file1 = new TFile(name1.c_str());
+	TFile *file2 = new TFile(name2.c_str());
+	TFile *file3 = new TFile(name3.c_str());
+
+	//Create names for the histograms to be stacked
+	string Histogram1RealName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 1
+	string Histogram2RealName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 2
+	string Histogram3RealName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 3
+
+	//Get all the histograms from files
+	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
+	TH1F *histogram2 = (TH1F*)file2->Get(Histogram2RealName.c_str());
+	TH1F *histogram3 = (TH1F*)file3->Get(Histogram3RealName.c_str());
+
+	//Set the line colours for all the histograms
+	histogram1->SetLineColor(kRed);
+	histogram2->SetLineColor(kBlue);
+	histogram3->SetLineColor(kGreen);
+
+	//Create the stack
+	THStack *histogramStack = new THStack("histogramStack", DataType.c_str());
+
+	//Add all the histograms to the stack
+	histogramStack->Add(histogram1, "hist");
+	histogramStack->Add(histogram2, "hist");
+	histogramStack->Add(histogram3, "hist");
+
+	//Draw the stack, actually stacking (no "nostack")
+	histogramStack->Draw("");
+
+	//Create all the names for the legend
+	string Histogram1DrawName = "h_" + DataType + "_" + ChainName1 + ";1"; //Create the real(seen by code) name for histogram 1
+	string Histogram2DrawName = "h_" + DataType + "_" + ChainName2 + ";1"; //Create the real(seen by code) name for histogram 2
+	string Histogram3DrawName = "h_" + DataType + "_" + ChainName3 + ";1"; //Create the real(seen by code) name for histogram 3
+
+	//Create the legend
+	auto legend = new TLegend(0.99,0.93,0.50,0.66);
+	legend->SetHeader(DataType.c_str());
+	legend->AddEntry(histogram1, Histogram1DrawName.c_str());
+	legend->AddEntry(histogram2, Histogram2DrawName.c_str());
+	legend->AddEntry(histogram3, Histogram3DrawName.c_str());
+	legend->Draw();
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Combo_Graphs/"+ DataType + "_" + OutputFileName;
+	
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+}
+
+//This function will combine processes and write them out to a new .root file
+void Process_Combiner(string AnalysisType, string Process) {
+
+	//Vector of files that can be looped over
+	vector<TFile*> files;
+	
+	//Various strings
+	string ProcessFileName = "../../MPhys/Processes/" + AnalysisType + "/" + Process + "_Chains.txt";
+	string line;
+
+	//Open the file
+	ifstream file (ProcessFileName);
+
+	while(!file.eof()) {  //While not at the end of the file
+		getline(file, line);  //Get the file line
+		if (line != "") {  //If not looking at the last line
+			files.push_back(new TFile(line.c_str()));  //Add the file to the vector
+		}
+	}
+
+	//Get the first histogram in the vector
+	TH1F *histogramMaster = (TH1F*)files[0]->Get("h_ljet_0_p4_Pt;1");
+
+	//For all the files in the vector not counting the first...
+	for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+
+		//Get the histogram
+		TH1F *histogram = (TH1F*)(*tfile)->Get("h_ljet_0_p4_Pt;1");
+
+		//Add it to the master histogram 
+		histogramMaster->Add(histogram);
+	}
+
+	//Draw the master histogram
+	histogramMaster->Draw("SAME HIST");
 
 }
 

@@ -11,6 +11,64 @@ run_all_tau_analyses = open("../Init/Run_All_Tau_Analyses.C", "w")
 
 import os
 
+def process_line_writer(inputFile, line, Name, AnalysisType, Process):
+	if (line.find(Process) != -1): 
+		try:
+			os.makedirs("../../Root-Files/" + Process)
+		except:
+			value = 1
+		inputFile.write("../../Root-Files/" + AnalysisType + "/" + Name + "_Histograms.root\n")
+
+def process_chains_writer(AnalysisType):
+
+	ttb_process_chains = open("../Processes/" + AnalysisType + "/ttb_Chains.txt", "w")
+	Wenu_process_chains = open("../Processes/" + AnalysisType + "/Wenu_Chains.txt", "w")
+	Wmunu_process_chains = open("../Processes/" + AnalysisType + "/Wmunu_Chains.txt", "w")
+	Wtaunu_process_chains = open("../Processes/" + AnalysisType + "/Wtaunu_Chains.txt", "w")
+	Zee2jets_process_chains = open("../Processes/" + AnalysisType + "/Zee2jets_Chains.txt", "w")
+	Zee_process_chains = open("../Processes/" + AnalysisType + "/Zee_Chains.txt", "w")
+	Zmm2jets_process_chains = open("../Processes/" + AnalysisType + "/Zmm2jets_Chains.txt", "w")
+	Zmumu_process_chains = open("../Processes/" + AnalysisType + "/Zmumu_Chains.txt", "w")
+	ZqqZll_process_chains = open("../Processes/" + AnalysisType + "/ZqqZll_Chains.txt", "w")
+	Ztt2jets_process_chains = open("../Processes/" + AnalysisType + "/Ztt2jets_Chains.txt", "w")
+	Ztt_process_chains = open("../Processes/" + AnalysisType + "/Ztt_Chains.txt", "w")
+	
+	mc_locations = open("MC_Paths.txt", "r")
+
+	initial_function = 0
+	name = ""
+	ID = ""
+	counter = 0
+
+	for line in mc_locations:
+		if line[0:2] == "##":
+			counter = 0
+			name = line[2:len(line)-1]
+			process_line_writer(ttb_process_chains, line, name, AnalysisType, "_ttb_")
+			process_line_writer(Wenu_process_chains, line, name, AnalysisType, "_Wenu_")
+			process_line_writer(Wmunu_process_chains, line, name, AnalysisType, "_Wmunu_")
+			process_line_writer(Wtaunu_process_chains, line, name, AnalysisType, "_Wtaunu_")
+			process_line_writer(Zee2jets_process_chains, line, name, AnalysisType, "_Zee2jets_")
+			process_line_writer(Zee_process_chains, line, name, AnalysisType, "_Zee_")
+			process_line_writer(Zmm2jets_process_chains, line, name, AnalysisType, "_Zmm2jets_")
+			process_line_writer(Zmumu_process_chains, line, name, AnalysisType, "_Zmumu_")
+			process_line_writer(ZqqZll_process_chains, line, name, AnalysisType, "_ZqqZll")
+			process_line_writer(Ztt2jets_process_chains, line, name, AnalysisType, "_Ztt2jets_")
+			process_line_writer(Ztt_process_chains, line, name, AnalysisType, "_Ztt_")
+
+	ttb_process_chains.close()
+	Wenu_process_chains.close()
+	Wmunu_process_chains.close()
+	Wtaunu_process_chains.close()
+	Zee2jets_process_chains.close()
+	Zee_process_chains.close()
+	Zmm2jets_process_chains.close()
+	Zmumu_process_chains.close()
+	ZqqZll_process_chains.close()
+	Ztt2jets_process_chains.close()
+	Ztt_process_chains.close()
+	
+
 def analysis_start_function_writer(inputFile, IDtag, Name, AnalysisType):
 	inputFile.write("void Start_" + AnalysisType + "_" + Name + "_Analysis() {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
@@ -130,3 +188,7 @@ tau_analysis_start_functions.write("#endif")
 run_all_electron_analyses.write("\n}\n")
 run_all_muon_analyses.write("\n}\n")
 run_all_tau_analyses.write("\n}\n")
+
+mc_locations.close()
+
+process_chains_writer("Electron")
