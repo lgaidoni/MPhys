@@ -434,6 +434,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	// Here is the file Path that has Access to Processes
 	// string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/";
 	// Loop over these processes or do manually as below: 
+	DataTypeHistName = "h_" + DataType + ";1";
 
 	//Create the file names for the stack of processes
 	string name1 = "../../Root-Files/" + AnalysisType + "/Processes/Ztt_Histograms.root";
@@ -466,74 +467,63 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	//string Histogram1DataType = "h_" + DataType + "
 
 	//Get all the histograms from files depending on the Data Type
-	TH1F *histogram1 = (TH1F*)file1->Get(DataType.c_str());
-	TH1F *histogram2 = (TH1F*)file2->Get(DataType.c_str());
-	TH1F *histogram3 = (TH1F*)file3->Get(DataType.c_str());
-	TH1F *histogram4 = (TH1F*)file4->Get(DataType.c_str());
-	TH1F *histogram5 = (TH1F*)file5->Get(DataType.c_str());
-	TH1F *histogram6 = (TH1F*)file6->Get(DataType.c_str());
-	TH1F *histogram7 = (TH1F*)file7->Get(DataType.c_str());
-	TH1F *histogram8 = (TH1F*)file8->Get(DataType.c_str());
-	TH1F *histogram9 = (TH1F*)file9->Get(DataType.c_str());
-	TH1F *histogram10 = (TH1F*)file10->Get(DataType.c_str());
-	TH1F *histogram11 = (TH1F*)file11->Get(DataType.c_str());
+	TH1F *histogram1 = (TH1F*)file1->Get(DataTypeHistName.c_str());
+	TH1F *histogram2 = (TH1F*)file2->Get(DataTypeHistName.c_str());
+	TH1F *histogram3 = (TH1F*)file3->Get(DataTypeHistName.c_str());
+	TH1F *histogram4 = (TH1F*)file4->Get(DataTypeHistName.c_str());
+	TH1F *histogram5 = (TH1F*)file5->Get(DataTypeHistName.c_str());
+	TH1F *histogram6 = (TH1F*)file6->Get(DataTypeHistName.c_str());
+	TH1F *histogram7 = (TH1F*)file7->Get(DataTypeHistName.c_str());
+	TH1F *histogram8 = (TH1F*)file8->Get(DataTypeHistName.c_str());
+	TH1F *histogram9 = (TH1F*)file9->Get(DataTypeHistName.c_str());
+	TH1F *histogram10 = (TH1F*)file10->Get(DataTypeHistName.c_str());
+	TH1F *histogram11 = (TH1F*)file11->Get(DataTypeHistName.c_str());
 
 	//Create the stacked histogram
 	THStack *histogramStack = new THStack("histogramStack", DataType.c_str());
 
 	//Set the line colours for all the histograms, fill
 	histogram1->SetLineColor(kRed-7);
-	histogram1->FillRandom("gaus",20000);
 	histogram1->SetMarkerStyle(29);
 	histogram1->SetMarkerColor(kRed-7);
 
 	histogram2->SetLineColor(kBlue-9);
-	histogram2->FillRandom("gaus",20000);
 	histogram2->SetMarkerStyle(18);
 	histogram2->SetMarkerColor(kBlue-9);
 
 	histogram3->SetLineColor(kGreen-7);
-	histogram3->FillRandom("gaus",20000);
 	histogram3->SetMarkerStyle(21);
 	histogram3->SetMarkerColor(kGreen-7);
 
 	histogram4->SetLineColor(kYellow+2);
-	histogram4->FillRandom("gaus",20000);
 	histogram4->SetMarkerStyle(3144);
 	histogram4->SetMarkerColor(kYellow+2);
 
 	histogram5->SetLineColor(kAzure+10);
-	histogram5->FillRandom("gaus",20000);
 	histogram5->SetMarkerStyle(59);
 	histogram5->SetMarkerColor(kAzure+10);
 
 	histogram6->SetLineColor(kGreen-8);
-	histogram6->FillRandom("gaus",20000);
 	histogram6->SetMarkerStyle(3359);
 	histogram6->SetMarkerColor(kGreen-8);
 
 	histogram7->SetLineColor(kViolet-6);
-	histogram7->FillRandom("gaus",20000);
 	histogram7->SetMarkerStyle(78);
 	histogram7->SetMarkerColor(kViolet-6);
 
 	histogram8->SetLineColor(kOrange-3);
-	histogram8->FillRandom("gaus",20000);
 	histogram8->SetMarkerStyle(3018);
 	histogram8->SetMarkerColor(kOrange-3);
 
 	histogram9->SetLineColor(kCyan-8);
-	histogram9->FillRandom("gaus",20000);
 	histogram9->SetMarkerStyle(3325);
 	histogram9->SetMarkerColor(kCyan-8);
 
 	histogram10->SetLineColor(kGray);
-	histogram10->FillRandom("gaus",20000);
 	histogram10->SetMarkerStyle(3011);
 	histogram10->SetMarkerColor(kGray);
 
 	histogram11->SetLineColor(kMagenta-10);
-	histogram11->FillRandom("gaus",20000);
 	histogram11->SetMarkerStyle(0);
 	histogram11->SetMarkerColor(kMagenta-10);
 
@@ -581,12 +571,14 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	legend->Draw();
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Init/"+ DataType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	
 	//Write out to a PDF file
 	histogramStack->SaveAs(FullOutputFilePath.c_str());
 
 }
+
+/*
 
 // Data and stacked for specific data types
 void Data_and_Stack(string AnalysisType, string DataType, string DataTypeHistogram, string DataStackHistogram) {
@@ -596,8 +588,8 @@ void Data_and_Stack(string AnalysisType, string DataType, string DataTypeHistogr
 
 	// find histogram path
 	// data and stack
-	string ROOTDataFilePath = "../../Root-Files/" + AnalysisType + "/DATA_Histograms.root/";
-	string ROOTStackFilePath = "../../Init/" + DataType + "/" + DataTypeHistogram;
+	string ROOTDataFilePath = "../../Root-Files/" + AnalysisType + "/DATA_Histograms.root";
+	string ROOTStackFilePath = "../../Root-Files/" + AnalysisType + "/" + DataTypeHistogram;
 
 	//Load in all the files for the data and stacks
 	TFile *file1 = new TFile(ROOTDataFilePath.c_str());   // DATA
@@ -613,15 +605,20 @@ void Data_and_Stack(string AnalysisType, string DataType, string DataTypeHistogr
 	
 	string datahistogramDrawName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 1
 	string stackhistogramDrawName = "h_" + DataType + ";1";
+
+	//Create the legend
+	auto legend = new TLegend(0.99,0.93,0.50,0.66);
 	legend->Draw();
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Init/"+ DataType + "/" + DataStackHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	
 	//Write out to a PDF file
-	histogramStack->SaveAs(FullOutputFilePath.c_str());
+	histogramDataStack->SaveAs(FullOutputFilePath.c_str());
 
 }
+
+*/
 
 
 
