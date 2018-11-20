@@ -394,23 +394,36 @@ void Process_Combiner(string AnalysisType, string Process) {
 
 	file.close();
 
-	//Get the first histogram in the vector
-	TH1F *histogramMaster = (TH1F*)files[0]->Get("h_ljet_0_p4_Pt;1");
+	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
+	ifstream DataTypeFile (DataTypeFileName);
 
-	//For all the files in the vector not counting the first...
-	for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
-
-		//Get the histogram
-		TH1F *histogram = (TH1F*)(*tfile)->Get("h_ljet_0_p4_Pt;1");
-
-		//Add it to the master histogram 
-		histogramMaster->Add(histogram);
-	}
-
-	//Draw the master histogram
-	histogramMaster->Draw("SAME HIST");
 	
-	Histograms->Close();
+	while(!DataTypeFile.eof()) {  //While not at the end of the file
+		getline(DataTypeFile, line);  //Get the file line
+		if (line != "") {  //If not looking at the last line	
+
+			//Get the first histogram in the vector
+			string histogramName = "h_" + line + ";1";
+			TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
+
+			//For all the files in the vector not counting the first...
+			for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+
+				//Get the histogram
+				TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
+
+				//Add it to the master histogram 
+				histogramMaster->Add(histogram);
+
+			}
+
+			//Draw the master histogram
+			Histograms->cd();
+			histogramMaster->Draw("HIST");
+			histogramMaster->Write();
+
+		}
+	}
 
 }
 

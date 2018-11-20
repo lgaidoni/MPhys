@@ -62,15 +62,15 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 
 		#To fill the _FillAllData_PreCut Function inside SOMETHING_Analysis.h
 		_FillAllData_PreCut.write("\t//Pre-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_PreCut.write("\th_" + leafName + "_" + TLorentzName + "_PRE->Fill(" + leafName + "->" + TLorentzName + "(), Luminosity_Weight * weight_total);\n\n")
+		_FillAllData_PreCut.write("\th_" + leafName + "_" + TLorentzName + "_PRE->Fill(" + leafName + "->" + TLorentzName + "());\n\n")
 
 		#To fill the ControlCut section inside SOMETHING_Analysis.h
 		_FillAllData_ControlCut.write("\t//Control-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_ControlCut.write("\th_" + leafName + "_" + TLorentzName + "_CONTROL->Fill(" + leafName + "->" + TLorentzName + "(), Luminosity_Weight * weight_total);\n\n")
+		_FillAllData_ControlCut.write("\th_" + leafName + "_" + TLorentzName + "_CONTROL->Fill(" + leafName + "->" + TLorentzName + "());\n\n")
 
 		#To fill the PostCut Section inside SOMETHING_Analysis.h
 		_FillAllData_PostCut.write("\t//Post-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
-		_FillAllData_PostCut.write("\th_" + leafName + "_" + TLorentzName + "->Fill(" + leafName + "->" + TLorentzName + "(), Luminosity_Weight * weight_total);\n\n")
+		_FillAllData_PostCut.write("\th_" + leafName + "_" + TLorentzName + "->Fill(" + leafName + "->" + TLorentzName + "());\n\n")
 
 		#To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 		_DrawHistos.write("\t//Histogram Draw (Quiet) Functions for " + leafName + "_" + TLorentzName + "\n")
@@ -241,11 +241,11 @@ for line in DATA_Analysis:
 
 #Header Declaration for C++ headers
 Histo_Custom_Book_Functions.write("#ifndef Histo_Book_Functions_AutoGen_Custom_DATA_h\n")
-Histo_Custom_Book_Functions.write("#define Histo_Book_Functions_AutoGen_Custom__DATAh\n\n")
+Histo_Custom_Book_Functions.write("#define Histo_Book_Functions_AutoGen_Custom_DATA_h\n\n")
 
 #Header Declaration for C++ headers
-Histo_Custom_Book_Definitions.write("#ifndef Histo_Book_Definitions_AutoGen_Custom__DATAh\n")
-Histo_Custom_Book_Definitions.write("#define Histo_Book_Definitions_AutoGen_Custom__DATAh\n\n")
+Histo_Custom_Book_Definitions.write("#ifndef Histo_Book_Definitions_AutoGen_Custom_DATA_h\n")
+Histo_Custom_Book_Definitions.write("#define Histo_Book_Definitions_AutoGen_Custom_DATA_h\n\n")
 
 for line in Custom_Histos:
 	

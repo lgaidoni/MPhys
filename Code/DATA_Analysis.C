@@ -58,7 +58,6 @@ void DATA_Analysis::Loop() {
    cout << "Number of Entries:   " << nentries << endl;
    cout << "Analysis Type:       " << AnalysisType << endl;
    cout << "Chain Name:          " << ChainName << endl;
-   cout << "Luminosity Weight:   " << Luminosity_Weight << endl;
    cout << "Start Time:          " << start/CLOCKS_PER_SEC << endl;
    cout << endl << "-------------------- " << AnalysisType << endl;
 
@@ -107,6 +106,9 @@ void DATA_Analysis::Loop() {
 			Electron_CutAndFill();
 		}
 	}
+
+	/*
+
 	/// Zmumu2Jets
 	if (AnalysisType == "Muon") {
 		if (Muon_InitialCut() == false) { // if we're not cutting
@@ -115,6 +117,8 @@ void DATA_Analysis::Loop() {
 			Muon_CutAndFill();
 		}
 	}
+
+	*/
 
 
 

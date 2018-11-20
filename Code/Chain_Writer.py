@@ -84,7 +84,7 @@ def run_all_analyses_writer_top(inputFile, AnalysisType):
 	inputFile.write("#include \"TROOT.h\"\n")
 	inputFile.write("using namespace std;\n")
 	inputFile.write("void Run_All_" + AnalysisType + "_Analyses() {\n\n")
-	inputFile.write("\tgROOT->ProcessLine(\".x ../Code/MC_Analysis.C\");")
+	inputFile.write("\tgROOT->ProcessLine(\".x ../Code/MC_Analysis.C\");\n")
 
 def run_all_analyses_writer_centre(inputFile, Name, AnalysisType):
 	inputFile.write("\tgROOT->ProcessLine(\"Start_" + AnalysisType + "_" + Name + "_Analysis()\");\n")
