@@ -4,7 +4,7 @@
 using namespace std;
 void Run_All_Zee_Analyses() {
 
-	gROOT->ProcessLine(".x ../../Code/MC_Analysis.C");
+	gROOT->ProcessLine(".x ../Code/MC_Analysis.C");
 	gROOT->ProcessLine("Start_Electron_Sh221_PDF30_Zee_MV280_500_CFilBVet_Analysis()");
 	gROOT->ProcessLine("Start_Electron_Sh221_PDF30_Zee_MV0_70_BFil_Analysis()");
 	gROOT->ProcessLine("Start_Electron_Sh221_PDF30_Zee_MV140_280_BFil_Analysis()");
