@@ -434,7 +434,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	// Here is the file Path that has Access to Processes
 	// string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/";
 	// Loop over these processes or do manually as below: 
-	DataTypeHistName = "h_" + DataType + ";1";
+	string DataTypeHistName = "h_" + DataType + ";1";
 
 	//Create the file names for the stack of processes
 	string name1 = "../../Root-Files/" + AnalysisType + "/Processes/Ztt_Histograms.root";
