@@ -26,10 +26,10 @@ public :
 
 	///---------------------------- OUR FUNCTION DEFINITIONS ---------------------------///
 	//Electron Definitions
-	#include "Electron_Function_Definitions_DATA.h"
+	#include "Electron_Function_Definitions.h"
 
 	//Muon Definitions
-	#include "Muon_Function_Definitions_DATA.h"
+	//#include "Muon_Function_Definitions.h"
 
 	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program
@@ -41,7 +41,6 @@ public :
 	/////-------------------------CUSTOM VARIABLE DEFINITIONS-------------------------/////
 	string AnalysisType;
 	string ChainName;
-	double Luminosity_Weight;
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
@@ -1020,6 +1019,9 @@ public :
    TBranch        *b_tau_1_type;   //!
 
    DATA_Analysis(TTree *tree=0);
+   DATA_Analysis(TTree *tree, string analysistype, string chainname);
+   DATA_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
+   DATA_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~DATA_Analysis();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
@@ -1046,6 +1048,48 @@ DATA_Analysis::DATA_Analysis(TTree *tree) : fChain(0)
 
    }
    Init(tree);
+}
+
+DATA_Analysis::DATA_Analysis(TTree *tree, string analysistype, string chainname) : fChain(0) 
+{
+// if parameter tree is not specified (or zero), connect the file
+// used to generate this class and read the Tree.
+   if (tree == 0) {
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+      if (!f || !f->IsOpen()) {
+         f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+      }
+      f->GetObject("NOMINAL",tree);
+
+   }
+   Init(tree);
+   AnalysisType = analysistype;
+   ChainName = chainname;
+}
+
+//This will read in a file located at fileLocation (Will only read MC data)
+DATA_Analysis::DATA_Analysis(string fileLocation) : fChain(0) 
+{
+    TTree *tree;
+    TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fileLocation.c_str());
+    if (!f || !f->IsOpen()) {
+       f = new TFile(fileLocation.c_str());
+    }
+    f->GetObject("NOMINAL",tree);
+    Init(tree);
+}
+
+//This will read in a file located at fileLocation (Will only read MC data)
+DATA_Analysis::DATA_Analysis(string fileLocation, string analysistype) : fChain(0) 
+{
+    TTree *tree;
+    TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject(fileLocation.c_str());
+    if (!f || !f->IsOpen()) {
+       f = new TFile(fileLocation.c_str());
+    }
+    f->GetObject("NOMINAL",tree);
+    Init(tree);
+    AnalysisType = analysistype;
 }
 
 DATA_Analysis::~DATA_Analysis()
@@ -1621,4 +1665,16 @@ Int_t DATA_Analysis::Cut(Long64_t entry)
 // returns -1 otherwise.
    return 1;
 }
+
+//Include lives here, because root will have read the class information by the time it gets here
+//This means DATA_Analysis will exist when this header is loaded
+#include "Histo_Book_Functions_AutoGen_DATA.h"
+#include "Histo_Book_Functions_AutoGen_Custom_DATA.h"
+#include "Generic_Functions.h"
+#include "Specific_Functions.h"
+#include "Chain_Functions_DATA.h"
+
+
+
+
 #endif // #ifdef DATA_Analysis_cxx
