@@ -13,10 +13,6 @@ import os
 
 def process_line_writer(inputFile, line, Name, AnalysisType, Process):
 	if (line.find(Process) != -1): 
-		try:
-			os.makedirs("../../Root-Files/" + Process)
-		except:
-			value = 1
 		inputFile.write("../../Root-Files/" + AnalysisType + "/" + Name + "_Histograms.root\n")
 
 def process_chains_writer(AnalysisType):
@@ -118,6 +114,13 @@ initial_function = 0
 name = ""
 ID = ""
 counter = 0
+
+try:
+	os.makedirs("../../Root-Files/Electron/Processes")
+	os.makedirs("../../Root-Files/Muon/Processes")
+	os.makedirs("../../Root-Files/Tau/Processes")
+except:
+	value = 1
 
 for line in mc_locations:
 
