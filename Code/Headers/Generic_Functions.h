@@ -367,6 +367,16 @@ void Process_Combiner(string AnalysisType, string Process) {
 
 	//Vector of files that can be looped over
 	vector<TFile*> files;
+
+	//String for the root file path
+	string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/" + Process + "_Histograms.root";
+
+	TFile *Histograms;
+
+	//Open/Create the root file
+	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
+	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
+	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
 	
 	//Various strings
 	string ProcessFileName = "../../MPhys/Processes/" + AnalysisType + "/" + Process + "_Chains.txt";
@@ -381,6 +391,8 @@ void Process_Combiner(string AnalysisType, string Process) {
 			files.push_back(new TFile(line.c_str()));  //Add the file to the vector
 		}
 	}
+
+	file.close();
 
 	//Get the first histogram in the vector
 	TH1F *histogramMaster = (TH1F*)files[0]->Get("h_ljet_0_p4_Pt;1");
@@ -397,6 +409,8 @@ void Process_Combiner(string AnalysisType, string Process) {
 
 	//Draw the master histogram
 	histogramMaster->Draw("SAME HIST");
+	
+	Histograms->Close();
 
 }
 

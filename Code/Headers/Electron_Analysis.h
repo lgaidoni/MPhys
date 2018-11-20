@@ -454,8 +454,8 @@ void MC_Analysis::Electron_DrawHistos() {
 	TFile *Histograms;
 	string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/" + ChainName + "_Histograms.root";
 
-	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
-	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) TFile *Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
+	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
+	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
 	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
 	//Draw histogram function takes the following:
@@ -522,7 +522,7 @@ void MC_Analysis::Electron_DrawHistos() {
 	DrawHistogram_Quiet(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL", "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + ChainName + " data set;Centrality;Events", 600, 400, false, "h_Centrality_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality", ";Centrality;Events", 600, 400, false, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
-//	Histograms->Close();
+	Histograms->Close();
 
 }
 
