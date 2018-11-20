@@ -445,9 +445,9 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	string name6 = "../../Root-Files/" + AnalysisType + "/Processes/Zee_Histograms.root";
 	string name7 = "../../Root-Files/" + AnalysisType + "/Processes/Zee2jets_Histograms.root";
 	string name8 = "../../Root-Files/" + AnalysisType + "/Processes/Wtaunu_Histograms.root";
-	string name9 = "../../Root-Files/" + AnalysisType + "/Processes/Wmumu_Histograms.root";
+	string name9 = "../../Root-Files/" + AnalysisType + "/Processes/Wmunu_Histograms.root";
 	string name10 = "../../Root-Files/" + AnalysisType + "/Processes/Wenu_Histograms.root";
-	string name11 = "../../Root-Files/" + AnalysisType + "/Processes/tbb_Histograms.root";
+	string name11 = "../../Root-Files/" + AnalysisType + "/Processes/ttb_Histograms.root";
 
 	//Load in all the files for the different processes, there are 11
 	TFile *file1 = new TFile(name1.c_str());   // Ztt
