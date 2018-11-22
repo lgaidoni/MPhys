@@ -6,3 +6,8 @@ DeltaR
 Centrality
 ljet_0_p4_Pt_CONTROL
 ljet_1_p4_Pt_CONTROL
+ljet_0_ljet_1_mass_CONTROL
+elec_0_elec_1_mass_CONTROL
+DeltaR_CONTROL
+Centrality_CONTROL
+
