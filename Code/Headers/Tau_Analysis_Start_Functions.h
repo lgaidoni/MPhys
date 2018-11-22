@@ -841,4 +841,12 @@ void Start_Tau_Sh221_PDF30_Wtaunu_MV1000_E_CMS_Analysis() {
 	Sh221_PDF30_Wtaunu_MV1000_E_CMS->Tau_DrawHistos();
 }
 
+void Start_Tau_DATA_Analysis() {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA = new MC_Analysis(Chain_DATA(), "Tau", "DATA", 1);
+	DATA->Tau_BookHistos();
+	DATA->Loop();
+	DATA->Tau_DrawHistos();
+}
+
 #endif

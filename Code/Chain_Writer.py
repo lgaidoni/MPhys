@@ -1,4 +1,5 @@
 mc_locations = open("MC_Paths.txt", "r") # Open the MC Paths for files that need merging
+data_locations = open("Data_Paths.txt", "r") # Open the DATA Paths for files that need merging
 chain_functions = open("Headers/Chain_Functions.h", "w")
 N_functions = open("Headers/N_Functions.h", "w")
 electron_analysis_start_functions = open("Headers/Electron_Analysis_Start_Functions.h", "w")
@@ -73,6 +74,17 @@ def analysis_start_function_writer(inputFile, IDtag, Name, AnalysisType):
 	inputFile.write("\tdouble lum_weight = luminosity_weighting_function(luminosity_info, N_" + Name + "(), 36200);\n")
 		
 	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), \"" + AnalysisType + "\", \"" + Name + "\", lum_weight);\n")
+	inputFile.write("\t" + Name + "->" + AnalysisType + "_BookHistos();\n")
+	inputFile.write("\t" + Name + "->Loop();\n")
+	inputFile.write("\t" + Name + "->" + AnalysisType + "_DrawHistos();\n")
+	
+	inputFile.write("}\n\n")
+
+def analysis_start_function_writer_data(inputFile, IDtag, Name, AnalysisType):
+	inputFile.write("void Start_" + AnalysisType + "_" + Name + "_Analysis() {\n")
+	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
+
+	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), \"" + AnalysisType + "\", \"" + Name + "\", 1);\n")
 	inputFile.write("\t" + Name + "->" + AnalysisType + "_BookHistos();\n")
 	inputFile.write("\t" + Name + "->Loop();\n")
 	inputFile.write("\t" + Name + "->" + AnalysisType + "_DrawHistos();\n")
@@ -178,11 +190,49 @@ for line in mc_locations:
 
 chain_functions.write("return NOMINAL;\n")
 chain_functions.write("} \n\n")
-chain_functions.write("#endif")
 
 N_functions.write("return N;\n")
 N_functions.write("} \n\n")
 N_functions.write("#endif")
+
+mc_locations.close()
+
+name = "DATA"
+ID = ""
+counter = 0
+
+run_all_analyses_writer_centre(run_all_electron_analyses, "DATA", "Electron")
+run_all_analyses_writer_centre(run_all_muon_analyses, "DATA", "Muon")
+run_all_analyses_writer_centre(run_all_tau_analyses, "DATA", "Tau")
+
+chain_functions.write("//Chain Return function for DATA\n")
+chain_functions.write("TChain *Chain_DATA() {\n\n")
+
+chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
+
+for line in data_locations:
+
+	if line[0:2] == "##":
+		counter = 0
+
+
+	elif line[0:2] == "@@":
+		ID = line[2:len(line)-1]
+
+
+	else:
+		counter = counter + 1
+		chain_functions.write("\tNOMINAL->Add(\"" + line[0:len(line)-1]  + "\");\n")
+
+analysis_start_function_writer_data(electron_analysis_start_functions, ID, name, "Electron")
+analysis_start_function_writer_data(muon_analysis_start_functions, ID, name, "Muon")
+analysis_start_function_writer_data(tau_analysis_start_functions, ID, name, "Tau")
+
+chain_functions.write("\treturn NOMINAL;\n")
+chain_functions.write("} \n\n")
+
+process_chains_writer("Electron")
+chain_functions.write("#endif")
 
 electron_analysis_start_functions.write("#endif")
 muon_analysis_start_functions.write("#endif")
@@ -191,7 +241,3 @@ tau_analysis_start_functions.write("#endif")
 run_all_electron_analyses.write("\n}\n")
 run_all_muon_analyses.write("\n}\n")
 run_all_tau_analyses.write("\n}\n")
-
-mc_locations.close()
-
-process_chains_writer("Electron")
