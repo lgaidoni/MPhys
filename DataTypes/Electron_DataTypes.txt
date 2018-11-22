@@ -6,6 +6,8 @@ ljet_0_ljet_1_mass
 elec_0_elec_1_mass
 DeltaR
 Centrality
+ljet_0_p4_Pt_CONTROL
+ljet_1_p4_Pt_CONTROL
 ljet_0_p4_Pt_PRE
 ljet_1_p4_Pt_PRE
 elec_0_p4_Pt_PRE
