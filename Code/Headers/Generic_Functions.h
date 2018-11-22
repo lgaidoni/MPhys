@@ -424,6 +424,8 @@ void Process_Combiner(string AnalysisType, string Process) {
 
 		}
 	}
+	
+	Histograms->Close();
 
 }
 
@@ -431,10 +433,13 @@ void Process_Combiner(string AnalysisType, string Process) {
 // need to give it the analysis type and then for given, tells it the path
 void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram) {
 
+	string DataTypeHistName = "h_" + DataType + ";1";
+
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+
 	// Here is the file Path that has Access to Processes
 	// string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/";
 	// Loop over these processes or do manually as below: 
-	string DataTypeHistName = "h_" + DataType + ";1";
 
 	//Create the file names for the stack of processes
 	string name1 = "../../Root-Files/" + AnalysisType + "/Processes/Ztt_Histograms.root";
@@ -449,6 +454,8 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	string name10 = "../../Root-Files/" + AnalysisType + "/Processes/Wenu_Histograms.root";
 	string name11 = "../../Root-Files/" + AnalysisType + "/Processes/ttb_Histograms.root";
 
+	string name12 = "../../Root-Files/" + AnalysisType + "/DATA_Histograms.root";
+
 	//Load in all the files for the different processes, there are 11
 	TFile *file1 = new TFile(name1.c_str());   // Ztt
 	TFile *file2 = new TFile(name2.c_str());   // Ztt2jets
@@ -461,6 +468,8 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	TFile *file9 = new TFile(name9.c_str());   // Wmumu
 	TFile *file10 = new TFile(name10.c_str()); // Wenu
 	TFile *file11= new TFile(name11.c_str());  // tbb
+
+	TFile *file12= new TFile(name12.c_str());  // DATA
 
 
 	// Create names depending on the Data Type, for the histograms we are stacking
@@ -479,53 +488,38 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	TH1F *histogram10 = (TH1F*)file10->Get(DataTypeHistName.c_str());
 	TH1F *histogram11 = (TH1F*)file11->Get(DataTypeHistName.c_str());
 
+	TH1F *histogram12 = (TH1F*)file12->Get(DataTypeHistName.c_str());
+
 	//Create the stacked histogram
-	THStack *histogramStack = new THStack("histogramStack", DataType.c_str());
+	THStack *histogramStack = new THStack("histogramStack", "");
 
 	//Set the line colours for all the histograms, fill
 	histogram1->SetLineColor(kRed-7);
-	histogram1->SetMarkerStyle(29);
-	histogram1->SetMarkerColor(kRed-7);
 
 	histogram2->SetLineColor(kBlue-9);
-	histogram2->SetMarkerStyle(18);
-	histogram2->SetMarkerColor(kBlue-9);
 
 	histogram3->SetLineColor(kGreen-7);
-	histogram3->SetMarkerStyle(21);
-	histogram3->SetMarkerColor(kGreen-7);
 
 	histogram4->SetLineColor(kYellow+2);
-	histogram4->SetMarkerStyle(3144);
-	histogram4->SetMarkerColor(kYellow+2);
 
 	histogram5->SetLineColor(kAzure+10);
-	histogram5->SetMarkerStyle(59);
-	histogram5->SetMarkerColor(kAzure+10);
 
 	histogram6->SetLineColor(kGreen-8);
-	histogram6->SetMarkerStyle(3359);
-	histogram6->SetMarkerColor(kGreen-8);
 
 	histogram7->SetLineColor(kViolet-6);
-	histogram7->SetMarkerStyle(78);
-	histogram7->SetMarkerColor(kViolet-6);
 
 	histogram8->SetLineColor(kOrange-3);
-	histogram8->SetMarkerStyle(3018);
-	histogram8->SetMarkerColor(kOrange-3);
 
 	histogram9->SetLineColor(kCyan-8);
-	histogram9->SetMarkerStyle(3325);
-	histogram9->SetMarkerColor(kCyan-8);
 
 	histogram10->SetLineColor(kGray);
-	histogram10->SetMarkerStyle(3011);
-	histogram10->SetMarkerColor(kGray);
 
 	histogram11->SetLineColor(kMagenta-10);
-	histogram11->SetMarkerStyle(0);
-	histogram11->SetMarkerColor(kMagenta-10);
+
+	histogram12->Sumw2();
+	histogram12->SetLineColor(kBlack);
+	histogram12->SetMarkerStyle(8);
+	histogram12->SetMarkerSize(0.3);
 
 	//  and add to the stack
 	histogramStack->Add(histogram1, "hist");
@@ -541,86 +535,50 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	histogramStack->Add(histogram11, "hist");
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
 
-	//Create all the names for the legend
-	string Histogram1DrawName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 1
-	string Histogram2DrawName = "h_" + DataType + ";1";
-	string Histogram3DrawName = "h_" + DataType + ";1"; 
-	string Histogram4DrawName = "h_" + DataType + ";1"; 
-	string Histogram5DrawName = "h_" + DataType + ";1"; 
-	string Histogram6DrawName = "h_" + DataType + ";1"; 
-	string Histogram7DrawName = "h_" + DataType + ";1";
-	string Histogram8DrawName = "h_" + DataType + ";1";
-	string Histogram9DrawName = "h_" + DataType + ";1";
-	string Histogram10DrawName = "h_" + DataType + ";1";
-	string Histogram11DrawName = "h_" + DataType + ";1";
+	histogram12->Draw("SAME");
+
+	canvas->SetLogy();
 
 	//Create the legend
-	auto legend = new TLegend(0.99,0.93,0.50,0.66);
+	auto legend = new TLegend(0.99,0.93,0.75,0.66);
 	legend->SetHeader(DataType.c_str());
-	legend->AddEntry(histogram1, Histogram1DrawName.c_str());
-	legend->AddEntry(histogram2, Histogram2DrawName.c_str());
-	legend->AddEntry(histogram3, Histogram3DrawName.c_str());
-	legend->AddEntry(histogram4, Histogram4DrawName.c_str());
-	legend->AddEntry(histogram5, Histogram5DrawName.c_str());
-	legend->AddEntry(histogram6, Histogram6DrawName.c_str());
-	legend->AddEntry(histogram7, Histogram7DrawName.c_str());
-	legend->AddEntry(histogram8, Histogram8DrawName.c_str());
-	legend->AddEntry(histogram9, Histogram9DrawName.c_str());
-	legend->AddEntry(histogram10, Histogram10DrawName.c_str());
-	legend->AddEntry(histogram11, Histogram11DrawName.c_str());
+	legend->AddEntry(histogram12, "Data");
+	legend->AddEntry(histogram1, "Ztt");
+	legend->AddEntry(histogram2, "Ztt2jets");
+	legend->AddEntry(histogram3, "ZqqZll");
+	legend->AddEntry(histogram4, "Zmumu");
+	legend->AddEntry(histogram5, "Zmm2jets");
+	legend->AddEntry(histogram6, "Zee");
+	legend->AddEntry(histogram7, "Zee2jets");
+	legend->AddEntry(histogram8, "Wtaunu");
+	legend->AddEntry(histogram9, "Wmunu");
+	legend->AddEntry(histogram10, "Wenu");
+	legend->AddEntry(histogram11, "ttb");
 	legend->Draw();
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	
 	//Write out to a PDF file
-	histogramStack->SaveAs(FullOutputFilePath.c_str());
+	canvas->SaveAs(FullOutputFilePath.c_str());
 
 }
 
-/*
+void DrawStackedProcesses(string AnalysisType) {
 
-// Data and stacked for specific data types
-void Data_and_Stack(string AnalysisType, string DataType, string DataTypeHistogram, string DataStackHistogram) {
+	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
+	ifstream DataTypeFile (DataTypeFileName);
+	string line;
 
-	// Create new histogram for stacking data and stacks
-	THStack *histogramDataStack = new THStack("histogramDataStack", DataType.c_str());
-
-	// find histogram path
-	// data and stack
-	string ROOTDataFilePath = "../../Root-Files/" + AnalysisType + "/DATA_Histograms.root";
-	string ROOTStackFilePath = "../../Root-Files/" + AnalysisType + "/" + DataTypeHistogram;
-
-	//Load in all the files for the data and stacks
-	TFile *file1 = new TFile(ROOTDataFilePath.c_str());   // DATA
-	TFile *file2 = new TFile(ROOTStackFilePath.c_str());   // STACK
-
-	// Get the histograms
-	TH1F *datahistogram = (TH1F*)file1->Get(DataType.c_str());
-	TH1F *stackhistogram = (TH1F*)file2->Get(DataType.c_str());
-
-	//Add them to the stack
-	histogramDataStack->Add(datahistogram, "hist");
-	histogramDataStack->Add(stackhistogram, "hist");
 	
-	string datahistogramDrawName = "h_" + DataType + ";1"; //Create the real(seen by code) name for histogram 1
-	string stackhistogramDrawName = "h_" + DataType + ";1";
-
-	//Create the legend
-	auto legend = new TLegend(0.99,0.93,0.50,0.66);
-	legend->Draw();
-
-	//Create the full output file path
-	string FullOutputFilePath = "../../Init/"+ DataType + "/" + DataStackHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
-	
-	//Write out to a PDF file
-	histogramDataStack->SaveAs(FullOutputFilePath.c_str());
-
+	while(!DataTypeFile.eof()) {  //While not at the end of the file
+		getline(DataTypeFile, line);  //Get the file line
+		if (line != "") {  //If not looking at the last line	
+			string fileName =  line + "_" + AnalysisType + "Final_Stacked_" + ".pdf";
+			Process_Stacker("Electron", line, fileName);
+		}
+	}
 }
-
-*/
-
-
 
 /////////////////////////////// VARIABLES /////////////////////////////// 
 /////////////////////////////// VARIABLES /////////////////////////////// 
