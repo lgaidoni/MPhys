@@ -63,7 +63,7 @@ void MC_Analysis::Loop() {
    cout << "Chain Name:          " << ChainName << endl;
    cout << "Luminosity Weight:   " << Luminosity_Weight << endl;
    cout << "Start Time:          " << start/CLOCKS_PER_SEC << endl;
-   cout << endl << "-------------------- " << AnalysisType << endl;
+   cout << endl << "-------------- " << AnalysisType << endl;
 
    //Loop over all the entries in jentry
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
@@ -90,13 +90,27 @@ void MC_Analysis::Loop() {
 	}
 
 	if (jentry % 500 == 0) {
-	
-		if (current_indicator == 0)      {cout << "                     " << "|"; current_indicator = 1;}
-		else if (current_indicator == 1) {cout << "                     " << "/"; current_indicator = 2;}
-		else if (current_indicator == 2) {cout << "                     " << "—"; current_indicator = 3;}
-		else if (current_indicator == 3) {cout << "                     " << "\\"; current_indicator = 0;}
 
-		cout << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%\r" << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << "\r";
+		for (int i = 0; i < 77; i++) {
+			double percentage = (entry_count / max_entries) * 100;
+			int percentageint = (int)(percentage/2 + 27);
+			if (i < 26) cout << " ";
+			if (i == 26) cout << "[";
+			if (i > 26 && i < percentageint) cout << "=";
+			if (i == percentageint) cout << ">";
+			if (i > percentageint && i < 77) cout << " ";
+			if (i == 76) cout << "]";
+		}
+
+		cout << "\r";
+	
+		if (current_indicator == 0)      {cout << "               " << "|"; current_indicator = 1;}
+		else if (current_indicator == 1) {cout << "               " << "/"; current_indicator = 2;}
+		else if (current_indicator == 2) {cout << "               " << "—"; current_indicator = 3;}
+		else if (current_indicator == 3) {cout << "               " << "\\"; current_indicator = 0;}
+
+		cout << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%\r" << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << "\r";		
+		
 		cout.flush();
 
 	}
@@ -123,7 +137,7 @@ void MC_Analysis::Loop() {
 
 	
       }
-   cout << "                     * 100.0%" << endl;
-   cout << "-------------------- Complete" << endl << endl;
+   cout << "               * 100.000% [==================================================]" << endl;
+   cout << "-------------- Complete" << endl << endl;
 
 }

@@ -42,6 +42,7 @@ public :
 	string AnalysisType;
 	string ChainName;
 	double Luminosity_Weight;
+	bool weight_total_override;
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
@@ -1648,6 +1649,13 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, dou
    AnalysisType = analysistype;
    ChainName = chainname;
    Luminosity_Weight = luminosity_weight;
+   if (ChainName == "DATA") {
+
+	Luminosity_Weight = 1;
+	weight_total_override = true;
+
+   }
+   else weight_total_override = false;
 }
 
 MC_Analysis::~MC_Analysis()
