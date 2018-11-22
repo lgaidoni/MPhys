@@ -161,6 +161,8 @@ void MC_Analysis::Electron_GenerateVariables() {
 // This function will fill the histograms that need to be filled before cuts are made
 void MC_Analysis::Electron_FillAllData_PreCut() {
 
+	if (weight_total_override) weight_total = 1;
+
 	#include "_FillAllData_PreCut.h"
 
 	//ptvarcones
@@ -190,6 +192,8 @@ void MC_Analysis::Electron_FillAllData_PreCut() {
 }
 
 void MC_Analysis::Electron_CutAndFill() {
+
+	if (weight_total_override) weight_total = 1;
 
 	//false means failed the cut, true means passed the cut
 
