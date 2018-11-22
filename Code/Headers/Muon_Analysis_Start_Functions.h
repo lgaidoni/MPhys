@@ -841,4 +841,12 @@ void Start_Muon_Sh221_PDF30_Wtaunu_MV1000_E_CMS_Analysis() {
 	Sh221_PDF30_Wtaunu_MV1000_E_CMS->Muon_DrawHistos();
 }
 
+void Start_Muon_DATA_Analysis() {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA = new MC_Analysis(Chain_DATA(), "Muon", "DATA", 1);
+	DATA->Muon_BookHistos();
+	DATA->Loop();
+	DATA->Muon_DrawHistos();
+}
+
 #endif

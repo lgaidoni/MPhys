@@ -841,4 +841,12 @@ void Start_Electron_Sh221_PDF30_Wtaunu_MV1000_E_CMS_Analysis() {
 	Sh221_PDF30_Wtaunu_MV1000_E_CMS->Electron_DrawHistos();
 }
 
+void Start_Electron_DATA_Analysis() {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA = new MC_Analysis(Chain_DATA(), "Electron", "DATA", 1);
+	DATA->Electron_BookHistos();
+	DATA->Loop();
+	DATA->Electron_DrawHistos();
+}
+
 #endif
