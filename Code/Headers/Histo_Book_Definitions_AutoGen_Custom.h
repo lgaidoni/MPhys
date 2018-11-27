@@ -103,88 +103,150 @@ virtual void Book_RapidityDilepton(int bins, double min, double max); // SEARCH 
 TH1F	*h_RapidityDilepton; // SEARCH VERSION
 
 
-/// ------------------- ELECTRONS ---------------- ///
+/// ------------------- LEPTONS ---------------- ///
 
-// -- Invariant mass of electron 0 and electron 1
-double elec_0_elec_1_mass;
+// -- Invariant mass of lepton 0 and lepton 1
+double lep_0_lep_1_mass;
 
-virtual void Book_elec_0_elec_1_mass_PRE(int bins, double min, double max); // PRE VERSION
-TH1F	*h_elec_0_elec_1_mass_PRE; // PRE VERSION
+virtual void Book_lep_0_lep_1_mass_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_0_lep_1_mass_PRE; // PRE VERSION
 
-virtual void Book_elec_0_elec_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
-TH1F	*h_elec_0_elec_1_mass_CONTROL; // CONTROL VERSION
+virtual void Book_lep_0_lep_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_mass_CONTROL; // CONTROL VERSION
 
-virtual void Book_elec_0_elec_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
-TH1F	*h_elec_0_elec_1_mass_EXCEPT; // EXCEPT VERSION
+virtual void Book_lep_0_lep_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_EXCEPT; // EXCEPT VERSION
 
-virtual void Book_elec_0_elec_1_mass(int bins, double min, double max); // SEARCH VERSION
-TH1F	*h_elec_0_elec_1_mass; // SEARCH VERSION
-
-
-// -- Combined transverse momentum of electron 0 and electron 1
-double elec_0_elec_1_pt;
-
-virtual void Book_elec_0_elec_1_pt_PRE(int bins, double min, double max); // PRE VERSION
-TH1F	*h_elec_0_elec_1_pt_PRE; // PRE VERSION
-
-virtual void Book_elec_0_elec_1_pt_CONTROL(int bins, double min, double max); // CONTROL VERSION
-TH1F	*h_elec_0_elec_1_pt_CONTROL; // CONTROL VERSION
-
-virtual void Book_elec_0_elec_1_pt_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
-TH1F	*h_elec_0_elec_1_pt_EXCEPT; // EXCEPT VERSION
-
-virtual void Book_elec_0_elec_1_pt(int bins, double min, double max); // SEARCH VERSION
-TH1F	*h_elec_0_elec_1_pt; // SEARCH VERSION
+virtual void Book_lep_0_lep_1_mass(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_mass; // SEARCH VERSION
 
 
-// -- True Combined transverse momentum of electron 0 and electron 1
-double elec_0_elec_1_pt_TRUTH;
+// -- Combined transverse momentum of lepton 0 and lepton 1
+double lep_0_lep_1_pt;
 
-virtual void Book_elec_0_elec_1_pt_TRUTH_PRE(int bins, double min, double max); // PRE VERSION
-TH1F	*h_elec_0_elec_1_pt_TRUTH_PRE; // PRE VERSION
+virtual void Book_lep_0_lep_1_pt_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_0_lep_1_pt_PRE; // PRE VERSION
 
-virtual void Book_elec_0_elec_1_pt_TRUTH_CONTROL(int bins, double min, double max); // CONTROL VERSION
-TH1F	*h_elec_0_elec_1_pt_TRUTH_CONTROL; // CONTROL VERSION
+virtual void Book_lep_0_lep_1_pt_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_pt_CONTROL; // CONTROL VERSION
 
-virtual void Book_elec_0_elec_1_pt_TRUTH_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
-TH1F	*h_elec_0_elec_1_pt_TRUTH_EXCEPT; // EXCEPT VERSION
+virtual void Book_lep_0_lep_1_pt_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_pt_EXCEPT; // EXCEPT VERSION
 
-virtual void Book_elec_0_elec_1_pt_TRUTH(int bins, double min, double max); // SEARCH VERSION
-TH1F	*h_elec_0_elec_1_pt_TRUTH; // SEARCH VERSION
-
-
-/// ------------------- MUONS ---------------- ///
-
-// -- Invariant mass of muon 0 and muon 1
-double muon_0_muon_1_mass;
-
-virtual void Book_muon_0_muon_1_mass_PRE(int bins, double min, double max); // PRE VERSION
-TH1F	*h_muon_0_muon_1_mass_PRE; // PRE VERSION
-
-virtual void Book_muon_0_muon_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
-TH1F	*h_muon_0_muon_1_mass_CONTROL; // CONTROL VERSION
-
-virtual void Book_muon_0_muon_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
-TH1F	*h_muon_0_muon_1_mass_EXCEPT; // EXCEPT VERSION
-
-virtual void Book_muon_0_muon_1_mass(int bins, double min, double max); // SEARCH VERSION
-TH1F	*h_muon_0_muon_1_mass; // SEARCH VERSION
+virtual void Book_lep_0_lep_1_pt(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_pt; // SEARCH VERSION
 
 
-// -- Combined transverse momentum of muon 0 and muon 1
-double muon_0_muon_1_pt;
+// -- True Combined transverse momentum of lepton 0 and lepton 1
+double lep_0_lep_1_pt_TRUTH;
 
-virtual void Book_muon_0_muon_1_pt_PRE(int bins, double min, double max); // PRE VERSION
-TH1F	*h_muon_0_muon_1_pt_PRE; // PRE VERSION
+virtual void Book_lep_0_lep_1_pt_TRUTH_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_0_lep_1_pt_TRUTH_PRE; // PRE VERSION
 
-virtual void Book_muon_0_muon_1_pt_CONTROL(int bins, double min, double max); // CONTROL VERSION
-TH1F	*h_muon_0_muon_1_pt_CONTROL; // CONTROL VERSION
+virtual void Book_lep_0_lep_1_pt_TRUTH_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_pt_TRUTH_CONTROL; // CONTROL VERSION
 
-virtual void Book_muon_0_muon_1_pt_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
-TH1F	*h_muon_0_muon_1_pt_EXCEPT; // EXCEPT VERSION
+virtual void Book_lep_0_lep_1_pt_TRUTH_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_pt_TRUTH_EXCEPT; // EXCEPT VERSION
 
-virtual void Book_muon_0_muon_1_pt(int bins, double min, double max); // SEARCH VERSION
-TH1F	*h_muon_0_muon_1_pt; // SEARCH VERSION
+virtual void Book_lep_0_lep_1_pt_TRUTH(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_pt_TRUTH; // SEARCH VERSION
+
+
+// -- Isolation cone for the lepton 0, size 20
+double lep_0_iso_ptvarcone20;
+
+virtual void Book_lep_0_iso_ptvarcone20_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_0_iso_ptvarcone20_PRE; // PRE VERSION
+
+virtual void Book_lep_0_iso_ptvarcone20_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_0_iso_ptvarcone20_CONTROL; // CONTROL VERSION
+
+virtual void Book_lep_0_iso_ptvarcone20_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_0_iso_ptvarcone20_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_lep_0_iso_ptvarcone20(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_0_iso_ptvarcone20; // SEARCH VERSION
+
+
+// -- Isolation cone for the lepton 0, size 30
+double lep_0_iso_ptvarcone30;
+
+virtual void Book_lep_0_iso_ptvarcone30_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_0_iso_ptvarcone30_PRE; // PRE VERSION
+
+virtual void Book_lep_0_iso_ptvarcone30_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_0_iso_ptvarcone30_CONTROL; // CONTROL VERSION
+
+virtual void Book_lep_0_iso_ptvarcone30_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_0_iso_ptvarcone30_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_lep_0_iso_ptvarcone30(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_0_iso_ptvarcone30; // SEARCH VERSION
+
+
+// -- Isolation cone for the lepton 0, size 40
+double lep_0_iso_ptvarcone40;
+
+virtual void Book_lep_0_iso_ptvarcone40_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_0_iso_ptvarcone40_PRE; // PRE VERSION
+
+virtual void Book_lep_0_iso_ptvarcone40_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_0_iso_ptvarcone40_CONTROL; // CONTROL VERSION
+
+virtual void Book_lep_0_iso_ptvarcone40_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_0_iso_ptvarcone40_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_lep_0_iso_ptvarcone40(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_0_iso_ptvarcone40; // SEARCH VERSION
+
+
+// -- Isolation cone for the lepton 1, size 20
+double lep_1_iso_ptvarcone20;
+
+virtual void Book_lep_1_iso_ptvarcone20_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_1_iso_ptvarcone20_PRE; // PRE VERSION
+
+virtual void Book_lep_1_iso_ptvarcone20_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_1_iso_ptvarcone20_CONTROL; // CONTROL VERSION
+
+virtual void Book_lep_1_iso_ptvarcone20_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_1_iso_ptvarcone20_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_lep_1_iso_ptvarcone20(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_1_iso_ptvarcone20; // SEARCH VERSION
+
+
+// -- Isolation cone for the lepton 1, size 30
+double lep_1_iso_ptvarcone30;
+
+virtual void Book_lep_1_iso_ptvarcone30_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_1_iso_ptvarcone30_PRE; // PRE VERSION
+
+virtual void Book_lep_1_iso_ptvarcone30_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_1_iso_ptvarcone30_CONTROL; // CONTROL VERSION
+
+virtual void Book_lep_1_iso_ptvarcone30_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_1_iso_ptvarcone30_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_lep_1_iso_ptvarcone30(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_1_iso_ptvarcone30; // SEARCH VERSION
+
+
+// -- Isolation cone for the lepton 1, size 40
+double lep_1_iso_ptvarcone40;
+
+virtual void Book_lep_1_iso_ptvarcone40_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_lep_1_iso_ptvarcone40_PRE; // PRE VERSION
+
+virtual void Book_lep_1_iso_ptvarcone40_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_lep_1_iso_ptvarcone40_CONTROL; // CONTROL VERSION
+
+virtual void Book_lep_1_iso_ptvarcone40_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_lep_1_iso_ptvarcone40_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_lep_1_iso_ptvarcone40(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_lep_1_iso_ptvarcone40; // SEARCH VERSION
 
 
 /// ------------------- JETS ---------------- ///
