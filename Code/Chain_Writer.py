@@ -2,13 +2,8 @@ mc_locations = open("MC_Paths.txt", "r") # Open the MC Paths for files that need
 data_locations = open("Data_Paths.txt", "r") # Open the DATA Paths for files that need merging
 chain_functions = open("Headers/Chain_Functions.h", "w")
 N_functions = open("Headers/N_Functions.h", "w")
-electron_analysis_start_functions = open("Headers/Electron_Analysis_Start_Functions.h", "w")
-muon_analysis_start_functions = open("Headers/Muon_Analysis_Start_Functions.h", "w")
-tau_analysis_start_functions = open("Headers/Tau_Analysis_Start_Functions.h", "w")
-
-run_all_electron_analyses = open("../Init/Run_All_Electron_Analyses.C", "w")
-run_all_muon_analyses = open("../Init/Run_All_Muon_Analyses.C", "w")
-run_all_tau_analyses = open("../Init/Run_All_Tau_Analyses.C", "w")
+analysis_start_functions = open("Headers/Analysis_Start_Functions.h", "w")
+run_all_analyses = open("Headers/Run_All_Analyses_Functions.h", "w")
 
 import os
 
@@ -66,40 +61,36 @@ def process_chains_writer(AnalysisType):
 	Ztt_process_chains.close()
 	
 
-def analysis_start_function_writer(inputFile, IDtag, Name, AnalysisType):
-	inputFile.write("void Start_" + AnalysisType + "_" + Name + "_Analysis() {\n")
+def analysis_start_function_writer(inputFile, IDtag, Name):
+	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType, string Particles) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
 	inputFile.write("\tvector<double> luminosity_info = csv_reader(\"" + IDtag + "\");\n")
 	inputFile.write("\tdouble lum_weight = luminosity_weighting_function(luminosity_info, N_" + Name + "(), 36200);\n")
 		
-	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), \"" + AnalysisType + "\", \"" + Name + "\", lum_weight);\n")
-	inputFile.write("\t" + Name + "->" + AnalysisType + "_BookHistos();\n")
+	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", lum_weight, Particles);\n")
+	inputFile.write("\t" + Name + "->BookHistos();\n")
 	inputFile.write("\t" + Name + "->Loop();\n")
-	inputFile.write("\t" + Name + "->" + AnalysisType + "_DrawHistos();\n")
+	inputFile.write("\t" + Name + "->DrawHistos();\n")
 	
 	inputFile.write("}\n\n")
 
-def analysis_start_function_writer_data(inputFile, IDtag, Name, AnalysisType):
-	inputFile.write("void Start_" + AnalysisType + "_" + Name + "_Analysis() {\n")
+def analysis_start_function_writer_data(inputFile, IDtag, Name):
+	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType, string Particles) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
-	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), \"" + AnalysisType + "\", \"" + Name + "\", 1);\n")
-	inputFile.write("\t" + Name + "->" + AnalysisType + "_BookHistos();\n")
+	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", 1, Particles);\n")
+	inputFile.write("\t" + Name + "->BookHistos();\n")
 	inputFile.write("\t" + Name + "->Loop();\n")
-	inputFile.write("\t" + Name + "->" + AnalysisType + "_DrawHistos();\n")
+	inputFile.write("\t" + Name + "->DrawHistos();\n")
 	
 	inputFile.write("}\n\n")
 
-def run_all_analyses_writer_top(inputFile, AnalysisType):
-	inputFile.write("#include <iostream>\n")
-	inputFile.write("#include \"TROOT.h\"\n")
-	inputFile.write("using namespace std;\n")
-	inputFile.write("void Run_All_" + AnalysisType + "_Analyses() {\n\n")
-	inputFile.write("\tgROOT->ProcessLine(\".x ../Code/MC_Analysis.C\");\n")
+def run_all_analyses_writer_top(inputFile):
+	inputFile.write("void Run_All_Analyses(string AnalysisType, string Particles) {\n\n")
 
-def run_all_analyses_writer_centre(inputFile, Name, AnalysisType):
-	inputFile.write("\tgROOT->ProcessLine(\"Start_" + AnalysisType + "_" + Name + "_Analysis()\");\n")
+def run_all_analyses_writer_centre(inputFile, Name):
+	inputFile.write("\tStart_" + Name + "_Analysis(AnalysisType, Particles);\n")
 	
 
 chain_functions.write("#ifndef Chain_Functions_h\n")
@@ -109,18 +100,10 @@ N_functions.write("#ifndef N_Functions_h\n")
 N_functions.write("#define N_Functions_h\n\n")
 
 
-electron_analysis_start_functions.write("#ifndef Electron_Analysis_Start_Functions_h\n")
-electron_analysis_start_functions.write("#define Electron_Analysis_Start_Functions_h\n\n")
+analysis_start_functions.write("#ifndef Analysis_Start_Functions_h\n")
+analysis_start_functions.write("#define Analysis_Start_Functions_h\n\n")
 
-muon_analysis_start_functions.write("#ifndef Muon_Analysis_Start_Functions_h\n")
-muon_analysis_start_functions.write("#define Muon_Analysis_Start_Functions_h\n\n")
-
-tau_analysis_start_functions.write("#ifndef Tau_Analysis_Start_Functions_h\n")
-tau_analysis_start_functions.write("#define Tau_Analysis_Start_Functions_h\n\n")
-
-run_all_analyses_writer_top(run_all_electron_analyses, "Electron")
-run_all_analyses_writer_top(run_all_muon_analyses, "Muon")
-run_all_analyses_writer_top(run_all_tau_analyses, "Tau")
+run_all_analyses_writer_top(run_all_analyses)
 
 initial_function = 0
 name = ""
@@ -129,6 +112,7 @@ counter = 0
 
 try:
 	os.makedirs("../../Root-Files/Electron/Processes")
+	os.makedirs("../../Root-Files/ElectronMuon/Processes")
 	os.makedirs("../../Root-Files/Muon/Processes")
 	os.makedirs("../../Root-Files/Tau/Processes")
 except:
@@ -157,28 +141,35 @@ for line in mc_locations:
 
 		try:
 			os.makedirs("../../Output-Files/Electron/" + name)
-			os.makedirs("../../Output-Files/Muon/" + name)
-			os.makedirs("../../Output-Files/Tau/" + name)
 			print("../../Output-Files/Electron/" + name + " Created")
-			print("../../Output-Files/Muon/" + name + " Created")
-			print("../../Output-Files/Tau/" + name + " Created")
-
 		except:
 			print("../../Output-Files/Electron/" + name + " Already Exists")
-			print("../../Output-Files/Muon/" + name + " Already Exists")
+
+		try:
+			os.makedirs("../../Output-Files/ElectronMuon/" + name)
+			print("../../Output-Files/ElectronMuon/" + name + " Created")
+		except:
+			print("../../Output-Files/ElectronMuon/" + name + " Already Exists")
+
+		try:
+			os.makedirs("../../Output-Files/Tau/" + name)
+			print("../../Output-Files/Tau/" + name + " Created")
+		except:
 			print("../../Output-Files/Tau/" + name + " Already Exists")
+
+		try:
+			os.makedirs("../../Output-Files/Muon/" + name)
+			print("../../Output-Files/Muon/" + name + " Created")
+		except:
+			print("../../Output-Files/Muon/" + name + " Already Exists")
 
 	elif line[0:2] == "@@":
 		ID = line[2:len(line)-1]
 		chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
 		
-		run_all_analyses_writer_centre(run_all_electron_analyses, name, "Electron")
-		run_all_analyses_writer_centre(run_all_muon_analyses, name, "Muon")
-		run_all_analyses_writer_centre(run_all_tau_analyses, name, "Tau")
+		run_all_analyses_writer_centre(run_all_analyses, name)
 
-		analysis_start_function_writer(electron_analysis_start_functions, ID, name, "Electron")
-		analysis_start_function_writer(muon_analysis_start_functions, ID, name, "Muon")
-		analysis_start_function_writer(tau_analysis_start_functions, ID, name, "Tau")
+		analysis_start_function_writer(analysis_start_functions, ID, name)
 
 	else:
 		counter = counter + 1
@@ -201,9 +192,31 @@ name = "DATA"
 ID = ""
 counter = 0
 
-run_all_analyses_writer_centre(run_all_electron_analyses, "DATA", "Electron")
-run_all_analyses_writer_centre(run_all_muon_analyses, "DATA", "Muon")
-run_all_analyses_writer_centre(run_all_tau_analyses, "DATA", "Tau")
+try:
+	os.makedirs("../../Output-Files/Muon/DATA")
+	print("../../Output-Files/Muon/DATA Created")
+except:
+	print("../../Output-Files/Muon/DATA Exists")
+
+try:
+	os.makedirs("../../Output-Files/Electron/DATA")
+	print("../../Output-Files/Electron/DATA Created")
+except:
+	print("../../Output-Files/Electron/DATA Exists")
+
+try:
+	os.makedirs("../../Output-Files/ElectronMuon/DATA")
+	print("../../Output-Files/ElectronMuon/DATA Created")
+except:
+	print("../../Output-Files/ElectronMuon/DATA Exists")
+
+try:
+	os.makedirs("../../Output-Files/Tau/DATA")
+	print("../../Output-Files/Tau/DATA Created")
+except:
+	print("../../Output-Files/Tau/DATA Exists")
+
+run_all_analyses_writer_centre(run_all_analyses, "DATA")
 
 chain_functions.write("//Chain Return function for DATA\n")
 chain_functions.write("TChain *Chain_DATA() {\n\n")
@@ -224,9 +237,7 @@ for line in data_locations:
 		counter = counter + 1
 		chain_functions.write("\tNOMINAL->Add(\"" + line[0:len(line)-1]  + "\");\n")
 
-analysis_start_function_writer_data(electron_analysis_start_functions, ID, name, "Electron")
-analysis_start_function_writer_data(muon_analysis_start_functions, ID, name, "Muon")
-analysis_start_function_writer_data(tau_analysis_start_functions, ID, name, "Tau")
+analysis_start_function_writer_data(analysis_start_functions, ID, name)
 
 chain_functions.write("\treturn NOMINAL;\n")
 chain_functions.write("} \n\n")
@@ -234,10 +245,6 @@ chain_functions.write("} \n\n")
 process_chains_writer("Electron")
 chain_functions.write("#endif")
 
-electron_analysis_start_functions.write("#endif")
-muon_analysis_start_functions.write("#endif")
-tau_analysis_start_functions.write("#endif")
+analysis_start_functions.write("#endif")
 
-run_all_electron_analyses.write("\n}\n")
-run_all_muon_analyses.write("\n}\n")
-run_all_tau_analyses.write("\n}\n")
+run_all_analyses.write("\n}\n")

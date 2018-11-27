@@ -25,11 +25,7 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
 
 	///---------------------------- OUR FUNCTION DEFINITIONS ---------------------------///
-	//Electron Definitions
-	#include "Electron_Function_Definitions.h"
-
-	//Muon Definitions
-	#include "Muon_Function_Definitions.h"
+	#include "Function_Definitions.h"
 
 	/////--------------------AUTO GENERATED HISTOGRAM DEFINITIONS---------------------/////
 	//This will include the auto generated default histograms for this program
@@ -43,6 +39,20 @@ public :
 	string ChainName;
 	double Luminosity_Weight;
 	bool weight_total_override;
+
+	/////-------------------------LEPTON INFORMATION----------------------------------/////
+
+	string desired_particles;
+	Int_t n_leptons;
+
+	UInt_t          *lep_0;
+	TLorentzVector  *lep_0_p4;
+	Float_t         *lep_0_q;
+
+	UInt_t          *lep_1;
+	TLorentzVector  *lep_1_p4;
+	Float_t         *lep_1_q;
+
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
@@ -1601,7 +1611,7 @@ public :
    TBranch        *b_weight_total;   //!
 
    MC_Analysis(TTree *tree=0);
-   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight);
+   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, string particles);
    MC_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
    MC_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~MC_Analysis();
@@ -1633,7 +1643,7 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight) : fChain(0) 
+MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, string particles) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
@@ -1649,6 +1659,7 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, dou
    AnalysisType = analysistype;
    ChainName = chainname;
    Luminosity_Weight = luminosity_weight;
+   desired_particles = particles;
    if (ChainName == "DATA") {
 
 	Luminosity_Weight = 1;
@@ -2586,9 +2597,5 @@ Int_t MC_Analysis::Cut(Long64_t entry)
 #include "Specific_Functions.h"
 #include "Chain_Functions.h"
 #include "N_Functions.h"
-
-
-
-
 
 #endif // #ifdef MC_Analysis_cxx

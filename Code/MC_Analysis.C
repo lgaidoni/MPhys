@@ -25,11 +25,9 @@
 
 #define MC_Analysis_cxx
 #include "Headers/MC_Analysis.h"
-#include "Headers/Electron_Analysis.h"
-#include "Headers/Electron_Analysis_Start_Functions.h"
-#include "Headers/Muon_Analysis.h"
-#include "Headers/Muon_Analysis_Start_Functions.h"
-#include "Headers/AnalysisStartTest.h"
+#include "Headers/Analysis.h"
+#include "Headers/Analysis_Start_Functions.h"
+#include "Headers/Run_All_Analyses_Functions.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h> 
@@ -44,6 +42,7 @@ void MC_Analysis::Loop() {
 
    clock_t start;
    clock_t one_second_in;
+   clock_t finished;
    double entries_per_second;
    double completion_time_double;
    double prev_entries = 0;
@@ -64,6 +63,13 @@ void MC_Analysis::Loop() {
    cout << "Luminosity Weight:   " << Luminosity_Weight << endl;
    cout << "Start Time:          " << start/CLOCKS_PER_SEC << endl;
    cout << endl << "-------------- " << AnalysisType << endl;
+	
+   fstream output("../../WWW/status.txt", output.out | output.app);
+   time_t now = time(0);
+   char* time = ctime(&now);
+   output << time << endl;
+   output << "\"" << desired_particles << "\" Analysis of " << ChainName << " in progress..." << endl << endl;
+   output.close();
 
    //Loop over all the entries in jentry
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
@@ -97,8 +103,8 @@ void MC_Analysis::Loop() {
 			if (i < 26) cout << " ";
 			if (i == 26) cout << "[";
 			if (i > 26 && i < percentageint) cout << "=";
-			if (i == percentageint) cout << ">";
-			if (i > percentageint && i < 77) cout << " ";
+			if (i == percentageint) cout << "|";
+			if (i > percentageint && i < 77) cout << "-";
 			if (i == 76) cout << "]";
 		}
 
@@ -113,31 +119,34 @@ void MC_Analysis::Loop() {
 		
 		cout.flush();
 
+		if (jentry % 100000 == 0) {
+
+			output.open("../../WWW/status.txt", output.out | output.app);
+			output << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%  " << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << endl;
+			output.close();
+			
+
+		}
+
 	}
 
 	///------------------- ACTUAL ANALYSIS -----------------///
-	/// Electron Analysis
-	if (AnalysisType == "Electron") {
-		if (Electron_InitialCut() == false) { // if we're not cutting
-			Electron_GenerateVariables();
-			Electron_FillAllData_PreCut();
-			Electron_CutAndFill();
-		}
+
+	ParticleSelection();
+	if (InitialCut() == false) { // if we're not cutting
+		GenerateVariables();
+		FillAllData_PreCut();
+		CutAndFill();
 	}
-	/// Zmumu2Jets
-	if (AnalysisType == "Muon") {
-		if (Muon_InitialCut() == false) { // if we're not cutting
-			Muon_GenerateVariables();
-			Muon_FillAllData_PreCut();
-			Muon_CutAndFill();
-		}
-	}
-
-
-
 	
       }
    cout << "               * 100.000% [==================================================]" << endl;
-   cout << "-------------- Complete" << endl << endl;
+   cout << "-------------- Complete" << endl << endl;	
+
+   finished = clock();
+
+   output.open("../../WWW/status.txt", output.out | output.app);
+   output << "Analysis Complete: finished in " << (finished - start)/CLOCKS_PER_SECOND << endl << endl;
+   output.close();
 
 }
