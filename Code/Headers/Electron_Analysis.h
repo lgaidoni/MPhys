@@ -467,32 +467,17 @@ void MC_Analysis::Electron_DrawHistos() {
 	#include "_DrawHistos.h"
 
 	//ptvar cone histograms
-	DrawHistogram_Quiet(h_elec_0_iso_ptvarcone20, "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20", ";;Events", 600, 400, true, "h_elec_0_iso_ptvarcone20_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_elec_0_iso_ptvarcone40, "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40", ";;Events", 600, 400, true, "h_elec_0_iso_ptvarcone40_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_iso_ptvarcone20_PRE, h_elec_0_iso_ptvarcone20, h_elec_0_iso_ptvarcone20_CONTROL, h_elec_0_iso_ptvarcone20_EXCEPT, "ptvarcone20 for electron 0", "Pre Cut", "Post Cut", "Control", "Except", "h_elec_0_iso_ptvarcone20", "h_elec_0_iso_ptvarcone20", ";;Events", 600, 400, true, "h_elec_0_iso_ptvarcone20_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_iso_ptvarcone40_PRE, h_elec_0_iso_ptvarcone40, h_elec_0_iso_ptvarcone40_CONTROL, h_elec_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for electron 0", "Pre Cut", "Post Cut", "Control", "Except", "h_elec_0_iso_ptvarcone40", "h_elec_0_iso_ptvarcone40", ";;Events", 600, 400, true, "h_elec_0_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
-	//topoet cone histograms
-	DrawHistogram(h_elec_0_iso_topoetcone20, "h_elec_0_iso_topoetcone20", "h_elec_0_iso_topoetcone20", ";;Events", 600, 400, true, "h_elec_0_iso_topoetcone20_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram(h_elec_0_iso_topoetcone40, "h_elec_0_iso_topoetcone40", "h_elec_0_iso_topoetcone40", ";;Events", 600, 400, true, "h_elec_0_iso_topoetcone40_" + ChainName + ".pdf", ChainName, AnalysisType);
-
 	// elec 0 & elec 1 invariant mass 
-	DrawHistogram_Quiet(h_elec_0_elec_1_mass_PRE, "h_elec_0_elec_1_mass_PRE", "h_elec_0_elec_1_mass_PRE", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_elec_0_elec_1_mass_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_elec_0_elec_1_mass, "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_elec_0_elec_1_mass_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_elec_1_mass_PRE, h_elec_0_elec_1_mass, h_elec_0_elec_1_mass_CONTROL, h_elec_0_elec_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_elec_0_elec_1_mass", "h_elec_0_elec_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, true, "h_elec_0_elec_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_elec_0_elec_1_mass_CONTROL, "h_elec_0_elec_1_mass_CONTROL", "h_elec_0_elec_1_mass_CONTROL", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_elec_0_elec_1_mass_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 	
 	//combined lepton elec 0 & elec 1 momentum
-	DrawHistogram_Quiet(h_elec_0_elec_1_pt_PRE, "h_elec_0_elec_1_pt_PRE", "h_elec_0_elec_1_pt_PRE", ";Momentum [GeV/c];Events", 600, 400, false, "h_elec_0_elec_1_pt_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_elec_0_elec_1_pt, "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_elec_0_elec_1_pt_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_elec_0_elec_1_pt_PRE, h_elec_0_elec_1_pt, h_elec_0_elec_1_pt_CONTROL, h_elec_0_elec_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_elec_0_elec_1_pt", "h_elec_0_elec_1_pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_elec_0_elec_1_pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
-	DrawHistogram_Quiet(h_elec_0_elec_1_pt_CONTROL, "h_elec_0_elec_1_pt_CONTROL", "h_elec_0_elec_1_pt_CONTROL", ";Momentum [GeV/c];Events", 600, 400, false, "h_elec_0_elec_1_pt_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 	
 	//leading jets ljet_0 ljet_1 invariant masses
-	DrawHistogram_Quiet(h_ljet_0_ljet_1_mass_PRE, "h_ljet_0_ljet_1_mass_PRE", "h_ljet_0_ljet_1_mass_PRE", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_ljet_0_ljet_1_mass_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_ljet_0_ljet_1_mass, "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_ljet_0_ljet_1_mass_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_ljet_1_mass_PRE, h_ljet_0_ljet_1_mass, h_ljet_0_ljet_1_mass_CONTROL, h_ljet_0_ljet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_ljet_0_ljet_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_ljet_0_ljet_1_mass_CONTROL, "h_ljet_0_ljet_1_mass_CONTROL", "h_ljet_0_ljet_1_mass_CONTROL", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_ljet_0_ljet_1_mass_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	//leading jets ljet_0 ljet_1 transverse momentum < already exists in DrawHistos.h
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_ljet_0_p4_Pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
@@ -506,30 +491,19 @@ void MC_Analysis::Electron_DrawHistos() {
 	// Dijet Rapidity
 	DrawHistogram_Quiet(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", "h_RapidityDijet_PRE", ";Dijet Rapidity [rads];Events", 600, 400, false, "h_RapidityDijet_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_RapidityDijet, "h_RapidityDijet", "h_RapidityDijet", ";Events", 600, 400, false, "h_RapidityDijet_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", 600, 400, false, "h_RapidityDijet_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", 600, 400, false, "h_RapidityDijet_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	//Delta R Histograms
-	DrawHistogram_Quiet(h_DeltaR_PRE, "h_DeltaR_PRE", "h_DeltaR_PRE", ";\\Delta R;Events", 600, 400, false, "h_DeltaR_PRE.pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_DeltaR, "h_DeltaR", "h_DeltaR", ";\\Delta R;Events", 600, 400, false, "h_DeltaR.pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR", ";Delta R;Events", 600, 400, false, "h_DeltaR_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_DeltaR_CONTROL, "h_DeltaR_CONTROL", "h_DeltaR_CONTROL", ";\\Delta R;Events", 600, 400, false, "h_DeltaR_CONTROL.pdf", ChainName, AnalysisType);
 
 	// pT balance
-	DrawHistogram_Quiet(h_pT_balance_PRE, "h_pT_balance_PRE", "h_pT_balance_PRE", ";p_{T}^{balance} [GeV/c];Events", 600, 400, false, "h_pT_balance_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_pT_balance, "h_pT_balance", "h_pT_balance", ";p_{T}^{balance} [GeV/c];Events", 600, 400, false, "h_pT_balance_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", "h_pT_balance", ";pT Balance;Events", 600, 400, false, "h_pT_balance_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_pT_balance_CONTROL, "h_pT_balance_CONTROL", "h_pT_balance_CONTROL", ";p_{T}^{balance} [GeV/c];Events", 600, 400, false, "h_pT_balance_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	// pT balance 3
-	DrawHistogram_Quiet(h_pT_balance_3_PRE, "h_pT_balance_3_PRE", "h_pT_balance_3_PRE", ";p_{T}^{balance, 3} [GeV/c];Events", 600, 400, false, "h_pT_balance_3_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_pT_balance_3_CONTROL, "h_pT_balance_3_CONTROL", "h_pT_balance_3_CONTROL", ";p_{T}^{balance, 3} [GeV/c];Events", 600, 400, false, "h_pT_balance_3_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", "h_pT_balance_3", ";pT Balance 3;Events", 600, 400, false, "h_pT_balance_3_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// Centrality histograms
-	DrawHistogram_Quiet(h_Centrality_PRE, "h_Centrality_PRE", "h_Centrality_PRE", ";Centrality;Events", 600, 400, false, "h_Centrality_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_Centrality, "h_Centrality", "h_Centrality", ";Centrality;Events", 600, 400, false, "h_Centrality_" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality", ";Centrality;Events", 600, 400, false, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_Centrality_CONTROL, "h_Centrality_CONTROL", "h_Centrality_CONTROL", "Centrality of a Z boson in the rapidity interval between ljet_0, ljet_1 with control cuts from " + ChainName + " data set;Centrality;Events", 600, 400, false, "h_Centrality_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	Histograms->Close();
 
