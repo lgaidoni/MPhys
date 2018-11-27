@@ -223,7 +223,7 @@ void MC_Analysis::Electron_CutAndFill() {
 	//Leading Jet 2 (ljet_1) Cut Condition
 	if (ljet_1_p4->Pt() > 45) ljet_1_pt_greater = true;
 
-	//Leading Jets Combined Invariant mass
+	// Dijjet mass = Leading Jets Combined Invariant mass
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
 
 	//pt balance limit Cut Condition
