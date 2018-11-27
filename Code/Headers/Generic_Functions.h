@@ -63,6 +63,13 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
+	string preName = histogramName + "_PRE";
+	string controlName = histogramName + "_CONTROL";
+
+	histogram1->Write(preName.c_str());
+	histogram2->Write(histogramName.c_str());
+	histogram3->Write(controlName.c_str());
+
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
 
@@ -102,6 +109,15 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
+
+	string preName = histogramName + "_PRE";
+	string controlName = histogramName + "_CONTROL";
+	string exceptName = histogramName + "_EXCEPT";
+
+	histogram1->Write(preName.c_str());
+	histogram2->Write(histogramName.c_str());
+	histogram3->Write(controlName.c_str());
+	histogram4->Write(exceptName.c_str());
 
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
@@ -495,26 +511,37 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 
 	//Set the line colours for all the histograms, fill
 	histogram1->SetLineColor(kRed-7);
+	histogram1->SetFillStyle(0);
 
 	histogram2->SetLineColor(kBlue-9);
+	histogram2->SetFillStyle(0);
 
 	histogram3->SetLineColor(kGreen-7);
+	histogram3->SetFillStyle(0);
 
 	histogram4->SetLineColor(kYellow+2);
+	histogram4->SetFillStyle(0);
 
 	histogram5->SetLineColor(kAzure+10);
+	histogram5->SetFillStyle(0);
 
 	histogram6->SetLineColor(kGreen-8);
+	histogram6->SetFillStyle(0);
 
 	histogram7->SetLineColor(kViolet-6);
+	histogram7->SetFillStyle(0);
 
 	histogram8->SetLineColor(kOrange-3);
+	histogram8->SetFillStyle(0);
 
 	histogram9->SetLineColor(kCyan-8);
+	histogram9->SetFillStyle(0);
 
 	histogram10->SetLineColor(kGray);
+	histogram10->SetFillStyle(0);
 
 	histogram11->SetLineColor(kMagenta-10);
+	histogram11->SetFillStyle(0);
 
 	histogram12->Sumw2();
 	histogram12->SetLineColor(kBlack);
@@ -574,7 +601,7 @@ void DrawStackedProcesses(string AnalysisType) {
 	while(!DataTypeFile.eof()) {  //While not at the end of the file
 		getline(DataTypeFile, line);  //Get the file line
 		if (line != "") {  //If not looking at the last line	
-			string fileName =  line + "_" + AnalysisType + "Final_Stacked_" + ".pdf";
+			string fileName =  line + "_" + AnalysisType + "_Final_Stacked_" + ".pdf";
 			Process_Stacker("Electron", line, fileName);
 		}
 	}
