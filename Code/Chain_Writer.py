@@ -243,6 +243,10 @@ chain_functions.write("\treturn NOMINAL;\n")
 chain_functions.write("} \n\n")
 
 process_chains_writer("Electron")
+process_chains_writer("ElectronMuon")
+process_chains_writer("Muon")
+process_chains_writer("Tau")
+
 chain_functions.write("#endif")
 
 analysis_start_functions.write("#endif")

@@ -591,6 +591,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 
 }
 
+//Draw the stacked graphs for all the desired variables
 void DrawStackedProcesses(string AnalysisType) {
 
 	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
@@ -602,9 +603,26 @@ void DrawStackedProcesses(string AnalysisType) {
 		getline(DataTypeFile, line);  //Get the file line
 		if (line != "") {  //If not looking at the last line	
 			string fileName =  line + "_" + AnalysisType + "_Final_Stacked_" + ".pdf";
-			Process_Stacker("Electron", line, fileName);
+			Process_Stacker(AnalysisType, line, fileName);
 		}
 	}
+}
+
+//Combine all the different chains belonging to each different process
+void CombineAllProcesses_AnalysisType(string AnalysisType) {
+
+	Process_Combiner(AnalysisType, "Zee");
+	Process_Combiner(AnalysisType, "Zee2jets");
+	Process_Combiner(AnalysisType, "Zmumu");
+	Process_Combiner(AnalysisType, "Zmm2jets");
+	Process_Combiner(AnalysisType, "Ztt");
+	Process_Combiner(AnalysisType, "Ztt2jets");
+	Process_Combiner(AnalysisType, "ZqqZll");
+	Process_Combiner(AnalysisType, "ttb");
+	Process_Combiner(AnalysisType, "Wenu");
+	Process_Combiner(AnalysisType, "Wmunu");
+	Process_Combiner(AnalysisType, "Wtaunu");
+
 }
 
 /////////////////////////////// VARIABLES /////////////////////////////// 

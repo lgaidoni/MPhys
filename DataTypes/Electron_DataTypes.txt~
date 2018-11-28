@@ -3,7 +3,7 @@ ljet_1_p4_Pt
 elec_0_p4_Pt
 elec_1_p4_Pt
 ljet_0_ljet_1_mass
-elec_0_elec_1_mass
+lep_0_lep_1_mass
 DeltaR
 Centrality
 ljet_0_p4_Pt_PRE
@@ -11,7 +11,7 @@ ljet_1_p4_Pt_PRE
 elec_0_p4_Pt_PRE
 elec_1_p4_Pt_PRE
 ljet_0_ljet_1_mass_PRE
-elec_0_elec_1_mass_PRE
+lep_0_lep_1_mass_PRE
 DeltaR_PRE
 Centrality_PRE
 ljet_0_p4_Pt_CONTROL
@@ -19,6 +19,6 @@ ljet_1_p4_Pt_CONTROL
 elec_0_p4_Pt_CONTROL
 elec_1_p4_Pt_CONTROL
 ljet_0_ljet_1_mass_CONTROL
-elec_0_elec_1_mass_CONTROL
+lep_0_lep_1_mass_CONTROL
 DeltaR_CONTROL
 Centrality_CONTROL
