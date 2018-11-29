@@ -561,14 +561,21 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	histogramStack->Add(histogram10, "hist");
 	histogramStack->Add(histogram11, "hist");
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
+	histogramStack->GetYaxis()->SetTitle("Events");
+
+	if (DataType.find("p4_Pt") != string::npos) histogramStack->GetXaxis()->SetTitle("Momentum [GeV/c]"); 
+	if (DataType.find("_mass") != string::npos) histogramStack->GetXaxis()->SetTitle("Invariant Mass [GeV/c^{2}]"); 
 
 	histogram12->Draw("SAME");
 
 	canvas->SetLogy();
 
+	string LegendHeader = AnalysisType + " " + DataType;
+
 	//Create the legend
-	auto legend = new TLegend(0.99,0.93,0.75,0.66);
-	legend->SetHeader(DataType.c_str());
+	auto legend = new TLegend(0.95,0.95,0.85,0.60);
+	//legend->SetHeader(LegendHeader.c_str());
+	//legend->SetTextSize(0.02);
 	legend->AddEntry(histogram12, "Data");
 	legend->AddEntry(histogram1, "Ztt");
 	legend->AddEntry(histogram2, "Ztt2jets");

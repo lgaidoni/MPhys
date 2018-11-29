@@ -117,7 +117,7 @@ void MC_Analysis::Loop() {
 		
 		cout.flush();
 
-		if (jentry % 25000 == 0) {
+		if (jentry % 200000 == 0) {
 
 			output.open("../../WWW/status.txt", output.out | output.app);
 			output << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%  " << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << endl;

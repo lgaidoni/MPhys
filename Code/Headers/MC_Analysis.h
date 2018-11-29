@@ -38,6 +38,7 @@ public :
 	string AnalysisType;
 	string ChainName;
 	double Luminosity_Weight;
+	double final_weighting;
 	bool weight_total_override;
 	string desired_particles;
 
@@ -2599,5 +2600,6 @@ Int_t MC_Analysis::Cut(Long64_t entry)
 #include "Analysis_Start_Functions.h"
 #include "Run_All_Analyses_Functions.h"
 #include "Specific_Functions.h"
+#include "Fitting_Functions.h"
 
 #endif // #ifdef MC_Analysis_cxx
