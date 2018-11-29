@@ -217,6 +217,9 @@ void MC_Analysis::GenerateVariables() {
 	// Centrality of Z boson between two leading jets calc using rapidity
 	Centrality = CentralityCalc(lep_0_p4, lep_1_p4, ljet_0_p4, ljet_1_p4);
 
+	//Final Weighting
+	final_weighting = Luminosity_Weight * weight_total;
+
 
 }
 
@@ -228,29 +231,29 @@ void MC_Analysis::FillAllData_PreCut() {
 	#include "_FillAllData_PreCut.h"
 
 	//ptvarcones
-	h_lep_0_iso_ptvarcone20_PRE->Fill(lep_0_iso_ptvarcone20, Luminosity_Weight * weight_total);
-	h_lep_0_iso_ptvarcone40_PRE->Fill(lep_0_iso_ptvarcone40, Luminosity_Weight * weight_total);
+	h_lep_0_iso_ptvarcone20_PRE->Fill(lep_0_iso_ptvarcone20, final_weighting);
+	h_lep_0_iso_ptvarcone40_PRE->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 	//Invariant mass
-	h_lep_0_lep_1_mass_PRE->Fill(lep_0_lep_1_mass, Luminosity_Weight * weight_total);
-	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass, Luminosity_Weight * weight_total);
+	h_lep_0_lep_1_mass_PRE->Fill(lep_0_lep_1_mass, final_weighting);
+	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass, final_weighting);
 
 	// Combined
-	h_RapidityDilepton_PRE->Fill(RapidityDilepton, Luminosity_Weight * weight_total);// dilepton rapidity
-	h_RapidityDijet_PRE->Fill(RapidityDijet, Luminosity_Weight * weight_total);// dijet rapidity	
-	h_lep_0_lep_1_pt_PRE->Fill(lep_0_lep_1_pt, Luminosity_Weight * weight_total);
+	h_RapidityDilepton_PRE->Fill(RapidityDilepton, final_weighting);// dilepton rapidity
+	h_RapidityDijet_PRE->Fill(RapidityDijet, final_weighting);// dijet rapidity	
+	h_lep_0_lep_1_pt_PRE->Fill(lep_0_lep_1_pt, final_weighting);
 
 	//Delta R
-	h_DeltaR_PRE->Fill(DeltaR, Luminosity_Weight * weight_total);
+	h_DeltaR_PRE->Fill(DeltaR, final_weighting);
 
 	// pT balance PRE
-	h_pT_balance_PRE->Fill(pT_balance, Luminosity_Weight * weight_total);
+	h_pT_balance_PRE->Fill(pT_balance, final_weighting);
 
 	// pT balance 3 PRE
-	h_pT_balance_3_PRE->Fill(pT_balance, Luminosity_Weight * weight_total);
+	h_pT_balance_3_PRE->Fill(pT_balance, final_weighting);
 
 	// Centrality
-	h_Centrality_PRE->Fill(Centrality, Luminosity_Weight * weight_total);
+	h_Centrality_PRE->Fill(Centrality, final_weighting);
 }
 
 void MC_Analysis::CutAndFill() {
@@ -325,7 +328,7 @@ void MC_Analysis::CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, Luminosity_Weight * weight_total);//Fill the EXCEPT histogram for mass
+		h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);//Fill the EXCEPT histogram for mass
 
 	}
 
@@ -340,7 +343,7 @@ void MC_Analysis::CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, Luminosity_Weight * weight_total);//Fill the EXCEPT histogram for combined lepton pt
+		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);//Fill the EXCEPT histogram for combined lepton pt
 
 	}
 
@@ -355,7 +358,7 @@ void MC_Analysis::CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(), Luminosity_Weight * weight_total);//Fill the EXCEPT histogram for ljet_0_pt
+		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(), final_weighting);//Fill the EXCEPT histogram for ljet_0_pt
 
 	}
 
@@ -370,7 +373,7 @@ void MC_Analysis::CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(), Luminosity_Weight * weight_total);//Fill the EXCEPT histogram for ljet_1_pt
+		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(), final_weighting);//Fill the EXCEPT histogram for ljet_1_pt
 
 	}
 
@@ -385,7 +388,7 @@ void MC_Analysis::CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_ljet_0_ljet_1_mass_EXCEPT->Fill(ljet_0_ljet_1_mass, Luminosity_Weight * weight_total);//Fill the EXCEPT histogram for leading jets combined invariant mass
+		h_ljet_0_ljet_1_mass_EXCEPT->Fill(ljet_0_ljet_1_mass, final_weighting);//Fill the EXCEPT histogram for leading jets combined invariant mass
 
 	}
 
@@ -400,7 +403,7 @@ void MC_Analysis::CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_lep_0_iso_ptvarcone20_EXCEPT->Fill(lep_0_iso_ptvarcone20, Luminosity_Weight * weight_total);
+		h_lep_0_iso_ptvarcone20_EXCEPT->Fill(lep_0_iso_ptvarcone20, final_weighting);
 
 	}
 
@@ -415,7 +418,7 @@ void MC_Analysis::CutAndFill() {
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, Luminosity_Weight * weight_total);
+		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 	}
 
@@ -430,7 +433,7 @@ void MC_Analysis::CutAndFill() {
 	   //pT_balance_limit)			// pT balance limit ABSENT
 	) {
 	
-		h_pT_balance_EXCEPT->Fill(pT_balance, Luminosity_Weight * weight_total);
+		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);
 
 	}
 
@@ -445,7 +448,7 @@ void MC_Analysis::CutAndFill() {
 	   //pT_balance_3_limit)		// pT balance 3 limit
 	) {
 	
-		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, Luminosity_Weight * weight_total);
+		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);
 
 	}
 
@@ -454,28 +457,28 @@ void MC_Analysis::CutAndFill() {
 		#include "_FillAllData_PostCut.h"
 
 		//ptvar cone histograms
-		h_lep_0_iso_ptvarcone20->Fill(lep_0_iso_ptvarcone20, Luminosity_Weight * weight_total);
-		h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, Luminosity_Weight * weight_total);
+		h_lep_0_iso_ptvarcone20->Fill(lep_0_iso_ptvarcone20, final_weighting);
+		h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 		//Invariant mass
-		h_lep_0_lep_1_mass->Fill(lep_0_lep_1_mass, Luminosity_Weight * weight_total); // two electrons
-		h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass, Luminosity_Weight * weight_total); // two jets
+		h_lep_0_lep_1_mass->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+		h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass, final_weighting); // two jets
 
 		//Combined lepton
-		h_RapidityDilepton->Fill(RapidityDilepton, Luminosity_Weight * weight_total);// (elec) dilepton rapidity
-		h_RapidityDijet->Fill(RapidityDijet, Luminosity_Weight * weight_total);// (jet) dijet rapidity
-		h_lep_0_lep_1_pt->Fill(lep_0_lep_1_pt, Luminosity_Weight * weight_total);
+		h_RapidityDilepton->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
+		h_RapidityDijet->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
+		h_lep_0_lep_1_pt->Fill(lep_0_lep_1_pt, final_weighting);
 
 		//Delta R for two electrons
-		h_DeltaR->Fill(DeltaR, Luminosity_Weight * weight_total);
+		h_DeltaR->Fill(DeltaR, final_weighting);
 
 		// pT balance
-		h_pT_balance->Fill(pT_balance, Luminosity_Weight * weight_total);	
+		h_pT_balance->Fill(pT_balance, final_weighting);	
 
 		if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
 
 		// Centrality
-		h_Centrality->Fill(Centrality, Luminosity_Weight * weight_total);
+		h_Centrality->Fill(Centrality, final_weighting);
 
 	}
 	
@@ -484,26 +487,26 @@ void MC_Analysis::CutAndFill() {
 		#include "_FillAllData_ControlCut.h"
 
 		//ptvar cone histograms
-		h_lep_0_iso_ptvarcone20_CONTROL->Fill(lep_0_iso_ptvarcone20, Luminosity_Weight * weight_total);
-		h_lep_0_iso_ptvarcone40_CONTROL->Fill(lep_0_iso_ptvarcone40, Luminosity_Weight * weight_total);
+		h_lep_0_iso_ptvarcone20_CONTROL->Fill(lep_0_iso_ptvarcone20, final_weighting);
+		h_lep_0_iso_ptvarcone40_CONTROL->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 		//Invariant mass
-		h_lep_0_lep_1_mass_CONTROL->Fill(lep_0_lep_1_mass, Luminosity_Weight * weight_total); // two electrons
-		h_ljet_0_ljet_1_mass_CONTROL->Fill(ljet_0_ljet_1_mass, Luminosity_Weight * weight_total); // two jets
+		h_lep_0_lep_1_mass_CONTROL->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+		h_ljet_0_ljet_1_mass_CONTROL->Fill(ljet_0_ljet_1_mass, final_weighting); // two jets
 
 		//Combined 
-		h_RapidityDilepton_CONTROL->Fill(RapidityDilepton, Luminosity_Weight * weight_total); // lepton (elec) dilepton rapidity
-		h_RapidityDijet_CONTROL->Fill(RapidityDijet, Luminosity_Weight * weight_total); // ljet dijet rapidity
-		h_lep_0_lep_1_pt_CONTROL->Fill(lep_0_lep_1_pt, Luminosity_Weight * weight_total);
+		h_RapidityDilepton_CONTROL->Fill(RapidityDilepton, final_weighting); // lepton (elec) dilepton rapidity
+		h_RapidityDijet_CONTROL->Fill(RapidityDijet, final_weighting); // ljet dijet rapidity
+		h_lep_0_lep_1_pt_CONTROL->Fill(lep_0_lep_1_pt, final_weighting);
 
 		//Delta R for two electrons
-		h_DeltaR_CONTROL->Fill(DeltaR, Luminosity_Weight * weight_total);
+		h_DeltaR_CONTROL->Fill(DeltaR, final_weighting);
 
 		// pT balance CONTROL
-		h_pT_balance_3_CONTROL->Fill(pT_balance_3, Luminosity_Weight * weight_total);
+		h_pT_balance_3_CONTROL->Fill(pT_balance_3, final_weighting);
 		
 		// Centrality CONTROL
-		h_Centrality_CONTROL->Fill(Centrality, Luminosity_Weight * weight_total);
+		h_Centrality_CONTROL->Fill(Centrality, final_weighting);
 
 	}
 
