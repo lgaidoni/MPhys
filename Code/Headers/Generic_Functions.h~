@@ -828,7 +828,7 @@ double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 
 }
 
-/*double Missing_Energy(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
+double Missing_Energy(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
 	
 	double xs = info[1];
 	double k = info[2];
@@ -840,5 +840,4 @@ double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 	return extra_weight;
 
 }
-*/
 #endif
