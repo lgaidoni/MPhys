@@ -38,11 +38,12 @@ public :
 	string AnalysisType;
 	string ChainName;
 	double Luminosity_Weight;
+	double final_weighting;
 	bool weight_total_override;
+	string desired_particles;
 
 	/////-------------------------LEPTON INFORMATION----------------------------------/////
 
-	string desired_particles;
 	Int_t n_leptons;
 
 	UInt_t          *lep_0;
@@ -2594,8 +2595,11 @@ Int_t MC_Analysis::Cut(Long64_t entry)
 #include "Histo_Book_Functions_AutoGen.h"
 #include "Histo_Book_Functions_AutoGen_Custom.h"
 #include "Generic_Functions.h"
-#include "Specific_Functions.h"
 #include "Chain_Functions.h"
 #include "N_Functions.h"
+#include "Analysis_Start_Functions.h"
+#include "Run_All_Analyses_Functions.h"
+#include "Specific_Functions.h"
+#include "Fitting_Functions.h"
 
 #endif // #ifdef MC_Analysis_cxx
