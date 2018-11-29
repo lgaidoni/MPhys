@@ -29,16 +29,14 @@ void MC_Analysis::BookHistos() {
 
 	///------------------------------------ lep_0 --------------------------------------///
 	//ptvar cone histograms
-	Book_lep_0_iso_ptvarcone20(bins, 0, 20000);
-	Book_lep_0_iso_ptvarcone20_PRE(bins, 0, 20000);
-	Book_lep_0_iso_ptvarcone20_CONTROL(bins, 0, 20000);
-	Book_lep_0_iso_ptvarcone20_EXCEPT(bins, 0, 20000);
-
 	Book_lep_0_iso_ptvarcone40(bins, 0, 20000);
 	Book_lep_0_iso_ptvarcone40_PRE(bins, 0, 20000);
 	Book_lep_0_iso_ptvarcone40_CONTROL(bins, 0, 20000);
 	Book_lep_0_iso_ptvarcone40_EXCEPT(bins, 0, 20000);
-
+	Book_lep_1_iso_ptvarcone40(bins, 0, 20000);
+	Book_lep_1_iso_ptvarcone40_PRE(bins, 0, 20000);
+	Book_lep_1_iso_ptvarcone40_CONTROL(bins, 0, 20000);
+	Book_lep_1_iso_ptvarcone40_EXCEPT(bins, 0, 20000);
 	///-------------------------------- lep_0 & lep_1 ----------------------------------///
 	//dilepton invariant mass
 	Book_lep_0_lep_1_mass_EXCEPT(bins, 0, 200);
@@ -102,15 +100,11 @@ void MC_Analysis::ParticleSelection() {
 	if (desired_particles == "ee") {
 
 		lep_0 = & elec_0;
-		lep_0_iso_ptvarcone20 = elec_0_iso_ptvarcone20;
-		lep_0_iso_ptvarcone30 = elec_0_iso_ptvarcone30;
 		lep_0_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
 		lep_0_p4 = elec_0_p4;
 		lep_0_q = & elec_0_q;	
 
 		lep_1 = & elec_1;
-		lep_1_iso_ptvarcone20 = elec_1_iso_ptvarcone20;
-		lep_1_iso_ptvarcone30 = elec_1_iso_ptvarcone30;
 		lep_1_iso_ptvarcone40 = elec_1_iso_ptvarcone40;
 		lep_1_p4 = elec_1_p4;
 		lep_1_q = & elec_1_q;	
@@ -122,15 +116,11 @@ void MC_Analysis::ParticleSelection() {
 	if (desired_particles == "mm") {
 
 		lep_0 = & muon_0;
-		lep_0_iso_ptvarcone20 = muon_0_iso_ptvarcone20;
-		lep_0_iso_ptvarcone30 = muon_0_iso_ptvarcone30;
 		lep_0_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
 		lep_0_p4 = muon_0_p4;
 		lep_0_q = & muon_0_q;	
 
 		lep_1 = & muon_1;
-		lep_1_iso_ptvarcone20 = muon_1_iso_ptvarcone20;
-		lep_1_iso_ptvarcone30 = muon_1_iso_ptvarcone30;
 		lep_1_iso_ptvarcone40 = muon_1_iso_ptvarcone40;
 		lep_1_p4 = muon_1_p4;
 		lep_1_q = & muon_1_q;	
@@ -142,23 +132,75 @@ void MC_Analysis::ParticleSelection() {
 	if (desired_particles == "em" || desired_particles == "me") {
 
 		lep_0 = & muon_0;
-		lep_0_iso_ptvarcone20 = muon_0_iso_ptvarcone20;
-		lep_0_iso_ptvarcone30 = muon_0_iso_ptvarcone30;
 		lep_0_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
 		lep_0_p4 = muon_0_p4;
 		lep_0_q = & muon_0_q;	
 
 		lep_1 = & elec_0;
-		lep_1_iso_ptvarcone20 = elec_0_iso_ptvarcone20;
-		lep_1_iso_ptvarcone30 = elec_0_iso_ptvarcone30;
 		lep_1_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
 		lep_1_p4 = elec_0_p4;
 		lep_1_q = & elec_0_q;	
-	
+
 		if (n_muons == 1 && n_electrons == 1) n_leptons = n_muons + n_electrons;
 		else n_leptons = 0;
 
+	}
 
+
+	// TAU analysis here:
+	if (desired_particles == "tt") {
+
+		if (n_taus == 2) { // tautau
+			lep_0 = & tau_0;
+			lep_0_iso_ptvarcone40 = 0;
+			lep_0_p4 = tau_0_p4;
+			lep_0_q = & tau_0_q;
+
+			lep_1 = & tau_1;	
+			lep_1_iso_ptvarcone40 = 0;
+			lep_1_p4 = tau_1_p4;
+			lep_1_q = & tau_1_q;
+
+			n_leptons = n_taus; 
+		}
+		if (n_taus == 1 && n_electrons == 1) { // etau
+			lep_0 = & tau_0; 
+			lep_0_iso_ptvarcone40 = 0;
+			lep_0_p4 = tau_0_p4;
+			lep_0_q = & tau_0_q;
+
+			lep_1 = & elec_0;
+			lep_1_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
+			lep_1_p4 = elec_0_p4;
+			lep_1_q = & elec_0_q;
+			n_leptons = n_taus + n_electrons; 
+		}
+		if (n_taus == 1 && n_muons == 1) { // mtau
+			lep_0 = & tau_0; 
+			lep_0_iso_ptvarcone40 = 0;
+			lep_0_p4 = tau_0_p4;
+			lep_0_q = & tau_0_q;
+
+			lep_1 = & muon_0;
+			lep_1_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
+			lep_1_p4 = muon_0_p4;
+			lep_1_q = & muon_0_q;
+
+			n_leptons = n_taus + n_muons; 
+		}
+		if (n_taus == 0 && n_muons == 1 && n_electrons == 1) { // em/me
+
+			lep_0 = & muon_0;
+			lep_0_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
+			lep_0_p4 = muon_0_p4;
+			lep_0_q = & muon_0_q;	
+
+			lep_1 = & elec_0;
+			lep_1_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
+			lep_1_p4 = elec_0_p4;
+			lep_1_q = & elec_0_q;	
+			n_leptons = n_muons + n_electrons; 
+		}
 	}
 
 }
@@ -219,8 +261,7 @@ void MC_Analysis::GenerateVariables() {
 
 	//Final Weighting
 	final_weighting = Luminosity_Weight * weight_total;
-
-
+  
 }
 
 // This function will fill the histograms that need to be filled before cuts are made
@@ -231,8 +272,9 @@ void MC_Analysis::FillAllData_PreCut() {
 	#include "_FillAllData_PreCut.h"
 
 	//ptvarcones
-	h_lep_0_iso_ptvarcone20_PRE->Fill(lep_0_iso_ptvarcone20, final_weighting);
+	h_lep_1_iso_ptvarcone40_PRE->Fill(lep_1_iso_ptvarcone40, final_weighting);
 	h_lep_0_iso_ptvarcone40_PRE->Fill(lep_0_iso_ptvarcone40, final_weighting);
+
 
 	//Invariant mass
 	h_lep_0_lep_1_mass_PRE->Fill(lep_0_lep_1_mass, final_weighting);
@@ -268,8 +310,8 @@ void MC_Analysis::CutAndFill() {
 	bool ljet_0_pt_greater = false;
 	bool ljet_1_pt_greater = false;
 	bool leading_jets_invariant_mass = false;
-	bool ptvarcone_20 = false;
-	bool ptvarcone_40 = false;
+	bool ptvarcone_40_0 = false;
+	bool ptvarcone_40_1 = false;
 
 	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
@@ -288,7 +330,7 @@ void MC_Analysis::CutAndFill() {
 	//Leading Jet 2 (ljet_1) Cut Condition
 	if (ljet_1_p4->Pt() > 45) ljet_1_pt_greater = true;
 
-	//Leading Jets Combined Invariant mass
+	// Dijjet mass = Leading Jets Combined Invariant mass
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
 
 	//pt balance limit Cut Condition
@@ -298,8 +340,8 @@ void MC_Analysis::CutAndFill() {
 	if (pT_balance_3 < 0.15) pT_balance_3_limit = true;
 
 	//ptvarcone cuts
-	if (lep_0_iso_ptvarcone20 < 0.1) ptvarcone_20 = true; 
-	if (lep_0_iso_ptvarcone40 < 0.1) ptvarcone_40 = true; 
+	if (lep_0_iso_ptvarcone40 < 0.1) ptvarcone_40_0 = true; 
+	if (lep_1_iso_ptvarcone40 < 0.1) ptvarcone_40_1 = true; 
 
 	//Initialise Common Cuts bool
 	bool common_cuts = false;
@@ -309,8 +351,8 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition 
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_20 && 			// ptvarcone_20 Cut
-	   ptvarcone_40)			// ptvarcone_40 Cut
+	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1)			// ptvarcone_40_1 Cut
 	{
 	
 		common_cuts = true;
@@ -322,8 +364,8 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition 
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_20 && 			// ptvarcone_20 Cut
-	   ptvarcone_40	&&			// ptvarcone_40 Cut
+	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
@@ -337,8 +379,8 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition 
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_20 && 			// ptvarcone_20 Cut
-	   ptvarcone_40	&&			// ptvarcone_40 Cut
+	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
@@ -352,8 +394,8 @@ void MC_Analysis::CutAndFill() {
 	   //ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition ABSENT
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_20 && 			// ptvarcone_20 Cut
-	   ptvarcone_40	&&			// ptvarcone_40 Cut
+	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
@@ -367,8 +409,8 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
 	   //ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition ABSENT
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_20 && 			// ptvarcone_20 Cut
-	   ptvarcone_40	&&			// ptvarcone_40 Cut
+	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
@@ -382,8 +424,8 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   //leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass ABSENT
-	   ptvarcone_20 && 			// ptvarcone_20 Cut
-	   ptvarcone_40	&&			// ptvarcone_40 Cut
+	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
@@ -397,13 +439,13 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   //ptvarcone_20 && 			// ptvarcone_20 Cut ABSENT
-	   ptvarcone_40	&&			// ptvarcone_40 Cut
+	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut ABSENT
+	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
-	
-		h_lep_0_iso_ptvarcone20_EXCEPT->Fill(lep_0_iso_ptvarcone20, final_weighting);
+
+		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);
 
 	}
 
@@ -412,8 +454,8 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_20 &&			// ptvarcone_20 Cut
-	   //ptvarcone_40 && 			// ptvarcone_40 Cut ABSENT
+	   ptvarcone_40_0 &&			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 && 			// ptvarcone_40_1 Cut ABSENT
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
@@ -427,8 +469,8 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_20 &&			// ptvarcone_20 Cut
-	   ptvarcone_40 && 			// ptvarcone_40 Cut
+	   ptvarcone_40_0 &&			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 && 			// ptvarcone_40_1 Cut
 	   rap_int_condition			// rapidity interval condition
 	   //pT_balance_limit)			// pT balance limit ABSENT
 	) {
@@ -442,8 +484,8 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_20 &&			// ptvarcone_20 Cut
-	   ptvarcone_40 && 			// ptvarcone_40 Cut ABSENT
+	   ptvarcone_40_0 &&			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 && 			// ptvarcone_40_1 Cut ABSENT
 	   !(rap_int_condition)			// rapidity interval condition
 	   //pT_balance_3_limit)		// pT balance 3 limit
 	) {
@@ -457,7 +499,7 @@ void MC_Analysis::CutAndFill() {
 		#include "_FillAllData_PostCut.h"
 
 		//ptvar cone histograms
-		h_lep_0_iso_ptvarcone20->Fill(lep_0_iso_ptvarcone20, final_weighting);
+		h_lep_1_iso_ptvarcone40->Fill(lep_1_iso_ptvarcone40, final_weighting);
 		h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 		//Invariant mass
@@ -487,8 +529,9 @@ void MC_Analysis::CutAndFill() {
 		#include "_FillAllData_ControlCut.h"
 
 		//ptvar cone histograms
-		h_lep_0_iso_ptvarcone20_CONTROL->Fill(lep_0_iso_ptvarcone20, final_weighting);
+		h_lep_1_iso_ptvarcone40_CONTROL->Fill(lep_1_iso_ptvarcone40, final_weighting);
 		h_lep_0_iso_ptvarcone40_CONTROL->Fill(lep_0_iso_ptvarcone40, final_weighting);
+
 
 		//Invariant mass
 		h_lep_0_lep_1_mass_CONTROL->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
@@ -528,8 +571,8 @@ void MC_Analysis::DrawHistos() {
 	#include "_DrawHistos.h"
 
 	//ptvar cone histograms
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone20_PRE, h_lep_0_iso_ptvarcone20, h_lep_0_iso_ptvarcone20_CONTROL, h_lep_0_iso_ptvarcone20_EXCEPT, "ptvarcone20 for leptron 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone20", "h_lep_0_iso_ptvarcone20", ";;Events", 600, 400, true, "h_lep_0_iso_ptvarcone20_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for leptron 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", "h_lep_0_iso_ptvarcone40", ";;Events", 600, 400, true, "h_lep_0_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", "h_lep_1_iso_ptvarcone40", ";;Events", 600, 400, true, "h_lep_1_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", "h_lep_0_iso_ptvarcone40", ";;Events", 600, 400, true, "h_lep_0_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// lep 0 & lep 1 invariant mass 
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, true, "h_lep_0_lep_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);

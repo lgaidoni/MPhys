@@ -26,6 +26,8 @@
 #define MC_Analysis_cxx
 #include "Headers/MC_Analysis.h"
 #include "Headers/Analysis.h"
+#include "Headers/Analysis_Start_Functions.h"
+#include "Headers/Run_All_Analyses_Functions.h"
 #include <TH2.h>
 #include <TStyle.h>
 #include <TCanvas.h> 
@@ -117,7 +119,7 @@ void MC_Analysis::Loop() {
 		
 		cout.flush();
 
-		if (jentry % 200000 == 0) {
+		if (jentry % 100000 == 0) {
 
 			output.open("../../WWW/status.txt", output.out | output.app);
 			output << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%  " << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << endl;
@@ -144,9 +146,7 @@ void MC_Analysis::Loop() {
    finished = clock();
 
    output.open("../../WWW/status.txt", output.out | output.app);
-
-   output << endl << "Analysis Complete: finished in " << (finished - start)/CLOCKS_PER_SEC << " seconds" << endl;
-   output << "-------------------------------------------------------------" << endl << endl;
+   output << "Analysis Complete: finished in " << (finished - start)/CLOCKS_PER_SECOND << endl << endl;
    output.close();
 
 }
