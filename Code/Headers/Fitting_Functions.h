@@ -42,7 +42,7 @@ void Fitting_Function(string AnalysisType, string DataType, string Process) {
 
 	int SelectedProcess;
 
-	if (Process == "Ztt") 
+	if (Process == "Ztt") SelectedProcess = 0;
 
 
 }
