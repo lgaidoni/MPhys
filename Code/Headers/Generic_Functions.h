@@ -577,9 +577,9 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	string LegendHeader = AnalysisType + " " + DataType;
 
 	//Create the legend
-	auto legend = new TLegend(0.95,0.95,0.85,0.60);
-	//legend->SetHeader(LegendHeader.c_str());
-	//legend->SetTextSize(0.02);
+	auto legend = new TLegend(0.95,0.95,0.70,0.60);
+	legend->SetTextSize(0.02);
+	legend->SetHeader(LegendHeader.c_str());
 	legend->AddEntry(histogram12, "Data");
 	legend->AddEntry(histogram1, "Ztt");
 	legend->AddEntry(histogram2, "Ztt2jets");
@@ -613,7 +613,7 @@ void DrawStackedProcesses(string AnalysisType) {
 	while(!DataTypeFile.eof()) {  //While not at the end of the file
 		getline(DataTypeFile, line);  //Get the file line
 		if (line != "") {  //If not looking at the last line	
-			string fileName =  line + "_" + AnalysisType + "_Final_Stacked_" + ".pdf";
+			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
 			Process_Stacker(AnalysisType, line, fileName);
 		}
 	}
