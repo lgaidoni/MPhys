@@ -163,7 +163,7 @@ void MC_Analysis::ParticleSelection() {
 
 			n_leptons = n_taus; 
 		}
-		if (n_taus == 1 && n_electrons == 1) { // etau
+		else if (n_taus == 1 && n_electrons == 1) { // etau
 			lep_0 = & tau_0; 
 			lep_0_iso_ptvarcone40 = 0;
 			lep_0_p4 = tau_0_p4;
@@ -173,9 +173,10 @@ void MC_Analysis::ParticleSelection() {
 			lep_1_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
 			lep_1_p4 = elec_0_p4;
 			lep_1_q = & elec_0_q;
+
 			n_leptons = n_taus + n_electrons; 
 		}
-		if (n_taus == 1 && n_muons == 1) { // mtau
+		else if (n_taus == 1 && n_muons == 1) { // mtau
 			lep_0 = & tau_0; 
 			lep_0_iso_ptvarcone40 = 0;
 			lep_0_p4 = tau_0_p4;
@@ -188,8 +189,7 @@ void MC_Analysis::ParticleSelection() {
 
 			n_leptons = n_taus + n_muons; 
 		}
-
-		if (n_taus == 0 && n_muons == 1 && n_electrons == 1) { // em/me
+		else if (n_taus == 0 && n_muons == 1 && n_electrons == 1) { // em/me
 
 			lep_0 = & muon_0;
 			lep_0_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
@@ -202,6 +202,7 @@ void MC_Analysis::ParticleSelection() {
 			lep_1_q = & elec_0_q;	
 			n_leptons = n_muons + n_electrons; 
 		}
+		else n_leptons = 0;
 
 	}
 
@@ -221,18 +222,7 @@ bool MC_Analysis::InitialCut() {
 	bool lep0_momentum = false;
 	bool lep0_eta = false;
 
-	// PRE SELECTION CUTS ADDED BACK IN - probably NOT going to work!
-	if (lep_0_p4->Pt() > 25) lep0_momentum = true;
-	if (lep_0_p4->Eta() < 2.4) lep0_eta = true;
-	if (lep_1_p4->Pt() > 25) lep1_momentum = true;
-	if (lep_1_p4->Eta() < 2.4) lep1_eta = true;
-/*
-	if (elec_0_p4->Pt() > 25) elec0_momentum = true;
-	if (elec_0_p4->Eta() < 2.47 && 1.37 < elec_0_p4->Eta() < 1.52) elec0_eta = true;
-	if (elec_1_p4->Pt() > 25) elec1_momentum = true;
-	if (elec_1_p4->Eta() < 2.47 &&  1.37 < elec_0_p4->Eta() < 1.52) elec1_eta = true;
-
-*/	//Condition Checking
+	//Condition Checking
 	if (n_leptons == 2) { //If two leptons are found
 		two_leptons = true;
 		if (& lep_0_q != & lep_1_q) leptons_opposite_charges = true;  //If lepton +/- pair found
@@ -242,7 +232,7 @@ bool MC_Analysis::InitialCut() {
 	if (n_jets >= 2) two_or_more_jets = true;  //If two or more jets were found
 
 	// If the conditions are met, don't cut
-	if (two_leptons && two_or_more_jets && leptons_opposite_charges && no_bjets && lep1_momentum  && lep1_eta  && lep0_momentum  && lep0_eta) return false; ///  && elec1_momentum  && elec1_eta  && elec0_momentum && elec0_eta
+	if (two_leptons && two_or_more_jets && leptons_opposite_charges && no_bjets) return false; ///  && elec1_momentum  && elec1_eta  && elec0_momentum && elec0_eta
 	//Otherwise, cut
 	return true;	
 
