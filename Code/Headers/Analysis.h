@@ -13,9 +13,9 @@
 //This function will book all relevant histograms
 void MC_Analysis::BookHistos() {
 
-	int bins = 100;
+	int bins = 50;
 	int PtMin = 0; //GeV/c
-	int PtMax = 500; //GeV/c
+	int PtMax = 1000; //GeV/c
 	int PhiMin = -4;
 	int PhiMax = 4;
 	int RapidityMin = -4;
@@ -68,10 +68,10 @@ void MC_Analysis::BookHistos() {
 
 	///---------------------------------ljet_0 & ljet_1-----------------------------------///
 
-	Book_ljet_0_ljet_1_mass_EXCEPT(bins, 0, 1500);
-	Book_ljet_0_ljet_1_mass_CONTROL(bins, 0, 1500);
-	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 1500);
-	Book_ljet_0_ljet_1_mass(bins, 0, 1500);
+	Book_ljet_0_ljet_1_mass_EXCEPT(bins, 0, 3000);
+	Book_ljet_0_ljet_1_mass_CONTROL(bins, 0, 3000);
+	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 3000);
+	Book_ljet_0_ljet_1_mass(bins, 0, 3000);
 
 	///------------------ pT balance for lep_0 & lep_1 ljet_0 & ljet_1-----------------///
 
