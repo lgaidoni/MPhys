@@ -12,9 +12,17 @@ lep_0_lep_1_mass
 lep_0_lep_1_mass_PRE
 lep_0_lep_1_mass_CONTROL
 lep_0_lep_1_mass_EXCEPT
+lep_0_lep_1_pt
+lep_0_lep_1_pt_PRE
+lep_0_lep_1_pt_CONTROL
+lep_0_lep_1_pt_EXCEPT
 DeltaR
 DeltaR_PRE
 DeltaR_CONTROL
 Centrality
 Centrality_PRE
 Centrality_CONTROL
+pT_balance_PRE
+pT_balance
+pT_balance_3_PRE
+pT_balance_3_CONTROL
