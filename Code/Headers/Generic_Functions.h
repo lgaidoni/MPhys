@@ -10,6 +10,236 @@
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 
+void Legend_Creator(vector<TH1F*> histograms) {
+
+	//Create the legend
+	auto legend = new TLegend(0.84,0.89,0.78,0.45);
+	legend->SetTextSize(0.037);
+	legend->SetBorderSize(0);
+	legend->AddEntry(histograms[11], "Data");
+	legend->AddEntry(histograms[0], "t#bar{t}");
+	legend->AddEntry(histograms[1], "Wtaunu");
+	legend->AddEntry(histograms[2], "Wmunu");
+	legend->AddEntry(histograms[3], "Wenu");
+	legend->AddEntry(histograms[4], "ZqqZll");
+	legend->AddEntry(histograms[5], "EW Z#tau#tau");
+	legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	legend->AddEntry(histograms[7], "EW Zee");
+	legend->AddEntry(histograms[8], "QCD Z#tau#tau");
+	legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+	legend->AddEntry(histograms[10], "QCD Zee");
+	legend->Draw();
+
+}
+
+void Legend_Creator_For_Fit(vector<TH1F*> histograms) {
+
+	//Create the legend
+	auto legend = new TLegend(0.93,0.925,0.83,0.40);
+	legend->SetTextSize(0.05);
+	legend->SetBorderSize(0);
+	legend->AddEntry(histograms[11], "Data");
+	legend->AddEntry(histograms[0], "t#bar{t}");
+	legend->AddEntry(histograms[1], "Wtaunu");
+	legend->AddEntry(histograms[2], "Wmunu");
+	legend->AddEntry(histograms[3], "Wenu");
+	legend->AddEntry(histograms[4], "ZqqZll");
+	legend->AddEntry(histograms[5], "EW Z#tau#tau");
+	legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	legend->AddEntry(histograms[7], "EW Zee");
+	legend->AddEntry(histograms[8], "QCD Z#tau#tau");
+	legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+	legend->AddEntry(histograms[10], "QCD Zee");
+	legend->Draw();
+
+}
+
+vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
+	
+
+	//ttb
+	histograms[0]->SetLineColor(kBlack);
+	histograms[0]->SetFillColor(kRed);
+	histograms[0]->SetFillStyle(1001);
+
+	//Wtaunu
+	histograms[1]->SetLineColor(kBlack);
+	histograms[1]->SetFillColor(kViolet-8);
+	histograms[1]->SetFillStyle(1001);
+
+	//Wmunu
+	histograms[2]->SetLineColor(kBlack);
+	histograms[2]->SetFillColor(kViolet-4);
+	histograms[2]->SetFillStyle(1001);
+
+	//Wenu
+	histograms[3]->SetLineColor(kBlack);
+	histograms[3]->SetFillColor(kViolet-1);
+	histograms[3]->SetFillStyle(1001);
+
+	//ZqqZll
+	histograms[4]->SetLineColor(kBlack);
+	histograms[4]->SetFillColor(kPink-6);
+	histograms[4]->SetFillStyle(1001);
+
+	//Ztt2jets
+	histograms[5]->SetLineColor(kBlack);
+	histograms[5]->SetFillColor(kSpring+10);
+	histograms[5]->SetFillStyle(1001);
+
+	//Zmm2jets
+	histograms[6]->SetLineColor(kBlack);
+	histograms[6]->SetFillColor(kAzure+2);
+	histograms[6]->SetFillStyle(1001);
+
+	//Zee2jets
+	histograms[7]->SetLineColor(kBlack);
+	histograms[7]->SetFillColor(kOrange-2);
+	histograms[7]->SetFillStyle(1001);
+
+	//Ztt
+	histograms[8]->SetLineColor(kBlack);
+	histograms[8]->SetFillColor(kSpring+3);
+	histograms[8]->SetFillStyle(1001);
+
+	//Zmumu
+	histograms[9]->SetLineColor(kBlack);
+	histograms[9]->SetFillColor(kAzure-9);
+	histograms[9]->SetFillStyle(1001);
+
+	//Zee
+	histograms[10]->SetLineColor(kBlack);
+	histograms[10]->SetFillColor(kOrange+1);
+	histograms[10]->SetFillStyle(1001);
+
+	//Data
+	histograms[11]->Sumw2();
+	histograms[11]->SetLineColor(kBlack);
+	histograms[11]->SetMarkerStyle(8);
+	histograms[11]->SetMarkerSize(0.3);
+
+	return histograms;
+
+}
+
+vector<TH1F*> Histogram_Return(string AnalysisType, string DataType) {
+
+	string DataTypeHistName = "h_" + DataType + ";1";
+
+	vector<string> names;
+	vector<TFile*> files;
+	vector<TH1F*> histograms;
+
+	// Here is the file Path that has Access to Processes
+	// string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/";
+	// Loop over these processes or do manually as below: 
+
+	//Create the file names for the stack of processes
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/ttb_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wtaunu_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wmunu_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wenu_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/ZqqZll_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Ztt2jets_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zmm2jets_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zee2jets_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Ztt_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zmumu_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zee_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/DATA_Histograms.root");
+
+	//Load in all the files for the different processes, there are 12
+	for (auto name = names.begin(); name < names.end(); name++) {
+		files.push_back(new TFile(name->c_str()));
+	}
+
+	//Get all the histograms from files depending on the Data Type
+	for (auto tfile = files.begin(); tfile < files.end(); tfile++) {
+		TH1F *histogram = (TH1F*)(*tfile)->Get(DataTypeHistName.c_str());
+		histograms.push_back(histogram);
+	}
+
+	return histograms;
+
+}
+
+void Histogram_Namer(TH1F* histogram, string DataType) {
+	
+	if (DataType.find("p4_Pt") != string::npos) histogram->GetXaxis()->SetTitle("p_{T} [GeV/c]"); 
+	if (DataType.find("_mass") != string::npos && DataType.find("lep_0_lep_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{ll} [GeV/c^{2}]"); 
+	if (DataType.find("_mass") != string::npos && DataType.find("ljet_0_ljet_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{jj} [GeV/c^{2}]");
+	if (DataType.find("Centrality") != string::npos) histogram->GetXaxis()->SetTitle("Centrality");
+	if (DataType.find("DeltaR") != string::npos) histogram->GetXaxis()->SetTitle("#DeltaR");
+
+}
+
+void Histogram_Namer(THStack* histogram, string DataType) {
+	
+	if (DataType.find("p4_Pt") != string::npos) histogram->GetXaxis()->SetTitle("p_{T} [GeV/c]"); 
+	if (DataType.find("_mass") != string::npos && DataType.find("lep_0_lep_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{ll} [GeV/c^{2}]"); 
+	if (DataType.find("_mass") != string::npos && DataType.find("ljet_0_ljet_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{jj} [GeV/c^{2}]");
+	if (DataType.find("Centrality") != string::npos) histogram->GetXaxis()->SetTitle("Centrality");
+	if (DataType.find("DeltaR") != string::npos) histogram->GetXaxis()->SetTitle("#DeltaR");
+
+
+}
+
+string Histogram_Namer(string DataType) {
+
+	string Histogram_Name;	
+
+	if (DataType.find("p4_Pt") != string::npos) Histogram_Name = "p_{T} [GeV/c]"; 
+	if (DataType.find("_mass") != string::npos && DataType.find("lep_0_lep_1") != string::npos) Histogram_Name = "m_{ll} [GeV/c^{2}]"; 
+	if (DataType.find("_mass") != string::npos && DataType.find("ljet_0_ljet_1") != string::npos) Histogram_Name = "m_{jj} [GeV/c^{2}]";
+	if (DataType.find("Centrality") != string::npos) Histogram_Name = "Centrality";
+	if (DataType.find("DeltaR") != string::npos) Histogram_Name = "#DeltaR";
+
+	return Histogram_Name;
+
+}
+
+void Draw_Region(string DataType) {
+
+	string region;
+
+	if (DataType.find("CONTROL") != string::npos) region = "Control";
+	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
+	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
+	else region = "Search";
+
+	string latexLine = "#font[42]{" + region + " Region}";
+
+	TLatex t;
+	t.SetTextFont(42);
+	t.SetNDC(kTRUE);
+	t.SetTextSize(0.037);
+	t.DrawLatex(0.62, 0.86, latexLine.c_str());
+	t.DrawLatex(0.62, 0.80, "#intL dt = 36.2fb^{-1}");
+	t.DrawLatex(0.62, 0.75, "#sqrt{s} = 13 TeV");
+
+}
+
+void Draw_Region_For_Fit(string DataType) {
+
+	string region;
+
+	if (DataType.find("CONTROL") != string::npos) region = "Control";
+	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
+	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
+	else region = "Search";
+
+	string latexLine = "#font[42]{" + region + " Region}";
+
+	TLatex t;
+	t.SetTextFont(42);
+	t.SetNDC(kTRUE);
+	t.SetTextSize(0.05);
+	t.DrawLatex(0.675, 0.90, latexLine.c_str());
+	t.DrawLatex(0.675, 0.81, "#intL dt = 36.2fb^{-1}");
+	t.DrawLatex(0.675, 0.72, "#sqrt{s} = 13 TeV");
+
+}
+
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
@@ -461,138 +691,108 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	// string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/";
 	// Loop over these processes or do manually as below: 
 
-	//Create the file names for the stack of processes
-	string name1 = "../../Root-Files/" + AnalysisType + "/Processes/Ztt_Histograms.root";
-	string name2 = "../../Root-Files/" + AnalysisType + "/Processes/Ztt2jets_Histograms.root";
-	string name3 = "../../Root-Files/" + AnalysisType + "/Processes/ZqqZll_Histograms.root";
-	string name4 = "../../Root-Files/" + AnalysisType + "/Processes/Zmumu_Histograms.root";
-	string name5 = "../../Root-Files/" + AnalysisType + "/Processes/Zmm2jets_Histograms.root";
-	string name6 = "../../Root-Files/" + AnalysisType + "/Processes/Zee_Histograms.root";
-	string name7 = "../../Root-Files/" + AnalysisType + "/Processes/Zee2jets_Histograms.root";
-	string name8 = "../../Root-Files/" + AnalysisType + "/Processes/Wtaunu_Histograms.root";
-	string name9 = "../../Root-Files/" + AnalysisType + "/Processes/Wmunu_Histograms.root";
-	string name10 = "../../Root-Files/" + AnalysisType + "/Processes/Wenu_Histograms.root";
-	string name11 = "../../Root-Files/" + AnalysisType + "/Processes/ttb_Histograms.root";
-
-	string name12 = "../../Root-Files/" + AnalysisType + "/DATA_Histograms.root";
-
-	//Load in all the files for the different processes, there are 11
-	TFile *file1 = new TFile(name1.c_str());   // Ztt
-	TFile *file2 = new TFile(name2.c_str());   // Ztt2jets
-	TFile *file3 = new TFile(name3.c_str());   // ZqqZll
-	TFile *file4 = new TFile(name4.c_str());   // Zmumu
-	TFile *file5 = new TFile(name5.c_str());   // Zmumu2Jets
-	TFile *file6 = new TFile(name6.c_str());   // Zee
-	TFile *file7 = new TFile(name7.c_str());   // Zee2Jets
-	TFile *file8 = new TFile(name8.c_str());   // Wtaunu
-	TFile *file9 = new TFile(name9.c_str());   // Wmumu
-	TFile *file10 = new TFile(name10.c_str()); // Wenu
-	TFile *file11= new TFile(name11.c_str());  // tbb
-
-	TFile *file12= new TFile(name12.c_str());  // DATA
-
-
-	// Create names depending on the Data Type, for the histograms we are stacking
-	//string Histogram1DataType = "h_" + DataType + "
-
-	//Get all the histograms from files depending on the Data Type
-	TH1F *histogram1 = (TH1F*)file1->Get(DataTypeHistName.c_str());
-	TH1F *histogram2 = (TH1F*)file2->Get(DataTypeHistName.c_str());
-	TH1F *histogram3 = (TH1F*)file3->Get(DataTypeHistName.c_str());
-	TH1F *histogram4 = (TH1F*)file4->Get(DataTypeHistName.c_str());
-	TH1F *histogram5 = (TH1F*)file5->Get(DataTypeHistName.c_str());
-	TH1F *histogram6 = (TH1F*)file6->Get(DataTypeHistName.c_str());
-	TH1F *histogram7 = (TH1F*)file7->Get(DataTypeHistName.c_str());
-	TH1F *histogram8 = (TH1F*)file8->Get(DataTypeHistName.c_str());
-	TH1F *histogram9 = (TH1F*)file9->Get(DataTypeHistName.c_str());
-	TH1F *histogram10 = (TH1F*)file10->Get(DataTypeHistName.c_str());
-	TH1F *histogram11 = (TH1F*)file11->Get(DataTypeHistName.c_str());
-
-	TH1F *histogram12 = (TH1F*)file12->Get(DataTypeHistName.c_str());
+	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
 
 	//Create the stacked histogram
 	THStack *histogramStack = new THStack("histogramStack", "");
 
-	//Set the line colours for all the histograms, fill
-	histogram1->SetLineColor(kRed-7);
-	histogram1->SetFillStyle(0);
-
-	histogram2->SetLineColor(kBlue-9);
-	histogram2->SetFillStyle(0);
-
-	histogram3->SetLineColor(kGreen-7);
-	histogram3->SetFillStyle(0);
-
-	histogram4->SetLineColor(kYellow+2);
-	histogram4->SetFillStyle(0);
-
-	histogram5->SetLineColor(kAzure+10);
-	histogram5->SetFillStyle(0);
-
-	histogram6->SetLineColor(kGreen-8);
-	histogram6->SetFillStyle(0);
-
-	histogram7->SetLineColor(kViolet-6);
-	histogram7->SetFillStyle(0);
-
-	histogram8->SetLineColor(kOrange-3);
-	histogram8->SetFillStyle(0);
-
-	histogram9->SetLineColor(kCyan-8);
-	histogram9->SetFillStyle(0);
-
-	histogram10->SetLineColor(kGray);
-	histogram10->SetFillStyle(0);
-
-	histogram11->SetLineColor(kMagenta-10);
-	histogram11->SetFillStyle(0);
-
-	histogram12->Sumw2();
-	histogram12->SetLineColor(kBlack);
-	histogram12->SetMarkerStyle(8);
-	histogram12->SetMarkerSize(0.3);
+	histograms = Set_Histogram_Styles(histograms);
 
 	//  and add to the stack
-	histogramStack->Add(histogram1, "hist");
-	histogramStack->Add(histogram2, "hist");
-	histogramStack->Add(histogram3, "hist");
-	histogramStack->Add(histogram4, "hist");
-	histogramStack->Add(histogram5, "hist");
-	histogramStack->Add(histogram6, "hist");	
-	histogramStack->Add(histogram7, "hist");
-	histogramStack->Add(histogram8, "hist");
-	histogramStack->Add(histogram9, "hist");
-	histogramStack->Add(histogram10, "hist");
-	histogramStack->Add(histogram11, "hist");
+	for (int i=0; i < 11; i++) {
+		histogramStack->Add(histograms[i], "hist");
+	}
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
 	histogramStack->GetYaxis()->SetTitle("Events");
 
-	if (DataType.find("p4_Pt") != string::npos) histogramStack->GetXaxis()->SetTitle("Momentum [GeV/c]"); 
-	if (DataType.find("_mass") != string::npos) histogramStack->GetXaxis()->SetTitle("Invariant Mass [GeV/c^{2}]"); 
+	Histogram_Namer(histogramStack, DataType);
 
-	histogram12->Draw("SAME");
+	double max_value = histogramStack->GetMaximum();
+
+	//Generic Maximum Size of the Graphs
+	if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(1000);}
+	else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(10000);}
+	else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(100000);}
+ 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(1000000);}
+	else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(10000000);}
+
+	//Exceptions to these rules and conditions for the minimum size of the graphs
+	if (AnalysisType == "Tau") {
+
+		if (DataType == "lep_0_lep_1_mass_PRE") histogramStack->SetMinimum(500);
+		if (DataType == "lep_0_lep_1_mass_EXCEPT") histogramStack->SetMinimum(15);
+		if (DataType == "Centrality_CONTROL") histogramStack->SetMinimum(1);
+
+	} else if (AnalysisType == "Electron") {
+
+		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_ljet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
+
+	} else if (AnalysisType == "Muon") {
+
+		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_ljet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
+
+	} else { int i = 0;
+
+	}
+
+	/*
+
+	if (AnalysisType == "Tau" && DataType.find("lep_0_lep_1") != string::npos && (DataType.find("PRE") != string::npos || DataType.find("EXCEPT") != string::npos)) {
+
+		if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(5000);}
+		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(50000);}
+		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(500000);}
+	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(5000000);}
+		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(50000000);}
+
+		if (DataType.find("PRE") != string::npos) {
+
+			histogramStack->SetMinimum(500);
+
+		} else if (DataType.find("EXCEPT") != string::npos){
+
+			histogramStack->SetMinimum(15);
+
+		}
+
+	} else if (AnalysisType == "Tau") {
+
+		if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(5000); histogramStack->SetMinimum(1); }
+		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(50000); histogramStack->SetMinimum(2); }
+		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(500000); histogramStack->SetMinimum(5); }
+	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(5000000); histogramStack->SetMinimum(30); }
+		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(50000000); histogramStack->SetMinimum(100); }
+
+	} else {
+		if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(1000); histogramStack->SetMinimum(2); }
+		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(10000); histogramStack->SetMinimum(5); }
+		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(100000); histogramStack->SetMinimum(10); }
+	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(1000000); histogramStack->SetMinimum(20); }
+		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(10000000); histogramStack->SetMinimum(100); }
+	}
+
+	*/
+
+	histograms[11]->Draw("SAME");
 
 	canvas->SetLogy();
 
-	string LegendHeader = AnalysisType + " " + DataType;
-
-	//Create the legend
-	auto legend = new TLegend(0.95,0.95,0.70,0.60);
-	legend->SetTextSize(0.02);
-	legend->SetHeader(LegendHeader.c_str());
-	legend->AddEntry(histogram12, "Data");
-	legend->AddEntry(histogram1, "Ztt");
-	legend->AddEntry(histogram2, "Ztt2jets");
-	legend->AddEntry(histogram3, "ZqqZll");
-	legend->AddEntry(histogram4, "Zmumu");
-	legend->AddEntry(histogram5, "Zmm2jets");
-	legend->AddEntry(histogram6, "Zee");
-	legend->AddEntry(histogram7, "Zee2jets");
-	legend->AddEntry(histogram8, "Wtaunu");
-	legend->AddEntry(histogram9, "Wmunu");
-	legend->AddEntry(histogram10, "Wenu");
-	legend->AddEntry(histogram11, "ttb");
-	legend->Draw();
+	Legend_Creator(histograms);
+	Draw_Region(DataType);
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
