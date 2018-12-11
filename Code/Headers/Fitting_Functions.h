@@ -1,6 +1,48 @@
 #ifndef Fitting_Functions_h
 #define Fitting_Functions_h
 
+int Process_Selector(string Process) {
+
+	//Selector for the process
+	int SelectedProcess;
+	if (Process == "ttb") SelectedProcess = 0;
+	if (Process == "Wtaunu") SelectedProcess = 1;
+	if (Process == "Wmunu") SelectedProcess = 2;
+	if (Process == "Wenu") SelectedProcess = 3;
+	if (Process == "ZqqZll") SelectedProcess = 4;
+	if (Process == "Ztt2jets") SelectedProcess = 5;
+	if (Process == "Zmm2jets") SelectedProcess = 6;
+	if (Process == "Zee2jets") SelectedProcess = 7;
+	if (Process == "Ztt") SelectedProcess = 8;
+	if (Process == "Zmumu") SelectedProcess = 9;
+	if (Process == "Zee") SelectedProcess = 10;
+	if (Process == "DATA") SelectedProcess = 11;
+
+	return SelectedProcess;
+
+}
+
+void Process_Selector_Confirmation(int SelectedProcess) {
+
+	//Selector for the process
+	string Process;
+	if (SelectedProcess == 0) Process = "ttb";
+	if (SelectedProcess == 1) Process = "Wtaunu";
+	if (SelectedProcess == 2) Process = "Wmunu";
+	if (SelectedProcess == 3) Process = "Wenu";
+	if (SelectedProcess == 4) Process = "ZqqZll";
+	if (SelectedProcess == 5) Process = "Ztt2jets";
+	if (SelectedProcess == 6) Process = "Zmm2jets";
+	if (SelectedProcess == 7) Process = "Zee2jets";
+	if (SelectedProcess == 8) Process = "Ztt";
+	if (SelectedProcess == 9) Process = "Zmumu";
+	if (SelectedProcess == 11) Process = "Zee";
+	if (SelectedProcess == 12) Process = "DATA";
+
+	cout << "Process: " << Process <<  " Selected" << endl;
+
+}
+
 //This function will return the histogram that is the Data Process divided by the MC Process
 TH1F* MC_DATA_Comparison(vector<TH1F*> histograms, int SelectedProcess) {
 	
@@ -36,24 +78,23 @@ TH1F* MC_DATA_Comparison(vector<TH1F*> histograms, int SelectedProcess) {
 
 }
 
-int Process_Selector(string Process) {
+//This function will return the histogram that is the Data Process divided by the MC Process
+TH1F* Two_Process_Data_Subtraction(vector<TH1F*> histograms, int SelectedProcess1, int SelectedProcess2) {
+	
+	//Get the data histogram from the vector
+	TH1F *dataHistogram = (TH1F*)histograms[11]->Clone();
 
-	//Selector for the process
-	int SelectedProcess;
-	if (Process == "ttb") SelectedProcess = 0;
-	if (Process == "Wtaunu") SelectedProcess = 1;
-	if (Process == "Wmunu") SelectedProcess = 2;
-	if (Process == "Wenu") SelectedProcess = 3;
-	if (Process == "ZqqZll") SelectedProcess = 4;
-	if (Process == "Ztt2jets") SelectedProcess = 5;
-	if (Process == "Zmm2jets") SelectedProcess = 6;
-	if (Process == "Zee2jets") SelectedProcess = 7;
-	if (Process == "Ztt") SelectedProcess = 8;
-	if (Process == "Zmumu") SelectedProcess = 9;
-	if (Process == "Zee") SelectedProcess = 10;
-	if (Process == "DATA") SelectedProcess = 11;
+	//For all the non-data histograms in the histogram vector
+	for (int i=0; i < 11; i++) {
+		//If the process isn't the selected process
+		if (!(i == SelectedProcess1 || i == SelectedProcess2)) {
+			//Process_Selector_Confirmation(i);
+			TH1F *histogram = histograms[i];
+			dataHistogram->Add(histogram, -1);
+		}
+	}
 
-	return SelectedProcess;
+	return dataHistogram;
 
 }
 
@@ -75,12 +116,12 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 				double bin_centre = binwidth * j;
 				double bin_content = histogram->GetBinContent(j);
 				double fit_y = m * bin_centre + c;
-				
+				/*
 				cout << "Bin centre: " << bin_centre << " ";
 				cout << "Bin content: " << bin_content << " ";
 				cout << "fit_y: " << fit_y << " ";
 				cout << "nbc: " << fit_y * bin_content << endl;
-				
+				*/
 				histogram->SetBinContent(j, fit_y * bin_content);
 
 			}
@@ -192,7 +233,7 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 	pad1->Draw();
 
 	pad2->SetTopMargin(0);
-	pad2->SetBottomMargin(0.4);
+	pad2->SetBottomMargin(0.45);
 	pad2->SetLeftMargin(0.085);
 	pad2->SetRightMargin(0.04);
 	pad2->Draw();
@@ -225,6 +266,7 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 		histogramStack->Add(histograms[i], "hist");
 	}
 
+	histogramStack->SetMinimum(5);
 	histogramStack->SetMaximum(10000);
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
 	histogramStack->GetYaxis()->SetLabelSize(0.);
@@ -232,9 +274,9 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 	//TGaxis(x-Start, y-Start, x-End, y-End, N Divisions, Final Axis Value, 510, "G")
 	TGaxis *axis = new TGaxis(0, 1, 0, 10000, 1, 10000, 510, "G");
 	axis->SetLabelFont(43); // Absolute font size in pixel (precision 3)
-	axis->SetLabelSize(16);
+	axis->SetLabelSize(17);
 	axis->SetTitleFont(43);
-	axis->SetTitleSize(16);
+	axis->SetTitleSize(17);
 	axis->SetTitleOffset(0.9);
 	axis->SetTitle("Events");
 	axis->Draw();
@@ -272,16 +314,16 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 	axis2->SetLabelSize(16);
 	axis2->SetTitleFont(43);
 	axis2->SetTitleSize(16);
-	axis2->SetTitleOffset(0.85);
+	axis2->SetTitleOffset(0.75);
 	axis2->SetTitle(yAxisTitle.c_str());
 	axis2->Draw();
 
 	//TGaxis(x-Start, y-Start, x-End, y-End, Initial Axis Value, Final Axis Value, 510, "G")
 	TGaxis *axis3 = new TGaxis(0, 0, 3000, 0, 0, 3000, 510, "");
 	axis3->SetLabelFont(43); // Absolute font size in pixel (precision 3)
-	axis3->SetLabelSize(16);
+	axis3->SetLabelSize(18);
 	axis3->SetTitleFont(43);
-	axis3->SetTitleSize(16);
+	axis3->SetTitleSize(17);
 	axis3->SetTitleOffset(4);
 	axis3->SetTitle(Histogram_Namer(DataType).c_str());
 	axis3->Draw(); 
@@ -307,6 +349,131 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
+
+}
+
+//Function to calculate the Cross section for two leptons, takes QCD process as Process1, EW process as Process2
+void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string DataType, string Process1, string Process2, double m, double c, double bins, bool scale, string ID) {
+
+	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	gStyle->SetOptStat(0);
+
+	//Selector for the process not to be subtracted
+	int SelectedProcess1 = Process_Selector(Process1);
+	int SelectedProcess2 = Process_Selector(Process2);
+
+	histograms[SelectedProcess1] = Weight_Process_Histogram(histograms, SelectedProcess1, m, c, bins);
+
+	TH1F *data = (TH1F*)histograms[11]->Clone();
+	TH1F *h1 = (TH1F*)histograms[SelectedProcess1]->Clone();
+	TH1F *h2 = (TH1F*)histograms[SelectedProcess2]->Clone();
+
+	RooRealVar x("x", "x", 250., 3000.);  
+
+	RooDataHist roofit_h1("roofit_h1", "roofit_h1", x, h1);   
+	RooRealVar c1("c1", "c1", 0., 10000000.); 
+
+	RooDataHist roofit_h2("roofit_h2", "roofit_h2", x, h2);   
+	RooRealVar c2("c2", "c2", 0., 10000000.); 
+
+	RooHistPdf pdf_roofit_h1("pdf_roofit_h1", "pdf_roofit_h1", x, roofit_h1);   
+	RooHistPdf pdf_roofit_h2("pdf_roofit_h2", "pdf_roofit_h2", x, roofit_h2); 
+
+	RooAddPdf model("model", "(c1*pdf_roofit_h1)+(c2*pdf_roofit_h2)", RooArgList(pdf_roofit_h1, pdf_roofit_h2), RooArgList(c1,c2));  
+
+	RooDataHist datah("datah", "dataset with x", x, data);
+	
+	model.fitTo(datah);
+
+	double n_Process1;
+	double n_Process2;
+
+	double normalised_scale_factor_Process1 = c1.getVal();
+	double normalised_scale_factor_Process2 = c2.getVal();
+
+	RooPlot* frame = x.frame();
+	datah.plotOn(frame);
+	model.plotOn(frame);
+
+	roofit_h1.plotOn(frame);
+	n_Process1 = frame->getFitRangeNEvt();
+
+	roofit_h2.plotOn(frame);
+	n_Process2 = frame->getFitRangeNEvt();
+
+	TCanvas *canvas2 = new TCanvas("Canvas2", "", 600, 400);
+
+	gPad->SetLogy();
+
+	double scale_factor_Process1 = normalised_scale_factor_Process1 / n_Process1;
+	double scale_factor_Process2 = normalised_scale_factor_Process2 / n_Process2;
+
+	cout << "Scale Factor for " << Process1 << ": " << scale_factor_Process1 << endl;
+	cout << "Scale Factor for " << Process2 << ": " << scale_factor_Process2 << endl;
+
+
+	if (scale) {
+		histograms[SelectedProcess1]->Scale(scale_factor_Process1);
+		histograms[SelectedProcess2]->Scale(scale_factor_Process2);
+	}
+
+	//Create the stacked histogram
+	THStack *histogramStack = new THStack("histogramStack", "");
+
+	histograms = Set_Histogram_Styles(histograms);
+
+	//and add to the stack
+	histogramStack->Add(histograms[SelectedProcess2], "hist");
+	histogramStack->Add(histograms[SelectedProcess1], "hist");
+
+	histogramStack->SetMinimum(5);
+	histogramStack->SetMaximum(10000);
+	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
+
+	histogramStack->GetYaxis()->SetTitle("Events");
+
+	histogramStack->GetXaxis()->SetLabelSize(0.05);
+	histogramStack->GetYaxis()->SetLabelSize(0.05);
+
+	histogramStack->GetXaxis()->SetTitleSize(0.037);
+	histogramStack->GetYaxis()->SetTitleSize(0.037);
+
+	histogramStack->GetXaxis()->SetTitleOffset(1.2);
+
+	Histogram_Namer(histogramStack, DataType);
+
+	TH1F *TwoProcessSubtractedDataHistogram = Two_Process_Data_Subtraction(histograms, SelectedProcess1, SelectedProcess2);
+
+	TwoProcessSubtractedDataHistogram->Draw("SAME");
+
+	Legend_Creator_For_Two(histograms, SelectedProcess1, SelectedProcess2);
+
+	Draw_Region_For_Two(DataType);
+
+	string scaled = "";
+	if (scale) scaled = "_Scaled";
+
+	fstream output("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + "_Sigma_Search" + scaled + "_Parameters.txt", output.out);
+	output << scale_factor_Process1 << endl << scale_factor_Process2;
+	output.close();
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_" + AnalysisType + "_Sigma_Search" + scaled + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	
+	//Write out to a PDF file
+	canvas2->SaveAs(FullOutputFilePath.c_str());
+
+	vector<double> info = csv_reader(ID);
+
+	cout << "MC Cross Section:     " << info[1] << endl;
+	cout << "EW Scale Factor:      " << scale_factor_Process2 << endl;
+	cout << "Actual Cross Section: " << info[1] * scale_factor_Process2 << endl;
+
+	fstream output2("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + "_Cross_Section.txt", output2.out);
+	output2 << "MC Cross Section:     " << info[1] << endl;
+	output2 << "EW Scale Factor:      " << scale_factor_Process2 << endl;
+	output2 << "Actual Cross Section: " << info[1] * scale_factor_Process2 << endl;
+	output2.close();
 
 }
 

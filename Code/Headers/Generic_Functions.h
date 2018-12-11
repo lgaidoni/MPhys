@@ -54,6 +54,28 @@ void Legend_Creator_For_Fit(vector<TH1F*> histograms) {
 
 }
 
+void Legend_Creator_For_Two(vector<TH1F*> histograms, int SelectedProcess1, int SelectedProcess2) {
+
+	//Create the legend
+	auto legend = new TLegend(0.89,0.89,0.80,0.70);
+	legend->SetTextSize(0.03);
+	legend->SetBorderSize(0);
+	legend->AddEntry(histograms[11], "Data");
+	if (SelectedProcess1 == 0 || SelectedProcess2 == 0) legend->AddEntry(histograms[0], "t#bar{t}");
+	if (SelectedProcess1 == 1 || SelectedProcess2 == 1) legend->AddEntry(histograms[1], "Wtaunu");
+	if (SelectedProcess1 == 2 || SelectedProcess2 == 2) legend->AddEntry(histograms[2], "Wmunu");
+	if (SelectedProcess1 == 3 || SelectedProcess2 == 3) legend->AddEntry(histograms[3], "Wenu");
+	if (SelectedProcess1 == 4 || SelectedProcess2 == 4) legend->AddEntry(histograms[4], "ZqqZll");
+	if (SelectedProcess1 == 5 || SelectedProcess2 == 5) legend->AddEntry(histograms[5], "EW Z#tau#tau");
+	if (SelectedProcess1 == 6 || SelectedProcess2 == 6) legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	if (SelectedProcess1 == 7 || SelectedProcess2 == 7) legend->AddEntry(histograms[7], "EW Zee");
+	if (SelectedProcess1 == 8 || SelectedProcess2 == 8) legend->AddEntry(histograms[8], "QCD Z#tau#tau");
+	if (SelectedProcess1 == 9 || SelectedProcess2 == 9) legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+	if (SelectedProcess1 == 10 || SelectedProcess2 == 10) legend->AddEntry(histograms[10], "QCD Zee");
+	legend->Draw();
+
+}
+
 vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
 	
 
@@ -240,6 +262,27 @@ void Draw_Region_For_Fit(string DataType) {
 
 }
 
+void Draw_Region_For_Two(string DataType) {
+
+	string region;
+
+	if (DataType.find("CONTROL") != string::npos) region = "Control";
+	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
+	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
+	else region = "Search";
+
+	string latexLine = "#font[42]{" + region + " Region}";
+
+	TLatex t;
+	t.SetTextFont(42);
+	t.SetNDC(kTRUE);
+	t.SetTextSize(0.035);
+	t.DrawLatex(0.62, 0.85, latexLine.c_str());
+	t.DrawLatex(0.62, 0.785, "#intL dt = 36.2fb^{-1}");
+	t.DrawLatex(0.62, 0.72, "#sqrt{s} = 13 TeV");
+
+}
+
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
@@ -369,6 +412,18 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 	histogram2->Draw("SAME HIST");	
 	histogram3->Draw("SAME HIST");	
 	histogram4->Draw("SAME HIST");	
+
+	histogram1->GetYaxis()->SetTitle("Events");
+
+	histogram1->GetXaxis()->SetLabelSize(0.05);
+	histogram1->GetYaxis()->SetLabelSize(0.05);
+
+	histogram1->GetXaxis()->SetTitleSize(0.037);
+	histogram1->GetYaxis()->SetTitleSize(0.037);
+
+	histogram1->GetXaxis()->SetTitleOffset(1.2);
+
+	Histogram_Namer(histogram1, histogramName);
 
 	auto legend = new TLegend(0.99,0.95,0.75,0.75);
 	legend->SetHeader(legendName.c_str());
@@ -703,9 +758,18 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		histogramStack->Add(histograms[i], "hist");
 	}
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
-	histogramStack->GetYaxis()->SetTitle("Events");
 
 	Histogram_Namer(histogramStack, DataType);
+
+	histogramStack->GetYaxis()->SetTitle("Events");
+
+	histogramStack->GetXaxis()->SetLabelSize(0.05);
+	histogramStack->GetYaxis()->SetLabelSize(0.05);
+
+	histogramStack->GetXaxis()->SetTitleSize(0.037);
+	histogramStack->GetYaxis()->SetTitleSize(0.037);
+
+	histogramStack->GetXaxis()->SetTitleOffset(1.2);
 
 	double max_value = histogramStack->GetMaximum();
 
@@ -748,44 +812,6 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	} else { int i = 0;
 
 	}
-
-	/*
-
-	if (AnalysisType == "Tau" && DataType.find("lep_0_lep_1") != string::npos && (DataType.find("PRE") != string::npos || DataType.find("EXCEPT") != string::npos)) {
-
-		if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(5000);}
-		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(50000);}
-		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(500000);}
-	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(5000000);}
-		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(50000000);}
-
-		if (DataType.find("PRE") != string::npos) {
-
-			histogramStack->SetMinimum(500);
-
-		} else if (DataType.find("EXCEPT") != string::npos){
-
-			histogramStack->SetMinimum(15);
-
-		}
-
-	} else if (AnalysisType == "Tau") {
-
-		if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(5000); histogramStack->SetMinimum(1); }
-		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(50000); histogramStack->SetMinimum(2); }
-		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(500000); histogramStack->SetMinimum(5); }
-	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(5000000); histogramStack->SetMinimum(30); }
-		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(50000000); histogramStack->SetMinimum(100); }
-
-	} else {
-		if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(1000); histogramStack->SetMinimum(2); }
-		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(10000); histogramStack->SetMinimum(5); }
-		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(100000); histogramStack->SetMinimum(10); }
-	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(1000000); histogramStack->SetMinimum(20); }
-		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(10000000); histogramStack->SetMinimum(100); }
-	}
-
-	*/
 
 	histograms[11]->Draw("SAME");
 
