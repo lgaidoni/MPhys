@@ -14,6 +14,10 @@ mkdir ~/Output-Files/Report-Graphs/Tau-Discussion/
 
 mkdir ~/Output-Files/Report-Graphs/Cross-Section/
 
+mkdir ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/
+mkdir ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/
+mkdir ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/
+
 cp -fP ~/Output-Files/Electron/Sh221_PDF30_Zee2jets_Min_N_TChannel/h_lep_0_iso_ptvarcone40_Sh221_PDF30_Zee2jets_Min_N_TChannel_Combo.pdf ~/Output-Files/Report-Graphs/Cut-Demonstration/h_lep_0_iso_ptvarcone40_Sh221_PDF30_Zee2jets_Min_N_TChannel_Combo.pdf
 cp -fP ~/Output-Files/Electron/Sh221_PDF30_Zee2jets_Min_N_TChannel/h_lep_1_iso_ptvarcone40_Sh221_PDF30_Zee2jets_Min_N_TChannel_Combo.pdf ~/Output-Files/Report-Graphs/Cut-Demonstration/h_lep_1_iso_ptvarcone40_Sh221_PDF30_Zee2jets_Min_N_TChannel_Combo.pdf
 cp -fP ~/Output-Files/Electron/Sh221_PDF30_Zee2jets_Min_N_TChannel/h_lep_0_lep_1_mass_Sh221_PDF30_Zee2jets_Min_N_TChannel_Combo.pdf ~/Output-Files/Report-Graphs/Cut-Demonstration/h_lep_0_lep_1_mass_Sh221_PDF30_Zee2jets_Min_N_TChannel_Combo.pdf
@@ -60,3 +64,33 @@ cp -fP ~/Output-Files/Fit-Graphs/ljet_0_ljet_1_mass_Electron_Sigma_Search_Scaled
 cp -fP ~/Output-Files/Fit-Graphs/ljet_0_ljet_1_mass_Muon_Sigma_Search.pdf ~/Output-Files/Report-Graphs/Cross-Section/ljet_0_ljet_1_mass_Muon_Sigma_Search.pdf
 cp -fP ~/Output-Files/Fit-Graphs/ljet_0_ljet_1_mass_Muon_Sigma_Search_Scaled.pdf ~/Output-Files/Report-Graphs/Cross-Section/ljet_0_ljet_1_mass_Muon_Sigma_Search_Scaled.pdf
 
+cp -fP ~/Output-Files/Final_Graphs/lep_0_lep_1_mass_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/lep_0_lep_1_mass_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/lep_0_lep_1_mass_EXCEPT_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/lep_0_lep_1_mass_EXCEPT_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/lep_0_lep_1_pt_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/lep_0_lep_1_pt_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/lep_0_lep_1_pt_EXCEPT_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/lep_0_lep_1_pt_EXCEPT_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_0_ljet_1_mass_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/ljet_0_ljet_1_mass_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_0_ljet_1_mass_EXCEPT_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/ljet_0_ljet_1_mass_EXCEPT_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_0_p4_Pt_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/ljet_0_p4_Pt_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_0_p4_Pt_EXCEPT_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/ljet_0_p4_Pt_EXCEPT_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_1_p4_Pt_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/ljet_1_p4_Pt_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_1_p4_Pt_EXCEPT_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/ljet_1_p4_Pt_EXCEPT_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/pT_balance_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/pT_balance_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/pT_balance_EXCEPT_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/pT_balance_EXCEPT_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/pT_balance_3_CONTROL_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/pT_balance_3_CONTROL_Electron_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/pT_balance_3_EXCEPT_Electron_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Electron/pT_balance_3_EXCEPT_Electron_Final_Stacked.pdf
+
+
+cp -fP ~/Output-Files/Final_Graphs/lep_0_lep_1_mass_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/lep_0_lep_1_mass_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/lep_0_lep_1_mass_EXCEPT_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/lep_0_lep_1_mass_EXCEPT_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/lep_0_lep_1_pt_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/lep_0_lep_1_pt_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/lep_0_lep_1_pt_EXCEPT_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/lep_0_lep_1_pt_EXCEPT_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_0_ljet_1_mass_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/ljet_0_ljet_1_mass_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_0_ljet_1_mass_EXCEPT_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/ljet_0_ljet_1_mass_EXCEPT_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_0_p4_Pt_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/ljet_0_p4_Pt_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_0_p4_Pt_EXCEPT_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/ljet_0_p4_Pt_EXCEPT_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_1_p4_Pt_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/ljet_1_p4_Pt_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/ljet_1_p4_Pt_EXCEPT_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/ljet_1_p4_Pt_EXCEPT_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/pT_balance_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/pT_balance_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/pT_balance_EXCEPT_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/pT_balance_EXCEPT_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/pT_balance_3_CONTROL_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/pT_balance_3_CONTROL_Muon_Final_Stacked.pdf
+cp -fP ~/Output-Files/Final_Graphs/pT_balance_3_EXCEPT_Muon_Final_Stacked.pdf ~/Output-Files/Report-Graphs/Cuts-SEARCH-EXCEPT-Final-Stacked/Muon/pT_balance_3_EXCEPT_Muon_Final_Stacked.pdf

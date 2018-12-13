@@ -389,7 +389,10 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string Da
 	double n_Process2;
 
 	double normalised_scale_factor_Process1 = c1.getVal();
+	double normalised_scale_factor_Process1_Error = c1.getError();
+
 	double normalised_scale_factor_Process2 = c2.getVal();
+	double normalised_scale_factor_Process2_Error = c2.getError();
 
 	RooPlot* frame = x.frame();
 	datah.plotOn(frame);
@@ -406,10 +409,13 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string Da
 	gPad->SetLogy();
 
 	double scale_factor_Process1 = normalised_scale_factor_Process1 / n_Process1;
-	double scale_factor_Process2 = normalised_scale_factor_Process2 / n_Process2;
+	double scale_factor_Process1_Error = (normalised_scale_factor_Process1_Error/normalised_scale_factor_Process1)*scale_factor_Process1;
 
-	cout << "Scale Factor for " << Process1 << ": " << scale_factor_Process1 << endl;
-	cout << "Scale Factor for " << Process2 << ": " << scale_factor_Process2 << endl;
+	double scale_factor_Process2 = normalised_scale_factor_Process2 / n_Process2;
+	double scale_factor_Process2_Error = (normalised_scale_factor_Process2_Error/normalised_scale_factor_Process2)*scale_factor_Process2;
+
+	cout << "Scale Factor for " << Process1 << ": " << scale_factor_Process1 << "+/-" << scale_factor_Process1_Error << endl;
+	cout << "Scale Factor for " << Process2 << ": " << scale_factor_Process2 << "+/-" << scale_factor_Process2_Error << endl << endl;
 
 
 	if (scale) {
@@ -465,14 +471,20 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string Da
 
 	vector<double> info = csv_reader(ID);
 
-	cout << "MC Cross Section:     " << info[1] << endl;
-	cout << "EW Scale Factor:      " << scale_factor_Process2 << endl;
-	cout << "Actual Cross Section: " << info[1] * scale_factor_Process2 << endl;
+	cout << endl << "MC Cross Section:     " << info[1] << endl;
+	cout << "QCD Scale Factor:     " << scale_factor_Process1 << " +/- " << scale_factor_Process1_Error << endl;
+	cout << "EW Scale Factor:      " << scale_factor_Process2 << " +/- " << scale_factor_Process2_Error << endl;
+
+	double cross_section = info[1] * scale_factor_Process2;
+	double cross_section_error = (scale_factor_Process2_Error/scale_factor_Process2)*cross_section;
+
+	cout << "EW Cross Section:     " << info[1] * scale_factor_Process2 << " +/- " << cross_section_error << endl;
 
 	fstream output2("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + "_Cross_Section.txt", output2.out);
 	output2 << "MC Cross Section:     " << info[1] << endl;
-	output2 << "EW Scale Factor:      " << scale_factor_Process2 << endl;
-	output2 << "Actual Cross Section: " << info[1] * scale_factor_Process2 << endl;
+	output2 << "QCD Scale Factor:     " << scale_factor_Process1 << " +/- " << scale_factor_Process1_Error << endl;
+	output2 << "EW Scale Factor:      " << scale_factor_Process2 << " +/- " << scale_factor_Process2_Error << endl;
+	output2 << "EW Cross Section:     " << info[1] * scale_factor_Process2 << " +/- " << cross_section_error  << endl;
 	output2.close();
 
 }

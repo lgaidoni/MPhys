@@ -10,72 +10,97 @@
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 
+//This function will create the legend on the currently active canvas
+//This function takes the vector of histograms created by Histogram_Return(AnalysisType, DataType)
 void Legend_Creator(vector<TH1F*> histograms) {
 
 	//Create the legend
 	auto legend = new TLegend(0.84,0.89,0.78,0.45);
+
+	//Minor Formatting
 	legend->SetTextSize(0.037);
 	legend->SetBorderSize(0);
+
+	//Add all the entries to the histogram
 	legend->AddEntry(histograms[11], "Data");
-	legend->AddEntry(histograms[0], "t#bar{t}");
-	legend->AddEntry(histograms[1], "Wtaunu");
-	legend->AddEntry(histograms[2], "Wmunu");
-	legend->AddEntry(histograms[3], "Wenu");
-	legend->AddEntry(histograms[4], "ZqqZll");
-	legend->AddEntry(histograms[5], "EW Z#tau#tau");
-	legend->AddEntry(histograms[6], "EW Z#mu#mu");
-	legend->AddEntry(histograms[7], "EW Zee");
-	legend->AddEntry(histograms[8], "QCD Z#tau#tau");
-	legend->AddEntry(histograms[9], "QCD Z#mu#mu");
 	legend->AddEntry(histograms[10], "QCD Zee");
-	legend->Draw();
+	legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+	legend->AddEntry(histograms[8], "QCD Z#tau#tau");
+	legend->AddEntry(histograms[7], "EW Zee");
+	legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	legend->AddEntry(histograms[5], "EW Z#tau#tau");
+	legend->AddEntry(histograms[4], "ZqqZll");
+	legend->AddEntry(histograms[3], "Wenu");
+	legend->AddEntry(histograms[2], "Wmunu");
+	legend->AddEntry(histograms[1], "Wtaunu");
+	legend->AddEntry(histograms[0], "t#bar{t}");
+
+	legend->Draw(); //Draw the legend to the currently active canvas
 
 }
 
+//This function will create the legend on the currently active canvas
+//Better formatted for the divided fit graphs
+//This function takes the vector of histograms created by Histogram_Return(AnalysisType, DataType)
 void Legend_Creator_For_Fit(vector<TH1F*> histograms) {
 
 	//Create the legend
 	auto legend = new TLegend(0.93,0.925,0.83,0.40);
+
+	//Minor Formatting
 	legend->SetTextSize(0.05);
 	legend->SetBorderSize(0);
+
+	//Add all the entries to the histgoram
 	legend->AddEntry(histograms[11], "Data");
-	legend->AddEntry(histograms[0], "t#bar{t}");
-	legend->AddEntry(histograms[1], "Wtaunu");
-	legend->AddEntry(histograms[2], "Wmunu");
-	legend->AddEntry(histograms[3], "Wenu");
-	legend->AddEntry(histograms[4], "ZqqZll");
-	legend->AddEntry(histograms[5], "EW Z#tau#tau");
-	legend->AddEntry(histograms[6], "EW Z#mu#mu");
-	legend->AddEntry(histograms[7], "EW Zee");
-	legend->AddEntry(histograms[8], "QCD Z#tau#tau");
-	legend->AddEntry(histograms[9], "QCD Z#mu#mu");
 	legend->AddEntry(histograms[10], "QCD Zee");
-	legend->Draw();
+	legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+	legend->AddEntry(histograms[8], "QCD Z#tau#tau");
+	legend->AddEntry(histograms[7], "EW Zee");
+	legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	legend->AddEntry(histograms[5], "EW Z#tau#tau");
+	legend->AddEntry(histograms[4], "ZqqZll");
+	legend->AddEntry(histograms[3], "Wenu");
+	legend->AddEntry(histograms[2], "Wmunu");
+	legend->AddEntry(histograms[1], "Wtaunu");
+	legend->AddEntry(histograms[0], "t#bar{t}");
+	
+	legend->Draw(); //Draw the legend to the currently active canvas
 
 }
 
+//This function will create the legend on the currently active canvas
+//Better formatted and specialised for specifically two processes stacked, plus data
+//This function takes the vector of histograms created by Histogram_Return(AnalysisType, DataType), an integer representing Process 1, and an integer representing Process 2
 void Legend_Creator_For_Two(vector<TH1F*> histograms, int SelectedProcess1, int SelectedProcess2) {
 
 	//Create the legend
 	auto legend = new TLegend(0.89,0.89,0.80,0.70);
+
+	//Minor Formatting
 	legend->SetTextSize(0.03);
 	legend->SetBorderSize(0);
-	legend->AddEntry(histograms[11], "Data");
-	if (SelectedProcess1 == 0 || SelectedProcess2 == 0) legend->AddEntry(histograms[0], "t#bar{t}");
-	if (SelectedProcess1 == 1 || SelectedProcess2 == 1) legend->AddEntry(histograms[1], "Wtaunu");
-	if (SelectedProcess1 == 2 || SelectedProcess2 == 2) legend->AddEntry(histograms[2], "Wmunu");
-	if (SelectedProcess1 == 3 || SelectedProcess2 == 3) legend->AddEntry(histograms[3], "Wenu");
-	if (SelectedProcess1 == 4 || SelectedProcess2 == 4) legend->AddEntry(histograms[4], "ZqqZll");
-	if (SelectedProcess1 == 5 || SelectedProcess2 == 5) legend->AddEntry(histograms[5], "EW Z#tau#tau");
-	if (SelectedProcess1 == 6 || SelectedProcess2 == 6) legend->AddEntry(histograms[6], "EW Z#mu#mu");
-	if (SelectedProcess1 == 7 || SelectedProcess2 == 7) legend->AddEntry(histograms[7], "EW Zee");
-	if (SelectedProcess1 == 8 || SelectedProcess2 == 8) legend->AddEntry(histograms[8], "QCD Z#tau#tau");
-	if (SelectedProcess1 == 9 || SelectedProcess2 == 9) legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+
+	legend->AddEntry(histograms[11], "Data"); //Add data to the legend
+
+	//If either process is equal to one of the processes listed here, add it to the legend
 	if (SelectedProcess1 == 10 || SelectedProcess2 == 10) legend->AddEntry(histograms[10], "QCD Zee");
-	legend->Draw();
+	if (SelectedProcess1 == 9 || SelectedProcess2 == 9) legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+	if (SelectedProcess1 == 8 || SelectedProcess2 == 8) legend->AddEntry(histograms[8], "QCD Z#tau#tau");
+	if (SelectedProcess1 == 7 || SelectedProcess2 == 7) legend->AddEntry(histograms[7], "EW Zee");
+	if (SelectedProcess1 == 6 || SelectedProcess2 == 6) legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	if (SelectedProcess1 == 5 || SelectedProcess2 == 5) legend->AddEntry(histograms[5], "EW Z#tau#tau");
+	if (SelectedProcess1 == 4 || SelectedProcess2 == 4) legend->AddEntry(histograms[4], "ZqqZll");
+	if (SelectedProcess1 == 3 || SelectedProcess2 == 3) legend->AddEntry(histograms[3], "Wenu");
+	if (SelectedProcess1 == 2 || SelectedProcess2 == 2) legend->AddEntry(histograms[2], "Wmunu");
+	if (SelectedProcess1 == 1 || SelectedProcess2 == 1) legend->AddEntry(histograms[1], "Wtaunu");
+	if (SelectedProcess1 == 0 || SelectedProcess2 == 0) legend->AddEntry(histograms[0], "t#bar{t}");
+
+	legend->Draw(); //Draw the legend to the currently active canvas
 
 }
 
+//This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
 vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
 	
 
@@ -144,19 +169,17 @@ vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
 
 }
 
+//This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
 vector<TH1F*> Histogram_Return(string AnalysisType, string DataType) {
 
-	string DataTypeHistName = "h_" + DataType + ";1";
+	string DataTypeHistName = "h_" + DataType + ";1";  //Name of the desired histogram in the root file
 
+	//Variable creation
 	vector<string> names;
 	vector<TFile*> files;
 	vector<TH1F*> histograms;
 
-	// Here is the file Path that has Access to Processes
-	// string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/";
-	// Loop over these processes or do manually as below: 
-
-	//Create the file names for the stack of processes
+	//Create the file names for the stack of processes and push them into the names vector
 	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/ttb_Histograms.root");
 	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wtaunu_Histograms.root");
 	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wmunu_Histograms.root");
@@ -170,12 +193,12 @@ vector<TH1F*> Histogram_Return(string AnalysisType, string DataType) {
 	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zee_Histograms.root");
 	names.push_back("../../Root-Files/" + AnalysisType + "/DATA_Histograms.root");
 
-	//Load in all the files for the different processes, there are 12
+	//Load in all the files for the different processes, there are 12 into the files vector
 	for (auto name = names.begin(); name < names.end(); name++) {
 		files.push_back(new TFile(name->c_str()));
 	}
 
-	//Get all the histograms from files depending on the Data Type
+	//Get all the histograms from files depending on the Data Type and push them into the histograms vector
 	for (auto tfile = files.begin(); tfile < files.end(); tfile++) {
 		TH1F *histogram = (TH1F*)(*tfile)->Get(DataTypeHistName.c_str());
 		histograms.push_back(histogram);
@@ -185,6 +208,7 @@ vector<TH1F*> Histogram_Return(string AnalysisType, string DataType) {
 
 }
 
+//This function will give the provided histogram an x-axis, depending on the name of the DataType (ljet_0_ljet_1_mass, Etc) provided
 void Histogram_Namer(TH1F* histogram, string DataType) {
 	
 	if (DataType.find("p4_Pt") != string::npos) histogram->GetXaxis()->SetTitle("p_{T} [GeV/c]"); 
@@ -195,6 +219,7 @@ void Histogram_Namer(TH1F* histogram, string DataType) {
 
 }
 
+//This function will give the provided histogram stack an x-axis, depending on the name of the DataType (ljet_0_ljet_1_mass, Etc) provided
 void Histogram_Namer(THStack* histogram, string DataType) {
 	
 	if (DataType.find("p4_Pt") != string::npos) histogram->GetXaxis()->SetTitle("p_{T} [GeV/c]"); 
@@ -206,6 +231,7 @@ void Histogram_Namer(THStack* histogram, string DataType) {
 
 }
 
+//This function will generate a string for the x-axis title, depending on the name of the DataType (ljet_0_ljet_1_mass, Etc) provided
 string Histogram_Namer(string DataType) {
 
 	string Histogram_Name;	
@@ -220,66 +246,77 @@ string Histogram_Namer(string DataType) {
 
 }
 
+//This function will draw the box containing information about the data used to produce graphs
+//It will draw the box to the currently active canvas
 void Draw_Region(string DataType) {
 
 	string region;
 
+	//Check the data type for different regions or except version of Data Types
 	if (DataType.find("CONTROL") != string::npos) region = "Control";
 	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
 	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
 	else region = "Search";
 
-	string latexLine = "#font[42]{" + region + " Region}";
+	string latexLine = "#font[42]{" + region + " Region}";  //Create a string to be c_str()
 
-	TLatex t;
-	t.SetTextFont(42);
-	t.SetNDC(kTRUE);
-	t.SetTextSize(0.037);
-	t.DrawLatex(0.62, 0.86, latexLine.c_str());
-	t.DrawLatex(0.62, 0.80, "#intL dt = 36.2fb^{-1}");
-	t.DrawLatex(0.62, 0.75, "#sqrt{s} = 13 TeV");
+	TLatex t;  						//Create a latex object
+	t.SetTextFont(42);  					//Set font
+	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
+	t.SetTextSize(0.037);  					//Set font size
+	t.DrawLatex(0.62, 0.86, latexLine.c_str());  		//Draw line 1
+	t.DrawLatex(0.62, 0.80, "#scale[0.7]{#int}L dt = 36.2fb^{-1}");  	//Draw line 2
+	t.DrawLatex(0.62, 0.75, "#sqrt{s} = 13 TeV");  		//Draw line 3
 
 }
 
+//This function will draw the box containing information about the data used to produce graphs
+//It will draw the box to the currently active canvas
+//It has been modified to appear better for the divided fit graphs
 void Draw_Region_For_Fit(string DataType) {
 
 	string region;
 
+	//Check the data type for different regions or except version of Data Types
 	if (DataType.find("CONTROL") != string::npos) region = "Control";
 	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
 	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
 	else region = "Search";
 
-	string latexLine = "#font[42]{" + region + " Region}";
+	string latexLine = "#font[42]{" + region + " Region}";  //Create a string to be c_str()
 
-	TLatex t;
-	t.SetTextFont(42);
-	t.SetNDC(kTRUE);
-	t.SetTextSize(0.05);
-	t.DrawLatex(0.675, 0.90, latexLine.c_str());
-	t.DrawLatex(0.675, 0.81, "#intL dt = 36.2fb^{-1}");
-	t.DrawLatex(0.675, 0.72, "#sqrt{s} = 13 TeV");
+	TLatex t;  						//Create a latex object
+	t.SetTextFont(42);  					//Set font
+	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
+	t.SetTextSize(0.05);  					//Set font size
+	t.DrawLatex(0.675, 0.90, latexLine.c_str()); 		//Draw line 1
+	t.DrawLatex(0.675, 0.81, "#scale[0.7]{#int}L dt = 36.2fb^{-1}"); 	//Draw line 2
+	t.DrawLatex(0.675, 0.72, "#sqrt{s} = 13 TeV");		//Draw line 3
 
 }
 
+//This function will draw the box containing information about the data used to produce graphs
+//It will draw the box to the currently active canvas
+//Better formatted and specialised for specifically two processes stacked, plus data
 void Draw_Region_For_Two(string DataType) {
 
 	string region;
 
+	//Check the data type for different regions or except version of Data Types
 	if (DataType.find("CONTROL") != string::npos) region = "Control";
 	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
 	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
 	else region = "Search";
 
-	string latexLine = "#font[42]{" + region + " Region}";
+	string latexLine = "#font[42]{" + region + " Region}";  //Create a string to be c_str()
 
-	TLatex t;
-	t.SetTextFont(42);
-	t.SetNDC(kTRUE);
-	t.SetTextSize(0.035);
-	t.DrawLatex(0.62, 0.85, latexLine.c_str());
-	t.DrawLatex(0.62, 0.785, "#intL dt = 36.2fb^{-1}");
-	t.DrawLatex(0.62, 0.72, "#sqrt{s} = 13 TeV");
+	TLatex t;  						//Create a latex object
+	t.SetTextFont(42);  					//Set font
+	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
+	t.SetTextSize(0.035);  					//Set font size
+	t.DrawLatex(0.62, 0.85, latexLine.c_str()); 		//Draw line 1
+	t.DrawLatex(0.62, 0.785, "#scale[0.7]{#int}L dt = 36.2fb^{-1}"); 	//Draw line 2
+	t.DrawLatex(0.62, 0.72, "#sqrt{s} = 13 TeV");		//Draw line 3
 
 }
 
@@ -337,12 +374,15 @@ void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramNam
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
 void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
 
+	//Strings for the file names
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
+	//Names for Pre and Control versions
 	string preName = histogramName + "_PRE";
 	string controlName = histogramName + "_CONTROL";
 
+	//Write the histograms out to the currently open root file
 	histogram1->Write(preName.c_str());
 	histogram2->Write(histogramName.c_str());
 	histogram3->Write(controlName.c_str());
@@ -350,23 +390,29 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
 
-	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
-
+	//Set the appearances of the histograms
 	histogram1->SetLineColor(kBlue-3);
 	histogram2->SetLineColor(kOrange+7);
 	histogram3->SetLineColor(kAzure+10);
 	histogram3->SetFillColor(kAzure+10);
 	histogram3->SetFillStyle(3002);
 
+	//Draw the histograms
 	histogram1->Draw("HIST");	
 	histogram2->Draw("SAME HIST");	
 	histogram3->Draw("SAME HIST");
 
+	//Create the legend
 	auto legend = new TLegend(0.99,0.95,0.75,0.75);
-	legend->SetHeader(legendName.c_str());
+	
+	legend->SetHeader(legendName.c_str());  //Set the legend header
+
+	//Fill the legend with all the histograms
 	legend->AddEntry(histogram1, histo1Name.c_str());
 	legend->AddEntry(histogram2, histo2Name.c_str());
 	legend->AddEntry(histogram3, histo3Name.c_str());
+	
+	//Draw the legend
 	legend->Draw();
 
 	//If the user wants the axis to be a log axis, do it
@@ -375,6 +421,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
+	//Close the current canvas
 	canvas->Close();
 
 }
@@ -384,13 +431,16 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, histogram EXCEPT, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
 void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
 
+	//Strings for the file names
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
+	//Names for Pre, Control, and Except versions
 	string preName = histogramName + "_PRE";
 	string controlName = histogramName + "_CONTROL";
 	string exceptName = histogramName + "_EXCEPT";
 
+	//Write the histograms out to the currently open root file
 	histogram1->Write(preName.c_str());
 	histogram2->Write(histogramName.c_str());
 	histogram3->Write(controlName.c_str());
@@ -399,6 +449,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 	//Create a new canvas using canvasName
 	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
 
+	//Set the appearances of the histograms
 	histogram1->SetLineColor(kBlue-3);
 	histogram2->SetLineColor(kOrange+7);
 	histogram2->SetFillColor(kOrange+7);
@@ -408,30 +459,35 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 	histogram3->SetFillStyle(3002);
 	histogram4->SetLineColor(kOrange);
 
+	//Draw the histograms
 	histogram1->Draw("HIST");	
 	histogram2->Draw("SAME HIST");	
 	histogram3->Draw("SAME HIST");	
 	histogram4->Draw("SAME HIST");	
 
+	//Set the axis information
 	histogram1->GetYaxis()->SetTitle("Events");
-
 	histogram1->GetXaxis()->SetLabelSize(0.05);
 	histogram1->GetYaxis()->SetLabelSize(0.05);
-
 	histogram1->GetXaxis()->SetTitleSize(0.037);
 	histogram1->GetYaxis()->SetTitleSize(0.037);
-
 	histogram1->GetXaxis()->SetTitleOffset(1.2);
 
+	//Name the x axis depending on the kind of data being plotted
 	Histogram_Namer(histogram1, histogramName);
 
+	//Create the legend
 	auto legend = new TLegend(0.99,0.95,0.75,0.75);
-	legend->SetHeader(legendName.c_str());
+
+	legend->SetHeader(legendName.c_str()); //Set the legend header
+
+	//Add all the histograms to the legend
 	legend->AddEntry(histogram1, histo1Name.c_str());
 	legend->AddEntry(histogram2, histo2Name.c_str());
 	legend->AddEntry(histogram3, histo3Name.c_str());
 	legend->AddEntry(histogram4, histo4Name.c_str());
-	legend->Draw();
+
+	legend->Draw(); //Draw the legend
 
 	//If the user wants the axis to be a log axis, do it
 	if (log == true) canvas->SetLogy();
@@ -439,59 +495,465 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
-	canvas->Close();
+	canvas->Close();  //Close the currently open canvas
 
 }
 
-//This function will overlay two histograms over each other. First in Red, Second in Blue
-void DrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string ChainName1, string ChainName2, string legendName, string histo1Name, string histo2Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ComboType, string AnalysisType) {
+//This function will combine processes and write them out to a new .root file
+void Process_Combiner(string AnalysisType, string Process) {
 
-	string Histogram1RealName = "h_" + DataType + "_" + ChainName1 + ";1"; //Create the real(seen by code) name for histogram 1
-	string Histogram2RealName = "h_" + DataType + "_" + ChainName2 + ";1"; //Create the real(seen by code) name for histogram 2
+	//Vector of files that can be looped over
+	vector<TFile*> files;
 
-	TH1F *histogram1 = (TH1F*)file1->Get(Histogram1RealName.c_str());
-	TH1F *histogram2 = (TH1F*)file2->Get(Histogram2RealName.c_str());
+	//String for the root file path
+	string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/" + Process + "_Histograms.root";
 
-	string OutputFilePath = "~/Output-Files/" + AnalysisType + "/";
-	string FullOutputFilePath = OutputFilePath + ComboType + "/" + OutputFileName;
+	TFile *Histograms;
 
-	//Create a new canvas using canvasName
-	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+	//Open/Create the root file
+	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
+	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
+	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
+	
+	//Various strings
+	string ProcessFileName = "../../MPhys/Processes/" + AnalysisType + "/" + Process + "_Chains.txt";
+	string line;
 
-//	THStack *histogramStack = new THStack("histogramStack", "Stacked 1D Histograms");
+	//Open the file
+	ifstream file (ProcessFileName);
 
-	histogram1->SetLineColor(kRed);
-	histogram2->SetLineColor(kBlue);
+	while(!file.eof()) {  //While not at the end of the file
+		getline(file, line);  //Get the file line
+		if (line != "") {  //If not looking at the last line
+			files.push_back(new TFile(line.c_str()));  //Add the file to the vector
+		}
+	}
 
-	// CHANGED STACK TO DRAWING CANVAS
-	histogram1->Draw("HIST");	
-	histogram2->Draw("SAME HIST");	
-//	histogramStack->Add(histogram1);
-//	histogramStack->Add(histogram2);
+	file.close();
 
-	//Sets the Titles
-//	histogramStack->SetTitle(title.c_str());
-	canvas->SetTitle(title.c_str());
+	//Open the list of Data Types
+	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
+	ifstream DataTypeFile (DataTypeFileName);
 
-	//Draw the histogram
-//	histogramStack->Draw("nostack");
-	canvas->Draw("nostack");
+	
+	while(!DataTypeFile.eof()) {  		//While not at the end of the file
+		getline(DataTypeFile, line);  	//Get the file line
+		if (line != "") {  		//If not looking at the last line	
 
-	auto legend = new TLegend(0.99,0.95,0.75,0.75);
-	legend->SetHeader(legendName.c_str());
-	legend->AddEntry(histogram1, histo1Name.c_str());
-	legend->AddEntry(histogram2, histo2Name.c_str());
-	legend->Draw();
+			//Get the first histogram in the vector
+			string histogramName = "h_" + line + ";1";
+			TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
 
-	//If the user wants the axis to be a log axis, do it
-	if (log == true) canvas->SetLogy();
+			//For all the files in the vector not counting the first...
+			for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
 
+				//Get the histogram
+				TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
+
+				//Add it to the master histogram 
+				histogramMaster->Add(histogram);
+
+			}
+
+			//Draw the master histogram
+			Histograms->cd();
+			histogramMaster->Draw("HIST");
+			histogramMaster->Write();
+
+		}
+	}
+	
+	Histograms->Close();
+
+}
+
+// Stacking histograms:
+// need to give it the analysis type and then for given, tells it the path
+void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram) {
+
+	//String for name of the histogram in the root file
+	string DataTypeHistName = "h_" + DataType + ";1";
+
+	//Create the canvas
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+
+	//Get the vector of histograms for the given AnalysisType and DataType
+	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+
+	//Create the stacked histogram
+	THStack *histogramStack = new THStack("histogramStack", "");
+
+	//Set the histogram styles
+	histograms = Set_Histogram_Styles(histograms);
+
+	//Add the histograms from the vector to the stack
+	for (int i=0; i < 11; i++) {
+		histogramStack->Add(histograms[i], "hist");
+	}
+
+	//Draw the stack, actually stacking (no "nostack")
+	histogramStack->Draw("");
+
+	//Name the histogram stack's x axis according to the DataType
+	Histogram_Namer(histogramStack, DataType);
+
+	//Set the histogram axes and labels
+	histogramStack->GetYaxis()->SetTitle("Events");
+	histogramStack->GetXaxis()->SetLabelSize(0.05);
+	histogramStack->GetYaxis()->SetLabelSize(0.05);
+	histogramStack->GetXaxis()->SetTitleSize(0.037);
+	histogramStack->GetYaxis()->SetTitleSize(0.037);
+	histogramStack->GetXaxis()->SetTitleOffset(1.2);
+
+	//Get the largest value in the histogram
+	double max_value = histogramStack->GetMaximum();
+
+	//Generic Maximum Size of the Graphs
+	//Set the Maximum Size of the histograms to something appropriate to the largest value in the histogram
+	if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(1000);}
+	else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(30000);}
+	else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(300000);}
+ 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(3000000);}
+	else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(30000000);}
+
+	//Exceptions to these rules and conditions for the minimum size of the graphs
+	if (AnalysisType == "Tau") {
+
+		if (DataType == "lep_0_lep_1_mass_PRE") histogramStack->SetMinimum(500);
+		if (DataType == "lep_0_lep_1_mass_EXCEPT") histogramStack->SetMinimum(15);
+		if (DataType == "Centrality_CONTROL") histogramStack->SetMinimum(1);
+
+	} else if (AnalysisType == "Electron") {
+
+		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_ljet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
+		else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
+		if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
+
+	} else if (AnalysisType == "Muon") {
+
+		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_ljet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
+		else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
+		if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
+
+	} else { int i = 0;
+
+	}
+
+	//Draw the data histogram over the histogram stack
+	histograms[11]->Draw("SAME");
+
+	canvas->SetLogy();  //Log the y axis
+
+	//Create the legend and draw the region information
+	Legend_Creator(histograms);
+	Draw_Region(DataType);
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
-	canvas->Close();
+}
+
+//Draw the stacked graphs for all the desired variables
+void DrawStackedProcesses(string AnalysisType) {
+
+	//Open the list of DataTypes to be stacked and drawn
+	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
+	ifstream DataTypeFile (DataTypeFileName);
+	string line;
+
+	
+	while(!DataTypeFile.eof()) {  		//While not at the end of the file
+		getline(DataTypeFile, line);  	//Get the file line
+		if (line != "") {  		//If not looking at the last line	
+			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
+			Process_Stacker(AnalysisType, line, fileName);
+		}
+	}
+}
+
+//Combine all the different chains belonging to each different process
+void CombineAllProcesses_AnalysisType(string AnalysisType) {
+
+	Process_Combiner(AnalysisType, "Zee");
+	Process_Combiner(AnalysisType, "Zee2jets");
+	Process_Combiner(AnalysisType, "Zmumu");
+	Process_Combiner(AnalysisType, "Zmm2jets");
+	Process_Combiner(AnalysisType, "Ztt");
+	Process_Combiner(AnalysisType, "Ztt2jets");
+	Process_Combiner(AnalysisType, "ZqqZll");
+	Process_Combiner(AnalysisType, "ttb");
+	Process_Combiner(AnalysisType, "Wenu");
+	Process_Combiner(AnalysisType, "Wmunu");
+	Process_Combiner(AnalysisType, "Wtaunu");
 
 }
+
+/////////////////////////////// VARIABLES /////////////////////////////// 
+/////////////////////////////// VARIABLES /////////////////////////////// 
+/////////////////////////////// VARIABLES ///////////////////////////////
+ 
+//This Fucntion will calculate invariant mass of two TLorentzVectors
+double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double mass = ((*Vector1)+(*Vector2)).M();
+	return mass;
+
+}
+
+//This Function will calculate delta phi (Phi = Polar angle in the transverse plane)
+double DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaPhi = Vector1->Phi() - Vector2->Phi();
+	return DeltaPhi;
+
+}
+
+//This Function will calculate delta eta (Eta = PseudoRapidity)
+double DeltaEta(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaEta = Vector1->Eta() - Vector2->Eta();
+	return DeltaEta;
+
+}
+
+//This Function will calculate delta rapidity (Rapidity = Rapidity)
+double DeltaRapidity(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaRapidity = Vector1->Rapidity() - Vector2->Rapidity();
+	return DeltaRapidity;
+
+}
+
+//This Function will calculate rapidity of the dilepton pair / dijet pair
+double RapidityDisomething(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double RapidityDisomething = Vector1->Rapidity() + Vector2->Rapidity();
+	return RapidityDisomething;
+}
+
+//This Function will calculate delta R (Distance in the R space)
+double DeltaRCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaRVal = sqrt( pow(DeltaPhi(Vector1, Vector2), 2) + pow(DeltaEta(Vector1, Vector2), 2) );
+	return DeltaRVal;
+
+}
+
+//This Function will calculate combined transverse momentum
+double CombinedTransverseMomentum(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double pT = ((*Vector1)+(*Vector2)).Pt();
+	return pT;
+
+}
+
+//If Vector 3 lies between Vector 1 and Vector 2, with pT greater than 25GeV
+bool RapidityIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3) {
+
+	bool rap_int_condition = true;
+	
+	//No additional jets with p_T > 25 GeV in rapidity interval between two leading jets
+	//First, need to find which leading jet is max and min and assign them these names
+	//Define the variables outside
+	double maxjet;
+	double minjet; 
+
+	if (Vector1->Rapidity() > Vector2->Rapidity()) { // if ljet_0 is greater than ljet_1, assign it as max
+		maxjet = Vector1->Rapidity();
+		minjet = Vector2->Rapidity();
+	} else { // if it is smaller, assign it as the min
+		minjet = Vector1->Rapidity();
+		maxjet = Vector2->Rapidity();	
+	}
+	
+	// if additional jet_2 is between this rapidity interval, and have pT > 25, cut
+	if (minjet <= Vector3->Rapidity() <= maxjet && Vector3->Pt() > 25) rap_int_condition = false;
+
+	return rap_int_condition;
+
+}
+
+// This function calculated the p_T^{balance} 
+// defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
+double pTBalanceCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
+	
+	double sumAll = ((*Vector1) + (*Vector2) + (*Vector3) + (*Vector4)).Pt(); 	// absolute value of all vectors
+	double abspTl1 = sqrt( pow (Vector1->Pt(),2)); 					// absolute value of lepton 1 transverse momentum
+	double abspTl2 = sqrt( pow (Vector2->Pt(),2)); 					// absolute value of lepton 2
+	double abspTj1 = sqrt( pow (Vector3->Pt(),2)); 					// absolute value of jet 1
+	double abspTj2 = sqrt( pow (Vector4->Pt(),2)); 					// absolute value of jet 2
+  					
+	double absvalEach = abspTl1 + abspTl2 + abspTj1 + abspTj2; 			// absolute value of each
+	double absvalAll = sqrt( pow(sumAll, 2)); 					// absolute value of them all
+
+	// pTBalance here
+	double pTBalance = absvalAll/absvalEach; // pT balance calculation
+	return pTBalance;
+
+}
+
+// This function calculated the p_T^{balance} 
+// defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
+double pTBalanceThreeCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4, TLorentzVector *Vector5){
+	
+	double sumAll = ((*Vector1) + (*Vector2) + (*Vector3) + (*Vector4) + (*Vector5)).Pt(); 	// absolute value of all vectors
+	double abspTl1 = sqrt( pow (Vector1->Pt(),2)); 						// absolute value of lepton 1 transverse momentum
+	double abspTl2 = sqrt( pow (Vector2->Pt(),2)); 						// absolute value of lepton 2
+	double abspTj1 = sqrt( pow (Vector3->Pt(),2)); 						// absolute value of jet 1
+	double abspTj2 = sqrt( pow (Vector4->Pt(),2)); 						// absolute value of jet 2
+	double abspTj3 = sqrt( pow (Vector5->Pt(),2)); 						// absolute value of jet 3
+ 
+	double absvalEach = abspTl1 + abspTl2 + abspTj1 + abspTj2 + abspTj3; 			// absolute value of each
+	double absvalAll = sqrt( pow(sumAll, 2)); 						// absolute value of them all
+
+	// pTBalance here
+	double pTBalanceThree = absvalAll/absvalEach; // pT balance calculation
+	return pTBalanceThree;
+
+}
+
+//This function will return a vector of doubles, containing information about luminosity weighting for a given file ID
+vector<double> csv_reader(string ID) {
+
+	//Create the various variables to be used
+	string Line, prevLine;
+	vector <double> info;
+	int matchPos = 0;
+	bool counterActive = true;
+
+	ifstream file ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); //Open the file
+	getline(file, Line, '\n');  //Get a new line
+	
+	while(!file.eof()){  //While not at the end of the file
+		getline(file,Line);  //Get a new line
+		if(counterActive) matchPos++;  //Increment the counter if the counter is active
+		if( Line.substr(0,6) == ID ) counterActive = false; //If the ID finds a match for line number, deactivate the counter
+	}
+
+	file.close(); // Close the File
+	ifstream file2 ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); //Open the file
+
+	//get lines from the file until it reaches the line with the matched ID
+	for(int i = 0; i < matchPos; i++) getline(file2, Line);
+	
+	//Variables to be used
+	double SampleID;
+	double xsectioninpb;
+	double kfactor;
+	double filterefficiency;
+	double xsecunc;
+
+	//Get the sample ID from the file
+	getline(file2, Line, ',');
+	SampleID = stod(Line);
+	info.push_back(SampleID);
+	
+	//Get the cross section in picobarns from the file
+	getline(file2, Line, ',');
+	getline(file2, Line, ',');
+	xsectioninpb = stod(Line);
+	info.push_back(xsectioninpb);
+	
+	//Get the k factor from the file
+	getline(file2, Line, ',');
+	kfactor = stod(Line);
+	info.push_back(kfactor);
+
+	//Get the filter efficiency from the file
+	getline(file2, Line, ',');
+	filterefficiency = stod(Line);
+	info.push_back(filterefficiency);
+	
+	//Get the cross section 'unc' from the file
+	///NO IDEA WHAT THIS IS
+	getline(file2, Line, '\n');
+	xsecunc = stod(Line);
+	info.push_back(xsecunc);
+
+	return info;  //Return the vector of info
+
+}
+
+// Luminosity weighting function
+// extra weight to apply is xs*L/N (xs = cross section, L = luminosity (L given by k*eff_filter, where k=correction on xs calculation, eff_filter = filtering efficiency), N=initial # of generated MC events, luminosity is luminosity of detector for MC scaling)
+// so have Lum_weighting = xs * k * eff_filter / N
+// need to access the data
+double luminosity_weighting_function(vector<double> info, double N, double luminosity) {
+	
+	double xs = info[1];
+	double k = info[2];
+	double eff_filter = info[3];
+	double extra_weight;
+
+	extra_weight =  luminosity*(xs*k*eff_filter)/N; //formula for extra luminosity weighting
+
+	return extra_weight;
+
+}
+
+double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){ // muon 1 muon 2 ljet 1 ljet 2
+// function for calculatig Centrality for Z boson
+// Z* = |eta_Z-(eta_j1+eta_j2)/2)/|Delta(eta_jj)| (where Delta(eta_jj) is the pseudorapidity separation	
+
+	
+	// to Calculate Z* need:
+ 	// double DeltaRapidity - already calculated see function double DeltaRapidity
+	double Z_rapidity = RapidityDisomething(Vector1, Vector2); // Z boson rapidity using muon 4 vectors
+	double j1_rapidity = Vector3->Eta();// jet 1 rapidity
+	double j2_rapidity = Vector4->Eta();// jet 2 rapidity	
+
+	double sum1 = Z_rapidity - (j1_rapidity + j2_rapidity)/2; // sum 1 to break things up
+
+	// calculate absoulute values:
+	//double absval_sum1 = sqrt(pow(sum1,2)); // absolute value of sum 1
+	//double absval_DeltaRapidity = sqrt(pow(DeltaRapidity(Vector3, Vector4),2)); // absolute value of rapidity separation of jets
+
+	// calculate Centrality
+	double Centrality = sum1/DeltaRapidity(Vector3, Vector4);
+	return Centrality;
+
+}
+
+/*double Missing_Energy(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
+	
+	double xs = info[1];
+	double k = info[2];
+	double eff_filter = info[3];
+	double extra_weight;
+
+	extra_weight =  luminosity*(xs*k*eff_filter)/N; //formula for extra luminosity weighting
+
+	return extra_weight;
+
+}
+*/
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+///--------------------------------OLD FUNCTIONS-------------------------------------------///
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
 
 //This function is a quick way of drawing two histograms overlain
 void QuickDrawHistogram_Overlay_Two(TFile *file1, TFile *file2, string DataType, string ChainName1, string ChainName2, string AnalysisType) {
@@ -667,429 +1129,6 @@ void Overlay_Flavour_Strengths(string ChainName1, string ChainName2, string Chai
 
 }
 
-//This function will combine processes and write them out to a new .root file
-void Process_Combiner(string AnalysisType, string Process) {
-
-	//Vector of files that can be looped over
-	vector<TFile*> files;
-
-	//String for the root file path
-	string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/" + Process + "_Histograms.root";
-
-	TFile *Histograms;
-
-	//Open/Create the root file
-	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
-	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
-	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
-	
-	//Various strings
-	string ProcessFileName = "../../MPhys/Processes/" + AnalysisType + "/" + Process + "_Chains.txt";
-	string line;
-
-	//Open the file
-	ifstream file (ProcessFileName);
-
-	while(!file.eof()) {  //While not at the end of the file
-		getline(file, line);  //Get the file line
-		if (line != "") {  //If not looking at the last line
-			files.push_back(new TFile(line.c_str()));  //Add the file to the vector
-		}
-	}
-
-	file.close();
-
-	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
-	ifstream DataTypeFile (DataTypeFileName);
-
-	
-	while(!DataTypeFile.eof()) {  //While not at the end of the file
-		getline(DataTypeFile, line);  //Get the file line
-		if (line != "") {  //If not looking at the last line	
-
-			//Get the first histogram in the vector
-			string histogramName = "h_" + line + ";1";
-			TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
-
-			//For all the files in the vector not counting the first...
-			for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
-
-				//Get the histogram
-				TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
-
-				//Add it to the master histogram 
-				histogramMaster->Add(histogram);
-
-			}
-
-			//Draw the master histogram
-			Histograms->cd();
-			histogramMaster->Draw("HIST");
-			histogramMaster->Write();
-
-		}
-	}
-	
-	Histograms->Close();
-
-}
-
-// Stacking histograms:
-// need to give it the analysis type and then for given, tells it the path
-void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram) {
-
-	string DataTypeHistName = "h_" + DataType + ";1";
-
-	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
-
-	// Here is the file Path that has Access to Processes
-	// string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/";
-	// Loop over these processes or do manually as below: 
-
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
-
-	//Create the stacked histogram
-	THStack *histogramStack = new THStack("histogramStack", "");
-
-	histograms = Set_Histogram_Styles(histograms);
-
-	//  and add to the stack
-	for (int i=0; i < 11; i++) {
-		histogramStack->Add(histograms[i], "hist");
-	}
-	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
-
-	Histogram_Namer(histogramStack, DataType);
-
-	histogramStack->GetYaxis()->SetTitle("Events");
-
-	histogramStack->GetXaxis()->SetLabelSize(0.05);
-	histogramStack->GetYaxis()->SetLabelSize(0.05);
-
-	histogramStack->GetXaxis()->SetTitleSize(0.037);
-	histogramStack->GetYaxis()->SetTitleSize(0.037);
-
-	histogramStack->GetXaxis()->SetTitleOffset(1.2);
-
-	double max_value = histogramStack->GetMaximum();
-
-	//Generic Maximum Size of the Graphs
-	if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(1000);}
-	else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(10000);}
-	else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(100000);}
- 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(1000000);}
-	else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(10000000);}
-
-	//Exceptions to these rules and conditions for the minimum size of the graphs
-	if (AnalysisType == "Tau") {
-
-		if (DataType == "lep_0_lep_1_mass_PRE") histogramStack->SetMinimum(500);
-		if (DataType == "lep_0_lep_1_mass_EXCEPT") histogramStack->SetMinimum(15);
-		if (DataType == "Centrality_CONTROL") histogramStack->SetMinimum(1);
-
-	} else if (AnalysisType == "Electron") {
-
-		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
-		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_0_ljet_1_mass") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
-		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
-
-	} else if (AnalysisType == "Muon") {
-
-		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
-		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_0_ljet_1_mass") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
-		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
-
-	} else { int i = 0;
-
-	}
-
-	histograms[11]->Draw("SAME");
-
-	canvas->SetLogy();
-
-	Legend_Creator(histograms);
-	Draw_Region(DataType);
-
-	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
-	
-	//Write out to a PDF file
-	canvas->SaveAs(FullOutputFilePath.c_str());
-
-}
-
-//Draw the stacked graphs for all the desired variables
-void DrawStackedProcesses(string AnalysisType) {
-
-	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
-	ifstream DataTypeFile (DataTypeFileName);
-	string line;
-
-	
-	while(!DataTypeFile.eof()) {  //While not at the end of the file
-		getline(DataTypeFile, line);  //Get the file line
-		if (line != "") {  //If not looking at the last line	
-			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
-			Process_Stacker(AnalysisType, line, fileName);
-		}
-	}
-}
-
-//Combine all the different chains belonging to each different process
-void CombineAllProcesses_AnalysisType(string AnalysisType) {
-
-	Process_Combiner(AnalysisType, "Zee");
-	Process_Combiner(AnalysisType, "Zee2jets");
-	Process_Combiner(AnalysisType, "Zmumu");
-	Process_Combiner(AnalysisType, "Zmm2jets");
-	Process_Combiner(AnalysisType, "Ztt");
-	Process_Combiner(AnalysisType, "Ztt2jets");
-	Process_Combiner(AnalysisType, "ZqqZll");
-	Process_Combiner(AnalysisType, "ttb");
-	Process_Combiner(AnalysisType, "Wenu");
-	Process_Combiner(AnalysisType, "Wmunu");
-	Process_Combiner(AnalysisType, "Wtaunu");
-
-}
-
-/////////////////////////////// VARIABLES /////////////////////////////// 
-/////////////////////////////// VARIABLES /////////////////////////////// 
-/////////////////////////////// VARIABLES ///////////////////////////////
- 
-//This Fucntion will calculate invariant mass of two TLorentzVectors
-double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
-
-	double mass = ((*Vector1)+(*Vector2)).M();
-	return mass;
-
-}
-
-//This Function will calculate delta phi (Phi = Polar angle in the transverse plane)
-double DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
-
-	double DeltaPhi = Vector1->Phi() - Vector2->Phi();
-	return DeltaPhi;
-
-}
-
-//This Function will calculate delta eta (Eta = PseudoRapidity)
-double DeltaEta(TLorentzVector *Vector1, TLorentzVector *Vector2) {
-
-	double DeltaEta = Vector1->Eta() - Vector2->Eta();
-	return DeltaEta;
-
-}
-
-//This Function will calculate delta rapidity (Rapidity = Rapidity)
-double DeltaRapidity(TLorentzVector *Vector1, TLorentzVector *Vector2) {
-
-	double DeltaRapidity = Vector1->Rapidity() - Vector2->Rapidity();
-	return DeltaRapidity;
-
-}
-
-//This Function will calculate rapidity of the dilepton pair / dijet pair
-double RapidityDisomething(TLorentzVector *Vector1, TLorentzVector *Vector2) {
-
-	double RapidityDisomething = Vector1->Rapidity() + Vector2->Rapidity();
-	return RapidityDisomething;
-}
-
-//This Function will calculate delta R (Distance in the R space)
-double DeltaRCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
-
-	double DeltaRVal = sqrt( pow(DeltaPhi(Vector1, Vector2), 2) + pow(DeltaEta(Vector1, Vector2), 2) );
-	return DeltaRVal;
-
-}
-
-//This Function will calculate combined transverse momentum
-double CombinedTransverseMomentum(TLorentzVector *Vector1, TLorentzVector *Vector2) {
-
-	double pT = ((*Vector1)+(*Vector2)).Pt();
-	return pT;
-
-}
-
-//If Vector 3 lies between Vector 1 and Vector 2, with pT greater than 25GeV
-bool RapidityIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3) {
-
-	bool rap_int_condition = true;
-	
-	// no additional jets with p_T > 25 GeV in rapidity interval between two leading jets
-	// first, need to find which leading jet is max and min and assign them these names
-	// define the variables outside
-	double maxjet;
-	double minjet; 
-
-	if (Vector1->Rapidity() > Vector2->Rapidity()) { // if ljet_0 is greater than ljet_1, assign it as max
-		maxjet = Vector1->Rapidity();
-		minjet = Vector2->Rapidity();
-	} 
-	else { // if it is smaller, assign it as the min
-		minjet = Vector1->Rapidity();
-		maxjet = Vector2->Rapidity();	
-	}
-
-	if (minjet <= Vector3->Rapidity() <= maxjet && Vector3->Pt() > 25) rap_int_condition = false; // if additional jet_2 is between this rapidity interval, and have pT > 25, cut
-
-	return rap_int_condition;
-
-}
-
-// This function calculated the p_T^{balance} 
-// defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
-double pTBalanceCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
-	
-	double sumAll = ((*Vector1) + (*Vector2) + (*Vector3) + (*Vector4)).Pt(); // absolute value of all vectors
-	double abspTl1 = sqrt( pow (Vector1->Pt(),2)); // absolute value of lepton 1 transverse momentum
-	double abspTl2 = sqrt( pow (Vector2->Pt(),2)); // absolute value of lepton 2
-	double abspTj1 = sqrt( pow (Vector3->Pt(),2)); // absolute value of jet 1
-	double abspTj2 = sqrt( pow (Vector4->Pt(),2)); // absolute value of jet 2
-  
-	double absvalEach = abspTl1 + abspTl2 + abspTj1 + abspTj2; // absolute value of each
-	double absvalAll = sqrt( pow(sumAll, 2)); // absolute value of them all
-
-	// pTBalance here
-	double pTBalance = absvalAll/absvalEach; // pT balance calculation
-	return pTBalance;
-
-}
-
-// This function calculated the p_T^{balance} 
-// defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
-double pTBalanceThreeCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4, TLorentzVector *Vector5){
-	
-	double sumAll = ((*Vector1) + (*Vector2) + (*Vector3) + (*Vector4) + (*Vector5)).Pt(); // absolute value of all vectors
-	double abspTl1 = sqrt( pow (Vector1->Pt(),2)); // absolute value of lepton 1 transverse momentum
-	double abspTl2 = sqrt( pow (Vector2->Pt(),2)); // absolute value of lepton 2
-	double abspTj1 = sqrt( pow (Vector3->Pt(),2)); // absolute value of jet 1
-	double abspTj2 = sqrt( pow (Vector4->Pt(),2)); // absolute value of jet 2
-	double abspTj3 = sqrt( pow (Vector5->Pt(),2)); // absolute value of jet 3
- 
-	double absvalEach = abspTl1 + abspTl2 + abspTj1 + abspTj2 + abspTj3; // absolute value of each
-	double absvalAll = sqrt( pow(sumAll, 2)); // absolute value of them all
-
-	// pTBalance here
-	double pTBalanceThree = absvalAll/absvalEach; // pT balance calculation
-	return pTBalanceThree;
-
-}
-
-//This function will return a vector of doubles, containing information about luminosity weighting for a given file ID
-vector<double> csv_reader(string ID) {
-
-	string Line, prevLine;
-	vector <double> info;
-	int matchPos = 0;
-	bool counterActive = true;
-
-	ifstream file ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); //Open the file
-	getline(file, Line, '\n');  //Get a new line
-	
-	while(!file.eof()){  //While not at the end of the file
-		getline(file,Line);  //Get a new line
-		if(counterActive) matchPos++;  //Increment the counter if the counter is active
-		if( Line.substr(0,6) == ID ) counterActive = false; //If the ID finds a match for line number, deactivate the counter
-	}
-
-	file.close(); // Close the File
-	ifstream file2 ("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/LepUniv_xsec.csv"); //Open the file
-
-	for(int i = 0; i < matchPos; i++) getline(file2, Line);
-	
-	double SampleID;
-	double xsectioninpb;
-	double kfactor;
-	double filterefficiency;
-	double xsecunc;
-
-	getline(file2, Line, ',');
-	SampleID = stod(Line);
-	info.push_back(SampleID);
-	
-	getline(file2, Line, ',');
-	getline(file2, Line, ',');
-	xsectioninpb = stod(Line);
-	info.push_back(xsectioninpb);
-	
-	getline(file2, Line, ',');
-	kfactor = stod(Line);
-	info.push_back(kfactor);
-
-	getline(file2, Line, ',');
-	filterefficiency = stod(Line);
-	info.push_back(filterefficiency);
-	
-	getline(file2, Line, '\n');
-	xsecunc = stod(Line);
-	info.push_back(xsecunc);
-
-	return info;
-
-}
-
-// Luminosity weighting function
-// extra weight to apply is xs*L/N (xs = cross section, L = luminosity (L given by k*eff_filter, where k=correction on xs calculation, eff_filter = filtering efficiency), N=initial # of generated MC events, luminosity is luminosity of detector for MC scaling)
-// so have Lum_weighting = xs * k * eff_filter / N
-// need to access the data
-double luminosity_weighting_function(vector<double> info, double N, double luminosity) {
-	
-	double xs = info[1];
-	double k = info[2];
-	double eff_filter = info[3];
-	double extra_weight;
-
-	extra_weight =  luminosity*(xs*k*eff_filter)/N; //formula for extra luminosity weighting
-
-	return extra_weight;
-
-}
-
-double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){ // muon 1 muon 2 ljet 1 ljet 2
-// function for calculatig Centrality for Z boson
-// Z* = |eta_Z-(eta_j1+eta_j2)/2)/|Delta(eta_jj)| (where Delta(eta_jj) is the pseudorapidity separation	
-
-	
-	// to Calculate Z* need:
- 	// double DeltaRapidity - already calculated see function double DeltaRapidity
-	double Z_rapidity = RapidityDisomething(Vector1, Vector2); // Z boson rapidity using muon 4 vectors
-	double j1_rapidity = Vector3->Eta();// jet 1 rapidity
-	double j2_rapidity = Vector4->Eta();// jet 2 rapidity	
-
-	double sum1 = Z_rapidity - (j1_rapidity + j2_rapidity)/2; // sum 1 to break things up
-
-	// calculate absoulute values:
-	//double absval_sum1 = sqrt(pow(sum1,2)); // absolute value of sum 1
-	//double absval_DeltaRapidity = sqrt(pow(DeltaRapidity(Vector3, Vector4),2)); // absolute value of rapidity separation of jets
-
-	// calculate Centrality
-	double Centrality = sum1/DeltaRapidity(Vector3, Vector4);
-	return Centrality;
-
-}
-
-/*double Missing_Energy(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
-	
-	double xs = info[1];
-	double k = info[2];
-	double eff_filter = info[3];
-	double extra_weight;
-
-	extra_weight =  luminosity*(xs*k*eff_filter)/N; //formula for extra luminosity weighting
-
-	return extra_weight;
-
-}
 */
+
 #endif

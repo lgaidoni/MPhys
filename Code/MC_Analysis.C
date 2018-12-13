@@ -61,8 +61,10 @@ void MC_Analysis::Loop() {
    cout << "Luminosity Weight:   " << Luminosity_Weight << endl;
    cout << "Start Time:          " << start/CLOCKS_PER_SEC << endl;
    cout << endl << "-------------- " << AnalysisType << endl;
+
+   string status_file = "../../WWW/" + AnalysisType + "_status.txt";
 	
-   fstream output("../../WWW/status.txt", output.out | output.app);
+   fstream output(status_file, output.out | output.app);
    time_t now = time(0);
    char* time = ctime(&now);
    output << time << endl;
@@ -119,7 +121,7 @@ void MC_Analysis::Loop() {
 
 		if (jentry % 200000 == 0) {
 
-			output.open("../../WWW/status.txt", output.out | output.app);
+			output.open(status_file, output.out | output.app);
 			output << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%  " << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << endl;
 			output.close();
 			
@@ -143,7 +145,7 @@ void MC_Analysis::Loop() {
 
    finished = clock();
 
-   output.open("../../WWW/status.txt", output.out | output.app);
+   output.open(status_file, output.out | output.app);
 
    output << endl << "Analysis Complete: finished in " << (finished - start)/CLOCKS_PER_SEC << " seconds" << endl;
    output << "-------------------------------------------------------------" << endl << endl;

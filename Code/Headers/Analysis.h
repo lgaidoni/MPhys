@@ -68,10 +68,10 @@ void MC_Analysis::BookHistos() {
 
 	///---------------------------------ljet_0 & ljet_1-----------------------------------///
 
-	Book_ljet_0_ljet_1_mass_EXCEPT(bins, 0, 3000);
-	Book_ljet_0_ljet_1_mass_CONTROL(bins, 0, 3000);
-	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 3000);
-	Book_ljet_0_ljet_1_mass(bins, 0, 3000);
+	Book_ljet_0_ljet_1_mass_EXCEPT(bins, 0, 4500);
+	Book_ljet_0_ljet_1_mass_CONTROL(bins, 0, 4500);
+	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 4500);
+	Book_ljet_0_ljet_1_mass(bins, 0, 4500);
 
 	///------------------ pT balance for lep_0 & lep_1 ljet_0 & ljet_1-----------------///
 
