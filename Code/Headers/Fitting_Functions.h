@@ -319,7 +319,7 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 	axis2->Draw();
 
 	//TGaxis(x-Start, y-Start, x-End, y-End, Initial Axis Value, Final Axis Value, 510, "G")
-	TGaxis *axis3 = new TGaxis(0, 0, 3000, 0, 0, 3000, 510, "");
+	TGaxis *axis3 = new TGaxis(0, 0, comparisonHistogram->GetXaxis()->GetXmax(), 0, 0, comparisonHistogram->GetXaxis()->GetXmax(), 510, "");
 	axis3->SetLabelFont(43); // Absolute font size in pixel (precision 3)
 	axis3->SetLabelSize(18);
 	axis3->SetTitleFont(43);
@@ -328,7 +328,7 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 	axis3->SetTitle(Histogram_Namer(DataType).c_str());
 	axis3->Draw(); 
 
-	TF1 *fit = new TF1("fit", "pol1", comparisonHistogram->GetXaxis()->GetXmin(), comparisonHistogram->GetXaxis()->GetXmax());
+	TF1 *fit = new TF1("fit", "pol1", comparisonHistogram->GetXaxis()->GetXmin(), 3000);
 
 	comparisonHistogram->Fit("fit");
 
@@ -433,7 +433,7 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string Da
 	histogramStack->Add(histograms[SelectedProcess1], "hist");
 
 	histogramStack->SetMinimum(5);
-	histogramStack->SetMaximum(10000);
+	histogramStack->SetMaximum(30000);
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
 
 	histogramStack->GetYaxis()->SetTitle("Events");
