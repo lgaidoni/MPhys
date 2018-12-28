@@ -578,8 +578,8 @@ void MC_Analysis::DrawHistos() {
 	#include "_DrawHistos.h"
 
 	//ptvar cone histograms
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", "h_lep_1_iso_ptvarcone40", ";;Events", 600, 400, true, "h_lep_1_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", "h_lep_0_iso_ptvarcone40", ";;Events", 600, 400, true, "h_lep_0_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", 600, 400, true, "h_lep_1_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", "h_lep_0_iso_ptvarcone40", ";Momentum [GeV/c];Events", 600, 400, true, "h_lep_0_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// lep 0 & lep 1 invariant mass 
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, true, "h_lep_0_lep_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
