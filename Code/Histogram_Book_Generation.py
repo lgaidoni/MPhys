@@ -19,6 +19,9 @@ _FillAllData_PostCut = open("Headers/_FillAllData_PostCut.h", "w")
 #To fill the _FillAllData_ControlCut Function inside SOMETHING_Analysis.h
 _FillAllData_ControlCut = open("Headers/_FillAllData_ControlCut.h", "w")
 
+#To fill the _FillAllData_BJET Function inside SOMETHING_Analysis.h
+_FillAllData_BJET = open("Headers/_FillAllData_BJET.h", "w")
+
 #To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 _DrawHistos = open("Headers/_DrawHistos.h", "w")
 
@@ -59,6 +62,7 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_CONTROL(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_EXCEPT(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_PRE(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n\n")
+		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_BJET(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n\n")
 
 		#To fill the _FillAllData_PreCut Function inside SOMETHING_Analysis.h
 		_FillAllData_PreCut.write("\t//Pre-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
@@ -72,12 +76,16 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 		_FillAllData_PostCut.write("\t//Post-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
 		_FillAllData_PostCut.write("\th_" + leafName + "_" + TLorentzName + "->Fill(" + leafName + "->" + TLorentzName + "(), final_weighting);\n\n")
 
+		#To fill the BJET Section inside SOMETHING_Analysis.h
+		_FillAllData_BJET.write("\t//BJET Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
+		_FillAllData_BJET.write("\th_" + leafName + "_" + TLorentzName + "_BJET->Fill(" + leafName + "->" + TLorentzName + "(), final_weighting);\n\n")
+
 		#To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 		_DrawHistos.write("\t//Histogram Draw (Quiet) Functions for " + leafName + "_" + TLorentzName + "\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + ", \"h_" + leafName + "_" + TLorentzName + "\", \"h_" + leafName + "_" + TLorentzName + "\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_PRE, \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n\n")
-
+		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_BJET, \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_BJET_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n\n")
 
 for line in MC_Analysis:
 
@@ -86,7 +94,7 @@ for line in MC_Analysis:
 
 		if line.find("matched") != -1 or line.find("truth") != -1:
 			value = 1
-		elif line.find("ljet_0") != -1 or line.find("ljet_1") != -1:
+		elif line.find("ljet_0") != -1 or line.find("ljet_1") != -1 or line.find("bjet_1") != -1 or line.find("bjet_1") != -1:
 			#If the leaf is a TLorentzVector
 			if line[3:17] == "TLorentzVector":
 
@@ -114,6 +122,8 @@ for line in MC_Analysis:
 					Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + "_EXCEPT;\n")
 					Histo_Definitions.write("\t\tvirtual void Book_" + leafName + "_" + TLorentzName + "_PRE(int bins, double min, double max);\n")
 					Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + "_PRE;\n")
+					Histo_Definitions.write("\t\tvirtual void Book_" + leafName + "_" + TLorentzName + "_BJET(int bins, double min, double max);\n")
+					Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + "_BJET;\n")
 
 					#Write out the histogram booking functions to the histogram booking functions file
 					Histo_Book_Functions_AutoGen.write("\t//Histogram booking function for " + leafName + "_" + TLorentzName + "\n")
@@ -128,6 +138,9 @@ for line in MC_Analysis:
 					Histo_Book_Functions_AutoGen.write("\t}\n")
 					Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "_PRE(int bins, double min, double max) {\n")
 					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_PRE = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_PRE\",\"\", bins, min, max);\n")
+					Histo_Book_Functions_AutoGen.write("\t}\n")
+					Histo_Book_Functions_AutoGen.write("\tvoid MC_Analysis::Book_" + leafName + "_" + TLorentzName + "_BJET(int bins, double min, double max) {\n")
+					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_BJET = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_BJET\",\"\", bins, min, max);\n")
 					Histo_Book_Functions_AutoGen.write("\t}\n")
 
 					AnalysisAutoGen_TLorentz(TLorentzName, "Pt", ";Momentum [GeV/c^{2}];Entries")
@@ -167,6 +180,9 @@ for line in MC_Analysis:
 				Histo_Definitions.write("\n")
 				Histo_Definitions.write("\tvirtual void Book_" + leafName + "_PRE(int bins, double min, double max);\n")
 				Histo_Definitions.write("\tTH1F\t*h_" + leafName + "_PRE;\n")
+				Histo_Definitions.write("\n")
+				Histo_Definitions.write("\tvirtual void Book_" + leafName + "_BJET(int bins, double min, double max);\n")
+				Histo_Definitions.write("\tTH1F\t*h_" + leafName + "_BJET;\n")
 				Histo_Definitions.write("\n")
 
 				#Write out the Histogram Booking Functions header
@@ -233,6 +249,9 @@ for line in MC_Analysis:
 				Histo_Book_Functions_AutoGen.write("void MC_Analysis::Book_" + leafName + "_PRE(int bins, double min, double max) {\n")
 				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_PRE = new TH1F(\"h_" + leafName + "_PRE\", \"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("}\n\n")
+				Histo_Book_Functions_AutoGen.write("void MC_Analysis::Book_" + leafName + "_BJET(int bins, double min, double max) {\n")
+				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_BJET = new TH1F(\"h_" + leafName + "_BJET\", \"\", bins, min, max);\n")
+				Histo_Book_Functions_AutoGen.write("}\n\n")
 			
 
 	#If the line is the one at the beginning of the declaration of leaf types
@@ -276,7 +295,10 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_EXCEPT; // EXCEPT VERSION\n\n")
 
 		Histo_Custom_Book_Definitions.write("virtual void Book_" + line[0:colonPos] + "(int bins, double min, double max); // SEARCH VERSION\n")
-		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "; // SEARCH VERSION\n\n\n")
+		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "; // SEARCH VERSION\n\n")
+
+		Histo_Custom_Book_Definitions.write("virtual void Book_" + line[0:colonPos] + "_BJET(int bins, double min, double max); // BJET VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_BJET; // BJET VERSION\n\n\n")
 
 	
 		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "_PRE(int bins, double min, double max) {\n")
@@ -289,6 +311,10 @@ for line in Custom_Histos:
 
 		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "_EXCEPT(int bins, double min, double max) {\n")
 		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_EXCEPT = new TH1F(\"h_" + line[0:colonPos] + "_EXCEPT\", \"\", bins, min, max);\n")
+		Histo_Custom_Book_Functions.write("}\n")
+
+		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "_BJET(int bins, double min, double max) {\n")
+		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_BJET = new TH1F(\"h_" + line[0:colonPos] + "_BJET\", \"\", bins, min, max);\n")
 		Histo_Custom_Book_Functions.write("}\n")
 
 		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "(int bins, double min, double max) {\n")

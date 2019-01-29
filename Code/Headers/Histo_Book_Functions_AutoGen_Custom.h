@@ -17,6 +17,9 @@ void MC_Analysis::Book_DeltaR_CONTROL(int bins, double min, double max) {
 void MC_Analysis::Book_DeltaR_EXCEPT(int bins, double min, double max) {
 	h_DeltaR_EXCEPT = new TH1F("h_DeltaR_EXCEPT", "", bins, min, max);
 }
+void MC_Analysis::Book_DeltaR_BJET(int bins, double min, double max) {
+	h_DeltaR_BJET = new TH1F("h_DeltaR_BJET", "", bins, min, max);
+}
 void MC_Analysis::Book_DeltaR(int bins, double min, double max) {
 	h_DeltaR = new TH1F("h_DeltaR", "", bins, min, max);
 }
@@ -31,6 +34,9 @@ void MC_Analysis::Book_pT_balance_CONTROL(int bins, double min, double max) {
 }
 void MC_Analysis::Book_pT_balance_EXCEPT(int bins, double min, double max) {
 	h_pT_balance_EXCEPT = new TH1F("h_pT_balance_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_pT_balance_BJET(int bins, double min, double max) {
+	h_pT_balance_BJET = new TH1F("h_pT_balance_BJET", "", bins, min, max);
 }
 void MC_Analysis::Book_pT_balance(int bins, double min, double max) {
 	h_pT_balance = new TH1F("h_pT_balance", "", bins, min, max);
@@ -47,6 +53,9 @@ void MC_Analysis::Book_pT_balance_3_CONTROL(int bins, double min, double max) {
 void MC_Analysis::Book_pT_balance_3_EXCEPT(int bins, double min, double max) {
 	h_pT_balance_3_EXCEPT = new TH1F("h_pT_balance_3_EXCEPT", "", bins, min, max);
 }
+void MC_Analysis::Book_pT_balance_3_BJET(int bins, double min, double max) {
+	h_pT_balance_3_BJET = new TH1F("h_pT_balance_3_BJET", "", bins, min, max);
+}
 void MC_Analysis::Book_pT_balance_3(int bins, double min, double max) {
 	h_pT_balance_3 = new TH1F("h_pT_balance_3", "", bins, min, max);
 }
@@ -61,6 +70,9 @@ void MC_Analysis::Book_Centrality_CONTROL(int bins, double min, double max) {
 }
 void MC_Analysis::Book_Centrality_EXCEPT(int bins, double min, double max) {
 	h_Centrality_EXCEPT = new TH1F("h_Centrality_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_Centrality_BJET(int bins, double min, double max) {
+	h_Centrality_BJET = new TH1F("h_Centrality_BJET", "", bins, min, max);
 }
 void MC_Analysis::Book_Centrality(int bins, double min, double max) {
 	h_Centrality = new TH1F("h_Centrality", "", bins, min, max);
@@ -77,6 +89,9 @@ void MC_Analysis::Book_RapidityDijet_CONTROL(int bins, double min, double max) {
 void MC_Analysis::Book_RapidityDijet_EXCEPT(int bins, double min, double max) {
 	h_RapidityDijet_EXCEPT = new TH1F("h_RapidityDijet_EXCEPT", "", bins, min, max);
 }
+void MC_Analysis::Book_RapidityDijet_BJET(int bins, double min, double max) {
+	h_RapidityDijet_BJET = new TH1F("h_RapidityDijet_BJET", "", bins, min, max);
+}
 void MC_Analysis::Book_RapidityDijet(int bins, double min, double max) {
 	h_RapidityDijet = new TH1F("h_RapidityDijet", "", bins, min, max);
 }
@@ -91,6 +106,9 @@ void MC_Analysis::Book_RapidityDilepton_CONTROL(int bins, double min, double max
 }
 void MC_Analysis::Book_RapidityDilepton_EXCEPT(int bins, double min, double max) {
 	h_RapidityDilepton_EXCEPT = new TH1F("h_RapidityDilepton_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_RapidityDilepton_BJET(int bins, double min, double max) {
+	h_RapidityDilepton_BJET = new TH1F("h_RapidityDilepton_BJET", "", bins, min, max);
 }
 void MC_Analysis::Book_RapidityDilepton(int bins, double min, double max) {
 	h_RapidityDilepton = new TH1F("h_RapidityDilepton", "", bins, min, max);
@@ -109,6 +127,9 @@ void MC_Analysis::Book_lep_0_lep_1_mass_CONTROL(int bins, double min, double max
 void MC_Analysis::Book_lep_0_lep_1_mass_EXCEPT(int bins, double min, double max) {
 	h_lep_0_lep_1_mass_EXCEPT = new TH1F("h_lep_0_lep_1_mass_EXCEPT", "", bins, min, max);
 }
+void MC_Analysis::Book_lep_0_lep_1_mass_BJET(int bins, double min, double max) {
+	h_lep_0_lep_1_mass_BJET = new TH1F("h_lep_0_lep_1_mass_BJET", "", bins, min, max);
+}
 void MC_Analysis::Book_lep_0_lep_1_mass(int bins, double min, double max) {
 	h_lep_0_lep_1_mass = new TH1F("h_lep_0_lep_1_mass", "", bins, min, max);
 }
@@ -123,6 +144,9 @@ void MC_Analysis::Book_lep_0_lep_1_pt_CONTROL(int bins, double min, double max) 
 }
 void MC_Analysis::Book_lep_0_lep_1_pt_EXCEPT(int bins, double min, double max) {
 	h_lep_0_lep_1_pt_EXCEPT = new TH1F("h_lep_0_lep_1_pt_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_lep_0_lep_1_pt_BJET(int bins, double min, double max) {
+	h_lep_0_lep_1_pt_BJET = new TH1F("h_lep_0_lep_1_pt_BJET", "", bins, min, max);
 }
 void MC_Analysis::Book_lep_0_lep_1_pt(int bins, double min, double max) {
 	h_lep_0_lep_1_pt = new TH1F("h_lep_0_lep_1_pt", "", bins, min, max);
@@ -139,38 +163,11 @@ void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH_CONTROL(int bins, double min, double
 void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH_EXCEPT(int bins, double min, double max) {
 	h_lep_0_lep_1_pt_TRUTH_EXCEPT = new TH1F("h_lep_0_lep_1_pt_TRUTH_EXCEPT", "", bins, min, max);
 }
+void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH_BJET(int bins, double min, double max) {
+	h_lep_0_lep_1_pt_TRUTH_BJET = new TH1F("h_lep_0_lep_1_pt_TRUTH_BJET", "", bins, min, max);
+}
 void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH(int bins, double min, double max) {
 	h_lep_0_lep_1_pt_TRUTH = new TH1F("h_lep_0_lep_1_pt_TRUTH", "", bins, min, max);
-}
-
-
-// -- Isolation cone for the lepton 0, size 20
-void MC_Analysis::Book_lep_0_iso_ptvarcone20_PRE(int bins, double min, double max) {
-	h_lep_0_iso_ptvarcone20_PRE = new TH1F("h_lep_0_iso_ptvarcone20_PRE", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_iso_ptvarcone20_CONTROL(int bins, double min, double max) {
-	h_lep_0_iso_ptvarcone20_CONTROL = new TH1F("h_lep_0_iso_ptvarcone20_CONTROL", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_iso_ptvarcone20_EXCEPT(int bins, double min, double max) {
-	h_lep_0_iso_ptvarcone20_EXCEPT = new TH1F("h_lep_0_iso_ptvarcone20_EXCEPT", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_iso_ptvarcone20(int bins, double min, double max) {
-	h_lep_0_iso_ptvarcone20 = new TH1F("h_lep_0_iso_ptvarcone20", "", bins, min, max);
-}
-
-
-// -- Isolation cone for the lepton 0, size 30
-void MC_Analysis::Book_lep_0_iso_ptvarcone30_PRE(int bins, double min, double max) {
-	h_lep_0_iso_ptvarcone30_PRE = new TH1F("h_lep_0_iso_ptvarcone30_PRE", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_iso_ptvarcone30_CONTROL(int bins, double min, double max) {
-	h_lep_0_iso_ptvarcone30_CONTROL = new TH1F("h_lep_0_iso_ptvarcone30_CONTROL", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_iso_ptvarcone30_EXCEPT(int bins, double min, double max) {
-	h_lep_0_iso_ptvarcone30_EXCEPT = new TH1F("h_lep_0_iso_ptvarcone30_EXCEPT", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_iso_ptvarcone30(int bins, double min, double max) {
-	h_lep_0_iso_ptvarcone30 = new TH1F("h_lep_0_iso_ptvarcone30", "", bins, min, max);
 }
 
 
@@ -184,38 +181,11 @@ void MC_Analysis::Book_lep_0_iso_ptvarcone40_CONTROL(int bins, double min, doubl
 void MC_Analysis::Book_lep_0_iso_ptvarcone40_EXCEPT(int bins, double min, double max) {
 	h_lep_0_iso_ptvarcone40_EXCEPT = new TH1F("h_lep_0_iso_ptvarcone40_EXCEPT", "", bins, min, max);
 }
+void MC_Analysis::Book_lep_0_iso_ptvarcone40_BJET(int bins, double min, double max) {
+	h_lep_0_iso_ptvarcone40_BJET = new TH1F("h_lep_0_iso_ptvarcone40_BJET", "", bins, min, max);
+}
 void MC_Analysis::Book_lep_0_iso_ptvarcone40(int bins, double min, double max) {
 	h_lep_0_iso_ptvarcone40 = new TH1F("h_lep_0_iso_ptvarcone40", "", bins, min, max);
-}
-
-
-// -- Isolation cone for the lepton 1, size 20
-void MC_Analysis::Book_lep_1_iso_ptvarcone20_PRE(int bins, double min, double max) {
-	h_lep_1_iso_ptvarcone20_PRE = new TH1F("h_lep_1_iso_ptvarcone20_PRE", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_1_iso_ptvarcone20_CONTROL(int bins, double min, double max) {
-	h_lep_1_iso_ptvarcone20_CONTROL = new TH1F("h_lep_1_iso_ptvarcone20_CONTROL", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_1_iso_ptvarcone20_EXCEPT(int bins, double min, double max) {
-	h_lep_1_iso_ptvarcone20_EXCEPT = new TH1F("h_lep_1_iso_ptvarcone20_EXCEPT", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_1_iso_ptvarcone20(int bins, double min, double max) {
-	h_lep_1_iso_ptvarcone20 = new TH1F("h_lep_1_iso_ptvarcone20", "", bins, min, max);
-}
-
-
-// -- Isolation cone for the lepton 1, size 30
-void MC_Analysis::Book_lep_1_iso_ptvarcone30_PRE(int bins, double min, double max) {
-	h_lep_1_iso_ptvarcone30_PRE = new TH1F("h_lep_1_iso_ptvarcone30_PRE", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_1_iso_ptvarcone30_CONTROL(int bins, double min, double max) {
-	h_lep_1_iso_ptvarcone30_CONTROL = new TH1F("h_lep_1_iso_ptvarcone30_CONTROL", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_1_iso_ptvarcone30_EXCEPT(int bins, double min, double max) {
-	h_lep_1_iso_ptvarcone30_EXCEPT = new TH1F("h_lep_1_iso_ptvarcone30_EXCEPT", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_1_iso_ptvarcone30(int bins, double min, double max) {
-	h_lep_1_iso_ptvarcone30 = new TH1F("h_lep_1_iso_ptvarcone30", "", bins, min, max);
 }
 
 
@@ -229,6 +199,9 @@ void MC_Analysis::Book_lep_1_iso_ptvarcone40_CONTROL(int bins, double min, doubl
 void MC_Analysis::Book_lep_1_iso_ptvarcone40_EXCEPT(int bins, double min, double max) {
 	h_lep_1_iso_ptvarcone40_EXCEPT = new TH1F("h_lep_1_iso_ptvarcone40_EXCEPT", "", bins, min, max);
 }
+void MC_Analysis::Book_lep_1_iso_ptvarcone40_BJET(int bins, double min, double max) {
+	h_lep_1_iso_ptvarcone40_BJET = new TH1F("h_lep_1_iso_ptvarcone40_BJET", "", bins, min, max);
+}
 void MC_Analysis::Book_lep_1_iso_ptvarcone40(int bins, double min, double max) {
 	h_lep_1_iso_ptvarcone40 = new TH1F("h_lep_1_iso_ptvarcone40", "", bins, min, max);
 }
@@ -236,7 +209,7 @@ void MC_Analysis::Book_lep_1_iso_ptvarcone40(int bins, double min, double max) {
 
 /// ------------------- JETS ---------------- ///
 
-// -- Invariant mass of two leading jets (leading and subleading)
+// -- Invariant mass of two leading jets (leading and subleading) (light)
 void MC_Analysis::Book_ljet_0_ljet_1_mass_PRE(int bins, double min, double max) {
 	h_ljet_0_ljet_1_mass_PRE = new TH1F("h_ljet_0_ljet_1_mass_PRE", "", bins, min, max);
 }
@@ -246,8 +219,65 @@ void MC_Analysis::Book_ljet_0_ljet_1_mass_CONTROL(int bins, double min, double m
 void MC_Analysis::Book_ljet_0_ljet_1_mass_EXCEPT(int bins, double min, double max) {
 	h_ljet_0_ljet_1_mass_EXCEPT = new TH1F("h_ljet_0_ljet_1_mass_EXCEPT", "", bins, min, max);
 }
+void MC_Analysis::Book_ljet_0_ljet_1_mass_BJET(int bins, double min, double max) {
+	h_ljet_0_ljet_1_mass_BJET = new TH1F("h_ljet_0_ljet_1_mass_BJET", "", bins, min, max);
+}
 void MC_Analysis::Book_ljet_0_ljet_1_mass(int bins, double min, double max) {
 	h_ljet_0_ljet_1_mass = new TH1F("h_ljet_0_ljet_1_mass", "", bins, min, max);
+}
+
+
+// -- Invariant mass of two leading jets (leading and subleading) (bottom)
+void MC_Analysis::Book_bjet_0_bjet_1_mass_PRE(int bins, double min, double max) {
+	h_bjet_0_bjet_1_mass_PRE = new TH1F("h_bjet_0_bjet_1_mass_PRE", "", bins, min, max);
+}
+void MC_Analysis::Book_bjet_0_bjet_1_mass_CONTROL(int bins, double min, double max) {
+	h_bjet_0_bjet_1_mass_CONTROL = new TH1F("h_bjet_0_bjet_1_mass_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_bjet_0_bjet_1_mass_EXCEPT(int bins, double min, double max) {
+	h_bjet_0_bjet_1_mass_EXCEPT = new TH1F("h_bjet_0_bjet_1_mass_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_bjet_0_bjet_1_mass_BJET(int bins, double min, double max) {
+	h_bjet_0_bjet_1_mass_BJET = new TH1F("h_bjet_0_bjet_1_mass_BJET", "", bins, min, max);
+}
+void MC_Analysis::Book_bjet_0_bjet_1_mass(int bins, double min, double max) {
+	h_bjet_0_bjet_1_mass = new TH1F("h_bjet_0_bjet_1_mass", "", bins, min, max);
+}
+
+
+// -- Leading jet transverse momentum
+void MC_Analysis::Book_jet_0_p4_Pt_PRE(int bins, double min, double max) {
+	h_jet_0_p4_Pt_PRE = new TH1F("h_jet_0_p4_Pt_PRE", "", bins, min, max);
+}
+void MC_Analysis::Book_jet_0_p4_Pt_CONTROL(int bins, double min, double max) {
+	h_jet_0_p4_Pt_CONTROL = new TH1F("h_jet_0_p4_Pt_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_jet_0_p4_Pt_EXCEPT(int bins, double min, double max) {
+	h_jet_0_p4_Pt_EXCEPT = new TH1F("h_jet_0_p4_Pt_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_jet_0_p4_Pt_BJET(int bins, double min, double max) {
+	h_jet_0_p4_Pt_BJET = new TH1F("h_jet_0_p4_Pt_BJET", "", bins, min, max);
+}
+void MC_Analysis::Book_jet_0_p4_Pt(int bins, double min, double max) {
+	h_jet_0_p4_Pt = new TH1F("h_jet_0_p4_Pt", "", bins, min, max);
+}
+
+
+// -- Subleading jet transverse momentum
+void MC_Analysis::Book_jet_1_p4_Pt_PRE(int bins, double min, double max) {
+	h_jet_1_p4_Pt_PRE = new TH1F("h_jet_1_p4_Pt_PRE", "", bins, min, max);
+}
+void MC_Analysis::Book_jet_1_p4_Pt_CONTROL(int bins, double min, double max) {
+	h_jet_1_p4_Pt_CONTROL = new TH1F("h_jet_1_p4_Pt_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_jet_1_p4_Pt_EXCEPT(int bins, double min, double max) {
+	h_jet_1_p4_Pt_EXCEPT = new TH1F("h_jet_1_p4_Pt_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_jet_1_p4_Pt_BJET(int bins, double min, double max) {
+	h_jet_1_p4_Pt_BJET = new TH1F("h_jet_1_p4_Pt_BJET", "", bins, min, max);
+}
+void MC_Analysis::Book_jet_1_p4_Pt(int bins, double min, double max) {
+	h_jet_1_p4_Pt = new TH1F("h_jet_1_p4_Pt", "", bins, min, max);
 }
 
 

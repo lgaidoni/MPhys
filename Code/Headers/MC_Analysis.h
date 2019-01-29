@@ -42,7 +42,7 @@ public :
 	bool weight_total_override;
 	string desired_particles;
 
-	/////-------------------------LEPTON INFORMATION----------------------------------/////
+	/////----------LEPTON INFORMATION------------/////
 
 	Int_t n_leptons;
 
@@ -53,6 +53,17 @@ public :
 	UInt_t          *lep_1;
 	TLorentzVector  *lep_1_p4;
 	Float_t         *lep_1_q;
+
+	/////--------------JET INFORMATION--------------/////
+
+	UInt_t		*jet_0;
+	TLorentzVector	*jet_0_p4;
+
+	UInt_t		*jet_1;
+	TLorentzVector	*jet_1_p4;
+
+	UInt_t		*jet_2;
+	TLorentzVector	*jet_2_p4;
 
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
