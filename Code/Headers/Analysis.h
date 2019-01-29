@@ -33,38 +33,47 @@ void MC_Analysis::BookHistos() {
 	Book_lep_0_iso_ptvarcone40_PRE(bins, 0, 20000);
 	Book_lep_0_iso_ptvarcone40_CONTROL(bins, 0, 20000);
 	Book_lep_0_iso_ptvarcone40_EXCEPT(bins, 0, 20000);
+	Book_lep_0_iso_ptvarcone40_BJET(bins, 0, 20000);
+
 	Book_lep_1_iso_ptvarcone40(bins, 0, 20000);
 	Book_lep_1_iso_ptvarcone40_PRE(bins, 0, 20000);
 	Book_lep_1_iso_ptvarcone40_CONTROL(bins, 0, 20000);
 	Book_lep_1_iso_ptvarcone40_EXCEPT(bins, 0, 20000);
+	Book_lep_1_iso_ptvarcone40_BJET(bins, 0, 20000);
+
 	///-------------------------------- lep_0 & lep_1 ----------------------------------///
 	//dilepton invariant mass
 	Book_lep_0_lep_1_mass_EXCEPT(bins, 0, 200);
 	Book_lep_0_lep_1_mass_CONTROL(bins, 0, 200);
 	Book_lep_0_lep_1_mass_PRE(bins, 0, 200);
 	Book_lep_0_lep_1_mass(bins, 0, 200);
+	Book_lep_0_lep_1_mass_BJET(bins, 0, 200);
 
 	//dilepton rapidity
 	Book_RapidityDilepton_CONTROL(bins, 0, 4.5);
 	Book_RapidityDilepton_PRE(bins, 0, 4.5);
 	Book_RapidityDilepton(bins, 0, 4.5);
+	Book_RapidityDilepton_BJET(bins, 0, 4.5);
 
 	//diljet rapidity
 	Book_RapidityDijet_CONTROL(bins, 0, 4.5);
 	Book_RapidityDijet_PRE(bins, 0, 4.5);
 	Book_RapidityDijet(bins, 0, 4.5);
+	Book_RapidityDijet_BJET(bins, 0, 4.5);
 
 	//dilepton pt
 	Book_lep_0_lep_1_pt_EXCEPT(bins, 0, 300);
 	Book_lep_0_lep_1_pt_CONTROL(bins, 0, 300);
 	Book_lep_0_lep_1_pt_PRE(bins, 0, 300);
 	Book_lep_0_lep_1_pt(bins, 0, 300);
+	Book_lep_0_lep_1_pt_BJET(bins, 0, 300);
 
 	///---------------------------------- Delta R ----------------------------------------///
 
 	Book_DeltaR(bins, 0, 10);
 	Book_DeltaR_PRE(bins, 0, 10);
 	Book_DeltaR_CONTROL(bins, 0, 10);
+	Book_DeltaR_BJET(bins, 0, 10);
 
 	///---------------------------------ljet_0 & ljet_1-----------------------------------///
 
@@ -73,12 +82,29 @@ void MC_Analysis::BookHistos() {
 	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 4500);
 	Book_ljet_0_ljet_1_mass(bins, 0, 4500);
 
+	Book_bjet_0_bjet_1_mass_BJET(bins, 0, 4500);
+
+	//jet_0 pt
+	Book_jet_0_p4_Pt_EXCEPT(bins, 0, 1000);
+	Book_jet_0_p4_Pt_CONTROL(bins, 0, 1000);
+	Book_jet_0_p4_Pt_PRE(bins, 0, 1000);
+	Book_jet_0_p4_Pt(bins, 0, 1000);
+	Book_jet_0_p4_Pt_BJET(bins, 0, 1000);
+
+	//jet_1 pt
+	Book_jet_1_p4_Pt_EXCEPT(bins, 0, 1000);
+	Book_jet_1_p4_Pt_CONTROL(bins, 0, 1000);
+	Book_jet_1_p4_Pt_PRE(bins, 0, 1000);
+	Book_jet_1_p4_Pt(bins, 0, 1000);
+	Book_jet_1_p4_Pt_BJET(bins, 0, 1000);
+
 	///------------------ pT balance for lep_0 & lep_1 ljet_0 & ljet_1-----------------///
 
 	Book_pT_balance_PRE(bins, 0, 1);
 	Book_pT_balance(bins, 0, 1);
 	Book_pT_balance_CONTROL(bins, 0, 1);
 	Book_pT_balance_EXCEPT(bins, 0, 1);
+	Book_pT_balance_BJET(bins, 0, 1);
 
 	///------------------ pT balance 3 for lep_0 & lep_1 ljet_0 & ljet_1 & ljet_2 -----------------///
 
@@ -92,7 +118,32 @@ void MC_Analysis::BookHistos() {
 	Book_Centrality_PRE(bins, -8, 8);
 	Book_Centrality(bins, -8, 8);
 	Book_Centrality_CONTROL(bins, -8, 8);
+	Book_Centrality_BJET(bins, -8, 8);
 
+}
+
+void MC_Analysis::JetSet(string JetSetType) {
+	if (JetSetType == "ljet") {
+		jet_0 = & ljet_0;
+		jet_0_p4 = ljet_0_p4;
+
+		jet_1 = & ljet_1;
+		jet_1_p4 = ljet_1_p4;
+
+		jet_2 = & ljet_2;
+		jet_2_p4 = ljet_2_p4;
+	}
+	else if (JetSetType == "bjet") {
+		jet_0 = & bjet_0;
+		jet_0_p4 = bjet_0_p4;
+
+		jet_1 = & bjet_1;
+		jet_1_p4 = bjet_1_p4;
+
+		jet_2 = & ljet_2;
+		jet_2_p4 = ljet_2_p4;
+	}
+	else cout << "HOW DID THIS HAPPEN TO ME" << endl << endl;
 }
 
 void MC_Analysis::ParticleSelection() {
@@ -110,7 +161,6 @@ void MC_Analysis::ParticleSelection() {
 		lep_1_q = & elec_1_q;	
 	
 		n_leptons = n_electrons;
-
 	}
 
 	if (desired_particles == "mm") {
@@ -126,7 +176,6 @@ void MC_Analysis::ParticleSelection() {
 		lep_1_q = & muon_1_q;	
 	
 		n_leptons = n_muons;
-
 	}
 
 	if (desired_particles == "em" || desired_particles == "me") {
@@ -143,84 +192,65 @@ void MC_Analysis::ParticleSelection() {
 
 		if (n_muons == 1 && n_electrons == 1) n_leptons = n_muons + n_electrons;
 		else n_leptons = 0;
-
 	}
 
-
-	// TAU analysis here:
 	if (desired_particles == "tt") {
 
-		if (n_taus == 2) { // tautau
-			lep_0 = & tau_0;
-			lep_0_iso_ptvarcone40 = 0;
-			lep_0_p4 = tau_0_p4;
-			lep_0_q = & tau_0_q;
+		lep_0 = & tau_0;
+		lep_0_iso_ptvarcone40 = 0;
+		lep_0_p4 = tau_0_p4;
+		lep_0_q = & tau_0_q;
 
-			lep_1 = & tau_1;	
-			lep_1_iso_ptvarcone40 = 0;
-			lep_1_p4 = tau_1_p4;
-			lep_1_q = & tau_1_q;
+		lep_1 = & tau_1;	
+		lep_1_iso_ptvarcone40 = 0;
+		lep_1_p4 = tau_1_p4;
+		lep_1_q = & tau_1_q;
 
-			n_leptons = n_taus; 
-		}
-		else if (n_taus == 1 && n_electrons == 1) { // etau
-			lep_0 = & tau_0; 
-			lep_0_iso_ptvarcone40 = 0;
-			lep_0_p4 = tau_0_p4;
-			lep_0_q = & tau_0_q;
+		n_leptons = n_taus; 
+	}
 
-			lep_1 = & elec_0;
-			lep_1_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
-			lep_1_p4 = elec_0_p4;
-			lep_1_q = & elec_0_q;
+	if (desired_particles == "et" || desired_particles == "te") {
 
-			n_leptons = n_taus + n_electrons; 
-		}
-		else if (n_taus == 1 && n_muons == 1) { // mtau
-			lep_0 = & tau_0; 
-			lep_0_iso_ptvarcone40 = 0;
-			lep_0_p4 = tau_0_p4;
-			lep_0_q = & tau_0_q;
+		lep_0 = & tau_0; 
+		lep_0_iso_ptvarcone40 = 0;
+		lep_0_p4 = tau_0_p4;
+		lep_0_q = & tau_0_q;
 
-			lep_1 = & muon_0;
-			lep_1_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
-			lep_1_p4 = muon_0_p4;
-			lep_1_q = & muon_0_q;
+		lep_1 = & elec_0;
+		lep_1_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
+		lep_1_p4 = elec_0_p4;
+		lep_1_q = & elec_0_q;
 
-			n_leptons = n_taus + n_muons; 
-		}
-		else if (n_taus == 0 && n_muons == 1 && n_electrons == 1) { // em/me
-
-			lep_0 = & muon_0;
-			lep_0_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
-			lep_0_p4 = muon_0_p4;
-			lep_0_q = & muon_0_q;	
-
-			lep_1 = & elec_0;
-			lep_1_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
-			lep_1_p4 = elec_0_p4;
-			lep_1_q = & elec_0_q;	
-			n_leptons = n_muons + n_electrons; 
-		}
+		if (n_taus == 1 && n_electrons == 1) n_leptons = n_taus + n_electrons;
 		else n_leptons = 0;
+	}
 
+	if (desired_particles == "mt" || desired_particles == "tm") {
+
+		lep_0 = & tau_0; 
+		lep_0_iso_ptvarcone40 = 0;
+		lep_0_p4 = tau_0_p4;
+		lep_0_q = & tau_0_q;
+
+		lep_1 = & muon_0;
+		lep_1_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
+		lep_1_p4 = muon_0_p4;
+		lep_1_q = & muon_0_q;
+
+		if (n_taus == 1 && n_muons == 1) n_leptons = n_taus + n_muons;
+		else n_leptons = 0;
 	}
 
 }
 
-
-//This function will perform the inital cuts, ensuring we have all the particles needed for analysis
-bool MC_Analysis::InitialCut() {
+//This function will perform the inital cuts, ensuring we have all the particles needed for analysis, selecting ljets
+bool MC_Analysis::RegionSelector_bjetVeto() {
 
 	//Setting up conditions
 	bool two_leptons = false;
 	bool two_or_more_jets = false;
 	bool leptons_opposite_charges = false;
 	bool no_bjets = false;
-	bool lep1_momentum = false;
-	bool lep1_eta = false;
-	bool lep0_momentum = false;
-	bool lep0_eta = false;
 
 	//Condition Checking
 	if (n_leptons == 2) { //If two leptons are found
@@ -238,12 +268,38 @@ bool MC_Analysis::InitialCut() {
 
 }
 
+//This function will perform the inital cuts, ensuring we have all the particles needed for analysis, selecting bjets
+bool MC_Analysis::RegionSelector_bjetSelect() {
+
+	//Setting up conditions
+	bool two_leptons = false;
+	bool two_or_more_jets = false;
+	bool leptons_opposite_charges = false;
+	bool no_ljets = false;
+
+	//Condition Checking
+	if (n_leptons == 2) { //If two leptons are found
+		two_leptons = true;
+		if (& lep_0_q != & lep_1_q) leptons_opposite_charges = true;  //If lepton +/- pair found
+	}
+
+	if (ljet_0 == 0 && ljet_1 == 0) no_ljets = true;  //If there are no ljets
+	if (n_bjets >= 2) two_or_more_jets = true;  //If two or more jets were found
+
+	// If the conditions are met, don't cut
+	if (two_leptons && two_or_more_jets && leptons_opposite_charges && no_ljets) return false; ///  && elec1_momentum  && elec1_eta  && elec0_momentum && elec0_eta
+	//Otherwise, cut
+	return true;	
+
+}
+
 //This function will generate variables, put them in a vector, and return said vector
 void MC_Analysis::GenerateVariables() {
 
 	//Invariant Mass
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
 	ljet_0_ljet_1_mass = InvariantMass(ljet_0_p4, ljet_1_p4);
+	bjet_0_bjet_1_mass = InvariantMass(bjet_0_p4, bjet_1_p4);
 
 	//Delta R
 	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
@@ -252,19 +308,19 @@ void MC_Analysis::GenerateVariables() {
 	RapidityDilepton = RapidityDisomething(lep_0_p4, lep_1_p4);
 
 	// Rapidity of dijet pair
-	RapidityDijet = RapidityDisomething(ljet_0_p4, ljet_1_p4);
+	RapidityDijet = RapidityDisomething(jet_0_p4, jet_1_p4);
 
 	//Combined Lepton momentum
 	lep_0_lep_1_pt = CombinedTransverseMomentum(lep_0_p4, lep_1_p4);
 
 	// p_T_Balance 
-	pT_balance = pTBalanceCalc(lep_0_p4, lep_1_p4, ljet_0_p4, ljet_1_p4);
+	pT_balance = pTBalanceCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
 	
 	// p_T_Balance_3
-	pT_balance_3 = pTBalanceThreeCalc(lep_0_p4, lep_1_p4, ljet_0_p4, ljet_1_p4, ljet_2_p4);
+	pT_balance_3 = pTBalanceThreeCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4, jet_2_p4);
 	
 	// Centrality of Z boson between two leading jets calc using rapidity
-	Centrality = CentralityCalc(lep_0_p4, lep_1_p4, ljet_0_p4, ljet_1_p4);
+	Centrality = CentralityCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
 
 	//Final Weighting
 	final_weighting = Luminosity_Weight * weight_total;
@@ -446,13 +502,13 @@ void MC_Analysis::CutAndFill() {
 	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut ABSENT
+	   //ptvarcone_40_0 && 			// ptvarcone_40_0 Cut ABSENT
 	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
 
-		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);
+		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 	}
 
@@ -462,12 +518,12 @@ void MC_Analysis::CutAndFill() {
 	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
 	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
 	   ptvarcone_40_0 &&			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 && 			// ptvarcone_40_1 Cut ABSENT
+	   //ptvarcone_40_1 && 			// ptvarcone_40_1 Cut ABSENT
 	   rap_int_condition &&			// rapidity interval condition
 	   pT_balance_limit)			// pT balance limit
 	{
 	
-		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);
+		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);
 
 	}
 
@@ -563,6 +619,95 @@ void MC_Analysis::CutAndFill() {
 
 }
 
+void MC_Analysis::CutAndFill_bjet() {
+
+	if (weight_total_override) weight_total = 1;
+
+	//false means failed the cut, true means passed the cut
+
+	// Initialise common bool conditions
+	bool Z_mass_condition = false;
+	bool combined_lepton_pt = false;
+	bool bjet_0_pt_greater = false;
+	bool bjet_1_pt_greater = false;
+	bool leading_jets_invariant_mass = false;
+	bool ptvarcone_40_0 = false;
+	bool ptvarcone_40_1 = false;
+
+	//Initialise specific bool conditions
+	bool pT_balance_limit = false;
+
+	//Z Boson Mass Cut
+	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101 ) Z_mass_condition = true;	
+
+	//Dilepton Pt Cut
+	if (lep_0_lep_1_pt > 20) combined_lepton_pt = true;
+
+	//Leading Jet 1 (ljet_0) Cut Condition 
+	if (bjet_0_p4->Pt() > 55) bjet_0_pt_greater = true;
+
+	//Leading Jet 2 (ljet_1) Cut Condition
+	if (bjet_1_p4->Pt() > 45) bjet_1_pt_greater = true;
+
+	// Dijjet mass = Leading Jets Combined Invariant mass
+	if (bjet_0_bjet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
+
+	//pt balance limit Cut Condition
+	if (pT_balance < 0.15) pT_balance_limit = true;
+
+	//ptvarcone cuts
+	if (lep_0_iso_ptvarcone40 < 0.1) ptvarcone_40_0 = true; 
+	if (lep_1_iso_ptvarcone40 < 0.1) ptvarcone_40_1 = true; 
+
+	//Initialise Common Cuts bool
+	bool common_cuts = false;
+
+	if(Z_mass_condition && 			// Z Boson Mass Cut
+	   combined_lepton_pt && 		// Dilepton Pt Cut
+	   bjet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition 
+	   bjet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
+	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
+	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
+	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
+	   pT_balance_limit)			// pT balance limit)
+	{
+	
+		common_cuts = true;
+
+	}
+
+	if (common_cuts) {
+
+		#include "_FillAllData_BJET.h"
+
+		//ptvar cone histograms
+		h_lep_1_iso_ptvarcone40_BJET->Fill(lep_1_iso_ptvarcone40, final_weighting);
+		h_lep_0_iso_ptvarcone40_BJET->Fill(lep_0_iso_ptvarcone40, final_weighting);
+
+		//Invariant mass
+		h_lep_0_lep_1_mass_BJET->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+		h_bjet_0_bjet_1_mass_BJET->Fill(bjet_0_bjet_1_mass, final_weighting); // two jets
+
+		//Combined lepton
+		h_RapidityDilepton_BJET->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
+		h_RapidityDijet_BJET->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
+		h_lep_0_lep_1_pt_BJET->Fill(lep_0_lep_1_pt, final_weighting);
+
+		//Delta R for two electrons
+		h_DeltaR_BJET->Fill(DeltaR, final_weighting);
+
+		// pT balance
+		h_pT_balance_BJET->Fill(pT_balance, final_weighting);	
+
+		if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+
+		// Centrality
+		h_Centrality_BJET->Fill(Centrality, final_weighting);
+
+	}
+
+}
+
 //This functinon will Draw all the histograms, and write them to a file
 void MC_Analysis::DrawHistos() {
 
@@ -615,6 +760,18 @@ void MC_Analysis::DrawHistos() {
 
 	// Centrality histograms
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality", ";Centrality;Events", 600, 400, false, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+
+	//BJET GRAPHS
+	DrawHistogram_Quiet(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", "h_lep_1_iso_ptvarcone40_BJET", ";;Events", 600, 400, false, "h_lep_1_iso_ptvarcone40_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", "h_lep_0_iso_ptvarcone40_BJET", ";;Events", 600, 400, false, "h_lep_0_iso_ptvarcone40_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_lep_0_lep_1_mass_BJET, "h_lep_0_lep_1_mass_BJET", "h_lep_0_lep_1_mass_BJET", ";;Events", 600, 400, false, "h_lep_0_lep_1_mass_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_bjet_0_bjet_1_mass_BJET, "h_bjet_0_bjet_1_mass_BJET", "h_bjet_0_bjet_1_mass_BJET", ";;Events", 600, 400, false, "h_bjet_0_bjet_1_mass_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_RapidityDilepton_BJET, "h_RapidityDilepton_BJET", "h_RapidityDilepton_BJET", ";;Events", 600, 400, false, "h_RapidityDilepton_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_RapidityDijet_BJET, "h_RapidityDijet_BJET", "h_RapidityDijet_BJET", ";;Events", 600, 400, false, "h_RapidityDijet_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_lep_0_lep_1_pt_BJET, "h_lep_0_lep_1_pt_BJET", "h_lep_0_lep_1_pt_BJET", ";;Events", 600, 400, false, "h_lep_0_lep_1_pt_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_DeltaR_BJET, "h_DeltaR_BJET", "h_DeltaR_BJET", ";;Events", 600, 400, false, "h_DeltaR_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_pT_balance_BJET, "h_pT_balance_BJET", "h_pT_balance_BJET", ";;Events", 600, 400, false, "h_pT_balance_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_Centrality_BJET, "h_Centrality_BJET", "h_Centrality_BJET", ";;Events", 600, 400, false, "h_Centrality_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	Histograms->Close();
 
