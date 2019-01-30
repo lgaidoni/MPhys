@@ -275,7 +275,7 @@ bool MC_Analysis::RegionSelector_bjetSelect() {
 	bool two_leptons = false;
 	bool two_or_more_jets = false;
 	bool leptons_opposite_charges = false;
-	bool no_ljets = false;
+	bool two_or_more_bjets = false;
 
 	//Condition Checking
 	if (n_leptons == 2) { //If two leptons are found
@@ -283,11 +283,11 @@ bool MC_Analysis::RegionSelector_bjetSelect() {
 		if (& lep_0_q != & lep_1_q) leptons_opposite_charges = true;  //If lepton +/- pair found
 	}
 
-	if (ljet_0 == 0 && ljet_1 == 0) no_ljets = true;  //If there are no ljets
-	if (n_bjets >= 2) two_or_more_jets = true;  //If two or more jets were found
+	if (n_jets>=2) two_or_more_jets = true;  //If two or more jets were found
+	if (n_bjets >= 2) two_or_more_bjets = true;  //If two or more bjets were found
 
 	// If the conditions are met, don't cut
-	if (two_leptons && two_or_more_jets && leptons_opposite_charges && no_ljets) return false; ///  && elec1_momentum  && elec1_eta  && elec0_momentum && elec0_eta
+	if (two_leptons && two_or_more_jets && leptons_opposite_charges && two_or_more_bjets) return false; ///  && elec1_momentum  && elec1_eta  && elec0_momentum && elec0_eta
 	//Otherwise, cut
 	return true;	
 
