@@ -94,7 +94,7 @@ for line in MC_Analysis:
 
 		if line.find("matched") != -1 or line.find("truth") != -1:
 			value = 1
-		elif line.find("ljet_0") != -1 or line.find("ljet_1") != -1 or line.find("bjet_1") != -1 or line.find("bjet_1") != -1:
+		elif line.find("ljet_0") != -1 or line.find("ljet_1") != -1 or line.find("bjet_0") != -1 or line.find("bjet_1") != -1:
 			#If the leaf is a TLorentzVector
 			if line[3:17] == "TLorentzVector":
 
