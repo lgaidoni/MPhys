@@ -1,18 +1,22 @@
 #ifndef Analysis_h
 #define Analysis_h
 
-///--------------------- ORDER OF OPERATIONS ---------------------------///
-///	1. Book Histograms
-///	2. Initial Selection Cut
-///	3. Generate Variables
-///	4. Fill Histograms Pre Selection Cut
-///	5. Selection Cut
-///	6. Fill Histograms Post Selection Cut
-///	7. Draw/Save Histograms
+///////////////////////////////////////////////////////////////////////////////////////////
+///											///
+///	This file, Analysis.h, contains the functions called by MC_Analysis.C to 	///
+///	analyse individual events, sort them into their appropriate regions, and	///
+///	book and fill the relevant histograms						///
+///											///
+///////////////////////////////////////////////////////////////////////////////////////////
 
-//This function will book all relevant histograms
+
+////////////////////////////////////////////////////////////////////////////////////////
+///--------------------------- HISTOGRAM BOOKING FUNCTION ---------------------------///
+////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::BookHistos() {
 
+
+	//Values for the automatically generated TLorentzVector histograms (ljets and bjets)
 	int bins = 50;
 	int PtMin = 0; //GeV/c
 	int PtMax = 1000; //GeV/c
@@ -122,8 +126,99 @@ void MC_Analysis::BookHistos() {
 
 }
 
-void MC_Analysis::JetSet(string JetSetType) {
-	if (JetSetType == "ljet") {
+void MC_Analysis::JetSet(bool bjets) {
+
+	if (bjets) {
+
+		//bbl
+		if (bjet_1_p4->Pt() > ljet_0_p4->Pt()) {
+
+			jet_0 = & bjet_0;
+			jet_0_p4 = bjet_0_p4;
+
+			jet_1 = & bjet_1;
+			jet_1_p4 = bjet_1_p4;
+
+			jet_2 = & ljet_0;
+			jet_2_p4 = ljet_0_p4;
+
+		//blb
+		} else if (bjet_0_p4->Pt() > ljet_0_p4->Pt() and ljet_0_p4->Pt() > bjet_1_p4->Pt() and bjet_1_p4->Pt() > ljet_1_p4->Pt()) {
+
+			jet_0 = & bjet_0;
+			jet_0_p4 = bjet_0_p4;
+
+			jet_1 = & ljet_0;
+			jet_1_p4 = ljet_0_p4;
+
+			jet_2 = & bjet_1;
+			jet_2_p4 = bjet_1_p4;
+
+		//bll
+		} else if (bjet_0_p4->Pt() > ljet_0_p4->Pt() and ljet_1_p4->Pt() > bjet_1_p4->Pt()) {
+
+			jet_0 = & bjet_0;
+			jet_0_p4 = bjet_0_p4;
+
+			jet_1 = & ljet_0;
+			jet_1_p4 = ljet_0_p4;
+
+			jet_2 = & ljet_1;
+			jet_2_p4 = ljet_1_p4;
+
+		//lll
+		} else if (ljet_2_p4->Pt() > bjet_0_p4->Pt()) {
+
+			jet_0 = & ljet_0;
+			jet_0_p4 = ljet_0_p4;
+
+			jet_1 = & ljet_1;
+			jet_1_p4 = ljet_1_p4;
+
+			jet_2 = & ljet_2;
+			jet_2_p4 = ljet_2_p4;
+
+		//llb
+		} else if (ljet_1_p4->Pt() > bjet_0_p4->Pt() and bjet_0_p4->Pt() > ljet_2_p4->Pt()) {
+
+			jet_0 = & ljet_0;
+			jet_0_p4 = ljet_0_p4;
+
+			jet_1 = & ljet_1;
+			jet_1_p4 = ljet_1_p4;
+
+			jet_2 = & bjet_0;
+			jet_2_p4 = bjet_0_p4;
+
+		//lbl
+		} else if (ljet_0_p4->Pt() > bjet_0_p4->Pt() and bjet_0_p4->Pt() > ljet_1_p4->Pt() and ljet_1_p4->Pt() > bjet_1_p4->Pt()) {
+
+			jet_0 = & ljet_0;
+			jet_0_p4 = ljet_0_p4;
+
+			jet_1 = & bjet_0;
+			jet_1_p4 = bjet_0_p4;
+
+			jet_2 = & ljet_1;
+			jet_2_p4 = ljet_1_p4;
+
+		//lbb
+		} else if (ljet_0_p4->Pt() > bjet_0_p4->Pt() and bjet_1_p4->Pt() > ljet_1_p4->Pt()) {
+
+			jet_0 = & ljet_0;
+			jet_0_p4 = ljet_0_p4;
+
+			jet_1 = & bjet_0;
+			jet_1_p4 = bjet_0_p4;
+
+			jet_2 = & bjet_1;
+			jet_2_p4 = bjet_1_p4;
+
+		}
+
+	}
+
+	else {
 		jet_0 = & ljet_0;
 		jet_0_p4 = ljet_0_p4;
 
@@ -133,20 +228,15 @@ void MC_Analysis::JetSet(string JetSetType) {
 		jet_2 = & ljet_2;
 		jet_2_p4 = ljet_2_p4;
 	}
-	else if (JetSetType == "bjet") {
-		jet_0 = & bjet_0;
-		jet_0_p4 = bjet_0_p4;
 
-		jet_1 = & bjet_1;
-		jet_1_p4 = bjet_1_p4;
-
-		jet_2 = & ljet_2;
-		jet_2_p4 = ljet_2_p4;
-	}
-	else cout << "HOW DID THIS HAPPEN TO ME" << endl << endl;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////
+///---------------------- DESIRED PARTICLE SELECTION FUNCTION -----------------------///
+////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::ParticleSelection() {
+
+	//For the desired output particles, set the generic lepton information to those specific leptons
 
 	if (desired_particles == "ee") {
 
@@ -244,13 +334,13 @@ void MC_Analysis::ParticleSelection() {
 }
 
 //This function will perform the inital cuts, ensuring we have all the particles needed for analysis, selecting ljets
-bool MC_Analysis::RegionSelector_bjetVeto() {
+bool MC_Analysis::InitialCut(bool bjets) {
 
 	//Setting up conditions
 	bool two_leptons = false;
 	bool two_or_more_jets = false;
 	bool leptons_opposite_charges = false;
-	bool no_bjets = false;
+	bool bjets_requirement = false;
 
 	//Condition Checking
 	if (n_leptons == 2) { //If two leptons are found
@@ -258,47 +348,31 @@ bool MC_Analysis::RegionSelector_bjetVeto() {
 		if (& lep_0_q != & lep_1_q) leptons_opposite_charges = true;  //If lepton +/- pair found
 	}
 
-	if (n_bjets == 0) no_bjets = true;  //If there are no bjets
+	if (bjets) {
+		bjets_region = true;  //If there are no bjets
+		if (n_bjets >= 2) bjets_requirement = true;
+	}
+	else {
+		bjets_region = false;
+		if (n_bjets == 0) bjets_requirement = true;
+	}
 	if (n_jets >= 2) two_or_more_jets = true;  //If two or more jets were found
 
 	// If the conditions are met, don't cut
-	if (two_leptons && two_or_more_jets && leptons_opposite_charges && no_bjets) return false; ///  && elec1_momentum  && elec1_eta  && elec0_momentum && elec0_eta
+	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement) return false;
 	//Otherwise, cut
 	return true;	
 
 }
 
-//This function will perform the inital cuts, ensuring we have all the particles needed for analysis, selecting bjets
-bool MC_Analysis::RegionSelector_bjetSelect() {
-
-	//Setting up conditions
-	bool two_leptons = false;
-	bool two_or_more_jets = false;
-	bool leptons_opposite_charges = false;
-	bool two_or_more_bjets = false;
-
-	//Condition Checking
-	if (n_leptons == 2) { //If two leptons are found
-		two_leptons = true;
-		if (& lep_0_q != & lep_1_q) leptons_opposite_charges = true;  //If lepton +/- pair found
-	}
-
-	if (n_jets>=2) two_or_more_jets = true;  //If two or more jets were found
-	if (n_bjets >= 2) two_or_more_bjets = true;  //If two or more bjets were found
-
-	// If the conditions are met, don't cut
-	if (two_leptons && two_or_more_jets && leptons_opposite_charges && two_or_more_bjets) return false; ///  && elec1_momentum  && elec1_eta  && elec0_momentum && elec0_eta
-	//Otherwise, cut
-	return true;	
-
-}
-
-//This function will generate variables, put them in a vector, and return said vector
+////////////////////////////////////////////////////////////////////////////////////////
+///--------------------- RELEVANT VARIABLE CALCULATION FUNCTION ---------------------///
+////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::GenerateVariables() {
 
 	//Invariant Mass
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
-	ljet_0_ljet_1_mass = InvariantMass(ljet_0_p4, ljet_1_p4);
+	ljet_0_ljet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
 	bjet_0_bjet_1_mass = InvariantMass(bjet_0_p4, bjet_1_p4);
 
 	//Delta R
@@ -327,7 +401,9 @@ void MC_Analysis::GenerateVariables() {
   
 }
 
-// This function will fill the histograms that need to be filled before cuts are made
+////////////////////////////////////////////////////////////////////////////////////////
+///------------- BEFORE VARIABLE CUT HISTOGRAM FILLING (PRE REGION) -----------------///
+////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::FillAllData_PreCut() {
 
 	if (weight_total_override) weight_total = 1;
@@ -355,17 +431,16 @@ void MC_Analysis::FillAllData_PreCut() {
 	h_pT_balance_PRE->Fill(pT_balance, final_weighting);
 
 	// pT balance 3 PRE
-	h_pT_balance_3_PRE->Fill(pT_balance, final_weighting);
+	h_pT_balance_3_PRE->Fill(pT_balance_3, final_weighting);
 
 	// Centrality
 	h_Centrality_PRE->Fill(Centrality, final_weighting);
 }
 
-void MC_Analysis::CutAndFill() {
-
-	if (weight_total_override) weight_total = 1;
-
-	//false means failed the cut, true means passed the cut
+////////////////////////////////////////////////////////////////////////////////////////
+///--------------------------- CUT FUNCTION CUT ON VARIABLES ------------------------///
+////////////////////////////////////////////////////////////////////////////////////////
+bool MC_Analysis::Cuts(string region) {
 
 	// Initialise common bool conditions
 	bool Z_mass_condition = false;
@@ -382,16 +457,16 @@ void MC_Analysis::CutAndFill() {
 	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4);
 
 	//Z Boson Mass Cut
-	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101 ) Z_mass_condition = true;	
+	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101) Z_mass_condition = true;	
 
 	//Dilepton Pt Cut
 	if (lep_0_lep_1_pt > 20) combined_lepton_pt = true;
 
-	//Leading Jet 1 (ljet_0) Cut Condition 
-	if (ljet_0_p4->Pt() > 55) ljet_0_pt_greater = true;
+	//Leading Jet 1 (ljet_0) Cut Condition
+	if (jet_0_p4->Pt() > 55) ljet_0_pt_greater = true;
 
 	//Leading Jet 2 (ljet_1) Cut Condition
-	if (ljet_1_p4->Pt() > 45) ljet_1_pt_greater = true;
+	if (jet_1_p4->Pt() > 45) ljet_1_pt_greater = true;
 
 	// Dijjet mass = Leading Jets Combined Invariant mass
 	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
@@ -404,160 +479,75 @@ void MC_Analysis::CutAndFill() {
 
 	//ptvarcone cuts
 	if (lep_0_iso_ptvarcone40 < 0.1) ptvarcone_40_0 = true; 
-	if (lep_1_iso_ptvarcone40 < 0.1) ptvarcone_40_1 = true; 
+	if (lep_1_iso_ptvarcone40 < 0.1) ptvarcone_40_1 = true;
 
-	//Initialise Common Cuts bool
-	bool common_cuts = false;
+	//If the region is an except region, make the relevant condition always true to see more of that histogram.
+	if (region == "EXCEPT_Z_mass_condition" && bjets_region == false) 		Z_mass_condition = true;
+	if (region == "EXCEPT_combined_lepton_pt" && bjets_region == false) 		combined_lepton_pt = true;
+	if (region == "EXCEPT_ljet_0_pt_greater" && bjets_region == false) 		ljet_0_pt_greater = true;
+	if (region == "EXCEPT_ljet_1_pt_greater" && bjets_region == false) 		ljet_1_pt_greater = true;
+	if (region == "EXCEPT_leading_jets_invariant_mass" && bjets_region == false) 	leading_jets_invariant_mass = true;
+	if (region == "EXCEPT_ptvarcone_40_0" && bjets_region == false) 		ptvarcone_40_0 = true;
+	if (region == "EXCEPT_ptvarcone_40_1" && bjets_region == false) 		ptvarcone_40_1 = true;
+	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) 		pT_balance_limit = true;
+	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) 		pT_balance_3_limit = true;
 
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition 
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1)			// ptvarcone_40_1 Cut
-	{
-	
+	bool common_cuts = false;	//The common cuts are false initially
+
+	//Work out if the common cuts are true here
+ 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1) {
 		common_cuts = true;
-
 	}
 
-	if(//Z_mass_condition && 		// Z Boson Mass Cut ABSENT
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition 
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
-	   rap_int_condition &&			// rapidity interval condition
-	   pT_balance_limit)			// pT balance limit
-	{
-	
-		h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);//Fill the EXCEPT histogram for mass
-
+	//If the region is the search region or an except region that isn't pt_balance (EW Z->ll enriched)
+	if ((region == "search" || (region.substr(0,6) == "EXCEPT" && region.substr(7,10) != "pT_balance")) && bjets_region == false) {
+		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   //combined_lepton_pt && 		// Dilepton Pt Cut ABSENT
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition 
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
-	   rap_int_condition &&			// rapidity interval condition
-	   pT_balance_limit)			// pT balance limit
-	{
-	
-		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);//Fill the EXCEPT histogram for combined lepton pt
-
+	//If the region is the except region for pt_balance (EW Z->ll enriched)
+	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) {
+		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   //ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition ABSENT
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
-	   rap_int_condition &&			// rapidity interval condition
-	   pT_balance_limit)			// pT balance limit
-	{
-	
-		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(), final_weighting);//Fill the EXCEPT histogram for ljet_0_pt
-
+	//If the region is the except region for pt_balance_3 (QCD enriched)
+	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) {
+		if(common_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
 	}
 
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
-	   //ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition ABSENT
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
-	   rap_int_condition &&			// rapidity interval condition
-	   pT_balance_limit)			// pT balance limit
-	{
-	
-		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(), final_weighting);//Fill the EXCEPT histogram for ljet_1_pt
-
+	//If the region is the control region (QCD enriched)
+	if (region == "control" && bjets_region == false) {
+		if(common_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
 	}
 
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   //leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass ABSENT
-	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
-	   rap_int_condition &&			// rapidity interval condition
-	   pT_balance_limit)			// pT balance limit
-	{
-	
-		h_ljet_0_ljet_1_mass_EXCEPT->Fill(ljet_0_ljet_1_mass, final_weighting);//Fill the EXCEPT histogram for leading jets combined invariant mass
-
+	//If the region is the bjet enriched region
+	if (region == "bjet" && bjets_region == true) {
+		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   //ptvarcone_40_0 && 			// ptvarcone_40_0 Cut ABSENT
-	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
-	   rap_int_condition &&			// rapidity interval condition
-	   pT_balance_limit)			// pT balance limit
-	{
+	return false;
 
-		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);
+}
 
-	}
+////////////////////////////////////////////////////////////////////////////////////////
+///-------- FILL FUNCTION TO FILLI HISTOGRAMS BELONGING TO DIFFERENT REGIONS --------///
+////////////////////////////////////////////////////////////////////////////////////////
+void MC_Analysis::Fill() {
 
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 &&			// ptvarcone_40_0 Cut
-	   //ptvarcone_40_1 && 			// ptvarcone_40_1 Cut ABSENT
-	   rap_int_condition &&			// rapidity interval condition
-	   pT_balance_limit)			// pT balance limit
-	{
-	
-		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);
+	if (weight_total_override) weight_total = 1;  //THIS VARIABLE MAY BE REDUNDANT
 
-	}
+	///----- EXCEPT region filling -----///
+	if (Cuts("EXCEPT_Z_mass_condition")) 		h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);	//Fill the EXCEPT histogram for mass
+	if (Cuts("EXCEPT_combined_lepton_pt")) 		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);		//Fill the EXCEPT histogram for combined lepton pt
+	if (Cuts("EXCEPT_ljet_0_pt_greater")) 		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(), final_weighting);		//Fill the EXCEPT histogram for ljet_0_pt
+	if (Cuts("EXCEPT_ljet_1_pt_greater")) 		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(), final_weighting);		//Fill the EXCEPT histogram for ljet_1_pt
+	if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_ljet_0_ljet_1_mass_EXCEPT->Fill(ljet_0_ljet_1_mass, final_weighting);	//Fill the EXCEPT histogram for leading jets combined invariant mass
+	if (Cuts("EXCEPT_ptvarcone_40_0")) 		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);
+	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);
+	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);
+	if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);
 
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 &&			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 && 			// ptvarcone_40_1 Cut
-	   rap_int_condition			// rapidity interval condition
-	   //pT_balance_limit)			// pT balance limit ABSENT
-	) {
-	
-		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);
-
-	}
-
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   ljet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition
-	   ljet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 &&			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 && 			// ptvarcone_40_1 Cut ABSENT
-	   !(rap_int_condition)			// rapidity interval condition
-	   //pT_balance_3_limit)		// pT balance 3 limit
-	) {
-	
-		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);
-
-	}
-
-	if (common_cuts && rap_int_condition && pT_balance_limit) {
+	///----- SEARCH region filling -----///
+	if (Cuts("search")) {
 
 		#include "_FillAllData_PostCut.h"
 
@@ -580,14 +570,15 @@ void MC_Analysis::CutAndFill() {
 		// pT balance
 		h_pT_balance->Fill(pT_balance, final_weighting);	
 
-		if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+		if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
 		// Centrality
 		h_Centrality->Fill(Centrality, final_weighting);
-
-	}
 	
-	else if (common_cuts && !(rap_int_condition) && pT_balance_3_limit) {
+	}
+
+	///----- CONTROL region filling -----///
+	if (Cuts("control")) {
 
 		#include "_FillAllData_ControlCut.h"
 
@@ -613,70 +604,9 @@ void MC_Analysis::CutAndFill() {
 		
 		// Centrality CONTROL
 		h_Centrality_CONTROL->Fill(Centrality, final_weighting);
-
 	}
 
-
-}
-
-void MC_Analysis::CutAndFill_bjet() {
-
-	if (weight_total_override) weight_total = 1;
-
-	//false means failed the cut, true means passed the cut
-
-	// Initialise common bool conditions
-	bool Z_mass_condition = false;
-	bool combined_lepton_pt = false;
-	bool bjet_0_pt_greater = false;
-	bool bjet_1_pt_greater = false;
-	bool leading_jets_invariant_mass = false;
-	bool ptvarcone_40_0 = false;
-	bool ptvarcone_40_1 = false;
-
-	//Initialise specific bool conditions
-	bool pT_balance_limit = false;
-
-	//Z Boson Mass Cut
-	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101 ) Z_mass_condition = true;	
-
-	//Dilepton Pt Cut
-	if (lep_0_lep_1_pt > 20) combined_lepton_pt = true;
-
-	//Leading Jet 1 (ljet_0) Cut Condition 
-	if (bjet_0_p4->Pt() > 55) bjet_0_pt_greater = true;
-
-	//Leading Jet 2 (ljet_1) Cut Condition
-	if (bjet_1_p4->Pt() > 45) bjet_1_pt_greater = true;
-
-	// Dijjet mass = Leading Jets Combined Invariant mass
-	if (bjet_0_bjet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
-
-	//pt balance limit Cut Condition
-	if (pT_balance < 0.15) pT_balance_limit = true;
-
-	//ptvarcone cuts
-	if (lep_0_iso_ptvarcone40 < 0.1) ptvarcone_40_0 = true; 
-	if (lep_1_iso_ptvarcone40 < 0.1) ptvarcone_40_1 = true; 
-
-	//Initialise Common Cuts bool
-	bool common_cuts = false;
-
-	if(Z_mass_condition && 			// Z Boson Mass Cut
-	   combined_lepton_pt && 		// Dilepton Pt Cut
-	   bjet_0_pt_greater && 		// Leading Jet 1 (ljet_0) Cut Condition 
-	   bjet_1_pt_greater && 		// Leading Jet 2 (ljet_1) Cut Condition
-	   leading_jets_invariant_mass && 	// Leading Jets Combined Invariant mass
-	   ptvarcone_40_0 && 			// ptvarcone_40_0 Cut
-	   ptvarcone_40_1 &&			// ptvarcone_40_1 Cut
-	   pT_balance_limit)			// pT balance limit)
-	{
-	
-		common_cuts = true;
-
-	}
-
-	if (common_cuts) {
+	if (Cuts("bjet")) {
 
 		#include "_FillAllData_BJET.h"
 

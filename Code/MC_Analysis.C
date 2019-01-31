@@ -152,18 +152,22 @@ void MC_Analysis::Loop() {
 	////////////////////////////////////////////////////////////
 
 	ParticleSelection();	//The particle selection function, selecting the desired particles
-	//if (n_bjets == 2) cout << endl << endl << n_bjets << endl << endl << endl;
-	//If there is no cut on events (bjet veto)
-	if (RegionSelector_bjetVeto() == false) {
-		JetSet("ljet");
+	if (InitialCut(false) == false) {
+		JetSet(false);
 		GenerateVariables();	//Generate all variables
 		FillAllData_PreCut();	//Fill all the pre-cut data
-		CutAndFill();		//Cut all the relevant events, and fill remaining
+		Fill();			//Fill all the post-cut data
+
+
+
 	}
-	else if (RegionSelector_bjetSelect() == false) {
-		JetSet("bjet");
+	else if (InitialCut(true) == false) {
+		JetSet(true);
 		GenerateVariables();	//Generate all variables
-		CutAndFill_bjet();	//Cut all the relevant events, and fill remaining
+		Fill();			//Fill all the post-cut data
+		//if (n_jets < n_bjets) cout << endl << endl << "LESS JETS THAN BJETS" << endl << endl;
+		//if (bjet_0_p4->Pt() < ljet_0_p4->Pt()) cout << endl << endl << "BJET PT LESS THAN LJET PT" << endl << endl;
+
 	}
 	
    }

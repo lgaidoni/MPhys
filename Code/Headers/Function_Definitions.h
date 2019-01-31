@@ -1,10 +1,9 @@
 	virtual void BookHistos();
-	virtual void JetSet(string JetSetType);
+	virtual void JetSet(bool bjets);
 	virtual void ParticleSelection();
-	virtual bool RegionSelector_bjetVeto();
-	virtual bool RegionSelector_bjetSelect();
+	virtual bool InitialCut(bool bjets);
 	virtual void GenerateVariables();
 	virtual void FillAllData_PreCut();
 	virtual void DrawHistos();
-	virtual void CutAndFill();
-	virtual void CutAndFill_bjet();
+	virtual bool Cuts(string region);
+	virtual void Fill();
