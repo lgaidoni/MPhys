@@ -41,6 +41,7 @@ public :
 	double final_weighting;
 	bool weight_total_override;
 	string desired_particles;
+	bool bjets_region;
 
 	/////----------LEPTON INFORMATION------------/////
 
@@ -64,6 +65,8 @@ public :
 
 	UInt_t		*jet_2;
 	TLorentzVector	*jet_2_p4;
+
+	/////-------------TEMPORARY TESTING VARIABLES----------/////
 
 
 // Fixed size dimensions of array or collections stored in the TTree if any.
