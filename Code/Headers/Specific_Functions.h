@@ -50,4 +50,13 @@ void All_Cross_Section_Calculation_QCD_EW_ll_Specific() {
 
 }
 
+void ThreadTest() {
+
+	thread thread_obj_1(Start_Sh221_PDF30_Zee2jets_Min_N_TChannel_Analysis, "Electron", "ee");
+	thread thread_obj_2(Start_Sh221_PDF30_Zee2jets_Min_N_TChannel_Analysis, "Muon", "mm");
+	thread_obj_1.join();
+	thread_obj_2.join();
+
+}
+
 #endif

@@ -153,24 +153,6 @@ void MC_Analysis::Book_lep_0_lep_1_pt(int bins, double min, double max) {
 }
 
 
-// -- True Combined transverse momentum of lepton 0 and lepton 1
-void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH_PRE(int bins, double min, double max) {
-	h_lep_0_lep_1_pt_TRUTH_PRE = new TH1F("h_lep_0_lep_1_pt_TRUTH_PRE", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH_CONTROL(int bins, double min, double max) {
-	h_lep_0_lep_1_pt_TRUTH_CONTROL = new TH1F("h_lep_0_lep_1_pt_TRUTH_CONTROL", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH_EXCEPT(int bins, double min, double max) {
-	h_lep_0_lep_1_pt_TRUTH_EXCEPT = new TH1F("h_lep_0_lep_1_pt_TRUTH_EXCEPT", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH_BJET(int bins, double min, double max) {
-	h_lep_0_lep_1_pt_TRUTH_BJET = new TH1F("h_lep_0_lep_1_pt_TRUTH_BJET", "", bins, min, max);
-}
-void MC_Analysis::Book_lep_0_lep_1_pt_TRUTH(int bins, double min, double max) {
-	h_lep_0_lep_1_pt_TRUTH = new TH1F("h_lep_0_lep_1_pt_TRUTH", "", bins, min, max);
-}
-
-
 // -- Isolation cone for the lepton 0, size 40
 void MC_Analysis::Book_lep_0_iso_ptvarcone40_PRE(int bins, double min, double max) {
 	h_lep_0_iso_ptvarcone40_PRE = new TH1F("h_lep_0_iso_ptvarcone40_PRE", "", bins, min, max);
@@ -209,39 +191,21 @@ void MC_Analysis::Book_lep_1_iso_ptvarcone40(int bins, double min, double max) {
 
 /// ------------------- JETS ---------------- ///
 
-// -- Invariant mass of two leading jets (leading and subleading) (light)
-void MC_Analysis::Book_ljet_0_ljet_1_mass_PRE(int bins, double min, double max) {
-	h_ljet_0_ljet_1_mass_PRE = new TH1F("h_ljet_0_ljet_1_mass_PRE", "", bins, min, max);
+// -- Invariant mass of two leading jets (leading and subleading)
+void MC_Analysis::Book_jet_0_jet_1_mass_PRE(int bins, double min, double max) {
+	h_jet_0_jet_1_mass_PRE = new TH1F("h_jet_0_jet_1_mass_PRE", "", bins, min, max);
 }
-void MC_Analysis::Book_ljet_0_ljet_1_mass_CONTROL(int bins, double min, double max) {
-	h_ljet_0_ljet_1_mass_CONTROL = new TH1F("h_ljet_0_ljet_1_mass_CONTROL", "", bins, min, max);
+void MC_Analysis::Book_jet_0_jet_1_mass_CONTROL(int bins, double min, double max) {
+	h_jet_0_jet_1_mass_CONTROL = new TH1F("h_jet_0_jet_1_mass_CONTROL", "", bins, min, max);
 }
-void MC_Analysis::Book_ljet_0_ljet_1_mass_EXCEPT(int bins, double min, double max) {
-	h_ljet_0_ljet_1_mass_EXCEPT = new TH1F("h_ljet_0_ljet_1_mass_EXCEPT", "", bins, min, max);
+void MC_Analysis::Book_jet_0_jet_1_mass_EXCEPT(int bins, double min, double max) {
+	h_jet_0_jet_1_mass_EXCEPT = new TH1F("h_jet_0_jet_1_mass_EXCEPT", "", bins, min, max);
 }
-void MC_Analysis::Book_ljet_0_ljet_1_mass_BJET(int bins, double min, double max) {
-	h_ljet_0_ljet_1_mass_BJET = new TH1F("h_ljet_0_ljet_1_mass_BJET", "", bins, min, max);
+void MC_Analysis::Book_jet_0_jet_1_mass_BJET(int bins, double min, double max) {
+	h_jet_0_jet_1_mass_BJET = new TH1F("h_jet_0_jet_1_mass_BJET", "", bins, min, max);
 }
-void MC_Analysis::Book_ljet_0_ljet_1_mass(int bins, double min, double max) {
-	h_ljet_0_ljet_1_mass = new TH1F("h_ljet_0_ljet_1_mass", "", bins, min, max);
-}
-
-
-// -- Invariant mass of two leading jets (leading and subleading) (bottom)
-void MC_Analysis::Book_bjet_0_bjet_1_mass_PRE(int bins, double min, double max) {
-	h_bjet_0_bjet_1_mass_PRE = new TH1F("h_bjet_0_bjet_1_mass_PRE", "", bins, min, max);
-}
-void MC_Analysis::Book_bjet_0_bjet_1_mass_CONTROL(int bins, double min, double max) {
-	h_bjet_0_bjet_1_mass_CONTROL = new TH1F("h_bjet_0_bjet_1_mass_CONTROL", "", bins, min, max);
-}
-void MC_Analysis::Book_bjet_0_bjet_1_mass_EXCEPT(int bins, double min, double max) {
-	h_bjet_0_bjet_1_mass_EXCEPT = new TH1F("h_bjet_0_bjet_1_mass_EXCEPT", "", bins, min, max);
-}
-void MC_Analysis::Book_bjet_0_bjet_1_mass_BJET(int bins, double min, double max) {
-	h_bjet_0_bjet_1_mass_BJET = new TH1F("h_bjet_0_bjet_1_mass_BJET", "", bins, min, max);
-}
-void MC_Analysis::Book_bjet_0_bjet_1_mass(int bins, double min, double max) {
-	h_bjet_0_bjet_1_mass = new TH1F("h_bjet_0_bjet_1_mass", "", bins, min, max);
+void MC_Analysis::Book_jet_0_jet_1_mass(int bins, double min, double max) {
+	h_jet_0_jet_1_mass = new TH1F("h_jet_0_jet_1_mass", "", bins, min, max);
 }
 
 

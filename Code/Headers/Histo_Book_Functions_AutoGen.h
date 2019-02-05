@@ -3546,3 +3546,486 @@ void MC_Analysis::Book_ljet_1_width_BJET(int bins, double min, double max) {
 	h_ljet_1_width_BJET = new TH1F("h_ljet_1_width_BJET", "", bins, min, max);
 }
 
+// ----- HISTOGRAM BOOKING FUNCTIONS FOR TLorentzVector met_reco_p4 ----- //
+	//Histogram booking function for met_reco_p4_X
+	void MC_Analysis::Book_met_reco_p4_X(int bins, double min, double max) {
+		h_met_reco_p4_X = new TH1F("h_met_reco_p4_X","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_X_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_X_CONTROL = new TH1F("h_met_reco_p4_X_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_X_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_X_EXCEPT = new TH1F("h_met_reco_p4_X_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_X_PRE(int bins, double min, double max) {
+		h_met_reco_p4_X_PRE = new TH1F("h_met_reco_p4_X_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_X_BJET(int bins, double min, double max) {
+		h_met_reco_p4_X_BJET = new TH1F("h_met_reco_p4_X_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Y
+	void MC_Analysis::Book_met_reco_p4_Y(int bins, double min, double max) {
+		h_met_reco_p4_Y = new TH1F("h_met_reco_p4_Y","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Y_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Y_CONTROL = new TH1F("h_met_reco_p4_Y_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Y_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Y_EXCEPT = new TH1F("h_met_reco_p4_Y_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Y_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Y_PRE = new TH1F("h_met_reco_p4_Y_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Y_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Y_BJET = new TH1F("h_met_reco_p4_Y_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Z
+	void MC_Analysis::Book_met_reco_p4_Z(int bins, double min, double max) {
+		h_met_reco_p4_Z = new TH1F("h_met_reco_p4_Z","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Z_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Z_CONTROL = new TH1F("h_met_reco_p4_Z_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Z_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Z_EXCEPT = new TH1F("h_met_reco_p4_Z_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Z_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Z_PRE = new TH1F("h_met_reco_p4_Z_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Z_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Z_BJET = new TH1F("h_met_reco_p4_Z_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_T
+	void MC_Analysis::Book_met_reco_p4_T(int bins, double min, double max) {
+		h_met_reco_p4_T = new TH1F("h_met_reco_p4_T","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_T_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_T_CONTROL = new TH1F("h_met_reco_p4_T_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_T_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_T_EXCEPT = new TH1F("h_met_reco_p4_T_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_T_PRE(int bins, double min, double max) {
+		h_met_reco_p4_T_PRE = new TH1F("h_met_reco_p4_T_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_T_BJET(int bins, double min, double max) {
+		h_met_reco_p4_T_BJET = new TH1F("h_met_reco_p4_T_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Px
+	void MC_Analysis::Book_met_reco_p4_Px(int bins, double min, double max) {
+		h_met_reco_p4_Px = new TH1F("h_met_reco_p4_Px","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Px_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Px_CONTROL = new TH1F("h_met_reco_p4_Px_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Px_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Px_EXCEPT = new TH1F("h_met_reco_p4_Px_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Px_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Px_PRE = new TH1F("h_met_reco_p4_Px_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Px_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Px_BJET = new TH1F("h_met_reco_p4_Px_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Py
+	void MC_Analysis::Book_met_reco_p4_Py(int bins, double min, double max) {
+		h_met_reco_p4_Py = new TH1F("h_met_reco_p4_Py","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Py_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Py_CONTROL = new TH1F("h_met_reco_p4_Py_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Py_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Py_EXCEPT = new TH1F("h_met_reco_p4_Py_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Py_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Py_PRE = new TH1F("h_met_reco_p4_Py_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Py_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Py_BJET = new TH1F("h_met_reco_p4_Py_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Pz
+	void MC_Analysis::Book_met_reco_p4_Pz(int bins, double min, double max) {
+		h_met_reco_p4_Pz = new TH1F("h_met_reco_p4_Pz","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Pz_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Pz_CONTROL = new TH1F("h_met_reco_p4_Pz_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Pz_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Pz_EXCEPT = new TH1F("h_met_reco_p4_Pz_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Pz_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Pz_PRE = new TH1F("h_met_reco_p4_Pz_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Pz_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Pz_BJET = new TH1F("h_met_reco_p4_Pz_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Energy
+	void MC_Analysis::Book_met_reco_p4_Energy(int bins, double min, double max) {
+		h_met_reco_p4_Energy = new TH1F("h_met_reco_p4_Energy","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Energy_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Energy_CONTROL = new TH1F("h_met_reco_p4_Energy_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Energy_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Energy_EXCEPT = new TH1F("h_met_reco_p4_Energy_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Energy_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Energy_PRE = new TH1F("h_met_reco_p4_Energy_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Energy_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Energy_BJET = new TH1F("h_met_reco_p4_Energy_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Theta
+	void MC_Analysis::Book_met_reco_p4_Theta(int bins, double min, double max) {
+		h_met_reco_p4_Theta = new TH1F("h_met_reco_p4_Theta","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Theta_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Theta_CONTROL = new TH1F("h_met_reco_p4_Theta_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Theta_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Theta_EXCEPT = new TH1F("h_met_reco_p4_Theta_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Theta_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Theta_PRE = new TH1F("h_met_reco_p4_Theta_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Theta_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Theta_BJET = new TH1F("h_met_reco_p4_Theta_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_CosTheta
+	void MC_Analysis::Book_met_reco_p4_CosTheta(int bins, double min, double max) {
+		h_met_reco_p4_CosTheta = new TH1F("h_met_reco_p4_CosTheta","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_CosTheta_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_CosTheta_CONTROL = new TH1F("h_met_reco_p4_CosTheta_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_CosTheta_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_CosTheta_EXCEPT = new TH1F("h_met_reco_p4_CosTheta_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_CosTheta_PRE(int bins, double min, double max) {
+		h_met_reco_p4_CosTheta_PRE = new TH1F("h_met_reco_p4_CosTheta_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_CosTheta_BJET(int bins, double min, double max) {
+		h_met_reco_p4_CosTheta_BJET = new TH1F("h_met_reco_p4_CosTheta_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Phi
+	void MC_Analysis::Book_met_reco_p4_Phi(int bins, double min, double max) {
+		h_met_reco_p4_Phi = new TH1F("h_met_reco_p4_Phi","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Phi_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Phi_CONTROL = new TH1F("h_met_reco_p4_Phi_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Phi_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Phi_EXCEPT = new TH1F("h_met_reco_p4_Phi_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Phi_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Phi_PRE = new TH1F("h_met_reco_p4_Phi_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Phi_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Phi_BJET = new TH1F("h_met_reco_p4_Phi_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Rho
+	void MC_Analysis::Book_met_reco_p4_Rho(int bins, double min, double max) {
+		h_met_reco_p4_Rho = new TH1F("h_met_reco_p4_Rho","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Rho_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Rho_CONTROL = new TH1F("h_met_reco_p4_Rho_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Rho_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Rho_EXCEPT = new TH1F("h_met_reco_p4_Rho_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Rho_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Rho_PRE = new TH1F("h_met_reco_p4_Rho_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Rho_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Rho_BJET = new TH1F("h_met_reco_p4_Rho_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Perp2
+	void MC_Analysis::Book_met_reco_p4_Perp2(int bins, double min, double max) {
+		h_met_reco_p4_Perp2 = new TH1F("h_met_reco_p4_Perp2","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Perp2_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Perp2_CONTROL = new TH1F("h_met_reco_p4_Perp2_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Perp2_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Perp2_EXCEPT = new TH1F("h_met_reco_p4_Perp2_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Perp2_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Perp2_PRE = new TH1F("h_met_reco_p4_Perp2_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Perp2_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Perp2_BJET = new TH1F("h_met_reco_p4_Perp2_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Pt
+	void MC_Analysis::Book_met_reco_p4_Pt(int bins, double min, double max) {
+		h_met_reco_p4_Pt = new TH1F("h_met_reco_p4_Pt","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Pt_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Pt_CONTROL = new TH1F("h_met_reco_p4_Pt_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Pt_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Pt_EXCEPT = new TH1F("h_met_reco_p4_Pt_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Pt_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Pt_PRE = new TH1F("h_met_reco_p4_Pt_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Pt_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Pt_BJET = new TH1F("h_met_reco_p4_Pt_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Perp
+	void MC_Analysis::Book_met_reco_p4_Perp(int bins, double min, double max) {
+		h_met_reco_p4_Perp = new TH1F("h_met_reco_p4_Perp","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Perp_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Perp_CONTROL = new TH1F("h_met_reco_p4_Perp_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Perp_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Perp_EXCEPT = new TH1F("h_met_reco_p4_Perp_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Perp_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Perp_PRE = new TH1F("h_met_reco_p4_Perp_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Perp_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Perp_BJET = new TH1F("h_met_reco_p4_Perp_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Et2
+	void MC_Analysis::Book_met_reco_p4_Et2(int bins, double min, double max) {
+		h_met_reco_p4_Et2 = new TH1F("h_met_reco_p4_Et2","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Et2_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Et2_CONTROL = new TH1F("h_met_reco_p4_Et2_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Et2_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Et2_EXCEPT = new TH1F("h_met_reco_p4_Et2_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Et2_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Et2_PRE = new TH1F("h_met_reco_p4_Et2_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Et2_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Et2_BJET = new TH1F("h_met_reco_p4_Et2_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Et
+	void MC_Analysis::Book_met_reco_p4_Et(int bins, double min, double max) {
+		h_met_reco_p4_Et = new TH1F("h_met_reco_p4_Et","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Et_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Et_CONTROL = new TH1F("h_met_reco_p4_Et_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Et_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Et_EXCEPT = new TH1F("h_met_reco_p4_Et_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Et_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Et_PRE = new TH1F("h_met_reco_p4_Et_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Et_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Et_BJET = new TH1F("h_met_reco_p4_Et_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Mag2
+	void MC_Analysis::Book_met_reco_p4_Mag2(int bins, double min, double max) {
+		h_met_reco_p4_Mag2 = new TH1F("h_met_reco_p4_Mag2","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mag2_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Mag2_CONTROL = new TH1F("h_met_reco_p4_Mag2_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mag2_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Mag2_EXCEPT = new TH1F("h_met_reco_p4_Mag2_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mag2_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Mag2_PRE = new TH1F("h_met_reco_p4_Mag2_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mag2_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Mag2_BJET = new TH1F("h_met_reco_p4_Mag2_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_M2
+	void MC_Analysis::Book_met_reco_p4_M2(int bins, double min, double max) {
+		h_met_reco_p4_M2 = new TH1F("h_met_reco_p4_M2","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_M2_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_M2_CONTROL = new TH1F("h_met_reco_p4_M2_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_M2_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_M2_EXCEPT = new TH1F("h_met_reco_p4_M2_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_M2_PRE(int bins, double min, double max) {
+		h_met_reco_p4_M2_PRE = new TH1F("h_met_reco_p4_M2_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_M2_BJET(int bins, double min, double max) {
+		h_met_reco_p4_M2_BJET = new TH1F("h_met_reco_p4_M2_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Mag
+	void MC_Analysis::Book_met_reco_p4_Mag(int bins, double min, double max) {
+		h_met_reco_p4_Mag = new TH1F("h_met_reco_p4_Mag","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mag_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Mag_CONTROL = new TH1F("h_met_reco_p4_Mag_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mag_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Mag_EXCEPT = new TH1F("h_met_reco_p4_Mag_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mag_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Mag_PRE = new TH1F("h_met_reco_p4_Mag_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mag_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Mag_BJET = new TH1F("h_met_reco_p4_Mag_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_M
+	void MC_Analysis::Book_met_reco_p4_M(int bins, double min, double max) {
+		h_met_reco_p4_M = new TH1F("h_met_reco_p4_M","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_M_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_M_CONTROL = new TH1F("h_met_reco_p4_M_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_M_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_M_EXCEPT = new TH1F("h_met_reco_p4_M_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_M_PRE(int bins, double min, double max) {
+		h_met_reco_p4_M_PRE = new TH1F("h_met_reco_p4_M_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_M_BJET(int bins, double min, double max) {
+		h_met_reco_p4_M_BJET = new TH1F("h_met_reco_p4_M_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Mt2
+	void MC_Analysis::Book_met_reco_p4_Mt2(int bins, double min, double max) {
+		h_met_reco_p4_Mt2 = new TH1F("h_met_reco_p4_Mt2","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mt2_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Mt2_CONTROL = new TH1F("h_met_reco_p4_Mt2_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mt2_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Mt2_EXCEPT = new TH1F("h_met_reco_p4_Mt2_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mt2_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Mt2_PRE = new TH1F("h_met_reco_p4_Mt2_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mt2_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Mt2_BJET = new TH1F("h_met_reco_p4_Mt2_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Mt
+	void MC_Analysis::Book_met_reco_p4_Mt(int bins, double min, double max) {
+		h_met_reco_p4_Mt = new TH1F("h_met_reco_p4_Mt","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mt_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Mt_CONTROL = new TH1F("h_met_reco_p4_Mt_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mt_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Mt_EXCEPT = new TH1F("h_met_reco_p4_Mt_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mt_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Mt_PRE = new TH1F("h_met_reco_p4_Mt_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Mt_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Mt_BJET = new TH1F("h_met_reco_p4_Mt_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Beta
+	void MC_Analysis::Book_met_reco_p4_Beta(int bins, double min, double max) {
+		h_met_reco_p4_Beta = new TH1F("h_met_reco_p4_Beta","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Beta_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Beta_CONTROL = new TH1F("h_met_reco_p4_Beta_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Beta_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Beta_EXCEPT = new TH1F("h_met_reco_p4_Beta_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Beta_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Beta_PRE = new TH1F("h_met_reco_p4_Beta_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Beta_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Beta_BJET = new TH1F("h_met_reco_p4_Beta_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Gamma
+	void MC_Analysis::Book_met_reco_p4_Gamma(int bins, double min, double max) {
+		h_met_reco_p4_Gamma = new TH1F("h_met_reco_p4_Gamma","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Gamma_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Gamma_CONTROL = new TH1F("h_met_reco_p4_Gamma_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Gamma_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Gamma_EXCEPT = new TH1F("h_met_reco_p4_Gamma_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Gamma_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Gamma_PRE = new TH1F("h_met_reco_p4_Gamma_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Gamma_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Gamma_BJET = new TH1F("h_met_reco_p4_Gamma_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Plus
+	void MC_Analysis::Book_met_reco_p4_Plus(int bins, double min, double max) {
+		h_met_reco_p4_Plus = new TH1F("h_met_reco_p4_Plus","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Plus_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Plus_CONTROL = new TH1F("h_met_reco_p4_Plus_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Plus_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Plus_EXCEPT = new TH1F("h_met_reco_p4_Plus_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Plus_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Plus_PRE = new TH1F("h_met_reco_p4_Plus_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Plus_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Plus_BJET = new TH1F("h_met_reco_p4_Plus_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Minus
+	void MC_Analysis::Book_met_reco_p4_Minus(int bins, double min, double max) {
+		h_met_reco_p4_Minus = new TH1F("h_met_reco_p4_Minus","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Minus_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Minus_CONTROL = new TH1F("h_met_reco_p4_Minus_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Minus_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Minus_EXCEPT = new TH1F("h_met_reco_p4_Minus_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Minus_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Minus_PRE = new TH1F("h_met_reco_p4_Minus_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Minus_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Minus_BJET = new TH1F("h_met_reco_p4_Minus_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Rapidity
+	void MC_Analysis::Book_met_reco_p4_Rapidity(int bins, double min, double max) {
+		h_met_reco_p4_Rapidity = new TH1F("h_met_reco_p4_Rapidity","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Rapidity_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Rapidity_CONTROL = new TH1F("h_met_reco_p4_Rapidity_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Rapidity_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Rapidity_EXCEPT = new TH1F("h_met_reco_p4_Rapidity_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Rapidity_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Rapidity_PRE = new TH1F("h_met_reco_p4_Rapidity_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Rapidity_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Rapidity_BJET = new TH1F("h_met_reco_p4_Rapidity_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_Eta
+	void MC_Analysis::Book_met_reco_p4_Eta(int bins, double min, double max) {
+		h_met_reco_p4_Eta = new TH1F("h_met_reco_p4_Eta","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Eta_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_Eta_CONTROL = new TH1F("h_met_reco_p4_Eta_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Eta_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_Eta_EXCEPT = new TH1F("h_met_reco_p4_Eta_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Eta_PRE(int bins, double min, double max) {
+		h_met_reco_p4_Eta_PRE = new TH1F("h_met_reco_p4_Eta_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_Eta_BJET(int bins, double min, double max) {
+		h_met_reco_p4_Eta_BJET = new TH1F("h_met_reco_p4_Eta_BJET","", bins, min, max);
+	}
+	//Histogram booking function for met_reco_p4_PseudoRapidity
+	void MC_Analysis::Book_met_reco_p4_PseudoRapidity(int bins, double min, double max) {
+		h_met_reco_p4_PseudoRapidity = new TH1F("h_met_reco_p4_PseudoRapidity","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_PseudoRapidity_CONTROL(int bins, double min, double max) {
+		h_met_reco_p4_PseudoRapidity_CONTROL = new TH1F("h_met_reco_p4_PseudoRapidity_CONTROL","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_PseudoRapidity_EXCEPT(int bins, double min, double max) {
+		h_met_reco_p4_PseudoRapidity_EXCEPT = new TH1F("h_met_reco_p4_PseudoRapidity_EXCEPT","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_PseudoRapidity_PRE(int bins, double min, double max) {
+		h_met_reco_p4_PseudoRapidity_PRE = new TH1F("h_met_reco_p4_PseudoRapidity_PRE","", bins, min, max);
+	}
+	void MC_Analysis::Book_met_reco_p4_PseudoRapidity_BJET(int bins, double min, double max) {
+		h_met_reco_p4_PseudoRapidity_BJET = new TH1F("h_met_reco_p4_PseudoRapidity_BJET","", bins, min, max);
+	}
+/// ----- END OF HISTOGRAM BOOKING FUNCTIONS FOR TLorentzVector met_reco_p4 ----- ///
+
