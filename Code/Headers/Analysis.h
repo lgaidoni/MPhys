@@ -32,6 +32,7 @@ void MC_Analysis::BookHistos() {
 	int pT_balance_Min = 0, pT_balance_Max = 1;
 	int pT_balance_3_Min = 0, pT_balance_3_Max = 1;
 	int Centrality_Min = -8, Centrality_Max = 8;
+	int MET_Centrality_Min = -8, MET_Centrality_Max = 8;
 	double RapidityDijet_Min = 0, RapidityDijet_Max = 4.5;
 	double RapidityDilepton_Min = 0, RapidityDilepton_Max = 4.5;
 	int lep_0_lep_1_mass_Min = 0, lep_0_lep_1_mass_Max = 200;
@@ -320,7 +321,7 @@ void MC_Analysis::GenerateVariables() {
 	//Final Weighting
 	final_weighting = Luminosity_Weight * weight_total;
 	
-	MET_Centrality = METCentrality(met_reco_p4, lep_0_4, lep_1_p4);
+	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
   
 }
 
@@ -358,6 +359,7 @@ void MC_Analysis::FillAllData_PreCut() {
 
 	// Centrality
 	h_Centrality_PRE->Fill(Centrality, final_weighting);
+	h_MET_Centrality_PRE->Fill(MET_Centrality, final_weighting);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -507,6 +509,7 @@ void MC_Analysis::Fill() {
 
 		// Centrality
 		h_Centrality->Fill(Centrality, final_weighting);
+		h_MET_Centrality->Fill(MET_Centrality, final_weighting);
 	
 	}
 
@@ -537,6 +540,7 @@ void MC_Analysis::Fill() {
 		
 		// Centrality CONTROL
 		h_Centrality_CONTROL->Fill(Centrality, final_weighting);
+		h_MET_Centrality_CONTROL->Fill(MET_Centrality, final_weighting);
 	}
 
 	if (Cuts("bjet")) {
@@ -566,6 +570,7 @@ void MC_Analysis::Fill() {
 
 		// Centrality
 		h_Centrality_BJET->Fill(Centrality, final_weighting);
+		h_MET_Centrality_BJET->Fill(MET_Centrality, final_weighting);
 
 	}
 
@@ -622,7 +627,9 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", "h_pT_balance_3", ";pT Balance 3;Events", 600, 400, false, "h_pT_balance_3_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 
 	// Centrality histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "\\Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality", ";Centrality;Events", 600, 400, false, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality", ";Centrality;Events", 600, 400, true, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET_Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", "h_MET_Centrality", ";MET_Centrality;Events", 600, 400, true, "h_MET_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+
 
 	//BJET GRAPHS
 	DrawHistogram_Quiet(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", "h_lep_1_iso_ptvarcone40_BJET", ";;Events", 600, 400, false, "h_lep_1_iso_ptvarcone40_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
@@ -635,6 +642,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_Quiet(h_DeltaR_BJET, "h_DeltaR_BJET", "h_DeltaR_BJET", ";;Events", 600, 400, false, "h_DeltaR_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_pT_balance_BJET, "h_pT_balance_BJET", "h_pT_balance_BJET", ";;Events", 600, 400, false, "h_pT_balance_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_Centrality_BJET, "h_Centrality_BJET", "h_Centrality_BJET", ";;Events", 600, 400, false, "h_Centrality_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", "h_MET_Centrality_BJET", ";;Events", 600, 400, false, "h_MET_Centrality_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 
 	Histograms->Close();
 

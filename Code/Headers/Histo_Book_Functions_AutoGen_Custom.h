@@ -245,4 +245,24 @@ void MC_Analysis::Book_jet_1_p4_Pt(int bins, double min, double max) {
 }
 
 
+/// ------------------- MISSINGENERGY ---------------- ///
+
+// -- MET_Centrality
+void MC_Analysis::Book_MET_Centrality_PRE(int bins, double min, double max) {
+	h_MET_Centrality_PRE = new TH1F("h_MET_Centrality_PRE", "", bins, min, max);
+}
+void MC_Analysis::Book_MET_Centrality_CONTROL(int bins, double min, double max) {
+	h_MET_Centrality_CONTROL = new TH1F("h_MET_Centrality_CONTROL", "", bins, min, max);
+}
+void MC_Analysis::Book_MET_Centrality_EXCEPT(int bins, double min, double max) {
+	h_MET_Centrality_EXCEPT = new TH1F("h_MET_Centrality_EXCEPT", "", bins, min, max);
+}
+void MC_Analysis::Book_MET_Centrality_BJET(int bins, double min, double max) {
+	h_MET_Centrality_BJET = new TH1F("h_MET_Centrality_BJET", "", bins, min, max);
+}
+void MC_Analysis::Book_MET_Centrality(int bins, double min, double max) {
+	h_MET_Centrality = new TH1F("h_MET_Centrality", "", bins, min, max);
+}
+
+
 #endif

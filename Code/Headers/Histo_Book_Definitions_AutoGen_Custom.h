@@ -258,4 +258,25 @@ virtual void Book_jet_1_p4_Pt_BJET(int bins, double min, double max); // BJET VE
 TH1F	*h_jet_1_p4_Pt_BJET; // BJET VERSION
 
 
+/// ------------------- MISSINGENERGY ---------------- ///
+
+// -- MET_Centrality
+double MET_Centrality;
+
+virtual void Book_MET_Centrality_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_MET_Centrality_PRE; // PRE VERSION
+
+virtual void Book_MET_Centrality_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_MET_Centrality_CONTROL; // CONTROL VERSION
+
+virtual void Book_MET_Centrality_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_MET_Centrality_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_MET_Centrality(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_MET_Centrality; // SEARCH VERSION
+
+virtual void Book_MET_Centrality_BJET(int bins, double min, double max); // BJET VERSION
+TH1F	*h_MET_Centrality_BJET; // BJET VERSION
+
+
 #endif

@@ -229,3 +229,10 @@
 	Book_jet_1_p4_Pt_BJET(bins, jet_1_p4_Pt_Min, jet_1_p4_Pt_Max);
 	Book_jet_1_p4_Pt_PRE(bins, jet_1_p4_Pt_Min, jet_1_p4_Pt_Max);
 
+	//Histogram Bookings for MET_Centrality
+	Book_MET_Centrality(bins, MET_Centrality_Min, MET_Centrality_Max);
+	Book_MET_Centrality_CONTROL(bins, MET_Centrality_Min, MET_Centrality_Max);
+	Book_MET_Centrality_EXCEPT(bins, MET_Centrality_Min, MET_Centrality_Max);
+	Book_MET_Centrality_BJET(bins, MET_Centrality_Min, MET_Centrality_Max);
+	Book_MET_Centrality_PRE(bins, MET_Centrality_Min, MET_Centrality_Max);
+
