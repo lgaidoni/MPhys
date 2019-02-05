@@ -373,7 +373,7 @@ void MC_Analysis::GenerateVariables() {
 	//Invariant Mass
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
 	ljet_0_ljet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
-	bjet_0_bjet_1_mass = InvariantMass(bjet_0_p4, bjet_1_p4);
+	bjet_0_bjet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
 
 	//Delta R
 	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);

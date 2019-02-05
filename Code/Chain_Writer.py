@@ -163,6 +163,19 @@ for line in mc_locations:
 		except:
 			print("../../Output-Files/Muon/" + name + " Already Exists")
 
+		try:
+			os.makedirs("../../Output-Files/MuonTau/" + name)
+			print("../../Output-Files/MuonTau/" + name + " Created")
+		except:
+			print("../../Output-Files/MuonTau/" + name + " Already Exists")
+
+		try:
+			os.makedirs("../../Output-Files/ElectronTau/" + name)
+			print("../../Output-Files/ElectronTau/" + name + " Created")
+		except:
+			print("../../Output-Files/ElectronTau/" + name + " Already Exists")
+
+
 	elif line[0:2] == "@@":
 		ID = line[2:len(line)-1]
 		chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
