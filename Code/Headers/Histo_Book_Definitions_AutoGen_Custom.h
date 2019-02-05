@@ -258,4 +258,63 @@ virtual void Book_jet_1_p4_Pt_BJET(int bins, double min, double max); // BJET VE
 TH1F	*h_jet_1_p4_Pt_BJET; // BJET VERSION
 
 
+/// ------------------- MISSINGENERGY ---------------- ///
+
+// -- Missing transversE Momentum centrality
+double MET_Centrality;
+
+virtual void Book_MET_Centrality_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_MET_Centrality_PRE; // PRE VERSION
+
+virtual void Book_MET_Centrality_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_MET_Centrality_CONTROL; // CONTROL VERSION
+
+virtual void Book_MET_Centrality_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_MET_Centrality_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_MET_Centrality(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_MET_Centrality; // SEARCH VERSION
+
+virtual void Book_MET_Centrality_BJET(int bins, double min, double max); // BJET VERSION
+TH1F	*h_MET_Centrality_BJET; // BJET VERSION
+
+
+// -- total unit vector of transverse momentum
+double TOT_pT_UnitVector;
+
+virtual void Book_TOT_pT_UnitVector_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_TOT_pT_UnitVector_PRE; // PRE VERSION
+
+virtual void Book_TOT_pT_UnitVector_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_TOT_pT_UnitVector_CONTROL; // CONTROL VERSION
+
+virtual void Book_TOT_pT_UnitVector_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_TOT_pT_UnitVector_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_TOT_pT_UnitVector(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_TOT_pT_UnitVector; // SEARCH VERSION
+
+virtual void Book_TOT_pT_UnitVector_BJET(int bins, double min, double max); // BJET VERSION
+TH1F	*h_TOT_pT_UnitVector_BJET; // BJET VERSION
+
+
+// -- unit vector of MET
+double MET_UnitVector;
+
+virtual void Book_MET_UnitVector_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_MET_UnitVector_PRE; // PRE VERSION
+
+virtual void Book_MET_UnitVector_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_MET_UnitVector_CONTROL; // CONTROL VERSION
+
+virtual void Book_MET_UnitVector_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_MET_UnitVector_EXCEPT; // EXCEPT VERSION
+
+virtual void Book_MET_UnitVector(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_MET_UnitVector; // SEARCH VERSION
+
+virtual void Book_MET_UnitVector_BJET(int bins, double min, double max); // BJET VERSION
+TH1F	*h_MET_UnitVector_BJET; // BJET VERSION
+
+
 #endif
