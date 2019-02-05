@@ -413,6 +413,13 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) 		pT_balance_limit = true;
 	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) 		pT_balance_3_limit = true;
 
+	//THIS IS HERE FOR THE FUTURE WHEN REMOVAL OF PT BALANCE FROM tau SELECTIONS IS NECESSARY
+	/*
+	if (region == "search" && (desired_particles != "ee" || desired_particles != "mm")) { pT_balance_limit = true; pT_balance_limit_3 = true; }
+	*/
+
+	if (region == "bjet" ) Z_mass_condition = true;
+
 	bool common_cuts = false;	//The common cuts are false initially
 
 	//Work out if the common cuts are true here
