@@ -87,6 +87,9 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_BJET, \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_BJET_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n\n")
 
+def AnalysisAutoGen_Custom(InputName, DesiredName, Units):
+	_BookHistos.write("\tBook_" + line[0:colonPos] + "(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
+
 for line in MC_Analysis:
 
 	#Here the files have their relevant information written
@@ -320,6 +323,8 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "(int bins, double min, double max) {\n")
 		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + " = new TH1F(\"h_" + line[0:colonPos] + "\", \"\", bins, min, max);\n")
 		Histo_Custom_Book_Functions.write("}\n\n\n")
+
+		
 
 
 #Header Endings for C++ headers
