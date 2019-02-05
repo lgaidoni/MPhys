@@ -968,9 +968,9 @@ double METCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 
 	double Emiss_Phi = Vector1->Phi();
 	double tauproduct1_Phi = Vector2->Phi();
-	double tauproduct_Phi = Vector3->Phi();	
+	double tauproduct2_Phi = Vector3->Phi();	
 
-	double sum1 = Z_Phi - (tauproduct1_Phi + tauproduct2_Phi)/2; // sum 1 to break things up
+	double sum1 = Emiss_Phi - (tauproduct1_Phi + tauproduct2_Phi)/2; // sum 1 to break things up
 
 	// calculate Centrality
 	double Centrality = sum1/DeltaPhi(Vector2, Vector3);
