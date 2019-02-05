@@ -236,3 +236,16 @@
 	Book_MET_Centrality_BJET(bins, MET_Centrality_Min, MET_Centrality_Max);
 	Book_MET_Centrality_PRE(bins, MET_Centrality_Min, MET_Centrality_Max);
 
+	//Histogram Bookings for TOT_pT_UnitVector
+	Book_TOT_pT_UnitVector(bins, TOT_pT_UnitVector_Min, TOT_pT_UnitVector_Max);
+	Book_TOT_pT_UnitVector_CONTROL(bins, TOT_pT_UnitVector_Min, TOT_pT_UnitVector_Max);
+	Book_TOT_pT_UnitVector_EXCEPT(bins, TOT_pT_UnitVector_Min, TOT_pT_UnitVector_Max);
+	Book_TOT_pT_UnitVector_BJET(bins, TOT_pT_UnitVector_Min, TOT_pT_UnitVector_Max);
+	Book_TOT_pT_UnitVector_PRE(bins, TOT_pT_UnitVector_Min, TOT_pT_UnitVector_Max);
+
+	//Histogram Bookings for MET_UnitVector
+	Book_MET_UnitVector(bins, MET_UnitVector_Min, MET_UnitVector_Max);
+	Book_MET_UnitVector_CONTROL(bins, MET_UnitVector_Min, MET_UnitVector_Max);
+	Book_MET_UnitVector_EXCEPT(bins, MET_UnitVector_Min, MET_UnitVector_Max);
+	Book_MET_UnitVector_BJET(bins, MET_UnitVector_Min, MET_UnitVector_Max);
+	Book_MET_UnitVector_PRE(bins, MET_UnitVector_Min, MET_UnitVector_Max);

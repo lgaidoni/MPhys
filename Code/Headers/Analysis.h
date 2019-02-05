@@ -42,6 +42,9 @@ void MC_Analysis::BookHistos() {
 	int jet_0_jet_1_mass_Min = 0,  jet_0_jet_1_mass_Max = 4500;
 	int jet_0_p4_Pt_Min = 0,  jet_0_p4_Pt_Max = 1000;
 	int jet_1_p4_Pt_Min = 0,  jet_1_p4_Pt_Max = 1000;
+	int MET_Centrality_Min = -8, MET_Centrality_Max = 8;
+	int TOT_pT_UnitVector_Min = 0, TOT_pT_UnitVector_Max = 1000;
+	int MET_UnitVector_Min = 0, MET_UnitVector_Max = 1000;
 
 	/////----------------------------------BOOKINGS------------------------------------/////
 
@@ -322,7 +325,11 @@ void MC_Analysis::GenerateVariables() {
 	final_weighting = Luminosity_Weight * weight_total;
 	
 	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
-  
+
+	TOT_pT_UnitVector = TOTpTUnitVector(lep_0_p4);
+
+	MET_UnitVector = METUnitVector(lep_0_p4, lep_1_p4);
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
