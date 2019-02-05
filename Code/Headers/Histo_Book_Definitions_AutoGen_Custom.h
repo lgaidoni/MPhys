@@ -278,7 +278,6 @@ TH1F	*h_MET_Centrality; // SEARCH VERSION
 virtual void Book_MET_Centrality_BJET(int bins, double min, double max); // BJET VERSION
 TH1F	*h_MET_Centrality_BJET; // BJET VERSION
 
-
 // -- total unit vector of transverse momentum
 double TOT_pT_UnitVector;
 
@@ -315,6 +314,5 @@ TH1F	*h_MET_UnitVector; // SEARCH VERSION
 
 virtual void Book_MET_UnitVector_BJET(int bins, double min, double max); // BJET VERSION
 TH1F	*h_MET_UnitVector_BJET; // BJET VERSION
-
 
 #endif

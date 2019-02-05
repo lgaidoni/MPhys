@@ -264,7 +264,6 @@ void MC_Analysis::Book_MET_Centrality(int bins, double min, double max) {
 	h_MET_Centrality = new TH1F("h_MET_Centrality", "", bins, min, max);
 }
 
-
 // -- total unit vector of transverse momentum
 void MC_Analysis::Book_TOT_pT_UnitVector_PRE(int bins, double min, double max) {
 	h_TOT_pT_UnitVector_PRE = new TH1F("h_TOT_pT_UnitVector_PRE", "", bins, min, max);
@@ -299,6 +298,5 @@ void MC_Analysis::Book_MET_UnitVector_BJET(int bins, double min, double max) {
 void MC_Analysis::Book_MET_UnitVector(int bins, double min, double max) {
 	h_MET_UnitVector = new TH1F("h_MET_UnitVector", "", bins, min, max);
 }
-
 
 #endif
