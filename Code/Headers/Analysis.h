@@ -320,7 +320,7 @@ void MC_Analysis::GenerateVariables() {
 	//Final Weighting
 	final_weighting = Luminosity_Weight * weight_total;
 	
-	MET_Centrality = METCentrality();
+	MET_Centrality = METCentrality(met_reco_p4, lep_0_4, lep_1_p4);
   
 }
 
@@ -363,6 +363,9 @@ void MC_Analysis::FillAllData_PreCut() {
 ////////////////////////////////////////////////////////////////////////////////////////
 ///--------------------------- CUT FUNCTION CUT ON VARIABLES ------------------------///
 ////////////////////////////////////////////////////////////////////////////////////////
+// NOTES
+// Missing energy 'Phi Interval Check' will go in eventually but has not yet been implemented
+
 bool MC_Analysis::Cuts(string region) {
 
 	// Initialise common bool conditions
