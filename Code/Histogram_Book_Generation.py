@@ -61,7 +61,7 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_CONTROL(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_EXCEPT(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
-		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_PRE(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n\n")
+		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_PRE(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "_BJET(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n\n")
 
 		#To fill the _FillAllData_PreCut Function inside SOMETHING_Analysis.h
@@ -84,11 +84,16 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 		_DrawHistos.write("\t//Histogram Draw (Quiet) Functions for " + leafName + "_" + TLorentzName + "\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + ", \"h_" + leafName + "_" + TLorentzName + "\", \"h_" + leafName + "_" + TLorentzName + "\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_PRE, \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_PRE_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n")
-		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n\n")
+		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_CONTROL_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n")
 		_DrawHistos.write("\tDrawHistogram_Quiet(h_" + leafName + "_" + TLorentzName + "_BJET, \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"" + Units + "\", 600, 400, false, \"h_" + leafName + "_" + TLorentzName + "_BJET_\" + ChainName + \".pdf\", ChainName, AnalysisType);\n\n")
 
-def AnalysisAutoGen_Custom(InputName, DesiredName, Units):
-	_BookHistos.write("\tBook_" + line[0:colonPos] + "(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n")
+def AnalysisAutoGen_Custom(name):
+	_BookHistos.write("\t//Histogram Bookings for " + name + "\n")
+	_BookHistos.write("\tBook_" + name + "(bins, " + name + "_Min, " + name + "_Max);\n")
+	_BookHistos.write("\tBook_" + name + "_CONTROL(bins, " + name + "_Min, " + name + "_Max);\n")
+	_BookHistos.write("\tBook_" + name + "_EXCEPT(bins, " + name + "_Min, " + name + "_Max);\n")
+	_BookHistos.write("\tBook_" + name + "_BJET(bins, " + name + "_Min, " + name + "_Max);\n")
+	_BookHistos.write("\tBook_" + name + "_PRE(bins, " + name + "_Min, " + name + "_Max);\n\n")
 
 for line in MC_Analysis:
 
@@ -97,7 +102,7 @@ for line in MC_Analysis:
 
 		if line.find("matched") != -1 or line.find("truth") != -1:
 			value = 1
-		elif line.find("ljet_0") != -1 or line.find("ljet_1") != -1 or line.find("bjet_0") != -1 or line.find("bjet_1") != -1:
+		elif line.find("ljet_0") != -1 or line.find("ljet_1") != -1 or line.find("bjet_0") != -1 or line.find("bjet_1") != -1 or line.find("met_reco_p4") != -1:
 			#If the leaf is a TLorentzVector
 			if line[3:17] == "TLorentzVector":
 
@@ -324,7 +329,7 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + " = new TH1F(\"h_" + line[0:colonPos] + "\", \"\", bins, min, max);\n")
 		Histo_Custom_Book_Functions.write("}\n\n\n")
 
-		
+		AnalysisAutoGen_Custom(line[0:colonPos])
 
 
 #Header Endings for C++ headers

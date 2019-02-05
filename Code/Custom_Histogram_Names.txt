@@ -10,11 +10,9 @@ RapidityDilepton:Rapidity of a dilepton pair
 ##LEPTONS
 lep_0_lep_1_mass:Invariant mass of lepton 0 and lepton 1
 lep_0_lep_1_pt:Combined transverse momentum of lepton 0 and lepton 1
-lep_0_lep_1_pt_TRUTH:True Combined transverse momentum of lepton 0 and lepton 1
 lep_0_iso_ptvarcone40:Isolation cone for the lepton 0, size 40
 lep_1_iso_ptvarcone40:Isolation cone for the lepton 1, size 40
 ##JETS
-ljet_0_ljet_1_mass:Invariant mass of two leading jets (leading and subleading) (light)
-bjet_0_bjet_1_mass:Invariant mass of two leading jets (leading and subleading) (bottom)
+jet_0_jet_1_mass:Invariant mass of two leading jets (leading and subleading)
 jet_0_p4_Pt:Leading jet transverse momentum
 jet_1_p4_Pt:Subleading jet transverse momentum

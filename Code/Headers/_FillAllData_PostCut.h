@@ -46,3 +46,15 @@
 	//Post-Cut Histogram Filling for ljet_1_p4_Eta
 	h_ljet_1_p4_Eta->Fill(ljet_1_p4->Eta(), final_weighting);
 
+	//Post-Cut Histogram Filling for met_reco_p4_Phi
+	h_met_reco_p4_Phi->Fill(met_reco_p4->Phi(), final_weighting);
+
+	//Post-Cut Histogram Filling for met_reco_p4_Pt
+	h_met_reco_p4_Pt->Fill(met_reco_p4->Pt(), final_weighting);
+
+	//Post-Cut Histogram Filling for met_reco_p4_Rapidity
+	h_met_reco_p4_Rapidity->Fill(met_reco_p4->Rapidity(), final_weighting);
+
+	//Post-Cut Histogram Filling for met_reco_p4_Eta
+	h_met_reco_p4_Eta->Fill(met_reco_p4->Eta(), final_weighting);
+

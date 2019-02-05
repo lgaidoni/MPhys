@@ -161,25 +161,6 @@ virtual void Book_lep_0_lep_1_pt_BJET(int bins, double min, double max); // BJET
 TH1F	*h_lep_0_lep_1_pt_BJET; // BJET VERSION
 
 
-// -- True Combined transverse momentum of lepton 0 and lepton 1
-double lep_0_lep_1_pt_TRUTH;
-
-virtual void Book_lep_0_lep_1_pt_TRUTH_PRE(int bins, double min, double max); // PRE VERSION
-TH1F	*h_lep_0_lep_1_pt_TRUTH_PRE; // PRE VERSION
-
-virtual void Book_lep_0_lep_1_pt_TRUTH_CONTROL(int bins, double min, double max); // CONTROL VERSION
-TH1F	*h_lep_0_lep_1_pt_TRUTH_CONTROL; // CONTROL VERSION
-
-virtual void Book_lep_0_lep_1_pt_TRUTH_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
-TH1F	*h_lep_0_lep_1_pt_TRUTH_EXCEPT; // EXCEPT VERSION
-
-virtual void Book_lep_0_lep_1_pt_TRUTH(int bins, double min, double max); // SEARCH VERSION
-TH1F	*h_lep_0_lep_1_pt_TRUTH; // SEARCH VERSION
-
-virtual void Book_lep_0_lep_1_pt_TRUTH_BJET(int bins, double min, double max); // BJET VERSION
-TH1F	*h_lep_0_lep_1_pt_TRUTH_BJET; // BJET VERSION
-
-
 // -- Isolation cone for the lepton 0, size 40
 double lep_0_iso_ptvarcone40;
 
@@ -220,42 +201,23 @@ TH1F	*h_lep_1_iso_ptvarcone40_BJET; // BJET VERSION
 
 /// ------------------- JETS ---------------- ///
 
-// -- Invariant mass of two leading jets (leading and subleading) (light)
-double ljet_0_ljet_1_mass;
+// -- Invariant mass of two leading jets (leading and subleading)
+double jet_0_jet_1_mass;
 
-virtual void Book_ljet_0_ljet_1_mass_PRE(int bins, double min, double max); // PRE VERSION
-TH1F	*h_ljet_0_ljet_1_mass_PRE; // PRE VERSION
+virtual void Book_jet_0_jet_1_mass_PRE(int bins, double min, double max); // PRE VERSION
+TH1F	*h_jet_0_jet_1_mass_PRE; // PRE VERSION
 
-virtual void Book_ljet_0_ljet_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
-TH1F	*h_ljet_0_ljet_1_mass_CONTROL; // CONTROL VERSION
+virtual void Book_jet_0_jet_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
+TH1F	*h_jet_0_jet_1_mass_CONTROL; // CONTROL VERSION
 
-virtual void Book_ljet_0_ljet_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
-TH1F	*h_ljet_0_ljet_1_mass_EXCEPT; // EXCEPT VERSION
+virtual void Book_jet_0_jet_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
+TH1F	*h_jet_0_jet_1_mass_EXCEPT; // EXCEPT VERSION
 
-virtual void Book_ljet_0_ljet_1_mass(int bins, double min, double max); // SEARCH VERSION
-TH1F	*h_ljet_0_ljet_1_mass; // SEARCH VERSION
+virtual void Book_jet_0_jet_1_mass(int bins, double min, double max); // SEARCH VERSION
+TH1F	*h_jet_0_jet_1_mass; // SEARCH VERSION
 
-virtual void Book_ljet_0_ljet_1_mass_BJET(int bins, double min, double max); // BJET VERSION
-TH1F	*h_ljet_0_ljet_1_mass_BJET; // BJET VERSION
-
-
-// -- Invariant mass of two leading jets (leading and subleading) (bottom)
-double bjet_0_bjet_1_mass;
-
-virtual void Book_bjet_0_bjet_1_mass_PRE(int bins, double min, double max); // PRE VERSION
-TH1F	*h_bjet_0_bjet_1_mass_PRE; // PRE VERSION
-
-virtual void Book_bjet_0_bjet_1_mass_CONTROL(int bins, double min, double max); // CONTROL VERSION
-TH1F	*h_bjet_0_bjet_1_mass_CONTROL; // CONTROL VERSION
-
-virtual void Book_bjet_0_bjet_1_mass_EXCEPT(int bins, double min, double max); // EXCEPT VERSION
-TH1F	*h_bjet_0_bjet_1_mass_EXCEPT; // EXCEPT VERSION
-
-virtual void Book_bjet_0_bjet_1_mass(int bins, double min, double max); // SEARCH VERSION
-TH1F	*h_bjet_0_bjet_1_mass; // SEARCH VERSION
-
-virtual void Book_bjet_0_bjet_1_mass_BJET(int bins, double min, double max); // BJET VERSION
-TH1F	*h_bjet_0_bjet_1_mass_BJET; // BJET VERSION
+virtual void Book_jet_0_jet_1_mass_BJET(int bins, double min, double max); // BJET VERSION
+TH1F	*h_jet_0_jet_1_mass_BJET; // BJET VERSION
 
 
 // -- Leading jet transverse momentum

@@ -112,9 +112,31 @@ counter = 0
 
 try:
 	os.makedirs("../../Root-Files/Electron/Processes")
+except:
+	value = 1
+
+try:
 	os.makedirs("../../Root-Files/ElectronMuon/Processes")
+except:
+	value = 1
+
+try:
 	os.makedirs("../../Root-Files/Muon/Processes")
+except:
+	value = 1
+
+try:
 	os.makedirs("../../Root-Files/Tau/Processes")
+except:
+	value = 1
+
+try:
+	os.makedirs("../../Root-Files/ElectronTau/Processes")
+except:
+	value = 1
+
+try:
+	os.makedirs("../../Root-Files/MuonTau/Processes")
 except:
 	value = 1
 
@@ -175,7 +197,6 @@ for line in mc_locations:
 		except:
 			print("../../Output-Files/ElectronTau/" + name + " Already Exists")
 
-
 	elif line[0:2] == "@@":
 		ID = line[2:len(line)-1]
 		chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
@@ -229,6 +250,18 @@ try:
 except:
 	print("../../Output-Files/Tau/DATA Exists")
 
+try:
+	os.makedirs("../../Output-Files/ElectronTau/DATA")
+	print("../../Output-Files/ElectronTau/DATA Created")
+except:
+	print("../../Output-Files/ElectronTau/DATA Exists")
+
+try:
+	os.makedirs("../../Output-Files/MuonTau/DATA")
+	print("../../Output-Files/MuonTau/DATA Created")
+except:
+	print("../../Output-Files/MuonTau/DATA Exists")
+
 run_all_analyses_writer_centre(run_all_analyses, "DATA")
 
 chain_functions.write("//Chain Return function for DATA\n")
@@ -259,6 +292,8 @@ process_chains_writer("Electron")
 process_chains_writer("ElectronMuon")
 process_chains_writer("Muon")
 process_chains_writer("Tau")
+process_chains_writer("ElectronTau")
+process_chains_writer("MuonTau")
 
 chain_functions.write("#endif")
 

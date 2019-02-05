@@ -27,102 +27,24 @@ void MC_Analysis::BookHistos() {
 	int EtaMin = -4;
 	int EtaMax = 4;
 
+	//Values for the automatically generated custom histograms
+	int DeltaR_Min = 0, DeltaR_Max = 10;
+	int pT_balance_Min = 0, pT_balance_Max = 1;
+	int pT_balance_3_Min = 0, pT_balance_3_Max = 1;
+	int Centrality_Min = -8, Centrality_Max = 8;
+	double RapidityDijet_Min = 0, RapidityDijet_Max = 4.5;
+	double RapidityDilepton_Min = 0, RapidityDilepton_Max = 4.5;
+	int lep_0_lep_1_mass_Min = 0, lep_0_lep_1_mass_Max = 200;
+	int lep_0_lep_1_pt_Min = 0, lep_0_lep_1_pt_Max = 300;
+	int lep_0_iso_ptvarcone40_Min = 0, lep_0_iso_ptvarcone40_Max = 20000;
+	int lep_1_iso_ptvarcone40_Min = 0, lep_1_iso_ptvarcone40_Max = 20000;
+	int jet_0_jet_1_mass_Min = 0,  jet_0_jet_1_mass_Max = 4500;
+	int jet_0_p4_Pt_Min = 0,  jet_0_p4_Pt_Max = 1000;
+	int jet_1_p4_Pt_Min = 0,  jet_1_p4_Pt_Max = 1000;
+
 	/////----------------------------------BOOKINGS------------------------------------/////
 
 	#include "_BookHistos.h"
-
-	///------------------------------------ lep_0 --------------------------------------///
-	//ptvar cone histograms
-	Book_lep_0_iso_ptvarcone40(bins, 0, 20000);
-	Book_lep_0_iso_ptvarcone40_PRE(bins, 0, 20000);
-	Book_lep_0_iso_ptvarcone40_CONTROL(bins, 0, 20000);
-	Book_lep_0_iso_ptvarcone40_EXCEPT(bins, 0, 20000);
-	Book_lep_0_iso_ptvarcone40_BJET(bins, 0, 20000);
-
-	Book_lep_1_iso_ptvarcone40(bins, 0, 20000);
-	Book_lep_1_iso_ptvarcone40_PRE(bins, 0, 20000);
-	Book_lep_1_iso_ptvarcone40_CONTROL(bins, 0, 20000);
-	Book_lep_1_iso_ptvarcone40_EXCEPT(bins, 0, 20000);
-	Book_lep_1_iso_ptvarcone40_BJET(bins, 0, 20000);
-
-	///-------------------------------- lep_0 & lep_1 ----------------------------------///
-	//dilepton invariant mass
-	Book_lep_0_lep_1_mass_EXCEPT(bins, 0, 200);
-	Book_lep_0_lep_1_mass_CONTROL(bins, 0, 200);
-	Book_lep_0_lep_1_mass_PRE(bins, 0, 200);
-	Book_lep_0_lep_1_mass(bins, 0, 200);
-	Book_lep_0_lep_1_mass_BJET(bins, 0, 200);
-
-	//dilepton rapidity
-	Book_RapidityDilepton_CONTROL(bins, 0, 4.5);
-	Book_RapidityDilepton_PRE(bins, 0, 4.5);
-	Book_RapidityDilepton(bins, 0, 4.5);
-	Book_RapidityDilepton_BJET(bins, 0, 4.5);
-
-	//diljet rapidity
-	Book_RapidityDijet_CONTROL(bins, 0, 4.5);
-	Book_RapidityDijet_PRE(bins, 0, 4.5);
-	Book_RapidityDijet(bins, 0, 4.5);
-	Book_RapidityDijet_BJET(bins, 0, 4.5);
-
-	//dilepton pt
-	Book_lep_0_lep_1_pt_EXCEPT(bins, 0, 300);
-	Book_lep_0_lep_1_pt_CONTROL(bins, 0, 300);
-	Book_lep_0_lep_1_pt_PRE(bins, 0, 300);
-	Book_lep_0_lep_1_pt(bins, 0, 300);
-	Book_lep_0_lep_1_pt_BJET(bins, 0, 300);
-
-	///---------------------------------- Delta R ----------------------------------------///
-
-	Book_DeltaR(bins, 0, 10);
-	Book_DeltaR_PRE(bins, 0, 10);
-	Book_DeltaR_CONTROL(bins, 0, 10);
-	Book_DeltaR_BJET(bins, 0, 10);
-
-	///---------------------------------ljet_0 & ljet_1-----------------------------------///
-
-	Book_ljet_0_ljet_1_mass_EXCEPT(bins, 0, 4500);
-	Book_ljet_0_ljet_1_mass_CONTROL(bins, 0, 4500);
-	Book_ljet_0_ljet_1_mass_PRE(bins, 0, 4500);
-	Book_ljet_0_ljet_1_mass(bins, 0, 4500);
-
-	Book_bjet_0_bjet_1_mass_BJET(bins, 0, 4500);
-
-	//jet_0 pt
-	Book_jet_0_p4_Pt_EXCEPT(bins, 0, 1000);
-	Book_jet_0_p4_Pt_CONTROL(bins, 0, 1000);
-	Book_jet_0_p4_Pt_PRE(bins, 0, 1000);
-	Book_jet_0_p4_Pt(bins, 0, 1000);
-	Book_jet_0_p4_Pt_BJET(bins, 0, 1000);
-
-	//jet_1 pt
-	Book_jet_1_p4_Pt_EXCEPT(bins, 0, 1000);
-	Book_jet_1_p4_Pt_CONTROL(bins, 0, 1000);
-	Book_jet_1_p4_Pt_PRE(bins, 0, 1000);
-	Book_jet_1_p4_Pt(bins, 0, 1000);
-	Book_jet_1_p4_Pt_BJET(bins, 0, 1000);
-
-	///------------------ pT balance for lep_0 & lep_1 ljet_0 & ljet_1-----------------///
-
-	Book_pT_balance_PRE(bins, 0, 1);
-	Book_pT_balance(bins, 0, 1);
-	Book_pT_balance_CONTROL(bins, 0, 1);
-	Book_pT_balance_EXCEPT(bins, 0, 1);
-	Book_pT_balance_BJET(bins, 0, 1);
-
-	///------------------ pT balance 3 for lep_0 & lep_1 ljet_0 & ljet_1 & ljet_2 -----------------///
-
-	Book_pT_balance_3_PRE(bins, 0, 1);
-	Book_pT_balance_3(bins, 0, 1);
-	Book_pT_balance_3_CONTROL(bins, 0, 1);
-	Book_pT_balance_3_EXCEPT(bins, 0, 1);
-
-	///------------------Centrality plot for Z boson inside rapidity interval of ljet_0 & ljet_1 -----------------///
-
-	Book_Centrality_PRE(bins, -8, 8);
-	Book_Centrality(bins, -8, 8);
-	Book_Centrality_CONTROL(bins, -8, 8);
-	Book_Centrality_BJET(bins, -8, 8);
 
 }
 
@@ -372,8 +294,7 @@ void MC_Analysis::GenerateVariables() {
 
 	//Invariant Mass
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
-	ljet_0_ljet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
-	bjet_0_bjet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
+	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
 
 	//Delta R
 	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
@@ -417,7 +338,7 @@ void MC_Analysis::FillAllData_PreCut() {
 
 	//Invariant mass
 	h_lep_0_lep_1_mass_PRE->Fill(lep_0_lep_1_mass, final_weighting);
-	h_ljet_0_ljet_1_mass_PRE->Fill(ljet_0_ljet_1_mass, final_weighting);
+	h_jet_0_jet_1_mass_PRE->Fill(jet_0_jet_1_mass, final_weighting);
 
 	// Combined
 	h_RapidityDilepton_PRE->Fill(RapidityDilepton, final_weighting);// dilepton rapidity
@@ -469,7 +390,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (jet_1_p4->Pt() > 45) ljet_1_pt_greater = true;
 
 	// Dijjet mass = Leading Jets Combined Invariant mass
-	if (ljet_0_ljet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
+	if (jet_0_jet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
 
 	//pt balance limit Cut Condition
 	if (pT_balance < 0.15) pT_balance_limit = true;
@@ -540,7 +461,7 @@ void MC_Analysis::Fill() {
 	if (Cuts("EXCEPT_combined_lepton_pt")) 		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);		//Fill the EXCEPT histogram for combined lepton pt
 	if (Cuts("EXCEPT_ljet_0_pt_greater")) 		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(), final_weighting);		//Fill the EXCEPT histogram for ljet_0_pt
 	if (Cuts("EXCEPT_ljet_1_pt_greater")) 		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(), final_weighting);		//Fill the EXCEPT histogram for ljet_1_pt
-	if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_ljet_0_ljet_1_mass_EXCEPT->Fill(ljet_0_ljet_1_mass, final_weighting);	//Fill the EXCEPT histogram for leading jets combined invariant mass
+	if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_jet_0_jet_1_mass_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);	//Fill the EXCEPT histogram for leading jets combined invariant mass
 	if (Cuts("EXCEPT_ptvarcone_40_0")) 		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);
 	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);
 	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);
@@ -557,7 +478,7 @@ void MC_Analysis::Fill() {
 
 		//Invariant mass
 		h_lep_0_lep_1_mass->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
-		h_ljet_0_ljet_1_mass->Fill(ljet_0_ljet_1_mass, final_weighting); // two jets
+		h_jet_0_jet_1_mass->Fill(jet_0_jet_1_mass, final_weighting); // two jets
 
 		//Combined lepton
 		h_RapidityDilepton->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
@@ -589,7 +510,7 @@ void MC_Analysis::Fill() {
 
 		//Invariant mass
 		h_lep_0_lep_1_mass_CONTROL->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
-		h_ljet_0_ljet_1_mass_CONTROL->Fill(ljet_0_ljet_1_mass, final_weighting); // two jets
+		h_jet_0_jet_1_mass_CONTROL->Fill(jet_0_jet_1_mass, final_weighting); // two jets
 
 		//Combined 
 		h_RapidityDilepton_CONTROL->Fill(RapidityDilepton, final_weighting); // lepton (elec) dilepton rapidity
@@ -616,7 +537,7 @@ void MC_Analysis::Fill() {
 
 		//Invariant mass
 		h_lep_0_lep_1_mass_BJET->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
-		h_bjet_0_bjet_1_mass_BJET->Fill(bjet_0_bjet_1_mass, final_weighting); // two jets
+		h_jet_0_jet_1_mass_BJET->Fill(jet_0_jet_1_mass, final_weighting); // two jets
 
 		//Combined lepton
 		h_RapidityDilepton_BJET->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
@@ -663,7 +584,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_lep_0_lep_1_pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
 	
 	//leading jets ljet_0 ljet_1 invariant masses
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_ljet_1_mass_PRE, h_ljet_0_ljet_1_mass, h_ljet_0_ljet_1_mass_CONTROL, h_ljet_0_ljet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_ljet_1_mass", "h_ljet_0_ljet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_ljet_0_ljet_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_jet_0_jet_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	//leading jets ljet_0 ljet_1 transverse momentum < already exists in DrawHistos.h
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_ljet_0_p4_Pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
@@ -695,7 +616,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_Quiet(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", "h_lep_1_iso_ptvarcone40_BJET", ";;Events", 600, 400, false, "h_lep_1_iso_ptvarcone40_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", "h_lep_0_iso_ptvarcone40_BJET", ";;Events", 600, 400, false, "h_lep_0_iso_ptvarcone40_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_lep_0_lep_1_mass_BJET, "h_lep_0_lep_1_mass_BJET", "h_lep_0_lep_1_mass_BJET", ";;Events", 600, 400, false, "h_lep_0_lep_1_mass_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_bjet_0_bjet_1_mass_BJET, "h_bjet_0_bjet_1_mass_BJET", "h_bjet_0_bjet_1_mass_BJET", ";;Events", 600, 400, false, "h_bjet_0_bjet_1_mass_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram_Quiet(h_jet_0_jet_1_mass_BJET, "h_jet_0_jet_1_mass_BJET", "h_jet_0_jet_1_mass_BJET", ";;Events", 600, 400, false, "h_jet_0_jet_1_mass_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_RapidityDilepton_BJET, "h_RapidityDilepton_BJET", "h_RapidityDilepton_BJET", ";;Events", 600, 400, false, "h_RapidityDilepton_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_RapidityDijet_BJET, "h_RapidityDijet_BJET", "h_RapidityDijet_BJET", ";;Events", 600, 400, false, "h_RapidityDijet_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_lep_0_lep_1_pt_BJET, "h_lep_0_lep_1_pt_BJET", "h_lep_0_lep_1_pt_BJET", ";;Events", 600, 400, false, "h_lep_0_lep_1_pt_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
