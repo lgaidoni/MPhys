@@ -963,10 +963,10 @@ double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 
 }
 
-double MMomCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){// for plotting how close the missing momentum is to the daughter products of the tau 
+double METCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){// for plotting how close the missing momentum is to the daughter products of the tau 
 // function for calculating Centrality for E_T^{miss}
 
-	double Z_Phi = Vector1->Phi();
+	double Emiss_Phi = Vector1->Phi();
 	double tauproduct1_Phi = Vector2->Phi();
 	double tauproduct_Phi = Vector3->Phi();	
 
