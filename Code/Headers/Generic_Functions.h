@@ -794,6 +794,34 @@ bool RapidityIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLo
 
 }
 
+// POTENTIALLY TO BE CHANGED FOR FUTURE ANALYSIS when considering neutrinos out of this interval. 05-01-19
+//If Vector 3 (E_T^{miss}) lies between Vector 1 (tau product 1 phi) and Vector 2 (tau product 2 phi) keep 
+bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3) {
+
+	bool phi_int_condition = true;
+	
+	//Check that E_T^{miss} lies in the delta phi interval between two tau decay particles
+	//First, need to find which tau decay particle is greater (max) or smaller (min) and assign them these names
+	//Define the variables outside
+	double maxphi;
+	double minphi; 
+
+	if (Vector1->Phi() > Vector2->Phi()) { 
+		maxphi = Vector1->Phi();
+		minphi = Vector2->Phi();
+	} else { 
+		minphi = Vector1->Phi();
+		maxphi = Vector2->Phi();	
+	}
+	
+	// if E_T^{miss} is not between this delta phi interval, cut
+	if (maxphi <= Vector3->Phi() <= minphi && Vector3->Pt()) phi_int_condition = false;
+
+	return phi_int_condition;
+
+}
+
+
 // This function calculated the p_T^{balance} 
 // defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
 double pTBalanceCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3, TLorentzVector *Vector4){
@@ -935,6 +963,18 @@ double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 
 }
 
+double MMomCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){// for plotting how close the missing momentum is to the daughter products of the tau 
+// function for calculating Centrality for E_T^{miss}
 
+	double Z_Phi = Vector1->Phi();
+	double tauproduct1_Phi = Vector2->Phi();
+	double tauproduct_Phi = Vector3->Phi();	
+
+	double sum1 = Z_Phi - (tauproduct1_Phi + tauproduct2_Phi)/2; // sum 1 to break things up
+
+	// calculate Centrality
+	double Centrality = sum1/DeltaPhi(Vector2, Vector3);
+	return Centrality;
+}
 
 #endif
