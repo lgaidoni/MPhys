@@ -398,6 +398,8 @@ void MC_Analysis::GenerateVariables() {
 
 	//Final Weighting
 	final_weighting = Luminosity_Weight * weight_total;
+	
+	MET_Centrality = METCentrality();
   
 }
 
