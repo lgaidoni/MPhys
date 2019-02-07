@@ -187,45 +187,6 @@ vector<TH1F*> Histogram_Return_Given_File(string AnalysisType, string DataType, 
 
 }
 
-//This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
-vector<TH1F*> Histogram_Return(string AnalysisType, string DataType) {
-
-	string DataTypeHistName = "h_" + DataType + ";1";  //Name of the desired histogram in the root file
-
-	//Variable creation
-	vector<string> names;
-	vector<TFile*> files;
-	vector<TH1F*> histograms;
-
-	//Create the file names for the stack of processes and push them into the names vector
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/ttb_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wtaunu_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wmunu_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wenu_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/ZqqZll_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Ztt2jets_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zmm2jets_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zee2jets_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Ztt_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zmumu_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zee_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/DATA_Histograms.root");
-
-	//Load in all the files for the different processes, there are 12 into the files vector
-	for (auto name = names.begin(); name < names.end(); name++) {
-		files.push_back(new TFile(name->c_str()));
-	}
-
-	//Get all the histograms from files depending on the Data Type and push them into the histograms vector
-	for (auto tfile = files.begin(); tfile < files.end(); tfile++) {
-		TH1F *histogram = (TH1F*)(*tfile)->Get(DataTypeHistName.c_str());
-		histograms.push_back(histogram);
-	}
-
-	return histograms;
-
-}
-
 //This function will give the provided histogram an x-axis, depending on the name of the DataType (ljet_0_ljet_1_mass, Etc) provided
 void Histogram_Namer(TH1F* histogram, string DataType) {
 	
@@ -293,7 +254,7 @@ void Draw_Region(string DataType, double textsize, double latex1left, double lat
 //DrawHistogram(histogram, histogram name, x axis title, bool for log y axis, bool for quiet, chain name, Analysis Type)
 void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
 
-	string OutputFileName = histogramName + ChainName + ".pdf";
+	string OutputFileName = histogramName + "_" + ChainName + ".pdf";
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 

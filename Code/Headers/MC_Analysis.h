@@ -1660,28 +1660,33 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
 
 MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, string particles) : fChain(0) 
 {
-// if parameter tree is not specified (or zero), connect the file
-// used to generate this class and read the Tree.
-   if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
-      if (!f || !f->IsOpen()) {
-         f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
-      }
-      f->GetObject("NOMINAL",tree);
 
-   }
-   Init(tree);
-   AnalysisType = analysistype;
-   ChainName = chainname;
-   Luminosity_Weight = luminosity_weight;
-   desired_particles = particles;
-   if (ChainName == "DATA") {
+	// if parameter tree is not specified (or zero), connect the file
+	// used to generate this class and read the Tree.
+	if (tree == 0) {
 
-	Luminosity_Weight = 1;
-	weight_total_override = true;
+		TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+		if (!f || !f->IsOpen()) {
 
-   }
-   else weight_total_override = false;
+			f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+		}
+
+		f->GetObject("NOMINAL",tree);
+	}
+
+	Init(tree);
+	AnalysisType = analysistype;
+	ChainName = chainname;
+	Luminosity_Weight = luminosity_weight;
+	desired_particles = particles;
+
+	if (ChainName == "DATA") {
+
+		Luminosity_Weight = 1;
+		weight_total_override = true;
+	}
+
+	else weight_total_override = false;
 }
 
 MC_Analysis::~MC_Analysis()
