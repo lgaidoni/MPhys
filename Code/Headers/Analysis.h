@@ -330,19 +330,16 @@ void MC_Analysis::GenerateVariables() {
 	
 	// Missing transverse momentum centrality
 	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
-	 
-	// unit vector of total transverse momentum 
-	TOT_pT_UnitVector = TOTpTUnitVector(lep_0_p4);
-
-	// unit vector of total missing transverse momentum
-	MET_UnitVector = METUnitVector(lep_0_p4, lep_1_p4);
 
 	// neutrino missing energy/momentum vector x and y components (in transverse plane)
-	vector<double> VectorMissingEnergy12 = SimMETEqn(lep_0_p4, lep_1_p4);
+	vector<double> VectorMissingEnergy12 = SimMETEqn(lep_0_p4, lep_1_p4, met_reco_p4);
 	
 	// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergyxy
-	neutrinoME1 = VectorMissingEnergy12[0];
-	neutrinoME2 = VectorMissingEnergy12[1];
+	neutrinoME1 = abs(VectorMissingEnergy12[0]);
+	neutrinoME2 = abs(VectorMissingEnergy12[1]);
+
+	//cout << "Neutrino ME1 = " << neutrinoME1 << endl << endl;
+	//cout << "Neutrino ME2 = " << neutrinoME2 << endl << endl;
 
 }
 
@@ -382,9 +379,6 @@ void MC_Analysis::FillAllData_PreCut() {
 	h_Centrality_PRE->Fill(Centrality, final_weighting);
 	h_MET_Centrality_PRE->Fill(MET_Centrality, final_weighting);
 
-	// neutrino missing energy/momentum vector x and y components (in transverse plane) PRE
-	h_VectorMissingEnergy12_PRE->Fill(VectorMissingEnergy12,final_weighting);
-	
 	// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 PRE
 	h_neutrinoME1_PRE->Fill(neutrinoME1,final_weighting);
 	h_neutrinoME2_PRE->Fill(neutrinoME2,final_weighting);
@@ -543,6 +537,10 @@ void MC_Analysis::Fill() {
 		h_Centrality->Fill(Centrality, final_weighting);
 		h_MET_Centrality->Fill(MET_Centrality, final_weighting);
 
+		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 PRE
+		h_neutrinoME1->Fill(neutrinoME1,final_weighting);
+		h_neutrinoME2->Fill(neutrinoME2,final_weighting);
+
 		h_Testing->Fill(lep_0_lep_1_mass, final_weighting);
 
 	/*
@@ -600,15 +598,6 @@ void MC_Analysis::Fill() {
 		// MET Centrality CONTROL
 		h_MET_Centrality_CONTROL->Fill(MET_Centrality, final_weighting);
 		 
-		// unit vector of total transverse momentum CONTROL
-		h_TOT_pT_UnitVector_CONTROL->Fill(TOT_pT_UnitVector, final_weighting);
-
-		// unit vector of total missing transverse momentum CONTROL
-		h_MET_UnitVector_CONTROL->Fill(MET_UnitVector, final_weighting);
-
-		// neutrino missing energy/momentum vector x and y components (in transverse plane) CONTROL
-		h_VectorMissingEnergy12_CONTROL->Fill(VectorMissingEnergy12,final_weighting);
-	
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 CONTROL
 		h_neutrinoME1_CONTROL->Fill(neutrinoME1,final_weighting);
 		h_neutrinoME2_CONTROL->Fill(neutrinoME2,final_weighting);
@@ -646,16 +635,7 @@ void MC_Analysis::Fill() {
 
 		// MET Centrality BJET
 		h_MET_Centrality_BJET->Fill(MET_Centrality, final_weighting);
-		 
-		// unit vector of total transverse momentum BJET
-		h_TOT_pT_UnitVector_BJET->Fill(TOT_pT_UnitVector, final_weighting);
 
-		// unit vector of total missing transverse momentum BJET
-		h_MET_UnitVector_BJET->Fill(MET_UnitVector, final_weighting);
-
-		// neutrino missing energy/momentum vector x and y components (in transverse plane) BJET
-		h_VectorMissingEnergy12_BJET->Fill(VectorMissingEnergy12,final_weighting);
-	
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
 		h_neutrinoME1_BJET->Fill(neutrinoME1,final_weighting);
 		h_neutrinoME2_BJET->Fill(neutrinoME2,final_weighting);
@@ -722,14 +702,11 @@ void MC_Analysis::DrawHistos() {
 	// MET Centrality histograms
 	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET_Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", "h_MET_Centrality", ";MET_Centrality;Events", 600, 400, true, "h_MET_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
-	// neutrino 1 and 2 missing energy/momentum 
-	DrawHistogram_PRE_SEARCH_CONTROL(h_VectorMissingEnergy12_PRE, h_VectorMissingEnergy12, h_VectorMissingEnergy12_CONTROL, "VectorMissingEnergy12", "Pre-Cut", "Post Cut", "Control", "h_VectorMissingEnergy12", "h_VectorMissingEnergy12", ";Missing Energy of neutrino 1 and 2;Events", 600, 400, true, "h_VectorMissingEnergy12_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
-
 	// missing energy for neutrino 1 
-	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrinoME1_PRE, h_neutrinoME1, h_neutrinoME1_CONTROL, "neutrinoME1", "Pre-Cut", "Post Cut", "Control", "h_neutrinoME1", "h_neutrinoME1", ";Missing Energy of neutrino 1", 600, 400, true, "h_neutrinoME1_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrinoME1_PRE, h_neutrinoME1, h_neutrinoME1_CONTROL, "neutrinoME1", "Pre-Cut", "Post Cut", "Control", "h_neutrinoME1", "h_neutrinoME1", ";Missing Energy of neutrino 1;Events", 600, 400, true, "h_neutrinoME1_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	// missing energy for neutrino 2
-	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrinoME1_PRE, h_neutrinoME1, h_neutrinoME1_CONTROL, "neutrinoME1", "Pre-Cut", "Post Cut", "Control", "h_neutrinoME1", "h_neutrinoME1", ";Missing Energy of neutrino 1", 600, 400, true, "h_neutrinoME1_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrinoME2_PRE, h_neutrinoME2, h_neutrinoME2_CONTROL, "neutrinoME2", "Pre-Cut", "Post Cut", "Control", "h_neutrinoME2", "h_neutrinoME2", ";Missing Energy of neutrino 2;Events", 600, 400, true, "h_neutrinoME2_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
@@ -743,9 +720,8 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_pT_balance_BJET, "h_pT_balance_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_Centrality_BJET, "h_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
-  DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_VectorMissingEnergy12_BJET", "h_VectorMissingEnergy12_BJET", ";;Events", 600, 400, false, "h_VectorMissingEnergy12_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_neutrinoME1_BJET", "h_neutrinoME1_BJET", ";;Events", 600, 400, false, "h_neutrinoME1_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_neutrinoME2_BJET", "h_neutrinoME2_BJET", ";;Events", 600, 400, false, "h_neutrinoME2_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_neutrinoME1_BJET, "h_neutrinoME1_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrinoME2_BJET, "h_neutrinoME2_BJET", ";;Events", false, true, ChainName, AnalysisType);
 
 	Histograms->Close();
 
