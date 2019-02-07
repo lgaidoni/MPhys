@@ -1006,4 +1006,35 @@ double METUnitVector(TLorentzVector *Vector1, TLorentzVector *Vector2){
 	return u_T_MET;
 }
 
+//Simultaneous equations solved for MET
+//Returns a vector containing the transverse momentum of neutrino 1 and 2
+vector<double> SimMETEqn(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // first tau, second tau, missing energy
+// a corresponds to tau and neutrino pair 1, b corresponds to tau and neutrino pair 2
+// 1 is x direction , 2 is y direction
+
+	// by solving these simultaneous eqns we can get x and y
+	// c1 = a1*x + b1*y;
+	// c2 = a2*x + b2*y;
+
+	// tau products
+	double a1 = UnitVector(Vector1->Px()), b1 = UnitVector(Vector2->Px());// a1=unitvector of x component of tau 1, b1 = tau 2
+	double a2 = UnitVector(Vector1->Py()), b2 = UnitVector(Vector2->Py());// a2=unitvector of y component of tau 1, b2 = tau 2
+	
+	// MET data
+	double c1 = UnitVector(Vector3->Px()); // c2 = total MET in y direction
+	double c2 = UnitVector(Vector3->Py()); // c1 = total MET in x direction
+
+	// neutrinos	
+	double neutrinoa = Vector1->Pt(), neutrinob = Vector2->Pt(); // transverse mometum of neutrino a and b resp
+	vector<double> pTneutrinovector; // vector for storing neutrino a transverse momentum and neutrino b transverse momentum
+
+	neutrinoa = (c1-(b1*c2)/(b2))/(a1-(b1*a1)/(b2));	
+	neutrinob = (c2-(a2*c1)/(a1))/(b2-(b1*a2)/(a1));
+
+	pTneutrinovector.push_back(neutrinoa);
+	pTneutrinovector.push_back(neutrinob);
+
+	return pTneutrinovector;
+}
+
 #endif
