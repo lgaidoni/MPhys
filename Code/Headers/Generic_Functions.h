@@ -977,14 +977,18 @@ double METCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 	return Centrality;
 }
 
+
+double UnitVector(TLorentzVector *Vector1){
+// general unit vector calculation
+	double p;
+	double unitvector = p/pow(pow(p,2),0.5);
+	return unitvector;
+}
+
 double TOTpTUnitVector(TLorentzVector *Vector1){
 // unit vector of the tot transverse momentum
 
-	double p_T  = Vector1->Pt();
-	double p_X = Vector1->Px();
-	double p_Y = Vector1->Py();
-	double UnitVector_tot = p_T/(pow(p_X,2) + pow(p_Y,2));
-	return UnitVector_tot;
+	return UnitVector(Vector1->Pt());
 
 }
 
@@ -993,7 +997,7 @@ double METUnitVector(TLorentzVector *Vector1, TLorentzVector *Vector2){
 
 	double u1  = TOTpTUnitVector(Vector1); // pt, px, py of unit vector 1
 	double u2 = TOTpTUnitVector(Vector2);// pt, px, py of unit vector 2
-	double u_T_MET = (u1 + u2)/(pow(u1,2) + pow(u2,2)); // calc for total unit vector of unknown momentum direction
+	double u_T_MET = (u1 + u2)/pow(pow(u1,2) + pow(u2,2),0.5); // calc for total unit vector of unknown momentum direction
 	return u_T_MET;
 }
 
