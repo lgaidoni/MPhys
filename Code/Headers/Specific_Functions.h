@@ -17,6 +17,8 @@ void CombineAllProcesses() {
 
 void Draw_All_Stacked_Processes() {
 
+	gErrorIgnoreLevel = kError;
+
 	DrawStackedProcesses("Electron");
 	DrawStackedProcesses("Muon");
 	DrawStackedProcesses("Tau");

@@ -134,7 +134,8 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 
 void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process) {
 
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -166,7 +167,8 @@ void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process
 
 void Process_Weighting(string AnalysisType, string DataType, string Process, double m, double c, double bins) {
 
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -215,8 +217,8 @@ void Process_Weighting(string AnalysisType, string DataType, string Process, dou
 
 void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string Process, double m, double c, double bins, bool weight) {
 
-	
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -354,7 +356,8 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 //Function to calculate the Cross section for two leptons, takes QCD process as Process1, EW process as Process2
 void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string DataType, string Process1, string Process2, double m, double c, double bins, bool scale, string ID) {
 
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 	gStyle->SetOptStat(0);
 
 	//Selector for the process not to be subtracted

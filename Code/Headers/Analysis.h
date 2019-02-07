@@ -45,6 +45,8 @@ void MC_Analysis::BookHistos() {
 	int TOT_pT_UnitVector_Min = 0, TOT_pT_UnitVector_Max = 1000;
 	int MET_UnitVector_Min = 0, MET_UnitVector_Max = 1000;
 
+	int Testing_Min = 0, Testing_Max = 200;
+
 	/////----------------------------------BOOKINGS------------------------------------/////
 
 	#include "_BookHistos.h"
@@ -366,6 +368,10 @@ void MC_Analysis::FillAllData_PreCut() {
 	// Centrality
 	h_Centrality_PRE->Fill(Centrality, final_weighting);
 	h_MET_Centrality_PRE->Fill(MET_Centrality, final_weighting);
+
+	//TESTING
+	h_Testing_PRE->Fill(lep_0_lep_1_mass, final_weighting);
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -516,6 +522,9 @@ void MC_Analysis::Fill() {
 		// Centrality
 		h_Centrality->Fill(Centrality, final_weighting);
 		h_MET_Centrality->Fill(MET_Centrality, final_weighting);
+
+		h_Testing->Fill(lep_0_lep_1_mass, final_weighting);
+
 	/*
 		cout << "lep_0_p4->Px() = " << lep_0_p4->Px() << endl << endl;
 		cout << "lep_0_p4->Py() = " << lep_0_p4->Py() << endl << endl;
