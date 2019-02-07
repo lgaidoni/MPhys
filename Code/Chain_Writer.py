@@ -297,6 +297,42 @@ process_chains_writer("MuonTau")
 
 chain_functions.write("#endif")
 
+try:
+	os.makedirs("../../Output-Files/Final_Graphs/Muon")
+	print("../../Output-Files/Final_Graphs/Muon Created")
+except:
+	print("../../Output-Files/Final_Graphs/Muon/DATA Exists")
+
+try:
+	os.makedirs("../../Output-Files/Final_Graphs/Electron")
+	print("../../Output-Files/Final_Graphs/Electron Created")
+except:
+	print("../../Output-Files/Final_Graphs/Electron Exists")
+
+try:
+	os.makedirs("../../Output-Files/Final_Graphs/ElectronMuon")
+	print("../../Output-Files/Final_Graphs/ElectronMuon Created")
+except:
+	print("../../Output-Files/Final_Graphs/ElectronMuon Exists")
+
+try:
+	os.makedirs("../../Output-Files/Final_Graphs/Tau")
+	print("../../Output-Files/Final_Graphs/Tau Created")
+except:
+	print("../../Output-Files/Final_Graphs/Tau Exists")
+
+try:
+	os.makedirs("../../Output-Files/Final_Graphs/ElectronTau")
+	print("../../Output-Files/Final_Graphs/ElectronTau Created")
+except:
+	print("../../Output-Files/Final_Graphs/ElectronTau Exists")
+
+try:
+	os.makedirs("../../Output-Files/Final_Graphs/MuonTau")
+	print("../../Output-Files/Final_Graphs/MuonTau Created")
+except:
+	print("../../Output-Files/Final_Graphs/MuonTau Exists")
+
 analysis_start_functions.write("#endif")
 
 run_all_analyses.write("\n}\n")
