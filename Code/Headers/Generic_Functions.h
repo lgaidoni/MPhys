@@ -910,27 +910,15 @@ double METCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 }
 
 
-double UnitVector(TLorentzVector *Vector1){
+double UnitVector(double p,TLorentzVector *Vector1){
 // general unit vector calculation
-	double p;
-	double unitvector = p/pow(pow(p,2),0.5);
+	double px = Vector1->Px();
+	double py = Vector1->Py();
+
+	double unitvector = p/pow( pow(px,2) + pow(py,2) ,0.5);
+
 	return unitvector;
-}
 
-double TOTpTUnitVector(TLorentzVector *Vector1){
-// unit vector of the tot transverse momentum
-
-	return UnitVector(Vector1->Pt());
-
-}
-
-double METUnitVector(TLorentzVector *Vector1, TLorentzVector *Vector2){
-// calculates unknown unit vector of the total MET unit vector
-
-	double u1  = TOTpTUnitVector(Vector1); // pt, px, py of unit vector 1
-	double u2 = TOTpTUnitVector(Vector2);// pt, px, py of unit vector 2
-	double u_T_MET = (u1 + u2)/pow(pow(u1,2) + pow(u2,2),0.5); // calc for total unit vector of unknown momentum direction
-	return u_T_MET;
 }
 
 //Simultaneous equations solved for MET
@@ -944,19 +932,30 @@ vector<double> SimMETEqn(TLorentzVector *Vector1, TLorentzVector *Vector2, TLore
 	// c2 = a2*x + b2*y;
 
 	// tau products
-	double a1 = UnitVector(Vector1->Px()), b1 = UnitVector(Vector2->Px());// a1=unitvector of x component of tau 1, b1 = tau 2
-	double a2 = UnitVector(Vector1->Py()), b2 = UnitVector(Vector2->Py());// a2=unitvector of y component of tau 1, b2 = tau 2
-	
+	double a1 = UnitVector(Vector1->Px(), Vector1), b1 = UnitVector(Vector2->Px(), Vector2);// a1=unitvector of x component of tau 1, b1 = tau 2
+	double a2 = UnitVector(Vector1->Py(), Vector1), b2 = UnitVector(Vector2->Py(), Vector2);// a2=unitvector of y component of tau 2, b2 = tau 2
+
 	// MET data
-	double c1 = UnitVector(Vector3->Px()); // c2 = total MET in y direction
-	double c2 = UnitVector(Vector3->Py()); // c1 = total MET in x direction
+	double c1 = Vector3->Px(); // c1 = total MET in x direction
+	double c2 = Vector3->Py(); // c2 = total MET in y direction
+
+	//cout << "a1 = " << a1 << " b1 = " << b1 << "c1 = " << c1 << endl << endl;
+	//cout << "a2 = " << a2 << " b2 = " << b2 << "c2 = " << c2 << endl << endl;
 
 	// neutrinos	
-	double neutrinoa = Vector1->Pt(), neutrinob = Vector2->Pt(); // transverse mometum of neutrino a and b resp
+	double neutrinoa, neutrinob; // transverse mometum of neutrino a and b resp
 	vector<double> pTneutrinovector; // vector for storing neutrino a transverse momentum and neutrino b transverse momentum
 
-	neutrinoa = (c1-(b1*c2)/(b2))/(a1-(b1*a1)/(b2));	
-	neutrinob = (c2-(a2*c1)/(a1))/(b2-(b1*a2)/(a1));
+	//neutrinoa = (c1-(b1*c2)/(b2))/(a1-(b1*a1)/(b2));	
+	//neutrinob = (c2-(a2*c1)/(a1))/(b2-(b1*a2)/(a1));
+	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	///Not 100% sure these are the right solutions for simultaneous equations. 
+
+	neutrinoa = (a2*c1 - a1*c2)/(a2*b1 - a1*b2);
+	neutrinob = (c1 - b1*neutrinoa)/a1;
+	//Cramer's Rule
+	//Derived in Luca's Book, page marked with I
+	//Found on Stack Overflow, "Solving simultanous equations with C++"
 
 	pTneutrinovector.push_back(neutrinoa);
 	pTneutrinovector.push_back(neutrinob);
