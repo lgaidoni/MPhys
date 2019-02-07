@@ -48,6 +48,8 @@ void MC_Analysis::BookHistos() {
 	int neutrinoME1_Min = 0, neutrinoME1_Max = 1000;
 	int neutrinoME2_Min = 0, neutrinoME2_Max = 1000;
 
+	int Testing_Min = 0, Testing_Max = 200;
+
 	/////----------------------------------BOOKINGS------------------------------------/////
 
 	#include "_BookHistos.h"
@@ -379,12 +381,6 @@ void MC_Analysis::FillAllData_PreCut() {
 	// Centrality PRE
 	h_Centrality_PRE->Fill(Centrality, final_weighting);
 	h_MET_Centrality_PRE->Fill(MET_Centrality, final_weighting);
-	 
-	// unit vector of total transverse momentum PRE
-	h_TOT_pT_UnitVector_PRE->Fill(TOT_pT_UnitVector, final_weighting);
-
-	// unit vector of total missing transverse momentum PRE
-	h_MET_UnitVector_PRE->Fill(MET_UnitVector, final_weighting);
 
 	// neutrino missing energy/momentum vector x and y components (in transverse plane) PRE
 	h_VectorMissingEnergy12_PRE->Fill(VectorMissingEnergy12,final_weighting);
@@ -393,6 +389,8 @@ void MC_Analysis::FillAllData_PreCut() {
 	h_neutrinoME1_PRE->Fill(neutrinoME1,final_weighting);
 	h_neutrinoME2_PRE->Fill(neutrinoME2,final_weighting);
 
+	//TESTING
+	h_Testing_PRE->Fill(lep_0_lep_1_mass, final_weighting);
 
 }
 
@@ -544,7 +542,31 @@ void MC_Analysis::Fill() {
 		// Centrality
 		h_Centrality->Fill(Centrality, final_weighting);
 		h_MET_Centrality->Fill(MET_Centrality, final_weighting);
-	
+
+		h_Testing->Fill(lep_0_lep_1_mass, final_weighting);
+
+	/*
+		cout << "lep_0_p4->Px() = " << lep_0_p4->Px() << endl << endl;
+		cout << "lep_0_p4->Py() = " << lep_0_p4->Py() << endl << endl;
+		cout << "lep_0_p4->Pz() = " << lep_0_p4->Pz() << endl << endl;
+		cout << "lep_0_p4->Pt() = " << lep_0_p4->Pt() << endl << endl;
+		cout << "lep_0_p4->Et() = " << lep_0_p4->Et() << endl << endl;
+		cout << "lep_0_p4->Phi() = " << lep_0_p4->Phi() << endl << endl;
+
+		cout << "lep_1_p4->Px() = " << lep_1_p4->Px() << endl << endl;
+		cout << "lep_1_p4->Py() = " << lep_1_p4->Py() << endl << endl;
+		cout << "lep_1_p4->Pz() = " << lep_1_p4->Pz() << endl << endl;
+		cout << "lep_1_p4->Pt() = " << lep_1_p4->Pt() << endl << endl;
+		cout << "lep_1_p4->Et() = " << lep_1_p4->Et() << endl << endl;
+		cout << "lep_1_p4->Phi() = " << lep_1_p4->Phi() << endl << endl;
+
+		cout << "met_reco_p4->Px() = " << met_reco_p4->Px() << endl << endl;
+		cout << "met_reco_p4->Py() = " << met_reco_p4->Py() << endl << endl;
+		cout << "met_reco_p4->Pz() = " << met_reco_p4->Pz() << endl << endl;
+		cout << "met_reco_p4->Pt() = " << met_reco_p4->Pt() << endl << endl;
+		cout << "met_reco_p4->Et() = " << met_reco_p4->Et() << endl << endl;
+		cout << "met_reco_p4->Phi() = " << met_reco_p4->Phi() << endl << endl;
+	*/
 	}
 
 	///----- CONTROL region filling -----///
@@ -674,14 +696,14 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_ljet_1_p4_Pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	// Dilepton Rapidity
-	DrawHistogram_Quiet(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", "h_RapidityDilepton_PRE", ";Dilepton Rapidity [rads];Events", 600, 400, false, "h_RapidityDilepton_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_RapidityDilepton, "h_RapidityDilepton", "h_RapidityDilepton", ";Dilepton Rapidity [rads];Events", 600, 400, false, "h_RapidityDilepton_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", "h_RapidityDilepton_CONTROL", ";Dilepton Rapidity [rads];Events", 600, 400, false, "h_RapidityDilepton_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
 
 	// Dijet Rapidity
-	DrawHistogram_Quiet(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", "h_RapidityDijet_PRE", ";Dijet Rapidity [rads];Events", 600, 400, false, "h_RapidityDijet_PRE_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_RapidityDijet, "h_RapidityDijet", "h_RapidityDijet", ";Events", 600, 400, false, "h_RapidityDijet_" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", 600, 400, false, "h_RapidityDijet_CONTROL_" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", ";Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType);
 
 	//Delta R Histograms
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR", ";Delta R;Events", 600, 400, false, "h_DeltaR_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
@@ -710,20 +732,18 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrinoME1_PRE, h_neutrinoME1, h_neutrinoME1_CONTROL, "neutrinoME1", "Pre-Cut", "Post Cut", "Control", "h_neutrinoME1", "h_neutrinoME1", ";Missing Energy of neutrino 1", 600, 400, true, "h_neutrinoME1_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
 
 	//BJET GRAPHS
-	DrawHistogram_Quiet(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", "h_lep_1_iso_ptvarcone40_BJET", ";;Events", 600, 400, false, "h_lep_1_iso_ptvarcone40_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", "h_lep_0_iso_ptvarcone40_BJET", ";;Events", 600, 400, false, "h_lep_0_iso_ptvarcone40_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_lep_0_lep_1_mass_BJET, "h_lep_0_lep_1_mass_BJET", "h_lep_0_lep_1_mass_BJET", ";;Events", 600, 400, false, "h_lep_0_lep_1_mass_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_jet_0_jet_1_mass_BJET, "h_jet_0_jet_1_mass_BJET", "h_jet_0_jet_1_mass_BJET", ";;Events", 600, 400, false, "h_jet_0_jet_1_mass_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_RapidityDilepton_BJET, "h_RapidityDilepton_BJET", "h_RapidityDilepton_BJET", ";;Events", 600, 400, false, "h_RapidityDilepton_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_RapidityDijet_BJET, "h_RapidityDijet_BJET", "h_RapidityDijet_BJET", ";;Events", 600, 400, false, "h_RapidityDijet_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_lep_0_lep_1_pt_BJET, "h_lep_0_lep_1_pt_BJET", "h_lep_0_lep_1_pt_BJET", ";;Events", 600, 400, false, "h_lep_0_lep_1_pt_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_DeltaR_BJET, "h_DeltaR_BJET", "h_DeltaR_BJET", ";;Events", 600, 400, false, "h_DeltaR_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_pT_balance_BJET, "h_pT_balance_BJET", "h_pT_balance_BJET", ";;Events", 600, 400, false, "h_pT_balance_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_Centrality_BJET, "h_Centrality_BJET", "h_Centrality_BJET", ";;Events", 600, 400, false, "h_Centrality_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", "h_MET_Centrality_BJET", ";;Events", 600, 400, false, "h_MET_Centrality_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_TOT_pT_UnitVector_BJET", "h_TOT_pT_UnitVector_BJET", ";;Events", 600, 400, false, "h_TOT_pT_UnitVector_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_MET_UnitVector_BJET", "h_MET_UnitVector_BJET", ";;Events", 600, 400, false, "h_MET_UnitVector_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
-	DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_VectorMissingEnergy12_BJET", "h_VectorMissingEnergy12_BJET", ";;Events", 600, 400, false, "h_VectorMissingEnergy12_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
+	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_BJET, "h_lep_0_lep_1_mass_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_jet_0_jet_1_mass_BJET, "h_jet_0_jet_1_mass_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton_BJET, "h_RapidityDilepton_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_BJET, "h_RapidityDijet_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_pt_BJET, "h_lep_0_lep_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaR_BJET, "h_DeltaR_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_BJET, "h_pT_balance_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_Centrality_BJET, "h_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
+  DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_VectorMissingEnergy12_BJET", "h_VectorMissingEnergy12_BJET", ";;Events", 600, 400, false, "h_VectorMissingEnergy12_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_neutrinoME1_BJET", "h_neutrinoME1_BJET", ";;Events", 600, 400, false, "h_neutrinoME1_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 	DrawHistogram_Quiet(h_TOT_pT_UnitVector_BJET, "h_neutrinoME2_BJET", "h_neutrinoME2_BJET", ";;Events", 600, 400, false, "h_neutrinoME2_BJET" + ChainName + ".pdf", ChainName, AnalysisType);
 

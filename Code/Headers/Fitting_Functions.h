@@ -36,8 +36,8 @@ void Process_Selector_Confirmation(int SelectedProcess) {
 	if (SelectedProcess == 7) Process = "Zee2jets";
 	if (SelectedProcess == 8) Process = "Ztt";
 	if (SelectedProcess == 9) Process = "Zmumu";
-	if (SelectedProcess == 11) Process = "Zee";
-	if (SelectedProcess == 12) Process = "DATA";
+	if (SelectedProcess == 10) Process = "Zee";
+	if (SelectedProcess == 11) Process = "DATA";
 
 	cout << "Process: " << Process <<  " Selected" << endl;
 
@@ -134,7 +134,8 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 
 void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process) {
 
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -166,7 +167,8 @@ void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process
 
 void Process_Weighting(string AnalysisType, string DataType, string Process, double m, double c, double bins) {
 
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -199,11 +201,11 @@ void Process_Weighting(string AnalysisType, string DataType, string Process, dou
 
 	histograms[11]->Draw("SAME");
 
-	Legend_Creator(histograms);
+	Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0);
 
 	canvas->SetLogy();
 
-	Draw_Region(DataType);
+	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_" + AnalysisType + "_Final_Stacked_Weighted.pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
@@ -215,8 +217,8 @@ void Process_Weighting(string AnalysisType, string DataType, string Process, dou
 
 void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string Process, double m, double c, double bins, bool weight) {
 
-	
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -288,9 +290,8 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 
 	pad1->Update();
 
-	Legend_Creator_For_Fit(histograms);
-
-	Draw_Region_For_Fit(DataType);
+	Legend_Creator(histograms, 0.93, 0.925, 0.83, 0.40, 0.05, 0);
+	Draw_Region(DataType, 0.05, 0.675, 0.90, 0.675, 0.81, 0.675, 0.72);
 
 	canvas->cd();
 	pad2->cd();
@@ -355,7 +356,8 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 //Function to calculate the Cross section for two leptons, takes QCD process as Process1, EW process as Process2
 void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string DataType, string Process1, string Process2, double m, double c, double bins, bool scale, string ID) {
 
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 	gStyle->SetOptStat(0);
 
 	//Selector for the process not to be subtracted
@@ -454,7 +456,7 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string Da
 
 	Legend_Creator_For_Two(histograms, SelectedProcess1, SelectedProcess2);
 
-	Draw_Region_For_Two(DataType);
+	Draw_Region(DataType, 0.035, 0.62, 0.85, 0.62, 0.785, 0.62, 0.72);
 
 	string scaled = "";
 	if (scale) scaled = "_Scaled";

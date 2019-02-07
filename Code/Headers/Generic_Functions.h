@@ -12,14 +12,14 @@
 
 //This function will create the legend on the currently active canvas
 //This function takes the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-void Legend_Creator(vector<TH1F*> histograms) {
+void Legend_Creator(vector<TH1F*> histograms, double xmax, double ymax, double xmin, double ymin, double textsize, double bordersize) {
 
 	//Create the legend
-	auto legend = new TLegend(0.84,0.89,0.78,0.45);
+	auto legend = new TLegend(xmax,ymax,xmin,ymin);
 
 	//Minor Formatting
-	legend->SetTextSize(0.037);
-	legend->SetBorderSize(0);
+	legend->SetTextSize(textsize);
+	legend->SetBorderSize(bordersize);
 
 	//Add all the entries to the histogram
 	legend->AddEntry(histograms[11], "Data");
@@ -35,36 +35,6 @@ void Legend_Creator(vector<TH1F*> histograms) {
 	legend->AddEntry(histograms[1], "Wtaunu");
 	legend->AddEntry(histograms[0], "t#bar{t}");
 
-	legend->Draw(); //Draw the legend to the currently active canvas
-
-}
-
-//This function will create the legend on the currently active canvas
-//Better formatted for the divided fit graphs
-//This function takes the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-void Legend_Creator_For_Fit(vector<TH1F*> histograms) {
-
-	//Create the legend
-	auto legend = new TLegend(0.93,0.925,0.83,0.40);
-
-	//Minor Formatting
-	legend->SetTextSize(0.05);
-	legend->SetBorderSize(0);
-
-	//Add all the entries to the histgoram
-	legend->AddEntry(histograms[11], "Data");
-	legend->AddEntry(histograms[10], "QCD Zee");
-	legend->AddEntry(histograms[9], "QCD Z#mu#mu");
-	legend->AddEntry(histograms[8], "QCD Z#tau#tau");
-	legend->AddEntry(histograms[7], "EW Zee");
-	legend->AddEntry(histograms[6], "EW Z#mu#mu");
-	legend->AddEntry(histograms[5], "EW Z#tau#tau");
-	legend->AddEntry(histograms[4], "ZqqZll");
-	legend->AddEntry(histograms[3], "Wenu");
-	legend->AddEntry(histograms[2], "Wmunu");
-	legend->AddEntry(histograms[1], "Wtaunu");
-	legend->AddEntry(histograms[0], "t#bar{t}");
-	
 	legend->Draw(); //Draw the legend to the currently active canvas
 
 }
@@ -169,15 +139,11 @@ vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
 
 }
 
-//This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
-vector<TH1F*> Histogram_Return(string AnalysisType, string DataType) {
-
-	string DataTypeHistName = "h_" + DataType + ";1";  //Name of the desired histogram in the root file
+vector<TFile*> Root_Files(string AnalysisType) {
 
 	//Variable creation
 	vector<string> names;
 	vector<TFile*> files;
-	vector<TH1F*> histograms;
 
 	//Create the file names for the stack of processes and push them into the names vector
 	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/ttb_Histograms.root");
@@ -198,15 +164,23 @@ vector<TH1F*> Histogram_Return(string AnalysisType, string DataType) {
 		files.push_back(new TFile(name->c_str()));
 	}
 
+	return files;
+
+}
+
+//This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
+vector<TH1F*> Histogram_Return_Given_File(string AnalysisType, string DataType, vector<TFile*> root_files) {
+
+	string DataTypeHistName = "h_" + DataType + ";1";  //Name of the desired histogram in the root file
+
+	//Variable creation
+	vector<TFile*> files = root_files;
+	vector<TH1F*> histograms;
+
 	//Get all the histograms from files depending on the Data Type and push them into the histograms vector
 	for (auto tfile = files.begin(); tfile < files.end(); tfile++) {
 		TH1F *histogram = (TH1F*)(*tfile)->Get(DataTypeHistName.c_str());
 		histograms.push_back(histogram);
-	}
-
-	//Close all the opened files
-	for (TFile* tfile = files.begin(); tfile < files.end(); tfile++) {
-		(*tfile)->Close();
 	}
 
 	return histograms;
@@ -218,7 +192,7 @@ void Histogram_Namer(TH1F* histogram, string DataType) {
 	
 	if (DataType.find("p4_Pt") != string::npos) histogram->GetXaxis()->SetTitle("p_{T} [GeV/c]"); 
 	if (DataType.find("_mass") != string::npos && DataType.find("lep_0_lep_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{ll} [GeV/c^{2}]"); 
-	if (DataType.find("_mass") != string::npos && DataType.find("ljet_0_ljet_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{jj} [GeV/c^{2}]");
+	if (DataType.find("_mass") != string::npos && DataType.find("jet_0_jet_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{jj} [GeV/c^{2}]");
 	if (DataType.find("Centrality") != string::npos) histogram->GetXaxis()->SetTitle("Centrality");
 	if (DataType.find("DeltaR") != string::npos) histogram->GetXaxis()->SetTitle("#DeltaR");
 
@@ -229,7 +203,7 @@ void Histogram_Namer(THStack* histogram, string DataType) {
 	
 	if (DataType.find("p4_Pt") != string::npos) histogram->GetXaxis()->SetTitle("p_{T} [GeV/c]"); 
 	if (DataType.find("_mass") != string::npos && DataType.find("lep_0_lep_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{ll} [GeV/c^{2}]"); 
-	if (DataType.find("_mass") != string::npos && DataType.find("ljet_0_ljet_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{jj} [GeV/c^{2}]");
+	if (DataType.find("_mass") != string::npos && DataType.find("jet_0_jet_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{jj} [GeV/c^{2}]");
 	if (DataType.find("Centrality") != string::npos) histogram->GetXaxis()->SetTitle("Centrality");
 	if (DataType.find("DeltaR") != string::npos) histogram->GetXaxis()->SetTitle("#DeltaR");
 
@@ -243,7 +217,7 @@ string Histogram_Namer(string DataType) {
 
 	if (DataType.find("p4_Pt") != string::npos) Histogram_Name = "p_{T} [GeV/c]"; 
 	if (DataType.find("_mass") != string::npos && DataType.find("lep_0_lep_1") != string::npos) Histogram_Name = "m_{ll} [GeV/c^{2}]"; 
-	if (DataType.find("_mass") != string::npos && DataType.find("ljet_0_ljet_1") != string::npos) Histogram_Name = "m_{jj} [GeV/c^{2}]";
+	if (DataType.find("_mass") != string::npos && DataType.find("jet_0_jet_1") != string::npos) Histogram_Name = "m_{jj} [GeV/c^{2}]";
 	if (DataType.find("Centrality") != string::npos) Histogram_Name = "Centrality";
 	if (DataType.find("DeltaR") != string::npos) Histogram_Name = "#DeltaR";
 
@@ -253,7 +227,7 @@ string Histogram_Namer(string DataType) {
 
 //This function will draw the box containing information about the data used to produce graphs
 //It will draw the box to the currently active canvas
-void Draw_Region(string DataType) {
+void Draw_Region(string DataType, double textsize, double latex1left, double latex1right, double latex2left, double latex2right, double latex3left, double latex3right) {
 
 	string region;
 
@@ -268,109 +242,56 @@ void Draw_Region(string DataType) {
 	TLatex t;  						//Create a latex object
 	t.SetTextFont(42);  					//Set font
 	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-	t.SetTextSize(0.037);  					//Set font size
-	t.DrawLatex(0.62, 0.86, latexLine.c_str());  		//Draw line 1
-	t.DrawLatex(0.62, 0.80, "#scale[0.7]{#int}L dt = 36.2fb^{-1}");  	//Draw line 2
-	t.DrawLatex(0.62, 0.75, "#sqrt{s} = 13 TeV");  		//Draw line 3
-
-}
-
-//This function will draw the box containing information about the data used to produce graphs
-//It will draw the box to the currently active canvas
-//It has been modified to appear better for the divided fit graphs
-void Draw_Region_For_Fit(string DataType) {
-
-	string region;
-
-	//Check the data type for different regions or except version of Data Types
-	if (DataType.find("CONTROL") != string::npos) region = "Control";
-	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
-	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
-	else region = "Search";
-
-	string latexLine = "#font[42]{" + region + " Region}";  //Create a string to be c_str()
-
-	TLatex t;  						//Create a latex object
-	t.SetTextFont(42);  					//Set font
-	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-	t.SetTextSize(0.05);  					//Set font size
-	t.DrawLatex(0.675, 0.90, latexLine.c_str()); 		//Draw line 1
-	t.DrawLatex(0.675, 0.81, "#scale[0.7]{#int}L dt = 36.2fb^{-1}"); 	//Draw line 2
-	t.DrawLatex(0.675, 0.72, "#sqrt{s} = 13 TeV");		//Draw line 3
-
-}
-
-//This function will draw the box containing information about the data used to produce graphs
-//It will draw the box to the currently active canvas
-//Better formatted and specialised for specifically two processes stacked, plus data
-void Draw_Region_For_Two(string DataType) {
-
-	string region;
-
-	//Check the data type for different regions or except version of Data Types
-	if (DataType.find("CONTROL") != string::npos) region = "Control";
-	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
-	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
-	else region = "Search";
-
-	string latexLine = "#font[42]{" + region + " Region}";  //Create a string to be c_str()
-
-	TLatex t;  						//Create a latex object
-	t.SetTextFont(42);  					//Set font
-	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-	t.SetTextSize(0.035);  					//Set font size
-	t.DrawLatex(0.62, 0.85, latexLine.c_str()); 		//Draw line 1
-	t.DrawLatex(0.62, 0.785, "#scale[0.7]{#int}L dt = 36.2fb^{-1}"); 	//Draw line 2
-	t.DrawLatex(0.62, 0.72, "#sqrt{s} = 13 TeV");		//Draw line 3
+	t.SetTextSize(textsize);  					//Set font size
+	t.DrawLatex(latex1left, latex1right, latexLine.c_str());  		//Draw line 1
+	t.DrawLatex(latex2left, latex2right, "#scale[0.7]{#int}L dt = 36.2fb^{-1}");  	//Draw line 2
+	t.DrawLatex(latex3left, latex3right, "#sqrt{s} = 13 TeV");  		//Draw line 3
 
 }
 
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
-//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
+//DrawHistogram(histogram, histogram name, x axis title, bool for log y axis, bool for quiet, chain name, Analysis Type)
+void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
 
+	string OutputFileName = histogramName + "_" + ChainName + ".pdf";
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
-	//Create a new canvas using canvasName
-	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+	if (!(quiet)) {
 
-	//Sets the Titles
-	histogram->SetTitle(title.c_str());
+		//Create a new canvas using canvasName
+		TCanvas *canvas = new TCanvas(histogramName.c_str(), "", 600, 400);
 
-	//Draw the histogram
-	histogram->Draw("HIST");
+		//Sets the Titles
+		histogram->SetTitle(title.c_str());
 
-	//If the user wants the axis to be a log axis, do it
-	if (log == true) canvas->SetLogy();
+		//Draw the histogram
+		histogram->Draw("HIST");
 
-	//Write out to a ROOT file
-	histogram->Write(histogramName.c_str());
-	
-	//Write out to a PDF file
-	canvas->SaveAs(FullOutputFilePath.c_str());
+		//If the user wants the axis to be a log axis, do it
+		if (log == true) canvas->SetLogy();
 
-	canvas->Close();
+		//Write out to a ROOT file
+		histogram->Write(histogramName.c_str());
 
-}
+		//Write out to a PDF file
+		canvas->SaveAs(FullOutputFilePath.c_str());
 
-//This function will draw a generic histogram, for simple histograms, it will be faster to use this
-//Draw histogram function takes the following:
-//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_Quiet(TH1F *histogram, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
+		canvas->Close();
 
-	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
-	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
+	} else if (quiet) {
 
-	//Sets the X axis title
-	histogram->SetTitle(title.c_str());
+		//Sets the X axis title
+		histogram->SetTitle(title.c_str());
 
-	//Draw the histogram
-	histogram->Draw();
+		//Draw the histogram
+		histogram->Draw();
 
-	//Write out to a ROOT file
-	histogram->Write(histogramName.c_str());
+		//Write out to a ROOT file
+		histogram->Write(histogramName.c_str());
+
+	}
 
 }
 
@@ -574,7 +495,7 @@ void Process_Combiner(string AnalysisType, string Process) {
 
 // Stacking histograms:
 // need to give it the analysis type and then for given, tells it the path
-void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram) {
+void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files) {
 
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
@@ -583,7 +504,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
 	//Get the vector of histograms for the given AnalysisType and DataType
-	vector<TH1F*> histograms = Histogram_Return(AnalysisType, DataType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 
 	//Create the stacked histogram
 	THStack *histogramStack = new THStack("histogramStack", "");
@@ -628,12 +549,30 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		if (DataType == "lep_0_lep_1_mass_EXCEPT") histogramStack->SetMinimum(15);
 		if (DataType == "Centrality_CONTROL") histogramStack->SetMinimum(1);
 
-	} else if (AnalysisType == "Electron") {
+	} else if (AnalysisType == "Electron" or AnalysisType == "Muon" or AnalysisType == "MuonTau" or AnalysisType == "ElectronTau" or AnalysisType == "ElectronMuon") {
 
 		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
 		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_0_ljet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("met_reco_p4_Pt") != string::npos) histogramStack->SetMinimum(0.01);
+		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
+		else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
+		if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
+
+	} 
+
+	/*else if (AnalysisType == "Muon") {
+
+		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
@@ -643,22 +582,9 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
 
-	} else if (AnalysisType == "Muon") {
+	}*/
 
-		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
-		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_0_ljet_1_mass") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
-		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
-		else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
-		if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
-
-	} else { int i = 0;
+	else { int i = 0;
 
 	}
 
@@ -668,8 +594,8 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	canvas->SetLogy();  //Log the y axis
 
 	//Create the legend and draw the region information
-	Legend_Creator(histograms);
-	Draw_Region(DataType);
+	Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0);
+	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
@@ -687,12 +613,13 @@ void DrawStackedProcesses(string AnalysisType) {
 	ifstream DataTypeFile (DataTypeFileName);
 	string line;
 
+	vector<TFile*> root_files = Root_Files(AnalysisType);
 	
 	while(!DataTypeFile.eof()) {  		//While not at the end of the file
 		getline(DataTypeFile, line);  	//Get the file line
 		if (line != "") {  		//If not looking at the last line	
 			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
-			Process_Stacker(AnalysisType, line, fileName);
+			Process_Stacker(AnalysisType, line, fileName, root_files);
 		}
 	}
 }
