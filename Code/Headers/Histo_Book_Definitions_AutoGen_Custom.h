@@ -298,7 +298,7 @@ virtual void Book_TOT_pT_UnitVector_BJET(int bins, double min, double max); // B
 TH1F	*h_TOT_pT_UnitVector_BJET; // BJET VERSION
 
 
-// -- unit vector of MET
+// -- unit vector of ME
 double MET_UnitVector;
 
 virtual void Book_MET_UnitVector_PRE(int bins, double min, double max); // PRE VERSION

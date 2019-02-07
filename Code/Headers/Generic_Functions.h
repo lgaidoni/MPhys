@@ -204,6 +204,11 @@ vector<TH1F*> Histogram_Return(string AnalysisType, string DataType) {
 		histograms.push_back(histogram);
 	}
 
+	//Close all the opened files
+	for (TFile* tfile = files.begin(); tfile < files.end(); tfile++) {
+		(*tfile)->Close();
+	}
+
 	return histograms;
 
 }
@@ -667,7 +672,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	Draw_Region(DataType);
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
