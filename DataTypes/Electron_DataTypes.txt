@@ -42,9 +42,3 @@ pT_balance_3_EXCEPT
 met_reco_p4_Pt
 met_reco_p4_Pt_PRE
 met_reco_p4_Pt_CONTROL
-h_neutrinoME1
-h_neutrinoME1_PRE
-h_neutrinoME1_CONTROL
-h_neutrinoME2
-h_neutrinoME2_PRE
-h_neutrinoME2_CONTROL
