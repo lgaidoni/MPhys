@@ -1,11 +1,11 @@
-mc_locations = open("MC_Paths.txt", "r") # Open the MC Paths for files that need merging
+import os
+
+mc_locations = open("MC_Paths.txt", "r")
 data_locations = open("Data_Paths.txt", "r") # Open the DATA Paths for files that need merging
 chain_functions = open("Headers/Chain_Functions.h", "w")
 N_functions = open("Headers/N_Functions.h", "w")
 analysis_start_functions = open("Headers/Analysis_Start_Functions.h", "w")
 run_all_analyses = open("Headers/Run_All_Analyses_Functions.h", "w")
-
-import os
 
 def process_line_writer(inputFile, line, Name, AnalysisType, Process):
 	if (line.find(Process) != -1): 
@@ -62,13 +62,13 @@ def process_chains_writer(AnalysisType):
 	
 
 def analysis_start_function_writer(inputFile, IDtag, Name):
-	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType, string Particles) {\n")
+	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
 	inputFile.write("\tvector<double> luminosity_info = csv_reader(\"" + IDtag + "\");\n")
 	inputFile.write("\tdouble lum_weight = luminosity_weighting_function(luminosity_info, N_" + Name + "(), 36200);\n")
 		
-	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", lum_weight, Particles);\n")
+	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", lum_weight);\n")
 	inputFile.write("\t" + Name + "->BookHistos();\n")
 	inputFile.write("\t" + Name + "->Loop();\n")
 	inputFile.write("\t" + Name + "->DrawHistos();\n")
@@ -76,10 +76,10 @@ def analysis_start_function_writer(inputFile, IDtag, Name):
 	inputFile.write("}\n\n")
 
 def analysis_start_function_writer_data(inputFile, IDtag, Name):
-	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType, string Particles) {\n")
+	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
-	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", 1, Particles);\n")
+	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", 1);\n")
 	inputFile.write("\t" + Name + "->BookHistos();\n")
 	inputFile.write("\t" + Name + "->Loop();\n")
 	inputFile.write("\t" + Name + "->DrawHistos();\n")
@@ -87,10 +87,10 @@ def analysis_start_function_writer_data(inputFile, IDtag, Name):
 	inputFile.write("}\n\n")
 
 def run_all_analyses_writer_top(inputFile):
-	inputFile.write("void Run_All_Analyses(string AnalysisType, string Particles) {\n\n")
+	inputFile.write("void Run_All_Analyses(string AnalysisType) {\n\n")
 
 def run_all_analyses_writer_centre(inputFile, Name):
-	inputFile.write("\tStart_" + Name + "_Analysis(AnalysisType, Particles);\n")
+	inputFile.write("\tStart_" + Name + "_Analysis(AnalysisType);\n")
 	
 
 chain_functions.write("#ifndef Chain_Functions_h\n")
