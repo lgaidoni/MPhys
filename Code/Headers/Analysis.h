@@ -411,6 +411,7 @@ bool MC_Analysis::Cuts(string region) {
 	bool pT_balance_limit = false;
 	bool pT_balance_3_limit = false;
 	bool rap_int_condition = RapidityIntervalCheck(jet_0_p4, jet_1_p4, jet_2_p4);
+	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4); // is missing energy between two 'tau' leptons in phi space?
 
 	//Z Boson Mass Cut
 	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101) Z_mass_condition = true;	
@@ -457,9 +458,21 @@ bool MC_Analysis::Cuts(string region) {
 
 	bool common_cuts = false;	//The common cuts are false initially
 
-	//Work out if the common cuts are true here
- 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1) {
-		common_cuts = true;
+	// common cuts for "Tau"
+	if (AnalysisType == "ElectonMuon" || AnalysisType == "ElectronTau" || AnalysisType == "MuonTau"){
+	
+		//Work out if the common cuts are true here
+	 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && phi_int_condition) {
+			common_cuts = true;
+		}
+		
+	}
+
+	else { // common cuts for "Electron" and "Muon" 
+		//Work out if the common cuts are true here
+	 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1) {
+			common_cuts = true;
+		}
 	}
 
 	//If the region is the search region or an except region that isn't pt_balance (EW Z->ll enriched)
