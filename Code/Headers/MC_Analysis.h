@@ -1626,7 +1626,7 @@ public :
    TBranch        *b_weight_total;   //!
 
    MC_Analysis(TTree *tree=0);
-   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, string particles);
+   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight);
    MC_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
    MC_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~MC_Analysis();
@@ -1658,7 +1658,7 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, string particles) : fChain(0) 
+MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight) : fChain(0) 
 {
 
 	// if parameter tree is not specified (or zero), connect the file
@@ -1678,7 +1678,6 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, dou
 	AnalysisType = analysistype;
 	ChainName = chainname;
 	Luminosity_Weight = luminosity_weight;
-	desired_particles = particles;
 
 	if (ChainName == "DATA") {
 

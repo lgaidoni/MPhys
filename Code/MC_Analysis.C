@@ -75,7 +75,7 @@ void MC_Analysis::Loop() {
 
    //Output information to the status file
    output << time << endl;
-   output << "\"" << desired_particles << "\" Analysis of " << ChainName << " in progress..." << endl << endl;
+   output << "\"" << AnalysisType << "\" Analysis of " << ChainName << " in progress..." << endl << endl;
    output.close();
 
    /////////////////////////////////////////////////////////////////////////////////////////////
