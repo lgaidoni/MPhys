@@ -234,4 +234,17 @@ vector<TH1F*>	hv_MET_Type_Favour; // HISTOGRAM VECTOR
 
 vector<string>	hv_MET_Type_Favour_names; // HISTOGRAM NAME VECTOR
 
+// --  reconstructed_Z_mass with neutrino and z candidate
+double reconstructed_Z_mass;
+
+virtual void Book_reconstructed_Z_mass(int bins, double min, double max);
+TH1F	*h_reconstructed_Z_mass; // SEARCH VERSION
+TH1F	*h_reconstructed_Z_mass_PRE; // PRE VERSION
+TH1F	*h_reconstructed_Z_mass_CONTROL; // CONTROL VERSION
+TH1F	*h_reconstructed_Z_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_reconstructed_Z_mass_BJET; // BJET VERSION
+vector<TH1F*>	hv_reconstructed_Z_mass; // HISTOGRAM VECTOR
+
+vector<string>	hv_reconstructed_Z_mass_names; // HISTOGRAM NAME VECTOR
+
 #endif
