@@ -332,16 +332,33 @@ void MC_Analysis::GenerateVariables() {
 	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
 
 	// neutrino missing energy/momentum vector x and y components (in transverse plane)
-	vector<double> VectorMissingEnergy12 = SimMETEqn(lep_0_p4, lep_1_p4, met_reco_p4);
+	vector<double> VectorNeutrinoTransMom12 = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
 	
-	// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergyxy
-	neutrinoME1 = abs(VectorMissingEnergy12[0]);
-	neutrinoME2 = abs(VectorMissingEnergy12[1]);
+	// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
+	neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
+	neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
 
 	//cout << "Neutrino ME1 = " << neutrinoME1 << endl << endl;
 	//cout << "Neutrino ME2 = " << neutrinoME2 << endl << endl;
 
-}
+	// neutrino 1
+	neutrino_0_x_p = x_component_pT(neutrino_0_pt, lep_0_p4); // p_x of neutrino 1
+	neutrino_0_y_p = y_component_pT(neutrino_0_pt, lep_0_p4); // p_y of neutrino 1
+	neutrino_0_z_p = p_z_neutrino_calc(neutrino_0_pt, lep_0_p4); // p_z of neutrino 1
+	neutrino_0_TLV = neutrino_TLV(neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 1
+	// neutrino 2
+	neutrino_1_x_p = x_component_pT(neutrino_1_pt, lep_1_p4); // p_x of neutrino 2
+	neutrino_1_y_p = y_component_pT(neutrino_1_pt, lep_1_p4); // p_y of neutrino 2
+	neutrino_1_z_p = p_z_neutrino_calc(neutrino_1_pt, lep_1_p4); // p_z of neutrino 2
+	neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
+
+	// reconstruct tau candidate with tau lepton and neutrino
+	reconstructed_tau_0_TLV = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
+	reconstructed_tau_1_TLV = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
+	
+	// invariant mass of the Z boson with new reconstructed neutrino
+	reconstructed_Z_mass = InvariantMass(reconstructed_tau_0_TLV, reconstructed_tau_1_TLV);
+}	
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ///------------- BEFORE VARIABLE CUT HISTOGRAM FILLING (PRE REGION) -----------------///
