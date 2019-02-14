@@ -109,6 +109,6 @@
 	//Histogram Bookings for MET_Type_Favour
 	Book_MET_Type_Favour(bins, MET_Type_Favour_Min, MET_Type_Favour_Max);
 
-	//Histogram Bookings for reconstructed_Z_mass
-	Book_reconstructed_Z_mass(bins, reconstructed_Z_mass_Min, reconstructed_Z_mass_Max);
+	//Histogram Bookings for lep_0_lep_1_mass_reconstructed
+	Book_lep_0_lep_1_mass_reconstructed(bins, lep_0_lep_1_mass_reconstructed_Min, lep_0_lep_1_mass_reconstructed_Max);
 

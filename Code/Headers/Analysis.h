@@ -48,7 +48,7 @@ void MC_Analysis::BookHistos() {
 	int neutrino_0_pt_Min = 0, neutrino_0_pt_Max = 1000;
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
 	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
-	int reconstructed_Z_mass_Min = 0, reconstructed_Z_mass_Max = 1000;
+  int lep_0_lep_1_mass_reconstructed_Min =0, lep_0_lep_1_mass_reconstructed_Max =200;
 
 	/////----------------------------------BOOKINGS------------------------------------/////
 
@@ -361,7 +361,7 @@ void MC_Analysis::GenerateVariables() {
 	TLorentzVector* reconstructed_tau_1_TLV = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 	
 	// invariant mass of the Z boson with new reconstructed neutrino
-	reconstructed_Z_mass = InvariantMass(reconstructed_tau_0_TLV, reconstructed_tau_1_TLV);
+	lep_0_lep_1_mass_reconstructed = InvariantMass(reconstructed_tau_0_TLV, reconstructed_tau_1_TLV);
 }	
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -409,6 +409,13 @@ void MC_Analysis::FillAllData_PreCut() {
 		h_MET_Type_Favour_PRE->Fill(MET_Type_Favour, final_weighting);
 
 	}
+
+	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+
+		h_lep_0_lep_1_mass_reconstructed_PRE->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
+
+	}
+
 
 }
 
@@ -589,6 +596,12 @@ void MC_Analysis::Fill() {
 
 		}
 
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+
+			h_lep_0_lep_1_mass_reconstructed->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
+
+		}
+
 	}
 
 	///----- CONTROL region filling -----///
@@ -629,6 +642,12 @@ void MC_Analysis::Fill() {
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
 			h_MET_Type_Favour_CONTROL->Fill(MET_Type_Favour, final_weighting);
+
+		}
+
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+
+			h_lep_0_lep_1_mass_reconstructed_CONTROL->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
 
 		}
 
@@ -745,6 +764,12 @@ void MC_Analysis::DrawHistos() {
 	// Met Type Favour, whether the missing energy vector points towards the lepton or hadronic tau
 	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
 
+	// reconstructed Z mass with tau candidates and neutrinos
+	//DrawHistogram(h_lep_0_lep_1_mass_reconstructed, "h_lep_0_lep_1_mass_reconstructed", "; Z mass incl neutrinos [GeV/c^2];Events", false, true, ChainName, AnalysisType);)
+	//DrawHistogram(h_lep_0_lep_1_mass_reconstructed_PRE, "h_lep_0_lep_1_mass_reconstructed_PRE", "; Z mass incl neutrinos [GeV/c^2];Events", false, true, ChainName, AnalysisType);)
+	//DrawHistogram(h_lep_0_lep_1_mass_reconstructed_CONTROL, "h_lep_0_lep_1_mass_reconstructed_CONTROL", "; Z mass incl neutrinos [GeV/c^2];Events", false, true, ChainName, AnalysisType);)
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reconstructed_PRE, h_lep_0_lep_1_mass_reconstructed, h_lep_0_lep_1_mass_reconstructed_CONTROL, "lep_0_lep_1_mass_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reconstructed", ";Z mass incl neutrinos;Events", true, ChainName, AnalysisType);	
+	
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
@@ -760,6 +785,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_neutrino_0_pt_BJET, "h_neutrino_0_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_neutrino_1_pt_BJET, "h_neutrino_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Type_Favour_BJET, "h_MET_Type_Favour_BJET", ";;Events", false, true, ChainName, AnalysisType);
+
 
 	Histograms->Close();
 
