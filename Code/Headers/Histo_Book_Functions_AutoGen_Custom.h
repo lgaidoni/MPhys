@@ -387,4 +387,26 @@ void MC_Analysis::Book_MET_Type_Favour(int bins, double min, double max) {
 }
 
 
+// --  reconstructed_Z_mass with neutrino and z candidate
+void MC_Analysis::Book_reconstructed_Z_mass(int bins, double min, double max) {
+	h_reconstructed_Z_mass = new TH1F("h_reconstructed_Z_mass", "", bins, min, max);
+	h_reconstructed_Z_mass_PRE = new TH1F("h_reconstructed_Z_mass_PRE", "", bins, min, max);
+	h_reconstructed_Z_mass_CONTROL = new TH1F("h_reconstructed_Z_mass_CONTROL", "", bins, min, max);
+	h_reconstructed_Z_mass_EXCEPT = new TH1F("h_reconstructed_Z_mass_EXCEPT", "", bins, min, max);
+	h_reconstructed_Z_mass_BJET = new TH1F("h_reconstructed_Z_mass_BJET", "", bins, min, max);
+
+	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass);
+	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass_CONTROL);
+	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass_EXCEPT);
+	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass_PRE);
+	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass_BJET);
+
+	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass");
+	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass_CONTROL");
+	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass_EXCEPT");
+	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass_PRE");
+	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass_BJET");
+}
+
+
 #endif
