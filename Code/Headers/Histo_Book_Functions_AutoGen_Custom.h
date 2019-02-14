@@ -365,27 +365,25 @@ void MC_Analysis::Book_neutrino_1_pt(int bins, double min, double max) {
 }
 
 
-/// ------------------- TESTING ---------------- ///
+// -- Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
+void MC_Analysis::Book_MET_Type_Favour(int bins, double min, double max) {
+	h_MET_Type_Favour = new TH1F("h_MET_Type_Favour", "", bins, min, max);
+	h_MET_Type_Favour_PRE = new TH1F("h_MET_Type_Favour_PRE", "", bins, min, max);
+	h_MET_Type_Favour_CONTROL = new TH1F("h_MET_Type_Favour_CONTROL", "", bins, min, max);
+	h_MET_Type_Favour_EXCEPT = new TH1F("h_MET_Type_Favour_EXCEPT", "", bins, min, max);
+	h_MET_Type_Favour_BJET = new TH1F("h_MET_Type_Favour_BJET", "", bins, min, max);
 
-// -- TESTING
-void MC_Analysis::Book_Testing(int bins, double min, double max) {
-	h_Testing = new TH1F("h_Testing", "", bins, min, max);
-	h_Testing_PRE = new TH1F("h_Testing_PRE", "", bins, min, max);
-	h_Testing_CONTROL = new TH1F("h_Testing_CONTROL", "", bins, min, max);
-	h_Testing_EXCEPT = new TH1F("h_Testing_EXCEPT", "", bins, min, max);
-	h_Testing_BJET = new TH1F("h_Testing_BJET", "", bins, min, max);
+	hv_MET_Type_Favour.push_back(h_MET_Type_Favour);
+	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_CONTROL);
+	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_EXCEPT);
+	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_PRE);
+	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_BJET);
 
-	hv_Testing.push_back(h_Testing);
-	hv_Testing.push_back(h_Testing_CONTROL);
-	hv_Testing.push_back(h_Testing_EXCEPT);
-	hv_Testing.push_back(h_Testing_PRE);
-	hv_Testing.push_back(h_Testing_BJET);
-
-	hv_Testing_names.push_back("h_Testing");
-	hv_Testing_names.push_back("h_Testing_CONTROL");
-	hv_Testing_names.push_back("h_Testing_EXCEPT");
-	hv_Testing_names.push_back("h_Testing_PRE");
-	hv_Testing_names.push_back("h_Testing_BJET");
+	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour");
+	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_CONTROL");
+	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_EXCEPT");
+	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_PRE");
+	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_BJET");
 }
 
 

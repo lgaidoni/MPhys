@@ -221,19 +221,17 @@ vector<TH1F*>	hv_neutrino_1_pt; // HISTOGRAM VECTOR
 
 vector<string>	hv_neutrino_1_pt_names; // HISTOGRAM NAME VECTOR
 
-/// ------------------- TESTING ---------------- ///
+// -- Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
+double MET_Type_Favour;
 
-// -- TESTING
-double Testing;
+virtual void Book_MET_Type_Favour(int bins, double min, double max);
+TH1F	*h_MET_Type_Favour; // SEARCH VERSION
+TH1F	*h_MET_Type_Favour_PRE; // PRE VERSION
+TH1F	*h_MET_Type_Favour_CONTROL; // CONTROL VERSION
+TH1F	*h_MET_Type_Favour_EXCEPT; // EXCEPT VERSION
+TH1F	*h_MET_Type_Favour_BJET; // BJET VERSION
+vector<TH1F*>	hv_MET_Type_Favour; // HISTOGRAM VECTOR
 
-virtual void Book_Testing(int bins, double min, double max);
-TH1F	*h_Testing; // SEARCH VERSION
-TH1F	*h_Testing_PRE; // PRE VERSION
-TH1F	*h_Testing_CONTROL; // CONTROL VERSION
-TH1F	*h_Testing_EXCEPT; // EXCEPT VERSION
-TH1F	*h_Testing_BJET; // BJET VERSION
-vector<TH1F*>	hv_Testing; // HISTOGRAM VECTOR
-
-vector<string>	hv_Testing_names; // HISTOGRAM NAME VECTOR
+vector<string>	hv_MET_Type_Favour_names; // HISTOGRAM NAME VECTOR
 
 #endif

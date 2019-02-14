@@ -106,6 +106,6 @@
 	//Histogram Bookings for neutrino_1_pt
 	Book_neutrino_1_pt(bins, neutrino_1_pt_Min, neutrino_1_pt_Max);
 
-	//Histogram Bookings for Testing
-	Book_Testing(bins, Testing_Min, Testing_Max);
+	//Histogram Bookings for MET_Type_Favour
+	Book_MET_Type_Favour(bins, MET_Type_Favour_Min, MET_Type_Favour_Max);
 
