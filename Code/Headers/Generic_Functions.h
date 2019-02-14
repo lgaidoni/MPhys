@@ -329,6 +329,9 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 	histogram2->Draw("SAME HIST");	
 	histogram3->Draw("SAME HIST");
 
+	//Name the x axis depending on the kind of data being plotted
+	Histogram_Namer(histogram1, histogramName);
+
 	//Create the legend
 	auto legend = new TLegend(0.99,0.95,0.75,0.75);
 	
