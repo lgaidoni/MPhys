@@ -723,7 +723,7 @@ bool RapidityIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLo
 	}
 	
 	// if additional jet_2 is between this rapidity interval, and have pT > 25, cut
-	if (minjet <= Vector3->Rapidity() <= maxjet && Vector3->Pt() > 25) rap_int_condition = false;
+	if (minjet <= Vector3->Rapidity() && Vector3->Rapidity() <= maxjet && Vector3->Pt() > 25) rap_int_condition = false;
 
 	return rap_int_condition;
 
@@ -733,7 +733,7 @@ bool RapidityIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLo
 //If Vector 3 (E_T^{miss}) lies between Vector 1 (tau product 1 phi) and Vector 2 (tau product 2 phi) keep 
 bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3) {
 
-	bool phi_int_condition = true;
+	bool phi_int_condition = false;
 	
 	//Check that E_T^{miss} lies in the delta phi interval between two tau decay particles
 	//First, need to find which tau decay particle is greater (max) or smaller (min) and assign them these names
@@ -748,9 +748,11 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 		minphi = Vector1->Phi();
 		maxphi = Vector2->Phi();	
 	}
+
+	//cout << "maxphi = " << maxphi << "   :   minphi = " << minphi << "   :   
 	
 	// if E_T^{miss} is not between this delta phi interval, cut
-	if (maxphi <= Vector3->Phi() <= minphi && Vector3->Pt()) phi_int_condition = false;
+	if (minphi <= Vector3->Phi() &&  Vector3->Phi() <= maxphi) phi_int_condition = true;
 
 	return phi_int_condition;
 
@@ -908,8 +910,20 @@ double METCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 	double sum1 = Emiss_Phi - (tauproduct1_Phi + tauproduct2_Phi)/2; // sum 1 to break things up
 
 	// calculate Centrality
-	double Centrality = sum1/DeltaPhi(Vector2, Vector3);
+	double Centrality = 2 * sum1/DeltaPhi(Vector2, Vector3);
 	return Centrality;
+}
+
+double METTypeFavour(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3) {
+
+	double Phi_E = Vector1->Phi();
+	double Phi_2= Vector2->Phi();	//Hadronic Tau
+	double Phi_3 = Vector3->Phi();	//Lepton
+
+	double favour = (Phi_3 - Phi_E)/(Phi_3 - Phi_2);
+
+	return favour;
+
 }
 
 
@@ -948,11 +962,6 @@ vector<double> pTneutrinovector_calc(TLorentzVector *Vector1, TLorentzVector *Ve
 	// neutrinos	
 	double neutrinoa, neutrinob; // transverse mometum of neutrino a and b resp
 	vector<double> pTneutrinovector; // vector for storing neutrino a transverse momentum and neutrino b transverse momentum
-
-	//neutrinoa = (c1-(b1*c2)/(b2))/(a1-(b1*a1)/(b2));	
-	//neutrinob = (c2-(a2*c1)/(a1))/(b2-(b1*a2)/(a1));
-	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	///Not 100% sure these are the right solutions for simultaneous equations. 
 
 	neutrinoa = (a2*c1 - a1*c2)/(a2*b1 - a1*b2);
 	neutrinob = (c1 - b1*neutrinoa)/a1;

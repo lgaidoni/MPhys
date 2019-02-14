@@ -32,7 +32,7 @@ void MC_Analysis::BookHistos() {
 	int pT_balance_Min = 0, pT_balance_Max = 1;
 	int pT_balance_3_Min = 0, pT_balance_3_Max = 1;
 	int Centrality_Min = -8, Centrality_Max = 8;
-	int MET_Centrality_Min = -8, MET_Centrality_Max = 8;
+	int MET_Centrality_Min = -16, MET_Centrality_Max = 16;
 	double RapidityDijet_Min = 0, RapidityDijet_Max = 4.5;
 	double RapidityDilepton_Min = 0, RapidityDilepton_Max = 4.5;
 	int lep_0_lep_1_mass_Min = 0, lep_0_lep_1_mass_Max = 200;
@@ -47,9 +47,8 @@ void MC_Analysis::BookHistos() {
 	int VectorNeutrinoTransMom_Min = 0, VectorNeutrinoTransMom_Max = 1000;
 	int neutrino_0_pt_Min = 0, neutrino_0_pt_Max = 1000;
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
+	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
 	int reconstructed_Z_mass =0, reconstructed_Z_mass=1000;
-
-	int Testing_Min = 0, Testing_Max = 200;
 
 	/////----------------------------------BOOKINGS------------------------------------/////
 
@@ -339,7 +338,8 @@ void MC_Analysis::GenerateVariables() {
 
 	// neutrino missing energy/momentum vector x and y components (in transverse plane)
 	vector<double> VectorNeutrinoTransMom12 = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
-	
+
+	MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
 
 	// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
 	neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
@@ -404,8 +404,11 @@ void MC_Analysis::FillAllData_PreCut() {
 	h_neutrino_0_pt_PRE->Fill(neutrino_0_pt,final_weighting);
 	h_neutrino_1_pt_PRE->Fill(neutrino_1_pt,final_weighting);
 
-	//TESTING
-	h_Testing_PRE->Fill(lep_0_lep_1_mass, final_weighting);
+	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+
+		h_MET_Type_Favour_PRE->Fill(MET_Type_Favour, final_weighting);
+
+	}
 
 }
 
@@ -425,12 +428,12 @@ bool MC_Analysis::Cuts(string region) {
 	bool leading_jets_invariant_mass = false;
 	bool ptvarcone_40_0 = false;
 	bool ptvarcone_40_1 = false;
+	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4);
 
 	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
 	bool pT_balance_3_limit = false;
 	bool rap_int_condition = RapidityIntervalCheck(jet_0_p4, jet_1_p4, jet_2_p4);
-	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4); // is missing energy between two 'tau' leptons in phi space?
 
 	//Z Boson Mass Cut
 	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101) Z_mass_condition = true;	
@@ -467,6 +470,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "EXCEPT_ptvarcone_40_1" && bjets_region == false) 		ptvarcone_40_1 = true;
 	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) 		pT_balance_limit = true;
 	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) 		pT_balance_3_limit = true;
+	if (region == "EXCEPT_phi_int_condition" && bjets_region == false) 		phi_int_condition = true;
 
 	//THIS IS HERE FOR THE FUTURE WHEN REMOVAL OF PT BALANCE FROM tau SELECTIONS IS NECESSARY
 	/*
@@ -479,6 +483,9 @@ bool MC_Analysis::Cuts(string region) {
 
 	// common cuts for "Tau"
 	if (AnalysisType == "ElectonMuon" || AnalysisType == "ElectronTau" || AnalysisType == "MuonTau"){
+
+		//This is only here in order to see the full mass spectrum represented in the rest of the cuts, and should be changed when appropriate
+		Z_mass_condition = true;
 	
 		//Work out if the common cuts are true here
 	 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && phi_int_condition) {
@@ -540,6 +547,7 @@ void MC_Analysis::Fill() {
 	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
 	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
 	if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
+	if (Cuts("EXCEPT_phi_int_condition")) 		h_MET_Centrality_EXCEPT->Fill(MET_Centrality, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
 
 	///----- SEARCH region filling -----///
 	if (Cuts("search")) {
@@ -575,7 +583,11 @@ void MC_Analysis::Fill() {
 		h_neutrino_0_pt->Fill(neutrino_0_pt,final_weighting);
 		h_neutrino_1_pt->Fill(neutrino_1_pt,final_weighting);
 
-		h_Testing->Fill(lep_0_lep_1_mass, final_weighting);
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+
+			h_MET_Type_Favour->Fill(MET_Type_Favour, final_weighting);
+
+		}
 
 	}
 
@@ -614,6 +626,12 @@ void MC_Analysis::Fill() {
 		h_neutrino_0_pt_CONTROL->Fill(neutrino_0_pt,final_weighting);
 		h_neutrino_1_pt_CONTROL->Fill(neutrino_1_pt,final_weighting);
 
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+
+			h_MET_Type_Favour_CONTROL->Fill(MET_Type_Favour, final_weighting);
+
+		}
+
 
 	}
 
@@ -651,6 +669,12 @@ void MC_Analysis::Fill() {
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
 		h_neutrino_0_pt_BJET->Fill(neutrino_0_pt,final_weighting);
 		h_neutrino_1_pt_BJET->Fill(neutrino_1_pt,final_weighting);
+
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+
+			h_MET_Type_Favour_BJET->Fill(MET_Type_Favour, final_weighting);
+
+		}
 
 	}
 
@@ -708,17 +732,18 @@ void MC_Analysis::DrawHistos() {
 
 	// Centrality histograms
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", ";Centrality;Events", true, ChainName, AnalysisType);
-	
-	//MISSING ENERGY GRAPHS
-	
+
 	// MET Centrality histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET_Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", ";MET_Centrality;Events", true, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, h_MET_Centrality_EXCEPT, "MET_Centrality", "Pre-Cut", "Post Cut", "Control", "Except", "h_MET_Centrality", ";MET_Centrality;Events", true, ChainName, AnalysisType);
 
 	// missing energy for neutrino 1 
 	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_0_pt_PRE, h_neutrino_0_pt, h_neutrino_0_pt_CONTROL, "neutrino_0_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_0_pt", ";Missing Energy of neutrino 1;Events", true, ChainName, AnalysisType);
 
 	// missing energy for neutrino 2
 	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_1_pt_PRE, h_neutrino_1_pt, h_neutrino_1_pt_CONTROL, "neutrino_1_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_1_pt", ";Missing Energy of neutrino 2;Events", true, ChainName, AnalysisType);
+
+	// Met Type Favour, whether the missing energy vector points towards the lepton or hadronic tau
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
 
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
@@ -734,6 +759,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_neutrino_0_pt_BJET, "h_neutrino_0_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_neutrino_1_pt_BJET, "h_neutrino_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_MET_Type_Favour_BJET, "h_MET_Type_Favour_BJET", ";;Events", false, true, ChainName, AnalysisType);
 
 	Histograms->Close();
 
