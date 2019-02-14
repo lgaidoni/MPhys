@@ -44,10 +44,11 @@ void MC_Analysis::BookHistos() {
 	int jet_1_p4_Pt_Min = 0,  jet_1_p4_Pt_Max = 1000;
 	int TOT_pT_UnitVector_Min = 0, TOT_pT_UnitVector_Max = 1000;
 	int MET_UnitVector_Min = 0, MET_UnitVector_Max = 1000;
-	int VectorMissingEnergyxy_Min = 0, VectorMissingEnergyxy_Max = 1000;
+	int VectorNeutrinoTransMom_Min = 0, VectorNeutrinoTransMom_Max = 1000;
 	int neutrino_0_pt_Min = 0, neutrino_0_pt_Max = 1000;
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
 	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
+	int reconstructed_Z_mass =0, reconstructed_Z_mass=1000;
 
 	/////----------------------------------BOOKINGS------------------------------------/////
 
@@ -336,15 +337,32 @@ void MC_Analysis::GenerateVariables() {
 	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
 
 	// neutrino missing energy/momentum vector x and y components (in transverse plane)
-	vector<double> VectorMissingEnergy12 = SimMETEqn(lep_0_p4, lep_1_p4, met_reco_p4);
-	
-	// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergyxy
-	neutrino_0_pt = abs(VectorMissingEnergy12[0]);
-	neutrino_1_pt = abs(VectorMissingEnergy12[1]);
+	vector<double> VectorNeutrinoTransMom12 = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
 
 	MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
 
-}
+	// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
+	neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
+	neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
+
+	// neutrino 1
+	double neutrino_0_x_p = x_component_pT(neutrino_0_pt, lep_0_p4); // p_x of neutrino 1
+	double neutrino_0_y_p = y_component_pT(neutrino_0_pt, lep_0_p4); // p_y of neutrino 1
+	double neutrino_0_z_p = p_z_neutrino_calc(neutrino_0_pt, lep_0_p4); // p_z of neutrino 1
+	TLorentzVector* neutrino_0_TLV = neutrino_TLV(neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 1
+	// neutrino 2
+	double neutrino_1_x_p = x_component_pT(neutrino_1_pt, lep_1_p4); // p_x of neutrino 2
+	double neutrino_1_y_p = y_component_pT(neutrino_1_pt, lep_1_p4); // p_y of neutrino 2
+	double neutrino_1_z_p = p_z_neutrino_calc(neutrino_1_pt, lep_1_p4); // p_z of neutrino 2
+	TLorentzVector* neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
+
+	// reconstruct tau candidate with tau lepton and neutrino
+	TLorentzVector* reconstructed_tau_0_TLV = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
+	TLorentzVector* reconstructed_tau_1_TLV = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
+	
+	// invariant mass of the Z boson with new reconstructed neutrino
+	reconstructed_Z_mass = InvariantMass(reconstructed_tau_0_TLV, reconstructed_tau_1_TLV);
+}	
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ///------------- BEFORE VARIABLE CUT HISTOGRAM FILLING (PRE REGION) -----------------///
