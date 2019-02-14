@@ -345,14 +345,6 @@ void MC_Analysis::GenerateVariables() {
 	neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
 	neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
 
-	//cout << "Neutrino ME1 = " << neutrinoME1 << endl << endl;
-	//cout << "Neutrino ME2 = " << neutrinoME2 << endl << endl;
-
-	// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergyxy
-	neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
-	neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
-
-
 	// neutrino 1
 	double neutrino_0_x_p = x_component_pT(neutrino_0_pt, lep_0_p4); // p_x of neutrino 1
 	double neutrino_0_y_p = y_component_pT(neutrino_0_pt, lep_0_p4); // p_y of neutrino 1

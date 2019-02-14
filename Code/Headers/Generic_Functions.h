@@ -298,9 +298,10 @@ void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log
 //This function will draw a stack of 3 histograms, used for overlaying PRE, SEARCH, and CONTROL
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
+void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string histogramName, string title, bool log, string ChainName, string AnalysisType) {
 
 	//Strings for the file names
+	string OutputFileName = histogramName + "_" + ChainName + "_Combo.pdf";
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
@@ -314,7 +315,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 	histogram3->Write(controlName.c_str());
 
 	//Create a new canvas using canvasName
-	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+	TCanvas *canvas = new TCanvas(histogramName.c_str(), "", 600, 400);
 
 	//Set the appearances of the histograms
 	histogram1->SetLineColor(kBlue-3);
@@ -355,9 +356,10 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 //This function will draw a stack of 4 histograms, used for overlaying PRE, SEARCH, CONTROL, and EXCEPT
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, histogram EXCEPT, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string canvasName, string histogramName, string title, int X, int Y, bool log, string OutputFileName, string ChainName, string AnalysisType) {
+void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string histogramName, string title, bool log, string ChainName, string AnalysisType) {
 
 	//Strings for the file names
+	string OutputFileName = histogramName + "_" + ChainName + "_Combo.pdf";
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
@@ -373,7 +375,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 	histogram4->Write(exceptName.c_str());
 
 	//Create a new canvas using canvasName
-	TCanvas *canvas = new TCanvas(canvasName.c_str(), "", X, Y);
+	TCanvas *canvas = new TCanvas(histogramName.c_str(), "", 600, 400);
 
 	//Set the appearances of the histograms
 	histogram1->SetLineColor(kBlue-3);
@@ -564,6 +566,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
 		if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("neutrinoME1") != string::npos or DataType.find("neutrinoME2") != string::npos) histogramStack->SetMinimum(1);
 
 	} 
 
