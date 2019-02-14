@@ -44,9 +44,10 @@ void MC_Analysis::BookHistos() {
 	int jet_1_p4_Pt_Min = 0,  jet_1_p4_Pt_Max = 1000;
 	int TOT_pT_UnitVector_Min = 0, TOT_pT_UnitVector_Max = 1000;
 	int MET_UnitVector_Min = 0, MET_UnitVector_Max = 1000;
-	int VectorMissingEnergyxy_Min = 0, VectorMissingEnergyxy_Max = 1000;
-	int neutrinoME1_Min = 0, neutrinoME1_Max = 1000;
-	int neutrinoME2_Min = 0, neutrinoME2_Max = 1000;
+	int VectorNeutrinoTransMom_Min = 0, VectorNeutrinoTransMom_Max = 1000;
+	int neutrino_0_pt_Min = 0, neutrino_0_pt_Max = 1000;
+	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
+	int reconstructed_Z_mass =0, reconstructed_Z_mass=1000;
 
 	int Testing_Min = 0, Testing_Max = 200;
 
@@ -56,8 +57,12 @@ void MC_Analysis::BookHistos() {
 
 }
 
+////////////////////////////////////////////////////////////////////////////////////////
+///----------------------------- JET SELECTION FUNCTION -----------------------------///
+////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::JetSet(bool bjets) {
 
+	//If the region contains bjets
 	if (bjets) {
 
 		//bbl
@@ -148,6 +153,7 @@ void MC_Analysis::JetSet(bool bjets) {
 
 	}
 
+	//Otherwise, assume there are no bjets present (they are vetoed) and set jets to ljets
 	else {
 		jet_0 = & ljet_0;
 		jet_0_p4 = ljet_0_p4;
@@ -168,7 +174,7 @@ void MC_Analysis::ParticleSelection() {
 
 	//For the desired output particles, set the generic lepton information to those specific leptons
 
-	if (desired_particles == "ee") {
+	if (AnalysisType == "Electron") {
 
 		lep_0 = & elec_0;
 		lep_0_iso_ptvarcone40 = elec_0_iso_ptvarcone40;
@@ -183,7 +189,7 @@ void MC_Analysis::ParticleSelection() {
 		n_leptons = n_electrons;
 	}
 
-	if (desired_particles == "mm") {
+	if (AnalysisType == "Muon") {
 
 		lep_0 = & muon_0;
 		lep_0_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
@@ -198,7 +204,7 @@ void MC_Analysis::ParticleSelection() {
 		n_leptons = n_muons;
 	}
 
-	if (desired_particles == "em" || desired_particles == "me") {
+	if (AnalysisType == "ElectronMuon") {
 
 		lep_0 = & muon_0;
 		lep_0_iso_ptvarcone40 = muon_0_iso_ptvarcone40;
@@ -214,7 +220,7 @@ void MC_Analysis::ParticleSelection() {
 		else n_leptons = 0;
 	}
 
-	if (desired_particles == "tt") {
+	if (AnalysisType == "Tau") {
 
 		lep_0 = & tau_0;
 		lep_0_iso_ptvarcone40 = 0;
@@ -229,7 +235,7 @@ void MC_Analysis::ParticleSelection() {
 		n_leptons = n_taus; 
 	}
 
-	if (desired_particles == "et" || desired_particles == "te") {
+	if (AnalysisType == "ElectronTau") {
 
 		lep_0 = & tau_0; 
 		lep_0_iso_ptvarcone40 = 0;
@@ -245,7 +251,7 @@ void MC_Analysis::ParticleSelection() {
 		else n_leptons = 0;
 	}
 
-	if (desired_particles == "mt" || desired_particles == "tm") {
+	if (AnalysisType == "MuonTau") {
 
 		lep_0 = & tau_0; 
 		lep_0_iso_ptvarcone40 = 0;
@@ -334,6 +340,7 @@ void MC_Analysis::GenerateVariables() {
 	// neutrino missing energy/momentum vector x and y components (in transverse plane)
 	vector<double> VectorNeutrinoTransMom12 = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
 	
+
 	// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
 	neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
 	neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
@@ -341,20 +348,25 @@ void MC_Analysis::GenerateVariables() {
 	//cout << "Neutrino ME1 = " << neutrinoME1 << endl << endl;
 	//cout << "Neutrino ME2 = " << neutrinoME2 << endl << endl;
 
+	// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergyxy
+	neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
+	neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
+
+
 	// neutrino 1
-	neutrino_0_x_p = x_component_pT(neutrino_0_pt, lep_0_p4); // p_x of neutrino 1
-	neutrino_0_y_p = y_component_pT(neutrino_0_pt, lep_0_p4); // p_y of neutrino 1
-	neutrino_0_z_p = p_z_neutrino_calc(neutrino_0_pt, lep_0_p4); // p_z of neutrino 1
-	neutrino_0_TLV = neutrino_TLV(neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 1
+	double neutrino_0_x_p = x_component_pT(neutrino_0_pt, lep_0_p4); // p_x of neutrino 1
+	double neutrino_0_y_p = y_component_pT(neutrino_0_pt, lep_0_p4); // p_y of neutrino 1
+	double neutrino_0_z_p = p_z_neutrino_calc(neutrino_0_pt, lep_0_p4); // p_z of neutrino 1
+	TLorentzVector* neutrino_0_TLV = neutrino_TLV(neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 1
 	// neutrino 2
-	neutrino_1_x_p = x_component_pT(neutrino_1_pt, lep_1_p4); // p_x of neutrino 2
-	neutrino_1_y_p = y_component_pT(neutrino_1_pt, lep_1_p4); // p_y of neutrino 2
-	neutrino_1_z_p = p_z_neutrino_calc(neutrino_1_pt, lep_1_p4); // p_z of neutrino 2
-	neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
+	double neutrino_1_x_p = x_component_pT(neutrino_1_pt, lep_1_p4); // p_x of neutrino 2
+	double neutrino_1_y_p = y_component_pT(neutrino_1_pt, lep_1_p4); // p_y of neutrino 2
+	double neutrino_1_z_p = p_z_neutrino_calc(neutrino_1_pt, lep_1_p4); // p_z of neutrino 2
+	TLorentzVector* neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
 
 	// reconstruct tau candidate with tau lepton and neutrino
-	reconstructed_tau_0_TLV = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
-	reconstructed_tau_1_TLV = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
+	TLorentzVector* reconstructed_tau_0_TLV = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
+	TLorentzVector* reconstructed_tau_1_TLV = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 	
 	// invariant mass of the Z boson with new reconstructed neutrino
 	reconstructed_Z_mass = InvariantMass(reconstructed_tau_0_TLV, reconstructed_tau_1_TLV);
@@ -397,8 +409,8 @@ void MC_Analysis::FillAllData_PreCut() {
 	h_MET_Centrality_PRE->Fill(MET_Centrality, final_weighting);
 
 	// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 PRE
-	h_neutrinoME1_PRE->Fill(neutrinoME1,final_weighting);
-	h_neutrinoME2_PRE->Fill(neutrinoME2,final_weighting);
+	h_neutrino_0_pt_PRE->Fill(neutrino_0_pt,final_weighting);
+	h_neutrino_1_pt_PRE->Fill(neutrino_1_pt,final_weighting);
 
 	//TESTING
 	h_Testing_PRE->Fill(lep_0_lep_1_mass, final_weighting);
@@ -425,7 +437,7 @@ bool MC_Analysis::Cuts(string region) {
 	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
 	bool pT_balance_3_limit = false;
-	bool rap_int_condition = RapidityIntervalCheck(ljet_0_p4, ljet_1_p4, ljet_2_p4);
+	bool rap_int_condition = RapidityIntervalCheck(jet_0_p4, jet_1_p4, jet_2_p4);
 	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4); // is missing energy between two 'tau' leptons in phi space?
 
 	//Z Boson Mass Cut
@@ -466,7 +478,7 @@ bool MC_Analysis::Cuts(string region) {
 
 	//THIS IS HERE FOR THE FUTURE WHEN REMOVAL OF PT BALANCE FROM tau SELECTIONS IS NECESSARY
 	/*
-	if (region == "search" && (desired_particles != "ee" || desired_particles != "mm")) { pT_balance_limit = true; pT_balance_limit_3 = true; }
+	if (region == "search" && (AnalysisType != "Electron" || AnalysisType != "Muon")) { pT_balance_limit = true; pT_balance_limit_3 = true; }
 	*/
 
 	if (region == "bjet" ) Z_mass_condition = true;
@@ -527,15 +539,15 @@ void MC_Analysis::Fill() {
 	if (weight_total_override) weight_total = 1;  //THIS VARIABLE MAY BE REDUNDANT
 
 	///----- EXCEPT region filling -----///
-	if (Cuts("EXCEPT_Z_mass_condition")) 		h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);	//Fill the EXCEPT histogram for mass
-	if (Cuts("EXCEPT_combined_lepton_pt")) 		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);		//Fill the EXCEPT histogram for combined lepton pt
-	if (Cuts("EXCEPT_ljet_0_pt_greater")) 		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(), final_weighting);		//Fill the EXCEPT histogram for ljet_0_pt
-	if (Cuts("EXCEPT_ljet_1_pt_greater")) 		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(), final_weighting);		//Fill the EXCEPT histogram for ljet_1_pt
-	if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_jet_0_jet_1_mass_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);	//Fill the EXCEPT histogram for leading jets combined invariant mass
-	if (Cuts("EXCEPT_ptvarcone_40_0")) 		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);
-	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);
-	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);
-	if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);
+	if (Cuts("EXCEPT_Z_mass_condition")) 		h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);		//Fill the EXCEPT histogram for mass
+	if (Cuts("EXCEPT_combined_lepton_pt")) 		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);			//Fill the EXCEPT histogram for combined lepton pt
+	if (Cuts("EXCEPT_ljet_0_pt_greater")) 		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(), final_weighting);			//Fill the EXCEPT histogram for ljet_0_pt
+	if (Cuts("EXCEPT_ljet_1_pt_greater")) 		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(), final_weighting);			//Fill the EXCEPT histogram for ljet_1_pt
+	if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_jet_0_jet_1_mass_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);		//Fill the EXCEPT histogram for leading jets combined invariant mass
+	if (Cuts("EXCEPT_ptvarcone_40_0")) 		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 0
+	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
+	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
+	if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
 
 	///----- SEARCH region filling -----///
 	if (Cuts("search")) {
@@ -547,16 +559,16 @@ void MC_Analysis::Fill() {
 		h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 		//Invariant mass
-		h_lep_0_lep_1_mass->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
-		h_jet_0_jet_1_mass->Fill(jet_0_jet_1_mass, final_weighting); // two jets
+		h_lep_0_lep_1_mass->Fill(lep_0_lep_1_mass, final_weighting); 	// two electrons
+		h_jet_0_jet_1_mass->Fill(jet_0_jet_1_mass, final_weighting); 	// two jets
 
 		//Combined lepton
-		h_RapidityDilepton->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
-		h_RapidityDijet->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
-		h_lep_0_lep_1_pt->Fill(lep_0_lep_1_pt, final_weighting);
+		h_RapidityDilepton->Fill(RapidityDilepton, final_weighting);	// dilepton rapidity
+		h_RapidityDijet->Fill(RapidityDijet, final_weighting);		// dijet rapidity
+		h_lep_0_lep_1_pt->Fill(lep_0_lep_1_pt, final_weighting);	// dilepton transverse momentum
 
 		//Delta R for two electrons
-		h_DeltaR->Fill(DeltaR, final_weighting);
+		h_DeltaR->Fill(DeltaR, final_weighting);			// Angular separation of two leptons
 
 		// pT balance
 		h_pT_balance->Fill(pT_balance, final_weighting);	
@@ -568,33 +580,11 @@ void MC_Analysis::Fill() {
 		h_MET_Centrality->Fill(MET_Centrality, final_weighting);
 
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 PRE
-		h_neutrinoME1->Fill(neutrinoME1,final_weighting);
-		h_neutrinoME2->Fill(neutrinoME2,final_weighting);
+		h_neutrino_0_pt->Fill(neutrino_0_pt,final_weighting);
+		h_neutrino_1_pt->Fill(neutrino_1_pt,final_weighting);
 
 		h_Testing->Fill(lep_0_lep_1_mass, final_weighting);
 
-	/*
-		cout << "lep_0_p4->Px() = " << lep_0_p4->Px() << endl << endl;
-		cout << "lep_0_p4->Py() = " << lep_0_p4->Py() << endl << endl;
-		cout << "lep_0_p4->Pz() = " << lep_0_p4->Pz() << endl << endl;
-		cout << "lep_0_p4->Pt() = " << lep_0_p4->Pt() << endl << endl;
-		cout << "lep_0_p4->Et() = " << lep_0_p4->Et() << endl << endl;
-		cout << "lep_0_p4->Phi() = " << lep_0_p4->Phi() << endl << endl;
-
-		cout << "lep_1_p4->Px() = " << lep_1_p4->Px() << endl << endl;
-		cout << "lep_1_p4->Py() = " << lep_1_p4->Py() << endl << endl;
-		cout << "lep_1_p4->Pz() = " << lep_1_p4->Pz() << endl << endl;
-		cout << "lep_1_p4->Pt() = " << lep_1_p4->Pt() << endl << endl;
-		cout << "lep_1_p4->Et() = " << lep_1_p4->Et() << endl << endl;
-		cout << "lep_1_p4->Phi() = " << lep_1_p4->Phi() << endl << endl;
-
-		cout << "met_reco_p4->Px() = " << met_reco_p4->Px() << endl << endl;
-		cout << "met_reco_p4->Py() = " << met_reco_p4->Py() << endl << endl;
-		cout << "met_reco_p4->Pz() = " << met_reco_p4->Pz() << endl << endl;
-		cout << "met_reco_p4->Pt() = " << met_reco_p4->Pt() << endl << endl;
-		cout << "met_reco_p4->Et() = " << met_reco_p4->Et() << endl << endl;
-		cout << "met_reco_p4->Phi() = " << met_reco_p4->Phi() << endl << endl;
-	*/
 	}
 
 	///----- CONTROL region filling -----///
@@ -629,8 +619,8 @@ void MC_Analysis::Fill() {
 		h_MET_Centrality_CONTROL->Fill(MET_Centrality, final_weighting);
 		 
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 CONTROL
-		h_neutrinoME1_CONTROL->Fill(neutrinoME1,final_weighting);
-		h_neutrinoME2_CONTROL->Fill(neutrinoME2,final_weighting);
+		h_neutrino_0_pt_CONTROL->Fill(neutrino_0_pt,final_weighting);
+		h_neutrino_1_pt_CONTROL->Fill(neutrino_1_pt,final_weighting);
 
 
 	}
@@ -667,8 +657,8 @@ void MC_Analysis::Fill() {
 		h_MET_Centrality_BJET->Fill(MET_Centrality, final_weighting);
 
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
-		h_neutrinoME1_BJET->Fill(neutrinoME1,final_weighting);
-		h_neutrinoME2_BJET->Fill(neutrinoME2,final_weighting);
+		h_neutrino_0_pt_BJET->Fill(neutrino_0_pt,final_weighting);
+		h_neutrino_1_pt_BJET->Fill(neutrino_1_pt,final_weighting);
 
 	}
 
@@ -689,21 +679,21 @@ void MC_Analysis::DrawHistos() {
 	#include "_DrawHistos.h"
 
 	//ptvar cone histograms
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", 600, 400, true, "h_lep_1_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", "h_lep_0_iso_ptvarcone40", ";Momentum [GeV/c];Events", 600, 400, true, "h_lep_0_iso_ptvarcone40_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, ChainName, AnalysisType);	
 
 	// lep 0 & lep 1 invariant mass 
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, true, "h_lep_0_lep_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", true, ChainName, AnalysisType);
 	
 	//combined lepton lep 0 & lep 1 momentum
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_lep_0_lep_1_pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);	
 	
 	//leading jets ljet_0 ljet_1 invariant masses
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", 600, 400, false, "h_jet_0_jet_1_mass_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", false, ChainName, AnalysisType);
 
 	//leading jets ljet_0 ljet_1 transverse momentum < already exists in DrawHistos.h
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_ljet_0_p4_Pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", 600, 400, false, "h_ljet_1_p4_Pt_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
 
 	// Dilepton Rapidity
 	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
@@ -716,27 +706,27 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType);
 
 	//Delta R Histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", "h_DeltaR", ";Delta R;Events", 600, 400, false, "h_DeltaR_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", false, ChainName, AnalysisType);
 
 	// pT balance
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", "h_pT_balance", ";pT Balance;Events", 600, 400, false, "h_pT_balance_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, ChainName, AnalysisType);
 
 	// pT balance 3
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", "h_pT_balance_3", ";pT Balance 3;Events", 600, 400, false, "h_pT_balance_3_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", ";pT Balance 3;Events", false, ChainName, AnalysisType);	
 
 	// Centrality histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", "h_Centrality", ";Centrality;Events", 600, 400, true, "h_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", ";Centrality;Events", true, ChainName, AnalysisType);
 	
 	//MISSING ENERGY GRAPHS
 	
 	// MET Centrality histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET_Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", "h_MET_Centrality", ";MET_Centrality;Events", 600, 400, true, "h_MET_Centrality_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET_Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", ";MET_Centrality;Events", true, ChainName, AnalysisType);
 
 	// missing energy for neutrino 1 
-	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrinoME1_PRE, h_neutrinoME1, h_neutrinoME1_CONTROL, "neutrinoME1", "Pre-Cut", "Post Cut", "Control", "h_neutrinoME1", "h_neutrinoME1", ";Missing Energy of neutrino 1;Events", 600, 400, true, "h_neutrinoME1_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_0_pt_PRE, h_neutrino_0_pt, h_neutrino_0_pt_CONTROL, "neutrino_0_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_0_pt", ";Missing Energy of neutrino 1;Events", true, ChainName, AnalysisType);
 
 	// missing energy for neutrino 2
-	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrinoME2_PRE, h_neutrinoME2, h_neutrinoME2_CONTROL, "neutrinoME2", "Pre-Cut", "Post Cut", "Control", "h_neutrinoME2", "h_neutrinoME2", ";Missing Energy of neutrino 2;Events", 600, 400, true, "h_neutrinoME2_" + ChainName + "_Combo.pdf", ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_1_pt_PRE, h_neutrino_1_pt, h_neutrino_1_pt_CONTROL, "neutrino_1_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_1_pt", ";Missing Energy of neutrino 2;Events", true, ChainName, AnalysisType);
 
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
@@ -750,8 +740,8 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_pT_balance_BJET, "h_pT_balance_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_Centrality_BJET, "h_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_neutrinoME1_BJET, "h_neutrinoME1_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_neutrinoME2_BJET, "h_neutrinoME2_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrino_0_pt_BJET, "h_neutrino_0_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrino_1_pt_BJET, "h_neutrino_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
 
 	Histograms->Close();
 
