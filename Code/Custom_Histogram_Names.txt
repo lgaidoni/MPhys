@@ -21,4 +21,4 @@ MET_Centrality:Missing transversE Momentum centrality
 neutrino_0_pt:missing energy of neutrino 1
 neutrino_1_pt:missing energy of neutrino 2
 MET_Type_Favour:Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
-reconstructed_Z_mass: reconstructed_Z_mass with neutrino and z candidates
+lep_0_lep_1_mass_reconstructed: reconstructed Z mass with neutrino and z candidates

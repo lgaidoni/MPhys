@@ -387,25 +387,25 @@ void MC_Analysis::Book_MET_Type_Favour(int bins, double min, double max) {
 }
 
 
-// --  reconstructed_Z_mass with neutrino and z candidate
-void MC_Analysis::Book_reconstructed_Z_mass(int bins, double min, double max) {
-	h_reconstructed_Z_mass = new TH1F("h_reconstructed_Z_mass", "", bins, min, max);
-	h_reconstructed_Z_mass_PRE = new TH1F("h_reconstructed_Z_mass_PRE", "", bins, min, max);
-	h_reconstructed_Z_mass_CONTROL = new TH1F("h_reconstructed_Z_mass_CONTROL", "", bins, min, max);
-	h_reconstructed_Z_mass_EXCEPT = new TH1F("h_reconstructed_Z_mass_EXCEPT", "", bins, min, max);
-	h_reconstructed_Z_mass_BJET = new TH1F("h_reconstructed_Z_mass_BJET", "", bins, min, max);
+// --  reconstructed Z mass with neutrino and z candidates
+void MC_Analysis::Book_lep_0_lep_1_mass_reconstructed(int bins, double min, double max) {
+	h_lep_0_lep_1_mass_reconstructed = new TH1F("h_lep_0_lep_1_mass_reconstructed", "", bins, min, max);
+	h_lep_0_lep_1_mass_reconstructed_PRE = new TH1F("h_lep_0_lep_1_mass_reconstructed_PRE", "", bins, min, max);
+	h_lep_0_lep_1_mass_reconstructed_CONTROL = new TH1F("h_lep_0_lep_1_mass_reconstructed_CONTROL", "", bins, min, max);
+	h_lep_0_lep_1_mass_reconstructed_EXCEPT = new TH1F("h_lep_0_lep_1_mass_reconstructed_EXCEPT", "", bins, min, max);
+	h_lep_0_lep_1_mass_reconstructed_BJET = new TH1F("h_lep_0_lep_1_mass_reconstructed_BJET", "", bins, min, max);
 
-	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass);
-	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass_CONTROL);
-	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass_EXCEPT);
-	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass_PRE);
-	hv_reconstructed_Z_mass.push_back(h_reconstructed_Z_mass_BJET);
+	hv_lep_0_lep_1_mass_reconstructed.push_back(h_lep_0_lep_1_mass_reconstructed);
+	hv_lep_0_lep_1_mass_reconstructed.push_back(h_lep_0_lep_1_mass_reconstructed_CONTROL);
+	hv_lep_0_lep_1_mass_reconstructed.push_back(h_lep_0_lep_1_mass_reconstructed_EXCEPT);
+	hv_lep_0_lep_1_mass_reconstructed.push_back(h_lep_0_lep_1_mass_reconstructed_PRE);
+	hv_lep_0_lep_1_mass_reconstructed.push_back(h_lep_0_lep_1_mass_reconstructed_BJET);
 
-	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass");
-	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass_CONTROL");
-	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass_EXCEPT");
-	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass_PRE");
-	hv_reconstructed_Z_mass_names.push_back("h_reconstructed_Z_mass_BJET");
+	hv_lep_0_lep_1_mass_reconstructed_names.push_back("h_lep_0_lep_1_mass_reconstructed");
+	hv_lep_0_lep_1_mass_reconstructed_names.push_back("h_lep_0_lep_1_mass_reconstructed_CONTROL");
+	hv_lep_0_lep_1_mass_reconstructed_names.push_back("h_lep_0_lep_1_mass_reconstructed_EXCEPT");
+	hv_lep_0_lep_1_mass_reconstructed_names.push_back("h_lep_0_lep_1_mass_reconstructed_PRE");
+	hv_lep_0_lep_1_mass_reconstructed_names.push_back("h_lep_0_lep_1_mass_reconstructed_BJET");
 }
 
 
