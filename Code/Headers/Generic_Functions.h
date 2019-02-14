@@ -930,7 +930,7 @@ vector<double> SimMETEqn(TLorentzVector *Vector1, TLorentzVector *Vector2, TLore
 // a corresponds to tau and neutrino pair 1, b corresponds to tau and neutrino pair 2
 // 1 is x direction , 2 is y direction
 
-	// by solving these simultaneous eqns we can get x and y
+	// by solving these simultaneous eqns we can get neutrinoa and neutrinob
 	// c1 = a1*x + b1*y;
 	// c2 = a2*x + b2*y;
 
@@ -966,4 +966,54 @@ vector<double> SimMETEqn(TLorentzVector *Vector1, TLorentzVector *Vector2, TLore
 	return pTneutrinovector;
 }
 
+// p_z for neutrinos
+double p_z_neutrino_calc(double p_T, TLorentzVector *Vector1){
+	double p_z; // to be calculated
+	double p_T; // given by neutrino_0_pt/neutrino_1_pT in Analysis.h
+	double theta = Vector1->Theta(); // theta (angle between tau candidate and beam direction
+
+	p_z = p_T/tan(theta); // p_z component of neutrino
+	return p_z;
+}
+
+double x_component_pT(double p_T, TLorentz *Vector){
+	double p_x; // to be calculated
+	double p_T; // given by neutrino_0_pT/neutrino_1_pT in Analysis.h
+	double u_x = UnitVector(Vector1->Px(), Vector1); // unit vector in x direction
+	
+	p_x = p_T*u_x;
+	return p_x; // x momentum component of neutrino_0_pT/neutrino_1_pT 
+}
+
+double y_component_pT(double p_T, TLorentz *Vector){
+	double p_y;// to be calculated
+	double p_T; // given by neutrino_0_pT/neutrino_1_pT in Analysis.h
+	double u_y = UnitVector(Vector1->Py(), Vector1); // unit vector in y direction
+	
+	p_y = p_T*u_y;
+	return p_y; // y momentum component of neutrino_0_pT/neutrino_1_pT 
+}
+
+TLorentzVector* neutrino_TLV(double p_x, double p_y, double p_z){ // 4 momentum px,py,pz,E (E=p_tot) of neutrino
+	// calculate the total energy of the neutrino (the modulus of total neutrino momentum)
+	p_tot = pow(p_x,2) + pow(p_y,2) + pow(p_z,2);	
+	Energy = abs(pow(p_tot,0.5));
+
+	TLorentzVector neutrino_TLV = TLorentzVector(p_x, p_y, p_z, Energy);
+
+	return neutrino_TLV;
+
+}
+
+TLorentzVector* reconstucted_tau_candidate_TLV(TLorentzVector *Vector1,TLorentzVector *Vector2){ // takes TLorentzVector of tau candidate and neutrino
+	p_x = Vector1->Px() + Vector2->Px();// total p_x of both
+	p_y = Vector1->Py() + Vector2->Py();// total p_y of both
+	p_z = Vector1->Pz() + Vector2->Pz();// total p_z of both
+	Energy = Vector1->Energy() + Vector2->Energy();// total E of both
+	
+	TLorentzVector reconstucted_tau_candidate_TLV(p_x, p_y, p_z, Energy);
+	
+	return reconstucted_tau_candidate_TLV;
+
+}
 #endif
