@@ -7,7 +7,6 @@ void CombineAllProcesses() {
 
 	CombineAllProcesses_AnalysisType("Electron");
 	CombineAllProcesses_AnalysisType("Muon");
-	CombineAllProcesses_AnalysisType("Tau");
 
 	CombineAllProcesses_AnalysisType("ElectronMuon");
 	CombineAllProcesses_AnalysisType("ElectronTau");
@@ -21,7 +20,6 @@ void Draw_All_Stacked_Processes() {
 
 	DrawStackedProcesses("Electron");
 	DrawStackedProcesses("Muon");
-	DrawStackedProcesses("Tau");
 
 	DrawStackedProcesses("ElectronMuon");
 	DrawStackedProcesses("ElectronTau");
