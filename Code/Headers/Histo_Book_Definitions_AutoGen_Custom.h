@@ -234,6 +234,8 @@ vector<TH1F*>	hv_MET_Type_Favour; // HISTOGRAM VECTOR
 
 vector<string>	hv_MET_Type_Favour_names; // HISTOGRAM NAME VECTOR
 
+/// ------------------- RECONSTRUCTED ---------------- ///
+
 // --  reconstructed Z mass with neutrino and z candidates
 double lep_0_lep_1_mass_reconstructed;
 
@@ -246,5 +248,44 @@ TH1F	*h_lep_0_lep_1_mass_reconstructed_BJET; // BJET VERSION
 vector<TH1F*>	hv_lep_0_lep_1_mass_reconstructed; // HISTOGRAM VECTOR
 
 vector<string>	hv_lep_0_lep_1_mass_reconstructed_names; // HISTOGRAM NAME VECTOR
+
+// -- Distance in R space between two leptons (reconstructed with missing neutrino energy included)
+double DeltaR_reconstructed;
+
+virtual void Book_DeltaR_reconstructed(int bins, double min, double max);
+TH1F	*h_DeltaR_reconstructed; // SEARCH VERSION
+TH1F	*h_DeltaR_reconstructed_PRE; // PRE VERSION
+TH1F	*h_DeltaR_reconstructed_CONTROL; // CONTROL VERSION
+TH1F	*h_DeltaR_reconstructed_EXCEPT; // EXCEPT VERSION
+TH1F	*h_DeltaR_reconstructed_BJET; // BJET VERSION
+vector<TH1F*>	hv_DeltaR_reconstructed; // HISTOGRAM VECTOR
+
+vector<string>	hv_DeltaR_reconstructed_names; // HISTOGRAM NAME VECTOR
+
+// -- Combined transverse momentum of lepton 0 and lepton 1 (reconstructed with missing neutrino energy included)
+double lep_0_lep_1_pt_reconstructed;
+
+virtual void Book_lep_0_lep_1_pt_reconstructed(int bins, double min, double max);
+TH1F	*h_lep_0_lep_1_pt_reconstructed; // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_pt_reconstructed_PRE; // PRE VERSION
+TH1F	*h_lep_0_lep_1_pt_reconstructed_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_pt_reconstructed_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_pt_reconstructed_BJET; // BJET VERSION
+vector<TH1F*>	hv_lep_0_lep_1_pt_reconstructed; // HISTOGRAM VECTOR
+
+vector<string>	hv_lep_0_lep_1_pt_reconstructed_names; // HISTOGRAM NAME VECTOR
+
+// -- Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
+double Centrality_reconstructed;
+
+virtual void Book_Centrality_reconstructed(int bins, double min, double max);
+TH1F	*h_Centrality_reconstructed; // SEARCH VERSION
+TH1F	*h_Centrality_reconstructed_PRE; // PRE VERSION
+TH1F	*h_Centrality_reconstructed_CONTROL; // CONTROL VERSION
+TH1F	*h_Centrality_reconstructed_EXCEPT; // EXCEPT VERSION
+TH1F	*h_Centrality_reconstructed_BJET; // BJET VERSION
+vector<TH1F*>	hv_Centrality_reconstructed; // HISTOGRAM VECTOR
+
+vector<string>	hv_Centrality_reconstructed_names; // HISTOGRAM NAME VECTOR
 
 #endif

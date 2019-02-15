@@ -564,12 +564,14 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("met_reco_p4_Pt") != string::npos) histogramStack->SetMinimum(0.01);
 		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("lep_0_lep_1_mass_reconstructed") != string::npos) histogramStack->SetMinimum(50);
 		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
 		else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
 		if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("neutrinoME1") != string::npos or DataType.find("neutrinoME2") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("neutrino_0_pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("MET_Type_Favour") != string::npos) histogramStack->SetMinimum(1);
 
 	} 
 
@@ -686,7 +688,7 @@ double DeltaRapidity(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 //This Function will calculate rapidity of the dilepton pair / dijet pair
 double RapidityDisomething(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
-	double RapidityDisomething = Vector1->Rapidity() + Vector2->Rapidity();
+	double RapidityDisomething = ((*Vector1)+(*Vector2)).Rapidity();
 	return RapidityDisomething;
 }
 
@@ -755,7 +757,16 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 	//cout << "maxphi = " << maxphi << "   :   minphi = " << minphi << "   :   
 	
 	// if E_T^{miss} is not between this delta phi interval, cut
-	if (minphi <= Vector3->Phi() &&  Vector3->Phi() <= maxphi) phi_int_condition = true;
+
+	if ((maxphi - minphi) < pi) {
+
+		if (minphi <= Vector3->Phi() &&  Vector3->Phi() <= maxphi) phi_int_condition = true;
+
+	} else {
+
+		if (!(minphi <= Vector3->Phi() &&  Vector3->Phi() <= maxphi)) phi_int_condition = true;
+
+	}
 
 	return phi_int_condition;
 
@@ -898,7 +909,7 @@ double CentralityCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 	//double absval_DeltaRapidity = sqrt(pow(DeltaRapidity(Vector3, Vector4),2)); // absolute value of rapidity separation of jets
 
 	// calculate Centrality
-	double Centrality = sum1/DeltaRapidity(Vector3, Vector4);
+	double Centrality = 2 * sum1/DeltaRapidity(Vector3, Vector4);
 	return Centrality;
 
 }
@@ -912,15 +923,27 @@ double METCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 
 	double sum1 = Emiss_Phi - (tauproduct1_Phi + tauproduct2_Phi)/2; // sum 1 to break things up
 
+	double Centrality;
+
 	// calculate Centrality
-	double Centrality = 2 * sum1/DeltaPhi(Vector2, Vector3);
+
+	if (DeltaPhi(Vector2, Vector3) < pi) {
+
+		Centrality = 2 * sum1/DeltaPhi(Vector2, Vector3);
+
+	} else {
+
+		Centrality = 2 * sum1/(2*pi - DeltaPhi(Vector2, Vector3));
+
+	}
+
 	return Centrality;
 }
 
 double METTypeFavour(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3) {
 
 	double Phi_E = Vector1->Phi();
-	double Phi_2= Vector2->Phi();	//Hadronic Tau
+	double Phi_2 = Vector2->Phi();	//Hadronic Tau
 	double Phi_3 = Vector3->Phi();	//Lepton
 
 	double favour = (Phi_3 - Phi_E)/(Phi_3 - Phi_2);

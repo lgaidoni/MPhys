@@ -32,7 +32,7 @@ void MC_Analysis::BookHistos() {
 	int pT_balance_Min = 0, pT_balance_Max = 1;
 	int pT_balance_3_Min = 0, pT_balance_3_Max = 1;
 	int Centrality_Min = -8, Centrality_Max = 8;
-	int MET_Centrality_Min = -16, MET_Centrality_Max = 16;
+	int MET_Centrality_Min = -4, MET_Centrality_Max = 4;
 	double RapidityDijet_Min = 0, RapidityDijet_Max = 4.5;
 	double RapidityDilepton_Min = 0, RapidityDilepton_Max = 4.5;
 	int lep_0_lep_1_mass_Min = 0, lep_0_lep_1_mass_Max = 200;
@@ -48,7 +48,11 @@ void MC_Analysis::BookHistos() {
 	int neutrino_0_pt_Min = 0, neutrino_0_pt_Max = 1000;
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
 	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
-  int lep_0_lep_1_mass_reconstructed_Min =0, lep_0_lep_1_mass_reconstructed_Max =200;
+
+  	int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
+	int DeltaR_reconstructed_Min = 0, DeltaR_reconstructed_Max = 10;
+	int lep_0_lep_1_pt_reconstructed_Min = 0, lep_0_lep_1_pt_reconstructed_Max = 300;
+	int Centrality_reconstructed_Min = -8, Centrality_reconstructed_Max = 8;
 
 	/////----------------------------------BOOKINGS------------------------------------/////
 
@@ -305,34 +309,6 @@ bool MC_Analysis::InitialCut(bool bjets) {
 ////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::GenerateVariables() {
 
-	//Invariant Mass
-	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
-	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
-
-	//Delta R
-	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
-
-	// Rapidity of dilepton pair
-	RapidityDilepton = RapidityDisomething(lep_0_p4, lep_1_p4);
-
-	// Rapidity of dijet pair
-	RapidityDijet = RapidityDisomething(jet_0_p4, jet_1_p4);
-
-	//Combined Lepton momentum
-	lep_0_lep_1_pt = CombinedTransverseMomentum(lep_0_p4, lep_1_p4);
-
-	// p_T_Balance 
-	pT_balance = pTBalanceCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
-	
-	// p_T_Balance_3
-	pT_balance_3 = pTBalanceThreeCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4, jet_2_p4);
-	
-	// Centrality of Z boson between two leading jets calc using rapidity
-	Centrality = CentralityCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
-
-	//Final Weighting
-	final_weighting = Luminosity_Weight * weight_total;
-	
 	// Missing transverse momentum centrality
 	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
 
@@ -357,11 +333,41 @@ void MC_Analysis::GenerateVariables() {
 	TLorentzVector* neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
 
 	// reconstruct tau candidate with tau lepton and neutrino
-	TLorentzVector* reconstructed_tau_0_TLV = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
-	TLorentzVector* reconstructed_tau_1_TLV = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
+	TLorentzVector* lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
+	TLorentzVector* lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 	
-	// invariant mass of the Z boson with new reconstructed neutrino
-	lep_0_lep_1_mass_reconstructed = InvariantMass(reconstructed_tau_0_TLV, reconstructed_tau_1_TLV);
+	//Invariant Mass
+	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
+	lep_0_lep_1_mass_reconstructed = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
+
+	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
+
+	//Delta R
+	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
+	DeltaR_reconstructed = DeltaRCalc(lep_0_reco_p4, lep_1_reco_p4);
+
+	// Rapidity of dilepton pair
+	RapidityDilepton = RapidityDisomething(lep_0_p4, lep_1_p4);
+
+	// Rapidity of dijet pair
+	RapidityDijet = RapidityDisomething(jet_0_p4, jet_1_p4);
+
+	//Combined Lepton momentum
+	lep_0_lep_1_pt = CombinedTransverseMomentum(lep_0_p4, lep_1_p4);
+
+	// p_T_Balance 
+	pT_balance = pTBalanceCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
+	
+	// p_T_Balance_3
+	pT_balance_3 = pTBalanceThreeCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4, jet_2_p4);
+	
+	// Centrality of Z boson between two leading jets calc using rapidity
+	Centrality = CentralityCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
+	Centrality_reconstructed = CentralityCalc(lep_0_reco_p4, lep_1_reco_p4, jet_0_p4, jet_1_p4);
+
+	//Final Weighting
+	final_weighting = Luminosity_Weight * weight_total;
+	
 }	
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -489,10 +495,11 @@ bool MC_Analysis::Cuts(string region) {
 	bool common_cuts = false;	//The common cuts are false initially
 
 	// common cuts for "Tau"
-	if (AnalysisType == "ElectonMuon" || AnalysisType == "ElectronTau" || AnalysisType == "MuonTau"){
+	if (AnalysisType == "ElectronMuon" || AnalysisType == "ElectronTau" || AnalysisType == "MuonTau"){
 
 		//This is only here in order to see the full mass spectrum represented in the rest of the cuts, and should be changed when appropriate
 		Z_mass_condition = true;
+		
 	
 		//Work out if the common cuts are true here
 	 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && phi_int_condition) {

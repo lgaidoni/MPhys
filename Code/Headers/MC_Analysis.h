@@ -18,6 +18,7 @@
 // Header file for the classes stored in the TTree if any.
 #include "TLorentzVector.h"
 #include "TVector3.h"
+const double pi = 3.14159265359;
 
 class MC_Analysis {
 public :
