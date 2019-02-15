@@ -387,6 +387,8 @@ void MC_Analysis::Book_MET_Type_Favour(int bins, double min, double max) {
 }
 
 
+/// ------------------- RECONSTRUCTED ---------------- ///
+
 // --  reconstructed Z mass with neutrino and z candidates
 void MC_Analysis::Book_lep_0_lep_1_mass_reconstructed(int bins, double min, double max) {
 	h_lep_0_lep_1_mass_reconstructed = new TH1F("h_lep_0_lep_1_mass_reconstructed", "", bins, min, max);
@@ -406,6 +408,72 @@ void MC_Analysis::Book_lep_0_lep_1_mass_reconstructed(int bins, double min, doub
 	hv_lep_0_lep_1_mass_reconstructed_names.push_back("h_lep_0_lep_1_mass_reconstructed_EXCEPT");
 	hv_lep_0_lep_1_mass_reconstructed_names.push_back("h_lep_0_lep_1_mass_reconstructed_PRE");
 	hv_lep_0_lep_1_mass_reconstructed_names.push_back("h_lep_0_lep_1_mass_reconstructed_BJET");
+}
+
+
+// -- Distance in R space between two leptons (reconstructed with missing neutrino energy included)
+void MC_Analysis::Book_DeltaR_reconstructed(int bins, double min, double max) {
+	h_DeltaR_reconstructed = new TH1F("h_DeltaR_reconstructed", "", bins, min, max);
+	h_DeltaR_reconstructed_PRE = new TH1F("h_DeltaR_reconstructed_PRE", "", bins, min, max);
+	h_DeltaR_reconstructed_CONTROL = new TH1F("h_DeltaR_reconstructed_CONTROL", "", bins, min, max);
+	h_DeltaR_reconstructed_EXCEPT = new TH1F("h_DeltaR_reconstructed_EXCEPT", "", bins, min, max);
+	h_DeltaR_reconstructed_BJET = new TH1F("h_DeltaR_reconstructed_BJET", "", bins, min, max);
+
+	hv_DeltaR_reconstructed.push_back(h_DeltaR_reconstructed);
+	hv_DeltaR_reconstructed.push_back(h_DeltaR_reconstructed_CONTROL);
+	hv_DeltaR_reconstructed.push_back(h_DeltaR_reconstructed_EXCEPT);
+	hv_DeltaR_reconstructed.push_back(h_DeltaR_reconstructed_PRE);
+	hv_DeltaR_reconstructed.push_back(h_DeltaR_reconstructed_BJET);
+
+	hv_DeltaR_reconstructed_names.push_back("h_DeltaR_reconstructed");
+	hv_DeltaR_reconstructed_names.push_back("h_DeltaR_reconstructed_CONTROL");
+	hv_DeltaR_reconstructed_names.push_back("h_DeltaR_reconstructed_EXCEPT");
+	hv_DeltaR_reconstructed_names.push_back("h_DeltaR_reconstructed_PRE");
+	hv_DeltaR_reconstructed_names.push_back("h_DeltaR_reconstructed_BJET");
+}
+
+
+// -- Combined transverse momentum of lepton 0 and lepton 1 (reconstructed with missing neutrino energy included)
+void MC_Analysis::Book_lep_0_lep_1_pt_reconstructed(int bins, double min, double max) {
+	h_lep_0_lep_1_pt_reconstructed = new TH1F("h_lep_0_lep_1_pt_reconstructed", "", bins, min, max);
+	h_lep_0_lep_1_pt_reconstructed_PRE = new TH1F("h_lep_0_lep_1_pt_reconstructed_PRE", "", bins, min, max);
+	h_lep_0_lep_1_pt_reconstructed_CONTROL = new TH1F("h_lep_0_lep_1_pt_reconstructed_CONTROL", "", bins, min, max);
+	h_lep_0_lep_1_pt_reconstructed_EXCEPT = new TH1F("h_lep_0_lep_1_pt_reconstructed_EXCEPT", "", bins, min, max);
+	h_lep_0_lep_1_pt_reconstructed_BJET = new TH1F("h_lep_0_lep_1_pt_reconstructed_BJET", "", bins, min, max);
+
+	hv_lep_0_lep_1_pt_reconstructed.push_back(h_lep_0_lep_1_pt_reconstructed);
+	hv_lep_0_lep_1_pt_reconstructed.push_back(h_lep_0_lep_1_pt_reconstructed_CONTROL);
+	hv_lep_0_lep_1_pt_reconstructed.push_back(h_lep_0_lep_1_pt_reconstructed_EXCEPT);
+	hv_lep_0_lep_1_pt_reconstructed.push_back(h_lep_0_lep_1_pt_reconstructed_PRE);
+	hv_lep_0_lep_1_pt_reconstructed.push_back(h_lep_0_lep_1_pt_reconstructed_BJET);
+
+	hv_lep_0_lep_1_pt_reconstructed_names.push_back("h_lep_0_lep_1_pt_reconstructed");
+	hv_lep_0_lep_1_pt_reconstructed_names.push_back("h_lep_0_lep_1_pt_reconstructed_CONTROL");
+	hv_lep_0_lep_1_pt_reconstructed_names.push_back("h_lep_0_lep_1_pt_reconstructed_EXCEPT");
+	hv_lep_0_lep_1_pt_reconstructed_names.push_back("h_lep_0_lep_1_pt_reconstructed_PRE");
+	hv_lep_0_lep_1_pt_reconstructed_names.push_back("h_lep_0_lep_1_pt_reconstructed_BJET");
+}
+
+
+// -- Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
+void MC_Analysis::Book_Centrality_reconstructed(int bins, double min, double max) {
+	h_Centrality_reconstructed = new TH1F("h_Centrality_reconstructed", "", bins, min, max);
+	h_Centrality_reconstructed_PRE = new TH1F("h_Centrality_reconstructed_PRE", "", bins, min, max);
+	h_Centrality_reconstructed_CONTROL = new TH1F("h_Centrality_reconstructed_CONTROL", "", bins, min, max);
+	h_Centrality_reconstructed_EXCEPT = new TH1F("h_Centrality_reconstructed_EXCEPT", "", bins, min, max);
+	h_Centrality_reconstructed_BJET = new TH1F("h_Centrality_reconstructed_BJET", "", bins, min, max);
+
+	hv_Centrality_reconstructed.push_back(h_Centrality_reconstructed);
+	hv_Centrality_reconstructed.push_back(h_Centrality_reconstructed_CONTROL);
+	hv_Centrality_reconstructed.push_back(h_Centrality_reconstructed_EXCEPT);
+	hv_Centrality_reconstructed.push_back(h_Centrality_reconstructed_PRE);
+	hv_Centrality_reconstructed.push_back(h_Centrality_reconstructed_BJET);
+
+	hv_Centrality_reconstructed_names.push_back("h_Centrality_reconstructed");
+	hv_Centrality_reconstructed_names.push_back("h_Centrality_reconstructed_CONTROL");
+	hv_Centrality_reconstructed_names.push_back("h_Centrality_reconstructed_EXCEPT");
+	hv_Centrality_reconstructed_names.push_back("h_Centrality_reconstructed_PRE");
+	hv_Centrality_reconstructed_names.push_back("h_Centrality_reconstructed_BJET");
 }
 
 

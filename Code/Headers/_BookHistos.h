@@ -112,3 +112,12 @@
 	//Histogram Bookings for lep_0_lep_1_mass_reconstructed
 	Book_lep_0_lep_1_mass_reconstructed(bins, lep_0_lep_1_mass_reconstructed_Min, lep_0_lep_1_mass_reconstructed_Max);
 
+	//Histogram Bookings for DeltaR_reconstructed
+	Book_DeltaR_reconstructed(bins, DeltaR_reconstructed_Min, DeltaR_reconstructed_Max);
+
+	//Histogram Bookings for lep_0_lep_1_pt_reconstructed
+	Book_lep_0_lep_1_pt_reconstructed(bins, lep_0_lep_1_pt_reconstructed_Min, lep_0_lep_1_pt_reconstructed_Max);
+
+	//Histogram Bookings for Centrality_reconstructed
+	Book_Centrality_reconstructed(bins, Centrality_reconstructed_Min, Centrality_reconstructed_Max);
+
