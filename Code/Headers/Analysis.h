@@ -354,6 +354,7 @@ void MC_Analysis::GenerateVariables() {
 
 	//Combined Lepton momentum
 	lep_0_lep_1_pt = CombinedTransverseMomentum(lep_0_p4, lep_1_p4);
+	lep_0_lep_1_pt_reconstructed = CombinedTransverseMomentum(lep_0_reco_p4, lep_1_reco_p4);
 
 	// p_T_Balance 
 	pT_balance = pTBalanceCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
@@ -419,6 +420,9 @@ void MC_Analysis::FillAllData_PreCut() {
 	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
 		h_lep_0_lep_1_mass_reconstructed_PRE->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
+		h_lep_0_lep_1_pt_reconstructed_PRE->Fill(lep_0_lep_1_pt_reconstructed, final_weighting);
+		h_DeltaR_reconstructed_PRE->Fill(DeltaR_reconstructed, final_weighting);
+		h_Centrality_reconstructed_PRE->Fill(Centrality_reconstructed, final_weighting);
 
 	}
 
@@ -606,6 +610,9 @@ void MC_Analysis::Fill() {
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
 			h_lep_0_lep_1_mass_reconstructed->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
+			h_lep_0_lep_1_pt_reconstructed->Fill(lep_0_lep_1_pt_reconstructed, final_weighting);
+			h_DeltaR_reconstructed->Fill(DeltaR_reconstructed, final_weighting);
+			h_Centrality_reconstructed->Fill(Centrality_reconstructed, final_weighting);
 
 		}
 
@@ -655,6 +662,9 @@ void MC_Analysis::Fill() {
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
 			h_lep_0_lep_1_mass_reconstructed_CONTROL->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
+			h_lep_0_lep_1_pt_reconstructed_CONTROL->Fill(lep_0_lep_1_pt_reconstructed, final_weighting);
+			h_DeltaR_reconstructed_CONTROL->Fill(DeltaR_reconstructed, final_weighting);
+			h_Centrality_reconstructed_CONTROL->Fill(Centrality_reconstructed, final_weighting);
 
 		}
 
@@ -748,7 +758,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType);
 
 	//Delta R Histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", true, ChainName, AnalysisType);
 
 	// pT balance
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, ChainName, AnalysisType);
@@ -772,11 +782,11 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
 
 	// reconstructed Z mass with tau candidates and neutrinos
-	//DrawHistogram(h_lep_0_lep_1_mass_reconstructed, "h_lep_0_lep_1_mass_reconstructed", "; Z mass incl neutrinos [GeV/c^2];Events", false, true, ChainName, AnalysisType);)
-	//DrawHistogram(h_lep_0_lep_1_mass_reconstructed_PRE, "h_lep_0_lep_1_mass_reconstructed_PRE", "; Z mass incl neutrinos [GeV/c^2];Events", false, true, ChainName, AnalysisType);)
-	//DrawHistogram(h_lep_0_lep_1_mass_reconstructed_CONTROL, "h_lep_0_lep_1_mass_reconstructed_CONTROL", "; Z mass incl neutrinos [GeV/c^2];Events", false, true, ChainName, AnalysisType);)
 	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reconstructed_PRE, h_lep_0_lep_1_mass_reconstructed, h_lep_0_lep_1_mass_reconstructed_CONTROL, "lep_0_lep_1_mass_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reconstructed", ";Z mass incl neutrinos;Events", true, ChainName, AnalysisType);	
-	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reconstructed_PRE, h_DeltaR_reconstructed, h_DeltaR_reconstructed_CONTROL, "\\Delta R_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reconstructed", ";Delta R;Events",true, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reconstructed_PRE, h_Centrality_reconstructed, h_Centrality_reconstructed_CONTROL, "Centrality_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reconstructed", ";Centrality;Events", true, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reconstructed_PRE, h_lep_0_lep_1_pt_reconstructed, h_lep_0_lep_1_pt_reconstructed_CONTROL, "lep_0_lep_1_pt_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reconstructed", ";Z momentum incl neutrinos;Events", true, ChainName, AnalysisType);	
+
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
