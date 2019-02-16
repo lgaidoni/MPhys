@@ -564,7 +564,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("met_reco_p4_Pt") != string::npos) histogramStack->SetMinimum(0.01);
 		if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
-		else if(DataType.find("lep_0_lep_1_mass_reconstructed") != string::npos) histogramStack->SetMinimum(50);
+		else if(DataType.find("lep_0_lep_1_mass_reconstructed") != string::npos) histogramStack->SetMinimum(1);
 		else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
 		else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
