@@ -571,6 +571,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("neutrino_0_pt") != string::npos) histogramStack->SetMinimum(1);
+		if(DataType.find("neutrino_1_pt") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("MET_Type_Favour") != string::npos) histogramStack->SetMinimum(1);
 
 	} 
