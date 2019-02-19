@@ -6,6 +6,7 @@ chain_functions = open("Headers/Chain_Functions.h", "w")
 N_functions = open("Headers/N_Functions.h", "w")
 analysis_start_functions = open("Headers/Analysis_Start_Functions.h", "w")
 run_all_analyses = open("Headers/Run_All_Analyses_Functions.h", "w")
+run_all_analyses_shell = open("Run_All_Analyses_V2.sh", "w")
 
 def process_line_writer(inputFile, line, Name, AnalysisType, Process):
 	if (line.find(Process) != -1): 
@@ -91,7 +92,6 @@ def run_all_analyses_writer_top(inputFile):
 
 def run_all_analyses_writer_centre(inputFile, Name):
 	inputFile.write("\tStart_" + Name + "_Analysis(AnalysisType);\n")
-	
 
 chain_functions.write("#ifndef Chain_Functions_h\n")
 chain_functions.write("#define Chain_Functions_h\n\n")
@@ -104,6 +104,8 @@ analysis_start_functions.write("#ifndef Analysis_Start_Functions_h\n")
 analysis_start_functions.write("#define Analysis_Start_Functions_h\n\n")
 
 run_all_analyses_writer_top(run_all_analyses)
+
+run_all_analyses_shell.write("echo \"Performing Analysis for $1\"\n")
 
 initial_function = 0
 name = ""
@@ -160,6 +162,8 @@ for line in mc_locations:
 		N_functions.write("//N Return function for " + name + "\n")
 		N_functions.write("Long64_t N_" + name + "() {\n\n")
 		N_functions.write("\tLong64_t N = 0;\n")
+
+		run_all_analyses_shell.write("gnome-terminal --working-directory=/afs/hep.man.ac.uk/u/lgaidoni/MPhys/Code -e 'root Start_Analysis.C(\\\"Start_" + name + "_Analysis\\\",\\\"$1\\\") -l -b' &\n")
 
 		try:
 			os.makedirs("../../Output-Files/Electron/" + name)
