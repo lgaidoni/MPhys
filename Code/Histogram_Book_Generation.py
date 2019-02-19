@@ -87,6 +87,10 @@ def AnalysisAutoGen_Custom(name):
 	_BookHistos.write("\t//Histogram Bookings for " + name + "\n")
 	_BookHistos.write("\tBook_" + name + "(bins, " + name + "_Min, " + name + "_Max);\n\n")
 
+def AnalysisAutoGen_Custom_2D(name):
+	_BookHistos.write("\t//Histogram Bookings for " + name + "\n")
+	_BookHistos.write("\tBook_" + name + "(xbins, " + name + "_xMin, " + name + "_xMax, ybins, " + name + "_yMin, " + name + "_yMax);\n\n")
+
 for line in MC_Analysis:
 
 	#Here the files have their relevant information written
@@ -283,6 +287,49 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Definitions.write("/// ------------------- " + line[2:len(line)-1] + " ---------------- ///\n\n")
 	elif line[0:len(line) - 1] == "": # If the line is empty
 		print("LINE IS EMPTY, PLEASE REMOVE EMPTY LINE")
+	elif line[0:2] == "$$": # If the line is for a 2D polar histogram
+		Histo_Custom_Book_Definitions.write("// -- " + line[colonPos + 1:len(line)-1] + "\n")
+		Histo_Custom_Book_Functions.write("// -- " + line[colonPos + 1:len(line)-1] + "\n")
+
+		commaPos = line.find(",")
+		commaPos2 = line.find(",", commaPos + 1)
+
+		histogram_name = line[2:commaPos]
+		data_type_1 = line[commaPos + 1:commaPos2]
+		data_type_2 = line[commaPos2 + 1:colonPos]
+
+		Histo_Custom_Book_Definitions.write("virtual void Book_" + histogram_name + "(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);\n")
+		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "; // SEARCH VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "_PRE; // PRE VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "_CONTROL; // CONTROL VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "_EXCEPT; // EXCEPT VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "_BJET; // BJET VERSION\n")
+		Histo_Custom_Book_Definitions.write("vector<TH2F*>\thv_" + histogram_name + "; // HISTOGRAM VECTOR\n")
+		Histo_Custom_Book_Definitions.write("vector<string>\thv_" + histogram_name + "_names; // HISTOGRAM NAME VECTOR\n\n")
+
+		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + histogram_name + "(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax) {\n")
+		Histo_Custom_Book_Functions.write("\th_" + histogram_name + " = new TH2F(\"h_" + histogram_name + "\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
+		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_PRE = new TH2F(\"h_" + histogram_name + "_PRE\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
+		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_CONTROL = new TH2F(\"h_" + histogram_name + "_CONTROL\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
+		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_EXCEPT = new TH2F(\"h_" + histogram_name + "_EXCEPT\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
+		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_BJET = new TH2F(\"h_" + histogram_name + "_BJET\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n\n")
+
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + ");\n")
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_CONTROL);\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_EXCEPT);\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_PRE);\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_BJET);\n\n")	
+
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "\");\n")
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_CONTROL\");\n")
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_EXCEPT\");\n")
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_PRE\");\n")
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_BJET\");\n")
+
+		Histo_Custom_Book_Functions.write("}\n\n\n")
+
+		AnalysisAutoGen_Custom_2D(histogram_name)
+
 	else: # Otherwise, output the line and comment to the files
 		Histo_Custom_Book_Definitions.write("// -- " + line[colonPos + 1:len(line)-1] + "\n")
 		Histo_Custom_Book_Functions.write("// -- " + line[colonPos + 1:len(line)-1] + "\n")
@@ -295,7 +342,7 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_CONTROL; // CONTROL VERSION\n")
 		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_EXCEPT; // EXCEPT VERSION\n")
 		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_BJET; // BJET VERSION\n")
-		Histo_Custom_Book_Definitions.write("vector<TH1F*>\thv_" + line[0:colonPos] + "; // HISTOGRAM VECTOR\n\n")
+		Histo_Custom_Book_Definitions.write("vector<TH1F*>\thv_" + line[0:colonPos] + "; // HISTOGRAM VECTOR\n")
 		Histo_Custom_Book_Definitions.write("vector<string>\thv_" + line[0:colonPos] + "_names; // HISTOGRAM NAME VECTOR\n\n")
 
 		Histo_Custom_Book_Functions.write("void MC_Analysis::Book_" + line[0:colonPos] + "(int bins, double min, double max) {\n")

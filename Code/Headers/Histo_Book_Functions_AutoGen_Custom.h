@@ -477,4 +477,26 @@ void MC_Analysis::Book_Centrality_reconstructed(int bins, double min, double max
 }
 
 
+// -- This is a test of a polar plot
+void MC_Analysis::Book_Test_Polar_Plot(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax) {
+	h_Test_Polar_Plot = new TH2F("h_Test_Polar_Plot", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Test_Polar_Plot_PRE = new TH2F("h_Test_Polar_Plot_PRE", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Test_Polar_Plot_CONTROL = new TH2F("h_Test_Polar_Plot_CONTROL", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Test_Polar_Plot_EXCEPT = new TH2F("h_Test_Polar_Plot_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Test_Polar_Plot_BJET = new TH2F("h_Test_Polar_Plot_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
+	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot);
+	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_CONTROL);
+	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_EXCEPT);
+	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_PRE);
+	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_BJET);
+
+	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot");
+	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_CONTROL");
+	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_EXCEPT");
+	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_PRE");
+	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_BJET");
+}
+
+
 #endif

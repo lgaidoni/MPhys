@@ -121,3 +121,6 @@
 	//Histogram Bookings for Centrality_reconstructed
 	Book_Centrality_reconstructed(bins, Centrality_reconstructed_Min, Centrality_reconstructed_Max);
 
+	//Histogram Bookings for Test_Polar_Plot
+	Book_Test_Polar_Plot(xbins, Test_Polar_Plot_xMin, Test_Polar_Plot_xMax, ybins, Test_Polar_Plot_yMin, Test_Polar_Plot_yMax);
+
