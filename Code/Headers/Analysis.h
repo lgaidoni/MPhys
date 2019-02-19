@@ -56,7 +56,7 @@ void MC_Analysis::BookHistos() {
 	int Test_Polar_Plot_xMin = 0 - pi;
 	int Test_Polar_Plot_xMax = 0 + pi;
 	int Test_Polar_Plot_yMin = 0;
-	int Test_Polar_Plot_yMax = 1000;
+	int Test_Polar_Plot_yMax = 100;
 
   	int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
 	int DeltaR_reconstructed_Min = 0, DeltaR_reconstructed_Max = 10;
@@ -612,6 +612,9 @@ void MC_Analysis::Fill() {
 		// missing energy 
 		h_met_reco_p4_Pt->Fill(met_reco_p4->Pt(), final_weighting); 
 
+		h_Test_Polar_Plot->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
+
+
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
 			h_MET_Type_Favour->Fill(MET_Type_Favour, final_weighting);
@@ -672,6 +675,9 @@ void MC_Analysis::Fill() {
 		
 		// MET Centrality CONTROL
 		h_MET_Centrality_CONTROL->Fill(MET_Centrality, final_weighting);
+
+		h_Test_Polar_Plot_CONTROL->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
+
 		 
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 CONTROL
 		h_neutrino_0_pt_CONTROL->Fill(neutrino_0_pt,final_weighting);
@@ -726,6 +732,9 @@ void MC_Analysis::Fill() {
 		// MET Centrality BJET
 		h_MET_Centrality_BJET->Fill(MET_Centrality, final_weighting);
 
+		// polar hist fill
+		h_Test_Polar_Plot_BJET->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
+
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
 		h_neutrino_0_pt_BJET->Fill(neutrino_0_pt,final_weighting);
 		h_neutrino_1_pt_BJET->Fill(neutrino_1_pt,final_weighting);
@@ -737,35 +746,6 @@ void MC_Analysis::Fill() {
 		}
 
 	}
-	// polar hist fill
-	polar_hist->Fill(met_reco_p4_Pt, Px);
-	polar_hist->Fill(met_reco_p4_Pt, Py);
-}
-
-
-void MC_Analysis::2DPolar() {
-
-	polar_hist->SetStats(0);
-
-	TCanvas* can = new TCanvas("c","c",800,1200);
-	can->Divide(1,3);
-	can->cd(1);
-	polar_hist->SetTitle("colz");
-	polar_hist->DrawCopy("colz");
-
-	can->cd(3);
-	gPad->DrawFrame(-3.5,-3.5,3.5,3.5);
-	polar_hist->SetTitle("colz pol");
-	polar_hist->DrawCopy("same colz pol");
-
-	TPad *p = (TPad*)can->cd(2);
-	//p->SetTheta(90.);
-	//p->SetPhi(0.);
-	polar_hist->SetTitle("lego2 pol");
-	polar_hist->DrawCopy("lego2 pol");
-
-	can->cd(3);
-	DrawPolCol(polar_hist);
 
 }
 
@@ -841,7 +821,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reconstructed_PRE, h_lep_0_lep_1_pt_reconstructed, h_lep_0_lep_1_pt_reconstructed_CONTROL, "lep_0_lep_1_pt_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reconstructed", ";Z momentum incl neutrinos;Events", true, ChainName, AnalysisType);	
 
 	// 2D POLAR HISTOGRAMS
-	DrawDrawHistogram2DPolar(h_met_reco_p4_Pt, h_met_reco_p4_Pt, "h_met_reco_p4_Pt", ";Missing Energy 2D polar plot;", false, false, ChainName, AnalysisType);
+	DrawHistogram2DPolar(h_Test_Polar_Plot, "h_Test_Polar_Plot", ";Missing Energy 2D polar plot;", false, false, ChainName, AnalysisType);
 	//DrawHistogram2DPolar(TH2F *histogram, string polar_histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
 	
 	//BJET GRAPHS
