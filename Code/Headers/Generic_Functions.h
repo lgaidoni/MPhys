@@ -187,6 +187,19 @@ vector<TH1F*> Histogram_Return_Given_File(string AnalysisType, string DataType, 
 
 }
 
+void Histogram_Remove_Negative_Events(TH1F* histogram) {
+
+	int bins = histogram->GetSize() - 2;
+
+	for (int bin = 0; bin < bins; bin++) {
+
+		double bincontent = histogram->GetBinContent(bin);
+		if (bincontent < 0) histogram->SetBinContent(bin, 0.0001);
+
+	}
+
+}
+
 //This function will give the provided histogram an x-axis, depending on the name of the DataType (ljet_0_ljet_1_mass, Etc) provided
 void Histogram_Namer(TH1F* histogram, string DataType) {
 	
@@ -258,6 +271,8 @@ void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
+	//Histogram_Remove_Negative_Events(histogram);
+
 	if (!(quiet)) {
 
 		//Create a new canvas using canvasName
@@ -299,6 +314,10 @@ void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
 void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string histogramName, string title, bool log, string ChainName, string AnalysisType) {
+
+	//Histogram_Remove_Negative_Events(histogram1);
+	//Histogram_Remove_Negative_Events(histogram2);	
+	//Histogram_Remove_Negative_Events(histogram3);
 
 	//Strings for the file names
 	string OutputFileName = histogramName + "_" + ChainName + "_Combo.pdf";
@@ -360,6 +379,11 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, histogram EXCEPT, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
 void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string histogramName, string title, bool log, string ChainName, string AnalysisType) {
+
+	//Histogram_Remove_Negative_Events(histogram1);
+	//Histogram_Remove_Negative_Events(histogram2);
+	//Histogram_Remove_Negative_Events(histogram3);
+	//Histogram_Remove_Negative_Events(histogram4);
 
 	//Strings for the file names
 	string OutputFileName = histogramName + "_" + ChainName + "_Combo.pdf";
@@ -746,6 +770,7 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 	//Define the variables outside
 	double maxphi;
 	double minphi; 
+	double V3_Phi = Vector3->Phi();
 
 	if (Vector1->Phi() > Vector2->Phi()) { 
 		maxphi = Vector1->Phi();
@@ -759,15 +784,21 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 	
 	// if E_T^{miss} is not between this delta phi interval, cut
 
-	if ((maxphi - minphi) < pi) {
+	if (abs(DeltaPhi(Vector1, Vector2)) < pi) {
 
 		if (minphi <= Vector3->Phi() &&  Vector3->Phi() <= maxphi) phi_int_condition = true;
 
-	} else {
+	} else if (abs(DeltaPhi(Vector1, Vector2)) > pi) {
 
-		if (!(minphi <= Vector3->Phi() &&  Vector3->Phi() <= maxphi)) phi_int_condition = true;
+		minphi += pi;
+		maxphi -= pi;
 
-	}
+		if (V3_Phi > 0) V3_Phi -= pi;
+		if (V3_Phi < 0) V3_Phi += pi;
+
+		if (minphi <= V3_Phi &&  V3_Phi <= maxphi) phi_int_condition = true;
+
+	} else cout << "HOW DID THIS HAPPEN TO ME?" << endl << endl;
 
 	return phi_int_condition;
 
@@ -928,13 +959,28 @@ double METCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 
 	// calculate Centrality
 
-	if (DeltaPhi(Vector2, Vector3) < pi) {
+	if (abs(DeltaPhi(Vector2, Vector3)) < pi) {
 
 		Centrality = 2 * sum1/DeltaPhi(Vector2, Vector3);
 
 	} else {
 
-		Centrality = 2 * sum1/(2*pi - DeltaPhi(Vector2, Vector3));
+		double Emiss_Phi_Corrected;
+		double tauproduct1_Phi_Corrected;
+		double tauproduct2_Phi_Corrected;
+
+		if (Emiss_Phi < 0) Emiss_Phi_Corrected = Emiss_Phi + pi;
+		else if (Emiss_Phi > 0) Emiss_Phi_Corrected = Emiss_Phi - pi;
+
+		if (Emiss_Phi < 0) tauproduct1_Phi_Corrected = tauproduct1_Phi + pi;
+		else if (Emiss_Phi > 0) tauproduct1_Phi_Corrected = tauproduct1_Phi - pi;
+
+		if (Emiss_Phi < 0) tauproduct2_Phi_Corrected = tauproduct2_Phi + pi;
+		else if (Emiss_Phi > 0) tauproduct2_Phi_Corrected = tauproduct2_Phi - pi;
+
+		double sum2 = Emiss_Phi - (tauproduct1_Phi + tauproduct2_Phi)/2; // sum 1 to break things up
+
+		Centrality = 2 * sum2/abs(tauproduct1_Phi_Corrected - tauproduct2_Phi_Corrected);
 
 	}
 
@@ -946,8 +992,23 @@ double METTypeFavour(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 	double Phi_E = Vector1->Phi();
 	double Phi_2 = Vector2->Phi();	//Hadronic Tau
 	double Phi_3 = Vector3->Phi();	//Lepton
+	double favour;
 
-	double favour = (Phi_3 - Phi_E)/(Phi_3 - Phi_2);
+	if (DeltaPhi(Vector2, Vector3) > pi) {
+
+		if (Phi_E < 0) Phi_E += pi;
+		else if (Phi_E > 0) Phi_E -= pi;
+
+		if (Phi_2 < 0) Phi_2 += pi;
+		else if (Phi_2 > 0) Phi_2 -= pi;
+
+		if (Phi_3 < 0) Phi_3 += pi;
+		else if (Phi_3 > 0) Phi_3 -= pi;
+
+	}
+
+	if (Phi_3 > Phi_2) favour = (Phi_3 - Phi_E)/(Phi_3 - Phi_2);
+	else if (Phi_3 < Phi_2) favour = (Phi_2 - Phi_E)/(Phi_2 - Phi_3);
 
 	return favour;
 
