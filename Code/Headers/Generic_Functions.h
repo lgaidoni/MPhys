@@ -454,6 +454,56 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 
 }
 
+// 2D POLAR HISTOGRAM FUNCTION
+DrawHistogram2DPolar(TH2F *histogram, string polar_histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
+
+	string OutputFileName = polar_histogramName + "_" + ChainName + "2D_POLAR.pdf";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
+
+	//Histogram_Remove_Negative_Events(histogram);
+
+	if (!(quiet)){
+
+	//Create a new canvas using canvasName
+	TH2F* canvas = new TH2F(polar_histogramName.c_str(),"", 32, -TMath::Pi(), TMath::Pi(), 24, 1.1, 3.5);
+	// TCanvas *canvas = new TCanvas(histogramName.c_str(), "", 600, 400);
+
+	//Sets the Titles
+	histogram->SetTitle(title.c_str());
+
+	//Draw the histogram
+	histogram->Draw("HIST");
+
+	//If the user wants the axis to be a log axis, do it
+	//if (log == true) canvas->SetLogy();
+
+	//Write out to a ROOT file
+	histogram->Write(polar_histogramName.c_str());
+
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+		canvas->Close();
+
+	} else if (quiet) {
+
+		//Sets the X axis title
+		histogram->SetTitle(title.c_str());
+
+		//Draw the histogram
+		histogram->Draw();
+
+		//Write out to a ROOT file
+		histogram->Write(polar_histogramName.c_str());
+
+	}
+	
+	Double_t max = h->GetYaxis()->GetXmax();
+	gPad->DrawFrame(-max,-max,max,max);
+	h->DrawCopy("same colz pol");
+}
+
 //This function will combine processes and write them out to a new .root file
 void Process_Combiner(string AnalysisType, string Process) {
 
