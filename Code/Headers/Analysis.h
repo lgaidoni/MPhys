@@ -49,6 +49,15 @@ void MC_Analysis::BookHistos() {
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
 	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
 
+	//Values for the 2D histograms
+	int xbins = 50;
+	int ybins = 50;
+	
+	int Test_Polar_Plot_xMin = 0 - pi;
+	int Test_Polar_Plot_xMax = 0 + pi;
+	int Test_Polar_Plot_yMin = 0;
+	int Test_Polar_Plot_yMax = 1000;
+
   	int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
 	int DeltaR_reconstructed_Min = 0, DeltaR_reconstructed_Max = 10;
 	int lep_0_lep_1_pt_reconstructed_Min = 0, lep_0_lep_1_pt_reconstructed_Max = 300;
