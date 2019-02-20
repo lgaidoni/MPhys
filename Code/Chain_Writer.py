@@ -163,7 +163,7 @@ for line in mc_locations:
 		N_functions.write("Long64_t N_" + name + "() {\n\n")
 		N_functions.write("\tLong64_t N = 0;\n")
 
-		run_all_analyses_shell.write("gnome-terminal --working-directory=/afs/hep.man.ac.uk/u/lgaidoni/MPhys/Code -e 'root Start_Analysis.C(\\\"Start_" + name + "_Analysis\\\",\\\"$1\\\") -l -b' &\n")
+		run_all_analyses_shell.write("gnome-terminal --working-directory=/afs/hep.man.ac.uk/u/lgaidoni/MPhys/Code -e \"root Start_Analysis.C(\\\\\\\"Start_" + name + "_Analysis\\\\\\\",\\\\\\\"$1\\\\\\\") -l -b\" &\n")
 
 		try:
 			os.makedirs("../../Output-Files/Electron/" + name)

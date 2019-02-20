@@ -576,6 +576,8 @@ void Process_Combiner(string AnalysisType, string Process) {
 // need to give it the analysis type and then for given, tells it the path
 void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files) {
 
+	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
+
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
 
@@ -615,7 +617,8 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 
 	//Generic Maximum Size of the Graphs
 	//Set the Maximum Size of the histograms to something appropriate to the largest value in the histogram
-	if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(1000);}
+	if (max_value >= 1 && max_value < 10) { histogramStack->SetMaximum(300);}
+	else if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(3000);}
 	else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(30000);}
 	else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(300000);}
  	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(3000000);}
@@ -633,7 +636,12 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
 		else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
-		if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau" or AnalysisType == "ElectronMuon") {
+			if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(0.01);
+		} else {
+			if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+		}
 		if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
 		if(DataType.find("met_reco_p4_Pt") != string::npos) histogramStack->SetMinimum(0.01);
