@@ -74,8 +74,7 @@ void MC_Analysis::Loop() {
    fstream output(status_file, output.out | output.app);  //Open the output file either creating it, or appending to it
 
    //Output information to the status file
-   output << time << endl;
-   output << "\"" << AnalysisType << "\" Analysis of " << ChainName << " in progress..." << endl << endl;
+   output << endl << "\"" << AnalysisType << "\" Analysis of " << ChainName << " begun at " << time << endl << endl;
    output.close();
 
    /////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +140,7 @@ void MC_Analysis::Loop() {
 
 			//Open the status file, and output the current completion and eta to it
 			output.open(status_file, output.out | output.app);
-			output << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%  " << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << endl;
+			output << "\"" << AnalysisType << "\" Analysis of " << ChainName << " Completion Information: " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%  " << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << endl;
 			output.close();
 		}
 
@@ -184,9 +183,15 @@ void MC_Analysis::Loop() {
    output.open(status_file, output.out | output.app);  //Open the status file
 
    ///Output the time it took to complete the analysis to the status file
-   output << endl << "Analysis Complete: finished in " << (finished - start)/CLOCKS_PER_SEC << " seconds" << endl;
-   output << "-------------------------------------------------------------" << endl << endl;
+   output << endl << "\"" << AnalysisType << "\" Analysis of " << ChainName << " Complete: finished in " << (finished - start)/CLOCKS_PER_SEC << " seconds" << endl << endl;
+
    output.close();
+
+   //String that stores the location of the status file
+   string timing_file = "../../WWW/" + AnalysisType + "_timing.txt";
+	
+   fstream timing(timing_file, timing.out | timing.app);  //Open the output file either creating it, or appending to it
+   timing << ChainName << "," << (finished - start)/CLOCKS_PER_SEC << endl;
 
 }
 
