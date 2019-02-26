@@ -49,14 +49,29 @@ void MC_Analysis::BookHistos() {
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
 	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
 
+
 	//Values for the 2D histograms
-	int xbins = 50;
+//	int xbins = 50;
+//	int ybins = 50;
+	int xbins = 20;
 	int ybins = 50;
 	
+	// POLAR
 	int Test_Polar_Plot_xMin = 0 - pi;
 	int Test_Polar_Plot_xMax = 0 + pi;
 	int Test_Polar_Plot_yMin = 0;
 	int Test_Polar_Plot_yMax = 100;
+
+	int lep_0_reco_p4_xMin = 0 - pi;
+	int lep_0_reco_p4_xMax = 0 + pi;
+	int lep_0_reco_p4_yMin = 0;
+	int lep_0_reco_p4_yMax = 100;
+
+	int lep_1_reco_p4_xMin = 0 - pi;
+	int lep_1_reco_p4_xMax = 0 + pi;
+	int lep_1_reco_p4_yMin = 0;
+	int lep_1_reco_p4_yMax = 100;
+
 
   	int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
 	int DeltaR_reconstructed_Min = 0, DeltaR_reconstructed_Max = 10;
@@ -320,32 +335,56 @@ void MC_Analysis::GenerateVariables() {
 
 	// Missing transverse momentum centrality
 	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
-
-	// neutrino missing energy/momentum vector x and y components (in transverse plane)
-	vector<double> VectorNeutrinoTransMom12 = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
-
-	MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
-
-	// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
-	neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
-	neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
-
-	// neutrino 1
-	double neutrino_0_x_p = x_component_pT(neutrino_0_pt, lep_0_p4); // p_x of neutrino 1
-	double neutrino_0_y_p = y_component_pT(neutrino_0_pt, lep_0_p4); // p_y of neutrino 1
-	double neutrino_0_z_p = p_z_neutrino_calc(neutrino_0_pt, lep_0_p4); // p_z of neutrino 1
-	TLorentzVector* neutrino_0_TLV = neutrino_TLV(neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 1
-
-	// neutrino 2
-	double neutrino_1_x_p = x_component_pT(neutrino_1_pt, lep_1_p4); // p_x of neutrino 2
-	double neutrino_1_y_p = y_component_pT(neutrino_1_pt, lep_1_p4); // p_y of neutrino 2
-	double neutrino_1_z_p = p_z_neutrino_calc(neutrino_1_pt, lep_1_p4); // p_z of neutrino 2
-	TLorentzVector* neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
-
-	// reconstruct tau candidate with tau lepton and neutrino
-	TLorentzVector* lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
-	TLorentzVector* lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 	
+	// InorOut = true means the E_t is outside of the phi interval 
+	double Et_along_a;
+	double Et_along_b;
+
+	if (PhiIntervalInOrOut(lep_0_p4->Pt(), lep_1_p4->Pt(), met_reco_p4->Pt()) { // outside the phi interval so need to see which one it favours
+		
+		// want to calcualate which tau it is closer to and find Et component along that tau vector
+		if ( ETFavourCalc( lep_0_p4->Pt(), lep_1_p4->Pt(), met_reco_p4->Pt() ) {
+			
+			Et_along_a = ETalongVectorCalc(lep_0_p4, met_reco_p4); // Et is along a		
+		}
+		else {
+			Et_along_b = ETalongVectorCalc(lep_1_p4, met_reco_p4); // Et is along b
+		} 
+	}
+
+	else { // normal "inside" the phi interval gap - standard reconstruction calculation
+	
+		// neutrino missing energy/momentum vector x and y components (in transverse plane)
+		vector<double> VectorNeutrinoTransMom12 = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
+
+		MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
+
+		// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
+		neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
+		neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
+
+		// neutrino 1
+		double neutrino_0_x_p = x_component_pT(neutrino_0_pt, lep_0_p4); // p_x of neutrino 1
+		double neutrino_0_y_p = y_component_pT(neutrino_0_pt, lep_0_p4); // p_y of neutrino 1
+		double neutrino_0_z_p = p_z_neutrino_calc(neutrino_0_pt, lep_0_p4); // p_z of neutrino 1
+		TLorentzVector* neutrino_0_TLV = neutrino_TLV(neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 1
+
+		// neutrino 2
+		double neutrino_1_x_p = x_component_pT(neutrino_1_pt, lep_1_p4); // p_x of neutrino 2
+		double neutrino_1_y_p = y_component_pT(neutrino_1_pt, lep_1_p4); // p_y of neutrino 2
+		double neutrino_1_z_p = p_z_neutrino_calc(neutrino_1_pt, lep_1_p4); // p_z of neutrino 2
+		TLorentzVector* neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
+
+		// reconstruct tau candidate with tau lepton and neutrino
+		TLorentzVector* lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
+		TLorentzVector* lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
+	
+	}
+
+	// make global variables
+	lep_0_reco_p4 = lep_0_reco_p4;
+	lep_1_reco_p4 = lep_1_reco_p4;
+
 	//Invariant Mass
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
 	lep_0_lep_1_mass_reconstructed = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
@@ -377,7 +416,7 @@ void MC_Analysis::GenerateVariables() {
 	Centrality_reconstructed = CentralityCalc(lep_0_reco_p4, lep_1_reco_p4, jet_0_p4, jet_1_p4);
 
 	//Final Weighting
-	final_weighting = Luminosity_Weight * weight_total;
+	final_weighting = Luminosity_Weight * weight_total;	
 	
 }	
 
@@ -456,11 +495,12 @@ bool MC_Analysis::Cuts(string region) {
 	bool ptvarcone_40_0 = false;
 	bool ptvarcone_40_1 = false;
 	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4);
+	bool Et_Miss_RangeCheck = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_reco_p4);
 
 	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
 	bool pT_balance_3_limit = false;
-	bool rap_int_condition = RapidityIntervalCheck(jet_0_p4, jet_1_p4, jet_2_p4);
+	bool rap_int_condition = RapidityIntervalCheck_v2(jet_0_p4, jet_1_p4, jet_2_p4);
 
 	//Z Boson Mass Cut
 	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101) Z_mass_condition = true;	
@@ -515,7 +555,7 @@ bool MC_Analysis::Cuts(string region) {
 		
 	
 		//Work out if the common cuts are true here
-	 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && phi_int_condition) {
+	 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && Et_Miss_RangeCheck) {
 			common_cuts = true;
 		}
 		
@@ -553,6 +593,8 @@ bool MC_Analysis::Cuts(string region) {
 		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
+	
+	
 	return false;
 
 }
@@ -611,9 +653,13 @@ void MC_Analysis::Fill() {
 
 		// missing energy 
 		h_met_reco_p4_Pt->Fill(met_reco_p4->Pt(), final_weighting); 
-
+		// missing energy in phi space
 		h_Test_Polar_Plot->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
-
+		
+		// reconstructed lepton 1 momentum in phi space
+		h_lep_0_reco_p4->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
+		// reconstructed lepton 2 momentum in phi space
+		h_lep_1_reco_p4->Fill(lep_1_reco_p4->Phi(), lep_1_reco_p4->Pt(), final_weighting);
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
@@ -675,13 +721,17 @@ void MC_Analysis::Fill() {
 		
 		// MET Centrality CONTROL
 		h_MET_Centrality_CONTROL->Fill(MET_Centrality, final_weighting);
-
-		h_Test_Polar_Plot_CONTROL->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
-
 		 
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 CONTROL
 		h_neutrino_0_pt_CONTROL->Fill(neutrino_0_pt,final_weighting);
 		h_neutrino_1_pt_CONTROL->Fill(neutrino_1_pt,final_weighting);
+
+		// Polar plots
+		h_Test_Polar_Plot_CONTROL->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
+		// reconstructed lepton 1 momentum in phi space
+		h_lep_0_reco_p4_CONTROL->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
+		// reconstructed lepton 2 momentum in phi space
+		h_lep_1_reco_p4_CONTROL->Fill(lep_1_reco_p4->Phi(), lep_1_reco_p4->Pt(), final_weighting);
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
@@ -734,6 +784,10 @@ void MC_Analysis::Fill() {
 
 		// polar hist fill
 		h_Test_Polar_Plot_BJET->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
+		// reconstructed lepton 1 momentum in phi space
+		h_lep_0_reco_p4_BJET->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
+		// reconstructed lepton 2 momentum in phi space
+		h_lep_1_reco_p4_BJET->Fill(lep_1_reco_p4->Phi(), lep_1_reco_p4->Pt(), final_weighting);
 
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
 		h_neutrino_0_pt_BJET->Fill(neutrino_0_pt,final_weighting);
@@ -823,6 +877,8 @@ void MC_Analysis::DrawHistos() {
 	// 2D POLAR HISTOGRAMS
 	DrawHistogram2DPolar(h_Test_Polar_Plot, "h_Test_Polar_Plot", ";Missing Energy 2D polar plot;", false, false, ChainName, AnalysisType);
 	//DrawHistogram2DPolar(TH2F *histogram, string polar_histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
+	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed lepton 1 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
+	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed leptons 2 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
 	
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
