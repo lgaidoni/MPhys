@@ -522,6 +522,8 @@ void MC_Analysis::Book_Mass_Favour_Combination_2D(int xbins, double xmin, double
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_EXCEPT");
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_PRE");
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_BJET");
+}
+
 
 // -- This is a test of a polar plot
 void MC_Analysis::Book_lep_0_reco_p4(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax) {
