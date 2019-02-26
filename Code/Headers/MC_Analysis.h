@@ -1683,7 +1683,7 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, dou
 	ChainName = chainname;
 	Luminosity_Weight = luminosity_weight;
 
-	if (ChainName == "DATA") {
+	if (ChainName.find("DATA") != string::npos) {
 
 		Luminosity_Weight = 1;
 		weight_total_override = true;

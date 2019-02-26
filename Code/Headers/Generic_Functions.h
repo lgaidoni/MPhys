@@ -642,7 +642,7 @@ void Process_Combiner(string AnalysisType, string Process) {
 
 // Stacking histograms:
 // need to give it the analysis type and then for given, tells it the path
-void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files) {
+void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged) {
 
 	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
 
@@ -750,15 +750,15 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	//Draw the data histogram over the histogram stack
 	histograms[11]->Draw("SAME");
 
-	canvas->SetLogy();  //Log the y axis
-
 	//Create the legend and draw the region information
 	Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0);
 	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
-	
+
+	if (logged) canvas->SetLogy();  //Log the y axis
+
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
@@ -778,7 +778,7 @@ void DrawStackedProcesses(string AnalysisType) {
 		getline(DataTypeFile, line);  	//Get the file line
 		if (line != "") {  		//If not looking at the last line	
 			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
-			Process_Stacker(AnalysisType, line, fileName, root_files);
+			Process_Stacker(AnalysisType, line, fileName, root_files, true);
 		}
 	}
 }
@@ -954,9 +954,9 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 // Function to decide if the Etmiss is inside the Phi interval or outside the phi interval
 bool PhiIntervalInOrOut(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // vec1 = pT of tau a, vec2 = pT of tau b, vec3 = pT of Etmiss (MET)
 
-	double delta_phi_aEt = DeltaPhi(Vector1, Vector3);// delta phi between Et and a
-	double delta_phi_bEt = DeltaPhi(Vector2, Vector3); // delta phi between Et and b
-	double delta_phi_ab = DeltaPhi(Vector1, Vector2); // delta phi between a and b
+	double delta_phi_aEt = DeltaPhi_V2(Vector1, Vector3);// delta phi between Et and a
+	double delta_phi_bEt = DeltaPhi_V2(Vector2, Vector3); // delta phi between Et and b
+	double delta_phi_ab = DeltaPhi_V2(Vector1, Vector2); // delta phi between a and b
 	
 	if ( (delta_phi_aEt + delta_phi_bEt) <= delta_phi_ab ) return false;// IF INSIDE THE PHI ANGLE OF TAUS
 	return true;// OTHERWISE OUTSIDE THE PHI ANGLE OF TAUS
@@ -967,9 +967,9 @@ bool ETFavourCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVect
 // Et_along_b = Et . unit vector of tau b ,  Et_along_a = Et . unit vector of tau a 
 
 	// Do i need these twice? Or will ROOT remember?
-	double delta_phi_aEt = DeltaPhi(Vector1, Vector3);// delta phi between Et and a
-	double delta_phi_bEt = DeltaPhi(Vector2, Vector3); // delta phi between Et and b
-	double delta_phi_ab = DeltaPhi(Vector1, Vector2); // delta phi between a and b
+	double delta_phi_aEt = DeltaPhi_V2(Vector1, Vector3);// delta phi between Et and a
+	double delta_phi_bEt = DeltaPhi_V2(Vector2, Vector3); // delta phi between Et and b
+	double delta_phi_ab = DeltaPhi_V2(Vector1, Vector2); // delta phi between a and b
 	
 	if (delta_phi_aEt > delta_phi_bEt){ return false; } // Closer to b
 	return true; // Otherwise Closer to a
