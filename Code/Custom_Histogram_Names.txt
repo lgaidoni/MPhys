@@ -25,5 +25,9 @@ MET_Type_Favour:Whether the missing energy is directed more towards the hadronic
 lep_0_lep_1_mass_reconstructed: reconstructed Z mass with neutrino and z candidates
 DeltaR_reconstructed:Distance in R space between two leptons (reconstructed with missing neutrino energy included)
 lep_0_lep_1_pt_reconstructed:Combined transverse momentum of lepton 0 and lepton 1 (reconstructed with missing neutrino energy included)
+##lep_0_reco_p4:global variables for lepton 0 reconstructed
+##lep_1_reco_p4:global variables for lepton 1 reconstructed
 Centrality_reconstructed:Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
 $$Test_Polar_Plot,met_reco_p4_Phi,met_reco_p4_Pt:This is a test of a polar plot
+$$lep_0_reco_p4,lep_0_reco_p4_Phi,lep_0_reco_p4_Pt:This is a test of a polar plot
+$$lep_1_reco_p4,lep_1_reco_p4_Phi,lep_1_reco_p4_Pt:
