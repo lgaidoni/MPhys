@@ -73,6 +73,14 @@ void MC_Analysis::Loop() {
 	
    fstream output(status_file, output.out | output.app);  //Open the output file either creating it, or appending to it
 
+   string current_progress = "../../Status_Files/" + AnalysisType + "_" + ChainName + "_status.txt";
+   
+   fstream progress(current_progress, progress.out | progress.trunc);
+
+   progress << "Beginning " << AnalysisType << " Analysis of " << ChainName;
+   progress.flush();
+   progress.close();
+
    //Output information to the status file
    output << endl << "\"" << AnalysisType << "\" Analysis of " << ChainName << " begun at " << time << endl << endl;
    output.close();
@@ -110,15 +118,20 @@ void MC_Analysis::Loop() {
 	//If the current entry is divisible by 500
 	if (jentry % 500 == 0) {
 
+		double percentage = (entry_count / max_entries) * 100;	//Work out completion as a percentrage
+		int percentageint1 = (int)(percentage/2 + 27);		//Turn the number into an integer
+		int percentageint2 = (int)(percentage/2);		//Turn the number into an integer
+
+		int eta = completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC;
+
 		//Loop between 0 and 76 (Progress bar runs from 26 to 76)
 		for (int i = 0; i < 77; i++) {
-			double percentage = (entry_count / max_entries) * 100;	//Work out completion as a percentrage
-			int percentageint = (int)(percentage/2 + 27);		//Turn the number into an integer
+			
 			if (i < 26) cout << " ";				//If not at the progress bar yet, print a space
 			if (i == 26) cout << "[";				//If beginning, print [
-			if (i > 26 && i < percentageint) cout << "=";		//If completed section, print =
-			if (i == percentageint) cout << "|";			//If at completion level, print |
-			if (i > percentageint && i < 77) cout << "-";		//If not yet completed section, print -
+			if (i > 26 && i < percentageint1) cout << "=";		//If completed section, print =
+			if (i == percentageint1) cout << "|";			//If at completion level, print |
+			if (i > percentageint1 && i < 77) cout << "-";		//If not yet completed section, print -
 			if (i == 76) cout << "]";				//If end, print ]
 		}
 
@@ -131,7 +144,7 @@ void MC_Analysis::Loop() {
 		else if (current_indicator == 3) {cout << "               " << "\\"; current_indicator = 0;}
 
 		//Print the completion percentage and the eta
-		cout << " " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%\r" << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << "\r";		
+		cout << " " << setprecision(3) << fixed << percentage << "%\r" << " ETA: " << eta << "\r";		
 		
 		cout.flush();	//Flush cout, pushing it to the terminal
 
@@ -140,8 +153,31 @@ void MC_Analysis::Loop() {
 
 			//Open the status file, and output the current completion and eta to it
 			output.open(status_file, output.out | output.app);
-			output << "\"" << AnalysisType << "\" Analysis of " << ChainName << " Completion Information: " << setprecision(3) << fixed << (entry_count / max_entries) * 100 << "%  " << " ETA: " << completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC << endl;
+			output << "\"" << AnalysisType << "\" Analysis of " << ChainName << " Completion Information: " << setprecision(3) << percentage << "%  " << " ETA: " << eta << endl;
 			output.close();
+
+		}
+
+		if (jentry % 2000 == 0) {
+
+			progress.open(current_progress, progress.out | progress.trunc);
+
+			for (int i = 0; i < 51; i++) {
+
+				if (i == 0) progress << "[";				//If beginning, print [
+				if (i > 0 && i < percentageint2) progress << "=";		//If completed section, print =
+				if (i == percentageint2) progress << "|";			//If at completion level, print |
+				if (i > percentageint2 && i < 50) progress << "-";		//If not yet completed section, print -
+				if (i == 50) progress << "] ";				//If end, print ]
+
+			}
+
+			progress << " ETA: " << eta;
+			progress << "  :  " << ChainName << " " << AnalysisType << " Completion: " << setprecision(3) << fixed << percentage << "%";
+
+			progress.flush();
+			progress.close();
+
 		}
 
 	}
@@ -186,6 +222,15 @@ void MC_Analysis::Loop() {
    output << endl << "\"" << AnalysisType << "\" Analysis of " << ChainName << " Complete: finished in " << (finished - start)/CLOCKS_PER_SEC << " seconds" << endl << endl;
 
    output.close();
+
+   progress.open(current_progress, progress.out | progress.trunc);
+
+   progress << "[==================================================]";
+   progress << " Completed in : " << (finished - start)/CLOCKS_PER_SEC;
+   progress << "  :  " << AnalysisType << " " << ChainName << " Completion: 100%";
+
+   progress.flush();
+   progress.close();
 
    //String that stores the location of the status file
    string timing_file = "../../WWW/" + AnalysisType + "_timing.txt";

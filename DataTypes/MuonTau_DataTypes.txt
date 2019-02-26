@@ -1,11 +1,9 @@
 ljet_0_p4_Pt
 ljet_0_p4_Pt_PRE
 ljet_0_p4_Pt_CONTROL
-ljet_0_p4_Pt_EXCEPT
 ljet_1_p4_Pt
 ljet_1_p4_Pt_PRE
 ljet_1_p4_Pt_CONTROL
-ljet_1_p4_Pt_EXCEPT
 jet_0_jet_1_mass
 jet_0_jet_1_mass_PRE
 jet_0_jet_1_mass_CONTROL

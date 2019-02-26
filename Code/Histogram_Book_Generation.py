@@ -262,7 +262,7 @@ for line in MC_Analysis:
 				Histo_Book_Functions_AutoGen.write("}\n\n")
 			
 
-	#If the line is the one at the beginning of the declaration of leaf types
+	#If the line is the one at the beginning of the declaration of leaf types 
 	if line.find("// Declaration of leaf types", 0, len(line)) != -1:
 		reader = 1
 

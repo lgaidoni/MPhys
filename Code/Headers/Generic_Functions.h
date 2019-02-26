@@ -505,6 +505,51 @@ void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, b
 	//histogram->DrawCopy("same colz pol");
 }
 
+// 2D POLAR HISTOGRAM FUNCTION
+void DrawHistogram2D(TH2F *histogram, string histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
+
+	string OutputFileName = histogramName + "_" + ChainName + "2D.pdf";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
+
+	//Histogram_Remove_Negative_Events(histogram);
+
+	if (!(quiet)){
+
+		TCanvas *canvas = new TCanvas(histogramName.c_str(), "", 600, 400);
+
+		//Sets the Titles
+		histogram->SetTitle(title.c_str());
+
+		//Draw the histogram
+		histogram->Draw("COLZ");
+
+		//If the user wants the axis to be a log axis, do it
+		//if (log == true) canvas->SetLogy();
+
+		//Write out to a ROOT file
+		histogram->Write(histogramName.c_str());
+
+		//Write out to a PDF file
+		canvas->SaveAs(FullOutputFilePath.c_str());
+
+		canvas->Close();
+
+	} else if (quiet) {
+
+		//Sets the X axis title
+		histogram->SetTitle(title.c_str());
+
+		//Draw the histogram
+		histogram->Draw();
+
+		//Write out to a ROOT file
+		histogram->Write(histogramName.c_str());
+
+	}
+
+}
+
 //This function will combine processes and write them out to a new .root file
 void Process_Combiner(string AnalysisType, string Process) {
 
@@ -546,26 +591,49 @@ void Process_Combiner(string AnalysisType, string Process) {
 		getline(DataTypeFile, line);  	//Get the file line
 		if (line != "") {  		//If not looking at the last line	
 
-			//Get the first histogram in the vector
-			string histogramName = "h_" + line + ";1";
-			TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
+			if (line.find("2D") != string::npos) {
+				//Get the first histogram in the vector
+				string histogramName = "h_" + line + ";1";
+				TH2F *histogramMaster = (TH2F*)files[0]->Get(histogramName.c_str()); 
 
-			//For all the files in the vector not counting the first...
-			for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+				//For all the files in the vector not counting the first...
+				for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
 
-				//Get the histogram
-				TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
+					//Get the histogram
+					TH2F *histogram = (TH2F*)(*tfile)->Get(histogramName.c_str());
 
-				//Add it to the master histogram 
-				histogramMaster->Add(histogram);
+					//Add it to the master histogram 
+					histogramMaster->Add(histogram);
 
+				}
+
+				//Draw the master histogram
+				Histograms->cd();
+				histogramMaster->Draw("HIST");
+				histogramMaster->Write();
 			}
 
-			//Draw the master histogram
-			Histograms->cd();
-			histogramMaster->Draw("HIST");
-			histogramMaster->Write();
+			else {
+				//Get the first histogram in the vector
+				string histogramName = "h_" + line + ";1";
+				TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
 
+				//For all the files in the vector not counting the first...
+				for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+
+					//Get the histogram
+					TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
+
+					//Add it to the master histogram 
+					histogramMaster->Add(histogram);
+
+				}
+
+				//Draw the master histogram
+				Histograms->cd();
+				histogramMaster->Draw("HIST");
+				histogramMaster->Write();
+			}
 		}
 	}
 	
@@ -1117,7 +1185,7 @@ double METTypeFavour(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 	}
 
 	if (Phi_3 > Phi_2) favour = (Phi_3 - Phi_E)/(Phi_3 - Phi_2);
-	else if (Phi_3 < Phi_2) favour = (Phi_2 - Phi_E)/(Phi_2 - Phi_3);
+	else if (Phi_3 < Phi_2) favour = 1 - (Phi_2 - Phi_E)/(Phi_2 - Phi_3);
 
 	return favour;
 

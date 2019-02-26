@@ -281,6 +281,16 @@ TH2F	*h_Test_Polar_Plot_BJET; // BJET VERSION
 vector<TH2F*>	hv_Test_Polar_Plot; // HISTOGRAM VECTOR
 vector<string>	hv_Test_Polar_Plot_names; // HISTOGRAM NAME VECTOR
 
+// -- 2D plot of dilepton invariant mass and favour for the purposes of discovering leptons which favour one flavour over another
+virtual void Book_Mass_Favour_Combination_2D(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);
+TH2F	*h_Mass_Favour_Combination_2D; // SEARCH VERSION
+TH2F	*h_Mass_Favour_Combination_2D_PRE; // PRE VERSION
+TH2F	*h_Mass_Favour_Combination_2D_CONTROL; // CONTROL VERSION
+TH2F	*h_Mass_Favour_Combination_2D_EXCEPT; // EXCEPT VERSION
+TH2F	*h_Mass_Favour_Combination_2D_BJET; // BJET VERSION
+vector<TH2F*>	hv_Mass_Favour_Combination_2D; // HISTOGRAM VECTOR
+vector<string>	hv_Mass_Favour_Combination_2D_names; // HISTOGRAM NAME VECTOR
+=======
 // -- This is a test of a polar plot
 virtual void Book_lep_0_reco_p4(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);
 TH2F	*h_lep_0_reco_p4; // SEARCH VERSION

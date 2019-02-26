@@ -105,8 +105,6 @@ analysis_start_functions.write("#define Analysis_Start_Functions_h\n\n")
 
 run_all_analyses_writer_top(run_all_analyses)
 
-run_all_analyses_shell.write("echo \"Performing Analysis for $1\"\n")
-
 initial_function = 0
 name = ""
 ID = ""
@@ -163,7 +161,7 @@ for line in mc_locations:
 		N_functions.write("Long64_t N_" + name + "() {\n\n")
 		N_functions.write("\tLong64_t N = 0;\n")
 
-		run_all_analyses_shell.write("gnome-terminal --working-directory=/afs/hep.man.ac.uk/u/lgaidoni/MPhys/Code -e \"root Start_Analysis.C(\\\\\\\"Start_" + name + "_Analysis\\\\\\\",\\\\\\\"$1\\\\\\\") -l -b\" &\n")
+		run_all_analyses_shell.write("root \"Start_Analysis.C(\\\\\\\"Start_" + name + "_Analysis\\\\\\\",\\\\\\\"Electron\\\\\\\")\" -l -b\n")
 
 		try:
 			os.makedirs("../../Output-Files/Electron/" + name)
@@ -289,6 +287,124 @@ for line in data_locations:
 
 analysis_start_function_writer_data(analysis_start_functions, ID, name)
 
+chain_functions.write("\treturn NOMINAL;\n")
+chain_functions.write("} \n\n")
+
+data_locations.close()
+
+data_locations = open("Data_Paths.txt", "r") # Open the DATA Paths for files that need merging
+
+data_loop_counter = 0
+data_chain_counter = 0
+ID = ""
+name = ""
+
+Electron_data_chain_locations = open("../Processes/Electron/data_Chains.txt", "w")
+ElectronMuon_data_chain_locations = open("../Processes/ElectronMuon/data_Chains.txt", "w")
+ElectronTau_data_chain_locations = open("../Processes/ElectronTau/data_Chains.txt", "w")
+Muon_data_chain_locations = open("../Processes/Muon/data_Chains.txt", "w")
+MuonTau_data_chain_locations = open("../Processes/MuonTau/data_Chains.txt", "w")
+
+for line in data_locations:
+
+	name = "DATA_" + str(data_chain_counter)
+
+	if line[0:2] == "##":
+		random_variable = 0
+
+	elif line[0:2] == "@@":
+		ID = line[2:len(line)-1]
+
+	else:
+		if data_loop_counter == 0:
+			chain_functions.write("//Chain Return function for " + name + "\n")
+			chain_functions.write("TChain *Chain_" + name + "() {\n\n")
+			chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
+		chain_functions.write("\tNOMINAL->Add(\"" + line[0:len(line)-1]  + "\");\n")
+		data_loop_counter += 1
+		if data_loop_counter == 10:
+
+			analysis_start_function_writer_data(analysis_start_functions, ID, name)
+
+			try:
+				os.makedirs("../../Output-Files/Electron/" + name)
+				print("../../Output-Files/Electron/" + name + " Created")
+			except:
+				print("../../Output-Files/Electron/" + name + " Already Exists")
+
+			try:
+				os.makedirs("../../Output-Files/ElectronMuon/" + name)
+				print("../../Output-Files/ElectronMuon/" + name + " Created")
+			except:
+				print("../../Output-Files/ElectronMuon/" + name + " Already Exists")
+
+			try:
+				os.makedirs("../../Output-Files/Tau/" + name)
+				print("../../Output-Files/Tau/" + name + " Created")
+			except:
+				print("../../Output-Files/Tau/" + name + " Already Exists")
+
+			try:
+				os.makedirs("../../Output-Files/Muon/" + name)
+				print("../../Output-Files/Muon/" + name + " Created")
+			except:
+				print("../../Output-Files/Muon/" + name + " Already Exists")
+
+			try:
+				os.makedirs("../../Output-Files/MuonTau/" + name)
+				print("../../Output-Files/MuonTau/" + name + " Created")
+			except:
+				print("../../Output-Files/MuonTau/" + name + " Already Exists")
+
+			try:
+				os.makedirs("../../Output-Files/ElectronTau/" + name)
+				print("../../Output-Files/ElectronTau/" + name + " Created")
+			except:
+				print("../../Output-Files/ElectronTau/" + name + " Already Exists")
+
+			chain_functions.write("\treturn NOMINAL;\n")
+			chain_functions.write("} \n\n")
+			data_loop_counter = 0
+			data_chain_counter += 1
+
+analysis_start_function_writer_data(analysis_start_functions, ID, name)
+
+try:
+	os.makedirs("../../Output-Files/Electron/" + name)
+	print("../../Output-Files/Electron/" + name + " Created")
+except:
+	print("../../Output-Files/Electron/" + name + " Already Exists")
+
+try:
+	os.makedirs("../../Output-Files/ElectronMuon/" + name)
+	print("../../Output-Files/ElectronMuon/" + name + " Created")
+except:
+	print("../../Output-Files/ElectronMuon/" + name + " Already Exists")
+
+try:
+	os.makedirs("../../Output-Files/Tau/" + name)
+	print("../../Output-Files/Tau/" + name + " Created")
+except:
+	print("../../Output-Files/Tau/" + name + " Already Exists")
+
+try:
+	os.makedirs("../../Output-Files/Muon/" + name)
+	print("../../Output-Files/Muon/" + name + " Created")
+except:
+	print("../../Output-Files/Muon/" + name + " Already Exists")
+
+try:
+	os.makedirs("../../Output-Files/MuonTau/" + name)
+	print("../../Output-Files/MuonTau/" + name + " Created")
+except:
+	print("../../Output-Files/MuonTau/" + name + " Already Exists")
+
+try:
+	os.makedirs("../../Output-Files/ElectronTau/" + name)
+	print("../../Output-Files/ElectronTau/" + name + " Created")
+except:
+	print("../../Output-Files/ElectronTau/" + name + " Already Exists")
+		
 chain_functions.write("\treturn NOMINAL;\n")
 chain_functions.write("} \n\n")
 

@@ -49,6 +49,10 @@ void MC_Analysis::BookHistos() {
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
 	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
 
+  int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
+	int DeltaR_reconstructed_Min = 0, DeltaR_reconstructed_Max = 10;
+	int lep_0_lep_1_pt_reconstructed_Min = 0, lep_0_lep_1_pt_reconstructed_Max = 300;
+	int Centrality_reconstructed_Min = -8, Centrality_reconstructed_Max = 8;
 
 	//Values for the 2D histograms
 //	int xbins = 50;
@@ -56,12 +60,18 @@ void MC_Analysis::BookHistos() {
 	int xbins = 20;
 	int ybins = 50;
 	
+
 	// POLAR
 	int Test_Polar_Plot_xMin = 0 - pi;
 	int Test_Polar_Plot_xMax = 0 + pi;
 	int Test_Polar_Plot_yMin = 0;
 	int Test_Polar_Plot_yMax = 100;
 
+	int Mass_Favour_Combination_2D_xMin = -1;
+	int Mass_Favour_Combination_2D_xMax = 2;
+	int Mass_Favour_Combination_2D_yMin = 0;
+	int Mass_Favour_Combination_2D_yMax = 200;
+  
 	int lep_0_reco_p4_xMin = 0 - pi;
 	int lep_0_reco_p4_xMax = 0 + pi;
 	int lep_0_reco_p4_yMin = 0;
@@ -71,12 +81,6 @@ void MC_Analysis::BookHistos() {
 	int lep_1_reco_p4_xMax = 0 + pi;
 	int lep_1_reco_p4_yMin = 0;
 	int lep_1_reco_p4_yMax = 100;
-
-
-  	int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
-	int DeltaR_reconstructed_Min = 0, DeltaR_reconstructed_Max = 10;
-	int lep_0_lep_1_pt_reconstructed_Min = 0, lep_0_lep_1_pt_reconstructed_Max = 300;
-	int Centrality_reconstructed_Min = -8, Centrality_reconstructed_Max = 8;
 
 	/////----------------------------------BOOKINGS------------------------------------/////
 
@@ -304,6 +308,17 @@ bool MC_Analysis::InitialCut(bool bjets) {
 	bool two_or_more_jets = false;
 	bool leptons_opposite_charges = false;
 	bool bjets_requirement = false;
+	bool jet_0_pt_greater = false;
+	bool jet_1_pt_greater = false;
+	bool phi_int_condition = true;
+
+	double jet_0_pt;
+	double jet_1_pt;
+
+	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+		phi_int_condition = false;
+		phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4);
+	}
 
 	//Condition Checking
 	if (n_leptons == 2) { //If two leptons are found
@@ -314,15 +329,25 @@ bool MC_Analysis::InitialCut(bool bjets) {
 	if (bjets) {
 		bjets_region = true;  //If there are no bjets
 		if (n_bjets >= 2) bjets_requirement = true;
+		jet_0_pt = bjet_0_p4->Pt();
+		jet_1_pt = bjet_1_p4->Pt();
 	}
 	else {
 		bjets_region = false;
 		if (n_bjets == 0) bjets_requirement = true;
+		jet_0_pt = ljet_0_p4->Pt();
+		jet_1_pt = ljet_1_p4->Pt();
 	}
 	if (n_jets >= 2) two_or_more_jets = true;  //If two or more jets were found
+	
+	//Leading Jet 1 (ljet_0) Cut Condition
+	if (jet_0_pt > 55) jet_0_pt_greater = true;
+
+	//Leading Jet 2 (ljet_1) Cut Condition
+	if (jet_1_pt > 45) jet_1_pt_greater = true;
 
 	// If the conditions are met, don't cut
-	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement) return false;
+	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater) return false;
 	//Otherwise, cut
 	return true;	
 
@@ -489,8 +514,6 @@ bool MC_Analysis::Cuts(string region) {
 	// Initialise common bool conditions
 	bool Z_mass_condition = false;
 	bool combined_lepton_pt = false;
-	bool ljet_0_pt_greater = false;
-	bool ljet_1_pt_greater = false;
 	bool leading_jets_invariant_mass = false;
 	bool ptvarcone_40_0 = false;
 	bool ptvarcone_40_1 = false;
@@ -508,12 +531,6 @@ bool MC_Analysis::Cuts(string region) {
 	//Dilepton Pt Cut
 	if (lep_0_lep_1_pt > 20) combined_lepton_pt = true;
 
-	//Leading Jet 1 (ljet_0) Cut Condition
-	if (jet_0_p4->Pt() > 55) ljet_0_pt_greater = true;
-
-	//Leading Jet 2 (ljet_1) Cut Condition
-	if (jet_1_p4->Pt() > 45) ljet_1_pt_greater = true;
-
 	// Dijjet mass = Leading Jets Combined Invariant mass
 	if (jet_0_jet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
 
@@ -530,8 +547,6 @@ bool MC_Analysis::Cuts(string region) {
 	//If the region is an except region, make the relevant condition always true to see more of that histogram.
 	if (region == "EXCEPT_Z_mass_condition" && bjets_region == false) 		Z_mass_condition = true;
 	if (region == "EXCEPT_combined_lepton_pt" && bjets_region == false) 		combined_lepton_pt = true;
-	if (region == "EXCEPT_ljet_0_pt_greater" && bjets_region == false) 		ljet_0_pt_greater = true;
-	if (region == "EXCEPT_ljet_1_pt_greater" && bjets_region == false) 		ljet_1_pt_greater = true;
 	if (region == "EXCEPT_leading_jets_invariant_mass" && bjets_region == false) 	leading_jets_invariant_mass = true;
 	if (region == "EXCEPT_ptvarcone_40_0" && bjets_region == false) 		ptvarcone_40_0 = true;
 	if (region == "EXCEPT_ptvarcone_40_1" && bjets_region == false) 		ptvarcone_40_1 = true;
@@ -555,7 +570,8 @@ bool MC_Analysis::Cuts(string region) {
 		
 	
 		//Work out if the common cuts are true here
-	 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && Et_Miss_RangeCheck) {
+
+	 	if (Z_mass_condition && combined_lepton_pt && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && Et_Miss_RangeCheck) {
 			common_cuts = true;
 		}
 		
@@ -563,7 +579,7 @@ bool MC_Analysis::Cuts(string region) {
 
 	else { // common cuts for "Electron" and "Muon" 
 		//Work out if the common cuts are true here
-	 	if (Z_mass_condition && combined_lepton_pt && ljet_0_pt_greater && ljet_1_pt_greater && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1) {
+	 	if (Z_mass_condition && combined_lepton_pt && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1) {
 			common_cuts = true;
 		}
 	}
@@ -609,8 +625,6 @@ void MC_Analysis::Fill() {
 	///----- EXCEPT region filling -----///
 	if (Cuts("EXCEPT_Z_mass_condition")) 		h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);		//Fill the EXCEPT histogram for mass
 	if (Cuts("EXCEPT_combined_lepton_pt")) 		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);			//Fill the EXCEPT histogram for combined lepton pt
-	if (Cuts("EXCEPT_ljet_0_pt_greater")) 		h_ljet_0_p4_Pt_EXCEPT->Fill(ljet_0_p4->Pt(), final_weighting);			//Fill the EXCEPT histogram for ljet_0_pt
-	if (Cuts("EXCEPT_ljet_1_pt_greater")) 		h_ljet_1_p4_Pt_EXCEPT->Fill(ljet_1_p4->Pt(), final_weighting);			//Fill the EXCEPT histogram for ljet_1_pt
 	if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_jet_0_jet_1_mass_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);		//Fill the EXCEPT histogram for leading jets combined invariant mass
 	if (Cuts("EXCEPT_ptvarcone_40_0")) 		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 0
 	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
@@ -655,11 +669,14 @@ void MC_Analysis::Fill() {
 		h_met_reco_p4_Pt->Fill(met_reco_p4->Pt(), final_weighting); 
 		// missing energy in phi space
 		h_Test_Polar_Plot->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
-		
+    
+		h_Mass_Favour_Combination_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass, final_weighting);
+    
 		// reconstructed lepton 1 momentum in phi space
 		h_lep_0_reco_p4->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
 		// reconstructed lepton 2 momentum in phi space
 		h_lep_1_reco_p4->Fill(lep_1_reco_p4->Phi(), lep_1_reco_p4->Pt(), final_weighting);
+
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
@@ -831,8 +848,8 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", false, ChainName, AnalysisType);
 
 	//leading jets ljet_0 ljet_1 transverse momentum < already exists in DrawHistos.h
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, h_ljet_0_p4_Pt_EXCEPT, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, h_ljet_1_p4_Pt_EXCEPT, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "Except", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
 
 	// Dilepton Rapidity
 	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
@@ -876,9 +893,11 @@ void MC_Analysis::DrawHistos() {
 
 	// 2D POLAR HISTOGRAMS
 	DrawHistogram2DPolar(h_Test_Polar_Plot, "h_Test_Polar_Plot", ";Missing Energy 2D polar plot;", false, false, ChainName, AnalysisType);
-	//DrawHistogram2DPolar(TH2F *histogram, string polar_histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
 	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed lepton 1 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
 	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed leptons 2 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
+  
+  DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Missing Energy 2D polar plot;", false, false, ChainName, AnalysisType);
+
 	
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
