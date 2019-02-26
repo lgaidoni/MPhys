@@ -6,6 +6,7 @@
 #define Generic_Functions_h
 #include <vector>
 
+
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
 /////////////////////////////// HISTOGRAM STUFF ///////////////////////////////
@@ -820,6 +821,15 @@ double DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
 }
 
+// DeltaPhi using dot product instead
+double DeltaPhi_v2(TLorentzVector *Vector1, TLorentzVector *Vector2){
+
+	double delta_phi = acos( Vector1->Dot(*Vector2) ) / ( abs(Vector1->Pt()) * abs(Vector2->Pt()) ); // delta phi between tau 1 and 2
+	return delta_phi;
+
+}
+
+
 //This Function will calculate delta eta (Eta = PseudoRapidity)
 double DeltaEta(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
@@ -930,6 +940,47 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 
 }
 
+// Function to decide if the Etmiss is inside the Phi interval or outside the phi interval
+bool PhiIntervalInOrOut(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // vec1 = pT of tau a, vec2 = pT of tau b, vec3 = pT of Etmiss (MET)
+
+	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
+	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
+	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
+	
+	if ( (delta_phi_aEt + delta_phi_bEt == delta_phi_ab) || (delta_phi_aEt + delta_phi_bEt < delta_phi_ab) ) return false;// IF INSIDE THE PHI ANGLE OF TAUS
+	else if ( (delta_phi_aEt + delta_phi_bEt > delta_phi_ab) )return true;// IF OUTSIDE THE PHI ANGLE OF TAUS
+}
+
+// Now need to decide if Etmiss is favouring the lepton or the hadron
+bool ETFavourCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // vec1 = pT of tau a, vec2 = pT of tau b, vec3 = pT of Etmiss (MET)
+// Et_along_b = Et . unit vector of tau b ,  Et_along_a = Et . unit vector of tau a 
+
+	// Do i need these twice? Or will ROOT remember?
+	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
+	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
+	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
+	
+	if (delta_phi_aEt > delta_phi_bEt){ return false; } // Closer to b
+	else if (delta_phi_bEt > delta_phi_aEt) { return true; } // Closer to a
+}
+
+double ETalongVectorCalc(TLorentzVector *Vector1, TLorentzVector *Vector2){ // lep_1/0_p4, met_reco_p4()
+	// calculates the Et missing along a certain vector 
+	double Et_along_vector = (Vector2->Dot(*Vector1))/Vector1->Pt();
+	return Et_along_vector;
+}
+
+// Is the missing energy out of reach?
+bool EtMiss_OutOfReachCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // vec1 = pT of tau a, vec2 = pT of tau b, vec3 = pT of Etmiss (MET)
+	
+	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
+	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
+	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
+	
+	//if (delta_phi_aEt + delta_phi_bEt > pi){ return false; } // outside of range, cut!!
+	if (delta_phi_aEt + delta_phi_bEt < pi){ return true; } // inside range, leave.
+	return false;
+}
 
 // This function calculated the p_T^{balance} 
 // defined as p_T^{bal} = (|p_T^{l1} + p_T^{l2} + p_T^{j1} + p_T^{j2} |)/|p_T^{l1}|+|p_T^{l2}|+|p_T^{j1}|+|p_T^{j2}|
@@ -1140,16 +1191,14 @@ double METTypeFavour(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 
 }
 
-
-double UnitVector(double p, TLorentzVector *Vector1){
 // general unit vector calculation
+double UnitVector(double p, TLorentzVector *Vector1){
 	double px = Vector1->Px();
 	double py = Vector1->Py();
 
 	double unitvector = p/pow( pow(px,2) + pow(py,2) ,0.5);
 
 	return unitvector;
-
 }
 
 //Simultaneous equations solved for MET

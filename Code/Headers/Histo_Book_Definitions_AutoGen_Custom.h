@@ -255,6 +255,10 @@ TH1F	*h_lep_0_lep_1_pt_reconstructed_BJET; // BJET VERSION
 vector<TH1F*>	hv_lep_0_lep_1_pt_reconstructed; // HISTOGRAM VECTOR
 vector<string>	hv_lep_0_lep_1_pt_reconstructed_names; // HISTOGRAM NAME VECTOR
 
+/// ------------------- lep_0_reco_p4:global variables for lepton 0 reconstructed ---------------- ///
+
+/// ------------------- lep_1_reco_p4:global variables for lepton 1 reconstructed ---------------- ///
+
 // -- Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
 double Centrality_reconstructed;
 
@@ -286,5 +290,25 @@ TH2F	*h_Mass_Favour_Combination_2D_EXCEPT; // EXCEPT VERSION
 TH2F	*h_Mass_Favour_Combination_2D_BJET; // BJET VERSION
 vector<TH2F*>	hv_Mass_Favour_Combination_2D; // HISTOGRAM VECTOR
 vector<string>	hv_Mass_Favour_Combination_2D_names; // HISTOGRAM NAME VECTOR
+=======
+// -- This is a test of a polar plot
+virtual void Book_lep_0_reco_p4(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);
+TH2F	*h_lep_0_reco_p4; // SEARCH VERSION
+TH2F	*h_lep_0_reco_p4_PRE; // PRE VERSION
+TH2F	*h_lep_0_reco_p4_CONTROL; // CONTROL VERSION
+TH2F	*h_lep_0_reco_p4_EXCEPT; // EXCEPT VERSION
+TH2F	*h_lep_0_reco_p4_BJET; // BJET VERSION
+vector<TH2F*>	hv_lep_0_reco_p4; // HISTOGRAM VECTOR
+vector<string>	hv_lep_0_reco_p4_names; // HISTOGRAM NAME VECTOR
+
+// -- 
+virtual void Book_lep_1_reco_p4(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);
+TH2F	*h_lep_1_reco_p4; // SEARCH VERSION
+TH2F	*h_lep_1_reco_p4_PRE; // PRE VERSION
+TH2F	*h_lep_1_reco_p4_CONTROL; // CONTROL VERSION
+TH2F	*h_lep_1_reco_p4_EXCEPT; // EXCEPT VERSION
+TH2F	*h_lep_1_reco_p4_BJET; // BJET VERSION
+vector<TH2F*>	hv_lep_1_reco_p4; // HISTOGRAM VECTOR
+vector<string>	hv_lep_1_reco_p4_names; // HISTOGRAM NAME VECTOR
 
 #endif

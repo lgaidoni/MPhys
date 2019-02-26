@@ -124,6 +124,11 @@
 	//Histogram Bookings for Test_Polar_Plot
 	Book_Test_Polar_Plot(xbins, Test_Polar_Plot_xMin, Test_Polar_Plot_xMax, ybins, Test_Polar_Plot_yMin, Test_Polar_Plot_yMax);
 
-	//Histogram Bookings for Mass_Favour_Combination_2D
+//Histogram Bookings for Mass_Favour_Combination_2D
 	Book_Mass_Favour_Combination_2D(xbins, Mass_Favour_Combination_2D_xMin, Mass_Favour_Combination_2D_xMax, ybins, Mass_Favour_Combination_2D_yMin, Mass_Favour_Combination_2D_yMax);
 
+//Histogram Bookings for lep_0_reco_p4
+	Book_lep_0_reco_p4(xbins, lep_0_reco_p4_xMin, lep_0_reco_p4_xMax, ybins, lep_0_reco_p4_yMin, lep_0_reco_p4_yMax);
+
+	//Histogram Bookings for lep_1_reco_p4
+	Book_lep_1_reco_p4(xbins, lep_1_reco_p4_xMin, lep_1_reco_p4_xMax, ybins, lep_1_reco_p4_yMin, lep_1_reco_p4_yMax);

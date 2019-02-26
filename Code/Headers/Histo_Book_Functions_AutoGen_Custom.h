@@ -455,6 +455,10 @@ void MC_Analysis::Book_lep_0_lep_1_pt_reconstructed(int bins, double min, double
 }
 
 
+/// ------------------- lep_0_reco_p4:global variables for lepton 0 reconstructed ---------------- ///
+
+/// ------------------- lep_1_reco_p4:global variables for lepton 1 reconstructed ---------------- ///
+
 // -- Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
 void MC_Analysis::Book_Centrality_reconstructed(int bins, double min, double max) {
 	h_Centrality_reconstructed = new TH1F("h_Centrality_reconstructed", "", bins, min, max);
@@ -518,6 +522,48 @@ void MC_Analysis::Book_Mass_Favour_Combination_2D(int xbins, double xmin, double
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_EXCEPT");
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_PRE");
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_BJET");
+
+// -- This is a test of a polar plot
+void MC_Analysis::Book_lep_0_reco_p4(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax) {
+	h_lep_0_reco_p4 = new TH2F("h_lep_0_reco_p4", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_lep_0_reco_p4_PRE = new TH2F("h_lep_0_reco_p4_PRE", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_lep_0_reco_p4_CONTROL = new TH2F("h_lep_0_reco_p4_CONTROL", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_lep_0_reco_p4_EXCEPT = new TH2F("h_lep_0_reco_p4_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_lep_0_reco_p4_BJET = new TH2F("h_lep_0_reco_p4_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
+	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4);
+	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_CONTROL);
+	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_EXCEPT);
+	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_PRE);
+	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_BJET);
+
+	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4");
+	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_CONTROL");
+	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_EXCEPT");
+	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_PRE");
+	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_BJET");
+}
+
+
+// -- 
+void MC_Analysis::Book_lep_1_reco_p4(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax) {
+	h_lep_1_reco_p4 = new TH2F("h_lep_1_reco_p4", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_lep_1_reco_p4_PRE = new TH2F("h_lep_1_reco_p4_PRE", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_lep_1_reco_p4_CONTROL = new TH2F("h_lep_1_reco_p4_CONTROL", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_lep_1_reco_p4_EXCEPT = new TH2F("h_lep_1_reco_p4_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_lep_1_reco_p4_BJET = new TH2F("h_lep_1_reco_p4_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
+	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4);
+	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_CONTROL);
+	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_EXCEPT);
+	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_PRE);
+	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_BJET);
+
+	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4");
+	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_CONTROL");
+	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_EXCEPT");
+	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_PRE");
+	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_BJET");
 }
 
 
