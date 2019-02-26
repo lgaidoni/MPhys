@@ -49,7 +49,7 @@ void MC_Analysis::BookHistos() {
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
 	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
 
-  int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
+  	int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
 	int DeltaR_reconstructed_Min = 0, DeltaR_reconstructed_Max = 10;
 	int lep_0_lep_1_pt_reconstructed_Min = 0, lep_0_lep_1_pt_reconstructed_Max = 300;
 	int Centrality_reconstructed_Min = -8, Centrality_reconstructed_Max = 8;
@@ -310,14 +310,15 @@ bool MC_Analysis::InitialCut(bool bjets) {
 	bool bjets_requirement = false;
 	bool jet_0_pt_greater = false;
 	bool jet_1_pt_greater = false;
-	bool phi_int_condition = true;
+	bool phi_realistic_condition = true;
 
 	double jet_0_pt;
 	double jet_1_pt;
 
+	//Is the missing energy physically realistic condition
 	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
-		phi_int_condition = false;
-		phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4);
+		phi_realistic_condition = false;
+		phi_realistic_condition = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_reco_p4);
 	}
 
 	//Condition Checking
@@ -327,7 +328,7 @@ bool MC_Analysis::InitialCut(bool bjets) {
 	}
 
 	if (bjets) {
-		bjets_region = true;  //If there are no bjets
+		bjets_region = true;
 		if (n_bjets >= 2) bjets_requirement = true;
 		jet_0_pt = bjet_0_p4->Pt();
 		jet_1_pt = bjet_1_p4->Pt();
@@ -347,7 +348,7 @@ bool MC_Analysis::InitialCut(bool bjets) {
 	if (jet_1_pt > 45) jet_1_pt_greater = true;
 
 	// If the conditions are met, don't cut
-	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater) return false;
+	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater && phi_realistic_condition) return false;
 	//Otherwise, cut
 	return true;	
 
@@ -441,7 +442,8 @@ void MC_Analysis::GenerateVariables() {
 	lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
 	lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 
-	// Invariant Mass
+	//Invariant Mass
+
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
 	lep_0_lep_1_mass_reconstructed = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
 
@@ -602,7 +604,6 @@ bool MC_Analysis::Cuts(string region) {
 		
 	
 		//Work out if the common cuts are true here
-
 	 	if (Z_mass_condition && combined_lepton_pt && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && Et_Miss_RangeCheck) {
 			common_cuts = true;
 		}
@@ -872,10 +873,10 @@ void MC_Analysis::DrawHistos() {
 
 	// lep 0 & lep 1 invariant mass 
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", true, ChainName, AnalysisType);
-	
+
 	//combined lepton lep 0 & lep 1 momentum
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);	
-	
+
 	//leading jets ljet_0 ljet_1 invariant masses
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", false, ChainName, AnalysisType);
 
