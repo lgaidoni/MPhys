@@ -375,14 +375,13 @@ void MC_Analysis::GenerateVariables() {
 		
 		// want to calcualate which tau it is closer to and find Et component along that tau vector
 		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_reco_p4 ) ) {
-			
 			Et_along_a = ETalongVectorCalc(lep_0_p4, met_reco_p4); // Et is along a		
 		}
 		else {
 			Et_along_b = ETalongVectorCalc(lep_1_p4, met_reco_p4); // Et is along b
-		} 
+		}
 	} else { // normal "inside" the phi interval gap - standard reconstruction calculation
-	
+
 		// neutrino missing energy/momentum vector x and y components (in transverse plane)
 		Neutrino_Transverse_Momentum_Vector = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
 
@@ -411,6 +410,11 @@ void MC_Analysis::GenerateVariables() {
 	// reconstruct tau candidate with tau lepton and neutrino
 	lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
 	lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
+
+	cout << "nu_0_px = " << neutrino_0_TLV->Px() << "         :   nu_0_py = " << neutrino_0_TLV->Py() << "         :   nu_0_Pt = " << neutrino_0_TLV->Pt() << endl;
+	cout << "nu_1_px = " << neutrino_1_TLV->Px() << "         :   nu_1_py = " << neutrino_1_TLV->Py() << "         :   nu_1_Pt = " << neutrino_1_TLV->Pt() << endl;
+	cout << "lep_0_reco_px = " << lep_0_reco_p4->Px() << "   :   lep_0_reco_py = " << lep_0_reco_p4->Py() << "   :   lep_0_reco_pt = " << lep_0_reco_p4->Pt() << endl;
+	cout << "lep_1_reco_px = " << lep_1_reco_p4->Px() << "   :   lep_1_reco_px = " << lep_1_reco_p4->Py() << "   :   lep_1_reco_px = " << lep_1_reco_p4->Pt() << endl;
 
 	//Invariant Mass
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
@@ -573,7 +577,6 @@ bool MC_Analysis::Cuts(string region) {
 		
 	
 		//Work out if the common cuts are true here
-
 	 	if (Z_mass_condition && combined_lepton_pt && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && Et_Miss_RangeCheck) {
 			common_cuts = true;
 		}
@@ -833,47 +836,31 @@ void MC_Analysis::DrawHistos() {
 	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
 	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
-	cout << "Pass point 1" << endl;
-
 	//Draw histogram function takes the following:
 	//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
 	#include "_DrawHistos.h"
-
-	cout << "Pass point 1" << endl;
 
 	//ptvar cone histograms
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, ChainName, AnalysisType);	
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, ChainName, AnalysisType);	
 
-	cout << "Pass point 1" << endl;
-
 	// lep 0 & lep 1 invariant mass 
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", true, ChainName, AnalysisType);
-	
-	cout << "Pass point 1" << endl;
 
 	//combined lepton lep 0 & lep 1 momentum
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);	
-	
-	cout << "Pass point 1" << endl;
 
 	//leading jets ljet_0 ljet_1 invariant masses
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", false, ChainName, AnalysisType);
-
-	cout << "Pass point 1" << endl;
 
 	//leading jets ljet_0 ljet_1 transverse momentum < already exists in DrawHistos.h
 	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
 
-	cout << "Pass point 1" << endl;
-
 	// Dilepton Rapidity
 	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
-
-
 
 	// Dijet Rapidity
 	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType);
