@@ -27,3 +27,4 @@ DeltaR_reconstructed:Distance in R space between two leptons (reconstructed with
 lep_0_lep_1_pt_reconstructed:Combined transverse momentum of lepton 0 and lepton 1 (reconstructed with missing neutrino energy included)
 Centrality_reconstructed:Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
 $$Test_Polar_Plot,met_reco_p4_Phi,met_reco_p4_Pt:This is a test of a polar plot
+$$Mass_Favour_Combination_2D,MET_Type_Favour,lep_0_lep_1_mass:2D plot of dilepton invariant mass and favour for the purposes of discovering leptons which favour one flavour over another
