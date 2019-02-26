@@ -803,7 +803,15 @@ void CombineAllProcesses_AnalysisType(string AnalysisType) {
 /////////////////////////////// VARIABLES /////////////////////////////// 
 /////////////////////////////// VARIABLES /////////////////////////////// 
 /////////////////////////////// VARIABLES ///////////////////////////////
- 
+
+// Dot Product function -> ROOT one uses p_z which we dont want - this one usses transverse coords only
+double DotProdPt(TLorentzVector *Vector1, TLorentzVector *Vector2){
+
+	double DotProduct = Vector1->Px()*Vector2->Px() + Vector1->Py()*Vector2->Py();
+	return DotProduct;
+
+}
+
 //This Fucntion will calculate invariant mass of two TLorentzVectors
 double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
@@ -820,17 +828,14 @@ double DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
 }
 
-///DELTA PHI V2 NOT WORKING AS INTENDED - SOME VALUES COME OUT "nan" due to larger delta phi than denominator... use old delta phi for now
-
 // DeltaPhi using dot product instead
 double DeltaPhi_v2(TLorentzVector *Vector1, TLorentzVector *Vector2){
-
-	double dot_product = Vector1->Dot(*Vector2);
+// edited tues 26th feb - run today to check, may need editing again
+	double adotb = DotProdPt(Vector1, Vector2);
 	double denominator = abs(Vector1->Pt()) * abs(Vector2->Pt());
-	double final_val = dot_product / denominator;
+	double final_val = adotb / denominator;
 
 	double delta_phi = acos( final_val ); // delta phi between tau 1 and 2
-	//cout << "DELTA PHI = " << delta_phi << "   :  dot product = " <<  dot_product << "   :   denominator = " << denominator << endl << endl;
 	return delta_phi;
 
 }
