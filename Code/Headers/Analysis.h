@@ -363,25 +363,56 @@ void MC_Analysis::GenerateVariables() {
 	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
 	
 	// InorOut = true means the E_t is outside of the phi interval 
-	double Et_along_a;
-	double Et_along_b;
+	// Change these to TLorentzVector as needed for Z boson mass reconstruction
+	double Et_along_0;
+	double Et_along_1;
 
 	vector<double> Neutrino_Transverse_Momentum_Vector;
 
 	double neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p;
 	double neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p;
-
+	
+	// if OUTSIDE
 	if (PhiIntervalInOrOut(lep_0_p4, lep_1_p4, met_reco_p4)) { // outside the phi interval so need to see which one it favours
 		
 		// want to calcualate which tau it is closer to and find Et component along that tau vector
-		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_reco_p4 ) ) {
-			Et_along_a = ETalongVectorCalc(lep_0_p4, met_reco_p4); // Et is along a		
-		}
-		else {
-			Et_along_b = ETalongVectorCalc(lep_1_p4, met_reco_p4); // Et is along b
-		}
-	} else { // normal "inside" the phi interval gap - standard reconstruction calculation
+		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_reco_p4 ) ) { // closer to lep_0
+			
+			// Et_along_0 should be TLorentzVector along lep_0
+			Et_along_0 = ETalongVectorCalc(lep_0_p4, met_reco_p4);	// Et along a
+			Et_along_1 = 0;
 
+			// neutrino 1
+			neutrino_0_x_p = x_component_pT(Et_along_0, lep_0_p4); // p_x of neutrino 1
+			neutrino_0_y_p = y_component_pT(Et_along_0, lep_0_p4); // p_y of neutrino 1
+			neutrino_0_z_p = p_z_neutrino_calc(Et_along_0, lep_0_p4); // p_z of neutrino 1
+
+			// neutrino 2
+			neutrino_1_x_p = 0; // p_x of neutrino 2
+			neutrino_1_y_p = 0; // p_y of neutrino 2
+			neutrino_1_z_p = 0; // p_z of neutrino 2
+
+
+		}
+		else { // closer to lep_1
+			// Et_along_1 should be TLorentzVector along lep_1
+			Et_along_1 = ETalongVectorCalc(lep_1_p4, met_reco_p4);	// Et along a
+			Et_along_0 = 0;
+			// neutrino 2
+			neutrino_1_x_p = x_component_pT(Et_along_1, lep_1_p4); // p_x of neutrino 2
+			neutrino_1_y_p = y_component_pT(Et_along_1, lep_1_p4); // p_y of neutrino 2
+			neutrino_1_z_p = p_z_neutrino_calc(Et_along_1, lep_1_p4); // p_z of neutrino 2
+
+			// neutrino 1
+			neutrino_0_x_p = 0; // p_x of neutrino 1
+			neutrino_0_y_p = 0; // p_y of neutrino 1
+			neutrino_0_z_p = 0; // p_z of neutrino 1
+
+		} 
+	}
+	// else INSIDE
+	else { // normal "inside" the phi interval gap - standard reconstruction calculation
+	
 		// neutrino missing energy/momentum vector x and y components (in transverse plane)
 		Neutrino_Transverse_Momentum_Vector = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
 
@@ -411,18 +442,14 @@ void MC_Analysis::GenerateVariables() {
 	lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
 	lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 
-	cout << "nu_0_px = " << neutrino_0_TLV->Px() << "         :   nu_0_py = " << neutrino_0_TLV->Py() << "         :   nu_0_Pt = " << neutrino_0_TLV->Pt() << endl;
-	cout << "nu_1_px = " << neutrino_1_TLV->Px() << "         :   nu_1_py = " << neutrino_1_TLV->Py() << "         :   nu_1_Pt = " << neutrino_1_TLV->Pt() << endl;
-	cout << "lep_0_reco_px = " << lep_0_reco_p4->Px() << "   :   lep_0_reco_py = " << lep_0_reco_p4->Py() << "   :   lep_0_reco_pt = " << lep_0_reco_p4->Pt() << endl;
-	cout << "lep_1_reco_px = " << lep_1_reco_p4->Px() << "   :   lep_1_reco_px = " << lep_1_reco_p4->Py() << "   :   lep_1_reco_px = " << lep_1_reco_p4->Pt() << endl;
-
 	//Invariant Mass
+
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
 	lep_0_lep_1_mass_reconstructed = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
 
 	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
 
-	//Delta R
+	// Delta R
 	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
 	DeltaR_reconstructed = DeltaRCalc(lep_0_reco_p4, lep_1_reco_p4);
 
@@ -432,7 +459,7 @@ void MC_Analysis::GenerateVariables() {
 	// Rapidity of dijet pair
 	RapidityDijet = RapidityDisomething(jet_0_p4, jet_1_p4);
 
-	//Combined Lepton momentum
+	// Combined Lepton momentum
 	lep_0_lep_1_pt = CombinedTransverseMomentum(lep_0_p4, lep_1_p4);
 	lep_0_lep_1_pt_reconstructed = CombinedTransverseMomentum(lep_0_reco_p4, lep_1_reco_p4);
 
@@ -446,7 +473,7 @@ void MC_Analysis::GenerateVariables() {
 	Centrality = CentralityCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
 	Centrality_reconstructed = CentralityCalc(lep_0_reco_p4, lep_1_reco_p4, jet_0_p4, jet_1_p4);
 
-	//Final Weighting
+	// Final Weighting
 	final_weighting = Luminosity_Weight * weight_total;	
 	
 }	
