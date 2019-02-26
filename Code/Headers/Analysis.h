@@ -57,8 +57,8 @@ void MC_Analysis::BookHistos() {
 	//Values for the 2D histograms
 //	int xbins = 50;
 //	int ybins = 50;
-	int xbins = 20;
-	int ybins = 50;
+	int xbins = 120;
+	int ybins = 80;
 	
 
 	// POLAR
@@ -70,7 +70,7 @@ void MC_Analysis::BookHistos() {
 	int Mass_Favour_Combination_2D_xMin = -1;
 	int Mass_Favour_Combination_2D_xMax = 2;
 	int Mass_Favour_Combination_2D_yMin = 0;
-	int Mass_Favour_Combination_2D_yMax = 200;
+	int Mass_Favour_Combination_2D_yMax = 160;
   
 	int lep_0_reco_p4_xMin = 0 - pi;
 	int lep_0_reco_p4_xMax = 0 + pi;
@@ -365,10 +365,15 @@ void MC_Analysis::GenerateVariables() {
 	double Et_along_a;
 	double Et_along_b;
 
-	if (PhiIntervalInOrOut(lep_0_p4->Pt(), lep_1_p4->Pt(), met_reco_p4->Pt()) { // outside the phi interval so need to see which one it favours
+	vector<double> Neutrino_Transverse_Momentum_Vector;
+
+	double neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p;
+	double neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p;
+
+	if (PhiIntervalInOrOut(lep_0_p4, lep_1_p4, met_reco_p4)) { // outside the phi interval so need to see which one it favours
 		
 		// want to calcualate which tau it is closer to and find Et component along that tau vector
-		if ( ETFavourCalc( lep_0_p4->Pt(), lep_1_p4->Pt(), met_reco_p4->Pt() ) {
+		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_reco_p4 ) ) {
 			
 			Et_along_a = ETalongVectorCalc(lep_0_p4, met_reco_p4); // Et is along a		
 		}
@@ -380,35 +385,35 @@ void MC_Analysis::GenerateVariables() {
 	else { // normal "inside" the phi interval gap - standard reconstruction calculation
 	
 		// neutrino missing energy/momentum vector x and y components (in transverse plane)
-		vector<double> VectorNeutrinoTransMom12 = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
+		Neutrino_Transverse_Momentum_Vector = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
 
 		MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
 
 		// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
-		neutrino_0_pt = abs(VectorNeutrinoTransMom12[0]);
-		neutrino_1_pt = abs(VectorNeutrinoTransMom12[1]);
+		neutrino_0_pt = abs(Neutrino_Transverse_Momentum_Vector[0]);
+		neutrino_1_pt = abs(Neutrino_Transverse_Momentum_Vector[1]);
 
 		// neutrino 1
 		double neutrino_0_x_p = x_component_pT(neutrino_0_pt, lep_0_p4); // p_x of neutrino 1
 		double neutrino_0_y_p = y_component_pT(neutrino_0_pt, lep_0_p4); // p_y of neutrino 1
 		double neutrino_0_z_p = p_z_neutrino_calc(neutrino_0_pt, lep_0_p4); // p_z of neutrino 1
-		TLorentzVector* neutrino_0_TLV = neutrino_TLV(neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 1
+
 
 		// neutrino 2
 		double neutrino_1_x_p = x_component_pT(neutrino_1_pt, lep_1_p4); // p_x of neutrino 2
 		double neutrino_1_y_p = y_component_pT(neutrino_1_pt, lep_1_p4); // p_y of neutrino 2
 		double neutrino_1_z_p = p_z_neutrino_calc(neutrino_1_pt, lep_1_p4); // p_z of neutrino 2
-		TLorentzVector* neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
 
-		// reconstruct tau candidate with tau lepton and neutrino
-		TLorentzVector* lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
-		TLorentzVector* lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
-	
 	}
 
-	// make global variables
-	lep_0_reco_p4 = lep_0_reco_p4;
-	lep_1_reco_p4 = lep_1_reco_p4;
+	TLorentzVector* neutrino_0_TLV = neutrino_TLV(neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 1
+	TLorentzVector* neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
+
+	// reconstruct tau candidate with tau lepton and neutrino
+	lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
+	lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
+
+	
 
 	//Invariant Mass
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
@@ -519,11 +524,12 @@ bool MC_Analysis::Cuts(string region) {
 	bool ptvarcone_40_1 = false;
 	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4);
 	bool Et_Miss_RangeCheck = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_reco_p4);
+	//if (Et_Miss_RangeCheck) cout << "IN RANGE" << endl << endl;
 
 	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
 	bool pT_balance_3_limit = false;
-	bool rap_int_condition = RapidityIntervalCheck_v2(jet_0_p4, jet_1_p4, jet_2_p4);
+	bool rap_int_condition = RapidityIntervalCheck(jet_0_p4, jet_1_p4, jet_2_p4);
 
 	//Z Boson Mass Cut
 	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101) Z_mass_condition = true;	

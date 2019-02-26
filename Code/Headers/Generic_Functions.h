@@ -585,7 +585,6 @@ void Process_Combiner(string AnalysisType, string Process) {
 	//Open the list of Data Types
 	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
 	ifstream DataTypeFile (DataTypeFileName);
-
 	
 	while(!DataTypeFile.eof()) {  		//While not at the end of the file
 		getline(DataTypeFile, line);  	//Get the file line
@@ -817,14 +816,21 @@ double InvariantMass(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 double DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
 	double DeltaPhi = Vector1->Phi() - Vector2->Phi();
-	return DeltaPhi;
+	return abs(DeltaPhi);
 
 }
+
+///DELTA PHI V2 NOT WORKING AS INTENDED - SOME VALUES COME OUT "nan" due to larger delta phi than denominator... use old delta phi for now
 
 // DeltaPhi using dot product instead
 double DeltaPhi_v2(TLorentzVector *Vector1, TLorentzVector *Vector2){
 
-	double delta_phi = acos( Vector1->Dot(*Vector2) ) / ( abs(Vector1->Pt()) * abs(Vector2->Pt()) ); // delta phi between tau 1 and 2
+	double dot_product = Vector1->Dot(*Vector2);
+	double denominator = abs(Vector1->Pt()) * abs(Vector2->Pt());
+	double final_val = dot_product / denominator;
+
+	double delta_phi = acos( final_val ); // delta phi between tau 1 and 2
+	//cout << "DELTA PHI = " << delta_phi << "   :  dot product = " <<  dot_product << "   :   denominator = " << denominator << endl << endl;
 	return delta_phi;
 
 }
@@ -943,12 +949,12 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 // Function to decide if the Etmiss is inside the Phi interval or outside the phi interval
 bool PhiIntervalInOrOut(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // vec1 = pT of tau a, vec2 = pT of tau b, vec3 = pT of Etmiss (MET)
 
-	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
-	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
-	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
+	double delta_phi_aEt = DeltaPhi(Vector1, Vector3);// delta phi between Et and a
+	double delta_phi_bEt = DeltaPhi(Vector2, Vector3); // delta phi between Et and b
+	double delta_phi_ab = DeltaPhi(Vector1, Vector2); // delta phi between a and b
 	
-	if ( (delta_phi_aEt + delta_phi_bEt == delta_phi_ab) || (delta_phi_aEt + delta_phi_bEt < delta_phi_ab) ) return false;// IF INSIDE THE PHI ANGLE OF TAUS
-	else if ( (delta_phi_aEt + delta_phi_bEt > delta_phi_ab) )return true;// IF OUTSIDE THE PHI ANGLE OF TAUS
+	if ( (delta_phi_aEt + delta_phi_bEt) <= delta_phi_ab ) return false;// IF INSIDE THE PHI ANGLE OF TAUS
+	return true;// OTHERWISE OUTSIDE THE PHI ANGLE OF TAUS
 }
 
 // Now need to decide if Etmiss is favouring the lepton or the hadron
@@ -956,12 +962,12 @@ bool ETFavourCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVect
 // Et_along_b = Et . unit vector of tau b ,  Et_along_a = Et . unit vector of tau a 
 
 	// Do i need these twice? Or will ROOT remember?
-	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
-	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
-	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
+	double delta_phi_aEt = DeltaPhi(Vector1, Vector3);// delta phi between Et and a
+	double delta_phi_bEt = DeltaPhi(Vector2, Vector3); // delta phi between Et and b
+	double delta_phi_ab = DeltaPhi(Vector1, Vector2); // delta phi between a and b
 	
 	if (delta_phi_aEt > delta_phi_bEt){ return false; } // Closer to b
-	else if (delta_phi_bEt > delta_phi_aEt) { return true; } // Closer to a
+	return true; // Otherwise Closer to a
 }
 
 double ETalongVectorCalc(TLorentzVector *Vector1, TLorentzVector *Vector2){ // lep_1/0_p4, met_reco_p4()

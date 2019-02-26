@@ -299,11 +299,11 @@ data_chain_counter = 0
 ID = ""
 name = ""
 
-Electron_data_chain_locations = open("../Processes/Electron/data_Chains.txt", "w")
-ElectronMuon_data_chain_locations = open("../Processes/ElectronMuon/data_Chains.txt", "w")
-ElectronTau_data_chain_locations = open("../Processes/ElectronTau/data_Chains.txt", "w")
-Muon_data_chain_locations = open("../Processes/Muon/data_Chains.txt", "w")
-MuonTau_data_chain_locations = open("../Processes/MuonTau/data_Chains.txt", "w")
+Electron_data_chain_locations = open("../Processes/Electron/DATA_Chains.txt", "w")
+ElectronMuon_data_chain_locations = open("../Processes/ElectronMuon/DATA_Chains.txt", "w")
+ElectronTau_data_chain_locations = open("../Processes/ElectronTau/DATA_Chains.txt", "w")
+Muon_data_chain_locations = open("../Processes/Muon/DATA_Chains.txt", "w")
+MuonTau_data_chain_locations = open("../Processes/MuonTau/DATA_Chains.txt", "w")
 
 for line in data_locations:
 
@@ -320,6 +320,13 @@ for line in data_locations:
 			chain_functions.write("//Chain Return function for " + name + "\n")
 			chain_functions.write("TChain *Chain_" + name + "() {\n\n")
 			chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
+
+			Electron_data_chain_locations.write("../../Root-Files/Electron/" + name + "_Histograms.root\n")
+			ElectronMuon_data_chain_locations.write("../../Root-Files/ElectronMuon/" + name + "_Histograms.root\n")
+			ElectronTau_data_chain_locations.write("../../Root-Files/ElectronTau/" + name + "_Histograms.root\n")
+			Muon_data_chain_locations.write("../../Root-Files/Muon/" + name + "_Histograms.root\n")
+			MuonTau_data_chain_locations.write("../../Root-Files/MuonTau/" + name + "_Histograms.root\n")
+
 		chain_functions.write("\tNOMINAL->Add(\"" + line[0:len(line)-1]  + "\");\n")
 		data_loop_counter += 1
 		if data_loop_counter == 10:
@@ -368,6 +375,12 @@ for line in data_locations:
 			data_chain_counter += 1
 
 analysis_start_function_writer_data(analysis_start_functions, ID, name)
+
+Electron_data_chain_locations.close()
+ElectronMuon_data_chain_locations.close()
+ElectronTau_data_chain_locations.close()
+Muon_data_chain_locations.close()
+MuonTau_data_chain_locations.close()
 
 try:
 	os.makedirs("../../Output-Files/Electron/" + name)

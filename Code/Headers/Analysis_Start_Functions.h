@@ -849,3 +849,244 @@ void Start_DATA_Analysis(string AnalysisType) {
 	DATA->DrawHistos();
 }
 
+void Start_DATA_0_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_0 = new MC_Analysis(Chain_DATA_0(), AnalysisType, "DATA_0", 1);
+	DATA_0->BookHistos();
+	DATA_0->Loop();
+	DATA_0->DrawHistos();
+}
+
+void Start_DATA_1_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_1 = new MC_Analysis(Chain_DATA_1(), AnalysisType, "DATA_1", 1);
+	DATA_1->BookHistos();
+	DATA_1->Loop();
+	DATA_1->DrawHistos();
+}
+
+void Start_DATA_2_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_2 = new MC_Analysis(Chain_DATA_2(), AnalysisType, "DATA_2", 1);
+	DATA_2->BookHistos();
+	DATA_2->Loop();
+	DATA_2->DrawHistos();
+}
+
+void Start_DATA_3_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_3 = new MC_Analysis(Chain_DATA_3(), AnalysisType, "DATA_3", 1);
+	DATA_3->BookHistos();
+	DATA_3->Loop();
+	DATA_3->DrawHistos();
+}
+
+void Start_DATA_4_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_4 = new MC_Analysis(Chain_DATA_4(), AnalysisType, "DATA_4", 1);
+	DATA_4->BookHistos();
+	DATA_4->Loop();
+	DATA_4->DrawHistos();
+}
+
+void Start_DATA_5_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_5 = new MC_Analysis(Chain_DATA_5(), AnalysisType, "DATA_5", 1);
+	DATA_5->BookHistos();
+	DATA_5->Loop();
+	DATA_5->DrawHistos();
+}
+
+void Start_DATA_6_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_6 = new MC_Analysis(Chain_DATA_6(), AnalysisType, "DATA_6", 1);
+	DATA_6->BookHistos();
+	DATA_6->Loop();
+	DATA_6->DrawHistos();
+}
+
+void Start_DATA_7_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_7 = new MC_Analysis(Chain_DATA_7(), AnalysisType, "DATA_7", 1);
+	DATA_7->BookHistos();
+	DATA_7->Loop();
+	DATA_7->DrawHistos();
+}
+
+void Start_DATA_8_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_8 = new MC_Analysis(Chain_DATA_8(), AnalysisType, "DATA_8", 1);
+	DATA_8->BookHistos();
+	DATA_8->Loop();
+	DATA_8->DrawHistos();
+}
+
+void Start_DATA_9_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_9 = new MC_Analysis(Chain_DATA_9(), AnalysisType, "DATA_9", 1);
+	DATA_9->BookHistos();
+	DATA_9->Loop();
+	DATA_9->DrawHistos();
+}
+
+void Start_DATA_10_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_10 = new MC_Analysis(Chain_DATA_10(), AnalysisType, "DATA_10", 1);
+	DATA_10->BookHistos();
+	DATA_10->Loop();
+	DATA_10->DrawHistos();
+}
+
+void Start_DATA_11_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_11 = new MC_Analysis(Chain_DATA_11(), AnalysisType, "DATA_11", 1);
+	DATA_11->BookHistos();
+	DATA_11->Loop();
+	DATA_11->DrawHistos();
+}
+
+void Start_DATA_12_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_12 = new MC_Analysis(Chain_DATA_12(), AnalysisType, "DATA_12", 1);
+	DATA_12->BookHistos();
+	DATA_12->Loop();
+	DATA_12->DrawHistos();
+}
+
+void Start_DATA_13_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_13 = new MC_Analysis(Chain_DATA_13(), AnalysisType, "DATA_13", 1);
+	DATA_13->BookHistos();
+	DATA_13->Loop();
+	DATA_13->DrawHistos();
+}
+
+void Start_DATA_14_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_14 = new MC_Analysis(Chain_DATA_14(), AnalysisType, "DATA_14", 1);
+	DATA_14->BookHistos();
+	DATA_14->Loop();
+	DATA_14->DrawHistos();
+}
+
+void Start_DATA_15_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_15 = new MC_Analysis(Chain_DATA_15(), AnalysisType, "DATA_15", 1);
+	DATA_15->BookHistos();
+	DATA_15->Loop();
+	DATA_15->DrawHistos();
+}
+
+void Start_DATA_16_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_16 = new MC_Analysis(Chain_DATA_16(), AnalysisType, "DATA_16", 1);
+	DATA_16->BookHistos();
+	DATA_16->Loop();
+	DATA_16->DrawHistos();
+}
+
+void Start_DATA_17_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_17 = new MC_Analysis(Chain_DATA_17(), AnalysisType, "DATA_17", 1);
+	DATA_17->BookHistos();
+	DATA_17->Loop();
+	DATA_17->DrawHistos();
+}
+
+void Start_DATA_18_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_18 = new MC_Analysis(Chain_DATA_18(), AnalysisType, "DATA_18", 1);
+	DATA_18->BookHistos();
+	DATA_18->Loop();
+	DATA_18->DrawHistos();
+}
+
+void Start_DATA_19_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_19 = new MC_Analysis(Chain_DATA_19(), AnalysisType, "DATA_19", 1);
+	DATA_19->BookHistos();
+	DATA_19->Loop();
+	DATA_19->DrawHistos();
+}
+
+void Start_DATA_20_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_20 = new MC_Analysis(Chain_DATA_20(), AnalysisType, "DATA_20", 1);
+	DATA_20->BookHistos();
+	DATA_20->Loop();
+	DATA_20->DrawHistos();
+}
+
+void Start_DATA_21_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_21 = new MC_Analysis(Chain_DATA_21(), AnalysisType, "DATA_21", 1);
+	DATA_21->BookHistos();
+	DATA_21->Loop();
+	DATA_21->DrawHistos();
+}
+
+void Start_DATA_22_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_22 = new MC_Analysis(Chain_DATA_22(), AnalysisType, "DATA_22", 1);
+	DATA_22->BookHistos();
+	DATA_22->Loop();
+	DATA_22->DrawHistos();
+}
+
+void Start_DATA_23_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_23 = new MC_Analysis(Chain_DATA_23(), AnalysisType, "DATA_23", 1);
+	DATA_23->BookHistos();
+	DATA_23->Loop();
+	DATA_23->DrawHistos();
+}
+
+void Start_DATA_24_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_24 = new MC_Analysis(Chain_DATA_24(), AnalysisType, "DATA_24", 1);
+	DATA_24->BookHistos();
+	DATA_24->Loop();
+	DATA_24->DrawHistos();
+}
+
+void Start_DATA_25_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_25 = new MC_Analysis(Chain_DATA_25(), AnalysisType, "DATA_25", 1);
+	DATA_25->BookHistos();
+	DATA_25->Loop();
+	DATA_25->DrawHistos();
+}
+
+void Start_DATA_26_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_26 = new MC_Analysis(Chain_DATA_26(), AnalysisType, "DATA_26", 1);
+	DATA_26->BookHistos();
+	DATA_26->Loop();
+	DATA_26->DrawHistos();
+}
+
+void Start_DATA_27_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_27 = new MC_Analysis(Chain_DATA_27(), AnalysisType, "DATA_27", 1);
+	DATA_27->BookHistos();
+	DATA_27->Loop();
+	DATA_27->DrawHistos();
+}
+
+void Start_DATA_28_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_28 = new MC_Analysis(Chain_DATA_28(), AnalysisType, "DATA_28", 1);
+	DATA_28->BookHistos();
+	DATA_28->Loop();
+	DATA_28->DrawHistos();
+}
+
+void Start_DATA_29_Analysis(string AnalysisType) {
+	gErrorIgnoreLevel = kError;
+	MC_Analysis *DATA_29 = new MC_Analysis(Chain_DATA_29(), AnalysisType, "DATA_29", 1);
+	DATA_29->BookHistos();
+	DATA_29->Loop();
+	DATA_29->DrawHistos();
+}
+
+#endif
