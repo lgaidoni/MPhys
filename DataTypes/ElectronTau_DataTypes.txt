@@ -63,5 +63,4 @@ lep_0_lep_1_mass_reconstructed_HIGH_E
 lep_0_lep_1_pt_reconstructed
 lep_0_lep_1_pt_reconstructed_PRE
 lep_0_lep_1_pt_reconstructed_CONTROL
-lep_0_lep_1_pt_reconstructed_HIGH_E
 Mass_Favour_Combination_2D
