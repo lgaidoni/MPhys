@@ -234,10 +234,35 @@ TH1F	*h_MET_Type_Favour_HIGH_E; // HIGH_E VERSION
 vector<TH1F*>	hv_MET_Type_Favour; // HISTOGRAM VECTOR
 vector<string>	hv_MET_Type_Favour_names; // HISTOGRAM NAME VECTOR
 
+// -- Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
+double MET_Type_Favour_INSIDE;
+
+virtual void Book_MET_Type_Favour_INSIDE(int bins, double min, double max);
+TH1F	*h_MET_Type_Favour_INSIDE; // SEARCH VERSION
+TH1F	*h_MET_Type_Favour_INSIDE_PRE; // PRE VERSION
+TH1F	*h_MET_Type_Favour_INSIDE_CONTROL; // CONTROL VERSION
+TH1F	*h_MET_Type_Favour_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_MET_Type_Favour_INSIDE_BJET; // BJET VERSION
+TH1F	*h_MET_Type_Favour_INSIDE_HIGH_E; // HIGH_E VERSION
+vector<TH1F*>	hv_MET_Type_Favour_INSIDE; // HISTOGRAM VECTOR
+vector<string>	hv_MET_Type_Favour_INSIDE_names; // HISTOGRAM NAME VECTOR
+
+// -- Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
+double MET_Type_Favour_OUTSIDE;
+
+virtual void Book_MET_Type_Favour_OUTSIDE(int bins, double min, double max);
+TH1F	*h_MET_Type_Favour_OUTSIDE; // SEARCH VERSION
+TH1F	*h_MET_Type_Favour_OUTSIDE_PRE; // PRE VERSION
+TH1F	*h_MET_Type_Favour_OUTSIDE_CONTROL; // CONTROL VERSION
+TH1F	*h_MET_Type_Favour_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_MET_Type_Favour_OUTSIDE_BJET; // BJET VERSION
+TH1F	*h_MET_Type_Favour_OUTSIDE_HIGH_E; // HIGH_E VERSION
+vector<TH1F*>	hv_MET_Type_Favour_OUTSIDE; // HISTOGRAM VECTOR
+vector<string>	hv_MET_Type_Favour_OUTSIDE_names; // HISTOGRAM NAME VECTOR
+
 /// ------------------- RECONSTRUCTED ---------------- ///
 
-
-// --  reconstructed Z mass with neutrino and z candidatesz
+// --  reconstructed Z mass with neutrino and z candidates
 double lep_0_lep_1_mass_reco;
 
 virtual void Book_lep_0_lep_1_mass_reco(int bins, double min, double max);
@@ -246,9 +271,35 @@ TH1F	*h_lep_0_lep_1_mass_reco_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_EXCEPT; // EXCEPT VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_BJET; // BJET VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_HIGH_E; // HIGH_E VERSION
 vector<TH1F*>	hv_lep_0_lep_1_mass_reco; // HISTOGRAM VECTOR
 vector<string>	hv_lep_0_lep_1_mass_reco_names; // HISTOGRAM NAME VECTOR
 
+// --  reconstructed Z mass with neutrino and z candidates only for inside the two leptons
+double lep_0_lep_1_mass_reco_INSIDE;
+
+virtual void Book_lep_0_lep_1_mass_reco_INSIDE(int bins, double min, double max);
+TH1F	*h_lep_0_lep_1_mass_reco_INSIDE; // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_PRE; // PRE VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_BJET; // BJET VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_HIGH_E; // HIGH_E VERSION
+vector<TH1F*>	hv_lep_0_lep_1_mass_reco_INSIDE; // HISTOGRAM VECTOR
+vector<string>	hv_lep_0_lep_1_mass_reco_INSIDE_names; // HISTOGRAM NAME VECTOR
+
+// --  reconstructed Z mass with neutrino and z candidates only for outside the two leptons
+double lep_0_lep_1_mass_reco_OUTSIDE;
+
+virtual void Book_lep_0_lep_1_mass_reco_OUTSIDE(int bins, double min, double max);
+TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE; // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_PRE; // PRE VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_BJET; // BJET VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_HIGH_E; // HIGH_E VERSION
+vector<TH1F*>	hv_lep_0_lep_1_mass_reco_OUTSIDE; // HISTOGRAM VECTOR
+vector<string>	hv_lep_0_lep_1_mass_reco_OUTSIDE_names; // HISTOGRAM NAME VECTOR
 
 // -- Distance in R space between two leptons (reconstructed with missing neutrino energy included)
 double DeltaR_reco;
@@ -259,9 +310,9 @@ TH1F	*h_DeltaR_reco_PRE; // PRE VERSION
 TH1F	*h_DeltaR_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_DeltaR_reco_EXCEPT; // EXCEPT VERSION
 TH1F	*h_DeltaR_reco_BJET; // BJET VERSION
+TH1F	*h_DeltaR_reco_HIGH_E; // HIGH_E VERSION
 vector<TH1F*>	hv_DeltaR_reco; // HISTOGRAM VECTOR
 vector<string>	hv_DeltaR_reco_names; // HISTOGRAM NAME VECTOR
-
 
 // -- Combined transverse momentum of lepton 0 and lepton 1 (reconstructed with missing neutrino energy included)
 double lep_0_lep_1_pt_reco;
@@ -272,13 +323,9 @@ TH1F	*h_lep_0_lep_1_pt_reco_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_EXCEPT; // EXCEPT VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_BJET; // BJET VERSION
+TH1F	*h_lep_0_lep_1_pt_reco_HIGH_E; // HIGH_E VERSION
 vector<TH1F*>	hv_lep_0_lep_1_pt_reco; // HISTOGRAM VECTOR
 vector<string>	hv_lep_0_lep_1_pt_reco_names; // HISTOGRAM NAME VECTOR
-
-
-/// ------------------- lep_0_reco_p4:global variables for lepton 0 reconstructed ---------------- ///
-
-/// ------------------- lep_1_reco_p4:global variables for lepton 1 reconstructed ---------------- ///
 
 // -- Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
 double Centrality_reco;
@@ -289,6 +336,7 @@ TH1F	*h_Centrality_reco_PRE; // PRE VERSION
 TH1F	*h_Centrality_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_Centrality_reco_EXCEPT; // EXCEPT VERSION
 TH1F	*h_Centrality_reco_BJET; // BJET VERSION
+TH1F	*h_Centrality_reco_HIGH_E; // HIGH_E VERSION
 vector<TH1F*>	hv_Centrality_reco; // HISTOGRAM VECTOR
 vector<string>	hv_Centrality_reco_names; // HISTOGRAM NAME VECTOR
 
