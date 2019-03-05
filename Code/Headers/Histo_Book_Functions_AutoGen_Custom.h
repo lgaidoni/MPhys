@@ -61,6 +61,33 @@ void MC_Analysis::Book_pT_balance(int bins, double min, double max) {
 }
 
 
+// -- PT Balance reconstructed
+void MC_Analysis::Book_pT_balance_reco(int bins, double min, double max) {
+	h_pT_balance_reco = new TH1F("h_pT_balance_reco", "", bins, min, max);
+	h_pT_balance_reco_PRE = new TH1F("h_pT_balance_reco_PRE", "", bins, min, max);
+	h_pT_balance_reco_CONTROL = new TH1F("h_pT_balance_reco_CONTROL", "", bins, min, max);
+	h_pT_balance_reco_EXCEPT = new TH1F("h_pT_balance_reco_EXCEPT", "", bins, min, max);
+	h_pT_balance_reco_BJET = new TH1F("h_pT_balance_reco_BJET", "", bins, min, max);
+
+	h_pT_balance_reco_HIGH_E = new TH1F("h_pT_balance_reco_HIGH_E", "", bins, min, max);
+
+	hv_pT_balance_reco.push_back(h_pT_balance_reco);
+	hv_pT_balance_reco.push_back(h_pT_balance_reco_CONTROL);
+	hv_pT_balance_reco.push_back(h_pT_balance_reco_EXCEPT);
+	hv_pT_balance_reco.push_back(h_pT_balance_reco_PRE);
+	hv_pT_balance_reco.push_back(h_pT_balance_reco_BJET);
+
+	hv_pT_balance_reco.push_back(h_pT_balance_reco_HIGH_E);
+
+	hv_pT_balance_reco_names.push_back("h_pT_balance_reco");
+	hv_pT_balance_reco_names.push_back("h_pT_balance_reco_CONTROL");
+	hv_pT_balance_reco_names.push_back("h_pT_balance_reco_EXCEPT");
+	hv_pT_balance_reco_names.push_back("h_pT_balance_reco_PRE");
+	hv_pT_balance_reco_names.push_back("h_pT_balance_reco_BJET");
+	hv_pT_balance_reco_names.push_back("h_pT_balance_reco_HIGH_E");
+}
+
+
 // -- PT Balance Three - Normalised transverse momentum balance between the two leptons and the three highest transverse momentum jets
 void MC_Analysis::Book_pT_balance_3(int bins, double min, double max) {
 	h_pT_balance_3 = new TH1F("h_pT_balance_3", "", bins, min, max);
