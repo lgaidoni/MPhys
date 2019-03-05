@@ -15,17 +15,22 @@ void MC_Analysis::Book_DeltaR(int bins, double min, double max) {
 	h_DeltaR_EXCEPT = new TH1F("h_DeltaR_EXCEPT", "", bins, min, max);
 	h_DeltaR_BJET = new TH1F("h_DeltaR_BJET", "", bins, min, max);
 
+	h_DeltaR_HIGH_E = new TH1F("h_DeltaR_HIGH_E", "", bins, min, max);
+
 	hv_DeltaR.push_back(h_DeltaR);
 	hv_DeltaR.push_back(h_DeltaR_CONTROL);
 	hv_DeltaR.push_back(h_DeltaR_EXCEPT);
 	hv_DeltaR.push_back(h_DeltaR_PRE);
 	hv_DeltaR.push_back(h_DeltaR_BJET);
 
+	hv_DeltaR.push_back(h_DeltaR_HIGH_E);
+
 	hv_DeltaR_names.push_back("h_DeltaR");
 	hv_DeltaR_names.push_back("h_DeltaR_CONTROL");
 	hv_DeltaR_names.push_back("h_DeltaR_EXCEPT");
 	hv_DeltaR_names.push_back("h_DeltaR_PRE");
 	hv_DeltaR_names.push_back("h_DeltaR_BJET");
+	hv_DeltaR_names.push_back("h_DeltaR_HIGH_E");
 }
 
 
@@ -37,17 +42,22 @@ void MC_Analysis::Book_pT_balance(int bins, double min, double max) {
 	h_pT_balance_EXCEPT = new TH1F("h_pT_balance_EXCEPT", "", bins, min, max);
 	h_pT_balance_BJET = new TH1F("h_pT_balance_BJET", "", bins, min, max);
 
+	h_pT_balance_HIGH_E = new TH1F("h_pT_balance_HIGH_E", "", bins, min, max);
+
 	hv_pT_balance.push_back(h_pT_balance);
 	hv_pT_balance.push_back(h_pT_balance_CONTROL);
 	hv_pT_balance.push_back(h_pT_balance_EXCEPT);
 	hv_pT_balance.push_back(h_pT_balance_PRE);
 	hv_pT_balance.push_back(h_pT_balance_BJET);
 
+	hv_pT_balance.push_back(h_pT_balance_HIGH_E);
+
 	hv_pT_balance_names.push_back("h_pT_balance");
 	hv_pT_balance_names.push_back("h_pT_balance_CONTROL");
 	hv_pT_balance_names.push_back("h_pT_balance_EXCEPT");
 	hv_pT_balance_names.push_back("h_pT_balance_PRE");
 	hv_pT_balance_names.push_back("h_pT_balance_BJET");
+	hv_pT_balance_names.push_back("h_pT_balance_HIGH_E");
 }
 
 
@@ -59,17 +69,22 @@ void MC_Analysis::Book_pT_balance_3(int bins, double min, double max) {
 	h_pT_balance_3_EXCEPT = new TH1F("h_pT_balance_3_EXCEPT", "", bins, min, max);
 	h_pT_balance_3_BJET = new TH1F("h_pT_balance_3_BJET", "", bins, min, max);
 
+	h_pT_balance_3_HIGH_E = new TH1F("h_pT_balance_3_HIGH_E", "", bins, min, max);
+
 	hv_pT_balance_3.push_back(h_pT_balance_3);
 	hv_pT_balance_3.push_back(h_pT_balance_3_CONTROL);
 	hv_pT_balance_3.push_back(h_pT_balance_3_EXCEPT);
 	hv_pT_balance_3.push_back(h_pT_balance_3_PRE);
 	hv_pT_balance_3.push_back(h_pT_balance_3_BJET);
 
+	hv_pT_balance_3.push_back(h_pT_balance_3_HIGH_E);
+
 	hv_pT_balance_3_names.push_back("h_pT_balance_3");
 	hv_pT_balance_3_names.push_back("h_pT_balance_3_CONTROL");
 	hv_pT_balance_3_names.push_back("h_pT_balance_3_EXCEPT");
 	hv_pT_balance_3_names.push_back("h_pT_balance_3_PRE");
 	hv_pT_balance_3_names.push_back("h_pT_balance_3_BJET");
+	hv_pT_balance_3_names.push_back("h_pT_balance_3_HIGH_E");
 }
 
 
@@ -81,17 +96,22 @@ void MC_Analysis::Book_Centrality(int bins, double min, double max) {
 	h_Centrality_EXCEPT = new TH1F("h_Centrality_EXCEPT", "", bins, min, max);
 	h_Centrality_BJET = new TH1F("h_Centrality_BJET", "", bins, min, max);
 
+	h_Centrality_HIGH_E = new TH1F("h_Centrality_HIGH_E", "", bins, min, max);
+
 	hv_Centrality.push_back(h_Centrality);
 	hv_Centrality.push_back(h_Centrality_CONTROL);
 	hv_Centrality.push_back(h_Centrality_EXCEPT);
 	hv_Centrality.push_back(h_Centrality_PRE);
 	hv_Centrality.push_back(h_Centrality_BJET);
 
+	hv_Centrality.push_back(h_Centrality_HIGH_E);
+
 	hv_Centrality_names.push_back("h_Centrality");
 	hv_Centrality_names.push_back("h_Centrality_CONTROL");
 	hv_Centrality_names.push_back("h_Centrality_EXCEPT");
 	hv_Centrality_names.push_back("h_Centrality_PRE");
 	hv_Centrality_names.push_back("h_Centrality_BJET");
+	hv_Centrality_names.push_back("h_Centrality_HIGH_E");
 }
 
 
@@ -103,17 +123,22 @@ void MC_Analysis::Book_RapidityDijet(int bins, double min, double max) {
 	h_RapidityDijet_EXCEPT = new TH1F("h_RapidityDijet_EXCEPT", "", bins, min, max);
 	h_RapidityDijet_BJET = new TH1F("h_RapidityDijet_BJET", "", bins, min, max);
 
+	h_RapidityDijet_HIGH_E = new TH1F("h_RapidityDijet_HIGH_E", "", bins, min, max);
+
 	hv_RapidityDijet.push_back(h_RapidityDijet);
 	hv_RapidityDijet.push_back(h_RapidityDijet_CONTROL);
 	hv_RapidityDijet.push_back(h_RapidityDijet_EXCEPT);
 	hv_RapidityDijet.push_back(h_RapidityDijet_PRE);
 	hv_RapidityDijet.push_back(h_RapidityDijet_BJET);
 
+	hv_RapidityDijet.push_back(h_RapidityDijet_HIGH_E);
+
 	hv_RapidityDijet_names.push_back("h_RapidityDijet");
 	hv_RapidityDijet_names.push_back("h_RapidityDijet_CONTROL");
 	hv_RapidityDijet_names.push_back("h_RapidityDijet_EXCEPT");
 	hv_RapidityDijet_names.push_back("h_RapidityDijet_PRE");
 	hv_RapidityDijet_names.push_back("h_RapidityDijet_BJET");
+	hv_RapidityDijet_names.push_back("h_RapidityDijet_HIGH_E");
 }
 
 
@@ -125,17 +150,22 @@ void MC_Analysis::Book_RapidityDilepton(int bins, double min, double max) {
 	h_RapidityDilepton_EXCEPT = new TH1F("h_RapidityDilepton_EXCEPT", "", bins, min, max);
 	h_RapidityDilepton_BJET = new TH1F("h_RapidityDilepton_BJET", "", bins, min, max);
 
+	h_RapidityDilepton_HIGH_E = new TH1F("h_RapidityDilepton_HIGH_E", "", bins, min, max);
+
 	hv_RapidityDilepton.push_back(h_RapidityDilepton);
 	hv_RapidityDilepton.push_back(h_RapidityDilepton_CONTROL);
 	hv_RapidityDilepton.push_back(h_RapidityDilepton_EXCEPT);
 	hv_RapidityDilepton.push_back(h_RapidityDilepton_PRE);
 	hv_RapidityDilepton.push_back(h_RapidityDilepton_BJET);
 
+	hv_RapidityDilepton.push_back(h_RapidityDilepton_HIGH_E);
+
 	hv_RapidityDilepton_names.push_back("h_RapidityDilepton");
 	hv_RapidityDilepton_names.push_back("h_RapidityDilepton_CONTROL");
 	hv_RapidityDilepton_names.push_back("h_RapidityDilepton_EXCEPT");
 	hv_RapidityDilepton_names.push_back("h_RapidityDilepton_PRE");
 	hv_RapidityDilepton_names.push_back("h_RapidityDilepton_BJET");
+	hv_RapidityDilepton_names.push_back("h_RapidityDilepton_HIGH_E");
 }
 
 
@@ -149,17 +179,22 @@ void MC_Analysis::Book_lep_0_lep_1_mass(int bins, double min, double max) {
 	h_lep_0_lep_1_mass_EXCEPT = new TH1F("h_lep_0_lep_1_mass_EXCEPT", "", bins, min, max);
 	h_lep_0_lep_1_mass_BJET = new TH1F("h_lep_0_lep_1_mass_BJET", "", bins, min, max);
 
+	h_lep_0_lep_1_mass_HIGH_E = new TH1F("h_lep_0_lep_1_mass_HIGH_E", "", bins, min, max);
+
 	hv_lep_0_lep_1_mass.push_back(h_lep_0_lep_1_mass);
 	hv_lep_0_lep_1_mass.push_back(h_lep_0_lep_1_mass_CONTROL);
 	hv_lep_0_lep_1_mass.push_back(h_lep_0_lep_1_mass_EXCEPT);
 	hv_lep_0_lep_1_mass.push_back(h_lep_0_lep_1_mass_PRE);
 	hv_lep_0_lep_1_mass.push_back(h_lep_0_lep_1_mass_BJET);
 
+	hv_lep_0_lep_1_mass.push_back(h_lep_0_lep_1_mass_HIGH_E);
+
 	hv_lep_0_lep_1_mass_names.push_back("h_lep_0_lep_1_mass");
 	hv_lep_0_lep_1_mass_names.push_back("h_lep_0_lep_1_mass_CONTROL");
 	hv_lep_0_lep_1_mass_names.push_back("h_lep_0_lep_1_mass_EXCEPT");
 	hv_lep_0_lep_1_mass_names.push_back("h_lep_0_lep_1_mass_PRE");
 	hv_lep_0_lep_1_mass_names.push_back("h_lep_0_lep_1_mass_BJET");
+	hv_lep_0_lep_1_mass_names.push_back("h_lep_0_lep_1_mass_HIGH_E");
 }
 
 
@@ -171,17 +206,22 @@ void MC_Analysis::Book_lep_0_lep_1_pt(int bins, double min, double max) {
 	h_lep_0_lep_1_pt_EXCEPT = new TH1F("h_lep_0_lep_1_pt_EXCEPT", "", bins, min, max);
 	h_lep_0_lep_1_pt_BJET = new TH1F("h_lep_0_lep_1_pt_BJET", "", bins, min, max);
 
+	h_lep_0_lep_1_pt_HIGH_E = new TH1F("h_lep_0_lep_1_pt_HIGH_E", "", bins, min, max);
+
 	hv_lep_0_lep_1_pt.push_back(h_lep_0_lep_1_pt);
 	hv_lep_0_lep_1_pt.push_back(h_lep_0_lep_1_pt_CONTROL);
 	hv_lep_0_lep_1_pt.push_back(h_lep_0_lep_1_pt_EXCEPT);
 	hv_lep_0_lep_1_pt.push_back(h_lep_0_lep_1_pt_PRE);
 	hv_lep_0_lep_1_pt.push_back(h_lep_0_lep_1_pt_BJET);
 
+	hv_lep_0_lep_1_pt.push_back(h_lep_0_lep_1_pt_HIGH_E);
+
 	hv_lep_0_lep_1_pt_names.push_back("h_lep_0_lep_1_pt");
 	hv_lep_0_lep_1_pt_names.push_back("h_lep_0_lep_1_pt_CONTROL");
 	hv_lep_0_lep_1_pt_names.push_back("h_lep_0_lep_1_pt_EXCEPT");
 	hv_lep_0_lep_1_pt_names.push_back("h_lep_0_lep_1_pt_PRE");
 	hv_lep_0_lep_1_pt_names.push_back("h_lep_0_lep_1_pt_BJET");
+	hv_lep_0_lep_1_pt_names.push_back("h_lep_0_lep_1_pt_HIGH_E");
 }
 
 
@@ -193,17 +233,22 @@ void MC_Analysis::Book_lep_0_iso_ptvarcone40(int bins, double min, double max) {
 	h_lep_0_iso_ptvarcone40_EXCEPT = new TH1F("h_lep_0_iso_ptvarcone40_EXCEPT", "", bins, min, max);
 	h_lep_0_iso_ptvarcone40_BJET = new TH1F("h_lep_0_iso_ptvarcone40_BJET", "", bins, min, max);
 
+	h_lep_0_iso_ptvarcone40_HIGH_E = new TH1F("h_lep_0_iso_ptvarcone40_HIGH_E", "", bins, min, max);
+
 	hv_lep_0_iso_ptvarcone40.push_back(h_lep_0_iso_ptvarcone40);
 	hv_lep_0_iso_ptvarcone40.push_back(h_lep_0_iso_ptvarcone40_CONTROL);
 	hv_lep_0_iso_ptvarcone40.push_back(h_lep_0_iso_ptvarcone40_EXCEPT);
 	hv_lep_0_iso_ptvarcone40.push_back(h_lep_0_iso_ptvarcone40_PRE);
 	hv_lep_0_iso_ptvarcone40.push_back(h_lep_0_iso_ptvarcone40_BJET);
 
+	hv_lep_0_iso_ptvarcone40.push_back(h_lep_0_iso_ptvarcone40_HIGH_E);
+
 	hv_lep_0_iso_ptvarcone40_names.push_back("h_lep_0_iso_ptvarcone40");
 	hv_lep_0_iso_ptvarcone40_names.push_back("h_lep_0_iso_ptvarcone40_CONTROL");
 	hv_lep_0_iso_ptvarcone40_names.push_back("h_lep_0_iso_ptvarcone40_EXCEPT");
 	hv_lep_0_iso_ptvarcone40_names.push_back("h_lep_0_iso_ptvarcone40_PRE");
 	hv_lep_0_iso_ptvarcone40_names.push_back("h_lep_0_iso_ptvarcone40_BJET");
+	hv_lep_0_iso_ptvarcone40_names.push_back("h_lep_0_iso_ptvarcone40_HIGH_E");
 }
 
 
@@ -215,17 +260,22 @@ void MC_Analysis::Book_lep_1_iso_ptvarcone40(int bins, double min, double max) {
 	h_lep_1_iso_ptvarcone40_EXCEPT = new TH1F("h_lep_1_iso_ptvarcone40_EXCEPT", "", bins, min, max);
 	h_lep_1_iso_ptvarcone40_BJET = new TH1F("h_lep_1_iso_ptvarcone40_BJET", "", bins, min, max);
 
+	h_lep_1_iso_ptvarcone40_HIGH_E = new TH1F("h_lep_1_iso_ptvarcone40_HIGH_E", "", bins, min, max);
+
 	hv_lep_1_iso_ptvarcone40.push_back(h_lep_1_iso_ptvarcone40);
 	hv_lep_1_iso_ptvarcone40.push_back(h_lep_1_iso_ptvarcone40_CONTROL);
 	hv_lep_1_iso_ptvarcone40.push_back(h_lep_1_iso_ptvarcone40_EXCEPT);
 	hv_lep_1_iso_ptvarcone40.push_back(h_lep_1_iso_ptvarcone40_PRE);
 	hv_lep_1_iso_ptvarcone40.push_back(h_lep_1_iso_ptvarcone40_BJET);
 
+	hv_lep_1_iso_ptvarcone40.push_back(h_lep_1_iso_ptvarcone40_HIGH_E);
+
 	hv_lep_1_iso_ptvarcone40_names.push_back("h_lep_1_iso_ptvarcone40");
 	hv_lep_1_iso_ptvarcone40_names.push_back("h_lep_1_iso_ptvarcone40_CONTROL");
 	hv_lep_1_iso_ptvarcone40_names.push_back("h_lep_1_iso_ptvarcone40_EXCEPT");
 	hv_lep_1_iso_ptvarcone40_names.push_back("h_lep_1_iso_ptvarcone40_PRE");
 	hv_lep_1_iso_ptvarcone40_names.push_back("h_lep_1_iso_ptvarcone40_BJET");
+	hv_lep_1_iso_ptvarcone40_names.push_back("h_lep_1_iso_ptvarcone40_HIGH_E");
 }
 
 
@@ -239,17 +289,22 @@ void MC_Analysis::Book_jet_0_jet_1_mass(int bins, double min, double max) {
 	h_jet_0_jet_1_mass_EXCEPT = new TH1F("h_jet_0_jet_1_mass_EXCEPT", "", bins, min, max);
 	h_jet_0_jet_1_mass_BJET = new TH1F("h_jet_0_jet_1_mass_BJET", "", bins, min, max);
 
+	h_jet_0_jet_1_mass_HIGH_E = new TH1F("h_jet_0_jet_1_mass_HIGH_E", "", bins, min, max);
+
 	hv_jet_0_jet_1_mass.push_back(h_jet_0_jet_1_mass);
 	hv_jet_0_jet_1_mass.push_back(h_jet_0_jet_1_mass_CONTROL);
 	hv_jet_0_jet_1_mass.push_back(h_jet_0_jet_1_mass_EXCEPT);
 	hv_jet_0_jet_1_mass.push_back(h_jet_0_jet_1_mass_PRE);
 	hv_jet_0_jet_1_mass.push_back(h_jet_0_jet_1_mass_BJET);
 
+	hv_jet_0_jet_1_mass.push_back(h_jet_0_jet_1_mass_HIGH_E);
+
 	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass");
 	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass_CONTROL");
 	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass_EXCEPT");
 	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass_PRE");
 	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass_BJET");
+	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass_HIGH_E");
 }
 
 
@@ -261,17 +316,22 @@ void MC_Analysis::Book_jet_0_p4_Pt(int bins, double min, double max) {
 	h_jet_0_p4_Pt_EXCEPT = new TH1F("h_jet_0_p4_Pt_EXCEPT", "", bins, min, max);
 	h_jet_0_p4_Pt_BJET = new TH1F("h_jet_0_p4_Pt_BJET", "", bins, min, max);
 
+	h_jet_0_p4_Pt_HIGH_E = new TH1F("h_jet_0_p4_Pt_HIGH_E", "", bins, min, max);
+
 	hv_jet_0_p4_Pt.push_back(h_jet_0_p4_Pt);
 	hv_jet_0_p4_Pt.push_back(h_jet_0_p4_Pt_CONTROL);
 	hv_jet_0_p4_Pt.push_back(h_jet_0_p4_Pt_EXCEPT);
 	hv_jet_0_p4_Pt.push_back(h_jet_0_p4_Pt_PRE);
 	hv_jet_0_p4_Pt.push_back(h_jet_0_p4_Pt_BJET);
 
+	hv_jet_0_p4_Pt.push_back(h_jet_0_p4_Pt_HIGH_E);
+
 	hv_jet_0_p4_Pt_names.push_back("h_jet_0_p4_Pt");
 	hv_jet_0_p4_Pt_names.push_back("h_jet_0_p4_Pt_CONTROL");
 	hv_jet_0_p4_Pt_names.push_back("h_jet_0_p4_Pt_EXCEPT");
 	hv_jet_0_p4_Pt_names.push_back("h_jet_0_p4_Pt_PRE");
 	hv_jet_0_p4_Pt_names.push_back("h_jet_0_p4_Pt_BJET");
+	hv_jet_0_p4_Pt_names.push_back("h_jet_0_p4_Pt_HIGH_E");
 }
 
 
@@ -283,17 +343,22 @@ void MC_Analysis::Book_jet_1_p4_Pt(int bins, double min, double max) {
 	h_jet_1_p4_Pt_EXCEPT = new TH1F("h_jet_1_p4_Pt_EXCEPT", "", bins, min, max);
 	h_jet_1_p4_Pt_BJET = new TH1F("h_jet_1_p4_Pt_BJET", "", bins, min, max);
 
+	h_jet_1_p4_Pt_HIGH_E = new TH1F("h_jet_1_p4_Pt_HIGH_E", "", bins, min, max);
+
 	hv_jet_1_p4_Pt.push_back(h_jet_1_p4_Pt);
 	hv_jet_1_p4_Pt.push_back(h_jet_1_p4_Pt_CONTROL);
 	hv_jet_1_p4_Pt.push_back(h_jet_1_p4_Pt_EXCEPT);
 	hv_jet_1_p4_Pt.push_back(h_jet_1_p4_Pt_PRE);
 	hv_jet_1_p4_Pt.push_back(h_jet_1_p4_Pt_BJET);
 
+	hv_jet_1_p4_Pt.push_back(h_jet_1_p4_Pt_HIGH_E);
+
 	hv_jet_1_p4_Pt_names.push_back("h_jet_1_p4_Pt");
 	hv_jet_1_p4_Pt_names.push_back("h_jet_1_p4_Pt_CONTROL");
 	hv_jet_1_p4_Pt_names.push_back("h_jet_1_p4_Pt_EXCEPT");
 	hv_jet_1_p4_Pt_names.push_back("h_jet_1_p4_Pt_PRE");
 	hv_jet_1_p4_Pt_names.push_back("h_jet_1_p4_Pt_BJET");
+	hv_jet_1_p4_Pt_names.push_back("h_jet_1_p4_Pt_HIGH_E");
 }
 
 
@@ -307,17 +372,22 @@ void MC_Analysis::Book_MET_Centrality(int bins, double min, double max) {
 	h_MET_Centrality_EXCEPT = new TH1F("h_MET_Centrality_EXCEPT", "", bins, min, max);
 	h_MET_Centrality_BJET = new TH1F("h_MET_Centrality_BJET", "", bins, min, max);
 
+	h_MET_Centrality_HIGH_E = new TH1F("h_MET_Centrality_HIGH_E", "", bins, min, max);
+
 	hv_MET_Centrality.push_back(h_MET_Centrality);
 	hv_MET_Centrality.push_back(h_MET_Centrality_CONTROL);
 	hv_MET_Centrality.push_back(h_MET_Centrality_EXCEPT);
 	hv_MET_Centrality.push_back(h_MET_Centrality_PRE);
 	hv_MET_Centrality.push_back(h_MET_Centrality_BJET);
 
+	hv_MET_Centrality.push_back(h_MET_Centrality_HIGH_E);
+
 	hv_MET_Centrality_names.push_back("h_MET_Centrality");
 	hv_MET_Centrality_names.push_back("h_MET_Centrality_CONTROL");
 	hv_MET_Centrality_names.push_back("h_MET_Centrality_EXCEPT");
 	hv_MET_Centrality_names.push_back("h_MET_Centrality_PRE");
 	hv_MET_Centrality_names.push_back("h_MET_Centrality_BJET");
+	hv_MET_Centrality_names.push_back("h_MET_Centrality_HIGH_E");
 }
 
 
@@ -329,17 +399,22 @@ void MC_Analysis::Book_neutrino_0_pt(int bins, double min, double max) {
 	h_neutrino_0_pt_EXCEPT = new TH1F("h_neutrino_0_pt_EXCEPT", "", bins, min, max);
 	h_neutrino_0_pt_BJET = new TH1F("h_neutrino_0_pt_BJET", "", bins, min, max);
 
+	h_neutrino_0_pt_HIGH_E = new TH1F("h_neutrino_0_pt_HIGH_E", "", bins, min, max);
+
 	hv_neutrino_0_pt.push_back(h_neutrino_0_pt);
 	hv_neutrino_0_pt.push_back(h_neutrino_0_pt_CONTROL);
 	hv_neutrino_0_pt.push_back(h_neutrino_0_pt_EXCEPT);
 	hv_neutrino_0_pt.push_back(h_neutrino_0_pt_PRE);
 	hv_neutrino_0_pt.push_back(h_neutrino_0_pt_BJET);
 
+	hv_neutrino_0_pt.push_back(h_neutrino_0_pt_HIGH_E);
+
 	hv_neutrino_0_pt_names.push_back("h_neutrino_0_pt");
 	hv_neutrino_0_pt_names.push_back("h_neutrino_0_pt_CONTROL");
 	hv_neutrino_0_pt_names.push_back("h_neutrino_0_pt_EXCEPT");
 	hv_neutrino_0_pt_names.push_back("h_neutrino_0_pt_PRE");
 	hv_neutrino_0_pt_names.push_back("h_neutrino_0_pt_BJET");
+	hv_neutrino_0_pt_names.push_back("h_neutrino_0_pt_HIGH_E");
 }
 
 
@@ -351,17 +426,22 @@ void MC_Analysis::Book_neutrino_1_pt(int bins, double min, double max) {
 	h_neutrino_1_pt_EXCEPT = new TH1F("h_neutrino_1_pt_EXCEPT", "", bins, min, max);
 	h_neutrino_1_pt_BJET = new TH1F("h_neutrino_1_pt_BJET", "", bins, min, max);
 
+	h_neutrino_1_pt_HIGH_E = new TH1F("h_neutrino_1_pt_HIGH_E", "", bins, min, max);
+
 	hv_neutrino_1_pt.push_back(h_neutrino_1_pt);
 	hv_neutrino_1_pt.push_back(h_neutrino_1_pt_CONTROL);
 	hv_neutrino_1_pt.push_back(h_neutrino_1_pt_EXCEPT);
 	hv_neutrino_1_pt.push_back(h_neutrino_1_pt_PRE);
 	hv_neutrino_1_pt.push_back(h_neutrino_1_pt_BJET);
 
+	hv_neutrino_1_pt.push_back(h_neutrino_1_pt_HIGH_E);
+
 	hv_neutrino_1_pt_names.push_back("h_neutrino_1_pt");
 	hv_neutrino_1_pt_names.push_back("h_neutrino_1_pt_CONTROL");
 	hv_neutrino_1_pt_names.push_back("h_neutrino_1_pt_EXCEPT");
 	hv_neutrino_1_pt_names.push_back("h_neutrino_1_pt_PRE");
 	hv_neutrino_1_pt_names.push_back("h_neutrino_1_pt_BJET");
+	hv_neutrino_1_pt_names.push_back("h_neutrino_1_pt_HIGH_E");
 }
 
 
@@ -373,17 +453,22 @@ void MC_Analysis::Book_MET_Type_Favour(int bins, double min, double max) {
 	h_MET_Type_Favour_EXCEPT = new TH1F("h_MET_Type_Favour_EXCEPT", "", bins, min, max);
 	h_MET_Type_Favour_BJET = new TH1F("h_MET_Type_Favour_BJET", "", bins, min, max);
 
+	h_MET_Type_Favour_HIGH_E = new TH1F("h_MET_Type_Favour_HIGH_E", "", bins, min, max);
+
 	hv_MET_Type_Favour.push_back(h_MET_Type_Favour);
 	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_CONTROL);
 	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_EXCEPT);
 	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_PRE);
 	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_BJET);
 
+	hv_MET_Type_Favour.push_back(h_MET_Type_Favour_HIGH_E);
+
 	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour");
 	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_CONTROL");
 	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_EXCEPT");
 	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_PRE");
 	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_BJET");
+	hv_MET_Type_Favour_names.push_back("h_MET_Type_Favour_HIGH_E");
 }
 
 
@@ -408,6 +493,7 @@ void MC_Analysis::Book_lep_0_lep_1_mass_reco(int bins, double min, double max) {
 	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco_EXCEPT");
 	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco_PRE");
 	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco_BJET");
+
 }
 
 
@@ -430,6 +516,7 @@ void MC_Analysis::Book_DeltaR_reco(int bins, double min, double max) {
 	hv_DeltaR_reco_names.push_back("h_DeltaR_reco_EXCEPT");
 	hv_DeltaR_reco_names.push_back("h_DeltaR_reco_PRE");
 	hv_DeltaR_reco_names.push_back("h_DeltaR_reco_BJET");
+
 }
 
 
@@ -452,6 +539,7 @@ void MC_Analysis::Book_lep_0_lep_1_pt_reco(int bins, double min, double max) {
 	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco_EXCEPT");
 	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco_PRE");
 	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco_BJET");
+
 }
 
 
@@ -478,6 +566,7 @@ void MC_Analysis::Book_Centrality_reco(int bins, double min, double max) {
 	hv_Centrality_reco_names.push_back("h_Centrality_reco_EXCEPT");
 	hv_Centrality_reco_names.push_back("h_Centrality_reco_PRE");
 	hv_Centrality_reco_names.push_back("h_Centrality_reco_BJET");
+
 }
 
 
@@ -489,17 +578,22 @@ void MC_Analysis::Book_Test_Polar_Plot(int xbins, double xmin, double xmax, int 
 	h_Test_Polar_Plot_EXCEPT = new TH2F("h_Test_Polar_Plot_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
 	h_Test_Polar_Plot_BJET = new TH2F("h_Test_Polar_Plot_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
 
+	h_Test_Polar_Plot_HIGH_E = new TH2F("h_Test_Polar_Plot_HIGH_E", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
 	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot);
 	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_CONTROL);
 	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_EXCEPT);
 	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_PRE);
 	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_BJET);
 
+	hv_Test_Polar_Plot.push_back(h_Test_Polar_Plot_HIGH_E);
+
 	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot");
 	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_CONTROL");
 	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_EXCEPT");
 	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_PRE");
 	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_BJET");
+	hv_Test_Polar_Plot_names.push_back("h_Test_Polar_Plot_HIGH_E");
 }
 
 
@@ -511,17 +605,22 @@ void MC_Analysis::Book_Mass_Favour_Combination_2D(int xbins, double xmin, double
 	h_Mass_Favour_Combination_2D_EXCEPT = new TH2F("h_Mass_Favour_Combination_2D_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
 	h_Mass_Favour_Combination_2D_BJET = new TH2F("h_Mass_Favour_Combination_2D_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
 
+	h_Mass_Favour_Combination_2D_HIGH_E = new TH2F("h_Mass_Favour_Combination_2D_HIGH_E", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
 	hv_Mass_Favour_Combination_2D.push_back(h_Mass_Favour_Combination_2D);
 	hv_Mass_Favour_Combination_2D.push_back(h_Mass_Favour_Combination_2D_CONTROL);
 	hv_Mass_Favour_Combination_2D.push_back(h_Mass_Favour_Combination_2D_EXCEPT);
 	hv_Mass_Favour_Combination_2D.push_back(h_Mass_Favour_Combination_2D_PRE);
 	hv_Mass_Favour_Combination_2D.push_back(h_Mass_Favour_Combination_2D_BJET);
 
+	hv_Mass_Favour_Combination_2D.push_back(h_Mass_Favour_Combination_2D_HIGH_E);
+
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D");
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_CONTROL");
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_EXCEPT");
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_PRE");
 	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_BJET");
+	hv_Mass_Favour_Combination_2D_names.push_back("h_Mass_Favour_Combination_2D_HIGH_E");
 }
 
 
@@ -533,17 +632,22 @@ void MC_Analysis::Book_lep_0_reco_p4(int xbins, double xmin, double xmax, int yb
 	h_lep_0_reco_p4_EXCEPT = new TH2F("h_lep_0_reco_p4_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
 	h_lep_0_reco_p4_BJET = new TH2F("h_lep_0_reco_p4_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
 
+	h_lep_0_reco_p4_HIGH_E = new TH2F("h_lep_0_reco_p4_HIGH_E", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
 	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4);
 	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_CONTROL);
 	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_EXCEPT);
 	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_PRE);
 	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_BJET);
 
+	hv_lep_0_reco_p4.push_back(h_lep_0_reco_p4_HIGH_E);
+
 	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4");
 	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_CONTROL");
 	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_EXCEPT");
 	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_PRE");
 	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_BJET");
+	hv_lep_0_reco_p4_names.push_back("h_lep_0_reco_p4_HIGH_E");
 }
 
 
@@ -555,17 +659,22 @@ void MC_Analysis::Book_lep_1_reco_p4(int xbins, double xmin, double xmax, int yb
 	h_lep_1_reco_p4_EXCEPT = new TH2F("h_lep_1_reco_p4_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
 	h_lep_1_reco_p4_BJET = new TH2F("h_lep_1_reco_p4_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
 
+	h_lep_1_reco_p4_HIGH_E = new TH2F("h_lep_1_reco_p4_HIGH_E", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
 	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4);
 	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_CONTROL);
 	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_EXCEPT);
 	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_PRE);
 	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_BJET);
 
+	hv_lep_1_reco_p4.push_back(h_lep_1_reco_p4_HIGH_E);
+
 	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4");
 	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_CONTROL");
 	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_EXCEPT");
 	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_PRE");
 	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_BJET");
+	hv_lep_1_reco_p4_names.push_back("h_lep_1_reco_p4_HIGH_E");
 }
 
 

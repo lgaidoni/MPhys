@@ -5,6 +5,7 @@
 	TH1F	*h_bjet_0_EXCEPT;
 	TH1F	*h_bjet_0_PRE;
 	TH1F	*h_bjet_0_BJET;
+	TH1F	*h_bjet_0_HIGH_E;
 	vector<TH1F*>	hv_bjet_0;
 		vector<string>	hv_bjet_0_names;
 
@@ -15,6 +16,7 @@
 	TH1F	*h_bjet_0_NOMINAL_central_jets_effSF_JVT_EXCEPT;
 	TH1F	*h_bjet_0_NOMINAL_central_jets_effSF_JVT_PRE;
 	TH1F	*h_bjet_0_NOMINAL_central_jets_effSF_JVT_BJET;
+	TH1F	*h_bjet_0_NOMINAL_central_jets_effSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_NOMINAL_central_jets_effSF_JVT;
 		vector<string>	hv_bjet_0_NOMINAL_central_jets_effSF_JVT_names;
 
@@ -25,6 +27,7 @@
 	TH1F	*h_bjet_0_NOMINAL_central_jets_ineffSF_JVT_EXCEPT;
 	TH1F	*h_bjet_0_NOMINAL_central_jets_ineffSF_JVT_PRE;
 	TH1F	*h_bjet_0_NOMINAL_central_jets_ineffSF_JVT_BJET;
+	TH1F	*h_bjet_0_NOMINAL_central_jets_ineffSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_NOMINAL_central_jets_ineffSF_JVT;
 		vector<string>	hv_bjet_0_NOMINAL_central_jets_ineffSF_JVT_names;
 
@@ -35,6 +38,7 @@
 	TH1F	*h_bjet_0_NOMINAL_effSF_MV2c10_EXCEPT;
 	TH1F	*h_bjet_0_NOMINAL_effSF_MV2c10_PRE;
 	TH1F	*h_bjet_0_NOMINAL_effSF_MV2c10_BJET;
+	TH1F	*h_bjet_0_NOMINAL_effSF_MV2c10_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_NOMINAL_effSF_MV2c10;
 		vector<string>	hv_bjet_0_NOMINAL_effSF_MV2c10_names;
 
@@ -45,6 +49,7 @@
 	TH1F	*h_bjet_0_NOMINAL_forward_jets_effSF_JVT_EXCEPT;
 	TH1F	*h_bjet_0_NOMINAL_forward_jets_effSF_JVT_PRE;
 	TH1F	*h_bjet_0_NOMINAL_forward_jets_effSF_JVT_BJET;
+	TH1F	*h_bjet_0_NOMINAL_forward_jets_effSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_NOMINAL_forward_jets_effSF_JVT;
 		vector<string>	hv_bjet_0_NOMINAL_forward_jets_effSF_JVT_names;
 
@@ -55,6 +60,7 @@
 	TH1F	*h_bjet_0_NOMINAL_forward_jets_ineffSF_JVT_EXCEPT;
 	TH1F	*h_bjet_0_NOMINAL_forward_jets_ineffSF_JVT_PRE;
 	TH1F	*h_bjet_0_NOMINAL_forward_jets_ineffSF_JVT_BJET;
+	TH1F	*h_bjet_0_NOMINAL_forward_jets_ineffSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_NOMINAL_forward_jets_ineffSF_JVT;
 		vector<string>	hv_bjet_0_NOMINAL_forward_jets_ineffSF_JVT_names;
 
@@ -65,6 +71,7 @@
 	TH1F	*h_bjet_0_NOMINAL_ineffSF_MV2c10_EXCEPT;
 	TH1F	*h_bjet_0_NOMINAL_ineffSF_MV2c10_PRE;
 	TH1F	*h_bjet_0_NOMINAL_ineffSF_MV2c10_BJET;
+	TH1F	*h_bjet_0_NOMINAL_ineffSF_MV2c10_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_NOMINAL_ineffSF_MV2c10;
 		vector<string>	hv_bjet_0_NOMINAL_ineffSF_MV2c10_names;
 
@@ -75,6 +82,7 @@
 	TH1F	*h_bjet_0_b_tag_quantile_EXCEPT;
 	TH1F	*h_bjet_0_b_tag_quantile_PRE;
 	TH1F	*h_bjet_0_b_tag_quantile_BJET;
+	TH1F	*h_bjet_0_b_tag_quantile_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_b_tag_quantile;
 		vector<string>	hv_bjet_0_b_tag_quantile_names;
 
@@ -85,6 +93,7 @@
 	TH1F	*h_bjet_0_b_tag_score_EXCEPT;
 	TH1F	*h_bjet_0_b_tag_score_PRE;
 	TH1F	*h_bjet_0_b_tag_score_BJET;
+	TH1F	*h_bjet_0_b_tag_score_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_b_tag_score;
 		vector<string>	hv_bjet_0_b_tag_score_names;
 
@@ -95,6 +104,7 @@
 	TH1F	*h_bjet_0_b_tagged_EXCEPT;
 	TH1F	*h_bjet_0_b_tagged_PRE;
 	TH1F	*h_bjet_0_b_tagged_BJET;
+	TH1F	*h_bjet_0_b_tagged_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_b_tagged;
 		vector<string>	hv_bjet_0_b_tagged_names;
 
@@ -105,6 +115,7 @@
 	TH1F	*h_bjet_0_fjvt_EXCEPT;
 	TH1F	*h_bjet_0_fjvt_PRE;
 	TH1F	*h_bjet_0_fjvt_BJET;
+	TH1F	*h_bjet_0_fjvt_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_fjvt;
 		vector<string>	hv_bjet_0_fjvt_names;
 
@@ -115,6 +126,7 @@
 	TH1F	*h_bjet_0_flavorlabel_EXCEPT;
 	TH1F	*h_bjet_0_flavorlabel_PRE;
 	TH1F	*h_bjet_0_flavorlabel_BJET;
+	TH1F	*h_bjet_0_flavorlabel_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_flavorlabel;
 		vector<string>	hv_bjet_0_flavorlabel_names;
 
@@ -125,6 +137,7 @@
 	TH1F	*h_bjet_0_flavorlabel_cone_EXCEPT;
 	TH1F	*h_bjet_0_flavorlabel_cone_PRE;
 	TH1F	*h_bjet_0_flavorlabel_cone_BJET;
+	TH1F	*h_bjet_0_flavorlabel_cone_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_flavorlabel_cone;
 		vector<string>	hv_bjet_0_flavorlabel_cone_names;
 
@@ -135,6 +148,7 @@
 	TH1F	*h_bjet_0_flavorlabel_part_EXCEPT;
 	TH1F	*h_bjet_0_flavorlabel_part_PRE;
 	TH1F	*h_bjet_0_flavorlabel_part_BJET;
+	TH1F	*h_bjet_0_flavorlabel_part_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_flavorlabel_part;
 		vector<string>	hv_bjet_0_flavorlabel_part_names;
 
@@ -145,6 +159,7 @@
 	TH1F	*h_bjet_0_is_Jvt_HS_EXCEPT;
 	TH1F	*h_bjet_0_is_Jvt_HS_PRE;
 	TH1F	*h_bjet_0_is_Jvt_HS_BJET;
+	TH1F	*h_bjet_0_is_Jvt_HS_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_is_Jvt_HS;
 		vector<string>	hv_bjet_0_is_Jvt_HS_names;
 
@@ -155,6 +170,7 @@
 	TH1F	*h_bjet_0_jvt_EXCEPT;
 	TH1F	*h_bjet_0_jvt_PRE;
 	TH1F	*h_bjet_0_jvt_BJET;
+	TH1F	*h_bjet_0_jvt_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_jvt;
 		vector<string>	hv_bjet_0_jvt_names;
 
@@ -165,6 +181,7 @@
 	TH1F	*h_bjet_0_origin_EXCEPT;
 	TH1F	*h_bjet_0_origin_PRE;
 	TH1F	*h_bjet_0_origin_BJET;
+	TH1F	*h_bjet_0_origin_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_origin;
 		vector<string>	hv_bjet_0_origin_names;
 
@@ -176,6 +193,7 @@
 		TH1F	*h_bjet_0_p4_X_EXCEPT;
 		TH1F	*h_bjet_0_p4_X_PRE;
 		TH1F	*h_bjet_0_p4_X_BJET;
+		TH1F	*h_bjet_0_p4_X_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_X;
 		vector<string>	hv_bjet_0_p4_X_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Y
@@ -185,6 +203,7 @@
 		TH1F	*h_bjet_0_p4_Y_EXCEPT;
 		TH1F	*h_bjet_0_p4_Y_PRE;
 		TH1F	*h_bjet_0_p4_Y_BJET;
+		TH1F	*h_bjet_0_p4_Y_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Y;
 		vector<string>	hv_bjet_0_p4_Y_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Z
@@ -194,6 +213,7 @@
 		TH1F	*h_bjet_0_p4_Z_EXCEPT;
 		TH1F	*h_bjet_0_p4_Z_PRE;
 		TH1F	*h_bjet_0_p4_Z_BJET;
+		TH1F	*h_bjet_0_p4_Z_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Z;
 		vector<string>	hv_bjet_0_p4_Z_names;
 		//Histogram booking functions and declarations for bjet_0_p4_T
@@ -203,6 +223,7 @@
 		TH1F	*h_bjet_0_p4_T_EXCEPT;
 		TH1F	*h_bjet_0_p4_T_PRE;
 		TH1F	*h_bjet_0_p4_T_BJET;
+		TH1F	*h_bjet_0_p4_T_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_T;
 		vector<string>	hv_bjet_0_p4_T_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Px
@@ -212,6 +233,7 @@
 		TH1F	*h_bjet_0_p4_Px_EXCEPT;
 		TH1F	*h_bjet_0_p4_Px_PRE;
 		TH1F	*h_bjet_0_p4_Px_BJET;
+		TH1F	*h_bjet_0_p4_Px_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Px;
 		vector<string>	hv_bjet_0_p4_Px_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Py
@@ -221,6 +243,7 @@
 		TH1F	*h_bjet_0_p4_Py_EXCEPT;
 		TH1F	*h_bjet_0_p4_Py_PRE;
 		TH1F	*h_bjet_0_p4_Py_BJET;
+		TH1F	*h_bjet_0_p4_Py_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Py;
 		vector<string>	hv_bjet_0_p4_Py_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Pz
@@ -230,6 +253,7 @@
 		TH1F	*h_bjet_0_p4_Pz_EXCEPT;
 		TH1F	*h_bjet_0_p4_Pz_PRE;
 		TH1F	*h_bjet_0_p4_Pz_BJET;
+		TH1F	*h_bjet_0_p4_Pz_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Pz;
 		vector<string>	hv_bjet_0_p4_Pz_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Energy
@@ -239,6 +263,7 @@
 		TH1F	*h_bjet_0_p4_Energy_EXCEPT;
 		TH1F	*h_bjet_0_p4_Energy_PRE;
 		TH1F	*h_bjet_0_p4_Energy_BJET;
+		TH1F	*h_bjet_0_p4_Energy_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Energy;
 		vector<string>	hv_bjet_0_p4_Energy_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Theta
@@ -248,6 +273,7 @@
 		TH1F	*h_bjet_0_p4_Theta_EXCEPT;
 		TH1F	*h_bjet_0_p4_Theta_PRE;
 		TH1F	*h_bjet_0_p4_Theta_BJET;
+		TH1F	*h_bjet_0_p4_Theta_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Theta;
 		vector<string>	hv_bjet_0_p4_Theta_names;
 		//Histogram booking functions and declarations for bjet_0_p4_CosTheta
@@ -257,6 +283,7 @@
 		TH1F	*h_bjet_0_p4_CosTheta_EXCEPT;
 		TH1F	*h_bjet_0_p4_CosTheta_PRE;
 		TH1F	*h_bjet_0_p4_CosTheta_BJET;
+		TH1F	*h_bjet_0_p4_CosTheta_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_CosTheta;
 		vector<string>	hv_bjet_0_p4_CosTheta_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Phi
@@ -266,6 +293,7 @@
 		TH1F	*h_bjet_0_p4_Phi_EXCEPT;
 		TH1F	*h_bjet_0_p4_Phi_PRE;
 		TH1F	*h_bjet_0_p4_Phi_BJET;
+		TH1F	*h_bjet_0_p4_Phi_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Phi;
 		vector<string>	hv_bjet_0_p4_Phi_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Rho
@@ -275,6 +303,7 @@
 		TH1F	*h_bjet_0_p4_Rho_EXCEPT;
 		TH1F	*h_bjet_0_p4_Rho_PRE;
 		TH1F	*h_bjet_0_p4_Rho_BJET;
+		TH1F	*h_bjet_0_p4_Rho_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Rho;
 		vector<string>	hv_bjet_0_p4_Rho_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Perp2
@@ -284,6 +313,7 @@
 		TH1F	*h_bjet_0_p4_Perp2_EXCEPT;
 		TH1F	*h_bjet_0_p4_Perp2_PRE;
 		TH1F	*h_bjet_0_p4_Perp2_BJET;
+		TH1F	*h_bjet_0_p4_Perp2_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Perp2;
 		vector<string>	hv_bjet_0_p4_Perp2_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Pt
@@ -293,6 +323,7 @@
 		TH1F	*h_bjet_0_p4_Pt_EXCEPT;
 		TH1F	*h_bjet_0_p4_Pt_PRE;
 		TH1F	*h_bjet_0_p4_Pt_BJET;
+		TH1F	*h_bjet_0_p4_Pt_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Pt;
 		vector<string>	hv_bjet_0_p4_Pt_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Perp
@@ -302,6 +333,7 @@
 		TH1F	*h_bjet_0_p4_Perp_EXCEPT;
 		TH1F	*h_bjet_0_p4_Perp_PRE;
 		TH1F	*h_bjet_0_p4_Perp_BJET;
+		TH1F	*h_bjet_0_p4_Perp_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Perp;
 		vector<string>	hv_bjet_0_p4_Perp_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Et2
@@ -311,6 +343,7 @@
 		TH1F	*h_bjet_0_p4_Et2_EXCEPT;
 		TH1F	*h_bjet_0_p4_Et2_PRE;
 		TH1F	*h_bjet_0_p4_Et2_BJET;
+		TH1F	*h_bjet_0_p4_Et2_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Et2;
 		vector<string>	hv_bjet_0_p4_Et2_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Et
@@ -320,6 +353,7 @@
 		TH1F	*h_bjet_0_p4_Et_EXCEPT;
 		TH1F	*h_bjet_0_p4_Et_PRE;
 		TH1F	*h_bjet_0_p4_Et_BJET;
+		TH1F	*h_bjet_0_p4_Et_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Et;
 		vector<string>	hv_bjet_0_p4_Et_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Mag2
@@ -329,6 +363,7 @@
 		TH1F	*h_bjet_0_p4_Mag2_EXCEPT;
 		TH1F	*h_bjet_0_p4_Mag2_PRE;
 		TH1F	*h_bjet_0_p4_Mag2_BJET;
+		TH1F	*h_bjet_0_p4_Mag2_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Mag2;
 		vector<string>	hv_bjet_0_p4_Mag2_names;
 		//Histogram booking functions and declarations for bjet_0_p4_M2
@@ -338,6 +373,7 @@
 		TH1F	*h_bjet_0_p4_M2_EXCEPT;
 		TH1F	*h_bjet_0_p4_M2_PRE;
 		TH1F	*h_bjet_0_p4_M2_BJET;
+		TH1F	*h_bjet_0_p4_M2_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_M2;
 		vector<string>	hv_bjet_0_p4_M2_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Mag
@@ -347,6 +383,7 @@
 		TH1F	*h_bjet_0_p4_Mag_EXCEPT;
 		TH1F	*h_bjet_0_p4_Mag_PRE;
 		TH1F	*h_bjet_0_p4_Mag_BJET;
+		TH1F	*h_bjet_0_p4_Mag_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Mag;
 		vector<string>	hv_bjet_0_p4_Mag_names;
 		//Histogram booking functions and declarations for bjet_0_p4_M
@@ -356,6 +393,7 @@
 		TH1F	*h_bjet_0_p4_M_EXCEPT;
 		TH1F	*h_bjet_0_p4_M_PRE;
 		TH1F	*h_bjet_0_p4_M_BJET;
+		TH1F	*h_bjet_0_p4_M_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_M;
 		vector<string>	hv_bjet_0_p4_M_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Mt2
@@ -365,6 +403,7 @@
 		TH1F	*h_bjet_0_p4_Mt2_EXCEPT;
 		TH1F	*h_bjet_0_p4_Mt2_PRE;
 		TH1F	*h_bjet_0_p4_Mt2_BJET;
+		TH1F	*h_bjet_0_p4_Mt2_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Mt2;
 		vector<string>	hv_bjet_0_p4_Mt2_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Mt
@@ -374,6 +413,7 @@
 		TH1F	*h_bjet_0_p4_Mt_EXCEPT;
 		TH1F	*h_bjet_0_p4_Mt_PRE;
 		TH1F	*h_bjet_0_p4_Mt_BJET;
+		TH1F	*h_bjet_0_p4_Mt_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Mt;
 		vector<string>	hv_bjet_0_p4_Mt_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Beta
@@ -383,6 +423,7 @@
 		TH1F	*h_bjet_0_p4_Beta_EXCEPT;
 		TH1F	*h_bjet_0_p4_Beta_PRE;
 		TH1F	*h_bjet_0_p4_Beta_BJET;
+		TH1F	*h_bjet_0_p4_Beta_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Beta;
 		vector<string>	hv_bjet_0_p4_Beta_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Gamma
@@ -392,6 +433,7 @@
 		TH1F	*h_bjet_0_p4_Gamma_EXCEPT;
 		TH1F	*h_bjet_0_p4_Gamma_PRE;
 		TH1F	*h_bjet_0_p4_Gamma_BJET;
+		TH1F	*h_bjet_0_p4_Gamma_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Gamma;
 		vector<string>	hv_bjet_0_p4_Gamma_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Plus
@@ -401,6 +443,7 @@
 		TH1F	*h_bjet_0_p4_Plus_EXCEPT;
 		TH1F	*h_bjet_0_p4_Plus_PRE;
 		TH1F	*h_bjet_0_p4_Plus_BJET;
+		TH1F	*h_bjet_0_p4_Plus_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Plus;
 		vector<string>	hv_bjet_0_p4_Plus_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Minus
@@ -410,6 +453,7 @@
 		TH1F	*h_bjet_0_p4_Minus_EXCEPT;
 		TH1F	*h_bjet_0_p4_Minus_PRE;
 		TH1F	*h_bjet_0_p4_Minus_BJET;
+		TH1F	*h_bjet_0_p4_Minus_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Minus;
 		vector<string>	hv_bjet_0_p4_Minus_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Rapidity
@@ -419,6 +463,7 @@
 		TH1F	*h_bjet_0_p4_Rapidity_EXCEPT;
 		TH1F	*h_bjet_0_p4_Rapidity_PRE;
 		TH1F	*h_bjet_0_p4_Rapidity_BJET;
+		TH1F	*h_bjet_0_p4_Rapidity_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Rapidity;
 		vector<string>	hv_bjet_0_p4_Rapidity_names;
 		//Histogram booking functions and declarations for bjet_0_p4_Eta
@@ -428,6 +473,7 @@
 		TH1F	*h_bjet_0_p4_Eta_EXCEPT;
 		TH1F	*h_bjet_0_p4_Eta_PRE;
 		TH1F	*h_bjet_0_p4_Eta_BJET;
+		TH1F	*h_bjet_0_p4_Eta_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_Eta;
 		vector<string>	hv_bjet_0_p4_Eta_names;
 		//Histogram booking functions and declarations for bjet_0_p4_PseudoRapidity
@@ -437,6 +483,7 @@
 		TH1F	*h_bjet_0_p4_PseudoRapidity_EXCEPT;
 		TH1F	*h_bjet_0_p4_PseudoRapidity_PRE;
 		TH1F	*h_bjet_0_p4_PseudoRapidity_BJET;
+		TH1F	*h_bjet_0_p4_PseudoRapidity_HIGH_E;
 		vector<TH1F*>	hv_bjet_0_p4_PseudoRapidity;
 		vector<string>	hv_bjet_0_p4_PseudoRapidity_names;
 	/// ---- End of booking functions and declarations for TLorentzVector bjet_0_p4 ---- ///
@@ -448,6 +495,7 @@
 	TH1F	*h_bjet_0_q_EXCEPT;
 	TH1F	*h_bjet_0_q_PRE;
 	TH1F	*h_bjet_0_q_BJET;
+	TH1F	*h_bjet_0_q_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_q;
 		vector<string>	hv_bjet_0_q_names;
 
@@ -458,6 +506,7 @@
 	TH1F	*h_bjet_0_type_EXCEPT;
 	TH1F	*h_bjet_0_type_PRE;
 	TH1F	*h_bjet_0_type_BJET;
+	TH1F	*h_bjet_0_type_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_type;
 		vector<string>	hv_bjet_0_type_names;
 
@@ -468,6 +517,7 @@
 	TH1F	*h_bjet_0_width_EXCEPT;
 	TH1F	*h_bjet_0_width_PRE;
 	TH1F	*h_bjet_0_width_BJET;
+	TH1F	*h_bjet_0_width_HIGH_E;
 	vector<TH1F*>	hv_bjet_0_width;
 		vector<string>	hv_bjet_0_width_names;
 
@@ -478,6 +528,7 @@
 	TH1F	*h_bjet_1_EXCEPT;
 	TH1F	*h_bjet_1_PRE;
 	TH1F	*h_bjet_1_BJET;
+	TH1F	*h_bjet_1_HIGH_E;
 	vector<TH1F*>	hv_bjet_1;
 		vector<string>	hv_bjet_1_names;
 
@@ -488,6 +539,7 @@
 	TH1F	*h_bjet_1_NOMINAL_central_jets_effSF_JVT_EXCEPT;
 	TH1F	*h_bjet_1_NOMINAL_central_jets_effSF_JVT_PRE;
 	TH1F	*h_bjet_1_NOMINAL_central_jets_effSF_JVT_BJET;
+	TH1F	*h_bjet_1_NOMINAL_central_jets_effSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_NOMINAL_central_jets_effSF_JVT;
 		vector<string>	hv_bjet_1_NOMINAL_central_jets_effSF_JVT_names;
 
@@ -498,6 +550,7 @@
 	TH1F	*h_bjet_1_NOMINAL_central_jets_ineffSF_JVT_EXCEPT;
 	TH1F	*h_bjet_1_NOMINAL_central_jets_ineffSF_JVT_PRE;
 	TH1F	*h_bjet_1_NOMINAL_central_jets_ineffSF_JVT_BJET;
+	TH1F	*h_bjet_1_NOMINAL_central_jets_ineffSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_NOMINAL_central_jets_ineffSF_JVT;
 		vector<string>	hv_bjet_1_NOMINAL_central_jets_ineffSF_JVT_names;
 
@@ -508,6 +561,7 @@
 	TH1F	*h_bjet_1_NOMINAL_effSF_MV2c10_EXCEPT;
 	TH1F	*h_bjet_1_NOMINAL_effSF_MV2c10_PRE;
 	TH1F	*h_bjet_1_NOMINAL_effSF_MV2c10_BJET;
+	TH1F	*h_bjet_1_NOMINAL_effSF_MV2c10_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_NOMINAL_effSF_MV2c10;
 		vector<string>	hv_bjet_1_NOMINAL_effSF_MV2c10_names;
 
@@ -518,6 +572,7 @@
 	TH1F	*h_bjet_1_NOMINAL_forward_jets_effSF_JVT_EXCEPT;
 	TH1F	*h_bjet_1_NOMINAL_forward_jets_effSF_JVT_PRE;
 	TH1F	*h_bjet_1_NOMINAL_forward_jets_effSF_JVT_BJET;
+	TH1F	*h_bjet_1_NOMINAL_forward_jets_effSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_NOMINAL_forward_jets_effSF_JVT;
 		vector<string>	hv_bjet_1_NOMINAL_forward_jets_effSF_JVT_names;
 
@@ -528,6 +583,7 @@
 	TH1F	*h_bjet_1_NOMINAL_forward_jets_ineffSF_JVT_EXCEPT;
 	TH1F	*h_bjet_1_NOMINAL_forward_jets_ineffSF_JVT_PRE;
 	TH1F	*h_bjet_1_NOMINAL_forward_jets_ineffSF_JVT_BJET;
+	TH1F	*h_bjet_1_NOMINAL_forward_jets_ineffSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_NOMINAL_forward_jets_ineffSF_JVT;
 		vector<string>	hv_bjet_1_NOMINAL_forward_jets_ineffSF_JVT_names;
 
@@ -538,6 +594,7 @@
 	TH1F	*h_bjet_1_NOMINAL_ineffSF_MV2c10_EXCEPT;
 	TH1F	*h_bjet_1_NOMINAL_ineffSF_MV2c10_PRE;
 	TH1F	*h_bjet_1_NOMINAL_ineffSF_MV2c10_BJET;
+	TH1F	*h_bjet_1_NOMINAL_ineffSF_MV2c10_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_NOMINAL_ineffSF_MV2c10;
 		vector<string>	hv_bjet_1_NOMINAL_ineffSF_MV2c10_names;
 
@@ -548,6 +605,7 @@
 	TH1F	*h_bjet_1_b_tag_quantile_EXCEPT;
 	TH1F	*h_bjet_1_b_tag_quantile_PRE;
 	TH1F	*h_bjet_1_b_tag_quantile_BJET;
+	TH1F	*h_bjet_1_b_tag_quantile_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_b_tag_quantile;
 		vector<string>	hv_bjet_1_b_tag_quantile_names;
 
@@ -558,6 +616,7 @@
 	TH1F	*h_bjet_1_b_tag_score_EXCEPT;
 	TH1F	*h_bjet_1_b_tag_score_PRE;
 	TH1F	*h_bjet_1_b_tag_score_BJET;
+	TH1F	*h_bjet_1_b_tag_score_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_b_tag_score;
 		vector<string>	hv_bjet_1_b_tag_score_names;
 
@@ -568,6 +627,7 @@
 	TH1F	*h_bjet_1_b_tagged_EXCEPT;
 	TH1F	*h_bjet_1_b_tagged_PRE;
 	TH1F	*h_bjet_1_b_tagged_BJET;
+	TH1F	*h_bjet_1_b_tagged_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_b_tagged;
 		vector<string>	hv_bjet_1_b_tagged_names;
 
@@ -578,6 +638,7 @@
 	TH1F	*h_bjet_1_fjvt_EXCEPT;
 	TH1F	*h_bjet_1_fjvt_PRE;
 	TH1F	*h_bjet_1_fjvt_BJET;
+	TH1F	*h_bjet_1_fjvt_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_fjvt;
 		vector<string>	hv_bjet_1_fjvt_names;
 
@@ -588,6 +649,7 @@
 	TH1F	*h_bjet_1_flavorlabel_EXCEPT;
 	TH1F	*h_bjet_1_flavorlabel_PRE;
 	TH1F	*h_bjet_1_flavorlabel_BJET;
+	TH1F	*h_bjet_1_flavorlabel_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_flavorlabel;
 		vector<string>	hv_bjet_1_flavorlabel_names;
 
@@ -598,6 +660,7 @@
 	TH1F	*h_bjet_1_flavorlabel_cone_EXCEPT;
 	TH1F	*h_bjet_1_flavorlabel_cone_PRE;
 	TH1F	*h_bjet_1_flavorlabel_cone_BJET;
+	TH1F	*h_bjet_1_flavorlabel_cone_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_flavorlabel_cone;
 		vector<string>	hv_bjet_1_flavorlabel_cone_names;
 
@@ -608,6 +671,7 @@
 	TH1F	*h_bjet_1_flavorlabel_part_EXCEPT;
 	TH1F	*h_bjet_1_flavorlabel_part_PRE;
 	TH1F	*h_bjet_1_flavorlabel_part_BJET;
+	TH1F	*h_bjet_1_flavorlabel_part_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_flavorlabel_part;
 		vector<string>	hv_bjet_1_flavorlabel_part_names;
 
@@ -618,6 +682,7 @@
 	TH1F	*h_bjet_1_is_Jvt_HS_EXCEPT;
 	TH1F	*h_bjet_1_is_Jvt_HS_PRE;
 	TH1F	*h_bjet_1_is_Jvt_HS_BJET;
+	TH1F	*h_bjet_1_is_Jvt_HS_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_is_Jvt_HS;
 		vector<string>	hv_bjet_1_is_Jvt_HS_names;
 
@@ -628,6 +693,7 @@
 	TH1F	*h_bjet_1_jvt_EXCEPT;
 	TH1F	*h_bjet_1_jvt_PRE;
 	TH1F	*h_bjet_1_jvt_BJET;
+	TH1F	*h_bjet_1_jvt_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_jvt;
 		vector<string>	hv_bjet_1_jvt_names;
 
@@ -638,6 +704,7 @@
 	TH1F	*h_bjet_1_origin_EXCEPT;
 	TH1F	*h_bjet_1_origin_PRE;
 	TH1F	*h_bjet_1_origin_BJET;
+	TH1F	*h_bjet_1_origin_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_origin;
 		vector<string>	hv_bjet_1_origin_names;
 
@@ -649,6 +716,7 @@
 		TH1F	*h_bjet_1_p4_X_EXCEPT;
 		TH1F	*h_bjet_1_p4_X_PRE;
 		TH1F	*h_bjet_1_p4_X_BJET;
+		TH1F	*h_bjet_1_p4_X_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_X;
 		vector<string>	hv_bjet_1_p4_X_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Y
@@ -658,6 +726,7 @@
 		TH1F	*h_bjet_1_p4_Y_EXCEPT;
 		TH1F	*h_bjet_1_p4_Y_PRE;
 		TH1F	*h_bjet_1_p4_Y_BJET;
+		TH1F	*h_bjet_1_p4_Y_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Y;
 		vector<string>	hv_bjet_1_p4_Y_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Z
@@ -667,6 +736,7 @@
 		TH1F	*h_bjet_1_p4_Z_EXCEPT;
 		TH1F	*h_bjet_1_p4_Z_PRE;
 		TH1F	*h_bjet_1_p4_Z_BJET;
+		TH1F	*h_bjet_1_p4_Z_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Z;
 		vector<string>	hv_bjet_1_p4_Z_names;
 		//Histogram booking functions and declarations for bjet_1_p4_T
@@ -676,6 +746,7 @@
 		TH1F	*h_bjet_1_p4_T_EXCEPT;
 		TH1F	*h_bjet_1_p4_T_PRE;
 		TH1F	*h_bjet_1_p4_T_BJET;
+		TH1F	*h_bjet_1_p4_T_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_T;
 		vector<string>	hv_bjet_1_p4_T_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Px
@@ -685,6 +756,7 @@
 		TH1F	*h_bjet_1_p4_Px_EXCEPT;
 		TH1F	*h_bjet_1_p4_Px_PRE;
 		TH1F	*h_bjet_1_p4_Px_BJET;
+		TH1F	*h_bjet_1_p4_Px_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Px;
 		vector<string>	hv_bjet_1_p4_Px_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Py
@@ -694,6 +766,7 @@
 		TH1F	*h_bjet_1_p4_Py_EXCEPT;
 		TH1F	*h_bjet_1_p4_Py_PRE;
 		TH1F	*h_bjet_1_p4_Py_BJET;
+		TH1F	*h_bjet_1_p4_Py_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Py;
 		vector<string>	hv_bjet_1_p4_Py_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Pz
@@ -703,6 +776,7 @@
 		TH1F	*h_bjet_1_p4_Pz_EXCEPT;
 		TH1F	*h_bjet_1_p4_Pz_PRE;
 		TH1F	*h_bjet_1_p4_Pz_BJET;
+		TH1F	*h_bjet_1_p4_Pz_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Pz;
 		vector<string>	hv_bjet_1_p4_Pz_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Energy
@@ -712,6 +786,7 @@
 		TH1F	*h_bjet_1_p4_Energy_EXCEPT;
 		TH1F	*h_bjet_1_p4_Energy_PRE;
 		TH1F	*h_bjet_1_p4_Energy_BJET;
+		TH1F	*h_bjet_1_p4_Energy_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Energy;
 		vector<string>	hv_bjet_1_p4_Energy_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Theta
@@ -721,6 +796,7 @@
 		TH1F	*h_bjet_1_p4_Theta_EXCEPT;
 		TH1F	*h_bjet_1_p4_Theta_PRE;
 		TH1F	*h_bjet_1_p4_Theta_BJET;
+		TH1F	*h_bjet_1_p4_Theta_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Theta;
 		vector<string>	hv_bjet_1_p4_Theta_names;
 		//Histogram booking functions and declarations for bjet_1_p4_CosTheta
@@ -730,6 +806,7 @@
 		TH1F	*h_bjet_1_p4_CosTheta_EXCEPT;
 		TH1F	*h_bjet_1_p4_CosTheta_PRE;
 		TH1F	*h_bjet_1_p4_CosTheta_BJET;
+		TH1F	*h_bjet_1_p4_CosTheta_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_CosTheta;
 		vector<string>	hv_bjet_1_p4_CosTheta_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Phi
@@ -739,6 +816,7 @@
 		TH1F	*h_bjet_1_p4_Phi_EXCEPT;
 		TH1F	*h_bjet_1_p4_Phi_PRE;
 		TH1F	*h_bjet_1_p4_Phi_BJET;
+		TH1F	*h_bjet_1_p4_Phi_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Phi;
 		vector<string>	hv_bjet_1_p4_Phi_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Rho
@@ -748,6 +826,7 @@
 		TH1F	*h_bjet_1_p4_Rho_EXCEPT;
 		TH1F	*h_bjet_1_p4_Rho_PRE;
 		TH1F	*h_bjet_1_p4_Rho_BJET;
+		TH1F	*h_bjet_1_p4_Rho_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Rho;
 		vector<string>	hv_bjet_1_p4_Rho_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Perp2
@@ -757,6 +836,7 @@
 		TH1F	*h_bjet_1_p4_Perp2_EXCEPT;
 		TH1F	*h_bjet_1_p4_Perp2_PRE;
 		TH1F	*h_bjet_1_p4_Perp2_BJET;
+		TH1F	*h_bjet_1_p4_Perp2_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Perp2;
 		vector<string>	hv_bjet_1_p4_Perp2_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Pt
@@ -766,6 +846,7 @@
 		TH1F	*h_bjet_1_p4_Pt_EXCEPT;
 		TH1F	*h_bjet_1_p4_Pt_PRE;
 		TH1F	*h_bjet_1_p4_Pt_BJET;
+		TH1F	*h_bjet_1_p4_Pt_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Pt;
 		vector<string>	hv_bjet_1_p4_Pt_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Perp
@@ -775,6 +856,7 @@
 		TH1F	*h_bjet_1_p4_Perp_EXCEPT;
 		TH1F	*h_bjet_1_p4_Perp_PRE;
 		TH1F	*h_bjet_1_p4_Perp_BJET;
+		TH1F	*h_bjet_1_p4_Perp_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Perp;
 		vector<string>	hv_bjet_1_p4_Perp_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Et2
@@ -784,6 +866,7 @@
 		TH1F	*h_bjet_1_p4_Et2_EXCEPT;
 		TH1F	*h_bjet_1_p4_Et2_PRE;
 		TH1F	*h_bjet_1_p4_Et2_BJET;
+		TH1F	*h_bjet_1_p4_Et2_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Et2;
 		vector<string>	hv_bjet_1_p4_Et2_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Et
@@ -793,6 +876,7 @@
 		TH1F	*h_bjet_1_p4_Et_EXCEPT;
 		TH1F	*h_bjet_1_p4_Et_PRE;
 		TH1F	*h_bjet_1_p4_Et_BJET;
+		TH1F	*h_bjet_1_p4_Et_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Et;
 		vector<string>	hv_bjet_1_p4_Et_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Mag2
@@ -802,6 +886,7 @@
 		TH1F	*h_bjet_1_p4_Mag2_EXCEPT;
 		TH1F	*h_bjet_1_p4_Mag2_PRE;
 		TH1F	*h_bjet_1_p4_Mag2_BJET;
+		TH1F	*h_bjet_1_p4_Mag2_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Mag2;
 		vector<string>	hv_bjet_1_p4_Mag2_names;
 		//Histogram booking functions and declarations for bjet_1_p4_M2
@@ -811,6 +896,7 @@
 		TH1F	*h_bjet_1_p4_M2_EXCEPT;
 		TH1F	*h_bjet_1_p4_M2_PRE;
 		TH1F	*h_bjet_1_p4_M2_BJET;
+		TH1F	*h_bjet_1_p4_M2_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_M2;
 		vector<string>	hv_bjet_1_p4_M2_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Mag
@@ -820,6 +906,7 @@
 		TH1F	*h_bjet_1_p4_Mag_EXCEPT;
 		TH1F	*h_bjet_1_p4_Mag_PRE;
 		TH1F	*h_bjet_1_p4_Mag_BJET;
+		TH1F	*h_bjet_1_p4_Mag_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Mag;
 		vector<string>	hv_bjet_1_p4_Mag_names;
 		//Histogram booking functions and declarations for bjet_1_p4_M
@@ -829,6 +916,7 @@
 		TH1F	*h_bjet_1_p4_M_EXCEPT;
 		TH1F	*h_bjet_1_p4_M_PRE;
 		TH1F	*h_bjet_1_p4_M_BJET;
+		TH1F	*h_bjet_1_p4_M_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_M;
 		vector<string>	hv_bjet_1_p4_M_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Mt2
@@ -838,6 +926,7 @@
 		TH1F	*h_bjet_1_p4_Mt2_EXCEPT;
 		TH1F	*h_bjet_1_p4_Mt2_PRE;
 		TH1F	*h_bjet_1_p4_Mt2_BJET;
+		TH1F	*h_bjet_1_p4_Mt2_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Mt2;
 		vector<string>	hv_bjet_1_p4_Mt2_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Mt
@@ -847,6 +936,7 @@
 		TH1F	*h_bjet_1_p4_Mt_EXCEPT;
 		TH1F	*h_bjet_1_p4_Mt_PRE;
 		TH1F	*h_bjet_1_p4_Mt_BJET;
+		TH1F	*h_bjet_1_p4_Mt_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Mt;
 		vector<string>	hv_bjet_1_p4_Mt_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Beta
@@ -856,6 +946,7 @@
 		TH1F	*h_bjet_1_p4_Beta_EXCEPT;
 		TH1F	*h_bjet_1_p4_Beta_PRE;
 		TH1F	*h_bjet_1_p4_Beta_BJET;
+		TH1F	*h_bjet_1_p4_Beta_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Beta;
 		vector<string>	hv_bjet_1_p4_Beta_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Gamma
@@ -865,6 +956,7 @@
 		TH1F	*h_bjet_1_p4_Gamma_EXCEPT;
 		TH1F	*h_bjet_1_p4_Gamma_PRE;
 		TH1F	*h_bjet_1_p4_Gamma_BJET;
+		TH1F	*h_bjet_1_p4_Gamma_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Gamma;
 		vector<string>	hv_bjet_1_p4_Gamma_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Plus
@@ -874,6 +966,7 @@
 		TH1F	*h_bjet_1_p4_Plus_EXCEPT;
 		TH1F	*h_bjet_1_p4_Plus_PRE;
 		TH1F	*h_bjet_1_p4_Plus_BJET;
+		TH1F	*h_bjet_1_p4_Plus_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Plus;
 		vector<string>	hv_bjet_1_p4_Plus_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Minus
@@ -883,6 +976,7 @@
 		TH1F	*h_bjet_1_p4_Minus_EXCEPT;
 		TH1F	*h_bjet_1_p4_Minus_PRE;
 		TH1F	*h_bjet_1_p4_Minus_BJET;
+		TH1F	*h_bjet_1_p4_Minus_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Minus;
 		vector<string>	hv_bjet_1_p4_Minus_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Rapidity
@@ -892,6 +986,7 @@
 		TH1F	*h_bjet_1_p4_Rapidity_EXCEPT;
 		TH1F	*h_bjet_1_p4_Rapidity_PRE;
 		TH1F	*h_bjet_1_p4_Rapidity_BJET;
+		TH1F	*h_bjet_1_p4_Rapidity_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Rapidity;
 		vector<string>	hv_bjet_1_p4_Rapidity_names;
 		//Histogram booking functions and declarations for bjet_1_p4_Eta
@@ -901,6 +996,7 @@
 		TH1F	*h_bjet_1_p4_Eta_EXCEPT;
 		TH1F	*h_bjet_1_p4_Eta_PRE;
 		TH1F	*h_bjet_1_p4_Eta_BJET;
+		TH1F	*h_bjet_1_p4_Eta_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_Eta;
 		vector<string>	hv_bjet_1_p4_Eta_names;
 		//Histogram booking functions and declarations for bjet_1_p4_PseudoRapidity
@@ -910,6 +1006,7 @@
 		TH1F	*h_bjet_1_p4_PseudoRapidity_EXCEPT;
 		TH1F	*h_bjet_1_p4_PseudoRapidity_PRE;
 		TH1F	*h_bjet_1_p4_PseudoRapidity_BJET;
+		TH1F	*h_bjet_1_p4_PseudoRapidity_HIGH_E;
 		vector<TH1F*>	hv_bjet_1_p4_PseudoRapidity;
 		vector<string>	hv_bjet_1_p4_PseudoRapidity_names;
 	/// ---- End of booking functions and declarations for TLorentzVector bjet_1_p4 ---- ///
@@ -921,6 +1018,7 @@
 	TH1F	*h_bjet_1_q_EXCEPT;
 	TH1F	*h_bjet_1_q_PRE;
 	TH1F	*h_bjet_1_q_BJET;
+	TH1F	*h_bjet_1_q_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_q;
 		vector<string>	hv_bjet_1_q_names;
 
@@ -931,6 +1029,7 @@
 	TH1F	*h_bjet_1_type_EXCEPT;
 	TH1F	*h_bjet_1_type_PRE;
 	TH1F	*h_bjet_1_type_BJET;
+	TH1F	*h_bjet_1_type_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_type;
 		vector<string>	hv_bjet_1_type_names;
 
@@ -941,6 +1040,7 @@
 	TH1F	*h_bjet_1_width_EXCEPT;
 	TH1F	*h_bjet_1_width_PRE;
 	TH1F	*h_bjet_1_width_BJET;
+	TH1F	*h_bjet_1_width_HIGH_E;
 	vector<TH1F*>	hv_bjet_1_width;
 		vector<string>	hv_bjet_1_width_names;
 
@@ -951,6 +1051,7 @@
 	TH1F	*h_ljet_0_EXCEPT;
 	TH1F	*h_ljet_0_PRE;
 	TH1F	*h_ljet_0_BJET;
+	TH1F	*h_ljet_0_HIGH_E;
 	vector<TH1F*>	hv_ljet_0;
 		vector<string>	hv_ljet_0_names;
 
@@ -961,6 +1062,7 @@
 	TH1F	*h_ljet_0_NOMINAL_central_jets_effSF_JVT_EXCEPT;
 	TH1F	*h_ljet_0_NOMINAL_central_jets_effSF_JVT_PRE;
 	TH1F	*h_ljet_0_NOMINAL_central_jets_effSF_JVT_BJET;
+	TH1F	*h_ljet_0_NOMINAL_central_jets_effSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_NOMINAL_central_jets_effSF_JVT;
 		vector<string>	hv_ljet_0_NOMINAL_central_jets_effSF_JVT_names;
 
@@ -971,6 +1073,7 @@
 	TH1F	*h_ljet_0_NOMINAL_central_jets_ineffSF_JVT_EXCEPT;
 	TH1F	*h_ljet_0_NOMINAL_central_jets_ineffSF_JVT_PRE;
 	TH1F	*h_ljet_0_NOMINAL_central_jets_ineffSF_JVT_BJET;
+	TH1F	*h_ljet_0_NOMINAL_central_jets_ineffSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_NOMINAL_central_jets_ineffSF_JVT;
 		vector<string>	hv_ljet_0_NOMINAL_central_jets_ineffSF_JVT_names;
 
@@ -981,6 +1084,7 @@
 	TH1F	*h_ljet_0_NOMINAL_effSF_MV2c10_EXCEPT;
 	TH1F	*h_ljet_0_NOMINAL_effSF_MV2c10_PRE;
 	TH1F	*h_ljet_0_NOMINAL_effSF_MV2c10_BJET;
+	TH1F	*h_ljet_0_NOMINAL_effSF_MV2c10_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_NOMINAL_effSF_MV2c10;
 		vector<string>	hv_ljet_0_NOMINAL_effSF_MV2c10_names;
 
@@ -991,6 +1095,7 @@
 	TH1F	*h_ljet_0_NOMINAL_forward_jets_effSF_JVT_EXCEPT;
 	TH1F	*h_ljet_0_NOMINAL_forward_jets_effSF_JVT_PRE;
 	TH1F	*h_ljet_0_NOMINAL_forward_jets_effSF_JVT_BJET;
+	TH1F	*h_ljet_0_NOMINAL_forward_jets_effSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_NOMINAL_forward_jets_effSF_JVT;
 		vector<string>	hv_ljet_0_NOMINAL_forward_jets_effSF_JVT_names;
 
@@ -1001,6 +1106,7 @@
 	TH1F	*h_ljet_0_NOMINAL_forward_jets_ineffSF_JVT_EXCEPT;
 	TH1F	*h_ljet_0_NOMINAL_forward_jets_ineffSF_JVT_PRE;
 	TH1F	*h_ljet_0_NOMINAL_forward_jets_ineffSF_JVT_BJET;
+	TH1F	*h_ljet_0_NOMINAL_forward_jets_ineffSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_NOMINAL_forward_jets_ineffSF_JVT;
 		vector<string>	hv_ljet_0_NOMINAL_forward_jets_ineffSF_JVT_names;
 
@@ -1011,6 +1117,7 @@
 	TH1F	*h_ljet_0_NOMINAL_ineffSF_MV2c10_EXCEPT;
 	TH1F	*h_ljet_0_NOMINAL_ineffSF_MV2c10_PRE;
 	TH1F	*h_ljet_0_NOMINAL_ineffSF_MV2c10_BJET;
+	TH1F	*h_ljet_0_NOMINAL_ineffSF_MV2c10_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_NOMINAL_ineffSF_MV2c10;
 		vector<string>	hv_ljet_0_NOMINAL_ineffSF_MV2c10_names;
 
@@ -1021,6 +1128,7 @@
 	TH1F	*h_ljet_0_b_tag_quantile_EXCEPT;
 	TH1F	*h_ljet_0_b_tag_quantile_PRE;
 	TH1F	*h_ljet_0_b_tag_quantile_BJET;
+	TH1F	*h_ljet_0_b_tag_quantile_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_b_tag_quantile;
 		vector<string>	hv_ljet_0_b_tag_quantile_names;
 
@@ -1031,6 +1139,7 @@
 	TH1F	*h_ljet_0_b_tag_score_EXCEPT;
 	TH1F	*h_ljet_0_b_tag_score_PRE;
 	TH1F	*h_ljet_0_b_tag_score_BJET;
+	TH1F	*h_ljet_0_b_tag_score_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_b_tag_score;
 		vector<string>	hv_ljet_0_b_tag_score_names;
 
@@ -1041,6 +1150,7 @@
 	TH1F	*h_ljet_0_b_tagged_EXCEPT;
 	TH1F	*h_ljet_0_b_tagged_PRE;
 	TH1F	*h_ljet_0_b_tagged_BJET;
+	TH1F	*h_ljet_0_b_tagged_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_b_tagged;
 		vector<string>	hv_ljet_0_b_tagged_names;
 
@@ -1051,6 +1161,7 @@
 	TH1F	*h_ljet_0_fjvt_EXCEPT;
 	TH1F	*h_ljet_0_fjvt_PRE;
 	TH1F	*h_ljet_0_fjvt_BJET;
+	TH1F	*h_ljet_0_fjvt_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_fjvt;
 		vector<string>	hv_ljet_0_fjvt_names;
 
@@ -1061,6 +1172,7 @@
 	TH1F	*h_ljet_0_flavorlabel_EXCEPT;
 	TH1F	*h_ljet_0_flavorlabel_PRE;
 	TH1F	*h_ljet_0_flavorlabel_BJET;
+	TH1F	*h_ljet_0_flavorlabel_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_flavorlabel;
 		vector<string>	hv_ljet_0_flavorlabel_names;
 
@@ -1071,6 +1183,7 @@
 	TH1F	*h_ljet_0_flavorlabel_cone_EXCEPT;
 	TH1F	*h_ljet_0_flavorlabel_cone_PRE;
 	TH1F	*h_ljet_0_flavorlabel_cone_BJET;
+	TH1F	*h_ljet_0_flavorlabel_cone_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_flavorlabel_cone;
 		vector<string>	hv_ljet_0_flavorlabel_cone_names;
 
@@ -1081,6 +1194,7 @@
 	TH1F	*h_ljet_0_flavorlabel_part_EXCEPT;
 	TH1F	*h_ljet_0_flavorlabel_part_PRE;
 	TH1F	*h_ljet_0_flavorlabel_part_BJET;
+	TH1F	*h_ljet_0_flavorlabel_part_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_flavorlabel_part;
 		vector<string>	hv_ljet_0_flavorlabel_part_names;
 
@@ -1091,6 +1205,7 @@
 	TH1F	*h_ljet_0_is_Jvt_HS_EXCEPT;
 	TH1F	*h_ljet_0_is_Jvt_HS_PRE;
 	TH1F	*h_ljet_0_is_Jvt_HS_BJET;
+	TH1F	*h_ljet_0_is_Jvt_HS_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_is_Jvt_HS;
 		vector<string>	hv_ljet_0_is_Jvt_HS_names;
 
@@ -1101,6 +1216,7 @@
 	TH1F	*h_ljet_0_jvt_EXCEPT;
 	TH1F	*h_ljet_0_jvt_PRE;
 	TH1F	*h_ljet_0_jvt_BJET;
+	TH1F	*h_ljet_0_jvt_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_jvt;
 		vector<string>	hv_ljet_0_jvt_names;
 
@@ -1111,6 +1227,7 @@
 	TH1F	*h_ljet_0_origin_EXCEPT;
 	TH1F	*h_ljet_0_origin_PRE;
 	TH1F	*h_ljet_0_origin_BJET;
+	TH1F	*h_ljet_0_origin_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_origin;
 		vector<string>	hv_ljet_0_origin_names;
 
@@ -1122,6 +1239,7 @@
 		TH1F	*h_ljet_0_p4_X_EXCEPT;
 		TH1F	*h_ljet_0_p4_X_PRE;
 		TH1F	*h_ljet_0_p4_X_BJET;
+		TH1F	*h_ljet_0_p4_X_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_X;
 		vector<string>	hv_ljet_0_p4_X_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Y
@@ -1131,6 +1249,7 @@
 		TH1F	*h_ljet_0_p4_Y_EXCEPT;
 		TH1F	*h_ljet_0_p4_Y_PRE;
 		TH1F	*h_ljet_0_p4_Y_BJET;
+		TH1F	*h_ljet_0_p4_Y_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Y;
 		vector<string>	hv_ljet_0_p4_Y_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Z
@@ -1140,6 +1259,7 @@
 		TH1F	*h_ljet_0_p4_Z_EXCEPT;
 		TH1F	*h_ljet_0_p4_Z_PRE;
 		TH1F	*h_ljet_0_p4_Z_BJET;
+		TH1F	*h_ljet_0_p4_Z_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Z;
 		vector<string>	hv_ljet_0_p4_Z_names;
 		//Histogram booking functions and declarations for ljet_0_p4_T
@@ -1149,6 +1269,7 @@
 		TH1F	*h_ljet_0_p4_T_EXCEPT;
 		TH1F	*h_ljet_0_p4_T_PRE;
 		TH1F	*h_ljet_0_p4_T_BJET;
+		TH1F	*h_ljet_0_p4_T_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_T;
 		vector<string>	hv_ljet_0_p4_T_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Px
@@ -1158,6 +1279,7 @@
 		TH1F	*h_ljet_0_p4_Px_EXCEPT;
 		TH1F	*h_ljet_0_p4_Px_PRE;
 		TH1F	*h_ljet_0_p4_Px_BJET;
+		TH1F	*h_ljet_0_p4_Px_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Px;
 		vector<string>	hv_ljet_0_p4_Px_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Py
@@ -1167,6 +1289,7 @@
 		TH1F	*h_ljet_0_p4_Py_EXCEPT;
 		TH1F	*h_ljet_0_p4_Py_PRE;
 		TH1F	*h_ljet_0_p4_Py_BJET;
+		TH1F	*h_ljet_0_p4_Py_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Py;
 		vector<string>	hv_ljet_0_p4_Py_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Pz
@@ -1176,6 +1299,7 @@
 		TH1F	*h_ljet_0_p4_Pz_EXCEPT;
 		TH1F	*h_ljet_0_p4_Pz_PRE;
 		TH1F	*h_ljet_0_p4_Pz_BJET;
+		TH1F	*h_ljet_0_p4_Pz_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Pz;
 		vector<string>	hv_ljet_0_p4_Pz_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Energy
@@ -1185,6 +1309,7 @@
 		TH1F	*h_ljet_0_p4_Energy_EXCEPT;
 		TH1F	*h_ljet_0_p4_Energy_PRE;
 		TH1F	*h_ljet_0_p4_Energy_BJET;
+		TH1F	*h_ljet_0_p4_Energy_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Energy;
 		vector<string>	hv_ljet_0_p4_Energy_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Theta
@@ -1194,6 +1319,7 @@
 		TH1F	*h_ljet_0_p4_Theta_EXCEPT;
 		TH1F	*h_ljet_0_p4_Theta_PRE;
 		TH1F	*h_ljet_0_p4_Theta_BJET;
+		TH1F	*h_ljet_0_p4_Theta_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Theta;
 		vector<string>	hv_ljet_0_p4_Theta_names;
 		//Histogram booking functions and declarations for ljet_0_p4_CosTheta
@@ -1203,6 +1329,7 @@
 		TH1F	*h_ljet_0_p4_CosTheta_EXCEPT;
 		TH1F	*h_ljet_0_p4_CosTheta_PRE;
 		TH1F	*h_ljet_0_p4_CosTheta_BJET;
+		TH1F	*h_ljet_0_p4_CosTheta_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_CosTheta;
 		vector<string>	hv_ljet_0_p4_CosTheta_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Phi
@@ -1212,6 +1339,7 @@
 		TH1F	*h_ljet_0_p4_Phi_EXCEPT;
 		TH1F	*h_ljet_0_p4_Phi_PRE;
 		TH1F	*h_ljet_0_p4_Phi_BJET;
+		TH1F	*h_ljet_0_p4_Phi_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Phi;
 		vector<string>	hv_ljet_0_p4_Phi_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Rho
@@ -1221,6 +1349,7 @@
 		TH1F	*h_ljet_0_p4_Rho_EXCEPT;
 		TH1F	*h_ljet_0_p4_Rho_PRE;
 		TH1F	*h_ljet_0_p4_Rho_BJET;
+		TH1F	*h_ljet_0_p4_Rho_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Rho;
 		vector<string>	hv_ljet_0_p4_Rho_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Perp2
@@ -1230,6 +1359,7 @@
 		TH1F	*h_ljet_0_p4_Perp2_EXCEPT;
 		TH1F	*h_ljet_0_p4_Perp2_PRE;
 		TH1F	*h_ljet_0_p4_Perp2_BJET;
+		TH1F	*h_ljet_0_p4_Perp2_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Perp2;
 		vector<string>	hv_ljet_0_p4_Perp2_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Pt
@@ -1239,6 +1369,7 @@
 		TH1F	*h_ljet_0_p4_Pt_EXCEPT;
 		TH1F	*h_ljet_0_p4_Pt_PRE;
 		TH1F	*h_ljet_0_p4_Pt_BJET;
+		TH1F	*h_ljet_0_p4_Pt_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Pt;
 		vector<string>	hv_ljet_0_p4_Pt_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Perp
@@ -1248,6 +1379,7 @@
 		TH1F	*h_ljet_0_p4_Perp_EXCEPT;
 		TH1F	*h_ljet_0_p4_Perp_PRE;
 		TH1F	*h_ljet_0_p4_Perp_BJET;
+		TH1F	*h_ljet_0_p4_Perp_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Perp;
 		vector<string>	hv_ljet_0_p4_Perp_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Et2
@@ -1257,6 +1389,7 @@
 		TH1F	*h_ljet_0_p4_Et2_EXCEPT;
 		TH1F	*h_ljet_0_p4_Et2_PRE;
 		TH1F	*h_ljet_0_p4_Et2_BJET;
+		TH1F	*h_ljet_0_p4_Et2_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Et2;
 		vector<string>	hv_ljet_0_p4_Et2_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Et
@@ -1266,6 +1399,7 @@
 		TH1F	*h_ljet_0_p4_Et_EXCEPT;
 		TH1F	*h_ljet_0_p4_Et_PRE;
 		TH1F	*h_ljet_0_p4_Et_BJET;
+		TH1F	*h_ljet_0_p4_Et_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Et;
 		vector<string>	hv_ljet_0_p4_Et_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Mag2
@@ -1275,6 +1409,7 @@
 		TH1F	*h_ljet_0_p4_Mag2_EXCEPT;
 		TH1F	*h_ljet_0_p4_Mag2_PRE;
 		TH1F	*h_ljet_0_p4_Mag2_BJET;
+		TH1F	*h_ljet_0_p4_Mag2_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Mag2;
 		vector<string>	hv_ljet_0_p4_Mag2_names;
 		//Histogram booking functions and declarations for ljet_0_p4_M2
@@ -1284,6 +1419,7 @@
 		TH1F	*h_ljet_0_p4_M2_EXCEPT;
 		TH1F	*h_ljet_0_p4_M2_PRE;
 		TH1F	*h_ljet_0_p4_M2_BJET;
+		TH1F	*h_ljet_0_p4_M2_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_M2;
 		vector<string>	hv_ljet_0_p4_M2_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Mag
@@ -1293,6 +1429,7 @@
 		TH1F	*h_ljet_0_p4_Mag_EXCEPT;
 		TH1F	*h_ljet_0_p4_Mag_PRE;
 		TH1F	*h_ljet_0_p4_Mag_BJET;
+		TH1F	*h_ljet_0_p4_Mag_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Mag;
 		vector<string>	hv_ljet_0_p4_Mag_names;
 		//Histogram booking functions and declarations for ljet_0_p4_M
@@ -1302,6 +1439,7 @@
 		TH1F	*h_ljet_0_p4_M_EXCEPT;
 		TH1F	*h_ljet_0_p4_M_PRE;
 		TH1F	*h_ljet_0_p4_M_BJET;
+		TH1F	*h_ljet_0_p4_M_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_M;
 		vector<string>	hv_ljet_0_p4_M_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Mt2
@@ -1311,6 +1449,7 @@
 		TH1F	*h_ljet_0_p4_Mt2_EXCEPT;
 		TH1F	*h_ljet_0_p4_Mt2_PRE;
 		TH1F	*h_ljet_0_p4_Mt2_BJET;
+		TH1F	*h_ljet_0_p4_Mt2_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Mt2;
 		vector<string>	hv_ljet_0_p4_Mt2_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Mt
@@ -1320,6 +1459,7 @@
 		TH1F	*h_ljet_0_p4_Mt_EXCEPT;
 		TH1F	*h_ljet_0_p4_Mt_PRE;
 		TH1F	*h_ljet_0_p4_Mt_BJET;
+		TH1F	*h_ljet_0_p4_Mt_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Mt;
 		vector<string>	hv_ljet_0_p4_Mt_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Beta
@@ -1329,6 +1469,7 @@
 		TH1F	*h_ljet_0_p4_Beta_EXCEPT;
 		TH1F	*h_ljet_0_p4_Beta_PRE;
 		TH1F	*h_ljet_0_p4_Beta_BJET;
+		TH1F	*h_ljet_0_p4_Beta_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Beta;
 		vector<string>	hv_ljet_0_p4_Beta_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Gamma
@@ -1338,6 +1479,7 @@
 		TH1F	*h_ljet_0_p4_Gamma_EXCEPT;
 		TH1F	*h_ljet_0_p4_Gamma_PRE;
 		TH1F	*h_ljet_0_p4_Gamma_BJET;
+		TH1F	*h_ljet_0_p4_Gamma_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Gamma;
 		vector<string>	hv_ljet_0_p4_Gamma_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Plus
@@ -1347,6 +1489,7 @@
 		TH1F	*h_ljet_0_p4_Plus_EXCEPT;
 		TH1F	*h_ljet_0_p4_Plus_PRE;
 		TH1F	*h_ljet_0_p4_Plus_BJET;
+		TH1F	*h_ljet_0_p4_Plus_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Plus;
 		vector<string>	hv_ljet_0_p4_Plus_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Minus
@@ -1356,6 +1499,7 @@
 		TH1F	*h_ljet_0_p4_Minus_EXCEPT;
 		TH1F	*h_ljet_0_p4_Minus_PRE;
 		TH1F	*h_ljet_0_p4_Minus_BJET;
+		TH1F	*h_ljet_0_p4_Minus_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Minus;
 		vector<string>	hv_ljet_0_p4_Minus_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Rapidity
@@ -1365,6 +1509,7 @@
 		TH1F	*h_ljet_0_p4_Rapidity_EXCEPT;
 		TH1F	*h_ljet_0_p4_Rapidity_PRE;
 		TH1F	*h_ljet_0_p4_Rapidity_BJET;
+		TH1F	*h_ljet_0_p4_Rapidity_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Rapidity;
 		vector<string>	hv_ljet_0_p4_Rapidity_names;
 		//Histogram booking functions and declarations for ljet_0_p4_Eta
@@ -1374,6 +1519,7 @@
 		TH1F	*h_ljet_0_p4_Eta_EXCEPT;
 		TH1F	*h_ljet_0_p4_Eta_PRE;
 		TH1F	*h_ljet_0_p4_Eta_BJET;
+		TH1F	*h_ljet_0_p4_Eta_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_Eta;
 		vector<string>	hv_ljet_0_p4_Eta_names;
 		//Histogram booking functions and declarations for ljet_0_p4_PseudoRapidity
@@ -1383,6 +1529,7 @@
 		TH1F	*h_ljet_0_p4_PseudoRapidity_EXCEPT;
 		TH1F	*h_ljet_0_p4_PseudoRapidity_PRE;
 		TH1F	*h_ljet_0_p4_PseudoRapidity_BJET;
+		TH1F	*h_ljet_0_p4_PseudoRapidity_HIGH_E;
 		vector<TH1F*>	hv_ljet_0_p4_PseudoRapidity;
 		vector<string>	hv_ljet_0_p4_PseudoRapidity_names;
 	/// ---- End of booking functions and declarations for TLorentzVector ljet_0_p4 ---- ///
@@ -1394,6 +1541,7 @@
 	TH1F	*h_ljet_0_q_EXCEPT;
 	TH1F	*h_ljet_0_q_PRE;
 	TH1F	*h_ljet_0_q_BJET;
+	TH1F	*h_ljet_0_q_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_q;
 		vector<string>	hv_ljet_0_q_names;
 
@@ -1404,6 +1552,7 @@
 	TH1F	*h_ljet_0_type_EXCEPT;
 	TH1F	*h_ljet_0_type_PRE;
 	TH1F	*h_ljet_0_type_BJET;
+	TH1F	*h_ljet_0_type_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_type;
 		vector<string>	hv_ljet_0_type_names;
 
@@ -1414,6 +1563,7 @@
 	TH1F	*h_ljet_0_width_EXCEPT;
 	TH1F	*h_ljet_0_width_PRE;
 	TH1F	*h_ljet_0_width_BJET;
+	TH1F	*h_ljet_0_width_HIGH_E;
 	vector<TH1F*>	hv_ljet_0_width;
 		vector<string>	hv_ljet_0_width_names;
 
@@ -1424,6 +1574,7 @@
 	TH1F	*h_ljet_1_EXCEPT;
 	TH1F	*h_ljet_1_PRE;
 	TH1F	*h_ljet_1_BJET;
+	TH1F	*h_ljet_1_HIGH_E;
 	vector<TH1F*>	hv_ljet_1;
 		vector<string>	hv_ljet_1_names;
 
@@ -1434,6 +1585,7 @@
 	TH1F	*h_ljet_1_NOMINAL_central_jets_effSF_JVT_EXCEPT;
 	TH1F	*h_ljet_1_NOMINAL_central_jets_effSF_JVT_PRE;
 	TH1F	*h_ljet_1_NOMINAL_central_jets_effSF_JVT_BJET;
+	TH1F	*h_ljet_1_NOMINAL_central_jets_effSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_NOMINAL_central_jets_effSF_JVT;
 		vector<string>	hv_ljet_1_NOMINAL_central_jets_effSF_JVT_names;
 
@@ -1444,6 +1596,7 @@
 	TH1F	*h_ljet_1_NOMINAL_central_jets_ineffSF_JVT_EXCEPT;
 	TH1F	*h_ljet_1_NOMINAL_central_jets_ineffSF_JVT_PRE;
 	TH1F	*h_ljet_1_NOMINAL_central_jets_ineffSF_JVT_BJET;
+	TH1F	*h_ljet_1_NOMINAL_central_jets_ineffSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_NOMINAL_central_jets_ineffSF_JVT;
 		vector<string>	hv_ljet_1_NOMINAL_central_jets_ineffSF_JVT_names;
 
@@ -1454,6 +1607,7 @@
 	TH1F	*h_ljet_1_NOMINAL_effSF_MV2c10_EXCEPT;
 	TH1F	*h_ljet_1_NOMINAL_effSF_MV2c10_PRE;
 	TH1F	*h_ljet_1_NOMINAL_effSF_MV2c10_BJET;
+	TH1F	*h_ljet_1_NOMINAL_effSF_MV2c10_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_NOMINAL_effSF_MV2c10;
 		vector<string>	hv_ljet_1_NOMINAL_effSF_MV2c10_names;
 
@@ -1464,6 +1618,7 @@
 	TH1F	*h_ljet_1_NOMINAL_forward_jets_effSF_JVT_EXCEPT;
 	TH1F	*h_ljet_1_NOMINAL_forward_jets_effSF_JVT_PRE;
 	TH1F	*h_ljet_1_NOMINAL_forward_jets_effSF_JVT_BJET;
+	TH1F	*h_ljet_1_NOMINAL_forward_jets_effSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_NOMINAL_forward_jets_effSF_JVT;
 		vector<string>	hv_ljet_1_NOMINAL_forward_jets_effSF_JVT_names;
 
@@ -1474,6 +1629,7 @@
 	TH1F	*h_ljet_1_NOMINAL_forward_jets_ineffSF_JVT_EXCEPT;
 	TH1F	*h_ljet_1_NOMINAL_forward_jets_ineffSF_JVT_PRE;
 	TH1F	*h_ljet_1_NOMINAL_forward_jets_ineffSF_JVT_BJET;
+	TH1F	*h_ljet_1_NOMINAL_forward_jets_ineffSF_JVT_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_NOMINAL_forward_jets_ineffSF_JVT;
 		vector<string>	hv_ljet_1_NOMINAL_forward_jets_ineffSF_JVT_names;
 
@@ -1484,6 +1640,7 @@
 	TH1F	*h_ljet_1_NOMINAL_ineffSF_MV2c10_EXCEPT;
 	TH1F	*h_ljet_1_NOMINAL_ineffSF_MV2c10_PRE;
 	TH1F	*h_ljet_1_NOMINAL_ineffSF_MV2c10_BJET;
+	TH1F	*h_ljet_1_NOMINAL_ineffSF_MV2c10_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_NOMINAL_ineffSF_MV2c10;
 		vector<string>	hv_ljet_1_NOMINAL_ineffSF_MV2c10_names;
 
@@ -1494,6 +1651,7 @@
 	TH1F	*h_ljet_1_b_tag_quantile_EXCEPT;
 	TH1F	*h_ljet_1_b_tag_quantile_PRE;
 	TH1F	*h_ljet_1_b_tag_quantile_BJET;
+	TH1F	*h_ljet_1_b_tag_quantile_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_b_tag_quantile;
 		vector<string>	hv_ljet_1_b_tag_quantile_names;
 
@@ -1504,6 +1662,7 @@
 	TH1F	*h_ljet_1_b_tag_score_EXCEPT;
 	TH1F	*h_ljet_1_b_tag_score_PRE;
 	TH1F	*h_ljet_1_b_tag_score_BJET;
+	TH1F	*h_ljet_1_b_tag_score_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_b_tag_score;
 		vector<string>	hv_ljet_1_b_tag_score_names;
 
@@ -1514,6 +1673,7 @@
 	TH1F	*h_ljet_1_b_tagged_EXCEPT;
 	TH1F	*h_ljet_1_b_tagged_PRE;
 	TH1F	*h_ljet_1_b_tagged_BJET;
+	TH1F	*h_ljet_1_b_tagged_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_b_tagged;
 		vector<string>	hv_ljet_1_b_tagged_names;
 
@@ -1524,6 +1684,7 @@
 	TH1F	*h_ljet_1_fjvt_EXCEPT;
 	TH1F	*h_ljet_1_fjvt_PRE;
 	TH1F	*h_ljet_1_fjvt_BJET;
+	TH1F	*h_ljet_1_fjvt_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_fjvt;
 		vector<string>	hv_ljet_1_fjvt_names;
 
@@ -1534,6 +1695,7 @@
 	TH1F	*h_ljet_1_flavorlabel_EXCEPT;
 	TH1F	*h_ljet_1_flavorlabel_PRE;
 	TH1F	*h_ljet_1_flavorlabel_BJET;
+	TH1F	*h_ljet_1_flavorlabel_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_flavorlabel;
 		vector<string>	hv_ljet_1_flavorlabel_names;
 
@@ -1544,6 +1706,7 @@
 	TH1F	*h_ljet_1_flavorlabel_cone_EXCEPT;
 	TH1F	*h_ljet_1_flavorlabel_cone_PRE;
 	TH1F	*h_ljet_1_flavorlabel_cone_BJET;
+	TH1F	*h_ljet_1_flavorlabel_cone_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_flavorlabel_cone;
 		vector<string>	hv_ljet_1_flavorlabel_cone_names;
 
@@ -1554,6 +1717,7 @@
 	TH1F	*h_ljet_1_flavorlabel_part_EXCEPT;
 	TH1F	*h_ljet_1_flavorlabel_part_PRE;
 	TH1F	*h_ljet_1_flavorlabel_part_BJET;
+	TH1F	*h_ljet_1_flavorlabel_part_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_flavorlabel_part;
 		vector<string>	hv_ljet_1_flavorlabel_part_names;
 
@@ -1564,6 +1728,7 @@
 	TH1F	*h_ljet_1_is_Jvt_HS_EXCEPT;
 	TH1F	*h_ljet_1_is_Jvt_HS_PRE;
 	TH1F	*h_ljet_1_is_Jvt_HS_BJET;
+	TH1F	*h_ljet_1_is_Jvt_HS_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_is_Jvt_HS;
 		vector<string>	hv_ljet_1_is_Jvt_HS_names;
 
@@ -1574,6 +1739,7 @@
 	TH1F	*h_ljet_1_jvt_EXCEPT;
 	TH1F	*h_ljet_1_jvt_PRE;
 	TH1F	*h_ljet_1_jvt_BJET;
+	TH1F	*h_ljet_1_jvt_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_jvt;
 		vector<string>	hv_ljet_1_jvt_names;
 
@@ -1584,6 +1750,7 @@
 	TH1F	*h_ljet_1_origin_EXCEPT;
 	TH1F	*h_ljet_1_origin_PRE;
 	TH1F	*h_ljet_1_origin_BJET;
+	TH1F	*h_ljet_1_origin_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_origin;
 		vector<string>	hv_ljet_1_origin_names;
 
@@ -1595,6 +1762,7 @@
 		TH1F	*h_ljet_1_p4_X_EXCEPT;
 		TH1F	*h_ljet_1_p4_X_PRE;
 		TH1F	*h_ljet_1_p4_X_BJET;
+		TH1F	*h_ljet_1_p4_X_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_X;
 		vector<string>	hv_ljet_1_p4_X_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Y
@@ -1604,6 +1772,7 @@
 		TH1F	*h_ljet_1_p4_Y_EXCEPT;
 		TH1F	*h_ljet_1_p4_Y_PRE;
 		TH1F	*h_ljet_1_p4_Y_BJET;
+		TH1F	*h_ljet_1_p4_Y_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Y;
 		vector<string>	hv_ljet_1_p4_Y_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Z
@@ -1613,6 +1782,7 @@
 		TH1F	*h_ljet_1_p4_Z_EXCEPT;
 		TH1F	*h_ljet_1_p4_Z_PRE;
 		TH1F	*h_ljet_1_p4_Z_BJET;
+		TH1F	*h_ljet_1_p4_Z_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Z;
 		vector<string>	hv_ljet_1_p4_Z_names;
 		//Histogram booking functions and declarations for ljet_1_p4_T
@@ -1622,6 +1792,7 @@
 		TH1F	*h_ljet_1_p4_T_EXCEPT;
 		TH1F	*h_ljet_1_p4_T_PRE;
 		TH1F	*h_ljet_1_p4_T_BJET;
+		TH1F	*h_ljet_1_p4_T_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_T;
 		vector<string>	hv_ljet_1_p4_T_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Px
@@ -1631,6 +1802,7 @@
 		TH1F	*h_ljet_1_p4_Px_EXCEPT;
 		TH1F	*h_ljet_1_p4_Px_PRE;
 		TH1F	*h_ljet_1_p4_Px_BJET;
+		TH1F	*h_ljet_1_p4_Px_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Px;
 		vector<string>	hv_ljet_1_p4_Px_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Py
@@ -1640,6 +1812,7 @@
 		TH1F	*h_ljet_1_p4_Py_EXCEPT;
 		TH1F	*h_ljet_1_p4_Py_PRE;
 		TH1F	*h_ljet_1_p4_Py_BJET;
+		TH1F	*h_ljet_1_p4_Py_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Py;
 		vector<string>	hv_ljet_1_p4_Py_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Pz
@@ -1649,6 +1822,7 @@
 		TH1F	*h_ljet_1_p4_Pz_EXCEPT;
 		TH1F	*h_ljet_1_p4_Pz_PRE;
 		TH1F	*h_ljet_1_p4_Pz_BJET;
+		TH1F	*h_ljet_1_p4_Pz_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Pz;
 		vector<string>	hv_ljet_1_p4_Pz_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Energy
@@ -1658,6 +1832,7 @@
 		TH1F	*h_ljet_1_p4_Energy_EXCEPT;
 		TH1F	*h_ljet_1_p4_Energy_PRE;
 		TH1F	*h_ljet_1_p4_Energy_BJET;
+		TH1F	*h_ljet_1_p4_Energy_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Energy;
 		vector<string>	hv_ljet_1_p4_Energy_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Theta
@@ -1667,6 +1842,7 @@
 		TH1F	*h_ljet_1_p4_Theta_EXCEPT;
 		TH1F	*h_ljet_1_p4_Theta_PRE;
 		TH1F	*h_ljet_1_p4_Theta_BJET;
+		TH1F	*h_ljet_1_p4_Theta_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Theta;
 		vector<string>	hv_ljet_1_p4_Theta_names;
 		//Histogram booking functions and declarations for ljet_1_p4_CosTheta
@@ -1676,6 +1852,7 @@
 		TH1F	*h_ljet_1_p4_CosTheta_EXCEPT;
 		TH1F	*h_ljet_1_p4_CosTheta_PRE;
 		TH1F	*h_ljet_1_p4_CosTheta_BJET;
+		TH1F	*h_ljet_1_p4_CosTheta_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_CosTheta;
 		vector<string>	hv_ljet_1_p4_CosTheta_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Phi
@@ -1685,6 +1862,7 @@
 		TH1F	*h_ljet_1_p4_Phi_EXCEPT;
 		TH1F	*h_ljet_1_p4_Phi_PRE;
 		TH1F	*h_ljet_1_p4_Phi_BJET;
+		TH1F	*h_ljet_1_p4_Phi_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Phi;
 		vector<string>	hv_ljet_1_p4_Phi_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Rho
@@ -1694,6 +1872,7 @@
 		TH1F	*h_ljet_1_p4_Rho_EXCEPT;
 		TH1F	*h_ljet_1_p4_Rho_PRE;
 		TH1F	*h_ljet_1_p4_Rho_BJET;
+		TH1F	*h_ljet_1_p4_Rho_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Rho;
 		vector<string>	hv_ljet_1_p4_Rho_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Perp2
@@ -1703,6 +1882,7 @@
 		TH1F	*h_ljet_1_p4_Perp2_EXCEPT;
 		TH1F	*h_ljet_1_p4_Perp2_PRE;
 		TH1F	*h_ljet_1_p4_Perp2_BJET;
+		TH1F	*h_ljet_1_p4_Perp2_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Perp2;
 		vector<string>	hv_ljet_1_p4_Perp2_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Pt
@@ -1712,6 +1892,7 @@
 		TH1F	*h_ljet_1_p4_Pt_EXCEPT;
 		TH1F	*h_ljet_1_p4_Pt_PRE;
 		TH1F	*h_ljet_1_p4_Pt_BJET;
+		TH1F	*h_ljet_1_p4_Pt_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Pt;
 		vector<string>	hv_ljet_1_p4_Pt_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Perp
@@ -1721,6 +1902,7 @@
 		TH1F	*h_ljet_1_p4_Perp_EXCEPT;
 		TH1F	*h_ljet_1_p4_Perp_PRE;
 		TH1F	*h_ljet_1_p4_Perp_BJET;
+		TH1F	*h_ljet_1_p4_Perp_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Perp;
 		vector<string>	hv_ljet_1_p4_Perp_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Et2
@@ -1730,6 +1912,7 @@
 		TH1F	*h_ljet_1_p4_Et2_EXCEPT;
 		TH1F	*h_ljet_1_p4_Et2_PRE;
 		TH1F	*h_ljet_1_p4_Et2_BJET;
+		TH1F	*h_ljet_1_p4_Et2_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Et2;
 		vector<string>	hv_ljet_1_p4_Et2_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Et
@@ -1739,6 +1922,7 @@
 		TH1F	*h_ljet_1_p4_Et_EXCEPT;
 		TH1F	*h_ljet_1_p4_Et_PRE;
 		TH1F	*h_ljet_1_p4_Et_BJET;
+		TH1F	*h_ljet_1_p4_Et_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Et;
 		vector<string>	hv_ljet_1_p4_Et_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Mag2
@@ -1748,6 +1932,7 @@
 		TH1F	*h_ljet_1_p4_Mag2_EXCEPT;
 		TH1F	*h_ljet_1_p4_Mag2_PRE;
 		TH1F	*h_ljet_1_p4_Mag2_BJET;
+		TH1F	*h_ljet_1_p4_Mag2_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Mag2;
 		vector<string>	hv_ljet_1_p4_Mag2_names;
 		//Histogram booking functions and declarations for ljet_1_p4_M2
@@ -1757,6 +1942,7 @@
 		TH1F	*h_ljet_1_p4_M2_EXCEPT;
 		TH1F	*h_ljet_1_p4_M2_PRE;
 		TH1F	*h_ljet_1_p4_M2_BJET;
+		TH1F	*h_ljet_1_p4_M2_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_M2;
 		vector<string>	hv_ljet_1_p4_M2_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Mag
@@ -1766,6 +1952,7 @@
 		TH1F	*h_ljet_1_p4_Mag_EXCEPT;
 		TH1F	*h_ljet_1_p4_Mag_PRE;
 		TH1F	*h_ljet_1_p4_Mag_BJET;
+		TH1F	*h_ljet_1_p4_Mag_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Mag;
 		vector<string>	hv_ljet_1_p4_Mag_names;
 		//Histogram booking functions and declarations for ljet_1_p4_M
@@ -1775,6 +1962,7 @@
 		TH1F	*h_ljet_1_p4_M_EXCEPT;
 		TH1F	*h_ljet_1_p4_M_PRE;
 		TH1F	*h_ljet_1_p4_M_BJET;
+		TH1F	*h_ljet_1_p4_M_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_M;
 		vector<string>	hv_ljet_1_p4_M_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Mt2
@@ -1784,6 +1972,7 @@
 		TH1F	*h_ljet_1_p4_Mt2_EXCEPT;
 		TH1F	*h_ljet_1_p4_Mt2_PRE;
 		TH1F	*h_ljet_1_p4_Mt2_BJET;
+		TH1F	*h_ljet_1_p4_Mt2_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Mt2;
 		vector<string>	hv_ljet_1_p4_Mt2_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Mt
@@ -1793,6 +1982,7 @@
 		TH1F	*h_ljet_1_p4_Mt_EXCEPT;
 		TH1F	*h_ljet_1_p4_Mt_PRE;
 		TH1F	*h_ljet_1_p4_Mt_BJET;
+		TH1F	*h_ljet_1_p4_Mt_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Mt;
 		vector<string>	hv_ljet_1_p4_Mt_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Beta
@@ -1802,6 +1992,7 @@
 		TH1F	*h_ljet_1_p4_Beta_EXCEPT;
 		TH1F	*h_ljet_1_p4_Beta_PRE;
 		TH1F	*h_ljet_1_p4_Beta_BJET;
+		TH1F	*h_ljet_1_p4_Beta_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Beta;
 		vector<string>	hv_ljet_1_p4_Beta_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Gamma
@@ -1811,6 +2002,7 @@
 		TH1F	*h_ljet_1_p4_Gamma_EXCEPT;
 		TH1F	*h_ljet_1_p4_Gamma_PRE;
 		TH1F	*h_ljet_1_p4_Gamma_BJET;
+		TH1F	*h_ljet_1_p4_Gamma_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Gamma;
 		vector<string>	hv_ljet_1_p4_Gamma_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Plus
@@ -1820,6 +2012,7 @@
 		TH1F	*h_ljet_1_p4_Plus_EXCEPT;
 		TH1F	*h_ljet_1_p4_Plus_PRE;
 		TH1F	*h_ljet_1_p4_Plus_BJET;
+		TH1F	*h_ljet_1_p4_Plus_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Plus;
 		vector<string>	hv_ljet_1_p4_Plus_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Minus
@@ -1829,6 +2022,7 @@
 		TH1F	*h_ljet_1_p4_Minus_EXCEPT;
 		TH1F	*h_ljet_1_p4_Minus_PRE;
 		TH1F	*h_ljet_1_p4_Minus_BJET;
+		TH1F	*h_ljet_1_p4_Minus_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Minus;
 		vector<string>	hv_ljet_1_p4_Minus_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Rapidity
@@ -1838,6 +2032,7 @@
 		TH1F	*h_ljet_1_p4_Rapidity_EXCEPT;
 		TH1F	*h_ljet_1_p4_Rapidity_PRE;
 		TH1F	*h_ljet_1_p4_Rapidity_BJET;
+		TH1F	*h_ljet_1_p4_Rapidity_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Rapidity;
 		vector<string>	hv_ljet_1_p4_Rapidity_names;
 		//Histogram booking functions and declarations for ljet_1_p4_Eta
@@ -1847,6 +2042,7 @@
 		TH1F	*h_ljet_1_p4_Eta_EXCEPT;
 		TH1F	*h_ljet_1_p4_Eta_PRE;
 		TH1F	*h_ljet_1_p4_Eta_BJET;
+		TH1F	*h_ljet_1_p4_Eta_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_Eta;
 		vector<string>	hv_ljet_1_p4_Eta_names;
 		//Histogram booking functions and declarations for ljet_1_p4_PseudoRapidity
@@ -1856,6 +2052,7 @@
 		TH1F	*h_ljet_1_p4_PseudoRapidity_EXCEPT;
 		TH1F	*h_ljet_1_p4_PseudoRapidity_PRE;
 		TH1F	*h_ljet_1_p4_PseudoRapidity_BJET;
+		TH1F	*h_ljet_1_p4_PseudoRapidity_HIGH_E;
 		vector<TH1F*>	hv_ljet_1_p4_PseudoRapidity;
 		vector<string>	hv_ljet_1_p4_PseudoRapidity_names;
 	/// ---- End of booking functions and declarations for TLorentzVector ljet_1_p4 ---- ///
@@ -1867,6 +2064,7 @@
 	TH1F	*h_ljet_1_q_EXCEPT;
 	TH1F	*h_ljet_1_q_PRE;
 	TH1F	*h_ljet_1_q_BJET;
+	TH1F	*h_ljet_1_q_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_q;
 		vector<string>	hv_ljet_1_q_names;
 
@@ -1877,6 +2075,7 @@
 	TH1F	*h_ljet_1_type_EXCEPT;
 	TH1F	*h_ljet_1_type_PRE;
 	TH1F	*h_ljet_1_type_BJET;
+	TH1F	*h_ljet_1_type_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_type;
 		vector<string>	hv_ljet_1_type_names;
 
@@ -1887,6 +2086,7 @@
 	TH1F	*h_ljet_1_width_EXCEPT;
 	TH1F	*h_ljet_1_width_PRE;
 	TH1F	*h_ljet_1_width_BJET;
+	TH1F	*h_ljet_1_width_HIGH_E;
 	vector<TH1F*>	hv_ljet_1_width;
 		vector<string>	hv_ljet_1_width_names;
 
@@ -1898,6 +2098,7 @@
 		TH1F	*h_met_reco_p4_X_EXCEPT;
 		TH1F	*h_met_reco_p4_X_PRE;
 		TH1F	*h_met_reco_p4_X_BJET;
+		TH1F	*h_met_reco_p4_X_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_X;
 		vector<string>	hv_met_reco_p4_X_names;
 		//Histogram booking functions and declarations for met_reco_p4_Y
@@ -1907,6 +2108,7 @@
 		TH1F	*h_met_reco_p4_Y_EXCEPT;
 		TH1F	*h_met_reco_p4_Y_PRE;
 		TH1F	*h_met_reco_p4_Y_BJET;
+		TH1F	*h_met_reco_p4_Y_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Y;
 		vector<string>	hv_met_reco_p4_Y_names;
 		//Histogram booking functions and declarations for met_reco_p4_Z
@@ -1916,6 +2118,7 @@
 		TH1F	*h_met_reco_p4_Z_EXCEPT;
 		TH1F	*h_met_reco_p4_Z_PRE;
 		TH1F	*h_met_reco_p4_Z_BJET;
+		TH1F	*h_met_reco_p4_Z_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Z;
 		vector<string>	hv_met_reco_p4_Z_names;
 		//Histogram booking functions and declarations for met_reco_p4_T
@@ -1925,6 +2128,7 @@
 		TH1F	*h_met_reco_p4_T_EXCEPT;
 		TH1F	*h_met_reco_p4_T_PRE;
 		TH1F	*h_met_reco_p4_T_BJET;
+		TH1F	*h_met_reco_p4_T_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_T;
 		vector<string>	hv_met_reco_p4_T_names;
 		//Histogram booking functions and declarations for met_reco_p4_Px
@@ -1934,6 +2138,7 @@
 		TH1F	*h_met_reco_p4_Px_EXCEPT;
 		TH1F	*h_met_reco_p4_Px_PRE;
 		TH1F	*h_met_reco_p4_Px_BJET;
+		TH1F	*h_met_reco_p4_Px_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Px;
 		vector<string>	hv_met_reco_p4_Px_names;
 		//Histogram booking functions and declarations for met_reco_p4_Py
@@ -1943,6 +2148,7 @@
 		TH1F	*h_met_reco_p4_Py_EXCEPT;
 		TH1F	*h_met_reco_p4_Py_PRE;
 		TH1F	*h_met_reco_p4_Py_BJET;
+		TH1F	*h_met_reco_p4_Py_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Py;
 		vector<string>	hv_met_reco_p4_Py_names;
 		//Histogram booking functions and declarations for met_reco_p4_Pz
@@ -1952,6 +2158,7 @@
 		TH1F	*h_met_reco_p4_Pz_EXCEPT;
 		TH1F	*h_met_reco_p4_Pz_PRE;
 		TH1F	*h_met_reco_p4_Pz_BJET;
+		TH1F	*h_met_reco_p4_Pz_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Pz;
 		vector<string>	hv_met_reco_p4_Pz_names;
 		//Histogram booking functions and declarations for met_reco_p4_Energy
@@ -1961,6 +2168,7 @@
 		TH1F	*h_met_reco_p4_Energy_EXCEPT;
 		TH1F	*h_met_reco_p4_Energy_PRE;
 		TH1F	*h_met_reco_p4_Energy_BJET;
+		TH1F	*h_met_reco_p4_Energy_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Energy;
 		vector<string>	hv_met_reco_p4_Energy_names;
 		//Histogram booking functions and declarations for met_reco_p4_Theta
@@ -1970,6 +2178,7 @@
 		TH1F	*h_met_reco_p4_Theta_EXCEPT;
 		TH1F	*h_met_reco_p4_Theta_PRE;
 		TH1F	*h_met_reco_p4_Theta_BJET;
+		TH1F	*h_met_reco_p4_Theta_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Theta;
 		vector<string>	hv_met_reco_p4_Theta_names;
 		//Histogram booking functions and declarations for met_reco_p4_CosTheta
@@ -1979,6 +2188,7 @@
 		TH1F	*h_met_reco_p4_CosTheta_EXCEPT;
 		TH1F	*h_met_reco_p4_CosTheta_PRE;
 		TH1F	*h_met_reco_p4_CosTheta_BJET;
+		TH1F	*h_met_reco_p4_CosTheta_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_CosTheta;
 		vector<string>	hv_met_reco_p4_CosTheta_names;
 		//Histogram booking functions and declarations for met_reco_p4_Phi
@@ -1988,6 +2198,7 @@
 		TH1F	*h_met_reco_p4_Phi_EXCEPT;
 		TH1F	*h_met_reco_p4_Phi_PRE;
 		TH1F	*h_met_reco_p4_Phi_BJET;
+		TH1F	*h_met_reco_p4_Phi_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Phi;
 		vector<string>	hv_met_reco_p4_Phi_names;
 		//Histogram booking functions and declarations for met_reco_p4_Rho
@@ -1997,6 +2208,7 @@
 		TH1F	*h_met_reco_p4_Rho_EXCEPT;
 		TH1F	*h_met_reco_p4_Rho_PRE;
 		TH1F	*h_met_reco_p4_Rho_BJET;
+		TH1F	*h_met_reco_p4_Rho_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Rho;
 		vector<string>	hv_met_reco_p4_Rho_names;
 		//Histogram booking functions and declarations for met_reco_p4_Perp2
@@ -2006,6 +2218,7 @@
 		TH1F	*h_met_reco_p4_Perp2_EXCEPT;
 		TH1F	*h_met_reco_p4_Perp2_PRE;
 		TH1F	*h_met_reco_p4_Perp2_BJET;
+		TH1F	*h_met_reco_p4_Perp2_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Perp2;
 		vector<string>	hv_met_reco_p4_Perp2_names;
 		//Histogram booking functions and declarations for met_reco_p4_Pt
@@ -2015,6 +2228,7 @@
 		TH1F	*h_met_reco_p4_Pt_EXCEPT;
 		TH1F	*h_met_reco_p4_Pt_PRE;
 		TH1F	*h_met_reco_p4_Pt_BJET;
+		TH1F	*h_met_reco_p4_Pt_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Pt;
 		vector<string>	hv_met_reco_p4_Pt_names;
 		//Histogram booking functions and declarations for met_reco_p4_Perp
@@ -2024,6 +2238,7 @@
 		TH1F	*h_met_reco_p4_Perp_EXCEPT;
 		TH1F	*h_met_reco_p4_Perp_PRE;
 		TH1F	*h_met_reco_p4_Perp_BJET;
+		TH1F	*h_met_reco_p4_Perp_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Perp;
 		vector<string>	hv_met_reco_p4_Perp_names;
 		//Histogram booking functions and declarations for met_reco_p4_Et2
@@ -2033,6 +2248,7 @@
 		TH1F	*h_met_reco_p4_Et2_EXCEPT;
 		TH1F	*h_met_reco_p4_Et2_PRE;
 		TH1F	*h_met_reco_p4_Et2_BJET;
+		TH1F	*h_met_reco_p4_Et2_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Et2;
 		vector<string>	hv_met_reco_p4_Et2_names;
 		//Histogram booking functions and declarations for met_reco_p4_Et
@@ -2042,6 +2258,7 @@
 		TH1F	*h_met_reco_p4_Et_EXCEPT;
 		TH1F	*h_met_reco_p4_Et_PRE;
 		TH1F	*h_met_reco_p4_Et_BJET;
+		TH1F	*h_met_reco_p4_Et_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Et;
 		vector<string>	hv_met_reco_p4_Et_names;
 		//Histogram booking functions and declarations for met_reco_p4_Mag2
@@ -2051,6 +2268,7 @@
 		TH1F	*h_met_reco_p4_Mag2_EXCEPT;
 		TH1F	*h_met_reco_p4_Mag2_PRE;
 		TH1F	*h_met_reco_p4_Mag2_BJET;
+		TH1F	*h_met_reco_p4_Mag2_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Mag2;
 		vector<string>	hv_met_reco_p4_Mag2_names;
 		//Histogram booking functions and declarations for met_reco_p4_M2
@@ -2060,6 +2278,7 @@
 		TH1F	*h_met_reco_p4_M2_EXCEPT;
 		TH1F	*h_met_reco_p4_M2_PRE;
 		TH1F	*h_met_reco_p4_M2_BJET;
+		TH1F	*h_met_reco_p4_M2_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_M2;
 		vector<string>	hv_met_reco_p4_M2_names;
 		//Histogram booking functions and declarations for met_reco_p4_Mag
@@ -2069,6 +2288,7 @@
 		TH1F	*h_met_reco_p4_Mag_EXCEPT;
 		TH1F	*h_met_reco_p4_Mag_PRE;
 		TH1F	*h_met_reco_p4_Mag_BJET;
+		TH1F	*h_met_reco_p4_Mag_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Mag;
 		vector<string>	hv_met_reco_p4_Mag_names;
 		//Histogram booking functions and declarations for met_reco_p4_M
@@ -2078,6 +2298,7 @@
 		TH1F	*h_met_reco_p4_M_EXCEPT;
 		TH1F	*h_met_reco_p4_M_PRE;
 		TH1F	*h_met_reco_p4_M_BJET;
+		TH1F	*h_met_reco_p4_M_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_M;
 		vector<string>	hv_met_reco_p4_M_names;
 		//Histogram booking functions and declarations for met_reco_p4_Mt2
@@ -2087,6 +2308,7 @@
 		TH1F	*h_met_reco_p4_Mt2_EXCEPT;
 		TH1F	*h_met_reco_p4_Mt2_PRE;
 		TH1F	*h_met_reco_p4_Mt2_BJET;
+		TH1F	*h_met_reco_p4_Mt2_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Mt2;
 		vector<string>	hv_met_reco_p4_Mt2_names;
 		//Histogram booking functions and declarations for met_reco_p4_Mt
@@ -2096,6 +2318,7 @@
 		TH1F	*h_met_reco_p4_Mt_EXCEPT;
 		TH1F	*h_met_reco_p4_Mt_PRE;
 		TH1F	*h_met_reco_p4_Mt_BJET;
+		TH1F	*h_met_reco_p4_Mt_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Mt;
 		vector<string>	hv_met_reco_p4_Mt_names;
 		//Histogram booking functions and declarations for met_reco_p4_Beta
@@ -2105,6 +2328,7 @@
 		TH1F	*h_met_reco_p4_Beta_EXCEPT;
 		TH1F	*h_met_reco_p4_Beta_PRE;
 		TH1F	*h_met_reco_p4_Beta_BJET;
+		TH1F	*h_met_reco_p4_Beta_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Beta;
 		vector<string>	hv_met_reco_p4_Beta_names;
 		//Histogram booking functions and declarations for met_reco_p4_Gamma
@@ -2114,6 +2338,7 @@
 		TH1F	*h_met_reco_p4_Gamma_EXCEPT;
 		TH1F	*h_met_reco_p4_Gamma_PRE;
 		TH1F	*h_met_reco_p4_Gamma_BJET;
+		TH1F	*h_met_reco_p4_Gamma_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Gamma;
 		vector<string>	hv_met_reco_p4_Gamma_names;
 		//Histogram booking functions and declarations for met_reco_p4_Plus
@@ -2123,6 +2348,7 @@
 		TH1F	*h_met_reco_p4_Plus_EXCEPT;
 		TH1F	*h_met_reco_p4_Plus_PRE;
 		TH1F	*h_met_reco_p4_Plus_BJET;
+		TH1F	*h_met_reco_p4_Plus_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Plus;
 		vector<string>	hv_met_reco_p4_Plus_names;
 		//Histogram booking functions and declarations for met_reco_p4_Minus
@@ -2132,6 +2358,7 @@
 		TH1F	*h_met_reco_p4_Minus_EXCEPT;
 		TH1F	*h_met_reco_p4_Minus_PRE;
 		TH1F	*h_met_reco_p4_Minus_BJET;
+		TH1F	*h_met_reco_p4_Minus_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Minus;
 		vector<string>	hv_met_reco_p4_Minus_names;
 		//Histogram booking functions and declarations for met_reco_p4_Rapidity
@@ -2141,6 +2368,7 @@
 		TH1F	*h_met_reco_p4_Rapidity_EXCEPT;
 		TH1F	*h_met_reco_p4_Rapidity_PRE;
 		TH1F	*h_met_reco_p4_Rapidity_BJET;
+		TH1F	*h_met_reco_p4_Rapidity_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Rapidity;
 		vector<string>	hv_met_reco_p4_Rapidity_names;
 		//Histogram booking functions and declarations for met_reco_p4_Eta
@@ -2150,6 +2378,7 @@
 		TH1F	*h_met_reco_p4_Eta_EXCEPT;
 		TH1F	*h_met_reco_p4_Eta_PRE;
 		TH1F	*h_met_reco_p4_Eta_BJET;
+		TH1F	*h_met_reco_p4_Eta_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_Eta;
 		vector<string>	hv_met_reco_p4_Eta_names;
 		//Histogram booking functions and declarations for met_reco_p4_PseudoRapidity
@@ -2159,6 +2388,7 @@
 		TH1F	*h_met_reco_p4_PseudoRapidity_EXCEPT;
 		TH1F	*h_met_reco_p4_PseudoRapidity_PRE;
 		TH1F	*h_met_reco_p4_PseudoRapidity_BJET;
+		TH1F	*h_met_reco_p4_PseudoRapidity_HIGH_E;
 		vector<TH1F*>	hv_met_reco_p4_PseudoRapidity;
 		vector<string>	hv_met_reco_p4_PseudoRapidity_names;
 	/// ---- End of booking functions and declarations for TLorentzVector met_reco_p4 ---- ///

@@ -55,10 +55,10 @@ void MC_Analysis::BookHistos() {
 	int Centrality_reconstructed_Min = -8, Centrality_reconstructed_Max = 8;
 
 	//Values for the 2D histograms
-//	int xbins = 50;
-//	int ybins = 50;
-	int xbins = 120;
-	int ybins = 80;
+	int xbins = 50;
+	int ybins = 50;
+//	int xbins = 120;
+//	int ybins = 80;
 	
 
 	// POLAR
@@ -367,6 +367,8 @@ void MC_Analysis::GenerateVariables() {
 	double Et_along_0;
 	double Et_along_1;
 
+	MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
+
 	vector<double> Neutrino_Transverse_Momentum_Vector;
 
 	double neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p;
@@ -415,8 +417,6 @@ void MC_Analysis::GenerateVariables() {
 	
 		// neutrino missing energy/momentum vector x and y components (in transverse plane)
 		Neutrino_Transverse_Momentum_Vector = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
-
-		MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
 
 		// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
 		neutrino_0_pt = abs(Neutrino_Transverse_Momentum_Vector[0]);
@@ -592,7 +592,15 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "search" && (AnalysisType != "Electron" || AnalysisType != "Muon")) { pT_balance_limit = true; pT_balance_limit_3 = true; }
 	*/
 
-	if (region == "bjet" ) Z_mass_condition = true; // Z mass = true means we are NOT cutting on Z mass
+
+	if (region == "bjet") Z_mass_condition = true;
+	if (region == "high_energy") {
+
+		leading_jets_invariant_mass = false;
+		if (jet_0_jet_1_mass > 1500) leading_jets_invariant_mass = true;
+
+	}
+
 
 	bool common_cuts = false;	//The common cuts are false initially
 
@@ -639,6 +647,11 @@ bool MC_Analysis::Cuts(string region) {
 
 	//If the region is the bjet enriched region
 	if (region == "bjet" && bjets_region == true) {
+		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
+	}
+
+	//If the region is the high energy region
+	if (region == "high_energy" && bjets_region == false) {
 		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
@@ -715,7 +728,7 @@ void MC_Analysis::Fill() {
 
 			h_MET_Type_Favour->Fill(MET_Type_Favour, final_weighting);
 
-			
+			/*
 			if (!(MET_Type_Favour > 0 && MET_Type_Favour < 1)) {
 
 				double Phi_E = met_reco_p4->Phi();
@@ -726,7 +739,7 @@ void MC_Analysis::Fill() {
 				cout << "Phi_E = " << Phi_E << "   :   Phi_Tau_Had = " << Phi_2 << "   :   Phi_Tau_Lep = " << Phi_3 << endl << endl;
 
 			}
-
+			*/
 
 		}
 
@@ -849,6 +862,50 @@ void MC_Analysis::Fill() {
 
 		}
 
+
+
+	}
+
+	if (Cuts("high_energy")) {
+
+		#include "_FillAllData_HIGH_E.h"
+
+		//Invariant mass HIGH_E
+		h_lep_0_lep_1_mass_HIGH_E->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+		h_jet_0_jet_1_mass_HIGH_E->Fill(jet_0_jet_1_mass, final_weighting); // two jets
+
+		h_lep_0_lep_1_pt_HIGH_E->Fill(lep_0_lep_1_pt, final_weighting);
+
+		//Delta R for two electrons HIGH_E
+		h_DeltaR_HIGH_E->Fill(DeltaR, final_weighting);
+
+		// pT balance HIGH_E
+		h_pT_balance_HIGH_E->Fill(pT_balance, final_weighting);	
+
+		if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+
+		// Centrality HIGH_E
+		h_Centrality_HIGH_E->Fill(Centrality, final_weighting);
+
+		// MET Centrality HIGH_E
+		h_MET_Centrality_HIGH_E->Fill(MET_Centrality, final_weighting);
+
+		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
+		h_neutrino_0_pt_HIGH_E->Fill(neutrino_0_pt,final_weighting);
+		h_neutrino_1_pt_HIGH_E->Fill(neutrino_1_pt,final_weighting);
+
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+
+			h_MET_Type_Favour_HIGH_E->Fill(MET_Type_Favour, final_weighting);
+
+		}
+
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+
+			h_lep_0_lep_1_mass_reconstructed_HIGH_E->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
+
+		}
+
 	}
 
 }
@@ -929,8 +986,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed lepton 1 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
 	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed leptons 2 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
   
-  DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Missing Energy 2D polar plot;", false, false, ChainName, AnalysisType);
-
+  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Momentum [GeV/c]", false, false, ChainName, AnalysisType);
 	
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
@@ -948,6 +1004,18 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_neutrino_1_pt_BJET, "h_neutrino_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Type_Favour_BJET, "h_MET_Type_Favour_BJET", ";;Events", false, true, ChainName, AnalysisType);
 
+	//HIGH_E Graphs
+	DrawHistogram(h_lep_0_lep_1_mass_HIGH_E, "h_lep_0_lep_1_mass_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_jet_0_jet_1_mass_HIGH_E, "h_jet_0_jet_1_mass_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_pt_HIGH_E, "h_lep_0_lep_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaR_HIGH_E, "h_DeltaR_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_HIGH_E, "h_pT_balance_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_Centrality_HIGH_E, "h_Centrality_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_MET_Centrality_HIGH_E, "h_MET_Centrality_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrino_0_pt_HIGH_E, "h_neutrino_0_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrino_1_pt_HIGH_E, "h_neutrino_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_MET_Type_Favour_HIGH_E, "h_MET_Type_Favour_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reconstructed_HIGH_E, "h_lep_0_lep_1_mass_reconstructed_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 
 	Histograms->Close();
 

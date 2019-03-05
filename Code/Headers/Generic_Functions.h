@@ -188,6 +188,25 @@ vector<TH1F*> Histogram_Return_Given_File(string AnalysisType, string DataType, 
 
 }
 
+//This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
+vector<TH2F*> Histogram_Return_Given_File_2D(string AnalysisType, string DataType, vector<TFile*> root_files) {
+
+	string DataTypeHistName = "h_" + DataType + ";1";  //Name of the desired histogram in the root file
+
+	//Variable creation
+	vector<TFile*> files = root_files;
+	vector<TH2F*> histograms;
+
+	//Get all the histograms from files depending on the Data Type and push them into the histograms vector
+	for (auto tfile = files.begin(); tfile < files.end(); tfile++) {
+		TH2F *histogram = (TH2F*)(*tfile)->Get(DataTypeHistName.c_str());
+		histograms.push_back(histogram);
+	}
+
+	return histograms;
+
+}
+
 void Histogram_Remove_Negative_Events(TH1F* histogram) {
 
 	int bins = histogram->GetSize() - 2;
@@ -752,8 +771,97 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 
 }
 
+
+// need to give it the analysis type and then for given, tells it the path
+void Process_Combiner_2D(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files) {
+
+	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
+
+	//String for name of the histogram in the root file
+	string DataTypeHistName = "h_" + DataType + ";1";
+
+	//Create the canvas
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+
+	//Get the vector of histograms for the given AnalysisType and DataType
+	vector<TH2F*> histograms = Histogram_Return_Given_File_2D(AnalysisType, DataType, root_files);
+	TH2F *histogramMaster = histograms[0]; 
+	TH2F *histogramData = histograms[11];
+
+	int counter = 1;
+	//For all the files in the vector not counting the first...
+	for (int i = 1; i < 11; i++) {
+
+		//Add it to the master histogram 
+		histogramMaster->Add(histograms[i]);
+
+	}
+
+	TH2 *RebinnedData = histogramData->Rebin2D(2,2,"newname");
+	TH2 *RebinnedMaster = histogramMaster->Rebin2D(2,2,"newname");
+
+	RebinnedMaster->SetMinimum(0.001);
+	RebinnedData->SetMinimum(0.001);
+
+	//Draw the stack, actually stacking (no "nostack")
+	RebinnedMaster->Draw("colz");
+
+	//Set the histogram axes and labels
+	histogramMaster->GetYaxis()->SetTitle("Events");
+	histogramMaster->GetXaxis()->SetLabelSize(0.05);
+	histogramMaster->GetYaxis()->SetLabelSize(0.05);
+	histogramMaster->GetXaxis()->SetTitleSize(0.037);
+	histogramMaster->GetYaxis()->SetTitleSize(0.037);
+	histogramMaster->GetXaxis()->SetTitleOffset(1.2);
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+	TCanvas *datacanvas = new TCanvas("Data_Canvas", "", 600, 400);
+	RebinnedData->Draw("colz");
+	string FullDATAOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/DATA_" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	datacanvas->SaveAs(FullDATAOutputFilePath.c_str());
+
+}
+
 //Draw the stacked graphs for all the desired variables
 void DrawStackedProcesses(string AnalysisType) {
+
+	//Open the list of DataTypes to be stacked and drawn
+	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
+	ifstream DataTypeFile (DataTypeFileName);
+	string line;
+
+	vector<string> logless_names;
+	logless_names.push_back("lep_0_lep_1_mass");
+	logless_names.push_back("MET_Type_Favour");
+
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	
+	while(!DataTypeFile.eof()) {  		//While not at the end of the file
+		getline(DataTypeFile, line);  	//Get the file line
+		if (line.find("2D") != string::npos) continue;
+		if (line != "") {  		//If not looking at the last line	
+			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
+			Process_Stacker(AnalysisType, line, fileName, root_files, true);
+
+			for (int i = 0; i <= logless_names.size(); i++) {
+
+				if (line.find(logless_names[i]) != string::npos) {
+					string loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_Logless.pdf";
+					Process_Stacker(AnalysisType, line, loglessFileName, root_files, false);
+				}
+
+			}
+		}
+	}
+}
+
+//Draw the stacked graphs for all the desired variables
+void DrawStackedProcesses_2D(string AnalysisType) {
 
 	//Open the list of DataTypes to be stacked and drawn
 	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
@@ -764,13 +872,10 @@ void DrawStackedProcesses(string AnalysisType) {
 	
 	while(!DataTypeFile.eof()) {  		//While not at the end of the file
 		getline(DataTypeFile, line);  	//Get the file line
+		if (line.find("2D") == string::npos) continue;
 		if (line != "") {  		//If not looking at the last line	
 			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
-			Process_Stacker(AnalysisType, line, fileName, root_files, true);
-			if (line.find("lep_0_lep_1_mass") != string::npos) {
-				string loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_Logless.pdf";
-				Process_Stacker(AnalysisType, line, loglessFileName, root_files, false);
-			}
+			Process_Combiner_2D(AnalysisType, line, fileName, root_files);
 		}
 	}
 }
@@ -820,6 +925,13 @@ double DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
 }
 
+double non_relative_DeltaPhi(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaPhi = Vector1->Phi() - Vector2->Phi();
+	return abs(DeltaPhi);
+
+}
+
 // DeltaPhi using dot product instead
 double DeltaPhi_v2(TLorentzVector *Vector1, TLorentzVector *Vector2){
 // edited tues 26th feb - run today to check, may need editing again
@@ -828,7 +940,28 @@ double DeltaPhi_v2(TLorentzVector *Vector1, TLorentzVector *Vector2){
 	double final_val = adotb / denominator;
 
 	double delta_phi = acos( final_val ); // delta phi between tau 1 and 2
+
+	//cout << "DeltaPhi_v1 = " << DeltaPhi(Vector1, Vector2) << "   :   DeltaPhi_v2 = " << delta_phi << endl;
+	//cout << "Vector1->Pt() = " << Vector1->Pt() << endl;
+	//cout << "Vector2->Pt() = " << Vector2->Pt() << endl << endl;
+
 	return delta_phi;
+
+}
+
+void DeltaPhi_v1_v2_Comparison(TLorentzVector *Vector1, TLorentzVector *Vector2) {
+
+	double DeltaPhi = abs(Vector1->Phi() - Vector2->Phi());
+
+	double adotb = DotProdPt(Vector1, Vector2);
+	double denominator = abs(Vector1->Pt()) * abs(Vector2->Pt());
+	double final_val = adotb / denominator;
+
+	double delta_phi = acos( final_val ); // delta phi between tau 1 and 2
+
+	double sum = DeltaPhi + delta_phi;
+
+	if (DeltaPhi > delta_phi + 0.000001 || DeltaPhi < delta_phi - 0.000001) cout << "DeltaPhi_v1 = " << DeltaPhi << "   :   DeltaPhi_v2 = " << delta_phi << "   :   Sum = " << sum << endl << endl;
 
 }
 
@@ -859,7 +992,7 @@ double RapidityDisomething(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 //This Function will calculate delta R (Distance in the R space)
 double DeltaRCalc(TLorentzVector *Vector1, TLorentzVector *Vector2) {
 
-	double DeltaRVal = sqrt( pow(DeltaPhi(Vector1, Vector2), 2) + pow(DeltaEta(Vector1, Vector2), 2) );
+	double DeltaRVal = sqrt( pow(DeltaPhi_v2(Vector1, Vector2), 2) + pow(DeltaEta(Vector1, Vector2), 2) );
 	return DeltaRVal;
 
 }
@@ -923,11 +1056,11 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 	
 	// if E_T^{miss} is not between this delta phi interval, cut
 
-	if (abs(DeltaPhi(Vector1, Vector2)) < pi) {
+	if (DeltaPhi_v2(Vector1, Vector2) < pi) {
 
 		if (minphi <= Vector3->Phi() &&  Vector3->Phi() <= maxphi) phi_int_condition = true;
 
-	} else if (abs(DeltaPhi(Vector1, Vector2)) > pi) {
+	} else if (DeltaPhi_v2(Vector1, Vector2) > pi) {
 
 		minphi += pi;
 		maxphi -= pi;
@@ -946,10 +1079,16 @@ bool PhiIntervalCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentz
 // Function to decide if the Etmiss is inside the Phi interval or outside the phi interval
 bool PhiIntervalInOrOut(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // vec1 = pT of tau a, vec2 = pT of tau b, vec3 = pT of Etmiss (MET)
 
+
 	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
+	//DeltaPhi_v1_v2_Comparison(Vector1, Vector3);
+
 	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
+	//DeltaPhi_v1_v2_Comparison(Vector2, Vector3);
+
 	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
-	
+	//DeltaPhi_v1_v2_Comparison(Vector1, Vector2);
+
 	if ( (delta_phi_aEt + delta_phi_bEt) <= delta_phi_ab ) return false;// IF INSIDE THE PHI ANGLE OF TAUS
 	return true;// OTHERWISE OUTSIDE THE PHI ANGLE OF TAUS
 }
@@ -959,8 +1098,13 @@ bool ETFavourCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVect
 // Et_along_b = Et . unit vector of tau b ,  Et_along_a = Et . unit vector of tau a 
 
 	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
+	//DeltaPhi_v1_v2_Comparison(Vector1, Vector3);
+
 	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
+	//DeltaPhi_v1_v2_Comparison(Vector2, Vector3);
+
 	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
+	//DeltaPhi_v1_v2_Comparison(Vector1, Vector2);
 	
 	if (delta_phi_aEt > delta_phi_bEt){ return false; } // Closer to b
 	return true; // Otherwise Closer to a
@@ -975,8 +1119,12 @@ double ETalongVectorCalc(TLorentzVector *Vector1, TLorentzVector *Vector2){ // l
 // Is the missing energy out of reach?
 bool EtMiss_OutOfReachCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // vec1 = pT of tau a, vec2 = pT of tau b, vec3 = pT of Etmiss (MET)
 	
+	//cout << "EtMiss_OutOfReachCheck:" << endl;
+
 	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
+
 	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
+
 	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
 	
 	//if (delta_phi_aEt + delta_phi_bEt > pi){ return false; } // outside of range, cut!!
@@ -1136,58 +1284,38 @@ double METCentrality(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 
 	double Centrality;
 
-	// calculate Centrality
+	Centrality = 2 * sum1/DeltaPhi_v2(Vector2, Vector3);
 
-	if (abs(DeltaPhi(Vector2, Vector3)) < pi) {
-
-		Centrality = 2 * sum1/DeltaPhi(Vector2, Vector3);
-
-	} else {
-
-		double Emiss_Phi_Corrected;
-		double tauproduct1_Phi_Corrected;
-		double tauproduct2_Phi_Corrected;
-
-		if (Emiss_Phi < 0) Emiss_Phi_Corrected = Emiss_Phi + pi;
-		else if (Emiss_Phi > 0) Emiss_Phi_Corrected = Emiss_Phi - pi;
-
-		if (Emiss_Phi < 0) tauproduct1_Phi_Corrected = tauproduct1_Phi + pi;
-		else if (Emiss_Phi > 0) tauproduct1_Phi_Corrected = tauproduct1_Phi - pi;
-
-		if (Emiss_Phi < 0) tauproduct2_Phi_Corrected = tauproduct2_Phi + pi;
-		else if (Emiss_Phi > 0) tauproduct2_Phi_Corrected = tauproduct2_Phi - pi;
-
-		double sum2 = Emiss_Phi - (tauproduct1_Phi + tauproduct2_Phi)/2; // sum 1 to break things up
-
-		Centrality = 2 * sum2/abs(tauproduct1_Phi_Corrected - tauproduct2_Phi_Corrected);
-
-	}
 
 	return Centrality;
 }
 
 double METTypeFavour(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3) {
 
-	double Phi_E = Vector1->Phi();
-	double Phi_2 = Vector2->Phi();	//Hadronic Tau
-	double Phi_3 = Vector3->Phi();	//Lepton
+	double phi_met = Vector1->Phi();
+	double phi_had = Vector2->Phi();	//Hadronic Tau
+	double phi_lep = Vector3->Phi();	//Lepton
 	double favour;
 
-	if (DeltaPhi(Vector2, Vector3) > pi) {
+	double delta_phi_lep_met = DeltaPhi_v2(Vector3, Vector1);
+	double delta_phi_had_met = DeltaPhi_v2(Vector1, Vector2);
+	double delta_phi_lep_had = DeltaPhi_v2(Vector3, Vector2);
 
-		if (Phi_E < 0) Phi_E += pi;
-		else if (Phi_E > 0) Phi_E -= pi;
+	favour = delta_phi_lep_met/delta_phi_lep_had;
 
-		if (Phi_2 < 0) Phi_2 += pi;
-		else if (Phi_2 > 0) Phi_2 -= pi;
-
-		if (Phi_3 < 0) Phi_3 += pi;
-		else if (Phi_3 > 0) Phi_3 -= pi;
-
+	if (non_relative_DeltaPhi(Vector2, Vector3) > pi) {					//If "inside" of taus contains the +/- pi discontinuity
+		if (phi_lep > phi_had) {								//If the leptonic tau has larger phi
+			if (phi_met < phi_lep && phi_met > 0) favour *= -1;					//If the missing energy is outside the interval on the leptonic side (smaller than phi_lep)
+		} else {										//If the leptonic tau has smaller phi
+			if (phi_met > phi_lep && phi_met < 0) favour *= -1;					//If the missing energy is ouside the interval on the leptonic side (larger than phi_lep)
+		}
+	} else {										//If "inside" of taus DOES NOT contain the +/- pi discontinuity
+		if (phi_lep > phi_had) {								//If the leptonic tau has larger phi
+			if (phi_met > phi_lep || (phi_met < phi_lep - (3/2 * pi))) favour *= -1;		//If the missing energy is outside the interval on the leptonic side (larger than phi_lep)
+		} else {										//If the leptonic tau has smaller phi
+			if (phi_met < phi_lep || (phi_met > phi_lep + (3/2 * pi))) favour *= -1;		//If the missing energy is ouside the interval on the leptonic side (smaller than phi_lep)
+		}
 	}
-
-	if (Phi_3 > Phi_2) favour = (Phi_3 - Phi_E)/(Phi_3 - Phi_2);
-	else if (Phi_3 < Phi_2) favour = 1 - (Phi_2 - Phi_E)/(Phi_2 - Phi_3);
 
 	return favour;
 
