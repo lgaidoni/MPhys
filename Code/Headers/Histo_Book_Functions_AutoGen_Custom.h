@@ -472,9 +472,63 @@ void MC_Analysis::Book_MET_Type_Favour(int bins, double min, double max) {
 }
 
 
+// -- Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
+void MC_Analysis::Book_MET_Type_Favour_INSIDE(int bins, double min, double max) {
+	h_MET_Type_Favour_INSIDE = new TH1F("h_MET_Type_Favour_INSIDE", "", bins, min, max);
+	h_MET_Type_Favour_INSIDE_PRE = new TH1F("h_MET_Type_Favour_INSIDE_PRE", "", bins, min, max);
+	h_MET_Type_Favour_INSIDE_CONTROL = new TH1F("h_MET_Type_Favour_INSIDE_CONTROL", "", bins, min, max);
+	h_MET_Type_Favour_INSIDE_EXCEPT = new TH1F("h_MET_Type_Favour_INSIDE_EXCEPT", "", bins, min, max);
+	h_MET_Type_Favour_INSIDE_BJET = new TH1F("h_MET_Type_Favour_INSIDE_BJET", "", bins, min, max);
+
+	h_MET_Type_Favour_INSIDE_HIGH_E = new TH1F("h_MET_Type_Favour_INSIDE_HIGH_E", "", bins, min, max);
+
+	hv_MET_Type_Favour_INSIDE.push_back(h_MET_Type_Favour_INSIDE);
+	hv_MET_Type_Favour_INSIDE.push_back(h_MET_Type_Favour_INSIDE_CONTROL);
+	hv_MET_Type_Favour_INSIDE.push_back(h_MET_Type_Favour_INSIDE_EXCEPT);
+	hv_MET_Type_Favour_INSIDE.push_back(h_MET_Type_Favour_INSIDE_PRE);
+	hv_MET_Type_Favour_INSIDE.push_back(h_MET_Type_Favour_INSIDE_BJET);
+
+	hv_MET_Type_Favour_INSIDE.push_back(h_MET_Type_Favour_INSIDE_HIGH_E);
+
+	hv_MET_Type_Favour_INSIDE_names.push_back("h_MET_Type_Favour_INSIDE");
+	hv_MET_Type_Favour_INSIDE_names.push_back("h_MET_Type_Favour_INSIDE_CONTROL");
+	hv_MET_Type_Favour_INSIDE_names.push_back("h_MET_Type_Favour_INSIDE_EXCEPT");
+	hv_MET_Type_Favour_INSIDE_names.push_back("h_MET_Type_Favour_INSIDE_PRE");
+	hv_MET_Type_Favour_INSIDE_names.push_back("h_MET_Type_Favour_INSIDE_BJET");
+	hv_MET_Type_Favour_INSIDE_names.push_back("h_MET_Type_Favour_INSIDE_HIGH_E");
+}
+
+
+// -- Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
+void MC_Analysis::Book_MET_Type_Favour_OUTSIDE(int bins, double min, double max) {
+	h_MET_Type_Favour_OUTSIDE = new TH1F("h_MET_Type_Favour_OUTSIDE", "", bins, min, max);
+	h_MET_Type_Favour_OUTSIDE_PRE = new TH1F("h_MET_Type_Favour_OUTSIDE_PRE", "", bins, min, max);
+	h_MET_Type_Favour_OUTSIDE_CONTROL = new TH1F("h_MET_Type_Favour_OUTSIDE_CONTROL", "", bins, min, max);
+	h_MET_Type_Favour_OUTSIDE_EXCEPT = new TH1F("h_MET_Type_Favour_OUTSIDE_EXCEPT", "", bins, min, max);
+	h_MET_Type_Favour_OUTSIDE_BJET = new TH1F("h_MET_Type_Favour_OUTSIDE_BJET", "", bins, min, max);
+
+	h_MET_Type_Favour_OUTSIDE_HIGH_E = new TH1F("h_MET_Type_Favour_OUTSIDE_HIGH_E", "", bins, min, max);
+
+	hv_MET_Type_Favour_OUTSIDE.push_back(h_MET_Type_Favour_OUTSIDE);
+	hv_MET_Type_Favour_OUTSIDE.push_back(h_MET_Type_Favour_OUTSIDE_CONTROL);
+	hv_MET_Type_Favour_OUTSIDE.push_back(h_MET_Type_Favour_OUTSIDE_EXCEPT);
+	hv_MET_Type_Favour_OUTSIDE.push_back(h_MET_Type_Favour_OUTSIDE_PRE);
+	hv_MET_Type_Favour_OUTSIDE.push_back(h_MET_Type_Favour_OUTSIDE_BJET);
+
+	hv_MET_Type_Favour_OUTSIDE.push_back(h_MET_Type_Favour_OUTSIDE_HIGH_E);
+
+	hv_MET_Type_Favour_OUTSIDE_names.push_back("h_MET_Type_Favour_OUTSIDE");
+	hv_MET_Type_Favour_OUTSIDE_names.push_back("h_MET_Type_Favour_OUTSIDE_CONTROL");
+	hv_MET_Type_Favour_OUTSIDE_names.push_back("h_MET_Type_Favour_OUTSIDE_EXCEPT");
+	hv_MET_Type_Favour_OUTSIDE_names.push_back("h_MET_Type_Favour_OUTSIDE_PRE");
+	hv_MET_Type_Favour_OUTSIDE_names.push_back("h_MET_Type_Favour_OUTSIDE_BJET");
+	hv_MET_Type_Favour_OUTSIDE_names.push_back("h_MET_Type_Favour_OUTSIDE_HIGH_E");
+}
+
+
 /// ------------------- RECONSTRUCTED ---------------- ///
 
-// --  reconstructed Z mass with neutrino and z candidatesz
+// --  reconstructed Z mass with neutrino and z candidates
 void MC_Analysis::Book_lep_0_lep_1_mass_reco(int bins, double min, double max) {
 	h_lep_0_lep_1_mass_reco = new TH1F("h_lep_0_lep_1_mass_reco", "", bins, min, max);
 	h_lep_0_lep_1_mass_reco_PRE = new TH1F("h_lep_0_lep_1_mass_reco_PRE", "", bins, min, max);
@@ -482,18 +536,76 @@ void MC_Analysis::Book_lep_0_lep_1_mass_reco(int bins, double min, double max) {
 	h_lep_0_lep_1_mass_reco_EXCEPT = new TH1F("h_lep_0_lep_1_mass_reco_EXCEPT", "", bins, min, max);
 	h_lep_0_lep_1_mass_reco_BJET = new TH1F("h_lep_0_lep_1_mass_reco_BJET", "", bins, min, max);
 
+	h_lep_0_lep_1_mass_reco_HIGH_E = new TH1F("h_lep_0_lep_1_mass_reco_HIGH_E", "", bins, min, max);
+
 	hv_lep_0_lep_1_mass_reco.push_back(h_lep_0_lep_1_mass_reco);
 	hv_lep_0_lep_1_mass_reco.push_back(h_lep_0_lep_1_mass_reco_CONTROL);
 	hv_lep_0_lep_1_mass_reco.push_back(h_lep_0_lep_1_mass_reco_EXCEPT);
 	hv_lep_0_lep_1_mass_reco.push_back(h_lep_0_lep_1_mass_reco_PRE);
 	hv_lep_0_lep_1_mass_reco.push_back(h_lep_0_lep_1_mass_reco_BJET);
 
+	hv_lep_0_lep_1_mass_reco.push_back(h_lep_0_lep_1_mass_reco_HIGH_E);
+
 	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco");
 	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco_CONTROL");
 	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco_EXCEPT");
 	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco_PRE");
 	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco_BJET");
+	hv_lep_0_lep_1_mass_reco_names.push_back("h_lep_0_lep_1_mass_reco_HIGH_E");
+}
 
+
+// --  reconstructed Z mass with neutrino and z candidates only for inside the two leptons
+void MC_Analysis::Book_lep_0_lep_1_mass_reco_INSIDE(int bins, double min, double max) {
+	h_lep_0_lep_1_mass_reco_INSIDE = new TH1F("h_lep_0_lep_1_mass_reco_INSIDE", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_INSIDE_PRE = new TH1F("h_lep_0_lep_1_mass_reco_INSIDE_PRE", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_INSIDE_CONTROL = new TH1F("h_lep_0_lep_1_mass_reco_INSIDE_CONTROL", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT = new TH1F("h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_INSIDE_BJET = new TH1F("h_lep_0_lep_1_mass_reco_INSIDE_BJET", "", bins, min, max);
+
+	h_lep_0_lep_1_mass_reco_INSIDE_HIGH_E = new TH1F("h_lep_0_lep_1_mass_reco_INSIDE_HIGH_E", "", bins, min, max);
+
+	hv_lep_0_lep_1_mass_reco_INSIDE.push_back(h_lep_0_lep_1_mass_reco_INSIDE);
+	hv_lep_0_lep_1_mass_reco_INSIDE.push_back(h_lep_0_lep_1_mass_reco_INSIDE_CONTROL);
+	hv_lep_0_lep_1_mass_reco_INSIDE.push_back(h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT);
+	hv_lep_0_lep_1_mass_reco_INSIDE.push_back(h_lep_0_lep_1_mass_reco_INSIDE_PRE);
+	hv_lep_0_lep_1_mass_reco_INSIDE.push_back(h_lep_0_lep_1_mass_reco_INSIDE_BJET);
+
+	hv_lep_0_lep_1_mass_reco_INSIDE.push_back(h_lep_0_lep_1_mass_reco_INSIDE_HIGH_E);
+
+	hv_lep_0_lep_1_mass_reco_INSIDE_names.push_back("h_lep_0_lep_1_mass_reco_INSIDE");
+	hv_lep_0_lep_1_mass_reco_INSIDE_names.push_back("h_lep_0_lep_1_mass_reco_INSIDE_CONTROL");
+	hv_lep_0_lep_1_mass_reco_INSIDE_names.push_back("h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT");
+	hv_lep_0_lep_1_mass_reco_INSIDE_names.push_back("h_lep_0_lep_1_mass_reco_INSIDE_PRE");
+	hv_lep_0_lep_1_mass_reco_INSIDE_names.push_back("h_lep_0_lep_1_mass_reco_INSIDE_BJET");
+	hv_lep_0_lep_1_mass_reco_INSIDE_names.push_back("h_lep_0_lep_1_mass_reco_INSIDE_HIGH_E");
+}
+
+
+// --  reconstructed Z mass with neutrino and z candidates only for outside the two leptons
+void MC_Analysis::Book_lep_0_lep_1_mass_reco_OUTSIDE(int bins, double min, double max) {
+	h_lep_0_lep_1_mass_reco_OUTSIDE = new TH1F("h_lep_0_lep_1_mass_reco_OUTSIDE", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_OUTSIDE_PRE = new TH1F("h_lep_0_lep_1_mass_reco_OUTSIDE_PRE", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL = new TH1F("h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT = new TH1F("h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_OUTSIDE_BJET = new TH1F("h_lep_0_lep_1_mass_reco_OUTSIDE_BJET", "", bins, min, max);
+
+	h_lep_0_lep_1_mass_reco_OUTSIDE_HIGH_E = new TH1F("h_lep_0_lep_1_mass_reco_OUTSIDE_HIGH_E", "", bins, min, max);
+
+	hv_lep_0_lep_1_mass_reco_OUTSIDE.push_back(h_lep_0_lep_1_mass_reco_OUTSIDE);
+	hv_lep_0_lep_1_mass_reco_OUTSIDE.push_back(h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL);
+	hv_lep_0_lep_1_mass_reco_OUTSIDE.push_back(h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT);
+	hv_lep_0_lep_1_mass_reco_OUTSIDE.push_back(h_lep_0_lep_1_mass_reco_OUTSIDE_PRE);
+	hv_lep_0_lep_1_mass_reco_OUTSIDE.push_back(h_lep_0_lep_1_mass_reco_OUTSIDE_BJET);
+
+	hv_lep_0_lep_1_mass_reco_OUTSIDE.push_back(h_lep_0_lep_1_mass_reco_OUTSIDE_HIGH_E);
+
+	hv_lep_0_lep_1_mass_reco_OUTSIDE_names.push_back("h_lep_0_lep_1_mass_reco_OUTSIDE");
+	hv_lep_0_lep_1_mass_reco_OUTSIDE_names.push_back("h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL");
+	hv_lep_0_lep_1_mass_reco_OUTSIDE_names.push_back("h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT");
+	hv_lep_0_lep_1_mass_reco_OUTSIDE_names.push_back("h_lep_0_lep_1_mass_reco_OUTSIDE_PRE");
+	hv_lep_0_lep_1_mass_reco_OUTSIDE_names.push_back("h_lep_0_lep_1_mass_reco_OUTSIDE_BJET");
+	hv_lep_0_lep_1_mass_reco_OUTSIDE_names.push_back("h_lep_0_lep_1_mass_reco_OUTSIDE_HIGH_E");
 }
 
 
@@ -505,18 +617,22 @@ void MC_Analysis::Book_DeltaR_reco(int bins, double min, double max) {
 	h_DeltaR_reco_EXCEPT = new TH1F("h_DeltaR_reco_EXCEPT", "", bins, min, max);
 	h_DeltaR_reco_BJET = new TH1F("h_DeltaR_reco_BJET", "", bins, min, max);
 
+	h_DeltaR_reco_HIGH_E = new TH1F("h_DeltaR_reco_HIGH_E", "", bins, min, max);
+
 	hv_DeltaR_reco.push_back(h_DeltaR_reco);
 	hv_DeltaR_reco.push_back(h_DeltaR_reco_CONTROL);
 	hv_DeltaR_reco.push_back(h_DeltaR_reco_EXCEPT);
 	hv_DeltaR_reco.push_back(h_DeltaR_reco_PRE);
 	hv_DeltaR_reco.push_back(h_DeltaR_reco_BJET);
 
+	hv_DeltaR_reco.push_back(h_DeltaR_reco_HIGH_E);
+
 	hv_DeltaR_reco_names.push_back("h_DeltaR_reco");
 	hv_DeltaR_reco_names.push_back("h_DeltaR_reco_CONTROL");
 	hv_DeltaR_reco_names.push_back("h_DeltaR_reco_EXCEPT");
 	hv_DeltaR_reco_names.push_back("h_DeltaR_reco_PRE");
 	hv_DeltaR_reco_names.push_back("h_DeltaR_reco_BJET");
-
+	hv_DeltaR_reco_names.push_back("h_DeltaR_reco_HIGH_E");
 }
 
 
@@ -528,24 +644,24 @@ void MC_Analysis::Book_lep_0_lep_1_pt_reco(int bins, double min, double max) {
 	h_lep_0_lep_1_pt_reco_EXCEPT = new TH1F("h_lep_0_lep_1_pt_reco_EXCEPT", "", bins, min, max);
 	h_lep_0_lep_1_pt_reco_BJET = new TH1F("h_lep_0_lep_1_pt_reco_BJET", "", bins, min, max);
 
+	h_lep_0_lep_1_pt_reco_HIGH_E = new TH1F("h_lep_0_lep_1_pt_reco_HIGH_E", "", bins, min, max);
+
 	hv_lep_0_lep_1_pt_reco.push_back(h_lep_0_lep_1_pt_reco);
 	hv_lep_0_lep_1_pt_reco.push_back(h_lep_0_lep_1_pt_reco_CONTROL);
 	hv_lep_0_lep_1_pt_reco.push_back(h_lep_0_lep_1_pt_reco_EXCEPT);
 	hv_lep_0_lep_1_pt_reco.push_back(h_lep_0_lep_1_pt_reco_PRE);
 	hv_lep_0_lep_1_pt_reco.push_back(h_lep_0_lep_1_pt_reco_BJET);
 
+	hv_lep_0_lep_1_pt_reco.push_back(h_lep_0_lep_1_pt_reco_HIGH_E);
+
 	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco");
 	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco_CONTROL");
 	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco_EXCEPT");
 	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco_PRE");
 	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco_BJET");
-
+	hv_lep_0_lep_1_pt_reco_names.push_back("h_lep_0_lep_1_pt_reco_HIGH_E");
 }
 
-
-/// ------------------- lep_0_reco_p4:global variables for lepton 0 reconstructed ---------------- ///
-
-/// ------------------- lep_1_reco_p4:global variables for lepton 1 reconstructed ---------------- ///
 
 // -- Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
 void MC_Analysis::Book_Centrality_reco(int bins, double min, double max) {
@@ -555,18 +671,22 @@ void MC_Analysis::Book_Centrality_reco(int bins, double min, double max) {
 	h_Centrality_reco_EXCEPT = new TH1F("h_Centrality_reco_EXCEPT", "", bins, min, max);
 	h_Centrality_reco_BJET = new TH1F("h_Centrality_reco_BJET", "", bins, min, max);
 
+	h_Centrality_reco_HIGH_E = new TH1F("h_Centrality_reco_HIGH_E", "", bins, min, max);
+
 	hv_Centrality_reco.push_back(h_Centrality_reco);
 	hv_Centrality_reco.push_back(h_Centrality_reco_CONTROL);
 	hv_Centrality_reco.push_back(h_Centrality_reco_EXCEPT);
 	hv_Centrality_reco.push_back(h_Centrality_reco_PRE);
 	hv_Centrality_reco.push_back(h_Centrality_reco_BJET);
 
+	hv_Centrality_reco.push_back(h_Centrality_reco_HIGH_E);
+
 	hv_Centrality_reco_names.push_back("h_Centrality_reco");
 	hv_Centrality_reco_names.push_back("h_Centrality_reco_CONTROL");
 	hv_Centrality_reco_names.push_back("h_Centrality_reco_EXCEPT");
 	hv_Centrality_reco_names.push_back("h_Centrality_reco_PRE");
 	hv_Centrality_reco_names.push_back("h_Centrality_reco_BJET");
-
+	hv_Centrality_reco_names.push_back("h_Centrality_reco_HIGH_E");
 }
 
 

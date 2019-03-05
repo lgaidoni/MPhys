@@ -109,8 +109,20 @@
 	//Histogram Bookings for MET_Type_Favour
 	Book_MET_Type_Favour(bins, MET_Type_Favour_Min, MET_Type_Favour_Max);
 
+	//Histogram Bookings for MET_Type_Favour_INSIDE
+	Book_MET_Type_Favour_INSIDE(bins, MET_Type_Favour_INSIDE_Min, MET_Type_Favour_INSIDE_Max);
+
+	//Histogram Bookings for MET_Type_Favour_OUTSIDE
+	Book_MET_Type_Favour_OUTSIDE(bins, MET_Type_Favour_OUTSIDE_Min, MET_Type_Favour_OUTSIDE_Max);
+
 	//Histogram Bookings for lep_0_lep_1_mass_reco
 	Book_lep_0_lep_1_mass_reco(bins, lep_0_lep_1_mass_reco_Min, lep_0_lep_1_mass_reco_Max);
+
+	//Histogram Bookings for lep_0_lep_1_mass_reco_INSIDE
+	Book_lep_0_lep_1_mass_reco_INSIDE(bins, lep_0_lep_1_mass_reco_INSIDE_Min, lep_0_lep_1_mass_reco_INSIDE_Max);
+
+	//Histogram Bookings for lep_0_lep_1_mass_reco_OUTSIDE
+	Book_lep_0_lep_1_mass_reco_OUTSIDE(bins, lep_0_lep_1_mass_reco_OUTSIDE_Min, lep_0_lep_1_mass_reco_OUTSIDE_Max);
 
 	//Histogram Bookings for DeltaR_reco
 	Book_DeltaR_reco(bins, DeltaR_reco_Min, DeltaR_reco_Max);
