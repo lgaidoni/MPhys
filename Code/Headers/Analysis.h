@@ -301,7 +301,7 @@ void MC_Analysis::ParticleSelection() {
 }
 
 //This function will perform the inital cuts, ensuring we have all the particles needed for analysis, selecting ljets
-bool MC_Analysis::InitialCut(bool bjets) {
+bool MC_Analysis::InitialCut(bool bjets) { // true = cut, false = keep
 
 	//Setting up conditions
 	bool two_leptons = false;
@@ -311,14 +311,13 @@ bool MC_Analysis::InitialCut(bool bjets) {
 	bool jet_0_pt_greater = false;
 	bool jet_1_pt_greater = false;
 	bool phi_realistic_condition = true;
-
 	double jet_0_pt;
 	double jet_1_pt;
 
 	//Is the missing energy physically realistic condition
 	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 		phi_realistic_condition = false;
-		phi_realistic_condition = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_reco_p4);
+		phi_realistic_condition = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_reco_p4); // returns true if want to keep (inside), false if outside
 	}
 
 	//Condition Checking
@@ -349,6 +348,7 @@ bool MC_Analysis::InitialCut(bool bjets) {
 
 	// If the conditions are met, don't cut
 	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater && phi_realistic_condition) return false;
+	
 	//Otherwise, cut
 	return true;	
 
@@ -376,7 +376,7 @@ void MC_Analysis::GenerateVariables() {
 	if (PhiIntervalInOrOut(lep_0_p4, lep_1_p4, met_reco_p4)) { // outside the phi interval so need to see which one it favours
 		
 		// want to calcualate which tau it is closer to and find Et component along that tau vector
-		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_reco_p4 ) ) { // closer to lep_0
+		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_reco_p4 ) ) { // closer to lep_0 aka TRUE
 			
 			// Et_along_0 should be TLorentzVector along lep_0
 			Et_along_0 = ETalongVectorCalc(lep_0_p4, met_reco_p4);	// Et along a
@@ -394,7 +394,7 @@ void MC_Analysis::GenerateVariables() {
 
 
 		}
-		else { // closer to lep_1
+		else { // closer to lep_1 aka FALSE
 			// Et_along_1 should be TLorentzVector along lep_1
 			Et_along_1 = ETalongVectorCalc(lep_1_p4, met_reco_p4);	// Et along a
 			Et_along_0 = 0;
@@ -444,8 +444,8 @@ void MC_Analysis::GenerateVariables() {
 
 	//Invariant Mass
 
-	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
-	lep_0_lep_1_mass_reconstructed = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
+	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4); // use standard TLorentzVectors given to us
+	lep_0_lep_1_mass_reconstructed = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4); // use new created TLorentzVectors made in lines 437-440 for reconstructed neutrinos
 
 	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
 
@@ -592,7 +592,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "search" && (AnalysisType != "Electron" || AnalysisType != "Muon")) { pT_balance_limit = true; pT_balance_limit_3 = true; }
 	*/
 
-	if (region == "bjet" ) Z_mass_condition = true;
+	if (region == "bjet" ) Z_mass_condition = true; // Z mass = true means we are NOT cutting on Z mass
 
 	bool common_cuts = false;	//The common cuts are false initially
 

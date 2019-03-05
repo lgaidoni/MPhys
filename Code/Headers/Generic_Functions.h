@@ -958,7 +958,6 @@ bool PhiIntervalInOrOut(TLorentzVector *Vector1, TLorentzVector *Vector2, TLoren
 bool ETFavourCalc(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzVector *Vector3){ // vec1 = pT of tau a, vec2 = pT of tau b, vec3 = pT of Etmiss (MET)
 // Et_along_b = Et . unit vector of tau b ,  Et_along_a = Et . unit vector of tau a 
 
-	// Do i need these twice? Or will ROOT remember?
 	double delta_phi_aEt = DeltaPhi_v2(Vector1, Vector3);// delta phi between Et and a
 	double delta_phi_bEt = DeltaPhi_v2(Vector2, Vector3); // delta phi between Et and b
 	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
@@ -981,8 +980,8 @@ bool EtMiss_OutOfReachCheck(TLorentzVector *Vector1, TLorentzVector *Vector2, TL
 	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
 	
 	//if (delta_phi_aEt + delta_phi_bEt > pi){ return false; } // outside of range, cut!!
-	if (delta_phi_aEt + delta_phi_bEt < pi){ return true; } // inside range, leave.
-	return false;
+	if (delta_phi_aEt + delta_phi_bEt <= pi){ return true; } // inside range, leave.
+	return false; // else return false?
 }
 
 // This function calculated the p_T^{balance} 
@@ -1229,8 +1228,12 @@ vector<double> pTneutrinovector_calc(TLorentzVector *Vector1, TLorentzVector *Ve
 	double neutrinoa, neutrinob; // transverse mometum of neutrino a and b resp
 	vector<double> pTneutrinovector; // vector for storing neutrino a transverse momentum and neutrino b transverse momentum
 
-	neutrinoa = (a2*c1 - a1*c2)/(a2*b1 - a1*b2);
-	neutrinob = (c1 - b1*neutrinoa)/a1;
+	//neutrinoa = (a2*c1 - a1*c2)/(a2*b1 - a1*b2);
+	//neutrinob = (c1 - b1*neutrinoa)/a1;
+	// EDITED Thu 28th Feb 4:25 pm Alice (rederived and got different ans so changed)
+	neutrinoa = (c1*b2 - c2*b1) / (a1*b2 - a2*b1); // x in equation
+	neutrinob = (c1*a2 - c2*a1)/ (b1*a2 - b2*a1);
+
 	//Cramer's Rule
 	//Derived in Luca's Book, page marked with I
 	//Found on Stack Overflow, "Solving simultanous equations with C++"
