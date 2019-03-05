@@ -79,9 +79,4 @@ lep_0_lep_1_mass_reco_OUTSIDE_HIGH_E
 lep_0_lep_1_pt_reco
 lep_0_lep_1_pt_reco_PRE
 lep_0_lep_1_pt_reco_CONTROL
-pT_balance_reco_PRE
-pT_balance_reco
-pT_balance_reco_EXCEPT
-pT_balance_reco_BJET
-pT_balance_reco_HIGH_E
 Mass_Favour_Combination_2D
