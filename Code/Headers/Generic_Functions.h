@@ -1041,7 +1041,7 @@ void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string Dat
 void DrawStackedProcesses(string AnalysisType) {
 
 	//Open the list of DataTypes to be stacked and drawn
-	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
+	string DataTypeFileName = "../../MPhys/DataTypes/Common_DataTypes.txt";
 	ifstream DataTypeFile (DataTypeFileName);
 	string line;
 
