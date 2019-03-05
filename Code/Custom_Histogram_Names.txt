@@ -21,12 +21,14 @@ MET_Centrality:Missing transversE Momentum centrality
 neutrino_0_pt:missing energy of neutrino 1
 neutrino_1_pt:missing energy of neutrino 2
 MET_Type_Favour:Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
+MET_Type_Favour_INSIDE:Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
+MET_Type_Favour_OUTSIDE:Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
 ##RECONSTRUCTED
-lep_0_lep_1_mass_reco: reconstructed Z mass with neutrino and z candidatesz
+lep_0_lep_1_mass_reco: reconstructed Z mass with neutrino and z candidates
+lep_0_lep_1_mass_reco_INSIDE: reconstructed Z mass with neutrino and z candidates only for inside the two leptons
+lep_0_lep_1_mass_reco_OUTSIDE: reconstructed Z mass with neutrino and z candidates only for outside the two leptons
 DeltaR_reco:Distance in R space between two leptons (reconstructed with missing neutrino energy included)
 lep_0_lep_1_pt_reco:Combined transverse momentum of lepton 0 and lepton 1 (reconstructed with missing neutrino energy included)
-##lep_0_reco_p4:global variables for lepton 0 reconstructed
-##lep_1_reco_p4:global variables for lepton 1 reconstructed
 Centrality_reco:Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
 $$Test_Polar_Plot,met_reco_p4_Phi,met_reco_p4_Pt:This is a test of a polar plot
 $$Mass_Favour_Combination_2D,MET_Type_Favour,lep_0_lep_1_mass:2D plot of dilepton invariant mass and favour for the purposes of discovering leptons which favour one flavour over another
