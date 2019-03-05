@@ -85,5 +85,3 @@ pT_balance_reco_EXCEPT
 pT_balance_reco_BJET
 pT_balance_reco_HIGH_E
 Mass_Favour_Combination_2D
-Mass_Favour_Combination_INSIDE_2D
-Mass_Favour_Combination_OUTSIDE_2D
