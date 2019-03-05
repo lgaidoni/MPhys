@@ -75,6 +75,16 @@ void MC_Analysis::BookHistos() {
 	int Mass_Favour_Combination_2D_xMax = 2;
 	int Mass_Favour_Combination_2D_yMin = 0;
 	int Mass_Favour_Combination_2D_yMax = 160;
+
+	int Mass_Favour_Combination_INSIDE_2D_xMin = -1;
+	int Mass_Favour_Combination_INSIDE_2D_xMax = 2;
+	int Mass_Favour_Combination_INSIDE_2D_yMin = 0;
+	int Mass_Favour_Combination_INSIDE_2D_yMax = 160;
+
+	int Mass_Favour_Combination_OUTSIDE_2D_xMin = -1;
+	int Mass_Favour_Combination_OUTSIDE_2D_xMax = 2;
+	int Mass_Favour_Combination_OUTSIDE_2D_yMin = 0;
+	int Mass_Favour_Combination_OUTSIDE_2D_yMax = 160;
   
 	int lep_0_reco_p4_xMin = 0 - pi;
 	int lep_0_reco_p4_xMax = 0 + pi;
@@ -449,7 +459,7 @@ void MC_Analysis::GenerateVariables() {
 	lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 
 	//Invariant Mass
-  lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
+  	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
 	lep_0_lep_1_mass_reco = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
 
 	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
@@ -731,8 +741,8 @@ void MC_Analysis::Fill() {
 		// missing energy in phi space
 		h_Test_Polar_Plot->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
     
-		h_Mass_Favour_Combination_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass, final_weighting);
-    
+		h_Mass_Favour_Combination_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+
 		// reconstructed lepton 1 momentum in phi space
 		h_lep_0_reco_p4->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
 		// reconstructed lepton 2 momentum in phi space
@@ -767,10 +777,12 @@ void MC_Analysis::Fill() {
 
 			if (outside_leptons) {
 
+				h_Mass_Favour_Combination_INSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 				h_lep_0_lep_1_mass_reco_OUTSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
 
 			} else {
 
+				h_Mass_Favour_Combination_OUTSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 				h_lep_0_lep_1_mass_reco_INSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
 
 			}
@@ -1012,6 +1024,8 @@ void MC_Analysis::DrawHistos() {
 
 	// reconstructed Z mass with tau candidates and neutrinos
 	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_OUTSIDE_PRE, h_lep_0_lep_1_mass_reco_OUTSIDE, h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL, "lep_0_lep_1_mass_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco_OUTSIDE", ";Z mass incl neutrinos Inside;Events", true, ChainName, AnalysisType);		
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_INSIDE_PRE, h_lep_0_lep_1_mass_reco_INSIDE, h_lep_0_lep_1_mass_reco_INSIDE_CONTROL, "lep_0_lep_1_mass_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco_INSIDE", ";Z mass incl neutrinos Outside;Events", true, ChainName, AnalysisType);	
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reco_PRE, h_DeltaR_reco, h_DeltaR_reco_CONTROL, "\\Delta R_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reco", ";Delta R;Events",true, ChainName, AnalysisType);	
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reco_PRE, h_Centrality_reco, h_Centrality_reco_CONTROL, "Centrality_reco", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reco", ";Centrality;Events", true, ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reco_PRE, h_lep_0_lep_1_pt_reco, h_lep_0_lep_1_pt_reco_CONTROL, "lep_0_lep_1_pt_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reco", ";Z momentum incl neutrinos;Events", true, ChainName, AnalysisType);	
@@ -1021,7 +1035,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed lepton 1 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
 	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed leptons 2 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
   
-  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Momentum [GeV/c]", false, false, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, false, ChainName, AnalysisType);
 	
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
