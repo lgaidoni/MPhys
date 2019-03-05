@@ -744,6 +744,60 @@ void MC_Analysis::Book_Mass_Favour_Combination_2D(int xbins, double xmin, double
 }
 
 
+// -- 2D plot of dilepton invariant mass and favour for missing energy inside the two leptons
+void MC_Analysis::Book_Mass_Favour_Combination_INSIDE_2D(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax) {
+	h_Mass_Favour_Combination_INSIDE_2D = new TH2F("h_Mass_Favour_Combination_INSIDE_2D", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Mass_Favour_Combination_INSIDE_2D_PRE = new TH2F("h_Mass_Favour_Combination_INSIDE_2D_PRE", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Mass_Favour_Combination_INSIDE_2D_CONTROL = new TH2F("h_Mass_Favour_Combination_INSIDE_2D_CONTROL", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Mass_Favour_Combination_INSIDE_2D_EXCEPT = new TH2F("h_Mass_Favour_Combination_INSIDE_2D_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Mass_Favour_Combination_INSIDE_2D_BJET = new TH2F("h_Mass_Favour_Combination_INSIDE_2D_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
+	h_Mass_Favour_Combination_INSIDE_2D_HIGH_E = new TH2F("h_Mass_Favour_Combination_INSIDE_2D_HIGH_E", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
+	hv_Mass_Favour_Combination_INSIDE_2D.push_back(h_Mass_Favour_Combination_INSIDE_2D);
+	hv_Mass_Favour_Combination_INSIDE_2D.push_back(h_Mass_Favour_Combination_INSIDE_2D_CONTROL);
+	hv_Mass_Favour_Combination_INSIDE_2D.push_back(h_Mass_Favour_Combination_INSIDE_2D_EXCEPT);
+	hv_Mass_Favour_Combination_INSIDE_2D.push_back(h_Mass_Favour_Combination_INSIDE_2D_PRE);
+	hv_Mass_Favour_Combination_INSIDE_2D.push_back(h_Mass_Favour_Combination_INSIDE_2D_BJET);
+
+	hv_Mass_Favour_Combination_INSIDE_2D.push_back(h_Mass_Favour_Combination_INSIDE_2D_HIGH_E);
+
+	hv_Mass_Favour_Combination_INSIDE_2D_names.push_back("h_Mass_Favour_Combination_INSIDE_2D");
+	hv_Mass_Favour_Combination_INSIDE_2D_names.push_back("h_Mass_Favour_Combination_INSIDE_2D_CONTROL");
+	hv_Mass_Favour_Combination_INSIDE_2D_names.push_back("h_Mass_Favour_Combination_INSIDE_2D_EXCEPT");
+	hv_Mass_Favour_Combination_INSIDE_2D_names.push_back("h_Mass_Favour_Combination_INSIDE_2D_PRE");
+	hv_Mass_Favour_Combination_INSIDE_2D_names.push_back("h_Mass_Favour_Combination_INSIDE_2D_BJET");
+	hv_Mass_Favour_Combination_INSIDE_2D_names.push_back("h_Mass_Favour_Combination_INSIDE_2D_HIGH_E");
+}
+
+
+// -- 2D plot of dilepton invariant mass and favour for missing energy outside the two leptons
+void MC_Analysis::Book_Mass_Favour_Combination_OUTSIDE_2D(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax) {
+	h_Mass_Favour_Combination_OUTSIDE_2D = new TH2F("h_Mass_Favour_Combination_OUTSIDE_2D", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Mass_Favour_Combination_OUTSIDE_2D_PRE = new TH2F("h_Mass_Favour_Combination_OUTSIDE_2D_PRE", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Mass_Favour_Combination_OUTSIDE_2D_CONTROL = new TH2F("h_Mass_Favour_Combination_OUTSIDE_2D_CONTROL", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Mass_Favour_Combination_OUTSIDE_2D_EXCEPT = new TH2F("h_Mass_Favour_Combination_OUTSIDE_2D_EXCEPT", "", xbins, xmin, xmax, ybins, ymin, ymax);
+	h_Mass_Favour_Combination_OUTSIDE_2D_BJET = new TH2F("h_Mass_Favour_Combination_OUTSIDE_2D_BJET", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
+	h_Mass_Favour_Combination_OUTSIDE_2D_HIGH_E = new TH2F("h_Mass_Favour_Combination_OUTSIDE_2D_HIGH_E", "", xbins, xmin, xmax, ybins, ymin, ymax);
+
+	hv_Mass_Favour_Combination_OUTSIDE_2D.push_back(h_Mass_Favour_Combination_OUTSIDE_2D);
+	hv_Mass_Favour_Combination_OUTSIDE_2D.push_back(h_Mass_Favour_Combination_OUTSIDE_2D_CONTROL);
+	hv_Mass_Favour_Combination_OUTSIDE_2D.push_back(h_Mass_Favour_Combination_OUTSIDE_2D_EXCEPT);
+	hv_Mass_Favour_Combination_OUTSIDE_2D.push_back(h_Mass_Favour_Combination_OUTSIDE_2D_PRE);
+	hv_Mass_Favour_Combination_OUTSIDE_2D.push_back(h_Mass_Favour_Combination_OUTSIDE_2D_BJET);
+
+	hv_Mass_Favour_Combination_OUTSIDE_2D.push_back(h_Mass_Favour_Combination_OUTSIDE_2D_HIGH_E);
+
+	hv_Mass_Favour_Combination_OUTSIDE_2D_names.push_back("h_Mass_Favour_Combination_OUTSIDE_2D");
+	hv_Mass_Favour_Combination_OUTSIDE_2D_names.push_back("h_Mass_Favour_Combination_OUTSIDE_2D_CONTROL");
+	hv_Mass_Favour_Combination_OUTSIDE_2D_names.push_back("h_Mass_Favour_Combination_OUTSIDE_2D_EXCEPT");
+	hv_Mass_Favour_Combination_OUTSIDE_2D_names.push_back("h_Mass_Favour_Combination_OUTSIDE_2D_PRE");
+	hv_Mass_Favour_Combination_OUTSIDE_2D_names.push_back("h_Mass_Favour_Combination_OUTSIDE_2D_BJET");
+	hv_Mass_Favour_Combination_OUTSIDE_2D_names.push_back("h_Mass_Favour_Combination_OUTSIDE_2D_HIGH_E");
+}
+
+
 // -- This is a test of a polar plot
 void MC_Analysis::Book_lep_0_reco_p4(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax) {
 	h_lep_0_reco_p4 = new TH2F("h_lep_0_reco_p4", "", xbins, xmin, xmax, ybins, ymin, ymax);

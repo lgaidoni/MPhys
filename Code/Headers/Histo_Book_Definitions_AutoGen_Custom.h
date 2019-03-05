@@ -362,6 +362,28 @@ TH2F	*h_Mass_Favour_Combination_2D_HIGH_E; // HIGH_E VERSION
 vector<TH2F*>	hv_Mass_Favour_Combination_2D; // HISTOGRAM VECTOR
 vector<string>	hv_Mass_Favour_Combination_2D_names; // HISTOGRAM NAME VECTOR
 
+// -- 2D plot of dilepton invariant mass and favour for missing energy inside the two leptons
+virtual void Book_Mass_Favour_Combination_INSIDE_2D(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);
+TH2F	*h_Mass_Favour_Combination_INSIDE_2D; // SEARCH VERSION
+TH2F	*h_Mass_Favour_Combination_INSIDE_2D_PRE; // PRE VERSION
+TH2F	*h_Mass_Favour_Combination_INSIDE_2D_CONTROL; // CONTROL VERSION
+TH2F	*h_Mass_Favour_Combination_INSIDE_2D_EXCEPT; // EXCEPT VERSION
+TH2F	*h_Mass_Favour_Combination_INSIDE_2D_BJET; // BJET VERSION
+TH2F	*h_Mass_Favour_Combination_INSIDE_2D_HIGH_E; // HIGH_E VERSION
+vector<TH2F*>	hv_Mass_Favour_Combination_INSIDE_2D; // HISTOGRAM VECTOR
+vector<string>	hv_Mass_Favour_Combination_INSIDE_2D_names; // HISTOGRAM NAME VECTOR
+
+// -- 2D plot of dilepton invariant mass and favour for missing energy outside the two leptons
+virtual void Book_Mass_Favour_Combination_OUTSIDE_2D(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);
+TH2F	*h_Mass_Favour_Combination_OUTSIDE_2D; // SEARCH VERSION
+TH2F	*h_Mass_Favour_Combination_OUTSIDE_2D_PRE; // PRE VERSION
+TH2F	*h_Mass_Favour_Combination_OUTSIDE_2D_CONTROL; // CONTROL VERSION
+TH2F	*h_Mass_Favour_Combination_OUTSIDE_2D_EXCEPT; // EXCEPT VERSION
+TH2F	*h_Mass_Favour_Combination_OUTSIDE_2D_BJET; // BJET VERSION
+TH2F	*h_Mass_Favour_Combination_OUTSIDE_2D_HIGH_E; // HIGH_E VERSION
+vector<TH2F*>	hv_Mass_Favour_Combination_OUTSIDE_2D; // HISTOGRAM VECTOR
+vector<string>	hv_Mass_Favour_Combination_OUTSIDE_2D_names; // HISTOGRAM NAME VECTOR
+
 // -- This is a test of a polar plot
 virtual void Book_lep_0_reco_p4(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);
 TH2F	*h_lep_0_reco_p4; // SEARCH VERSION

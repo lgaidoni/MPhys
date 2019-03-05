@@ -8,6 +8,9 @@ analysis_start_functions = open("Headers/Analysis_Start_Functions.h", "w")
 run_all_analyses = open("Headers/Run_All_Analyses_Functions.h", "w")
 run_all_analyses_shell = open("Run_All_Analyses_V2.sh", "w")
 
+Types = ["Electron","ElectronMuon","ElectronTau","Muon","MuonTau"]
+Regions = ["SEARCH", "CONTROL", "BJET", "HIGH_E", "PRE", "EXCEPT"]
+
 def process_line_writer(inputFile, line, Name, AnalysisType, Process):
 	if (line.find(Process) != -1): 
 		inputFile.write("../../Root-Files/" + AnalysisType + "/" + Name + "_Histograms.root\n")
@@ -110,35 +113,11 @@ name = ""
 ID = ""
 counter = 0
 
-try:
-	os.makedirs("../../Root-Files/Electron/Processes")
-except:
-	value = 1
-
-try:
-	os.makedirs("../../Root-Files/ElectronMuon/Processes")
-except:
-	value = 1
-
-try:
-	os.makedirs("../../Root-Files/Muon/Processes")
-except:
-	value = 1
-
-try:
-	os.makedirs("../../Root-Files/Tau/Processes")
-except:
-	value = 1
-
-try:
-	os.makedirs("../../Root-Files/ElectronTau/Processes")
-except:
-	value = 1
-
-try:
-	os.makedirs("../../Root-Files/MuonTau/Processes")
-except:
-	value = 1
+for Type in Types:
+	try:
+		os.makedirs("../../Root-Files/" + Type +  "/Processes")
+	except:
+		value = 1
 
 for line in mc_locations:
 
@@ -163,41 +142,12 @@ for line in mc_locations:
 
 		run_all_analyses_shell.write("root \"Start_Analysis.C(\\\\\\\"Start_" + name + "_Analysis\\\\\\\",\\\\\\\"Electron\\\\\\\")\" -l -b\n")
 
-		try:
-			os.makedirs("../../Output-Files/Electron/" + name)
-			print("../../Output-Files/Electron/" + name + " Created")
-		except:
-			print("../../Output-Files/Electron/" + name + " Already Exists")
-
-		try:
-			os.makedirs("../../Output-Files/ElectronMuon/" + name)
-			print("../../Output-Files/ElectronMuon/" + name + " Created")
-		except:
-			print("../../Output-Files/ElectronMuon/" + name + " Already Exists")
-
-		try:
-			os.makedirs("../../Output-Files/Tau/" + name)
-			print("../../Output-Files/Tau/" + name + " Created")
-		except:
-			print("../../Output-Files/Tau/" + name + " Already Exists")
-
-		try:
-			os.makedirs("../../Output-Files/Muon/" + name)
-			print("../../Output-Files/Muon/" + name + " Created")
-		except:
-			print("../../Output-Files/Muon/" + name + " Already Exists")
-
-		try:
-			os.makedirs("../../Output-Files/MuonTau/" + name)
-			print("../../Output-Files/MuonTau/" + name + " Created")
-		except:
-			print("../../Output-Files/MuonTau/" + name + " Already Exists")
-
-		try:
-			os.makedirs("../../Output-Files/ElectronTau/" + name)
-			print("../../Output-Files/ElectronTau/" + name + " Created")
-		except:
-			print("../../Output-Files/ElectronTau/" + name + " Already Exists")
+		for Type in Types:
+			try:
+				os.makedirs("../../Output-Files/" + Type +  "/" + name)
+				print("../../Output-Files/" + Type +  "/" + name + " Created")
+			except:
+				print("../../Output-Files/" + Type +  "/" + name + " Already Exists")
 
 	elif line[0:2] == "@@":
 		ID = line[2:len(line)-1]
@@ -228,41 +178,12 @@ name = "DATA"
 ID = ""
 counter = 0
 
-try:
-	os.makedirs("../../Output-Files/Muon/DATA")
-	print("../../Output-Files/Muon/DATA Created")
-except:
-	print("../../Output-Files/Muon/DATA Exists")
-
-try:
-	os.makedirs("../../Output-Files/Electron/DATA")
-	print("../../Output-Files/Electron/DATA Created")
-except:
-	print("../../Output-Files/Electron/DATA Exists")
-
-try:
-	os.makedirs("../../Output-Files/ElectronMuon/DATA")
-	print("../../Output-Files/ElectronMuon/DATA Created")
-except:
-	print("../../Output-Files/ElectronMuon/DATA Exists")
-
-try:
-	os.makedirs("../../Output-Files/Tau/DATA")
-	print("../../Output-Files/Tau/DATA Created")
-except:
-	print("../../Output-Files/Tau/DATA Exists")
-
-try:
-	os.makedirs("../../Output-Files/ElectronTau/DATA")
-	print("../../Output-Files/ElectronTau/DATA Created")
-except:
-	print("../../Output-Files/ElectronTau/DATA Exists")
-
-try:
-	os.makedirs("../../Output-Files/MuonTau/DATA")
-	print("../../Output-Files/MuonTau/DATA Created")
-except:
-	print("../../Output-Files/MuonTau/DATA Exists")
+for Type in Types:
+	try:
+		os.makedirs("../../Output-Files/" + Type +  "/DATA")
+		print("../../Output-Files/" + Type +  "/DATA Created")
+	except:
+		print("../../Output-Files/" + Type +  "/DATA Already Exists")
 
 run_all_analyses_writer_centre(run_all_analyses, "DATA")
 
@@ -333,41 +254,13 @@ for line in data_locations:
 
 			analysis_start_function_writer_data(analysis_start_functions, ID, name)
 
-			try:
-				os.makedirs("../../Output-Files/Electron/" + name)
-				print("../../Output-Files/Electron/" + name + " Created")
-			except:
-				print("../../Output-Files/Electron/" + name + " Already Exists")
 
-			try:
-				os.makedirs("../../Output-Files/ElectronMuon/" + name)
-				print("../../Output-Files/ElectronMuon/" + name + " Created")
-			except:
-				print("../../Output-Files/ElectronMuon/" + name + " Already Exists")
-
-			try:
-				os.makedirs("../../Output-Files/Tau/" + name)
-				print("../../Output-Files/Tau/" + name + " Created")
-			except:
-				print("../../Output-Files/Tau/" + name + " Already Exists")
-
-			try:
-				os.makedirs("../../Output-Files/Muon/" + name)
-				print("../../Output-Files/Muon/" + name + " Created")
-			except:
-				print("../../Output-Files/Muon/" + name + " Already Exists")
-
-			try:
-				os.makedirs("../../Output-Files/MuonTau/" + name)
-				print("../../Output-Files/MuonTau/" + name + " Created")
-			except:
-				print("../../Output-Files/MuonTau/" + name + " Already Exists")
-
-			try:
-				os.makedirs("../../Output-Files/ElectronTau/" + name)
-				print("../../Output-Files/ElectronTau/" + name + " Created")
-			except:
-				print("../../Output-Files/ElectronTau/" + name + " Already Exists")
+			for Type in Types:
+				try:
+					os.makedirs("../../Output-Files/" + Type +  "/" + name)
+					print("../../Output-Files/" + Type +  "/" + name + " Created")
+				except:
+					print("../../Output-Files/" + Type +  "/" + name + " Already Exists")
 
 			chain_functions.write("\treturn NOMINAL;\n")
 			chain_functions.write("} \n\n")
@@ -382,41 +275,12 @@ ElectronTau_data_chain_locations.close()
 Muon_data_chain_locations.close()
 MuonTau_data_chain_locations.close()
 
-try:
-	os.makedirs("../../Output-Files/Electron/" + name)
-	print("../../Output-Files/Electron/" + name + " Created")
-except:
-	print("../../Output-Files/Electron/" + name + " Already Exists")
-
-try:
-	os.makedirs("../../Output-Files/ElectronMuon/" + name)
-	print("../../Output-Files/ElectronMuon/" + name + " Created")
-except:
-	print("../../Output-Files/ElectronMuon/" + name + " Already Exists")
-
-try:
-	os.makedirs("../../Output-Files/Tau/" + name)
-	print("../../Output-Files/Tau/" + name + " Created")
-except:
-	print("../../Output-Files/Tau/" + name + " Already Exists")
-
-try:
-	os.makedirs("../../Output-Files/Muon/" + name)
-	print("../../Output-Files/Muon/" + name + " Created")
-except:
-	print("../../Output-Files/Muon/" + name + " Already Exists")
-
-try:
-	os.makedirs("../../Output-Files/MuonTau/" + name)
-	print("../../Output-Files/MuonTau/" + name + " Created")
-except:
-	print("../../Output-Files/MuonTau/" + name + " Already Exists")
-
-try:
-	os.makedirs("../../Output-Files/ElectronTau/" + name)
-	print("../../Output-Files/ElectronTau/" + name + " Created")
-except:
-	print("../../Output-Files/ElectronTau/" + name + " Already Exists")
+for Type in Types:
+	try:
+		os.makedirs("../../Output-Files/" + Type +  "/" + name)
+		print("../../Output-Files/" + Type +  "/" + name + " Created")
+	except:
+		print("../../Output-Files/" + Type +  "/" + name + " Already Exists")
 		
 chain_functions.write("\treturn NOMINAL;\n")
 chain_functions.write("} \n\n")
@@ -430,41 +294,19 @@ process_chains_writer("MuonTau")
 
 chain_functions.write("#endif")
 
-try:
-	os.makedirs("../../Output-Files/Final_Graphs/Muon")
-	print("../../Output-Files/Final_Graphs/Muon Created")
-except:
-	print("../../Output-Files/Final_Graphs/Muon/DATA Exists")
-
-try:
-	os.makedirs("../../Output-Files/Final_Graphs/Electron")
-	print("../../Output-Files/Final_Graphs/Electron Created")
-except:
-	print("../../Output-Files/Final_Graphs/Electron Exists")
-
-try:
-	os.makedirs("../../Output-Files/Final_Graphs/ElectronMuon")
-	print("../../Output-Files/Final_Graphs/ElectronMuon Created")
-except:
-	print("../../Output-Files/Final_Graphs/ElectronMuon Exists")
-
-try:
-	os.makedirs("../../Output-Files/Final_Graphs/Tau")
-	print("../../Output-Files/Final_Graphs/Tau Created")
-except:
-	print("../../Output-Files/Final_Graphs/Tau Exists")
-
-try:
-	os.makedirs("../../Output-Files/Final_Graphs/ElectronTau")
-	print("../../Output-Files/Final_Graphs/ElectronTau Created")
-except:
-	print("../../Output-Files/Final_Graphs/ElectronTau Exists")
-
-try:
-	os.makedirs("../../Output-Files/Final_Graphs/MuonTau")
-	print("../../Output-Files/Final_Graphs/MuonTau Created")
-except:
-	print("../../Output-Files/Final_Graphs/MuonTau Exists")
+for Type in Types:
+	try:
+		os.makedirs("../../Output-Files/Final_Graphs/" + Type)
+		print("../../Output-Files/Final_Graphs/" + Type +  " Created")
+	except:
+		print("../../Output-Files/Final_Graphs/" + Type + " Exists")
+	
+	for Region in Regions:
+		try:
+			os.makedirs("../../Output-Files/Final_Graphs/" + Type + "/" + Region)
+			print("../../Output-Files/Final_Graphs/" + Type +  "/" + Region + " Created")
+		except:
+			print("../../Output-Files/Final_Graphs/" + Type +  "/" + Region + " Exists")
 
 analysis_start_functions.write("#endif")
 

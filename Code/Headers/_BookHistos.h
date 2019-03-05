@@ -139,6 +139,12 @@
 	//Histogram Bookings for Mass_Favour_Combination_2D
 	Book_Mass_Favour_Combination_2D(xbins, Mass_Favour_Combination_2D_xMin, Mass_Favour_Combination_2D_xMax, ybins, Mass_Favour_Combination_2D_yMin, Mass_Favour_Combination_2D_yMax);
 
+	//Histogram Bookings for Mass_Favour_Combination_INSIDE_2D
+	Book_Mass_Favour_Combination_INSIDE_2D(xbins, Mass_Favour_Combination_INSIDE_2D_xMin, Mass_Favour_Combination_INSIDE_2D_xMax, ybins, Mass_Favour_Combination_INSIDE_2D_yMin, Mass_Favour_Combination_INSIDE_2D_yMax);
+
+	//Histogram Bookings for Mass_Favour_Combination_OUTSIDE_2D
+	Book_Mass_Favour_Combination_OUTSIDE_2D(xbins, Mass_Favour_Combination_OUTSIDE_2D_xMin, Mass_Favour_Combination_OUTSIDE_2D_xMax, ybins, Mass_Favour_Combination_OUTSIDE_2D_yMin, Mass_Favour_Combination_OUTSIDE_2D_yMax);
+
 	//Histogram Bookings for lep_0_reco_p4
 	Book_lep_0_reco_p4(xbins, lep_0_reco_p4_xMin, lep_0_reco_p4_xMax, ybins, lep_0_reco_p4_yMin, lep_0_reco_p4_yMax);
 
