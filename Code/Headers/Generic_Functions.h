@@ -158,7 +158,7 @@ vector<TFile*> Root_Files(string AnalysisType) {
 	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Ztt_Histograms.root");
 	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zmumu_Histograms.root");
 	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zee_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/DATA_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/DATA_Histograms.root");
 
 	//Load in all the files for the different processes, there are 12 into the files vector
 	for (auto name = names.begin(); name < names.end(); name++) {
@@ -894,6 +894,7 @@ void CombineAllProcesses_AnalysisType(string AnalysisType) {
 	Process_Combiner(AnalysisType, "Wenu");
 	Process_Combiner(AnalysisType, "Wmunu");
 	Process_Combiner(AnalysisType, "Wtaunu");
+	Process_Combiner(AnalysisType, "DATA");
 
 }
 

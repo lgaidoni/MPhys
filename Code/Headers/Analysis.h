@@ -48,11 +48,15 @@ void MC_Analysis::BookHistos() {
 	int neutrino_0_pt_Min = 0, neutrino_0_pt_Max = 1000;
 	int neutrino_1_pt_Min = 0, neutrino_1_pt_Max = 1000;
 	int MET_Type_Favour_Min = -1, MET_Type_Favour_Max = 2;
+	int MET_Type_Favour_INSIDE_Min = -1, MET_Type_Favour_INSIDE_Max = 2;
+	int MET_Type_Favour_OUTSIDE_Min = -1, MET_Type_Favour_OUTSIDE_Max = 2;
 
-  	int lep_0_lep_1_mass_reconstructed_Min = 0, lep_0_lep_1_mass_reconstructed_Max = 200;
-	int DeltaR_reconstructed_Min = 0, DeltaR_reconstructed_Max = 10;
-	int lep_0_lep_1_pt_reconstructed_Min = 0, lep_0_lep_1_pt_reconstructed_Max = 300;
-	int Centrality_reconstructed_Min = -8, Centrality_reconstructed_Max = 8;
+  	int lep_0_lep_1_mass_reco_Min = 0, lep_0_lep_1_mass_reco_Max = 200;
+  	int lep_0_lep_1_mass_reco_INSIDE_Min = 0, lep_0_lep_1_mass_reco_INSIDE_Max = 200;
+  	int lep_0_lep_1_mass_reco_OUTSIDE_Min = 0, lep_0_lep_1_mass_reco_OUTSIDE_Max = 200;
+	int DeltaR_reco_Min = 0, DeltaR_reco_Max = 10;
+	int lep_0_lep_1_pt_reco_Min = 0, lep_0_lep_1_pt_reco_Max = 300;
+	int Centrality_reco_Min = -8, Centrality_reco_Max = 8;
 
 	//Values for the 2D histograms
 	int xbins = 50;
@@ -373,9 +377,11 @@ void MC_Analysis::GenerateVariables() {
 
 	double neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p;
 	double neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p;
+
+	outside_leptons = PhiIntervalInOrOut(lep_0_p4, lep_1_p4, met_reco_p4);
 	
 	// if OUTSIDE
-	if (PhiIntervalInOrOut(lep_0_p4, lep_1_p4, met_reco_p4)) { // outside the phi interval so need to see which one it favours
+	if (outside_leptons) { // outside the phi interval so need to see which one it favours
 		
 		// want to calcualate which tau it is closer to and find Et component along that tau vector
 		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_reco_p4 ) ) { // closer to lep_0
@@ -445,13 +451,13 @@ void MC_Analysis::GenerateVariables() {
 	//Invariant Mass
 
 	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
-	lep_0_lep_1_mass_reconstructed = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
+	lep_0_lep_1_mass_reco = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
 
 	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
 
 	// Delta R
 	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
-	DeltaR_reconstructed = DeltaRCalc(lep_0_reco_p4, lep_1_reco_p4);
+	DeltaR_reco = DeltaRCalc(lep_0_reco_p4, lep_1_reco_p4);
 
 	// Rapidity of dilepton pair
 	RapidityDilepton = RapidityDisomething(lep_0_p4, lep_1_p4);
@@ -461,7 +467,7 @@ void MC_Analysis::GenerateVariables() {
 
 	// Combined Lepton momentum
 	lep_0_lep_1_pt = CombinedTransverseMomentum(lep_0_p4, lep_1_p4);
-	lep_0_lep_1_pt_reconstructed = CombinedTransverseMomentum(lep_0_reco_p4, lep_1_reco_p4);
+	lep_0_lep_1_pt_reco = CombinedTransverseMomentum(lep_0_reco_p4, lep_1_reco_p4);
 
 	// p_T_Balance 
 	pT_balance = pTBalanceCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
@@ -471,7 +477,7 @@ void MC_Analysis::GenerateVariables() {
 	
 	// Centrality of Z boson between two leading jets calc using rapidity
 	Centrality = CentralityCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
-	Centrality_reconstructed = CentralityCalc(lep_0_reco_p4, lep_1_reco_p4, jet_0_p4, jet_1_p4);
+	Centrality_reco = CentralityCalc(lep_0_reco_p4, lep_1_reco_p4, jet_0_p4, jet_1_p4);
 
 	// Final Weighting
 	final_weighting = Luminosity_Weight * weight_total;	
@@ -526,10 +532,20 @@ void MC_Analysis::FillAllData_PreCut() {
 
 	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
-		h_lep_0_lep_1_mass_reconstructed_PRE->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
-		h_lep_0_lep_1_pt_reconstructed_PRE->Fill(lep_0_lep_1_pt_reconstructed, final_weighting);
-		h_DeltaR_reconstructed_PRE->Fill(DeltaR_reconstructed, final_weighting);
-		h_Centrality_reconstructed_PRE->Fill(Centrality_reconstructed, final_weighting);
+		h_lep_0_lep_1_mass_reco_PRE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+		h_lep_0_lep_1_pt_reco_PRE->Fill(lep_0_lep_1_pt_reco, final_weighting);
+		h_DeltaR_reco_PRE->Fill(DeltaR_reco, final_weighting);
+		h_Centrality_reco_PRE->Fill(Centrality_reco, final_weighting);
+
+		if (outside_leptons) {
+
+			h_lep_0_lep_1_mass_reco_OUTSIDE_PRE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+
+		} else {
+
+			h_lep_0_lep_1_mass_reco_INSIDE_PRE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+
+		}
 
 	}
 
@@ -743,10 +759,20 @@ void MC_Analysis::Fill() {
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
-			h_lep_0_lep_1_mass_reconstructed->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
-			h_lep_0_lep_1_pt_reconstructed->Fill(lep_0_lep_1_pt_reconstructed, final_weighting);
-			h_DeltaR_reconstructed->Fill(DeltaR_reconstructed, final_weighting);
-			h_Centrality_reconstructed->Fill(Centrality_reconstructed, final_weighting);
+			h_lep_0_lep_1_mass_reco->Fill(lep_0_lep_1_mass_reco, final_weighting);
+			h_lep_0_lep_1_pt_reco->Fill(lep_0_lep_1_pt_reco, final_weighting);
+			h_DeltaR_reco->Fill(DeltaR_reco, final_weighting);
+			h_Centrality_reco->Fill(Centrality_reco, final_weighting);
+
+			if (outside_leptons) {
+
+				h_lep_0_lep_1_mass_reco_OUTSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+
+			} else {
+
+				h_lep_0_lep_1_mass_reco_INSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+
+			}
 
 		}
 
@@ -802,10 +828,20 @@ void MC_Analysis::Fill() {
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
-			h_lep_0_lep_1_mass_reconstructed_CONTROL->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
-			h_lep_0_lep_1_pt_reconstructed_CONTROL->Fill(lep_0_lep_1_pt_reconstructed, final_weighting);
-			h_DeltaR_reconstructed_CONTROL->Fill(DeltaR_reconstructed, final_weighting);
-			h_Centrality_reconstructed_CONTROL->Fill(Centrality_reconstructed, final_weighting);
+			h_lep_0_lep_1_mass_reco_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
+			h_lep_0_lep_1_pt_reco_CONTROL->Fill(lep_0_lep_1_pt_reco, final_weighting);
+			h_DeltaR_reco_CONTROL->Fill(DeltaR_reco, final_weighting);
+			h_Centrality_reco_CONTROL->Fill(Centrality_reco, final_weighting);
+
+			if (outside_leptons) {
+
+				h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
+
+			} else {
+
+				h_lep_0_lep_1_mass_reco_INSIDE_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
+
+			}
 
 		}
 
@@ -900,7 +936,7 @@ void MC_Analysis::Fill() {
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
-			h_lep_0_lep_1_mass_reconstructed_HIGH_E->Fill(lep_0_lep_1_mass_reconstructed, final_weighting);
+			h_lep_0_lep_1_mass_reco_HIGH_E->Fill(lep_0_lep_1_mass_reco, final_weighting);
 
 		}
 
@@ -974,10 +1010,10 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
 
 	// reconstructed Z mass with tau candidates and neutrinos
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reconstructed_PRE, h_lep_0_lep_1_mass_reconstructed, h_lep_0_lep_1_mass_reconstructed_CONTROL, "lep_0_lep_1_mass_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reconstructed", ";Z mass incl neutrinos;Events", true, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reconstructed_PRE, h_DeltaR_reconstructed, h_DeltaR_reconstructed_CONTROL, "\\Delta R_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reconstructed", ";Delta R;Events",true, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reconstructed_PRE, h_Centrality_reconstructed, h_Centrality_reconstructed_CONTROL, "Centrality_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reconstructed", ";Centrality;Events", true, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reconstructed_PRE, h_lep_0_lep_1_pt_reconstructed, h_lep_0_lep_1_pt_reconstructed_CONTROL, "lep_0_lep_1_pt_reconstructed", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reconstructed", ";Z momentum incl neutrinos;Events", true, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reco_PRE, h_DeltaR_reco, h_DeltaR_reco_CONTROL, "\\Delta R_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reco", ";Delta R;Events",true, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reco_PRE, h_Centrality_reco, h_Centrality_reco_CONTROL, "Centrality_reco", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reco", ";Centrality;Events", true, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reco_PRE, h_lep_0_lep_1_pt_reco, h_lep_0_lep_1_pt_reco_CONTROL, "lep_0_lep_1_pt_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reco", ";Z momentum incl neutrinos;Events", true, ChainName, AnalysisType);	
 
 	// 2D POLAR HISTOGRAMS
 	DrawHistogram2DPolar(h_Test_Polar_Plot, "h_Test_Polar_Plot", ";Missing Energy 2D polar plot;", false, false, ChainName, AnalysisType);
@@ -1013,7 +1049,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_neutrino_0_pt_HIGH_E, "h_neutrino_0_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_neutrino_1_pt_HIGH_E, "h_neutrino_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Type_Favour_HIGH_E, "h_MET_Type_Favour_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_lep_1_mass_reconstructed_HIGH_E, "h_lep_0_lep_1_mass_reconstructed_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_HIGH_E, "h_lep_0_lep_1_mass_reco_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 
 	Histograms->Close();
 

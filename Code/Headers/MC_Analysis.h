@@ -43,6 +43,7 @@ public :
 	bool weight_total_override;
 	string desired_particles;
 	bool bjets_region;
+	bool outside_leptons;
 
 	/////----------LEPTON INFORMATION------------/////
 
