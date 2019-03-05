@@ -236,61 +236,61 @@ vector<string>	hv_MET_Type_Favour_names; // HISTOGRAM NAME VECTOR
 
 /// ------------------- RECONSTRUCTED ---------------- ///
 
-// --  reconstructed Z mass with neutrino and z candidates
-double lep_0_lep_1_mass_reconstructed;
 
-virtual void Book_lep_0_lep_1_mass_reconstructed(int bins, double min, double max);
-TH1F	*h_lep_0_lep_1_mass_reconstructed; // SEARCH VERSION
-TH1F	*h_lep_0_lep_1_mass_reconstructed_PRE; // PRE VERSION
-TH1F	*h_lep_0_lep_1_mass_reconstructed_CONTROL; // CONTROL VERSION
-TH1F	*h_lep_0_lep_1_mass_reconstructed_EXCEPT; // EXCEPT VERSION
-TH1F	*h_lep_0_lep_1_mass_reconstructed_BJET; // BJET VERSION
-TH1F	*h_lep_0_lep_1_mass_reconstructed_HIGH_E; // HIGH_E VERSION
-vector<TH1F*>	hv_lep_0_lep_1_mass_reconstructed; // HISTOGRAM VECTOR
-vector<string>	hv_lep_0_lep_1_mass_reconstructed_names; // HISTOGRAM NAME VECTOR
+// --  reconstructed Z mass with neutrino and z candidatesz
+double lep_0_lep_1_mass_reco;
+
+virtual void Book_lep_0_lep_1_mass_reco(int bins, double min, double max);
+TH1F	*h_lep_0_lep_1_mass_reco; // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_PRE; // PRE VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_BJET; // BJET VERSION
+vector<TH1F*>	hv_lep_0_lep_1_mass_reco; // HISTOGRAM VECTOR
+vector<string>	hv_lep_0_lep_1_mass_reco_names; // HISTOGRAM NAME VECTOR
+
 
 // -- Distance in R space between two leptons (reconstructed with missing neutrino energy included)
-double DeltaR_reconstructed;
+double DeltaR_reco;
 
-virtual void Book_DeltaR_reconstructed(int bins, double min, double max);
-TH1F	*h_DeltaR_reconstructed; // SEARCH VERSION
-TH1F	*h_DeltaR_reconstructed_PRE; // PRE VERSION
-TH1F	*h_DeltaR_reconstructed_CONTROL; // CONTROL VERSION
-TH1F	*h_DeltaR_reconstructed_EXCEPT; // EXCEPT VERSION
-TH1F	*h_DeltaR_reconstructed_BJET; // BJET VERSION
-TH1F	*h_DeltaR_reconstructed_HIGH_E; // HIGH_E VERSION
-vector<TH1F*>	hv_DeltaR_reconstructed; // HISTOGRAM VECTOR
-vector<string>	hv_DeltaR_reconstructed_names; // HISTOGRAM NAME VECTOR
+virtual void Book_DeltaR_reco(int bins, double min, double max);
+TH1F	*h_DeltaR_reco; // SEARCH VERSION
+TH1F	*h_DeltaR_reco_PRE; // PRE VERSION
+TH1F	*h_DeltaR_reco_CONTROL; // CONTROL VERSION
+TH1F	*h_DeltaR_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_DeltaR_reco_BJET; // BJET VERSION
+vector<TH1F*>	hv_DeltaR_reco; // HISTOGRAM VECTOR
+vector<string>	hv_DeltaR_reco_names; // HISTOGRAM NAME VECTOR
+
 
 // -- Combined transverse momentum of lepton 0 and lepton 1 (reconstructed with missing neutrino energy included)
-double lep_0_lep_1_pt_reconstructed;
+double lep_0_lep_1_pt_reco;
 
-virtual void Book_lep_0_lep_1_pt_reconstructed(int bins, double min, double max);
-TH1F	*h_lep_0_lep_1_pt_reconstructed; // SEARCH VERSION
-TH1F	*h_lep_0_lep_1_pt_reconstructed_PRE; // PRE VERSION
-TH1F	*h_lep_0_lep_1_pt_reconstructed_CONTROL; // CONTROL VERSION
-TH1F	*h_lep_0_lep_1_pt_reconstructed_EXCEPT; // EXCEPT VERSION
-TH1F	*h_lep_0_lep_1_pt_reconstructed_BJET; // BJET VERSION
-TH1F	*h_lep_0_lep_1_pt_reconstructed_HIGH_E; // HIGH_E VERSION
-vector<TH1F*>	hv_lep_0_lep_1_pt_reconstructed; // HISTOGRAM VECTOR
-vector<string>	hv_lep_0_lep_1_pt_reconstructed_names; // HISTOGRAM NAME VECTOR
+virtual void Book_lep_0_lep_1_pt_reco(int bins, double min, double max);
+TH1F	*h_lep_0_lep_1_pt_reco; // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_pt_reco_PRE; // PRE VERSION
+TH1F	*h_lep_0_lep_1_pt_reco_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_pt_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_pt_reco_BJET; // BJET VERSION
+vector<TH1F*>	hv_lep_0_lep_1_pt_reco; // HISTOGRAM VECTOR
+vector<string>	hv_lep_0_lep_1_pt_reco_names; // HISTOGRAM NAME VECTOR
+
 
 /// ------------------- lep_0_reco_p4:global variables for lepton 0 reconstructed ---------------- ///
 
 /// ------------------- lep_1_reco_p4:global variables for lepton 1 reconstructed ---------------- ///
 
 // -- Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
-double Centrality_reconstructed;
+double Centrality_reco;
 
-virtual void Book_Centrality_reconstructed(int bins, double min, double max);
-TH1F	*h_Centrality_reconstructed; // SEARCH VERSION
-TH1F	*h_Centrality_reconstructed_PRE; // PRE VERSION
-TH1F	*h_Centrality_reconstructed_CONTROL; // CONTROL VERSION
-TH1F	*h_Centrality_reconstructed_EXCEPT; // EXCEPT VERSION
-TH1F	*h_Centrality_reconstructed_BJET; // BJET VERSION
-TH1F	*h_Centrality_reconstructed_HIGH_E; // HIGH_E VERSION
-vector<TH1F*>	hv_Centrality_reconstructed; // HISTOGRAM VECTOR
-vector<string>	hv_Centrality_reconstructed_names; // HISTOGRAM NAME VECTOR
+virtual void Book_Centrality_reco(int bins, double min, double max);
+TH1F	*h_Centrality_reco; // SEARCH VERSION
+TH1F	*h_Centrality_reco_PRE; // PRE VERSION
+TH1F	*h_Centrality_reco_CONTROL; // CONTROL VERSION
+TH1F	*h_Centrality_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_Centrality_reco_BJET; // BJET VERSION
+vector<TH1F*>	hv_Centrality_reco; // HISTOGRAM VECTOR
+vector<string>	hv_Centrality_reco_names; // HISTOGRAM NAME VECTOR
 
 // -- This is a test of a polar plot
 virtual void Book_Test_Polar_Plot(int xbins, double xmin, double xmax, int ybins, double ymin, double ymax);
