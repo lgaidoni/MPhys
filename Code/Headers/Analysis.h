@@ -537,6 +537,14 @@ void MC_Analysis::FillAllData_PreCut() {
 
 		h_MET_Type_Favour_PRE->Fill(MET_Type_Favour, final_weighting);
 
+		if (outside_leptons) {
+			h_MET_Type_Favour_OUTSIDE_PRE->Fill(MET_Type_Favour, final_weighting);
+
+		} else {
+			h_MET_Type_Favour_INSIDE_PRE->Fill(MET_Type_Favour, final_weighting);
+
+		}
+
 	}
 
 	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
@@ -753,18 +761,17 @@ void MC_Analysis::Fill() {
 
 			h_MET_Type_Favour->Fill(MET_Type_Favour, final_weighting);
 
-			/*
-			if (!(MET_Type_Favour > 0 && MET_Type_Favour < 1)) {
+			if (outside_leptons) {
+				h_MET_Type_Favour_OUTSIDE->Fill(MET_Type_Favour, final_weighting);
+				h_Mass_Favour_Combination_OUTSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 
-				double Phi_E = met_reco_p4->Phi();
-				double Phi_2 = lep_0_p4->Phi();
-				double Phi_3 = lep_1_p4->Phi();
+			} else {
 
-				cout << endl << "EVENT WITH FAVOUR OUT OF RANGE" << endl;
-				cout << "Phi_E = " << Phi_E << "   :   Phi_Tau_Had = " << Phi_2 << "   :   Phi_Tau_Lep = " << Phi_3 << endl << endl;
+				h_MET_Type_Favour_INSIDE->Fill(MET_Type_Favour, final_weighting);
+				h_Mass_Favour_Combination_INSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 
 			}
-			*/
+
 
 		}
 
@@ -777,12 +784,10 @@ void MC_Analysis::Fill() {
 
 			if (outside_leptons) {
 
-				h_Mass_Favour_Combination_INSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 				h_lep_0_lep_1_mass_reco_OUTSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
 
 			} else {
 
-				h_Mass_Favour_Combination_OUTSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 				h_lep_0_lep_1_mass_reco_INSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
 
 			}
@@ -836,6 +841,14 @@ void MC_Analysis::Fill() {
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
 			h_MET_Type_Favour_CONTROL->Fill(MET_Type_Favour, final_weighting);
+
+			if (outside_leptons) {
+				h_MET_Type_Favour_OUTSIDE_CONTROL->Fill(MET_Type_Favour, final_weighting);
+
+			} else {
+				h_MET_Type_Favour_INSIDE_CONTROL->Fill(MET_Type_Favour, final_weighting);
+
+			}
 
 		}
 
@@ -1021,6 +1034,8 @@ void MC_Analysis::DrawHistos() {
 
 	// Met Type Favour, whether the missing energy vector points towards the lepton or hadronic tau
 	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_INSIDE_PRE, h_MET_Type_Favour_INSIDE, h_MET_Type_Favour_INSIDE_CONTROL, "MET_Type_Favour_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_INSIDE", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_OUTSIDE_PRE, h_MET_Type_Favour_OUTSIDE, h_MET_Type_Favour_OUTSIDE_CONTROL, "MET_Type_Favour_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_OUTSIDE", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
 
 	// reconstructed Z mass with tau candidates and neutrinos
 	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, ChainName, AnalysisType);	
@@ -1036,7 +1051,9 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed leptons 2 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
   
   	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, false, ChainName, AnalysisType);
-	
+  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, false, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, false, ChainName, AnalysisType);	
+
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);

@@ -69,24 +69,74 @@ def analysis_start_function_writer(inputFile, IDtag, Name):
 	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
+   	inputFile.write("\tstring completion_file = \"../../Completion_Files/\" + AnalysisType + \"/" + Name + "_completion.txt\";\n");
+   
+	inputFile.write("\tfstream completion(completion_file, completion.out | completion.trunc);\n")
+	inputFile.write("\tcompletion << \"Started " + Name + "\";\n");
+	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.close();\n")
+
 	inputFile.write("\tvector<double> luminosity_info = csv_reader(\"" + IDtag + "\");\n")
 	inputFile.write("\tdouble lum_weight = luminosity_weighting_function(luminosity_info, N_" + Name + "(), 36200);\n")
 		
 	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", lum_weight);\n")
+
 	inputFile.write("\t" + Name + "->BookHistos();\n")
+
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
+	inputFile.write("\tcompletion << \"Analysing " + Name + "\";\n");
+	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.close();\n")
+
 	inputFile.write("\t" + Name + "->Loop();\n")
+
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
+	inputFile.write("\tcompletion << \"Analysed " + Name + "\";\n");
+	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.close();\n")
+
 	inputFile.write("\t" + Name + "->DrawHistos();\n")
-	
+
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
+	inputFile.write("\tcompletion << \"Finished " + Name + "\";\n");
+	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.close();\n")
+
 	inputFile.write("}\n\n")
 
 def analysis_start_function_writer_data(inputFile, IDtag, Name):
 	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
+   	inputFile.write("\tstring completion_file = \"../../Completion_Files/\" + AnalysisType + \"/" + Name + "_completion.txt\";\n");
+   
+	inputFile.write("\tfstream completion(completion_file, completion.out | completion.trunc);\n")
+	inputFile.write("\tcompletion << \"Started " + Name + "\";\n");
+	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.close();\n")
+
 	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", 1);\n")
+
 	inputFile.write("\t" + Name + "->BookHistos();\n")
+
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
+	inputFile.write("\tcompletion << \"Analysing " + Name + "\";\n");
+	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.close();\n")
+
 	inputFile.write("\t" + Name + "->Loop();\n")
+
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
+	inputFile.write("\tcompletion << \"Analysed " + Name + "\";\n");
+	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.close();\n")
+
 	inputFile.write("\t" + Name + "->DrawHistos();\n")
+
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
+	inputFile.write("\tcompletion << \"Finished " + Name + "\";\n");
+	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.close();\n")
 	
 	inputFile.write("}\n\n")
 

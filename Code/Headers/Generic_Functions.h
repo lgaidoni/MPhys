@@ -639,7 +639,7 @@ void Process_Combiner(string AnalysisType, string Process) {
 	file.close();
 
 	//Open the list of Data Types
-	string DataTypeFileName = "../../MPhys/DataTypes/" + AnalysisType + "_DataTypes.txt";
+	string DataTypeFileName = "../../MPhys/DataTypes/Common_DataTypes.txt";
 	ifstream DataTypeFile (DataTypeFileName);
 	
 	while(!DataTypeFile.eof()) {  		//While not at the end of the file
