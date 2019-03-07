@@ -382,14 +382,40 @@ void MC_Analysis::GenerateVariables() {
 	double Et_along_0;
 	double Et_along_1;
 
+	//Calculate the lepton mass favour (whether a lepton points more towards the hadronic tau or the leptonic tau
 	MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
 
+	//Vector which cintains the neutrino transverse momentum vectors
 	vector<double> Neutrino_Transverse_Momentum_Vector;
 
+	//Stores the momenta of the neutrinos pointed along lepton 0 and lepton 1
 	double neutrino_0_x_p, neutrino_0_y_p, neutrino_0_z_p;
 	double neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p;
 
+	//Calculates the global variable for whether a missing energy is inside or outside the lepton phi interval
 	outside_leptons = PhiIntervalInOrOut(lep_0_p4, lep_1_p4, met_reco_p4);
+
+	/* //SANITY CHECK FOR OUTSIDE LEPTON RANGE FUCNTION
+	if (outside_leptons) {
+		
+		cout << "---------------------" << endl << endl;
+
+		double phi_0 = lep_0_p4->Phi();
+		double phi_1 = lep_1_p4->Phi();
+		double phi_E = met_reco_p4->Phi();
+		double dp_01 = DeltaPhi_v2(lep_0_p4, lep_1_p4);
+		double dp_0E = DeltaPhi_v2(lep_0_p4, met_reco_p4);
+		double dp_1E = DeltaPhi_v2(lep_1_p4, met_reco_p4);
+		double dot01 = DotProdPt(lep_0_p4, lep_1_p4);
+		double dot0E = DotProdPt(lep_0_p4, met_reco_p4);
+		double dot1E = DotProdPt(lep_1_p4, met_reco_p4);
+
+		cout << "phi_0 = " << phi_0 << endl << "phi_1 = " << phi_1 << endl << "phi_E = " << phi_E << endl << endl;
+		cout << "dp_01 = " << dp_01 << endl << "dp_0E = " << dp_0E << endl << "dp_1E = " << dp_1E << endl << endl;
+		cout << "dot01 = " << dot01 << endl << "dot0E = " << dot0E << endl << "dot1E = " << dot1E << endl << endl;
+		cout << "MET_F = " << MET_Type_Favour << endl << endl;
+	}
+	*/
 	
 	// if OUTSIDE
 	if (outside_leptons) { // outside the phi interval so need to see which one it favours
@@ -625,13 +651,10 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) 		pT_balance_3_limit = true;
 	if (region == "EXCEPT_pT_balance_reco_limit" && bjets_region == false) 		pT_balance_reco_limit = true;
 
-	//THIS IS HERE FOR THE FUTURE WHEN REMOVAL OF PT BALANCE FROM tau SELECTIONS IS NECESSARY
-	/*
-	if (region == "search" && (AnalysisType != "Electron" || AnalysisType != "Muon")) { pT_balance_limit = true; pT_balance_limit_3 = true; }
-	*/
-
-
+	//If the region is the bjet region, make the mass condition true, so that the full mass spectrum can be seen 
 	if (region == "bjet") Z_mass_condition = true;
+
+	//If the region is the high energy region, increase the minimum energy requirement for events.
 	if (region == "high_energy") {
 
 		leading_jets_invariant_mass = false;
