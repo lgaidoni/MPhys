@@ -33,6 +33,19 @@ TH1F	*h_pT_balance_HIGH_E; // HIGH_E VERSION
 vector<TH1F*>	hv_pT_balance; // HISTOGRAM VECTOR
 vector<string>	hv_pT_balance_names; // HISTOGRAM NAME VECTOR
 
+// -- PT Balance reconstructed
+double pT_balance_reco;
+
+virtual void Book_pT_balance_reco(int bins, double min, double max);
+TH1F	*h_pT_balance_reco; // SEARCH VERSION
+TH1F	*h_pT_balance_reco_PRE; // PRE VERSION
+TH1F	*h_pT_balance_reco_CONTROL; // CONTROL VERSION
+TH1F	*h_pT_balance_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_pT_balance_reco_BJET; // BJET VERSION
+TH1F	*h_pT_balance_reco_HIGH_E; // HIGH_E VERSION
+vector<TH1F*>	hv_pT_balance_reco; // HISTOGRAM VECTOR
+vector<string>	hv_pT_balance_reco_names; // HISTOGRAM NAME VECTOR
+
 // -- PT Balance Three - Normalised transverse momentum balance between the two leptons and the three highest transverse momentum jets
 double pT_balance_3;
 

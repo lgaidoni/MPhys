@@ -30,6 +30,7 @@ void MC_Analysis::BookHistos() {
 	//Values for the automatically generated custom histograms
 	int DeltaR_Min = 0, DeltaR_Max = 10;
 	int pT_balance_Min = 0, pT_balance_Max = 1;
+	int pT_balance_reco_Min = 0, pT_balance_reco_Max = 1;
 	int pT_balance_3_Min = 0, pT_balance_3_Max = 1;
 	int Centrality_Min = -8, Centrality_Max = 8;
 	int MET_Centrality_Min = -4, MET_Centrality_Max = 4;
@@ -480,7 +481,8 @@ void MC_Analysis::GenerateVariables() {
 
 	// p_T_Balance 
 	pT_balance = pTBalanceCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
-	
+	pT_balance_reco = pTBalanceCalc(lep_0_reco_p4, lep_1_reco_p4, jet_0_p4, jet_1_p4);
+
 	// p_T_Balance_3
 	pT_balance_3 = pTBalanceThreeCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4, jet_2_p4);
 	
@@ -521,6 +523,7 @@ void MC_Analysis::FillAllData_PreCut() {
 
 	// pT balance PRE
 	h_pT_balance_PRE->Fill(pT_balance, final_weighting);
+	h_pT_balance_reco_PRE->Fill(pT_balance_reco, final_weighting);
 
 	// pT balance 3 PRE
 	h_pT_balance_3_PRE->Fill(pT_balance_3, final_weighting);
@@ -589,6 +592,7 @@ bool MC_Analysis::Cuts(string region) {
 
 	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
+	bool pT_balance_reco_limit = false;
 	bool pT_balance_3_limit = false;
 	bool rap_int_condition = RapidityIntervalCheck(jet_0_p4, jet_1_p4, jet_2_p4);
 
@@ -619,6 +623,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "EXCEPT_ptvarcone_40_1" && bjets_region == false) 		ptvarcone_40_1 = true;
 	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) 		pT_balance_limit = true;
 	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) 		pT_balance_3_limit = true;
+	if (region == "EXCEPT_pT_balance_reco_limit" && bjets_region == false) 		pT_balance_reco_limit = true;
 
 	//THIS IS HERE FOR THE FUTURE WHEN REMOVAL OF PT BALANCE FROM tau SELECTIONS IS NECESSARY
 	/*
@@ -641,9 +646,10 @@ bool MC_Analysis::Cuts(string region) {
 	if (AnalysisType == "ElectronMuon" || AnalysisType == "ElectronTau" || AnalysisType == "MuonTau"){
 
 		//This is only here in order to see the full mass spectrum represented in the rest of the cuts, and should be changed when appropriate
-		Z_mass_condition = true;
-		
-	
+		Z_mass_condition = true; // Z boson mass taken out
+		pT_balance_limit = true; // pT balance cut taken out
+		pT_balance_3_limit = true; // pT balance 3 cut taken out
+
 		//Work out if the common cuts are true here
 	 	if (Z_mass_condition && combined_lepton_pt && leading_jets_invariant_mass && ptvarcone_40_0 && ptvarcone_40_1 && Et_Miss_RangeCheck) {
 			common_cuts = true;
@@ -709,7 +715,7 @@ void MC_Analysis::Fill() {
 	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
 	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
 	if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
-
+	if (Cuts("EXCEPT_pT_balance_reco_limit")) 	h_pT_balance_reco_EXCEPT->Fill(pT_balance_reco, final_weighting);		//Fill the EXCEPT histogram for pt balance
 	///----- SEARCH region filling -----///
 	if (Cuts("search")) {
 
@@ -733,8 +739,9 @@ void MC_Analysis::Fill() {
 
 		// pT balance
 		h_pT_balance->Fill(pT_balance, final_weighting);	
-
-		if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
+		h_pT_balance_reco->Fill(pT_balance_reco, final_weighting);
+	
+	//	if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
 		// Centrality
 		h_Centrality->Fill(Centrality, final_weighting);
@@ -896,8 +903,9 @@ void MC_Analysis::Fill() {
 
 		// pT balance BJET
 		h_pT_balance_BJET->Fill(pT_balance, final_weighting);	
+		h_pT_balance_reco_BJET->Fill(pT_balance_reco, final_weighting);	
 
-		if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+		//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
 
 		// Centrality BJET
 		h_Centrality_BJET->Fill(Centrality, final_weighting);
@@ -941,8 +949,9 @@ void MC_Analysis::Fill() {
 
 		// pT balance HIGH_E
 		h_pT_balance_HIGH_E->Fill(pT_balance, final_weighting);	
-
-		if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+		h_pT_balance_reco_HIGH_E->Fill(pT_balance_reco, final_weighting);
+	
+		//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
 
 		// Centrality HIGH_E
 		h_Centrality_HIGH_E->Fill(Centrality, final_weighting);
@@ -1016,7 +1025,8 @@ void MC_Analysis::DrawHistos() {
 
 	// pT balance
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, ChainName, AnalysisType);
-
+	// pT balance reconstructed	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_PRE, h_pT_balance_reco, h_pT_balance_reco_CONTROL, h_pT_balance_reco_EXCEPT, "p_{T}^{balance} reconstructed", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco", ";pT Balance reconstructed;Events", false, ChainName, AnalysisType);
 	// pT balance 3
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", ";pT Balance 3;Events", false, ChainName, AnalysisType);	
 
@@ -1064,6 +1074,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_lep_0_lep_1_pt_BJET, "h_lep_0_lep_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_DeltaR_BJET, "h_DeltaR_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_pT_balance_BJET, "h_pT_balance_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_BJET, "h_pT_balance_reco_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_Centrality_BJET, "h_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_neutrino_0_pt_BJET, "h_neutrino_0_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
@@ -1076,6 +1087,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_lep_0_lep_1_pt_HIGH_E, "h_lep_0_lep_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_DeltaR_HIGH_E, "h_DeltaR_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_pT_balance_HIGH_E, "h_pT_balance_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_HIGH_E, "h_pT_balance_reco_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_Centrality_HIGH_E, "h_Centrality_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Centrality_HIGH_E, "h_MET_Centrality_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_neutrino_0_pt_HIGH_E, "h_neutrino_0_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);

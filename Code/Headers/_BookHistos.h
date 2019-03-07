@@ -64,6 +64,9 @@
 	//Histogram Bookings for pT_balance
 	Book_pT_balance(bins, pT_balance_Min, pT_balance_Max);
 
+	//Histogram Bookings for pT_balance_reco
+	Book_pT_balance_reco(bins, pT_balance_reco_Min, pT_balance_reco_Max);
+
 	//Histogram Bookings for pT_balance_3
 	Book_pT_balance_3(bins, pT_balance_3_Min, pT_balance_3_Max);
 
