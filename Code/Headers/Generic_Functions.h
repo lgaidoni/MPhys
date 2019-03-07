@@ -1312,7 +1312,7 @@ bool PhiIntervalInOrOut(TLorentzVector *Vector1, TLorentzVector *Vector2, TLoren
 	double delta_phi_ab = DeltaPhi_v2(Vector1, Vector2); // delta phi between a and b
 	//DeltaPhi_v1_v2_Comparison(Vector1, Vector2);
 
-	if ( (delta_phi_aEt + delta_phi_bEt) <= delta_phi_ab ) return false;// IF INSIDE THE PHI ANGLE OF TAUS
+	if ( (delta_phi_aEt + delta_phi_bEt) <= delta_phi_ab + 0.0000001) return false;// IF INSIDE THE PHI ANGLE OF TAUS
 	return true;// OTHERWISE OUTSIDE THE PHI ANGLE OF TAUS
 }
 
@@ -1526,7 +1526,7 @@ double METTypeFavour(TLorentzVector *Vector1, TLorentzVector *Vector2, TLorentzV
 
 	favour = delta_phi_lep_met/delta_phi_lep_had;
 
-	if (non_relative_DeltaPhi(Vector2, Vector3) > pi) {					//If "inside" of taus contains the +/- pi discontinuity
+	if (abs(non_relative_DeltaPhi(Vector2, Vector3)) > pi) {					//If "inside" of taus contains the +/- pi discontinuity
 		if (phi_lep > phi_had) {								//If the leptonic tau has larger phi
 			if (phi_met < phi_lep && phi_met > 0) favour *= -1;					//If the missing energy is outside the interval on the leptonic side (smaller than phi_lep)
 		} else {										//If the leptonic tau has smaller phi
