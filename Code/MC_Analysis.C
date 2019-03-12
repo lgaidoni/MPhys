@@ -48,6 +48,8 @@ void MC_Analysis::Loop() {
    time_t now = time(0);			//Get the current time
    char* time = ctime(&now);			//Turn the current time into a Char to be cout-able
 
+   if (higgs_analysis == true) AnalysisType = AnalysisType  + "_Higgs";
+
    //--- Loop Running Indicator ---//
 
    int current_indicator = 0;

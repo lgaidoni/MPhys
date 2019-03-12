@@ -1,10 +1,14 @@
 import os
 
-data_types = ["Electron", "Muon", "ElectronMuon", "ElectronTau", "MuonTau"]
+data_types = ["Electron", "Muon", "ElectronMuon", "ElectronTau", "MuonTau", "Electron_Higgs", "ElectronMuon_Higgs", "ElectronTau_Higgs", "Muon_Higgs", "MuonTau_Higgs"]
 
 def print_function(filename, name, data_type):
 
-	filename.write("root \"Start_Analysis.C(\\\\\\\"Start_" + name + "_Analysis\\\\\\\",\\\\\\\"" + data_type + "\\\\\\\", false)\" -l -b\n")
+	HiggsMode = "false"
+	if (data_type.find("_Higgs") != -1):
+		HiggsMode = "true"
+
+	filename.write("root \"Start_Analysis.C(\\\\\\\"Start_" + name + "_Analysis\\\\\\\",\\\\\\\"" + data_type + "\\\\\\\", false, " + HiggsMode + ")\" -l -b\n")
 
 for data_type in data_types:
 

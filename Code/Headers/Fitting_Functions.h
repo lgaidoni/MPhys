@@ -471,7 +471,7 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string Da
 	//Write out to a PDF file
 	canvas2->SaveAs(FullOutputFilePath.c_str());
 
-	vector<double> info = csv_reader(ID);
+	vector<double> info = csv_reader(ID, false);
 
 	cout << endl << "MC Cross Section:     " << info[1] << endl;
 	cout << "QCD Scale Factor:     " << scale_factor_Process1 << " +/- " << scale_factor_Process1_Error << endl;
