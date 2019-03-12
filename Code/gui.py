@@ -11,7 +11,7 @@ def gui(window):
 	processes = ["Zee", "Zee2jets", "Zmumu", "Zmm2jets", "Ztt", "Ztt2jets", "ttb", "Wenu", "Wmunu", "Wtaunu", "ZqqZll", "DATA", "Incomplete Analyses", "No Histograms"]
 	DATA_chains = []
 	
-	for x in range(0,29):
+	for x in range(0,30):
 		DATA_chains.append("DATA_" + str(x) + "_")
 
 	mode = "types"
@@ -96,6 +96,8 @@ def gui(window):
 
 			window.erase()
 
+			window.addstr(mode + ":\n\n")
+
 			counter = 0
 
 			chain_names = open("Chain_Names.txt","r")
@@ -176,8 +178,6 @@ def gui(window):
 
 			chain_names.close
 
-			window.addstr(mode + ":\n\n")
-
 			window.addstr("\nSelected Chain To Perform Analysis On:\n" + ChainName[0:len(ChainName) - 1] + "\n\n")
 
 			window.addstr("Analysis Type:\n" + AnalysisType + "\n\n")
@@ -209,7 +209,7 @@ def gui(window):
 				temporary_command_file.write("root \"Start_Analysis.C(\\\"Start_" + ChainName[0:len(ChainName) - 1] + "_Analysis\\\",\\\"" + AnalysisType + "\\\")\" -l -b -q")
 				temporary_command_file.close()
 				subprocess.Popen('gnome-terminal -x "bash" -c ". temporary_command_file.sh"', shell=True)
-				time.sleep(10)
+				time.sleep(5)
 				os.remove("temporary_command_file.sh")
 			elif c == curses.KEY_LEFT:
 				mode = AnalysisType

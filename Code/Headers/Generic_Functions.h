@@ -40,6 +40,47 @@ void Legend_Creator(vector<TH1F*> histograms, double xmax, double ymax, double x
 
 }
 
+void Legend_Creator_QCD_EW(vector<TH1F*> histograms, double xmax, double ymax, double xmin, double ymin, double textsize, double bordersize) {
+
+	//Create the legend
+	auto legend = new TLegend(xmax,ymax,xmin,ymin);
+
+	//Minor Formatting
+	legend->SetTextSize(textsize);
+	legend->SetBorderSize(bordersize);
+
+	//Add all the entries to the histogram
+	legend->AddEntry(histograms[10], "QCD Zee");
+	legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+	legend->AddEntry(histograms[8], "QCD Z#tau#tau");
+	legend->AddEntry(histograms[7], "EW Zee");
+	legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	legend->AddEntry(histograms[5], "EW Z#tau#tau");
+
+
+	legend->Draw(); //Draw the legend to the currently active canvas
+
+}
+
+void Legend_Creator_EW(vector<TH1F*> histograms, double xmax, double ymax, double xmin, double ymin, double textsize, double bordersize) {
+
+	//Create the legend
+	auto legend = new TLegend(xmax,ymax,xmin,ymin);
+
+	//Minor Formatting
+	legend->SetTextSize(textsize);
+	legend->SetBorderSize(bordersize);
+
+	//Add all the entries to the histogram
+	legend->AddEntry(histograms[7], "EW Zee");
+	legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	legend->AddEntry(histograms[5], "EW Z#tau#tau");
+
+
+	legend->Draw(); //Draw the legend to the currently active canvas
+
+}
+
 //This function will create the legend on the currently active canvas
 //Better formatted and specialised for specifically two processes stacked, plus data
 //This function takes the vector of histograms created by Histogram_Return(AnalysisType, DataType), an integer representing Process 1, and an integer representing Process 2
@@ -172,6 +213,28 @@ vector<TH1F*> Set_Histogram_Styles_QCD_EW(vector<TH1F*> histograms) {
 	histograms[10]->SetLineColor(kBlack);
 	histograms[10]->SetFillColor(kOrange+1);
 	histograms[10]->SetFillStyle(1001);
+
+	return histograms;
+
+}
+
+//This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
+vector<TH1F*> Set_Histogram_Styles_EW(vector<TH1F*> histograms) {
+
+	//Ztt2jets
+	histograms[5]->SetLineColor(kBlack);
+	histograms[5]->SetFillColor(kSpring+10);
+	histograms[5]->SetFillStyle(1001);
+
+	//Zmm2jets
+	histograms[6]->SetLineColor(kBlack);
+	histograms[6]->SetFillColor(kAzure+2);
+	histograms[6]->SetFillStyle(1001);
+
+	//Zee2jets
+	histograms[7]->SetLineColor(kBlack);
+	histograms[7]->SetFillColor(kOrange-2);
+	histograms[7]->SetFillStyle(1001);
 
 	return histograms;
 
@@ -370,7 +433,7 @@ void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log
 //This function will draw a stack of 3 histograms, used for overlaying PRE, SEARCH, and CONTROL
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string histogramName, string title, bool log, string ChainName, string AnalysisType) {
+void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType) {
 
 	//Histogram_Remove_Negative_Events(histogram1);
 	//Histogram_Remove_Negative_Events(histogram2);	
@@ -425,7 +488,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 	if (log == true) canvas->SetLogy();
 
 	//Write out to a PDF file
-	canvas->SaveAs(FullOutputFilePath.c_str());
+	if (draw == true) canvas->SaveAs(FullOutputFilePath.c_str());
 
 	//Close the current canvas
 	canvas->Close();
@@ -435,7 +498,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 //This function will draw a stack of 4 histograms, used for overlaying PRE, SEARCH, CONTROL, and EXCEPT
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, histogram EXCEPT, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string histogramName, string title, bool log, string ChainName, string AnalysisType) {
+void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType) {
 
 	//Histogram_Remove_Negative_Events(histogram1);
 	//Histogram_Remove_Negative_Events(histogram2);
@@ -505,14 +568,14 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 	if (log == true) canvas->SetLogy();
 
 	//Write out to a PDF file
-	canvas->SaveAs(FullOutputFilePath.c_str());
+	if (draw == true) canvas->SaveAs(FullOutputFilePath.c_str());
 
 	canvas->Close();  //Close the currently open canvas
 
 }
 
 // 2D POLAR HISTOGRAM FUNCTION
-void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
+void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType) {
 
 	string OutputFileName = histogramName + "_" + ChainName + "2D_POLAR.pdf";
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
@@ -520,7 +583,7 @@ void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, b
 
 	//Histogram_Remove_Negative_Events(histogram);
 
-	if (!(quiet)){
+	if (draw){
 
 		TCanvas *canvas = new TCanvas(histogramName.c_str(), "", 600, 600);
 
@@ -543,7 +606,7 @@ void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, b
 
 		canvas->Close();
 
-	} else if (quiet) {
+	} else if (!(draw)) {
 
 		//Sets the X axis title
 		histogram->SetTitle(title.c_str());
@@ -562,7 +625,7 @@ void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, b
 }
 
 // 2D POLAR HISTOGRAM FUNCTION
-void DrawHistogram2D(TH2F *histogram, string histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
+void DrawHistogram2D(TH2F *histogram, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType) {
 
 	string OutputFileName = histogramName + "_" + ChainName + "2D.pdf";
 	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
@@ -570,7 +633,7 @@ void DrawHistogram2D(TH2F *histogram, string histogramName, string title, bool l
 
 	//Histogram_Remove_Negative_Events(histogram);
 
-	if (!(quiet)){
+	if (draw){
 
 		TCanvas *canvas = new TCanvas(histogramName.c_str(), "", 600, 400);
 
@@ -591,7 +654,7 @@ void DrawHistogram2D(TH2F *histogram, string histogramName, string title, bool l
 
 		canvas->Close();
 
-	} else if (quiet) {
+	} else if (!(draw)) {
 
 		//Sets the X axis title
 		histogram->SetTitle(title.c_str());
@@ -916,7 +979,123 @@ void Process_Stacker_QCD_EW(string AnalysisType, string DataType, string DataTyp
 	}
 
 	//Create the legend and draw the region information
-	Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0);
+	Legend_Creator_QCD_EW(histograms, 0.84, 0.89, 0.78, 0.57, 0.037, 0);
+	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
+
+	string Region;
+
+	if (DataTypeHistogram.find("CONTROL") != string::npos) Region = "CONTROL";
+	else if (DataTypeHistogram.find("PRE") != string::npos) Region = "PRE";
+	else if (DataTypeHistogram.find("EXCEPT") != string::npos) Region = "EXCEPT";
+	else if (DataTypeHistogram.find("HIGH_E") != string::npos) Region = "HIGH_E";
+	else if (DataTypeHistogram.find("BJET") != string::npos) Region = "BJET";
+	else Region = "SEARCH";
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+
+	if (logged) canvas->SetLogy();  //Log the y axis
+
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+}
+
+void Process_Stacker_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged) {
+
+	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
+
+	//String for name of the histogram in the root file
+	string DataTypeHistName = "h_" + DataType + ";1";
+
+	//Create the canvas
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+
+	//Get the vector of histograms for the given AnalysisType and DataType
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+
+	//Create the stacked histogram
+	THStack *histogramStack = new THStack("histogramStack", "");
+
+	//Set the histogram styles
+	histograms = Set_Histogram_Styles_QCD_EW(histograms);
+
+	//Add the histograms from the vector to the stack
+	histogramStack->Add(histograms[5], "hist");
+	histogramStack->Add(histograms[6], "hist");
+	histogramStack->Add(histograms[7], "hist");
+
+	//Draw the stack, actually stacking (no "nostack")
+	histogramStack->Draw("");
+
+	//Name the histogram stack's x axis according to the DataType
+	Histogram_Namer(histogramStack, DataType);
+
+	//Set the histogram axes and labels
+	histogramStack->GetYaxis()->SetTitle("Events");
+	histogramStack->GetXaxis()->SetLabelSize(0.05);
+	histogramStack->GetYaxis()->SetLabelSize(0.05);
+	histogramStack->GetXaxis()->SetTitleSize(0.037);
+	histogramStack->GetYaxis()->SetTitleSize(0.037);
+	histogramStack->GetXaxis()->SetTitleOffset(1.2);
+
+	//Get the largest value in the histogram
+	double max_value = histogramStack->GetMaximum();
+
+	//Generic Maximum Size of the Graphs
+	//Set the Maximum Size of the histograms to something appropriate to the largest value in the histogram
+
+	if(logged) {
+
+		if (max_value >= 1 && max_value < 10) { histogramStack->SetMaximum(300);}
+		else if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(3000);}
+		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(30000);}
+		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(300000);}
+	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(3000000);}
+		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(30000000);}
+
+		//Exceptions to these rules and conditions for the minimum size of the graphs
+		if (AnalysisType == "Tau") {
+
+			if (DataType == "lep_0_lep_1_mass_PRE") histogramStack->SetMinimum(500);
+			if (DataType == "lep_0_lep_1_mass_EXCEPT") histogramStack->SetMinimum(15);
+			if (DataType == "Centrality_CONTROL") histogramStack->SetMinimum(1);
+
+		} else if (AnalysisType == "Electron" or AnalysisType == "Muon" or AnalysisType == "MuonTau" or AnalysisType == "ElectronTau" or AnalysisType == "ElectronMuon") {
+
+			if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
+			else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
+
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau" or AnalysisType == "ElectronMuon") {
+				if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(0.01);
+			} else {
+				if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(1);
+			}
+			if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("met_reco_p4_Pt") != string::npos) histogramStack->SetMinimum(0.01);
+			if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
+			else if(DataType.find("lep_0_lep_1_mass_reconstructed") != string::npos) histogramStack->SetMinimum(1);
+			else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
+			else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
+			if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("neutrino_0_pt") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("neutrino_1_pt") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("MET_Type_Favour") != string::npos) histogramStack->SetMinimum(1);
+
+		} 
+
+		else { int i = 0;
+
+		}
+
+	}
+
+	//Create the legend and draw the region information
+	Legend_Creator_EW(histograms, 0.84, 0.89, 0.78, 0.71, 0.037, 0);
 	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
 
 	string Region;
@@ -994,7 +1173,7 @@ void Process_Combiner_2D(string AnalysisType, string DataType, string DataTypeHi
 }
 
 // need to give it the analysis type and then for given, tells it the path
-void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files) {
+void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool log) {
 
 	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
 
@@ -1017,6 +1196,49 @@ void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string Dat
 	TH2 *RebinnedMaster = histogramMaster->Rebin2D(1,1,"newname");
 
 	RebinnedMaster->SetMinimum(0.001);
+
+	if(log) canvas->SetLogz();
+
+	//Draw the stack, actually stacking (no "nostack")
+	RebinnedMaster->Draw("colz");
+
+	//Set the histogram axes and labels
+	histogramMaster->GetYaxis()->SetTitle("Events");
+	histogramMaster->GetXaxis()->SetLabelSize(0.05);
+	histogramMaster->GetYaxis()->SetLabelSize(0.05);
+	histogramMaster->GetXaxis()->SetTitleSize(0.037);
+	histogramMaster->GetYaxis()->SetTitleSize(0.037);
+	histogramMaster->GetXaxis()->SetTitleOffset(1.2);
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+}
+
+void Process_Combiner_2D_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool log) {
+
+	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
+
+	//String for name of the histogram in the root file
+	string DataTypeHistName = "h_" + DataType + ";1";
+
+	//Create the canvas
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+
+	//Get the vector of histograms for the given AnalysisType and DataType
+	vector<TH2F*> histograms = Histogram_Return_Given_File_2D(AnalysisType, DataType, root_files);
+	TH2F *histogramMaster = histograms[5]; 
+	histogramMaster->Add(histograms[6]);
+	histogramMaster->Add(histograms[7]);
+
+	TH2 *RebinnedMaster = histogramMaster->Rebin2D(1,1,"newname");
+
+	RebinnedMaster->SetMinimum(0.001);
+
+	if(log) canvas->SetLogz();
 
 	//Draw the stack, actually stacking (no "nostack")
 	RebinnedMaster->Draw("colz");
@@ -1067,8 +1289,18 @@ void DrawStackedProcesses(string AnalysisType) {
 
 				for (int i = 0; i <= QCD_EW_graphs.size(); i++) {
 					if (line.find(QCD_EW_graphs[i]) != string::npos) {
-						string loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
-						Process_Combiner_2D_QCD_EW(AnalysisType, line, loglessFileName, root_files);
+
+						string FileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
+						Process_Combiner_2D_QCD_EW(AnalysisType, line, FileName, root_files, false);
+
+						FileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW_Logged.pdf";
+						Process_Combiner_2D_QCD_EW(AnalysisType, line, FileName, root_files, true);
+
+						FileName =  line + "_" + AnalysisType + "_Final_Stacked_EW.pdf";
+						Process_Combiner_2D_EW(AnalysisType, line, FileName, root_files, false);
+
+						FileName =  line + "_" + AnalysisType + "_Final_Stacked_EW_Logged.pdf";
+						Process_Combiner_2D_EW(AnalysisType, line, FileName, root_files, true);
 					}
 				}
 
@@ -1093,8 +1325,11 @@ void DrawStackedProcesses(string AnalysisType) {
 			for (int i = 0; i <= QCD_EW_graphs.size(); i++) {
 
 				if (line.find(QCD_EW_graphs[i]) != string::npos) {
-					string loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
-					Process_Stacker_QCD_EW(AnalysisType, line, loglessFileName, root_files, false);
+					string QCD_EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
+					Process_Stacker_QCD_EW(AnalysisType, line, QCD_EW_loglessFileName, root_files, false);
+
+					string EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_EW.pdf";
+					Process_Stacker_EW(AnalysisType, line, EW_loglessFileName, root_files, false);
 				}
 
 			}

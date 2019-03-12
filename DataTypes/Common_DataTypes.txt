@@ -38,6 +38,8 @@ pT_balance
 pT_balance_EXCEPT
 pT_balance_BJET
 pT_balance_HIGH_E
+pT_balance_reco_PRE
+pT_balance_reco
 pT_balance_3_PRE
 pT_balance_3_CONTROL
 pT_balance_3_EXCEPT

@@ -43,6 +43,7 @@ public :
 	string desired_particles;
 	bool bjets_region;
 	bool outside_leptons;
+	bool draw_histograms;
 
 	/////----------LEPTON INFORMATION------------/////
 
@@ -1630,7 +1631,7 @@ public :
    TBranch        *b_weight_total;   //!
 
    MC_Analysis(TTree *tree=0);
-   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight);
+   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, bool draw);
    MC_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
    MC_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~MC_Analysis();
@@ -1662,7 +1663,7 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight) : fChain(0) 
+MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, bool draw) : fChain(0) 
 {
 
 	// if parameter tree is not specified (or zero), connect the file
@@ -1682,6 +1683,7 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, dou
 	AnalysisType = analysistype;
 	ChainName = chainname;
 	Luminosity_Weight = luminosity_weight;
+	draw_histograms = draw;
 
 	if (ChainName.find("DATA") != string::npos) {
 
@@ -1697,6 +1699,8 @@ MC_Analysis::~MC_Analysis()
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
+
+/*
 
 //This will read in a file located at fileLocation (Will only read MC data)
 MC_Analysis::MC_Analysis(string fileLocation) : fChain(0) 
@@ -1722,6 +1726,8 @@ MC_Analysis::MC_Analysis(string fileLocation, string analysistype) : fChain(0)
     Init(tree);
     AnalysisType = analysistype;
 }
+
+*/
 
 Int_t MC_Analysis::GetEntry(Long64_t entry)
 {

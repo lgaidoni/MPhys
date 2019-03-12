@@ -4,7 +4,7 @@ data_types = ["Electron", "Muon", "ElectronMuon", "ElectronTau", "MuonTau"]
 
 def print_function(filename, name, data_type):
 
-	filename.write("root \"Start_Analysis.C(\\\\\\\"Start_" + name + "_Analysis\\\\\\\",\\\\\\\"" + data_type + "\\\\\\\")\" -l -b\n")
+	filename.write("root \"Start_Analysis.C(\\\\\\\"Start_" + name + "_Analysis\\\\\\\",\\\\\\\"" + data_type + "\\\\\\\", false)\" -l -b\n")
 
 for data_type in data_types:
 
@@ -40,6 +40,11 @@ for data_type in data_types:
 
 
 run_analyses_v3 = open("Run_All_Analyses_V3.sh", "w")
+
+for data_type in data_types:
+	run_analyses_v3.write("rm -r ../../Completion_Files/" + data_type + "/*\n")
+
+run_analyses_v3.write("rm -r ../../Status_Files/*\n")
 run_analyses_v3.write(". Run_Electron_Analyses_V3.sh & \n")
 run_analyses_v3.write(". Run_ElectronMuon_Analyses_V3.sh & \n")
 run_analyses_v3.write(". Run_ElectronTau_Analyses_V3.sh & \n")

@@ -66,85 +66,85 @@ def process_chains_writer(AnalysisType):
 	
 
 def analysis_start_function_writer(inputFile, IDtag, Name):
-	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType) {\n")
+	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType, bool draw) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
    	inputFile.write("\tstring completion_file = \"../../Completion_Files/\" + AnalysisType + \"/" + Name + "_completion.txt\";\n");
    
-	inputFile.write("\tfstream completion(completion_file, completion.out | completion.trunc);\n")
-	inputFile.write("\tcompletion << \"Started " + Name + "\";\n");
-	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tfstream completion(completion_file, completion.out | completion.trunc); ")
+	inputFile.write("\tcompletion << \"Started " + Name + "\"; ");
+	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
 	inputFile.write("\tvector<double> luminosity_info = csv_reader(\"" + IDtag + "\");\n")
 	inputFile.write("\tdouble lum_weight = luminosity_weighting_function(luminosity_info, N_" + Name + "(), 36200);\n")
 		
-	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", lum_weight);\n")
+	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", lum_weight, draw);\n")
 
 	inputFile.write("\t" + Name + "->BookHistos();\n")
 
-	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
-	inputFile.write("\tcompletion << \"Analysing " + Name + "\";\n");
-	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc); ")
+	inputFile.write("\tcompletion << \"Analysing " + Name + "\"; ");
+	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
 	inputFile.write("\t" + Name + "->Loop();\n")
 
-	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
-	inputFile.write("\tcompletion << \"Analysed " + Name + "\";\n");
-	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc); ")
+	inputFile.write("\tcompletion << \"Analysed " + Name + "\"; ");
+	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
 	inputFile.write("\t" + Name + "->DrawHistos();\n")
 
-	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
-	inputFile.write("\tcompletion << \"Finished " + Name + "\";\n");
-	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc); ")
+	inputFile.write("\tcompletion << \"Finished " + Name + "\"; ");
+	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
 	inputFile.write("}\n\n")
 
 def analysis_start_function_writer_data(inputFile, IDtag, Name):
-	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType) {\n")
+	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType, bool draw) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
    	inputFile.write("\tstring completion_file = \"../../Completion_Files/\" + AnalysisType + \"/" + Name + "_completion.txt\";\n");
    
-	inputFile.write("\tfstream completion(completion_file, completion.out | completion.trunc);\n")
-	inputFile.write("\tcompletion << \"Started " + Name + "\";\n");
-	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tfstream completion(completion_file, completion.out | completion.trunc); ")
+	inputFile.write("\tcompletion << \"Started " + Name + "\"; ");
+	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
-	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", 1);\n")
+	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + "(), AnalysisType, \"" + Name + "\", 1, draw);\n")
 
 	inputFile.write("\t" + Name + "->BookHistos();\n")
 
-	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
-	inputFile.write("\tcompletion << \"Analysing " + Name + "\";\n");
-	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc); ")
+	inputFile.write("\tcompletion << \"Analysing " + Name + "\"; ");
+	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
 	inputFile.write("\t" + Name + "->Loop();\n")
 
-	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
-	inputFile.write("\tcompletion << \"Analysed " + Name + "\";\n");
-	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc); ")
+	inputFile.write("\tcompletion << \"Analysed " + Name + "\"; ");
+	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
 	inputFile.write("\t" + Name + "->DrawHistos();\n")
 
-	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc);\n")
-	inputFile.write("\tcompletion << \"Finished " + Name + "\";\n");
-	inputFile.write("\tcompletion.flush();\n")
+	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc); ")
+	inputFile.write("\tcompletion << \"Finished " + Name + "\"; ");
+	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 	
 	inputFile.write("}\n\n")
 
 def run_all_analyses_writer_top(inputFile):
-	inputFile.write("void Run_All_Analyses(string AnalysisType) {\n\n")
+	inputFile.write("void Run_All_Analyses(string AnalysisType, bool draw) {\n\n")
 
 def run_all_analyses_writer_centre(inputFile, Name):
-	inputFile.write("\tStart_" + Name + "_Analysis(AnalysisType);\n")
+	inputFile.write("\tStart_" + Name + "_Analysis(AnalysisType, draw);\n")
 
 chain_functions.write("#ifndef Chain_Functions_h\n")
 chain_functions.write("#define Chain_Functions_h\n\n")
