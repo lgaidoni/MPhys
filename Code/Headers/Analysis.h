@@ -618,7 +618,6 @@ bool MC_Analysis::Cuts(string region) {
 
 	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
-	bool pT_balance_reco_limit = false;
 	bool pT_balance_3_limit = false;
 	bool rap_int_condition = RapidityIntervalCheck(jet_0_p4, jet_1_p4, jet_2_p4);
 
@@ -649,7 +648,6 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "EXCEPT_ptvarcone_40_1" && bjets_region == false) 		ptvarcone_40_1 = true;
 	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) 		pT_balance_limit = true;
 	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) 		pT_balance_3_limit = true;
-	if (region == "EXCEPT_pT_balance_reco_limit" && bjets_region == false) 		pT_balance_reco_limit = true;
 
 	//If the region is the bjet region, make the mass condition true, so that the full mass spectrum can be seen 
 	if (region == "bjet") Z_mass_condition = true;
@@ -738,7 +736,6 @@ void MC_Analysis::Fill() {
 	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
 	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
 	if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
-	if (Cuts("EXCEPT_pT_balance_reco_limit")) 	h_pT_balance_reco_EXCEPT->Fill(pT_balance_reco, final_weighting);		//Fill the EXCEPT histogram for pt balance
 	///----- SEARCH region filling -----///
 	if (Cuts("search")) {
 
@@ -778,9 +775,6 @@ void MC_Analysis::Fill() {
 		h_met_reco_p4_Pt->Fill(met_reco_p4->Pt(), final_weighting); 
 		// missing energy in phi space
 		h_Test_Polar_Plot->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
-    
-		h_Mass_Favour_Combination_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
-
 		// reconstructed lepton 1 momentum in phi space
 		h_lep_0_reco_p4->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
 		// reconstructed lepton 2 momentum in phi space
@@ -790,6 +784,7 @@ void MC_Analysis::Fill() {
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
 			h_MET_Type_Favour->Fill(MET_Type_Favour, final_weighting);
+			h_Mass_Favour_Combination_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 
 			if (outside_leptons) {
 				h_MET_Type_Favour_OUTSIDE->Fill(MET_Type_Favour, final_weighting);
@@ -1012,26 +1007,24 @@ void MC_Analysis::DrawHistos() {
 	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
 	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
-	//Draw histogram function takes the following:
-	//DrawHistogram(histogram, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name)
 	#include "_DrawHistos.h"
 
 	//ptvar cone histograms
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType);	
 
 	// lep 0 & lep 1 invariant mass 
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", true, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", true, draw_histograms, ChainName, AnalysisType);
 
 	//combined lepton lep 0 & lep 1 momentum
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType);	
 
 	//leading jets ljet_0 ljet_1 invariant masses
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", false, draw_histograms, ChainName, AnalysisType);
 
 	//leading jets ljet_0 ljet_1 transverse momentum < already exists in DrawHistos.h
-	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType);
 
 	// Dilepton Rapidity
 	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
@@ -1044,48 +1037,48 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType);
 
 	//Delta R Histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", true, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	// pT balance
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, draw_histograms, ChainName, AnalysisType);
 	// pT balance reconstructed	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_PRE, h_pT_balance_reco, h_pT_balance_reco_CONTROL, h_pT_balance_reco_EXCEPT, "p_{T}^{balance} reconstructed", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco", ";pT Balance reconstructed;Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_pT_balance_reco_PRE, h_pT_balance_reco, h_pT_balance_reco_CONTROL, "p_{T}^{balance} reconstructed", "Pre Cut", "Post Cut", "Control", "h_pT_balance_reco", ";pT Balance reconstructed;Events", false, draw_histograms, ChainName, AnalysisType);
 	// pT balance 3
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", ";pT Balance 3;Events", false, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", ";pT Balance 3;Events", false, draw_histograms, ChainName, AnalysisType);	
 
 	// Centrality histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", ";Centrality;Events", true, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	// MET Centrality histogram
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", ";MET_Centrality;Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", ";MET_Centrality;Events", false, draw_histograms, ChainName, AnalysisType);
 
 	// missing energy for neutrino 1 
-	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_0_pt_PRE, h_neutrino_0_pt, h_neutrino_0_pt_CONTROL, "neutrino_0_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_0_pt", ";Missing Energy of neutrino 1;Events", true, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_0_pt_PRE, h_neutrino_0_pt, h_neutrino_0_pt_CONTROL, "neutrino_0_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_0_pt", ";Missing Energy of neutrino 1;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	// missing energy for neutrino 2
-	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_1_pt_PRE, h_neutrino_1_pt, h_neutrino_1_pt_CONTROL, "neutrino_1_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_1_pt", ";Missing Energy of neutrino 2;Events", true, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_1_pt_PRE, h_neutrino_1_pt, h_neutrino_1_pt_CONTROL, "neutrino_1_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_1_pt", ";Missing Energy of neutrino 2;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	// Met Type Favour, whether the missing energy vector points towards the lepton or hadronic tau
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_INSIDE_PRE, h_MET_Type_Favour_INSIDE, h_MET_Type_Favour_INSIDE_CONTROL, "MET_Type_Favour_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_INSIDE", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_OUTSIDE_PRE, h_MET_Type_Favour_OUTSIDE, h_MET_Type_Favour_OUTSIDE_CONTROL, "MET_Type_Favour_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_OUTSIDE", ";Missing Energy Tau or Lepton;Events", false, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_INSIDE_PRE, h_MET_Type_Favour_INSIDE, h_MET_Type_Favour_INSIDE_CONTROL, "MET_Type_Favour_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_INSIDE", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_OUTSIDE_PRE, h_MET_Type_Favour_OUTSIDE, h_MET_Type_Favour_OUTSIDE_CONTROL, "MET_Type_Favour_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_OUTSIDE", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType);
 
 	// reconstructed Z mass with tau candidates and neutrinos
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_OUTSIDE_PRE, h_lep_0_lep_1_mass_reco_OUTSIDE, h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL, "lep_0_lep_1_mass_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco_OUTSIDE", ";Z mass incl neutrinos Inside;Events", true, ChainName, AnalysisType);		
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_INSIDE_PRE, h_lep_0_lep_1_mass_reco_INSIDE, h_lep_0_lep_1_mass_reco_INSIDE_CONTROL, "lep_0_lep_1_mass_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco_INSIDE", ";Z mass incl neutrinos Outside;Events", true, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reco_PRE, h_DeltaR_reco, h_DeltaR_reco_CONTROL, "\\Delta R_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reco", ";Delta R;Events",true, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reco_PRE, h_Centrality_reco, h_Centrality_reco_CONTROL, "Centrality_reco", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reco", ";Centrality;Events", true, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reco_PRE, h_lep_0_lep_1_pt_reco, h_lep_0_lep_1_pt_reco_CONTROL, "lep_0_lep_1_pt_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reco", ";Z momentum incl neutrinos;Events", true, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_OUTSIDE_PRE, h_lep_0_lep_1_mass_reco_OUTSIDE, h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL, "lep_0_lep_1_mass_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco_OUTSIDE", ";Z mass incl neutrinos Inside;Events", true, draw_histograms, ChainName, AnalysisType);		
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_INSIDE_PRE, h_lep_0_lep_1_mass_reco_INSIDE, h_lep_0_lep_1_mass_reco_INSIDE_CONTROL, "lep_0_lep_1_mass_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco_INSIDE", ";Z mass incl neutrinos Outside;Events", true, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reco_PRE, h_DeltaR_reco, h_DeltaR_reco_CONTROL, "\\Delta R_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reco", ";Delta R;Events",true, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reco_PRE, h_Centrality_reco, h_Centrality_reco_CONTROL, "Centrality_reco", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reco", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reco_PRE, h_lep_0_lep_1_pt_reco, h_lep_0_lep_1_pt_reco_CONTROL, "lep_0_lep_1_pt_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reco", ";Z momentum incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType);	
 
 	// 2D POLAR HISTOGRAMS
-	DrawHistogram2DPolar(h_Test_Polar_Plot, "h_Test_Polar_Plot", ";Missing Energy 2D polar plot;", false, false, ChainName, AnalysisType);
-	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed lepton 1 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
-	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed leptons 2 momentum 2D polar plot;", false, false, ChainName, AnalysisType);
+	DrawHistogram2DPolar(h_Test_Polar_Plot, "h_Test_Polar_Plot", ";Missing Energy 2D polar plot;", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed lepton 1 momentum 2D polar plot;", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed leptons 2 momentum 2D polar plot;", false, draw_histograms, ChainName, AnalysisType);
   
-  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, false, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, false, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, false, ChainName, AnalysisType);	
+  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
 
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);

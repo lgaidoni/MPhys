@@ -43,6 +43,8 @@ public :
 	string desired_particles;
 	bool bjets_region;
 	bool outside_leptons;
+	bool draw_histograms;
+	bool higgs_analysis;
 
 	/////----------LEPTON INFORMATION------------/////
 
@@ -1630,7 +1632,7 @@ public :
    TBranch        *b_weight_total;   //!
 
    MC_Analysis(TTree *tree=0);
-   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight);
+   MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, bool draw, bool Higgs);
    MC_Analysis(string fileLocation);  //Runs all analysis, DEPRECATED
    MC_Analysis(string fileLocation, string analysistype);  //Runs analysis specified by analysistype
    virtual ~MC_Analysis();
@@ -1651,37 +1653,73 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
-   if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
-      if (!f || !f->IsOpen()) {
-         f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
-      }
-      f->GetObject("NOMINAL",tree);
 
-   }
-   Init(tree);
+	if (tree == 0) {
+		TFile *f;
+
+		if (gSystem->AccessPathName("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root")) {
+			cout << "PC2014 DATA DOES NOT EXIST" << endl << endl;
+		} else {
+			cout << "PC2014 DATA EXISTS" << endl;
+			f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+			if (!f || !f->IsOpen()) {
+				f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+			}
+
+		}
+
+		if (gSystem->AccessPathName("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root")) {
+			cout << "HIGGS DATA DOES NOT EXIST" << endl << endl;
+		} else {
+			cout << "HIGGS DATA EXISTS" << endl;
+			f = (TFile*)gROOT->GetListOfFiles()->FindObject("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
+			if (!f || !f->IsOpen()) {
+				f = new TFile("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
+			}
+		}
+
+		f->GetObject("NOMINAL",tree);
+	}
+	Init(tree);
+
 }
 
-MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight) : fChain(0) 
+MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, double luminosity_weight, bool draw, bool Higgs) : fChain(0) 
 {
 
 	// if parameter tree is not specified (or zero), connect the file
 	// used to generate this class and read the Tree.
 	if (tree == 0) {
 
-		TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
-		if (!f || !f->IsOpen()) {
+		if (Higgs) {
 
-			f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+			TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
+			if (!f || !f->IsOpen()) {
+
+				f = new TFile("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
+			}
+
+			f->GetObject("NOMINAL",tree);
+
+		} else {
+
+			TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+			if (!f || !f->IsOpen()) {
+
+				f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+			}
+
+			f->GetObject("NOMINAL",tree);
+
 		}
-
-		f->GetObject("NOMINAL",tree);
 	}
 
 	Init(tree);
 	AnalysisType = analysistype;
 	ChainName = chainname;
 	Luminosity_Weight = luminosity_weight;
+	draw_histograms = draw;
+	higgs_analysis = Higgs;
 
 	if (ChainName.find("DATA") != string::npos) {
 
@@ -1697,6 +1735,8 @@ MC_Analysis::~MC_Analysis()
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
+
+/*
 
 //This will read in a file located at fileLocation (Will only read MC data)
 MC_Analysis::MC_Analysis(string fileLocation) : fChain(0) 
@@ -1722,6 +1762,8 @@ MC_Analysis::MC_Analysis(string fileLocation, string analysistype) : fChain(0)
     Init(tree);
     AnalysisType = analysistype;
 }
+
+*/
 
 Int_t MC_Analysis::GetEntry(Long64_t entry)
 {
@@ -2621,6 +2663,10 @@ Int_t MC_Analysis::Cut(Long64_t entry)
 #include "N_Functions.h"
 #include "Analysis_Start_Functions.h"
 #include "Run_All_Analyses_Functions.h"
+#include "Chain_Functions_Higgs.h"
+#include "N_Functions_Higgs.h"
+#include "Analysis_Start_Functions_Higgs.h"
+#include "Run_All_Analyses_Functions_Higgs.h"
 #include "Fitting_Functions.h"
 #include "Specific_Functions.h"
 

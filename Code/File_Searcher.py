@@ -24,3 +24,5 @@ for root, dirs, files in os.walk("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/data"):
 			data_locations.write("@@" + path[74:82] + "\n")
 		data_locations.write(path + "\n")
 		prevpath = path
+
+
