@@ -182,7 +182,33 @@ vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
 }
 
 //This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-vector<TH1F*> Set_Histogram_Styles_QCD_EW(vector<TH1F*> histograms) {
+vector<TH1F*> Set_Histogram_Styles_INSIDE(vector<TH1F*> histograms) {
+	
+
+	//ttb
+	histograms[0]->SetLineColor(kBlack);
+	histograms[0]->SetFillColor(kRed);
+	histograms[0]->SetFillStyle(1001);
+
+	//Wtaunu
+	histograms[1]->SetLineColor(kBlack);
+	histograms[1]->SetFillColor(kViolet-8);
+	histograms[1]->SetFillStyle(1001);
+
+	//Wmunu
+	histograms[2]->SetLineColor(kBlack);
+	histograms[2]->SetFillColor(kViolet-4);
+	histograms[2]->SetFillStyle(1001);
+
+	//Wenu
+	histograms[3]->SetLineColor(kBlack);
+	histograms[3]->SetFillColor(kViolet-1);
+	histograms[3]->SetFillStyle(1001);
+
+	//ZqqZll
+	histograms[4]->SetLineColor(kBlack);
+	histograms[4]->SetFillColor(kPink-6);
+	histograms[4]->SetFillStyle(1001);
 
 	//Ztt2jets
 	histograms[5]->SetLineColor(kBlack);
@@ -214,31 +240,85 @@ vector<TH1F*> Set_Histogram_Styles_QCD_EW(vector<TH1F*> histograms) {
 	histograms[10]->SetFillColor(kOrange+1);
 	histograms[10]->SetFillStyle(1001);
 
+	//Data
+	histograms[11]->Sumw2();
+	histograms[11]->SetLineColor(kBlack);
+	histograms[11]->SetMarkerStyle(8);
+	histograms[11]->SetMarkerSize(0.3);
+
 	return histograms;
 
 }
 
 //This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-vector<TH1F*> Set_Histogram_Styles_EW(vector<TH1F*> histograms) {
+vector<TH1F*> Set_Histogram_Styles_OUTSIDE(vector<TH1F*> histograms) {
+	
+
+	//ttb
+	histograms[0]->SetLineColor(kBlack);
+	histograms[0]->SetFillColor(kCyan);
+	histograms[0]->SetFillStyle(1001);
+
+	//Wtaunu
+	histograms[1]->SetLineColor(kBlack);
+	histograms[1]->SetFillColor(kSpring+3);
+	histograms[1]->SetFillStyle(1001);
+
+	//Wmunu
+	histograms[2]->SetLineColor(kBlack);
+	histograms[2]->SetFillColor(kSpring-6);
+	histograms[2]->SetFillStyle(1001);
+
+	//Wenu
+	histograms[3]->SetLineColor(kBlack);
+	histograms[3]->SetFillColor(kSpring-2);
+	histograms[3]->SetFillStyle(1001);
+
+	//ZqqZll
+	histograms[4]->SetLineColor(kBlack);
+	histograms[4]->SetFillColor(kTeal-4);
+	histograms[4]->SetFillStyle(1001);
 
 	//Ztt2jets
 	histograms[5]->SetLineColor(kBlack);
-	histograms[5]->SetFillColor(kSpring+10);
+	histograms[5]->SetFillColor(kViolet+10);
 	histograms[5]->SetFillStyle(1001);
 
 	//Zmm2jets
 	histograms[6]->SetLineColor(kBlack);
-	histograms[6]->SetFillColor(kAzure+2);
+	histograms[6]->SetFillColor(kOrange+1);
 	histograms[6]->SetFillStyle(1001);
 
 	//Zee2jets
 	histograms[7]->SetLineColor(kBlack);
-	histograms[7]->SetFillColor(kOrange-2);
+	histograms[7]->SetFillColor(kAzure-1);
 	histograms[7]->SetFillStyle(1001);
+
+	//Ztt
+	histograms[8]->SetLineColor(kBlack);
+	histograms[8]->SetFillColor(kViolet-7);
+	histograms[8]->SetFillStyle(1001);
+
+	//Zmumu
+	histograms[9]->SetLineColor(kBlack);
+	histograms[9]->SetFillColor(kOrange+3);
+	histograms[9]->SetFillStyle(1001);
+
+	//Zee
+	histograms[10]->SetLineColor(kBlack);
+	histograms[10]->SetFillColor(kAzure+2);
+	histograms[10]->SetFillStyle(1001);
+
+	//Data
+	histograms[11]->Sumw2();
+	histograms[11]->SetLineColor(kBlack);
+	histograms[11]->SetMarkerStyle(8);
+	histograms[11]->SetMarkerSize(0.3);
 
 	return histograms;
 
 }
+
 
 vector<TFile*> Root_Files(string AnalysisType) {
 
@@ -820,7 +900,7 @@ void Process_Combiner(string AnalysisType, string Process) {
 
 // Stacking histograms:
 // need to give it the analysis type and then for given, tells it the path
-void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged) {
+void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged, string mode) {
 
 	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
 
@@ -839,9 +919,27 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	//Set the histogram styles
 	histograms = Set_Histogram_Styles(histograms);
 
-	//Add the histograms from the vector to the stack
-	for (int i=0; i < 11; i++) {
-		histogramStack->Add(histograms[i], "hist");
+
+	if (mode == "QCD_EW") {
+		//Add the histograms from the vector to the stack
+		histogramStack->Add(histograms[5], "hist");
+		histogramStack->Add(histograms[6], "hist");
+		histogramStack->Add(histograms[7], "hist");
+		histogramStack->Add(histograms[8], "hist");
+		histogramStack->Add(histograms[9], "hist");
+		histogramStack->Add(histograms[10], "hist");
+	}
+	else if (mode == "EW") {
+		//Add the histograms from the vector to the stack
+		histogramStack->Add(histograms[5], "hist");
+		histogramStack->Add(histograms[6], "hist");
+		histogramStack->Add(histograms[7], "hist");
+	}
+	else {
+		//Add the histograms from the vector to the stack
+		for (int i=0; i < 11; i++) {
+			histogramStack->Add(histograms[i], "hist");
+		}
 	}
 
 	//Draw the stack, actually stacking (no "nostack")
@@ -959,7 +1057,7 @@ void Process_Stacker_QCD_EW(string AnalysisType, string DataType, string DataTyp
 	THStack *histogramStack = new THStack("histogramStack", "");
 
 	//Set the histogram styles
-	histograms = Set_Histogram_Styles_QCD_EW(histograms);
+	histograms = Set_Histogram_Styles(histograms);
 
 	//Add the histograms from the vector to the stack
 	histogramStack->Add(histograms[5], "hist");
@@ -1079,7 +1177,7 @@ void Process_Stacker_EW(string AnalysisType, string DataType, string DataTypeHis
 	THStack *histogramStack = new THStack("histogramStack", "");
 
 	//Set the histogram styles
-	histograms = Set_Histogram_Styles_QCD_EW(histograms);
+	histograms = Set_Histogram_Styles(histograms);
 
 	//Add the histograms from the vector to the stack
 	histogramStack->Add(histograms[5], "hist");
@@ -1338,6 +1436,8 @@ void DrawStackedProcesses(string AnalysisType) {
 	QCD_EW_graphs.push_back("MET_Type_Favour");
 	QCD_EW_graphs.push_back("Mass_Favour_Combination_2D");
 	QCD_EW_graphs.push_back("Mass_DeltaPhi_Combination_2D");
+	QCD_EW_graphs.push_back("Mass_DeltaPhi_Combination_INSIDE_2D");
+	QCD_EW_graphs.push_back("Mass_DeltaPhi_Combination_OUTSIDE_2D");
 	QCD_EW_graphs.push_back("pT_balance");
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);
@@ -1375,13 +1475,13 @@ void DrawStackedProcesses(string AnalysisType) {
 
 		if (line != "") {  		//If not looking at the last line	
 			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
-			Process_Stacker(AnalysisType, line, fileName, root_files, true);
+			Process_Stacker(AnalysisType, line, fileName, root_files, true, "");
 
 			for (int i = 0; i <= logless_names.size(); i++) {
 
 				if (line.find(logless_names[i]) != string::npos) {
 					string loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_Logless.pdf";
-					Process_Stacker(AnalysisType, line, loglessFileName, root_files, false);
+					Process_Stacker(AnalysisType, line, loglessFileName, root_files, false, "");
 				}
 
 			}
@@ -1390,15 +1490,56 @@ void DrawStackedProcesses(string AnalysisType) {
 
 				if (line.find(QCD_EW_graphs[i]) != string::npos) {
 					string QCD_EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
-					Process_Stacker_QCD_EW(AnalysisType, line, QCD_EW_loglessFileName, root_files, false);
+					Process_Stacker(AnalysisType, line, QCD_EW_loglessFileName, root_files, false, "QCD_EW");
 
 					string EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_EW.pdf";
-					Process_Stacker_EW(AnalysisType, line, EW_loglessFileName, root_files, false);
+					Process_Stacker(AnalysisType, line, EW_loglessFileName, root_files, false, "EW");
 				}
 
 			}
 		}
 	}
+}
+
+void Inside_Outside_Overlay(string AnalysisType, string DataType, string Mode) {
+
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+
+	//String for name of the histograms in the root file
+	string InsideName = DataType + "_INSIDE";
+	string OutsideName = DataType + "_OUTSIDE";
+
+	//Create the canvas
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+
+	cout << "Drawing Inside Histograms" << endl;
+	vector<TH1F*> InsideHistograms = Histogram_Return_Given_File(AnalysisType, InsideName, root_files);
+
+	cout << "Drawing Outside Histograms" << endl;
+	vector<TH1F*> OutsideHistograms = Histogram_Return_Given_File(AnalysisType, OutsideName, root_files);
+
+	THStack *InsideStack = new THStack("InsideStack", "");
+	THStack *OutsideStack = new THStack("OutsideStack", "");
+
+	InsideHistograms = Set_Histogram_Styles_INSIDE(InsideHistograms);
+	OutsideHistograms = Set_Histogram_Styles_OUTSIDE(OutsideHistograms);
+
+	InsideStack->Add(InsideHistograms[5], "hist");
+	InsideStack->Add(InsideHistograms[6], "hist");
+	InsideStack->Add(InsideHistograms[7], "hist");
+
+	OutsideStack->Add(OutsideHistograms[5], "hist");
+	OutsideStack->Add(OutsideHistograms[6], "hist");
+	OutsideStack->Add(OutsideHistograms[7], "hist");
+
+	cout << InsideHistograms[5]->GetEntries() << endl;
+	cout << InsideHistograms[5]->Integral(1,49) << endl;
+
+	//Draw the stack, actually stacking (no "nostack")
+	InsideStack->Draw("");
+	OutsideStack->Draw("SAME");
+
+
 }
 
 //Combine all the different chains belonging to each different process
