@@ -25,6 +25,9 @@ _FillAllData_BJET = open("Headers/_FillAllData_BJET.h", "w")
 #To fill the _FillAllData_BJET Function inside SOMETHING_Analysis.h
 _FillAllData_HIGH_E = open("Headers/_FillAllData_HIGH_E.h", "w")
 
+#To fill the _FillAllData_BJET Function inside SOMETHING_Analysis.h
+_FillAllData_TRUTH = open("Headers/_FillAllData_TRUTH.h", "w")
+
 #To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 _DrawHistos = open("Headers/_DrawHistos.h", "w")
 
@@ -63,6 +66,14 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 		_BookHistos.write("\t//Histogram Bookings for " + leafName + "_" + TLorentzName + "\n")
 		_BookHistos.write("\tBook_" + leafName + "_" + TLorentzName + "(bins, " + InputTLorentzName + "Min, " + InputTLorentzName + "Max);\n\n")
 
+		if leafName.find("matched") != -1 or leafName.find("truth") != -1:
+			_FillAllData_PreCut.write("if (ChainName.find(\"DATA\") == string::npos) {")
+			_FillAllData_ControlCut.write("if (ChainName.find(\"DATA\") == string::npos) {")
+			_FillAllData_PostCut.write("if (ChainName.find(\"DATA\") == string::npos) {")
+			_FillAllData_BJET.write("if (ChainName.find(\"DATA\") == string::npos) {")
+			_FillAllData_HIGH_E.write("if (ChainName.find(\"DATA\") == string::npos) {")
+			_FillAllData_TRUTH.write("if (ChainName.find(\"DATA\") == string::npos) {")
+
 		#To fill the _FillAllData_PreCut Function inside SOMETHING_Analysis.h
 		_FillAllData_PreCut.write("\t//Pre-Cut Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
 		_FillAllData_PreCut.write("\th_" + leafName + "_" + TLorentzName + "_PRE->Fill(" + leafName + "->" + TLorentzName + "(), final_weighting);\n\n")
@@ -83,6 +94,18 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 		_FillAllData_HIGH_E.write("\t//HIGH_E Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
 		_FillAllData_HIGH_E.write("\th_" + leafName + "_" + TLorentzName + "_HIGH_E->Fill(" + leafName + "->" + TLorentzName + "(), final_weighting);\n\n")
 
+		#To fill the TRUTH Section inside SOMETHING_Analysis.h
+		_FillAllData_TRUTH.write("\t//TRUTH Histogram Filling for " + leafName + "_" + TLorentzName + "\n")
+		_FillAllData_TRUTH.write("\th_" + leafName + "_" + TLorentzName + "_TRUTH->Fill(" + leafName + "->" + TLorentzName + "(), final_weighting);\n\n")
+
+		if leafName.find("matched") != -1 or leafName.find("truth") != -1:
+			_FillAllData_PreCut.write("}\n")
+			_FillAllData_ControlCut.write("}\n")
+			_FillAllData_PostCut.write("}\n")
+			_FillAllData_BJET.write("}\n")
+			_FillAllData_HIGH_E.write("}\n")
+			_FillAllData_TRUTH.write("}\n")
+
 		#To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 		_DrawHistos.write("\t//Histogram Draw (Quiet) Functions for " + leafName + "_" + TLorentzName + "\n")
 		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + ", \"h_" + leafName + "_" + TLorentzName + "\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n")
@@ -90,6 +113,7 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n")
 		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_BJET, \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n\n")
 		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_HIGH_E, \"h_" + leafName + "_" + TLorentzName + "_HIGH_E\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n\n")
+		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_TRUTH, \"h_" + leafName + "_" + TLorentzName + "_TRUTH\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n\n")
 
 def AnalysisAutoGen_Custom(name):
 	_BookHistos.write("\t//Histogram Bookings for " + name + "\n")
@@ -104,7 +128,7 @@ for line in MC_Analysis:
 	#Here the files have their relevant information written
 	if reader == 1:
 
-		if line.find("matched") != -1 or line.find("truth") != -1:
+		if (line.find("matched") != -1 and line.find("matched_p4") == -1) or (line.find("truth") != -1 and line.find("truth_p4") != -1):
 			value = 1
 		elif line.find("ljet_0") != -1 or line.find("ljet_1") != -1 or line.find("bjet_0") != -1 or line.find("bjet_1") != -1 or line.find("met_reco_p4") != -1:
 			#If the leaf is a TLorentzVector
@@ -133,6 +157,7 @@ for line in MC_Analysis:
 					Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + "_PRE;\n")
 					Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + "_BJET;\n")
 					Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + "_HIGH_E;\n")
+					Histo_Definitions.write("\t\tTH1F\t*h_" + leafName + "_" + TLorentzName + "_TRUTH;\n")
 					Histo_Definitions.write("\t\tvector<TH1F*>\thv_" + leafName + "_" + TLorentzName + ";\n")
 					Histo_Definitions.write("\t\tvector<string>\thv_" + leafName + "_" + TLorentzName + "_names;\n")
 
@@ -143,16 +168,18 @@ for line in MC_Analysis:
 					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_CONTROL = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_CONTROL\",\"\", bins, min, max);\n")
 					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_EXCEPT = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_EXCEPT\",\"\", bins, min, max);\n")
 					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_PRE = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_PRE\",\"\", bins, min, max);\n")
-					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_BJET = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_BJET\",\"\", bins, min, max);\n\n")
-					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_HIGH_E = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_HIGH_E\",\"\", bins, min, max);\n\n")
+					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_BJET = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_BJET\",\"\", bins, min, max);\n")
+					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_HIGH_E = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_HIGH_E\",\"\", bins, min, max);\n")
+					Histo_Book_Functions_AutoGen.write("\t\th_" + leafName + "_" + TLorentzName + "_TRUTH = new TH1F(\"h_" + leafName + "_" + TLorentzName + "_TRUTH\",\"\", bins, min, max);\n\n")
 
 					#Write out the vector push_backs for the histogram vector
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + ");\n")
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + "_CONTROL);\n")	
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + "_EXCEPT);\n")	
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + "_PRE);\n")	
-					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + "_BJET);\n\n")	
-					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + "_HIGH_E);\n\n")	
+					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + "_BJET);\n")	
+					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + "_HIGH_E);\n")	
+					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + ".push_back(h_" + leafName + "_" + TLorentzName + "_TRUTH);\n\n")	
 
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + "_names.push_back(\"h_" + leafName + "_" + TLorentzName + "\");\n")
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + "_names.push_back(\"h_" + leafName + "_" + TLorentzName + "_CONTROL\");\n")
@@ -160,6 +187,7 @@ for line in MC_Analysis:
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + "_names.push_back(\"h_" + leafName + "_" + TLorentzName + "_PRE\");\n")
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + "_names.push_back(\"h_" + leafName + "_" + TLorentzName + "_BJET\");\n")
 					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + "_names.push_back(\"h_" + leafName + "_" + TLorentzName + "_HIGH_E\");\n")
+					Histo_Book_Functions_AutoGen.write("\t\thv_" + leafName + "_" + TLorentzName + "_names.push_back(\"h_" + leafName + "_" + TLorentzName + "_TRUTH\");\n\n")
 
 					Histo_Book_Functions_AutoGen.write("\t}\n")
 
@@ -197,6 +225,7 @@ for line in MC_Analysis:
 				Histo_Definitions.write("\tTH1F\t*h_" + leafName + "_PRE;\n")
 				Histo_Definitions.write("\tTH1F\t*h_" + leafName + "_BJET;\n")
 				Histo_Definitions.write("\tTH1F\t*h_" + leafName + "_HIGH_E;\n")
+				Histo_Definitions.write("\tTH1F\t*h_" + leafName + "_TRUTH;\n")
 				Histo_Definitions.write("\tvector<TH1F*>\thv_" + leafName + ";\n")
 				Histo_Definitions.write("\t\tvector<string>\thv_" + leafName + "_names;\n")
 				Histo_Definitions.write("\n")
@@ -258,15 +287,17 @@ for line in MC_Analysis:
 				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_CONTROL = new TH1F(\"h_" + leafName + "_CONTROL\", \"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_EXCEPT = new TH1F(\"h_" + leafName + "_EXCEPT\", \"\", bins, min, max);\n")
 				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_PRE = new TH1F(\"h_" + leafName + "_PRE\", \"\", bins, min, max);\n")
-				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_BJET = new TH1F(\"h_" + leafName + "_BJET\", \"\", bins, min, max);\n\n")
-				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_HIGH_E = new TH1F(\"h_" + leafName + "_HIGH_E\", \"\", bins, min, max);\n\n")
+				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_BJET = new TH1F(\"h_" + leafName + "_BJET\", \"\", bins, min, max);\n")
+				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_HIGH_E = new TH1F(\"h_" + leafName + "_HIGH_E\", \"\", bins, min, max);\n")
+				Histo_Book_Functions_AutoGen.write("\th_" + leafName + "_TRUTH = new TH1F(\"h_" + leafName + "_TRUTH\", \"\", bins, min, max);\n\n")
 
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + ");\n")
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + "_CONTROL);\n")	
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + "_EXCEPT);\n")	
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + "_PRE);\n")	
-				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + "_BJET);\n\n")	
-				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + "_HIGH_E);\n\n")	
+				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + "_BJET);\n")	
+				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + "_HIGH_E);\n")	
+				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + ".push_back(h_" + leafName + "_TRUTH);\n\n")	
 
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + "_names.push_back(\"h_" + leafName + "\");\n")
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + "_names.push_back(\"h_" + leafName + "_CONTROL\");\n")
@@ -274,6 +305,7 @@ for line in MC_Analysis:
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + "_names.push_back(\"h_" + leafName + "_PRE\");\n")
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + "_names.push_back(\"h_" + leafName + "_BJET\");\n")
 				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + "_names.push_back(\"h_" + leafName + "_HIGH_E\");\n")
+				Histo_Book_Functions_AutoGen.write("\thv_" + leafName + "_names.push_back(\"h_" + leafName + "_TRUTH\");\n\n")
 
 				Histo_Book_Functions_AutoGen.write("}\n\n")
 			
@@ -321,6 +353,7 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "_EXCEPT; // EXCEPT VERSION\n")
 		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "_BJET; // BJET VERSION\n")
 		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "_HIGH_E; // HIGH_E VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH2F\t*h_" + histogram_name + "_TRUTH; // TRUTH VERSION\n")
 		Histo_Custom_Book_Definitions.write("vector<TH2F*>\thv_" + histogram_name + "; // HISTOGRAM VECTOR\n")
 		Histo_Custom_Book_Definitions.write("vector<string>\thv_" + histogram_name + "_names; // HISTOGRAM NAME VECTOR\n\n")
 
@@ -329,15 +362,17 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_PRE = new TH2F(\"h_" + histogram_name + "_PRE\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
 		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_CONTROL = new TH2F(\"h_" + histogram_name + "_CONTROL\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
 		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_EXCEPT = new TH2F(\"h_" + histogram_name + "_EXCEPT\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
-		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_BJET = new TH2F(\"h_" + histogram_name + "_BJET\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n\n")
-		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_HIGH_E = new TH2F(\"h_" + histogram_name + "_HIGH_E\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n\n")
+		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_BJET = new TH2F(\"h_" + histogram_name + "_BJET\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
+		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_HIGH_E = new TH2F(\"h_" + histogram_name + "_HIGH_E\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n")
+		Histo_Custom_Book_Functions.write("\th_" + histogram_name + "_TRUTH = new TH2F(\"h_" + histogram_name + "_TRUTH\", \"\", xbins, xmin, xmax, ybins, ymin, ymax);\n\n")
 
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + ");\n")
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_CONTROL);\n")	
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_EXCEPT);\n")	
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_PRE);\n")	
-		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_BJET);\n\n")	
-		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_HIGH_E);\n\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_BJET);\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_HIGH_E);\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + ".push_back(h_" + histogram_name + "_TRUTH);\n\n")	
 
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "\");\n")
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_CONTROL\");\n")
@@ -345,6 +380,7 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_PRE\");\n")
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_BJET\");\n")
 		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_HIGH_E\");\n")
+		Histo_Custom_Book_Functions.write("\thv_" + histogram_name + "_names.push_back(\"h_" + histogram_name + "_TRUTH\");\n\n")
 
 		Histo_Custom_Book_Functions.write("}\n\n\n")
 
@@ -363,6 +399,7 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_EXCEPT; // EXCEPT VERSION\n")
 		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_BJET; // BJET VERSION\n")
 		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_HIGH_E; // HIGH_E VERSION\n")
+		Histo_Custom_Book_Definitions.write("TH1F\t*h_" + line[0:colonPos] + "_TRUTH; // TRUTH VERSION\n")
 		Histo_Custom_Book_Definitions.write("vector<TH1F*>\thv_" + line[0:colonPos] + "; // HISTOGRAM VECTOR\n")
 		Histo_Custom_Book_Definitions.write("vector<string>\thv_" + line[0:colonPos] + "_names; // HISTOGRAM NAME VECTOR\n\n")
 
@@ -371,15 +408,17 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_PRE = new TH1F(\"h_" + line[0:colonPos] + "_PRE\", \"\", bins, min, max);\n")
 		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_CONTROL = new TH1F(\"h_" + line[0:colonPos] + "_CONTROL\", \"\", bins, min, max);\n")
 		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_EXCEPT = new TH1F(\"h_" + line[0:colonPos] + "_EXCEPT\", \"\", bins, min, max);\n")
-		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_BJET = new TH1F(\"h_" + line[0:colonPos] + "_BJET\", \"\", bins, min, max);\n\n")
-		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_HIGH_E = new TH1F(\"h_" + line[0:colonPos] + "_HIGH_E\", \"\", bins, min, max);\n\n")
+		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_BJET = new TH1F(\"h_" + line[0:colonPos] + "_BJET\", \"\", bins, min, max);\n")
+		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_HIGH_E = new TH1F(\"h_" + line[0:colonPos] + "_HIGH_E\", \"\", bins, min, max);\n")
+		Histo_Custom_Book_Functions.write("\th_" + line[0:colonPos] + "_TRUTH = new TH1F(\"h_" + line[0:colonPos] + "_TRUTH\", \"\", bins, min, max);\n\n")
 
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + ");\n")
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + "_CONTROL);\n")	
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + "_EXCEPT);\n")	
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + "_PRE);\n")	
-		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + "_BJET);\n\n")	
-		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + "_HIGH_E);\n\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + "_BJET);\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + "_HIGH_E);\n")	
+		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + ".push_back(h_" + line[0:colonPos] + "_TRUTH);\n\n")	
 
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + "_names.push_back(\"h_" + line[0:colonPos] + "\");\n")
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + "_names.push_back(\"h_" + line[0:colonPos] + "_CONTROL\");\n")
@@ -387,6 +426,7 @@ for line in Custom_Histos:
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + "_names.push_back(\"h_" + line[0:colonPos] + "_PRE\");\n")
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + "_names.push_back(\"h_" + line[0:colonPos] + "_BJET\");\n")
 		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + "_names.push_back(\"h_" + line[0:colonPos] + "_HIGH_E\");\n")
+		Histo_Custom_Book_Functions.write("\thv_" + line[0:colonPos] + "_names.push_back(\"h_" + line[0:colonPos] + "_TRUTH\");\n\n")
 
 		Histo_Custom_Book_Functions.write("}\n\n\n")
 

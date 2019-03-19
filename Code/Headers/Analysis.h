@@ -29,8 +29,11 @@ void MC_Analysis::BookHistos() {
 
 	//Values for the automatically generated custom histograms
 	int DeltaR_Min = 0, DeltaR_Max = 10;
+	double DeltaPhi_Min = 0, DeltaPhi_Max = pi;
 	int pT_balance_Min = 0, pT_balance_Max = 1;
 	int pT_balance_reco_Min = 0, pT_balance_reco_Max = 1;
+	int pT_balance_reco_INSIDE_Min = 0, pT_balance_reco_INSIDE_Max = 1;
+	int pT_balance_reco_OUTSIDE_Min = 0, pT_balance_reco_OUTSIDE_Max = 1;
 	int pT_balance_3_Min = 0, pT_balance_3_Max = 1;
 	int Centrality_Min = -8, Centrality_Max = 8;
 	int MET_Centrality_Min = -4, MET_Centrality_Max = 4;
@@ -56,6 +59,9 @@ void MC_Analysis::BookHistos() {
   	int lep_0_lep_1_mass_reco_INSIDE_Min = 0, lep_0_lep_1_mass_reco_INSIDE_Max = 200;
   	int lep_0_lep_1_mass_reco_OUTSIDE_Min = 0, lep_0_lep_1_mass_reco_OUTSIDE_Max = 200;
 	int DeltaR_reco_Min = 0, DeltaR_reco_Max = 10;
+	double DeltaPhi_reco_Min = 0, DeltaPhi_reco_Max = pi;
+	double DeltaPhi_reco_INSIDE_Min = 0, DeltaPhi_reco_INSIDE_Max = pi;
+	double DeltaPhi_reco_OUTSIDE_Min = 0, DeltaPhi_reco_OUTSIDE_Max = pi;
 	int lep_0_lep_1_pt_reco_Min = 0, lep_0_lep_1_pt_reco_Max = 300;
 	int Centrality_reco_Min = -8, Centrality_reco_Max = 8;
 
@@ -86,6 +92,21 @@ void MC_Analysis::BookHistos() {
 	int Mass_Favour_Combination_OUTSIDE_2D_xMax = 2;
 	int Mass_Favour_Combination_OUTSIDE_2D_yMin = 0;
 	int Mass_Favour_Combination_OUTSIDE_2D_yMax = 160;
+
+	int Mass_DeltaPhi_Combination_2D_xMin = 0;
+	int Mass_DeltaPhi_Combination_2D_xMax = pi;
+	int Mass_DeltaPhi_Combination_2D_yMin = 0;
+	int Mass_DeltaPhi_Combination_2D_yMax = 160;
+
+	int Mass_DeltaPhi_Combination_INSIDE_2D_xMin = 0;
+	int Mass_DeltaPhi_Combination_INSIDE_2D_xMax = pi;
+	int Mass_DeltaPhi_Combination_INSIDE_2D_yMin = 0;
+	int Mass_DeltaPhi_Combination_INSIDE_2D_yMax = 160;
+
+	int Mass_DeltaPhi_Combination_OUTSIDE_2D_xMin = 0;
+	int Mass_DeltaPhi_Combination_OUTSIDE_2D_xMax = pi;
+	int Mass_DeltaPhi_Combination_OUTSIDE_2D_yMin = 0;
+	int Mass_DeltaPhi_Combination_OUTSIDE_2D_yMax = 160;
   
 	int lep_0_reco_p4_xMin = 0 - pi;
 	int lep_0_reco_p4_xMax = 0 + pi;
@@ -213,12 +234,26 @@ void MC_Analysis::JetSet(bool bjets) {
 
 }
 
+void MC_Analysis::JetSet_TRUTH() {
+
+	jet_0 = & ljet_0_matched;
+	jet_0_p4 = ljet_0_matched_p4;
+
+	jet_1 = & ljet_1_matched;
+	jet_1_p4 = ljet_1_matched_p4;
+
+	jet_2 = & ljet_2_matched;
+	jet_2_p4 = ljet_2_matched_p4;
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 ///---------------------- DESIRED PARTICLE SELECTION FUNCTION -----------------------///
 ////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::ParticleSelection() {
 
 	//For the desired output particles, set the generic lepton information to those specific leptons
+	met_p4 = met_reco_p4;
 
 	if (AnalysisType == "Electron") {
 
@@ -315,8 +350,103 @@ void MC_Analysis::ParticleSelection() {
 
 }
 
+void MC_Analysis::ParticleSelection_TRUTH() {
+
+	//For the desired output particles, set the generic lepton information to those specific leptons
+
+	lep_0_iso_ptvarcone40 = 0;
+	lep_1_iso_ptvarcone40 = 0;
+	met_p4 = met_truth_p4;
+
+	if (AnalysisType == "Electron") {
+
+		lep_0 = & elec_0_matched;
+		lep_0_p4 = elec_0_matched_p4;
+		lep_0_q = & elec_0_matched_q;	
+
+		lep_1 = & elec_1_matched;
+		lep_1_p4 = elec_1_matched_p4;
+		lep_1_q = & elec_1_matched_q;	
+	
+		if (elec_0_matched > 0 && elec_1_matched > 0) n_leptons = 2;
+		else n_leptons = 0;
+	}
+
+	if (AnalysisType == "Muon") {
+
+		lep_0 = & muon_0_matched;
+		lep_0_p4 = muon_0_matched_p4;
+		lep_0_q = & muon_0_matched_q;	
+
+		lep_1 = & muon_1_matched;
+		lep_1_p4 = muon_1_matched_p4;
+		lep_1_q = & muon_1_matched_q;	
+	
+		if (muon_0_matched > 0 && muon_1_matched > 0) n_leptons = 2;
+		else n_leptons = 0;
+	}
+
+	if (AnalysisType == "ElectronMuon") {
+
+		lep_0 = & muon_0_matched;
+		lep_0_p4 = muon_0_matched_p4;
+		lep_0_q = & muon_0_matched_q;	
+
+		lep_1 = & elec_0_matched;
+		lep_1_p4 = elec_0_matched_p4;
+		lep_1_q = & elec_0_matched_q;	
+
+		if (muon_0_matched > 0 && elec_0_matched > 0 && muon_1_matched == 0 && elec_1_matched == 0) n_leptons = 2;
+		else n_leptons = 0;
+	}
+
+	if (AnalysisType == "Tau") {
+
+		lep_0 = & tau_0_truth;
+		lep_0_p4 = tau_0_truth_p4;
+		lep_0_q = & tau_0_truth_q;
+
+		lep_1 = & tau_1_truth;	
+		lep_1_p4 = tau_1_truth_p4;
+		lep_1_q = & tau_1_truth_q;
+
+		if (tau_0_truth > 0 && tau_1_truth > 0) n_leptons = 2;
+		else n_leptons = 0;
+	}
+
+	if (AnalysisType == "ElectronTau") {
+
+		lep_0 = & tau_0_truth; 
+		lep_0_p4 = tau_0_truth_p4;
+		lep_0_q = & tau_0_truth_q;
+
+		lep_1 = & elec_0_matched;
+		lep_1_p4 = elec_0_matched_p4;
+		lep_1_q = & elec_0_matched_q;
+
+		if (tau_0_truth > 0 && elec_0_matched > 0 && tau_1_truth == 0 && elec_1_matched == 0) n_leptons = 2;
+		else n_leptons = 0;
+	}
+
+	if (AnalysisType == "MuonTau") {
+
+		lep_0 = & tau_0_truth; 
+		lep_0_p4 = tau_0_truth_p4;
+		lep_0_q = & tau_0_truth_q;
+
+		lep_1 = & muon_0_matched;
+		lep_1_p4 = muon_0_matched_p4;
+		lep_1_q = & muon_0_matched_q;
+
+		if (tau_0_truth > 0 && muon_0_matched > 0 && tau_1_truth == 0 && muon_1_matched == 0) n_leptons = 2;
+		else n_leptons = 0;
+	}
+
+}
+
+
 //This function will perform the inital cuts, ensuring we have all the particles needed for analysis, selecting ljets
-bool MC_Analysis::InitialCut(bool bjets) { // true = cut, false = keep
+bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = keep
 
 	//Setting up conditions
 	bool two_leptons = false;
@@ -332,7 +462,7 @@ bool MC_Analysis::InitialCut(bool bjets) { // true = cut, false = keep
 	//Is the missing energy physically realistic condition
 	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 		phi_realistic_condition = false;
-		phi_realistic_condition = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_reco_p4); // returns true if want to keep (inside), false if outside
+		phi_realistic_condition = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_p4); // returns true if want to keep (inside), false if outside
 	}
 
 	//Condition Checking
@@ -353,6 +483,10 @@ bool MC_Analysis::InitialCut(bool bjets) { // true = cut, false = keep
 		jet_0_pt = ljet_0_p4->Pt();
 		jet_1_pt = ljet_1_p4->Pt();
 	}
+
+	if (truth) truth_region = true;
+	else truth_region = false;
+
 	if (n_jets >= 2) two_or_more_jets = true;  //If two or more jets were found
 	
 	//Leading Jet 1 (ljet_0) Cut Condition
@@ -375,7 +509,7 @@ bool MC_Analysis::InitialCut(bool bjets) { // true = cut, false = keep
 void MC_Analysis::GenerateVariables() {
 
 	// Missing transverse momentum centrality
-	MET_Centrality = METCentrality(met_reco_p4, lep_0_p4, lep_1_p4);
+	MET_Centrality = METCentrality(met_p4, lep_0_p4, lep_1_p4);
 	
 	// InorOut = true means the E_t is outside of the phi interval 
 	// Change these to TLorentzVector as needed for Z boson mass reconstruction
@@ -383,7 +517,7 @@ void MC_Analysis::GenerateVariables() {
 	double Et_along_1;
 
 	//Calculate the lepton mass favour (whether a lepton points more towards the hadronic tau or the leptonic tau
-	MET_Type_Favour = METTypeFavour(met_reco_p4, lep_0_p4, lep_1_p4);
+	MET_Type_Favour = METTypeFavour(met_p4, lep_0_p4, lep_1_p4);
 
 	//Vector which cintains the neutrino transverse momentum vectors
 	vector<double> Neutrino_Transverse_Momentum_Vector;
@@ -393,7 +527,7 @@ void MC_Analysis::GenerateVariables() {
 	double neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p;
 
 	//Calculates the global variable for whether a missing energy is inside or outside the lepton phi interval
-	outside_leptons = PhiIntervalInOrOut(lep_0_p4, lep_1_p4, met_reco_p4);
+	outside_leptons = PhiIntervalInOrOut(lep_0_p4, lep_1_p4, met_p4);
 
 	/* //SANITY CHECK FOR OUTSIDE LEPTON RANGE FUCNTION
 	if (outside_leptons) {
@@ -402,13 +536,13 @@ void MC_Analysis::GenerateVariables() {
 
 		double phi_0 = lep_0_p4->Phi();
 		double phi_1 = lep_1_p4->Phi();
-		double phi_E = met_reco_p4->Phi();
+		double phi_E = met_p4->Phi();
 		double dp_01 = DeltaPhi_v2(lep_0_p4, lep_1_p4);
-		double dp_0E = DeltaPhi_v2(lep_0_p4, met_reco_p4);
-		double dp_1E = DeltaPhi_v2(lep_1_p4, met_reco_p4);
+		double dp_0E = DeltaPhi_v2(lep_0_p4, met_p4);
+		double dp_1E = DeltaPhi_v2(lep_1_p4, met_p4);
 		double dot01 = DotProdPt(lep_0_p4, lep_1_p4);
-		double dot0E = DotProdPt(lep_0_p4, met_reco_p4);
-		double dot1E = DotProdPt(lep_1_p4, met_reco_p4);
+		double dot0E = DotProdPt(lep_0_p4, met_p4);
+		double dot1E = DotProdPt(lep_1_p4, met_p4);
 
 		cout << "phi_0 = " << phi_0 << endl << "phi_1 = " << phi_1 << endl << "phi_E = " << phi_E << endl << endl;
 		cout << "dp_01 = " << dp_01 << endl << "dp_0E = " << dp_0E << endl << "dp_1E = " << dp_1E << endl << endl;
@@ -421,10 +555,10 @@ void MC_Analysis::GenerateVariables() {
 	if (outside_leptons) { // outside the phi interval so need to see which one it favours
 		
 		// want to calcualate which tau it is closer to and find Et component along that tau vector
-		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_reco_p4 ) ) { // closer to lep_0 aka TRUE
+		if ( ETFavourCalc( lep_0_p4, lep_1_p4, met_p4 ) ) { // closer to lep_0 aka TRUE
 			
 			// Et_along_0 should be TLorentzVector along lep_0
-			Et_along_0 = ETalongVectorCalc(lep_0_p4, met_reco_p4);	// Et along a
+			Et_along_0 = ETalongVectorCalc(lep_0_p4, met_p4);	// Et along a
 			Et_along_1 = 0;
 
 			// neutrino 1
@@ -441,7 +575,7 @@ void MC_Analysis::GenerateVariables() {
 		}
 		else { // closer to lep_1 aka FALSE
 			// Et_along_1 should be TLorentzVector along lep_1
-			Et_along_1 = ETalongVectorCalc(lep_1_p4, met_reco_p4);	// Et along a
+			Et_along_1 = ETalongVectorCalc(lep_1_p4, met_p4);	// Et along a
 			Et_along_0 = 0;
 			// neutrino 2
 			neutrino_1_x_p = x_component_pT(Et_along_1, lep_1_p4); // p_x of neutrino 2
@@ -459,7 +593,7 @@ void MC_Analysis::GenerateVariables() {
 	else { // normal "inside" the phi interval gap - standard reconstruction calculation
 	
 		// neutrino missing energy/momentum vector x and y components (in transverse plane)
-		Neutrino_Transverse_Momentum_Vector = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_reco_p4);
+		Neutrino_Transverse_Momentum_Vector = pTneutrinovector_calc(lep_0_p4, lep_1_p4, met_p4);
 
 		// transverse momentum for neutrino 1 and 2 taken from the vector VectorNeutrinoTransMom12
 		neutrino_0_pt = abs(Neutrino_Transverse_Momentum_Vector[0]);
@@ -494,6 +628,10 @@ void MC_Analysis::GenerateVariables() {
 	// Delta R
 	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
 	DeltaR_reco = DeltaRCalc(lep_0_reco_p4, lep_1_reco_p4);
+
+	//Delta Phi
+	DeltaPhi = DeltaPhi_v2(lep_0_p4, lep_1_p4);
+	DeltaPhi_reco = DeltaPhi_v2(lep_0_reco_p4, lep_1_reco_p4);
 
 	// Rapidity of dilepton pair
 	RapidityDilepton = RapidityDisomething(lep_0_p4, lep_1_p4);
@@ -546,10 +684,10 @@ void MC_Analysis::FillAllData_PreCut() {
 
 	//Delta R
 	h_DeltaR_PRE->Fill(DeltaR, final_weighting);
+	h_DeltaPhi_PRE->Fill(DeltaPhi, final_weighting);
 
 	// pT balance PRE
 	h_pT_balance_PRE->Fill(pT_balance, final_weighting);
-	h_pT_balance_reco_PRE->Fill(pT_balance_reco, final_weighting);
 
 	// pT balance 3 PRE
 	h_pT_balance_3_PRE->Fill(pT_balance_3, final_weighting);
@@ -582,14 +720,20 @@ void MC_Analysis::FillAllData_PreCut() {
 		h_lep_0_lep_1_pt_reco_PRE->Fill(lep_0_lep_1_pt_reco, final_weighting);
 		h_DeltaR_reco_PRE->Fill(DeltaR_reco, final_weighting);
 		h_Centrality_reco_PRE->Fill(Centrality_reco, final_weighting);
+		h_DeltaPhi_reco_PRE->Fill(DeltaPhi_reco, final_weighting);
+		h_pT_balance_reco_PRE->Fill(pT_balance_reco, final_weighting);
 
 		if (outside_leptons) {
 
 			h_lep_0_lep_1_mass_reco_OUTSIDE_PRE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+			h_DeltaPhi_reco_OUTSIDE_PRE->Fill(DeltaPhi_reco, final_weighting);
+			h_pT_balance_reco_OUTSIDE_PRE->Fill(pT_balance_reco, final_weighting);
 
 		} else {
 
 			h_lep_0_lep_1_mass_reco_INSIDE_PRE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+			h_pT_balance_reco_INSIDE_PRE->Fill(pT_balance_reco, final_weighting);
+			h_DeltaPhi_reco_INSIDE_PRE->Fill(DeltaPhi_reco, final_weighting);
 
 		}
 
@@ -612,8 +756,8 @@ bool MC_Analysis::Cuts(string region) {
 	bool leading_jets_invariant_mass = false;
 	bool ptvarcone_40_0 = false;
 	bool ptvarcone_40_1 = false;
-	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_reco_p4);
-	bool Et_Miss_RangeCheck = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_reco_p4);
+	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_p4);
+	bool Et_Miss_RangeCheck = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_p4);
 	//if (Et_Miss_RangeCheck) cout << "IN RANGE" << endl << endl;
 
 	//Initialise specific bool conditions
@@ -686,32 +830,37 @@ bool MC_Analysis::Cuts(string region) {
 	}
 
 	//If the region is the search region or an except region that isn't pt_balance (EW Z->ll enriched)
-	if ((region == "search" || (region.substr(0,6) == "EXCEPT" && region.substr(7,10) != "pT_balance")) && bjets_region == false) {
+	if ((region == "search" || (region.substr(0,6) == "EXCEPT" && region.substr(7,10) != "pT_balance")) && bjets_region == false && truth_region == false) {
 		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the except region for pt_balance (EW Z->ll enriched)
-	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) {
+	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false && truth_region == false) {
 		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the except region for pt_balance_3 (QCD enriched)
-	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) {
+	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false && truth_region == false) {
 		if(common_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
 	}
 
 	//If the region is the control region (QCD enriched)
-	if (region == "control" && bjets_region == false) {
+	if (region == "control" && bjets_region == false && truth_region == false) {
 		if(common_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
 	}
 
 	//If the region is the bjet enriched region
-	if (region == "bjet" && bjets_region == true) {
+	if (region == "bjet" && bjets_region == true && truth_region == false) {
 		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the high energy region
-	if (region == "high_energy" && bjets_region == false) {
+	if (region == "high_energy" && bjets_region == false && truth_region == false) {
+		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
+	}
+
+	//If the region is the high energy region
+	if (region == "truth" && bjets_region == false && truth_region == true) {
 		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
@@ -757,9 +906,10 @@ void MC_Analysis::Fill() {
 		//Delta R for two electrons
 		h_DeltaR->Fill(DeltaR, final_weighting);			// Angular separation of two leptons
 
+		h_DeltaPhi->Fill(DeltaPhi, final_weighting);
+
 		// pT balance
 		h_pT_balance->Fill(pT_balance, final_weighting);	
-		h_pT_balance_reco->Fill(pT_balance_reco, final_weighting);
 	
 	//	if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
@@ -770,16 +920,6 @@ void MC_Analysis::Fill() {
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 PRE
 		h_neutrino_0_pt->Fill(neutrino_0_pt,final_weighting);
 		h_neutrino_1_pt->Fill(neutrino_1_pt,final_weighting);
-
-		// missing energy 
-		h_met_reco_p4_Pt->Fill(met_reco_p4->Pt(), final_weighting); 
-		// missing energy in phi space
-		h_Test_Polar_Plot->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
-		// reconstructed lepton 1 momentum in phi space
-		h_lep_0_reco_p4->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
-		// reconstructed lepton 2 momentum in phi space
-		h_lep_1_reco_p4->Fill(lep_1_reco_p4->Phi(), lep_1_reco_p4->Pt(), final_weighting);
-
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
@@ -806,14 +946,23 @@ void MC_Analysis::Fill() {
 			h_lep_0_lep_1_pt_reco->Fill(lep_0_lep_1_pt_reco, final_weighting);
 			h_DeltaR_reco->Fill(DeltaR_reco, final_weighting);
 			h_Centrality_reco->Fill(Centrality_reco, final_weighting);
+			h_pT_balance_reco->Fill(pT_balance_reco, final_weighting);
+			h_DeltaPhi_reco->Fill(DeltaPhi_reco, final_weighting);
+			h_Mass_DeltaPhi_Combination_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
 			if (outside_leptons) {
 
 				h_lep_0_lep_1_mass_reco_OUTSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_pT_balance_reco_OUTSIDE->Fill(pT_balance_reco, final_weighting);
+				h_DeltaPhi_reco_OUTSIDE->Fill(DeltaPhi_reco, final_weighting);
+				h_Mass_DeltaPhi_Combination_OUTSIDE_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
 			} else {
 
 				h_lep_0_lep_1_mass_reco_INSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_pT_balance_reco_INSIDE->Fill(pT_balance_reco, final_weighting);
+				h_DeltaPhi_reco_INSIDE->Fill(DeltaPhi_reco, final_weighting);
+				h_Mass_DeltaPhi_Combination_INSIDE_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
 			}
 
@@ -843,6 +992,8 @@ void MC_Analysis::Fill() {
 		//Delta R for two electrons
 		h_DeltaR_CONTROL->Fill(DeltaR, final_weighting);
 
+		h_DeltaPhi_CONTROL->Fill(DeltaPhi, final_weighting);
+
 		// pT balance CONTROL
 		h_pT_balance_3_CONTROL->Fill(pT_balance_3, final_weighting);
 		
@@ -855,13 +1006,6 @@ void MC_Analysis::Fill() {
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 CONTROL
 		h_neutrino_0_pt_CONTROL->Fill(neutrino_0_pt,final_weighting);
 		h_neutrino_1_pt_CONTROL->Fill(neutrino_1_pt,final_weighting);
-
-		// Polar plots
-		h_Test_Polar_Plot_CONTROL->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
-		// reconstructed lepton 1 momentum in phi space
-		h_lep_0_reco_p4_CONTROL->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
-		// reconstructed lepton 2 momentum in phi space
-		h_lep_1_reco_p4_CONTROL->Fill(lep_1_reco_p4->Phi(), lep_1_reco_p4->Pt(), final_weighting);
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
@@ -883,14 +1027,17 @@ void MC_Analysis::Fill() {
 			h_lep_0_lep_1_pt_reco_CONTROL->Fill(lep_0_lep_1_pt_reco, final_weighting);
 			h_DeltaR_reco_CONTROL->Fill(DeltaR_reco, final_weighting);
 			h_Centrality_reco_CONTROL->Fill(Centrality_reco, final_weighting);
+			h_DeltaPhi_reco_CONTROL->Fill(DeltaPhi_reco, final_weighting);
 
 			if (outside_leptons) {
 
 				h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_DeltaPhi_reco_OUTSIDE_CONTROL->Fill(DeltaPhi_reco, final_weighting);
 
 			} else {
 
 				h_lep_0_lep_1_mass_reco_INSIDE_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_DeltaPhi_reco_INSIDE_CONTROL->Fill(DeltaPhi_reco, final_weighting);
 
 			}
 
@@ -930,13 +1077,6 @@ void MC_Analysis::Fill() {
 
 		// MET Centrality BJET
 		h_MET_Centrality_BJET->Fill(MET_Centrality, final_weighting);
-
-		// polar hist fill
-		h_Test_Polar_Plot_BJET->Fill(met_reco_p4->Phi(), met_reco_p4->Pt(), final_weighting);
-		// reconstructed lepton 1 momentum in phi space
-		h_lep_0_reco_p4_BJET->Fill(lep_0_reco_p4->Phi(), lep_0_reco_p4->Pt(), final_weighting);
-		// reconstructed lepton 2 momentum in phi space
-		h_lep_1_reco_p4_BJET->Fill(lep_1_reco_p4->Phi(), lep_1_reco_p4->Pt(), final_weighting);
 
 		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
 		h_neutrino_0_pt_BJET->Fill(neutrino_0_pt,final_weighting);
@@ -995,6 +1135,92 @@ void MC_Analysis::Fill() {
 
 	}
 
+	if (Cuts("truth")) {
+
+		#include "_FillAllData_TRUTH.h"
+
+		//ptvar cone histograms TRUTH
+		h_lep_1_iso_ptvarcone40_TRUTH->Fill(lep_1_iso_ptvarcone40, final_weighting);
+		h_lep_0_iso_ptvarcone40_TRUTH->Fill(lep_0_iso_ptvarcone40, final_weighting);
+
+		//Invariant mass TRUTH
+		h_lep_0_lep_1_mass_TRUTH->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+		h_jet_0_jet_1_mass_TRUTH->Fill(jet_0_jet_1_mass, final_weighting); // two jets
+
+		//Combined lepton TRUTH
+		h_RapidityDilepton_TRUTH->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
+		h_RapidityDijet_TRUTH->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
+		h_lep_0_lep_1_pt_TRUTH->Fill(lep_0_lep_1_pt, final_weighting);
+
+		//Delta R for two electrons TRUTH
+		h_DeltaR_TRUTH->Fill(DeltaR, final_weighting);
+
+		h_DeltaPhi_TRUTH->Fill(DeltaPhi, final_weighting);
+
+		// pT balance TRUTH
+		h_pT_balance_TRUTH->Fill(pT_balance, final_weighting);	
+		h_pT_balance_reco_TRUTH->Fill(pT_balance_reco, final_weighting);	
+
+		//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+
+		// Centrality TRUTH
+		h_Centrality_TRUTH->Fill(Centrality, final_weighting);
+
+		// MET Centrality TRUTH
+		h_MET_Centrality_TRUTH->Fill(MET_Centrality, final_weighting);
+
+		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 TRUTH
+		h_neutrino_0_pt_TRUTH->Fill(neutrino_0_pt,final_weighting);
+		h_neutrino_1_pt_TRUTH->Fill(neutrino_1_pt,final_weighting);
+
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+
+			h_MET_Type_Favour_TRUTH->Fill(MET_Type_Favour, final_weighting);
+			h_Mass_Favour_Combination_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+
+			if (outside_leptons) {
+				h_MET_Type_Favour_OUTSIDE_TRUTH->Fill(MET_Type_Favour, final_weighting);
+				h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+
+			} else {
+				h_MET_Type_Favour_INSIDE_TRUTH->Fill(MET_Type_Favour, final_weighting);
+				h_Mass_Favour_Combination_INSIDE_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+
+			}
+
+		}
+
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+
+			h_lep_0_lep_1_mass_reco_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
+			h_lep_0_lep_1_pt_reco_TRUTH->Fill(lep_0_lep_1_pt_reco, final_weighting);
+			h_DeltaR_reco_TRUTH->Fill(DeltaR_reco, final_weighting);
+			h_Centrality_reco_TRUTH->Fill(Centrality_reco, final_weighting);
+			h_DeltaPhi_reco_TRUTH->Fill(DeltaPhi_reco, final_weighting);
+			h_pT_balance_reco_TRUTH->Fill(pT_balance_reco, final_weighting);
+			h_Mass_DeltaPhi_Combination_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+
+			if (outside_leptons) {
+
+				h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_DeltaPhi_reco_OUTSIDE_TRUTH->Fill(DeltaPhi_reco, final_weighting);
+				h_pT_balance_reco_OUTSIDE_TRUTH->Fill(pT_balance_reco, final_weighting);
+				h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+
+			} else {
+
+				h_lep_0_lep_1_mass_reco_INSIDE_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_pT_balance_reco_INSIDE_TRUTH->Fill(pT_balance_reco, final_weighting);
+				h_DeltaPhi_reco_INSIDE_TRUTH->Fill(DeltaPhi_reco, final_weighting);
+				h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+
+			}
+
+		}
+
+
+	}
+
 }
 
 //This functinon will Draw all the histograms, and write them to a file
@@ -1039,10 +1265,17 @@ void MC_Analysis::DrawHistos() {
 	//Delta R Histograms
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", true, draw_histograms, ChainName, AnalysisType);
 
+	//Delta Phi Histograms
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaPhi_PRE, h_DeltaPhi, h_DeltaPhi_CONTROL, "\\Delta Phi", "Pre-Cut", "Post Cut", "Control", "h_DeltaPhi", ";Delta Phi;Events", true, draw_histograms, ChainName, AnalysisType);
+
 	// pT balance
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, draw_histograms, ChainName, AnalysisType);
+	
 	// pT balance reconstructed	
 	DrawHistogram_PRE_SEARCH_CONTROL(h_pT_balance_reco_PRE, h_pT_balance_reco, h_pT_balance_reco_CONTROL, "p_{T}^{balance} reconstructed", "Pre Cut", "Post Cut", "Control", "h_pT_balance_reco", ";pT Balance reconstructed;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_pT_balance_reco_INSIDE_PRE, h_pT_balance_reco_INSIDE, h_pT_balance_reco_INSIDE_CONTROL, "p_{T}^{balance} reconstructed_INSIDE", "Pre Cut", "Post Cut", "Control", "h_pT_balance_reco_INSIDE", ";pT Balance reconstructed_INSIDE;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_pT_balance_reco_OUTSIDE_PRE, h_pT_balance_reco_OUTSIDE, h_pT_balance_reco_OUTSIDE_CONTROL, "p_{T}^{balance} reconstructed_OUTSIDE", "Pre Cut", "Post Cut", "Control", "h_pT_balance_reco_OUTSIDE", ";pT Balance reconstructed_OUTSIDE;Events", false, draw_histograms, ChainName, AnalysisType);
+	
 	// pT balance 3
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", ";pT Balance 3;Events", false, draw_histograms, ChainName, AnalysisType);	
 
@@ -1070,15 +1303,19 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reco_PRE, h_DeltaR_reco, h_DeltaR_reco_CONTROL, "\\Delta R_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reco", ";Delta R;Events",true, draw_histograms, ChainName, AnalysisType);	
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reco_PRE, h_Centrality_reco, h_Centrality_reco_CONTROL, "Centrality_reco", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reco", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reco_PRE, h_lep_0_lep_1_pt_reco, h_lep_0_lep_1_pt_reco_CONTROL, "lep_0_lep_1_pt_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reco", ";Z momentum incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaPhi_reco_PRE, h_DeltaPhi_reco, h_DeltaPhi_reco_CONTROL, "\\Delta Phi_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaPhi_reco", ";Delta Phi_reco;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaPhi_reco_INSIDE_PRE, h_DeltaPhi_reco_INSIDE, h_DeltaPhi_reco_INSIDE_CONTROL, "\\Delta Phi_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_DeltaPhi_reco_INSIDE", ";Delta Phi_reco_INSIDE;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaPhi_reco_OUTSIDE_PRE, h_DeltaPhi_reco_OUTSIDE, h_DeltaPhi_reco_OUTSIDE_CONTROL, "\\Delta Phi_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_DeltaPhi_reco_OUTSIDE", ";Delta Phi_reco_OUTSIDE;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	// 2D POLAR HISTOGRAMS
-	DrawHistogram2DPolar(h_Test_Polar_Plot, "h_Test_Polar_Plot", ";Missing Energy 2D polar plot;", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed lepton 1 momentum 2D polar plot;", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram2DPolar(h_lep_0_reco_p4, "h_lep_0_reco_p4", ";Reconstructed leptons 2 momentum 2D polar plot;", false, draw_histograms, ChainName, AnalysisType);
-  
   	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
   	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
   	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
+
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D, "h_Mass_DeltaPhi_Combination_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D, "h_Mass_DeltaPhi_Combination_INSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
+
 
 	//BJET GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
@@ -1110,6 +1347,42 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_neutrino_1_pt_HIGH_E, "h_neutrino_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Type_Favour_HIGH_E, "h_MET_Type_Favour_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_0_lep_1_mass_reco_HIGH_E, "h_lep_0_lep_1_mass_reco_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+
+	//TRUTH GRAPHS
+	DrawHistogram(h_lep_1_iso_ptvarcone40_TRUTH, "h_lep_1_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_iso_ptvarcone40_TRUTH, "h_lep_0_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_TRUTH, "h_lep_0_lep_1_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_TRUTH, "h_lep_0_lep_1_mass_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_INSIDE_TRUTH, "h_lep_0_lep_1_mass_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH, "h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_jet_0_jet_1_mass_TRUTH, "h_jet_0_jet_1_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton_TRUTH, "h_RapidityDilepton_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_TRUTH, "h_RapidityDijet_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_pt_TRUTH, "h_lep_0_lep_1_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaR_TRUTH, "h_DeltaR_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_TRUTH, "h_DeltaPhi_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_reco_TRUTH, "h_DeltaPhi_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_reco_INSIDE_TRUTH, "h_DeltaPhi_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_reco_OUTSIDE_TRUTH, "h_DeltaPhi_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_TRUTH, "h_pT_balance_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_TRUTH, "h_pT_balance_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_INSIDE_TRUTH, "h_pT_balance_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_OUTSIDE_TRUTH, "h_pT_balance_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_Centrality_TRUTH, "h_Centrality_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_MET_Centrality_TRUTH, "h_MET_Centrality_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrino_0_pt_TRUTH, "h_neutrino_0_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrino_1_pt_TRUTH, "h_neutrino_1_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_MET_Type_Favour_TRUTH, "h_MET_Type_Favour_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+
+	// 2D POLAR TRUTH HISTOGRAMS
+  	DrawHistogram2D(h_Mass_Favour_Combination_2D_TRUTH, "h_Mass_Favour_Combination_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D_TRUTH, "h_Mass_Favour_Combination_INSIDE_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH, "h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
+
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D_TRUTH, "h_Mass_DeltaPhi_Combination_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
+
 
 	Histograms->Close();
 

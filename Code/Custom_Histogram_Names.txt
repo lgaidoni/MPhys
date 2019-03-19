@@ -2,8 +2,8 @@
 ##FunctionName:Comment
 ##GENERIC
 DeltaR:Distance in R space between two detections (ljet, elec, muon, etc)
+DeltaPhi:Separation of the two candidate leptons in phi space
 pT_balance:PT Balance - Normalised transverse momentum balance between the two leptons and the two highest transverse momentum jets
-pT_balance_reco:PT Balance reconstructed
 pT_balance_3:PT Balance Three - Normalised transverse momentum balance between the two leptons and the three highest transverse momentum jets
 Centrality:Centrality of pseudorapidity of Z boson between two leading jets
 RapidityDijet:Rapidity of a dijet pair
@@ -25,15 +25,21 @@ MET_Type_Favour:Whether the missing energy is directed more towards the hadronic
 MET_Type_Favour_INSIDE:Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
 MET_Type_Favour_OUTSIDE:Whether the missing energy is directed more towards the hadronic tau or the other lepton (e or m)
 ##RECONSTRUCTED
+DeltaPhi_reco:Separation of the two candidate leptons in phi space
+DeltaPhi_reco_INSIDE:Separation of the two candidate leptons in phi space
+DeltaPhi_reco_OUTSIDE:Separation of the two candidate leptons in phi space
+pT_balance_reco:PT Balance reconstructed
+pT_balance_reco_INSIDE:PT Balance reconstructed
+pT_balance_reco_OUTSIDE:PT Balance reconstructed
 lep_0_lep_1_mass_reco: reconstructed Z mass with neutrino and z candidates
 lep_0_lep_1_mass_reco_INSIDE: reconstructed Z mass with neutrino and z candidates only for inside the two leptons
 lep_0_lep_1_mass_reco_OUTSIDE: reconstructed Z mass with neutrino and z candidates only for outside the two leptons
 DeltaR_reco:Distance in R space between two leptons (reconstructed with missing neutrino energy included)
 lep_0_lep_1_pt_reco:Combined transverse momentum of lepton 0 and lepton 1 (reconstructed with missing neutrino energy included)
 Centrality_reco:Centrality of pseudorapidity of Z boson between two leading jets (reconstructed with missing neutrino energy included)
-$$Test_Polar_Plot,met_reco_p4_Phi,met_reco_p4_Pt:This is a test of a polar plot
 $$Mass_Favour_Combination_2D,MET_Type_Favour,lep_0_lep_1_mass_reco:2D plot of dilepton invariant mass and favour for the purposes of discovering leptons which favour one flavour over another
 $$Mass_Favour_Combination_INSIDE_2D,MET_Type_Favour,lep_0_lep_1_mass_reco:2D plot of dilepton invariant mass and favour for missing energy inside the two leptons
 $$Mass_Favour_Combination_OUTSIDE_2D,MET_Type_Favour,lep_0_lep_1_mass_reco:2D plot of dilepton invariant mass and favour for missing energy outside the two leptons
-$$lep_0_reco_p4,lep_0_reco_p4_Phi,lep_0_reco_p4_Pt:This is a test of a polar plot
-$$lep_1_reco_p4,lep_1_reco_p4_Phi,lep_1_reco_p4_Pt:
+$$Mass_DeltaPhi_Combination_2D,DeltaPhi_reco,lep_0_lep_1_mass_reco:2D plot of Delta Phi between two candidate leptons and the dilepton invariant mass
+$$Mass_DeltaPhi_Combination_INSIDE_2D,DeltaPhi_reco,lep_0_lep_1_mass_reco:2D plot of Delta Phi between two candidate leptons and the dilepton invariant mass
+$$Mass_DeltaPhi_Combination_OUTSIDE_2D,DeltaPhi_reco,lep_0_lep_1_mass_reco:2D plot of Delta Phi between two candidate leptons and the dilepton invariant mass
