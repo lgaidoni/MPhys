@@ -42,6 +42,7 @@ public :
 	bool weight_total_override;
 	string desired_particles;
 	bool bjets_region;
+	bool truth_region;
 	bool outside_leptons;
 	bool draw_histograms;
 	bool higgs_analysis;
@@ -60,6 +61,11 @@ public :
 
 	TLorentzVector	*lep_0_reco_p4;
 	TLorentzVector	*lep_1_reco_p4;
+
+	TLorentzVector	*lep_0_reco_matched_p4;
+	TLorentzVector	*lep_1_reco_matched_p4;
+
+	TLorentzVector  *met_p4;
 
 	/////--------------JET INFORMATION--------------/////
 

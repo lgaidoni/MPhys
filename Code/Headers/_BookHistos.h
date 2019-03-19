@@ -1,3 +1,15 @@
+	//Histogram Bookings for bjet_0_matched_p4_Phi
+	Book_bjet_0_matched_p4_Phi(bins, PhiMin, PhiMax);
+
+	//Histogram Bookings for bjet_0_matched_p4_Pt
+	Book_bjet_0_matched_p4_Pt(bins, PtMin, PtMax);
+
+	//Histogram Bookings for bjet_0_matched_p4_Rapidity
+	Book_bjet_0_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
+
+	//Histogram Bookings for bjet_0_matched_p4_Eta
+	Book_bjet_0_matched_p4_Eta(bins, EtaMin, EtaMax);
+
 	//Histogram Bookings for bjet_0_p4_Phi
 	Book_bjet_0_p4_Phi(bins, PhiMin, PhiMax);
 
@@ -9,6 +21,18 @@
 
 	//Histogram Bookings for bjet_0_p4_Eta
 	Book_bjet_0_p4_Eta(bins, EtaMin, EtaMax);
+
+	//Histogram Bookings for bjet_1_matched_p4_Phi
+	Book_bjet_1_matched_p4_Phi(bins, PhiMin, PhiMax);
+
+	//Histogram Bookings for bjet_1_matched_p4_Pt
+	Book_bjet_1_matched_p4_Pt(bins, PtMin, PtMax);
+
+	//Histogram Bookings for bjet_1_matched_p4_Rapidity
+	Book_bjet_1_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
+
+	//Histogram Bookings for bjet_1_matched_p4_Eta
+	Book_bjet_1_matched_p4_Eta(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for bjet_1_p4_Phi
 	Book_bjet_1_p4_Phi(bins, PhiMin, PhiMax);
@@ -22,6 +46,18 @@
 	//Histogram Bookings for bjet_1_p4_Eta
 	Book_bjet_1_p4_Eta(bins, EtaMin, EtaMax);
 
+	//Histogram Bookings for ljet_0_matched_p4_Phi
+	Book_ljet_0_matched_p4_Phi(bins, PhiMin, PhiMax);
+
+	//Histogram Bookings for ljet_0_matched_p4_Pt
+	Book_ljet_0_matched_p4_Pt(bins, PtMin, PtMax);
+
+	//Histogram Bookings for ljet_0_matched_p4_Rapidity
+	Book_ljet_0_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
+
+	//Histogram Bookings for ljet_0_matched_p4_Eta
+	Book_ljet_0_matched_p4_Eta(bins, EtaMin, EtaMax);
+
 	//Histogram Bookings for ljet_0_p4_Phi
 	Book_ljet_0_p4_Phi(bins, PhiMin, PhiMax);
 
@@ -33,6 +69,18 @@
 
 	//Histogram Bookings for ljet_0_p4_Eta
 	Book_ljet_0_p4_Eta(bins, EtaMin, EtaMax);
+
+	//Histogram Bookings for ljet_1_matched_p4_Phi
+	Book_ljet_1_matched_p4_Phi(bins, PhiMin, PhiMax);
+
+	//Histogram Bookings for ljet_1_matched_p4_Pt
+	Book_ljet_1_matched_p4_Pt(bins, PtMin, PtMax);
+
+	//Histogram Bookings for ljet_1_matched_p4_Rapidity
+	Book_ljet_1_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
+
+	//Histogram Bookings for ljet_1_matched_p4_Eta
+	Book_ljet_1_matched_p4_Eta(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for ljet_1_p4_Phi
 	Book_ljet_1_p4_Phi(bins, PhiMin, PhiMax);
@@ -61,11 +109,11 @@
 	//Histogram Bookings for DeltaR
 	Book_DeltaR(bins, DeltaR_Min, DeltaR_Max);
 
+	//Histogram Bookings for DeltaPhi
+	Book_DeltaPhi(bins, DeltaPhi_Min, DeltaPhi_Max);
+
 	//Histogram Bookings for pT_balance
 	Book_pT_balance(bins, pT_balance_Min, pT_balance_Max);
-
-	//Histogram Bookings for pT_balance_reco
-	Book_pT_balance_reco(bins, pT_balance_reco_Min, pT_balance_reco_Max);
 
 	//Histogram Bookings for pT_balance_3
 	Book_pT_balance_3(bins, pT_balance_3_Min, pT_balance_3_Max);
@@ -118,6 +166,24 @@
 	//Histogram Bookings for MET_Type_Favour_OUTSIDE
 	Book_MET_Type_Favour_OUTSIDE(bins, MET_Type_Favour_OUTSIDE_Min, MET_Type_Favour_OUTSIDE_Max);
 
+	//Histogram Bookings for DeltaPhi_reco
+	Book_DeltaPhi_reco(bins, DeltaPhi_reco_Min, DeltaPhi_reco_Max);
+
+	//Histogram Bookings for DeltaPhi_reco_INSIDE
+	Book_DeltaPhi_reco_INSIDE(bins, DeltaPhi_reco_INSIDE_Min, DeltaPhi_reco_INSIDE_Max);
+
+	//Histogram Bookings for DeltaPhi_reco_OUTSIDE
+	Book_DeltaPhi_reco_OUTSIDE(bins, DeltaPhi_reco_OUTSIDE_Min, DeltaPhi_reco_OUTSIDE_Max);
+
+	//Histogram Bookings for pT_balance_reco
+	Book_pT_balance_reco(bins, pT_balance_reco_Min, pT_balance_reco_Max);
+
+	//Histogram Bookings for pT_balance_reco_INSIDE
+	Book_pT_balance_reco_INSIDE(bins, pT_balance_reco_INSIDE_Min, pT_balance_reco_INSIDE_Max);
+
+	//Histogram Bookings for pT_balance_reco_OUTSIDE
+	Book_pT_balance_reco_OUTSIDE(bins, pT_balance_reco_OUTSIDE_Min, pT_balance_reco_OUTSIDE_Max);
+
 	//Histogram Bookings for lep_0_lep_1_mass_reco
 	Book_lep_0_lep_1_mass_reco(bins, lep_0_lep_1_mass_reco_Min, lep_0_lep_1_mass_reco_Max);
 
@@ -136,9 +202,6 @@
 	//Histogram Bookings for Centrality_reco
 	Book_Centrality_reco(bins, Centrality_reco_Min, Centrality_reco_Max);
 
-	//Histogram Bookings for Test_Polar_Plot
-	Book_Test_Polar_Plot(xbins, Test_Polar_Plot_xMin, Test_Polar_Plot_xMax, ybins, Test_Polar_Plot_yMin, Test_Polar_Plot_yMax);
-
 	//Histogram Bookings for Mass_Favour_Combination_2D
 	Book_Mass_Favour_Combination_2D(xbins, Mass_Favour_Combination_2D_xMin, Mass_Favour_Combination_2D_xMax, ybins, Mass_Favour_Combination_2D_yMin, Mass_Favour_Combination_2D_yMax);
 
@@ -148,9 +211,12 @@
 	//Histogram Bookings for Mass_Favour_Combination_OUTSIDE_2D
 	Book_Mass_Favour_Combination_OUTSIDE_2D(xbins, Mass_Favour_Combination_OUTSIDE_2D_xMin, Mass_Favour_Combination_OUTSIDE_2D_xMax, ybins, Mass_Favour_Combination_OUTSIDE_2D_yMin, Mass_Favour_Combination_OUTSIDE_2D_yMax);
 
-	//Histogram Bookings for lep_0_reco_p4
-	Book_lep_0_reco_p4(xbins, lep_0_reco_p4_xMin, lep_0_reco_p4_xMax, ybins, lep_0_reco_p4_yMin, lep_0_reco_p4_yMax);
+	//Histogram Bookings for Mass_DeltaPhi_Combination_2D
+	Book_Mass_DeltaPhi_Combination_2D(xbins, Mass_DeltaPhi_Combination_2D_xMin, Mass_DeltaPhi_Combination_2D_xMax, ybins, Mass_DeltaPhi_Combination_2D_yMin, Mass_DeltaPhi_Combination_2D_yMax);
 
-	//Histogram Bookings for lep_1_reco_p4
-	Book_lep_1_reco_p4(xbins, lep_1_reco_p4_xMin, lep_1_reco_p4_xMax, ybins, lep_1_reco_p4_yMin, lep_1_reco_p4_yMax);
+	//Histogram Bookings for Mass_DeltaPhi_Combination_INSIDE_2D
+	Book_Mass_DeltaPhi_Combination_INSIDE_2D(xbins, Mass_DeltaPhi_Combination_INSIDE_2D_xMin, Mass_DeltaPhi_Combination_INSIDE_2D_xMax, ybins, Mass_DeltaPhi_Combination_INSIDE_2D_yMin, Mass_DeltaPhi_Combination_INSIDE_2D_yMax);
+
+	//Histogram Bookings for Mass_DeltaPhi_Combination_OUTSIDE_2D
+	Book_Mass_DeltaPhi_Combination_OUTSIDE_2D(xbins, Mass_DeltaPhi_Combination_OUTSIDE_2D_xMin, Mass_DeltaPhi_Combination_OUTSIDE_2D_xMax, ybins, Mass_DeltaPhi_Combination_OUTSIDE_2D_yMin, Mass_DeltaPhi_Combination_OUTSIDE_2D_yMax);
 

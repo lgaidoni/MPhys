@@ -368,6 +368,9 @@ void Draw_Region(string DataType, double textsize, double latex1left, double lat
 	if (DataType.find("CONTROL") != string::npos) region = "Control";
 	else if (DataType.find("EXCEPT") != string::npos) region = "Except";
 	else if (DataType.find("PRE") != string::npos) region = "Pre-Cut";
+	else if (DataType.find("BJET") != string::npos) region = "Bjet";
+	else if (DataType.find("HIGH_E") != string::npos) region = "High Energy";
+	else if (DataType.find("TRUTH") != string::npos) region = "Truth";
 	else region = "Search";
 
 	string latexLine = "#font[42]{" + region + " Region}";  //Create a string to be c_str()
@@ -669,6 +672,62 @@ void DrawHistogram2D(TH2F *histogram, string histogramName, string title, bool l
 
 }
 
+void Process_Combiner_Checker(string AnalysisType, string FileName) {
+
+	vector<TFile*> files;
+	files.push_back(new TFile(FileName.c_str()));  //Add the file to the vector
+	files.push_back(new TFile(FileName.c_str()));  //Add the file to the vector
+	files.push_back(new TFile(FileName.c_str()));  //Add the file to the vector
+
+	//Open the list of Data Types
+	string DataTypeFileName = "../../MPhys/DataTypes/Common_DataTypes.txt";
+	ifstream DataTypeFile (DataTypeFileName);
+
+	string line;
+
+	while(!DataTypeFile.eof()) {  		//While not at the end of the file
+		getline(DataTypeFile, line);  	//Get the file line
+		if (line != "") {  		//If not looking at the last line
+			if (line.find("2D") != string::npos) {
+				//Get the first histogram in the vector
+				string histogramName = "h_" + line + ";1";
+				TH2F *histogramMaster = (TH2F*)files[0]->Get(histogramName.c_str()); 
+
+				//For all the files in the vector not counting the first...
+				for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+
+					//Get the histogram
+					TH2F *histogram = (TH2F*)(*tfile)->Get(histogramName.c_str());
+
+					//Add it to the master histogram 
+					histogramMaster->Add(histogram);
+
+				}
+			}
+
+			else {
+
+				cout << line << endl;	
+
+				//Get the first histogram in the vector
+				string histogramName = "h_" + line + ";1";
+				TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
+
+				//For all the files in the vector not counting the first...
+				for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+
+					//Get the histogram
+					TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
+
+					//Add it to the master histogram 
+					histogramMaster->Add(histogram);
+
+				}
+			}
+		}
+	}
+}
+
 //This function will combine processes and write them out to a new .root file
 void Process_Combiner(string AnalysisType, string Process) {
 
@@ -868,6 +927,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	else if (DataTypeHistogram.find("EXCEPT") != string::npos) Region = "EXCEPT";
 	else if (DataTypeHistogram.find("HIGH_E") != string::npos) Region = "HIGH_E";
 	else if (DataTypeHistogram.find("BJET") != string::npos) Region = "BJET";
+	else if (DataTypeHistogram.find("TRUTH") != string::npos) Region = "TRUTH";
 	else Region = "SEARCH";
 
 	//Create the full output file path
@@ -989,6 +1049,7 @@ void Process_Stacker_QCD_EW(string AnalysisType, string DataType, string DataTyp
 	else if (DataTypeHistogram.find("EXCEPT") != string::npos) Region = "EXCEPT";
 	else if (DataTypeHistogram.find("HIGH_E") != string::npos) Region = "HIGH_E";
 	else if (DataTypeHistogram.find("BJET") != string::npos) Region = "BJET";
+	else if (DataTypeHistogram.find("TRUTH") != string::npos) Region = "TRUTH";
 	else Region = "SEARCH";
 
 	//Create the full output file path
@@ -1105,6 +1166,7 @@ void Process_Stacker_EW(string AnalysisType, string DataType, string DataTypeHis
 	else if (DataTypeHistogram.find("EXCEPT") != string::npos) Region = "EXCEPT";
 	else if (DataTypeHistogram.find("HIGH_E") != string::npos) Region = "HIGH_E";
 	else if (DataTypeHistogram.find("BJET") != string::npos) Region = "BJET";
+	else if (DataTypeHistogram.find("TRUTH") != string::npos) Region = "TRUTH";
 	else Region = "SEARCH";
 
 	//Create the full output file path
@@ -1275,6 +1337,8 @@ void DrawStackedProcesses(string AnalysisType) {
 	QCD_EW_graphs.push_back("lep_0_lep_1_mass");
 	QCD_EW_graphs.push_back("MET_Type_Favour");
 	QCD_EW_graphs.push_back("Mass_Favour_Combination_2D");
+	QCD_EW_graphs.push_back("Mass_DeltaPhi_Combination_2D");
+	QCD_EW_graphs.push_back("pT_balance");
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);
 	
@@ -1887,4 +1951,7 @@ TLorentzVector* reconstucted_tau_candidate_TLV(TLorentzVector *Vector1,TLorentzV
 	return reconstucted_tau_candidate_TLV;
 
 }
+
+
+
 #endif

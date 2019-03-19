@@ -1,7 +1,9 @@
 	virtual void BookHistos();
 	virtual void JetSet(bool bjets);
+	virtual void JetSet_TRUTH();
 	virtual void ParticleSelection();
-	virtual bool InitialCut(bool bjets);
+	virtual void ParticleSelection_TRUTH();
+	virtual bool InitialCut(bool bjets, bool truth);
 	virtual void GenerateVariables();
 	virtual void FillAllData_PreCut();
 	virtual void DrawHistos();
