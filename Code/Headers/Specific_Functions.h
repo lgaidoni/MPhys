@@ -51,4 +51,27 @@ void All_Cross_Section_Calculation_QCD_EW_ll_Specific() {
 
 }
 
+void All_Generate_Significance_Values() {
+
+	double alpha;
+
+	vector<string> types;
+	types.push_back("lep_0_lep_1_mass");
+	types.push_back("lep_0_lep_1_mass_reco");
+	types.push_back("pT_balance");
+	types.push_back("pT_balance_reco_INSIDE");
+	types.push_back("pT_balance_reco_OUTSIDE");
+
+	for (int i = 0; i < types.size(); i++) { 
+		// calculate alpha
+		alpha = SignificanceLevelCalc("MuonTau", types[i], 5);	
+		// save to file
+		fstream output("../../Output-Files/Final_Graphs/MuonTau_Significance.txt", output.out | output.app);
+		output << types[i] << "\t" << alpha << "\n" << endl;
+		output.close();
+
+	}
+
+}
+
 #endif

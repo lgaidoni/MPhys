@@ -132,6 +132,37 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 
 }
 
+double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedProcess) { // 5,6,7 for ee, mumu, tautau
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	
+	double N_events = 0;
+	double N_bkg = 0;
+	double N_signal = 0;
+	double significance = 0;
+
+	cout << "\nALL DATA TYPES: Alpha level calc!" << endl;
+	for (int i=0; i<11; i++) { //loop over the histograms for different data sets
+		TH1F* histogram = histograms[i];
+		if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+
+			N_events = histogram->Integral(); // gets no of events by integrating
+			N_bkg += N_events;
+			cout << "Events for histogram" << i << ": " << N_events << endl;
+			cout << "Total background events: " << N_bkg << endl;
+		}
+
+		else { N_signal = histogram->Integral();  // should get the signal number of events
+		cout << "\nTotal signal events: " << N_signal << endl;
+		}
+	}
+
+	significance = N_signal/pow(N_signal+N_bkg,0.5);
+	cout << "\nSignificance: " << significance << endl;
+	return significance;
+
+}
+
 void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process) {
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);

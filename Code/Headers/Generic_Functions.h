@@ -1533,7 +1533,6 @@ void Inside_Outside_Overlay(string AnalysisType, string DataType, string Mode) {
 	OutsideStack->Add(OutsideHistograms[7], "hist");
 
 	cout << InsideHistograms[5]->GetEntries() << endl;
-	cout << InsideHistograms[5]->Integral(1,49) << endl;
 
 	//Draw the stack, actually stacking (no "nostack")
 	InsideStack->Draw("");
