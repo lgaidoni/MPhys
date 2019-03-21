@@ -800,7 +800,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "high_energy") {
 
 		leading_jets_invariant_mass = false;
-		if (jet_0_jet_1_mass > 1500) leading_jets_invariant_mass = true;
+		if (jet_0_jet_1_mass > 1000) leading_jets_invariant_mass = true;
 
 	}
 

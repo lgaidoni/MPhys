@@ -182,63 +182,51 @@ vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
 }
 
 //This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-vector<TH1F*> Set_Histogram_Styles_INSIDE(vector<TH1F*> histograms) {
-	
+vector<TH1F*> Set_Histogram_Styles_INSIDE(vector<TH1F*> histograms) {	
 
 	//ttb
 	histograms[0]->SetLineColor(kBlack);
-	histograms[0]->SetFillColor(kRed);
-	histograms[0]->SetFillStyle(1001);
+	histograms[0]->SetFillColorAlpha(kRed,0.99);
 
 	//Wtaunu
 	histograms[1]->SetLineColor(kBlack);
-	histograms[1]->SetFillColor(kViolet-8);
-	histograms[1]->SetFillStyle(1001);
+	histograms[1]->SetFillColorAlpha(kViolet-8,0.99);
 
 	//Wmunu
 	histograms[2]->SetLineColor(kBlack);
-	histograms[2]->SetFillColor(kViolet-4);
-	histograms[2]->SetFillStyle(1001);
+	histograms[2]->SetFillColorAlpha(kViolet-4,0.99);
 
 	//Wenu
 	histograms[3]->SetLineColor(kBlack);
-	histograms[3]->SetFillColor(kViolet-1);
-	histograms[3]->SetFillStyle(1001);
+	histograms[3]->SetFillColorAlpha(kViolet-1,0.99);
 
 	//ZqqZll
 	histograms[4]->SetLineColor(kBlack);
-	histograms[4]->SetFillColor(kPink-6);
-	histograms[4]->SetFillStyle(1001);
+	histograms[4]->SetFillColorAlpha(kPink-6,0.99);
 
 	//Ztt2jets
 	histograms[5]->SetLineColor(kBlack);
-	histograms[5]->SetFillColor(kSpring+10);
-	histograms[5]->SetFillStyle(1001);
+	histograms[5]->SetFillColorAlpha(kSpring+10,0.99);
 
 	//Zmm2jets
 	histograms[6]->SetLineColor(kBlack);
-	histograms[6]->SetFillColor(kAzure+2);
-	histograms[6]->SetFillStyle(1001);
+	histograms[6]->SetFillColorAlpha(kAzure+2,0.99);
 
 	//Zee2jets
 	histograms[7]->SetLineColor(kBlack);
-	histograms[7]->SetFillColor(kOrange-2);
-	histograms[7]->SetFillStyle(1001);
+	histograms[7]->SetFillColorAlpha(kOrange-2,0.99);
 
 	//Ztt
 	histograms[8]->SetLineColor(kBlack);
-	histograms[8]->SetFillColor(kSpring+3);
-	histograms[8]->SetFillStyle(1001);
+	histograms[8]->SetFillColorAlpha(kSpring+3,0.99);
 
 	//Zmumu
 	histograms[9]->SetLineColor(kBlack);
-	histograms[9]->SetFillColor(kAzure-9);
-	histograms[9]->SetFillStyle(1001);
+	histograms[9]->SetFillColorAlpha(kAzure-9,0.99);
 
 	//Zee
 	histograms[10]->SetLineColor(kBlack);
-	histograms[10]->SetFillColor(kOrange+1);
-	histograms[10]->SetFillStyle(1001);
+	histograms[10]->SetFillColorAlpha(kOrange+1,0.99);
 
 	//Data
 	histograms[11]->Sumw2();
@@ -252,62 +240,61 @@ vector<TH1F*> Set_Histogram_Styles_INSIDE(vector<TH1F*> histograms) {
 
 //This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
 vector<TH1F*> Set_Histogram_Styles_OUTSIDE(vector<TH1F*> histograms) {
-	
 
 	//ttb
 	histograms[0]->SetLineColor(kBlack);
-	histograms[0]->SetFillColor(kCyan);
-	histograms[0]->SetFillStyle(1001);
+	histograms[0]->SetFillColorAlpha(kRed,0.25);
+	//histograms[0]->SetFillStyle(3003);
 
 	//Wtaunu
 	histograms[1]->SetLineColor(kBlack);
-	histograms[1]->SetFillColor(kSpring+3);
-	histograms[1]->SetFillStyle(1001);
+	histograms[1]->SetFillColorAlpha(kViolet-8,0.25);
+	//histograms[1]->SetFillStyle(3003);
 
 	//Wmunu
 	histograms[2]->SetLineColor(kBlack);
-	histograms[2]->SetFillColor(kSpring-6);
-	histograms[2]->SetFillStyle(1001);
+	histograms[2]->SetFillColorAlpha(kViolet-4,0.25);
+	//histograms[2]->SetFillStyle(3003);
 
 	//Wenu
 	histograms[3]->SetLineColor(kBlack);
-	histograms[3]->SetFillColor(kSpring-2);
-	histograms[3]->SetFillStyle(1001);
+	histograms[3]->SetFillColorAlpha(kViolet-1,0.25);
+	//histograms[3]->SetFillStyle(3003);
 
 	//ZqqZll
 	histograms[4]->SetLineColor(kBlack);
-	histograms[4]->SetFillColor(kTeal-4);
-	histograms[4]->SetFillStyle(1001);
+	histograms[4]->SetFillColorAlpha(kPink-6,0.25);
+	//histograms[4]->SetFillStyle(3003);
 
 	//Ztt2jets
 	histograms[5]->SetLineColor(kBlack);
-	histograms[5]->SetFillColor(kViolet+10);
-	histograms[5]->SetFillStyle(1001);
+	histograms[5]->SetFillColorAlpha(kSpring+10, 0.25);
+	//histograms[5]->SetFillStyle(3003);
 
 	//Zmm2jets
 	histograms[6]->SetLineColor(kBlack);
-	histograms[6]->SetFillColor(kOrange+1);
-	histograms[6]->SetFillStyle(1001);
+	histograms[6]->SetFillColorAlpha(kAzure+2,0.25);
+	//histograms[6]->SetFillStyle(3003);
 
 	//Zee2jets
 	histograms[7]->SetLineColor(kBlack);
-	histograms[7]->SetFillColor(kAzure-1);
-	histograms[7]->SetFillStyle(1001);
+	histograms[7]->SetFillColorAlpha(kOrange-2,0.25);
+	//histograms[7]->SetFillStyle(3003);
 
 	//Ztt
 	histograms[8]->SetLineColor(kBlack);
-	histograms[8]->SetFillColor(kViolet-7);
-	histograms[8]->SetFillStyle(1001);
+	histograms[8]->SetFillColorAlpha(kSpring+3,0.25);
+	//histograms[8]->SetFillStyle(3003);
 
 	//Zmumu
 	histograms[9]->SetLineColor(kBlack);
-	histograms[9]->SetFillColor(kOrange+3);
-	histograms[9]->SetFillStyle(1001);
+	histograms[9]->SetFillColorAlpha(kAzure-9,0.25);
+	//histograms[9]->SetFillStyle(3003);
 
 	//Zee
 	histograms[10]->SetLineColor(kBlack);
-	histograms[10]->SetFillColor(kAzure+2);
-	histograms[10]->SetFillStyle(1001);
+	histograms[10]->SetFillColorAlpha(kOrange+1,0.25);
+	//histograms[10]->SetFillStyle(3003);
 
 	//Data
 	histograms[11]->Sumw2();
@@ -1010,251 +997,20 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 		}
 
 	}
-
 	//Draw the data histogram over the histogram stack
-	histograms[11]->Draw("SAME");
+	if (mode == "") histograms[11]->Draw("SAME");
 
 	//Create the legend and draw the region information
-	Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0);
-	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
-
-	string Region;
-
-	if (DataTypeHistogram.find("CONTROL") != string::npos) Region = "CONTROL";
-	else if (DataTypeHistogram.find("PRE") != string::npos) Region = "PRE";
-	else if (DataTypeHistogram.find("EXCEPT") != string::npos) Region = "EXCEPT";
-	else if (DataTypeHistogram.find("HIGH_E") != string::npos) Region = "HIGH_E";
-	else if (DataTypeHistogram.find("BJET") != string::npos) Region = "BJET";
-	else if (DataTypeHistogram.find("TRUTH") != string::npos) Region = "TRUTH";
-	else Region = "SEARCH";
-
-	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
-
-	if (logged) canvas->SetLogy();  //Log the y axis
-
-	//Write out to a PDF file
-	canvas->SaveAs(FullOutputFilePath.c_str());
-
-}
-
-// Stacking histograms:
-// need to give it the analysis type and then for given, tells it the path
-void Process_Stacker_QCD_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged) {
-
-	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
-
-	//String for name of the histogram in the root file
-	string DataTypeHistName = "h_" + DataType + ";1";
-
-	//Create the canvas
-	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
-
-	//Get the vector of histograms for the given AnalysisType and DataType
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
-
-	//Create the stacked histogram
-	THStack *histogramStack = new THStack("histogramStack", "");
-
-	//Set the histogram styles
-	histograms = Set_Histogram_Styles(histograms);
-
-	//Add the histograms from the vector to the stack
-	histogramStack->Add(histograms[5], "hist");
-	histogramStack->Add(histograms[6], "hist");
-	histogramStack->Add(histograms[7], "hist");
-	histogramStack->Add(histograms[8], "hist");
-	histogramStack->Add(histograms[9], "hist");
-	histogramStack->Add(histograms[10], "hist");
-
-	//Draw the stack, actually stacking (no "nostack")
-	histogramStack->Draw("");
-
-	//Name the histogram stack's x axis according to the DataType
-	Histogram_Namer(histogramStack, DataType);
-
-	//Set the histogram axes and labels
-	histogramStack->GetYaxis()->SetTitle("Events");
-	histogramStack->GetXaxis()->SetLabelSize(0.05);
-	histogramStack->GetYaxis()->SetLabelSize(0.05);
-	histogramStack->GetXaxis()->SetTitleSize(0.037);
-	histogramStack->GetYaxis()->SetTitleSize(0.037);
-	histogramStack->GetXaxis()->SetTitleOffset(1.2);
-
-	//Get the largest value in the histogram
-	double max_value = histogramStack->GetMaximum();
-
-	//Generic Maximum Size of the Graphs
-	//Set the Maximum Size of the histograms to something appropriate to the largest value in the histogram
-
-	if(logged) {
-
-		if (max_value >= 1 && max_value < 10) { histogramStack->SetMaximum(300);}
-		else if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(3000);}
-		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(30000);}
-		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(300000);}
-	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(3000000);}
-		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(30000000);}
-
-		//Exceptions to these rules and conditions for the minimum size of the graphs
-		if (AnalysisType == "Tau") {
-
-			if (DataType == "lep_0_lep_1_mass_PRE") histogramStack->SetMinimum(500);
-			if (DataType == "lep_0_lep_1_mass_EXCEPT") histogramStack->SetMinimum(15);
-			if (DataType == "Centrality_CONTROL") histogramStack->SetMinimum(1);
-
-		} else if (AnalysisType == "Electron" or AnalysisType == "Muon" or AnalysisType == "MuonTau" or AnalysisType == "ElectronTau" or AnalysisType == "ElectronMuon") {
-
-			if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
-			else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
-
-			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau" or AnalysisType == "ElectronMuon") {
-				if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(0.01);
-			} else {
-				if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(1);
-			}
-			if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("met_reco_p4_Pt") != string::npos) histogramStack->SetMinimum(0.01);
-			if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
-			else if(DataType.find("lep_0_lep_1_mass_reconstructed") != string::npos) histogramStack->SetMinimum(1);
-			else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
-			else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
-			if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("neutrino_0_pt") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("neutrino_1_pt") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("MET_Type_Favour") != string::npos) histogramStack->SetMinimum(1);
-
-		} 
-
-		else { int i = 0;
-
-		}
-
+	if (mode == "QCD_EW") {
+		Legend_Creator_QCD_EW(histograms, 0.84, 0.89, 0.78, 0.57, 0.037, 0);
+	}
+	else if (mode == "EW") {
+		Legend_Creator_EW(histograms, 0.84, 0.89, 0.78, 0.71, 0.037, 0);
+	}
+	else {
+		Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0);
 	}
 
-	//Create the legend and draw the region information
-	Legend_Creator_QCD_EW(histograms, 0.84, 0.89, 0.78, 0.57, 0.037, 0);
-	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
-
-	string Region;
-
-	if (DataTypeHistogram.find("CONTROL") != string::npos) Region = "CONTROL";
-	else if (DataTypeHistogram.find("PRE") != string::npos) Region = "PRE";
-	else if (DataTypeHistogram.find("EXCEPT") != string::npos) Region = "EXCEPT";
-	else if (DataTypeHistogram.find("HIGH_E") != string::npos) Region = "HIGH_E";
-	else if (DataTypeHistogram.find("BJET") != string::npos) Region = "BJET";
-	else if (DataTypeHistogram.find("TRUTH") != string::npos) Region = "TRUTH";
-	else Region = "SEARCH";
-
-	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
-
-	if (logged) canvas->SetLogy();  //Log the y axis
-
-	//Write out to a PDF file
-	canvas->SaveAs(FullOutputFilePath.c_str());
-
-}
-
-void Process_Stacker_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged) {
-
-	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
-
-	//String for name of the histogram in the root file
-	string DataTypeHistName = "h_" + DataType + ";1";
-
-	//Create the canvas
-	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
-
-	//Get the vector of histograms for the given AnalysisType and DataType
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
-
-	//Create the stacked histogram
-	THStack *histogramStack = new THStack("histogramStack", "");
-
-	//Set the histogram styles
-	histograms = Set_Histogram_Styles(histograms);
-
-	//Add the histograms from the vector to the stack
-	histogramStack->Add(histograms[5], "hist");
-	histogramStack->Add(histograms[6], "hist");
-	histogramStack->Add(histograms[7], "hist");
-
-	//Draw the stack, actually stacking (no "nostack")
-	histogramStack->Draw("");
-
-	//Name the histogram stack's x axis according to the DataType
-	Histogram_Namer(histogramStack, DataType);
-
-	//Set the histogram axes and labels
-	histogramStack->GetYaxis()->SetTitle("Events");
-	histogramStack->GetXaxis()->SetLabelSize(0.05);
-	histogramStack->GetYaxis()->SetLabelSize(0.05);
-	histogramStack->GetXaxis()->SetTitleSize(0.037);
-	histogramStack->GetYaxis()->SetTitleSize(0.037);
-	histogramStack->GetXaxis()->SetTitleOffset(1.2);
-
-	//Get the largest value in the histogram
-	double max_value = histogramStack->GetMaximum();
-
-	//Generic Maximum Size of the Graphs
-	//Set the Maximum Size of the histograms to something appropriate to the largest value in the histogram
-
-	if(logged) {
-
-		if (max_value >= 1 && max_value < 10) { histogramStack->SetMaximum(300);}
-		else if (max_value >= 10 && max_value < 100) { histogramStack->SetMaximum(3000);}
-		else if (max_value >= 100 && max_value < 1000) { histogramStack->SetMaximum(30000);}
-		else if (max_value >= 1000 && max_value < 10000) { histogramStack->SetMaximum(300000);}
-	 	else if (max_value >= 10000 && max_value < 100000) { histogramStack->SetMaximum(3000000);}
-		else if (max_value >= 100000 && max_value < 1000000) { histogramStack->SetMaximum(30000000);}
-
-		//Exceptions to these rules and conditions for the minimum size of the graphs
-		if (AnalysisType == "Tau") {
-
-			if (DataType == "lep_0_lep_1_mass_PRE") histogramStack->SetMinimum(500);
-			if (DataType == "lep_0_lep_1_mass_EXCEPT") histogramStack->SetMinimum(15);
-			if (DataType == "Centrality_CONTROL") histogramStack->SetMinimum(1);
-
-		} else if (AnalysisType == "Electron" or AnalysisType == "Muon" or AnalysisType == "MuonTau" or AnalysisType == "ElectronTau" or AnalysisType == "ElectronMuon") {
-
-			if(DataType.find("Centrality_PRE") != string::npos) histogramStack->SetMinimum(50);
-			else if(DataType.find("Centrality") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("DeltaR") != string::npos) histogramStack->SetMinimum(1);
-
-			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau" or AnalysisType == "ElectronMuon") {
-				if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(0.01);
-			} else {
-				if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(1);
-			}
-			if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("met_reco_p4_Pt") != string::npos) histogramStack->SetMinimum(0.01);
-			if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
-			else if(DataType.find("lep_0_lep_1_mass_reconstructed") != string::npos) histogramStack->SetMinimum(1);
-			else if(DataType.find("lep_0_lep_1_mass") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("lep_0_lep_1_pt_PRE") != string::npos) { histogramStack->SetMinimum(30); histogramStack->SetMaximum(5000000); }
-			else if(DataType.find("lep_0_lep_1_pt") != string::npos) { histogramStack->SetMinimum(1); histogramStack->SetMaximum(500000); }
-			if(DataType.find("pT_balance") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("pT_balance_3") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("neutrino_0_pt") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("neutrino_1_pt") != string::npos) histogramStack->SetMinimum(1);
-			if(DataType.find("MET_Type_Favour") != string::npos) histogramStack->SetMinimum(1);
-
-		} 
-
-		else { int i = 0;
-
-		}
-
-	}
-
-	//Create the legend and draw the region information
-	Legend_Creator_EW(histograms, 0.84, 0.89, 0.78, 0.71, 0.037, 0);
 	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
 
 	string Region;
@@ -1419,6 +1175,117 @@ void Process_Combiner_2D_EW(string AnalysisType, string DataType, string DataTyp
 
 }
 
+void Inside_Outside_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
+
+	//String for name of the histograms in the root file
+	string InsideName = DataType + "_INSIDE";
+	string OutsideName = DataType + "_OUTSIDE";
+
+	//Create the canvas
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+
+	vector<TH1F*> InsideHistograms = Histogram_Return_Given_File(AnalysisType, InsideName, root_files);
+
+	vector<TH1F*> OutsideHistograms = Histogram_Return_Given_File(AnalysisType, OutsideName, root_files);
+
+	THStack *InsideStack = new THStack("InsideStack", "");
+	THStack *OutsideStack = new THStack("OutsideStack", "");
+
+	InsideHistograms = Set_Histogram_Styles_INSIDE(InsideHistograms);
+	OutsideHistograms = Set_Histogram_Styles_OUTSIDE(OutsideHistograms);
+
+	if (mode == "QCD_EW") {
+		InsideStack->Add(InsideHistograms[5], "hist");
+		InsideStack->Add(InsideHistograms[6], "hist");
+		InsideStack->Add(InsideHistograms[7], "hist");
+		InsideStack->Add(InsideHistograms[8], "hist");
+		InsideStack->Add(InsideHistograms[9], "hist");
+		InsideStack->Add(InsideHistograms[10], "hist");
+
+		OutsideStack->Add(OutsideHistograms[5], "hist");
+		OutsideStack->Add(OutsideHistograms[6], "hist");
+		OutsideStack->Add(OutsideHistograms[7], "hist");
+		OutsideStack->Add(OutsideHistograms[8], "hist");
+		OutsideStack->Add(OutsideHistograms[9], "hist");
+		OutsideStack->Add(OutsideHistograms[10], "hist");
+
+	}
+	else if (mode == "EW") {
+
+		InsideStack->Add(InsideHistograms[5], "hist");
+		InsideStack->Add(InsideHistograms[6], "hist");
+		InsideStack->Add(InsideHistograms[7], "hist");
+
+		OutsideStack->Add(OutsideHistograms[5], "hist");
+		OutsideStack->Add(OutsideHistograms[6], "hist");
+		OutsideStack->Add(OutsideHistograms[7], "hist");
+	}
+	else {
+		//Add the histograms from the vector to the stack
+		for (int i=0; i < 11; i++) {
+			InsideStack->Add(InsideHistograms[i], "hist");
+		}
+
+		for (int i=0; i < 11; i++) {
+			OutsideStack->Add(OutsideHistograms[i], "hist");
+		}
+	}
+
+	//Draw the stack, actually stacking (no "nostack")
+	InsideStack->Draw("");
+	OutsideStack->Draw("same noclear");
+
+	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.70, 0.73);
+
+	TLatex t;  						//Create a latex object
+	t.SetTextFont(42);  					//Set font
+	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
+	t.SetTextSize(0.035);  					//Set font size
+
+	canvas->SetRightMargin(0.15);
+
+	//Create the legend and draw the region information
+	if (mode == "QCD_EW") {
+		t.DrawLatex(0.86, 0.86, "Inside");
+		Legend_Creator_QCD_EW(InsideHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
+
+		t.DrawLatex(0.86, 0.61, "Outside");
+		Legend_Creator_QCD_EW(OutsideHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
+	}
+	else if (mode == "EW") {
+
+		t.DrawLatex(0.86, 0.86, "Inside");
+		Legend_Creator_EW(InsideHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
+
+		t.DrawLatex(0.86, 0.71, "Outside");
+		Legend_Creator_EW(OutsideHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
+	}
+	else {
+		t.DrawLatex(0.86, 0.86, "Inside");
+		Legend_Creator(InsideHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
+
+		t.DrawLatex(0.86, 0.46, "Outside");
+		Legend_Creator(InsideHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
+	}
+
+	string Region;
+
+	if (DataType.find("CONTROL") != string::npos) Region = "CONTROL";
+	else if (DataType.find("PRE") != string::npos) Region = "PRE";
+	else if (DataType.find("EXCEPT") != string::npos) Region = "EXCEPT";
+	else if (DataType.find("HIGH_E") != string::npos) Region = "HIGH_E";
+	else if (DataType.find("BJET") != string::npos) Region = "BJET";
+	else if (DataType.find("TRUTH") != string::npos) Region = "TRUTH";
+	else Region = "SEARCH";
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+}
+
 //Draw the stacked graphs for all the desired variables
 void DrawStackedProcesses(string AnalysisType) {
 
@@ -1439,6 +1306,10 @@ void DrawStackedProcesses(string AnalysisType) {
 	QCD_EW_graphs.push_back("Mass_DeltaPhi_Combination_INSIDE_2D");
 	QCD_EW_graphs.push_back("Mass_DeltaPhi_Combination_OUTSIDE_2D");
 	QCD_EW_graphs.push_back("pT_balance");
+
+	vector<string> IN_OUT_graphs;
+	IN_OUT_graphs.push_back("lep_0_lep_1_mass_reco");
+	IN_OUT_graphs.push_back("pT_balance_reco");
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);
 	
@@ -1465,6 +1336,7 @@ void DrawStackedProcesses(string AnalysisType) {
 
 						FileName =  line + "_" + AnalysisType + "_Final_Stacked_EW_Logged.pdf";
 						Process_Combiner_2D_EW(AnalysisType, line, FileName, root_files, true);
+
 					}
 				}
 
@@ -1494,51 +1366,23 @@ void DrawStackedProcesses(string AnalysisType) {
 
 					string EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_EW.pdf";
 					Process_Stacker(AnalysisType, line, EW_loglessFileName, root_files, false, "EW");
+
+				}
+
+			}
+
+			for (int i = 0; i <= IN_OUT_graphs.size(); i++) {
+				if (line == IN_OUT_graphs[i]) {
+					fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_QCD_EW.pdf";
+					Inside_Outside_Overlay(AnalysisType, line, "QCD_EW", fileName, root_files);
+
+					fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_EW.pdf";
+					Inside_Outside_Overlay(AnalysisType, line, "EW", fileName, root_files);
 				}
 
 			}
 		}
 	}
-}
-
-void Inside_Outside_Overlay(string AnalysisType, string DataType, string Mode) {
-
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-
-	//String for name of the histograms in the root file
-	string InsideName = DataType + "_INSIDE";
-	string OutsideName = DataType + "_OUTSIDE";
-
-	//Create the canvas
-	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
-
-	cout << "Drawing Inside Histograms" << endl;
-	vector<TH1F*> InsideHistograms = Histogram_Return_Given_File(AnalysisType, InsideName, root_files);
-
-	cout << "Drawing Outside Histograms" << endl;
-	vector<TH1F*> OutsideHistograms = Histogram_Return_Given_File(AnalysisType, OutsideName, root_files);
-
-	THStack *InsideStack = new THStack("InsideStack", "");
-	THStack *OutsideStack = new THStack("OutsideStack", "");
-
-	InsideHistograms = Set_Histogram_Styles_INSIDE(InsideHistograms);
-	OutsideHistograms = Set_Histogram_Styles_OUTSIDE(OutsideHistograms);
-
-	InsideStack->Add(InsideHistograms[5], "hist");
-	InsideStack->Add(InsideHistograms[6], "hist");
-	InsideStack->Add(InsideHistograms[7], "hist");
-
-	OutsideStack->Add(OutsideHistograms[5], "hist");
-	OutsideStack->Add(OutsideHistograms[6], "hist");
-	OutsideStack->Add(OutsideHistograms[7], "hist");
-
-	cout << InsideHistograms[5]->GetEntries() << endl;
-
-	//Draw the stack, actually stacking (no "nostack")
-	InsideStack->Draw("");
-	OutsideStack->Draw("SAME");
-
-
 }
 
 //Combine all the different chains belonging to each different process
