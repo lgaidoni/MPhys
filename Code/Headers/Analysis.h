@@ -388,15 +388,15 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 
 	if (AnalysisType == "ElectronMuon") {
 
-		lep_0 = & muon_0_matched;
-		lep_0_p4 = muon_0_matched_p4;
-		lep_0_q = & muon_0_matched_q;	
+		lep_0 = & muon_0_matched_truth_lepTau;
+		lep_0_p4 = muon_0_matched_truth_lepTau_p4;
+		lep_0_q = & muon_0_matched_truth_lepTau_q;	
 
-		lep_1 = & elec_0_matched;
-		lep_1_p4 = elec_0_matched_p4;
-		lep_1_q = & elec_0_matched_q;	
+		lep_1 = & elec_0_matched_truth_lepTau;
+		lep_1_p4 = elec_0_matched_truth_lepTau_p4;
+		lep_1_q = & elec_0_matched_truth_lepTau_q;	
 
-		if (muon_0_matched > 0 && elec_0_matched > 0 && muon_1_matched == 0 && elec_1_matched == 0) n_leptons = 2;
+		if (muon_0_matched_truth_lepTau > 0 && elec_0_matched_truth_lepTau > 0 && muon_1_matched_truth_lepTau == 0 && elec_1_matched_truth_lepTau == 0) n_leptons = 2;
 		else n_leptons = 0;
 	}
 
@@ -420,11 +420,11 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
 
-		lep_1 = & elec_0_matched;
-		lep_1_p4 = elec_0_matched_p4;
-		lep_1_q = & elec_0_matched_q;
+		lep_1 = & elec_0_matched_truth_lepTau;
+		lep_1_p4 = elec_0_matched_truth_lepTau_p4;
+		lep_1_q = & elec_0_matched_truth_lepTau_q;
 
-		if (tau_0_truth > 0 && elec_0_matched > 0 && tau_1_truth == 0 && elec_1_matched == 0) n_leptons = 2;
+		if (tau_0_truth > 0 && elec_0_matched_truth_lepTau > 0 && tau_1_truth == 0 && elec_1_matched_truth_lepTau == 0) n_leptons = 2;
 		else n_leptons = 0;
 	}
 
@@ -434,11 +434,11 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
 
-		lep_1 = & muon_0_matched;
-		lep_1_p4 = muon_0_matched_p4;
-		lep_1_q = & muon_0_matched_q;
+		lep_1 = & muon_0_matched_truth_lepTau;
+		lep_1_p4 = muon_0_matched_truth_lepTau_p4;
+		lep_1_q = & muon_0_matched_truth_lepTau_q;
 
-		if (tau_0_truth > 0 && muon_0_matched > 0 && tau_1_truth == 0 && muon_1_matched == 0) n_leptons = 2;
+		if (tau_0_truth > 0 && muon_0_matched_truth_lepTau > 0 && tau_1_truth == 0 && muon_1_matched_truth_lepTau == 0) n_leptons = 2;
 		else n_leptons = 0;
 	}
 
@@ -506,7 +506,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 ////////////////////////////////////////////////////////////////////////////////////////
 ///--------------------- RELEVANT VARIABLE CALCULATION FUNCTION ---------------------///
 ////////////////////////////////////////////////////////////////////////////////////////
-void MC_Analysis::GenerateVariables() {
+void MC_Analysis::GenerateVariables(bool truth) {
 
 	// Missing transverse momentum centrality
 	MET_Centrality = METCentrality(met_p4, lep_0_p4, lep_1_p4);
@@ -619,6 +619,11 @@ void MC_Analysis::GenerateVariables() {
 	lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
 	lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 
+	if (truth) {
+		lep_0_reco_p4 = lep_0_p4;
+		lep_1_reco_p4 = lep_1_p4;	
+	}
+
 	//Invariant Mass
   	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
 	lep_0_lep_1_mass_reco = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
@@ -654,8 +659,23 @@ void MC_Analysis::GenerateVariables() {
 	Centrality = CentralityCalc(lep_0_p4, lep_1_p4, jet_0_p4, jet_1_p4);
 	Centrality_reco = CentralityCalc(lep_0_reco_p4, lep_1_reco_p4, jet_0_p4, jet_1_p4);
 
+	double QCD_weight_factor = 1;
+
+	if (ChainName.find("_Zee_") != string::npos) {
+		QCD_weight_factor = -0.000240084 * jet_0_jet_1_mass + 0.996438;
+		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
+	}
+	else if (ChainName.find("_Zmumu_") != string::npos) {
+		QCD_weight_factor = -0.000279242 * jet_0_jet_1_mass + 1.01748;
+		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
+	}
+	else if (ChainName.find("_Ztt_") != string::npos) {
+		QCD_weight_factor = -0.000279242 * jet_0_jet_1_mass + 1.01748;
+		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
+	}
+
 	// Final Weighting
-	final_weighting = Luminosity_Weight * weight_total;	
+	final_weighting = Luminosity_Weight * weight_total * QCD_weight_factor;	
 	
 }	
 
@@ -758,7 +778,11 @@ bool MC_Analysis::Cuts(string region) {
 	bool ptvarcone_40_1 = false;
 	bool phi_int_condition = PhiIntervalCheck(lep_0_p4, lep_1_p4, met_p4);
 	bool Et_Miss_RangeCheck = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_p4);
-	//if (Et_Miss_RangeCheck) cout << "IN RANGE" << endl << endl;
+
+	//Initialise Custom Cuts
+	bool centrality_condition = false;
+	bool delta_phi_condition = false;
+	bool pT_balance_reco_condition = false;
 
 	//Initialise specific bool conditions
 	bool pT_balance_limit = false;
@@ -777,12 +801,19 @@ bool MC_Analysis::Cuts(string region) {
 	//pt balance limit Cut Condition
 	if (pT_balance < 0.15) pT_balance_limit = true;
 
+	if (pT_balance_reco < 0.2) pT_balance_reco_condition = true;
+
 	//pt balance 3 Cut Condition
 	if (pT_balance_3 < 0.15) pT_balance_3_limit = true;
 
 	//ptvarcone cuts
 	if (lep_0_iso_ptvarcone40 < 0.1) ptvarcone_40_0 = true; 
 	if (lep_1_iso_ptvarcone40 < 0.1) ptvarcone_40_1 = true;
+	
+	//Centrality cuts
+	if (Centrality >= -2 && Centrality <= 2) centrality_condition = true;
+	
+	if (DeltaPhi < 2) delta_phi_condition = true;
 
 	//If the region is an except region, make the relevant condition always true to see more of that histogram.
 	if (region == "EXCEPT_Z_mass_condition" && bjets_region == false) 		Z_mass_condition = true;
@@ -792,6 +823,8 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "EXCEPT_ptvarcone_40_1" && bjets_region == false) 		ptvarcone_40_1 = true;
 	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) 		pT_balance_limit = true;
 	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) 		pT_balance_3_limit = true;
+	if (region == "EXCEPT_centrality_condition" && bjets_region == false) 		centrality_condition = true;
+	if (region == "EXCEPT_delta_phi_condition" && bjets_region == false) 		delta_phi_condition = true;
 
 	//If the region is the bjet region, make the mass condition true, so that the full mass spectrum can be seen 
 	if (region == "bjet") Z_mass_condition = true;
@@ -806,12 +839,23 @@ bool MC_Analysis::Cuts(string region) {
 
 
 	bool common_cuts = false;	//The common cuts are false initially
+	bool custom_cuts = true;	//The custom cuts are true initially, as they are only considered for the "Tau" analyses, "ElectronTau", "MuonTau", "ElectronMuon".
 
 	// common cuts for "Tau"
 	if (AnalysisType == "ElectronMuon" || AnalysisType == "ElectronTau" || AnalysisType == "MuonTau"){
 
 		//This is only here in order to see the full mass spectrum represented in the rest of the cuts, and should be changed when appropriate
-		Z_mass_condition = true; // Z boson mass taken out
+		Z_mass_condition = false;
+		if (lep_0_lep_1_mass_reco >= 60 && lep_0_lep_1_mass_reco <= 120) Z_mass_condition = true;
+
+		if (region == "EXCEPT_Z_mass_condition" && bjets_region == false) Z_mass_condition = true;	
+		if (region == "EXCEPT_pT_balance_reco_condition" && bjets_region == false) pT_balance_reco_condition = true;
+
+		custom_cuts = false;
+
+		if (region == "EXCEPT_delta_phi_condition" && bjets_region == false) delta_phi_condition = true;
+		if (centrality_condition && delta_phi_condition && pT_balance_reco_condition) custom_cuts = true;
+		
 		pT_balance_limit = true; // pT balance cut taken out
 		pT_balance_3_limit = true; // pT balance 3 cut taken out
 
@@ -831,37 +875,42 @@ bool MC_Analysis::Cuts(string region) {
 
 	//If the region is the search region or an except region that isn't pt_balance (EW Z->ll enriched)
 	if ((region == "search" || (region.substr(0,6) == "EXCEPT" && region.substr(7,10) != "pT_balance")) && bjets_region == false && truth_region == false) {
-		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
+		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
+	}
+
+	//If the region is the except region for pt_balance (EW Z->ll enriched)
+	if (region == "EXCEPT_pT_balance_reco_condition" && bjets_region == false && truth_region == false) {
+		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the except region for pt_balance (EW Z->ll enriched)
 	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false && truth_region == false) {
-		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
+		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the except region for pt_balance_3 (QCD enriched)
 	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false && truth_region == false) {
-		if(common_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
+		if(common_cuts && custom_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
 	}
 
 	//If the region is the control region (QCD enriched)
 	if (region == "control" && bjets_region == false && truth_region == false) {
-		if(common_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
+		if(common_cuts && custom_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
 	}
 
 	//If the region is the bjet enriched region
 	if (region == "bjet" && bjets_region == true && truth_region == false) {
-		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
+		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the high energy region
 	if (region == "high_energy" && bjets_region == false && truth_region == false) {
-		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
+		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the high energy region
 	if (region == "truth" && bjets_region == false && truth_region == true) {
-		if (common_cuts && rap_int_condition && pT_balance_limit) return true;
+		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	
@@ -885,7 +934,26 @@ void MC_Analysis::Fill() {
 	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
 	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
 	if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
-	///----- SEARCH region filling -----///
+	if (Cuts("EXCEPT_centrality_condition")) 	h_Centrality_EXCEPT->Fill(Centrality, final_weighting);				//Fill the EXCEPT histogram for centrality	
+	if (Cuts("EXCEPT_delta_phi_condition")) 	h_DeltaPhi_EXCEPT->Fill(DeltaPhi, final_weighting);				//Fill the EXCEPT histogram for delta phi	
+
+	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+		if (Cuts("EXCEPT_Z_mass_condition")) h_lep_0_lep_1_mass_reco_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
+		if (Cuts("EXCEPT_delta_phi_condition")) h_DeltaPhi_reco_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+		if (Cuts("EXCEPT_pT_balance_reco_condition")) h_pT_balance_reco_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+		if (outside_leptons) {
+			if (Cuts("EXCEPT_Z_mass_condition")) h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
+			if (Cuts("EXCEPT_delta_phi_condition")) h_DeltaPhi_reco_OUTSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+			if (Cuts("EXCEPT_pT_balance_reco_condition")) h_pT_balance_reco_OUTSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+		} else {
+			if (Cuts("EXCEPT_Z_mass_condition")) h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
+			if (Cuts("EXCEPT_delta_phi_condition")) h_DeltaPhi_reco_INSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+			if (Cuts("EXCEPT_pT_balance_reco_condition")) h_pT_balance_reco_INSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+		}
+
+	}
+
+	///----- SEARCH region filling -----///	
 	if (Cuts("search")) {
 
 		#include "_FillAllData_PostCut.h"
@@ -1266,21 +1334,21 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	//Delta Phi Histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaPhi_PRE, h_DeltaPhi, h_DeltaPhi_CONTROL, "\\Delta Phi", "Pre-Cut", "Post Cut", "Control", "h_DeltaPhi", ";Delta Phi;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_PRE, h_DeltaPhi, h_DeltaPhi_CONTROL, h_DeltaPhi_EXCEPT, "\\Delta Phi", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi", ";Delta Phi;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	// pT balance
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, draw_histograms, ChainName, AnalysisType);
 	
 	// pT balance reconstructed	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_pT_balance_reco_PRE, h_pT_balance_reco, h_pT_balance_reco_CONTROL, "p_{T}^{balance} reconstructed", "Pre Cut", "Post Cut", "Control", "h_pT_balance_reco", ";pT Balance reconstructed;Events", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_pT_balance_reco_INSIDE_PRE, h_pT_balance_reco_INSIDE, h_pT_balance_reco_INSIDE_CONTROL, "p_{T}^{balance} reconstructed_INSIDE", "Pre Cut", "Post Cut", "Control", "h_pT_balance_reco_INSIDE", ";pT Balance reconstructed_INSIDE;Events", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_pT_balance_reco_OUTSIDE_PRE, h_pT_balance_reco_OUTSIDE, h_pT_balance_reco_OUTSIDE_CONTROL, "p_{T}^{balance} reconstructed_OUTSIDE", "Pre Cut", "Post Cut", "Control", "h_pT_balance_reco_OUTSIDE", ";pT Balance reconstructed_OUTSIDE;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_PRE, h_pT_balance_reco, h_pT_balance_reco_CONTROL, h_pT_balance_reco_EXCEPT, "p_{T}^{balance} reconstructed", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco", ";pT Balance reconstructed;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_INSIDE_PRE, h_pT_balance_reco_INSIDE, h_pT_balance_reco_INSIDE_CONTROL, h_pT_balance_reco_INSIDE_EXCEPT, "p_{T}^{balance} reconstructed_INSIDE", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco_INSIDE", ";pT Balance reconstructed_INSIDE;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_OUTSIDE_PRE, h_pT_balance_reco_OUTSIDE, h_pT_balance_reco_OUTSIDE_CONTROL, h_pT_balance_reco_OUTSIDE_EXCEPT, "p_{T}^{balance} reconstructed_OUTSIDE", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco_OUTSIDE", ";pT Balance reconstructed_OUTSIDE;Events", false, draw_histograms, ChainName, AnalysisType);
 	
 	// pT balance 3
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", ";pT Balance 3;Events", false, draw_histograms, ChainName, AnalysisType);	
 
 	// Centrality histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, "Centrality", "Pre-Cut", "Post Cut", "Control", "h_Centrality", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, h_Centrality_EXCEPT, "Centrality", "Pre-Cut", "Post Cut", "Control", "Except", "h_Centrality", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	// MET Centrality histogram
 	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", ";MET_Centrality;Events", false, draw_histograms, ChainName, AnalysisType);
@@ -1297,15 +1365,15 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_OUTSIDE_PRE, h_MET_Type_Favour_OUTSIDE, h_MET_Type_Favour_OUTSIDE_CONTROL, "MET_Type_Favour_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_OUTSIDE", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType);
 
 	// reconstructed Z mass with tau candidates and neutrinos
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_OUTSIDE_PRE, h_lep_0_lep_1_mass_reco_OUTSIDE, h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL, "lep_0_lep_1_mass_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco_OUTSIDE", ";Z mass incl neutrinos Inside;Events", true, draw_histograms, ChainName, AnalysisType);		
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_mass_reco_INSIDE_PRE, h_lep_0_lep_1_mass_reco_INSIDE, h_lep_0_lep_1_mass_reco_INSIDE_CONTROL, "lep_0_lep_1_mass_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_mass_reco_INSIDE", ";Z mass incl neutrinos Outside;Events", true, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, h_lep_0_lep_1_mass_reco_EXCEPT, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_OUTSIDE_PRE, h_lep_0_lep_1_mass_reco_OUTSIDE, h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL, h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT, "lep_0_lep_1_mass_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco_OUTSIDE", ";Z mass incl neutrinos Inside;Events", true, draw_histograms, ChainName, AnalysisType);		
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_INSIDE_PRE, h_lep_0_lep_1_mass_reco_INSIDE, h_lep_0_lep_1_mass_reco_INSIDE_CONTROL, h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT, "lep_0_lep_1_mass_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco_INSIDE", ";Z mass incl neutrinos Outside;Events", true, draw_histograms, ChainName, AnalysisType);	
 	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reco_PRE, h_DeltaR_reco, h_DeltaR_reco_CONTROL, "\\Delta R_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reco", ";Delta R;Events",true, draw_histograms, ChainName, AnalysisType);	
 	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reco_PRE, h_Centrality_reco, h_Centrality_reco_CONTROL, "Centrality_reco", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reco", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
 	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reco_PRE, h_lep_0_lep_1_pt_reco, h_lep_0_lep_1_pt_reco_CONTROL, "lep_0_lep_1_pt_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reco", ";Z momentum incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaPhi_reco_PRE, h_DeltaPhi_reco, h_DeltaPhi_reco_CONTROL, "\\Delta Phi_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaPhi_reco", ";Delta Phi_reco;Events", true, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaPhi_reco_INSIDE_PRE, h_DeltaPhi_reco_INSIDE, h_DeltaPhi_reco_INSIDE_CONTROL, "\\Delta Phi_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_DeltaPhi_reco_INSIDE", ";Delta Phi_reco_INSIDE;Events", true, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaPhi_reco_OUTSIDE_PRE, h_DeltaPhi_reco_OUTSIDE, h_DeltaPhi_reco_OUTSIDE_CONTROL, "\\Delta Phi_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_DeltaPhi_reco_OUTSIDE", ";Delta Phi_reco_OUTSIDE;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_PRE, h_DeltaPhi_reco, h_DeltaPhi_reco_CONTROL, h_DeltaPhi_reco_EXCEPT, "\\Delta Phi_reco", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco", ";Delta Phi_reco;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_INSIDE_PRE, h_DeltaPhi_reco_INSIDE, h_DeltaPhi_reco_INSIDE_CONTROL, h_DeltaPhi_reco_INSIDE_EXCEPT, "\\Delta Phi_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco_INSIDE", ";Delta Phi_reco_INSIDE;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_OUTSIDE_PRE, h_DeltaPhi_reco_OUTSIDE, h_DeltaPhi_reco_OUTSIDE_CONTROL, h_DeltaPhi_reco_OUTSIDE_EXCEPT, "\\Delta Phi_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco_OUTSIDE", ";Delta Phi_reco_OUTSIDE;Events", true, draw_histograms, ChainName, AnalysisType);
 
 	// 2D POLAR HISTOGRAMS
   	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
