@@ -395,6 +395,7 @@ void Histogram_Namer(TH1F* histogram, string DataType) {
 	if (DataType.find("_mass") != string::npos && DataType.find("jet_0_jet_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{jj} [GeV/c^{2}]");
 	if (DataType.find("Centrality") != string::npos) histogram->GetXaxis()->SetTitle("Centrality");
 	if (DataType.find("DeltaR") != string::npos) histogram->GetXaxis()->SetTitle("#DeltaR");
+	if (DataType.find("DeltaPhi") != string::npos) histogram->GetXaxis()->SetTitle("#Delta#Phi");
 
 }
 
@@ -406,6 +407,7 @@ void Histogram_Namer(THStack* histogram, string DataType) {
 	if (DataType.find("_mass") != string::npos && DataType.find("jet_0_jet_1") != string::npos) histogram->GetXaxis()->SetTitle("m_{jj} [GeV/c^{2}]");
 	if (DataType.find("Centrality") != string::npos) histogram->GetXaxis()->SetTitle("Centrality");
 	if (DataType.find("DeltaR") != string::npos) histogram->GetXaxis()->SetTitle("#DeltaR");
+	if (DataType.find("DeltaPhi") != string::npos) histogram->GetXaxis()->SetTitle("#Delta#Phi");
 
 
 }
@@ -420,6 +422,7 @@ string Histogram_Namer(string DataType) {
 	if (DataType.find("_mass") != string::npos && DataType.find("jet_0_jet_1") != string::npos) Histogram_Name = "m_{jj} [GeV/c^{2}]";
 	if (DataType.find("Centrality") != string::npos) Histogram_Name = "Centrality";
 	if (DataType.find("DeltaR") != string::npos) Histogram_Name = "#DeltaR";
+	if (DataType.find("DeltaPhi") != string::npos)  Histogram_Name = "#Delta#Phi";
 
 	return Histogram_Name;
 
@@ -1297,6 +1300,7 @@ void DrawStackedProcesses(string AnalysisType) {
 	vector<string> logless_names;
 	logless_names.push_back("lep_0_lep_1_mass");
 	logless_names.push_back("MET_Type_Favour");
+	logless_names.push_back("pT_balance");
 
 	vector<string> QCD_EW_graphs;
 	QCD_EW_graphs.push_back("lep_0_lep_1_mass");

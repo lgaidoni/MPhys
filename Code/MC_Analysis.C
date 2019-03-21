@@ -191,7 +191,7 @@ void MC_Analysis::Loop() {
 	ParticleSelection();	//The particle selection function, selecting the desired particles
 	if (InitialCut(false, false) == false) {
 		JetSet(false);
-		GenerateVariables();	//Generate all variables
+		GenerateVariables(false);	//Generate all variables
 		FillAllData_PreCut();	//Fill all the pre-cut data
 		Fill();			//Fill all the post-cut data
 
@@ -200,7 +200,7 @@ void MC_Analysis::Loop() {
 	}
 	else if (InitialCut(true, false) == false) {
 		JetSet(true);
-		GenerateVariables();	//Generate all variables
+		GenerateVariables(false);	//Generate all variables
 		Fill();			//Fill all the post-cut data
 		//if (n_jets < n_bjets) cout << endl << endl << "LESS JETS THAN BJETS" << endl << endl;
 		//if (bjet_0_p4->Pt() < ljet_0_p4->Pt()) cout << endl << endl << "BJET PT LESS THAN LJET PT" << endl << endl;
@@ -211,7 +211,7 @@ void MC_Analysis::Loop() {
 		ParticleSelection_TRUTH();	//The particle selection function, selecting the desired particles
 		if (InitialCut(false, true) == false) {
 			JetSet_TRUTH();
-			GenerateVariables();	//Generate all variables
+			GenerateVariables(true);	//Generate all variables
 			Fill();			//Fill all the post-cut data
 		}
 	}	

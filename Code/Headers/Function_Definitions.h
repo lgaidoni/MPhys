@@ -4,7 +4,7 @@
 	virtual void ParticleSelection();
 	virtual void ParticleSelection_TRUTH();
 	virtual bool InitialCut(bool bjets, bool truth);
-	virtual void GenerateVariables();
+	virtual void GenerateVariables(bool truth);
 	virtual void FillAllData_PreCut();
 	virtual void DrawHistos();
 	virtual bool Cuts(string region);

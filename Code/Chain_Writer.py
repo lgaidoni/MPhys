@@ -24,7 +24,7 @@ run_all_analyses = open("Headers/Run_All_Analyses_Functions" + higgs + ".h", "w"
 run_all_analyses_shell = open("Run_All_Analyses_V2" + higgs + ".sh", "w")
 
 Types = ["Electron","ElectronMuon","ElectronTau","Muon","MuonTau"]
-Regions = ["SEARCH", "CONTROL", "BJET", "HIGH_E", "PRE", "EXCEPT"]
+Regions = ["SEARCH", "CONTROL", "BJET", "HIGH_E", "PRE", "EXCEPT", "TRUTH"]
 
 def process_line_writer(inputFile, line, Name, AnalysisType, Process):
 	if (line.find(Process) != -1): 
