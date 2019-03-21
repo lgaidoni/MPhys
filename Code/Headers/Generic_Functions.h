@@ -1372,7 +1372,6 @@ void DrawStackedProcesses(string AnalysisType) {
 			}
 
 			for (int i = 0; i <= IN_OUT_graphs.size(); i++) {
-
 				if (line == IN_OUT_graphs[i]) {
 					fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_QCD_EW.pdf";
 					Inside_Outside_Overlay(AnalysisType, line, "QCD_EW", fileName, root_files);
