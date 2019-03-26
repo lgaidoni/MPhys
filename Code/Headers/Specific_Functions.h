@@ -51,7 +51,7 @@ void All_Cross_Section_Calculation_QCD_EW_ll_Specific() {
 
 }
 
-void All_Generate_Significance_Values() {
+/*void All_Generate_Significance_Values() {
 
 	double alpha;
 
@@ -61,6 +61,8 @@ void All_Generate_Significance_Values() {
 	types.push_back("pT_balance");
 	types.push_back("pT_balance_reco_INSIDE");
 	types.push_back("pT_balance_reco_OUTSIDE");
+	types.push_back("lep_0_lep_1_mass_HIGH_E");
+	types.push_back("lep_0_lep_1_mass_reco_HIGH_E");
 
 	for (int i = 0; i < types.size(); i++) { 
 		// calculate alpha
@@ -73,5 +75,8 @@ void All_Generate_Significance_Values() {
 	}
 
 }
+*/
+
+
 
 #endif
