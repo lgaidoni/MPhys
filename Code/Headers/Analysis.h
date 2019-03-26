@@ -816,15 +816,15 @@ bool MC_Analysis::Cuts(string region) {
 	if (DeltaPhi < 2) delta_phi_condition = true;
 
 	//If the region is an except region, make the relevant condition always true to see more of that histogram.
-	if (region == "EXCEPT_Z_mass_condition" && bjets_region == false) 		Z_mass_condition = true;
-	if (region == "EXCEPT_combined_lepton_pt" && bjets_region == false) 		combined_lepton_pt = true;
-	if (region == "EXCEPT_leading_jets_invariant_mass" && bjets_region == false) 	leading_jets_invariant_mass = true;
-	if (region == "EXCEPT_ptvarcone_40_0" && bjets_region == false) 		ptvarcone_40_0 = true;
-	if (region == "EXCEPT_ptvarcone_40_1" && bjets_region == false) 		ptvarcone_40_1 = true;
-	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false) 		pT_balance_limit = true;
-	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false) 		pT_balance_3_limit = true;
-	if (region == "EXCEPT_centrality_condition" && bjets_region == false) 		centrality_condition = true;
-	if (region == "EXCEPT_delta_phi_condition" && bjets_region == false) 		delta_phi_condition = true;
+	if (region == "EXCEPT_Z_mass_condition" && !(bjets_region)) 		Z_mass_condition = true;
+	if (region == "EXCEPT_combined_lepton_pt" && !(bjets_region)) 		combined_lepton_pt = true;
+	if (region == "EXCEPT_leading_jets_invariant_mass" && !(bjets_region)) 	leading_jets_invariant_mass = true;
+	if (region == "EXCEPT_ptvarcone_40_0" && !(bjets_region)) 		ptvarcone_40_0 = true;
+	if (region == "EXCEPT_ptvarcone_40_1" && !(bjets_region)) 		ptvarcone_40_1 = true;
+	if (region == "EXCEPT_pT_balance_limit" && !(bjets_region)) 		pT_balance_limit = true;
+	if (region == "EXCEPT_pT_balance_3_limit" && !(bjets_region)) 		pT_balance_3_limit = true;
+	if (region == "EXCEPT_centrality_condition" && !(bjets_region)) 		centrality_condition = true;
+	if (region == "EXCEPT_delta_phi_condition" && !(bjets_region)) 		delta_phi_condition = true;
 
 	//If the region is the bjet region, make the mass condition true, so that the full mass spectrum can be seen 
 	if (region == "bjet") Z_mass_condition = true;
@@ -874,42 +874,42 @@ bool MC_Analysis::Cuts(string region) {
 	}
 
 	//If the region is the search region or an except region that isn't pt_balance (EW Z->ll enriched)
-	if ((region == "search" || (region.substr(0,6) == "EXCEPT" && region.substr(7,10) != "pT_balance")) && bjets_region == false && truth_region == false) {
+	if ((region == "search" || (region.substr(0,6) == "EXCEPT" && region.substr(7,10) != "pT_balance")) && !(bjets_region) && !(truth_region)) {
 		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the except region for pt_balance (EW Z->ll enriched)
-	if (region == "EXCEPT_pT_balance_reco_condition" && bjets_region == false && truth_region == false) {
+	if (region == "EXCEPT_pT_balance_reco_condition" && !(bjets_region) && !(truth_region)) {
 		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the except region for pt_balance (EW Z->ll enriched)
-	if (region == "EXCEPT_pT_balance_limit" && bjets_region == false && truth_region == false) {
+	if (region == "EXCEPT_pT_balance_limit" && !(bjets_region) && !(truth_region)) {
 		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the except region for pt_balance_3 (QCD enriched)
-	if (region == "EXCEPT_pT_balance_3_limit" && bjets_region == false && truth_region == false) {
+	if (region == "EXCEPT_pT_balance_3_limit" && !(bjets_region) && !(truth_region)) {
 		if(common_cuts && custom_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
 	}
 
 	//If the region is the control region (QCD enriched)
-	if (region == "control" && bjets_region == false && truth_region == false) {
+	if (region == "control" && !(bjets_region) && !(truth_region)) {
 		if(common_cuts && custom_cuts && !(rap_int_condition) && pT_balance_3_limit) return true;
 	}
 
 	//If the region is the bjet enriched region
-	if (region == "bjet" && bjets_region == true && truth_region == false) {
+	if (region == "bjet" && bjets_region && !(truth_region)) {
 		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the high energy region
-	if (region == "high_energy" && bjets_region == false && truth_region == false) {
+	if (region == "high_energy" && !(bjets_region) && !(truth_region)) {
 		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
 	//If the region is the high energy region
-	if (region == "truth" && bjets_region == false && truth_region == true) {
+	if (region == "truth" && !(bjets_region) && truth_region) {
 		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
 
@@ -922,370 +922,392 @@ bool MC_Analysis::Cuts(string region) {
 ////////////////////////////////////////////////////////////////////////////////////////
 ///-------- FILL FUNCTION TO FILLI HISTOGRAMS BELONGING TO DIFFERENT REGIONS --------///
 ////////////////////////////////////////////////////////////////////////////////////////
-void MC_Analysis::Fill() {
+void MC_Analysis::Fill(string region) {
 
 	if (weight_total_override) weight_total = 1;  //THIS VARIABLE MAY BE REDUNDANT
 
-	///----- EXCEPT region filling -----///
-	if (Cuts("EXCEPT_Z_mass_condition")) 		h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);		//Fill the EXCEPT histogram for mass
-	if (Cuts("EXCEPT_combined_lepton_pt")) 		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);			//Fill the EXCEPT histogram for combined lepton pt
-	if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_jet_0_jet_1_mass_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);		//Fill the EXCEPT histogram for leading jets combined invariant mass
-	if (Cuts("EXCEPT_ptvarcone_40_0")) 		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 0
-	if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
-	if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
-	if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
-	if (Cuts("EXCEPT_centrality_condition")) 	h_Centrality_EXCEPT->Fill(Centrality, final_weighting);				//Fill the EXCEPT histogram for centrality	
-	if (Cuts("EXCEPT_delta_phi_condition")) 	h_DeltaPhi_EXCEPT->Fill(DeltaPhi, final_weighting);				//Fill the EXCEPT histogram for delta phi	
+	if (region == "normal") {
 
-	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
-		if (Cuts("EXCEPT_Z_mass_condition")) h_lep_0_lep_1_mass_reco_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
-		if (Cuts("EXCEPT_delta_phi_condition")) h_DeltaPhi_reco_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
-		if (Cuts("EXCEPT_pT_balance_reco_condition")) h_pT_balance_reco_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
-		if (outside_leptons) {
-			if (Cuts("EXCEPT_Z_mass_condition")) h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
-			if (Cuts("EXCEPT_delta_phi_condition")) h_DeltaPhi_reco_OUTSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
-			if (Cuts("EXCEPT_pT_balance_reco_condition")) h_pT_balance_reco_OUTSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
-		} else {
-			if (Cuts("EXCEPT_Z_mass_condition")) h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
-			if (Cuts("EXCEPT_delta_phi_condition")) h_DeltaPhi_reco_INSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
-			if (Cuts("EXCEPT_pT_balance_reco_condition")) h_pT_balance_reco_INSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+		bool EXCEPT_Z_mass_condition = false;
+		bool EXCEPT_DeltaPhi_condition = false;
+		bool EXCEPT_pT_balance_reco_condition = false;
+
+		///----- EXCEPT region filling -----///
+		if (Cuts("EXCEPT_Z_mass_condition")) {
+			h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);		//Fill the EXCEPT histogram for mass
+			EXCEPT_Z_mass_condition = true;
+		}
+		if (Cuts("EXCEPT_combined_lepton_pt")) 		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);			//Fill the EXCEPT histogram for combined lepton pt
+		if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_jet_0_jet_1_mass_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);		//Fill the EXCEPT histogram for leading jets combined invariant mass
+		if (Cuts("EXCEPT_ptvarcone_40_0")) 		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 0
+		if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
+		if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
+		if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
+		if (Cuts("EXCEPT_centrality_condition")) 	h_Centrality_EXCEPT->Fill(Centrality, final_weighting);				//Fill the EXCEPT histogram for centrality	
+		if (Cuts("EXCEPT_delta_phi_condition")) {
+			h_DeltaPhi_EXCEPT->Fill(DeltaPhi, final_weighting);				//Fill the EXCEPT histogram for delta phi	
+			EXCEPT_DeltaPhi_condition = true;
 		}
 
-	}
+		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+			if (EXCEPT_Z_mass_condition) h_lep_0_lep_1_mass_reco_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
+			if (EXCEPT_DeltaPhi_condition) h_DeltaPhi_reco_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+			if (Cuts("EXCEPT_pT_balance_reco_condition")) {
+				h_pT_balance_reco_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+				EXCEPT_pT_balance_reco_condition = true;
+			}
+			if (outside_leptons) {
+				if (EXCEPT_Z_mass_condition) h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
+				if (EXCEPT_DeltaPhi_condition) h_DeltaPhi_reco_OUTSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+				if (EXCEPT_pT_balance_reco_condition) h_pT_balance_reco_OUTSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+			} else {
+				if (EXCEPT_Z_mass_condition) h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
+				if (EXCEPT_DeltaPhi_condition) h_DeltaPhi_reco_INSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+				if (EXCEPT_pT_balance_reco_condition) h_pT_balance_reco_INSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+			}
 
-	///----- SEARCH region filling -----///	
-	if (Cuts("search")) {
+		}
 
-		#include "_FillAllData_PostCut.h"
+		///----- SEARCH region filling -----///	
+		if (Cuts("search")) {
 
-		//ptvar cone histograms
-		h_lep_1_iso_ptvarcone40->Fill(lep_1_iso_ptvarcone40, final_weighting);
-		h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, final_weighting);
+			#include "_FillAllData_PostCut.h"
 
-		//Invariant mass
-		h_lep_0_lep_1_mass->Fill(lep_0_lep_1_mass, final_weighting); 	// two electrons
-		h_jet_0_jet_1_mass->Fill(jet_0_jet_1_mass, final_weighting); 	// two jets
+			//ptvar cone histograms
+			h_lep_1_iso_ptvarcone40->Fill(lep_1_iso_ptvarcone40, final_weighting);
+			h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
-		//Combined lepton
-		h_RapidityDilepton->Fill(RapidityDilepton, final_weighting);	// dilepton rapidity
-		h_RapidityDijet->Fill(RapidityDijet, final_weighting);		// dijet rapidity
-		h_lep_0_lep_1_pt->Fill(lep_0_lep_1_pt, final_weighting);	// dilepton transverse momentum
+			//Invariant mass
+			h_lep_0_lep_1_mass->Fill(lep_0_lep_1_mass, final_weighting); 	// two electrons
+			h_jet_0_jet_1_mass->Fill(jet_0_jet_1_mass, final_weighting); 	// two jets
 
-		//Delta R for two electrons
-		h_DeltaR->Fill(DeltaR, final_weighting);			// Angular separation of two leptons
+			//Combined lepton
+			h_RapidityDilepton->Fill(RapidityDilepton, final_weighting);	// dilepton rapidity
+			h_RapidityDijet->Fill(RapidityDijet, final_weighting);		// dijet rapidity
+			h_lep_0_lep_1_pt->Fill(lep_0_lep_1_pt, final_weighting);	// dilepton transverse momentum
 
-		h_DeltaPhi->Fill(DeltaPhi, final_weighting);
+			//Delta R for two electrons
+			h_DeltaR->Fill(DeltaR, final_weighting);			// Angular separation of two leptons
 
-		// pT balance
-		h_pT_balance->Fill(pT_balance, final_weighting);	
+			h_DeltaPhi->Fill(DeltaPhi, final_weighting);
+
+			// pT balance
+			h_pT_balance->Fill(pT_balance, final_weighting);	
 	
-	//	if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
+		//	if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
-		// Centrality
-		h_Centrality->Fill(Centrality, final_weighting);
-		h_MET_Centrality->Fill(MET_Centrality, final_weighting);
+			// Centrality
+			h_Centrality->Fill(Centrality, final_weighting);
+			h_MET_Centrality->Fill(MET_Centrality, final_weighting);
 
-		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 PRE
-		h_neutrino_0_pt->Fill(neutrino_0_pt,final_weighting);
-		h_neutrino_1_pt->Fill(neutrino_1_pt,final_weighting);
+			// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 PRE
+			h_neutrino_0_pt->Fill(neutrino_0_pt,final_weighting);
+			h_neutrino_1_pt->Fill(neutrino_1_pt,final_weighting);
 
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
-			h_MET_Type_Favour->Fill(MET_Type_Favour, final_weighting);
-			h_Mass_Favour_Combination_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+				h_MET_Type_Favour->Fill(MET_Type_Favour, final_weighting);
+				h_Mass_Favour_Combination_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 
-			if (outside_leptons) {
-				h_MET_Type_Favour_OUTSIDE->Fill(MET_Type_Favour, final_weighting);
-				h_Mass_Favour_Combination_OUTSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+				if (outside_leptons) {
+					h_MET_Type_Favour_OUTSIDE->Fill(MET_Type_Favour, final_weighting);
+					h_Mass_Favour_Combination_OUTSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
 
-			} else {
+				} else {
 
-				h_MET_Type_Favour_INSIDE->Fill(MET_Type_Favour, final_weighting);
-				h_Mass_Favour_Combination_INSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+					h_MET_Type_Favour_INSIDE->Fill(MET_Type_Favour, final_weighting);
+					h_Mass_Favour_Combination_INSIDE_2D->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+
+				}
+
 
 			}
 
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
-		}
+				h_lep_0_lep_1_mass_reco->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_lep_0_lep_1_pt_reco->Fill(lep_0_lep_1_pt_reco, final_weighting);
+				h_DeltaR_reco->Fill(DeltaR_reco, final_weighting);
+				h_Centrality_reco->Fill(Centrality_reco, final_weighting);
+				h_pT_balance_reco->Fill(pT_balance_reco, final_weighting);
+				h_DeltaPhi_reco->Fill(DeltaPhi_reco, final_weighting);
+				h_Mass_DeltaPhi_Combination_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+				if (outside_leptons) {
 
-			h_lep_0_lep_1_mass_reco->Fill(lep_0_lep_1_mass_reco, final_weighting);
-			h_lep_0_lep_1_pt_reco->Fill(lep_0_lep_1_pt_reco, final_weighting);
-			h_DeltaR_reco->Fill(DeltaR_reco, final_weighting);
-			h_Centrality_reco->Fill(Centrality_reco, final_weighting);
-			h_pT_balance_reco->Fill(pT_balance_reco, final_weighting);
-			h_DeltaPhi_reco->Fill(DeltaPhi_reco, final_weighting);
-			h_Mass_DeltaPhi_Combination_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+					h_lep_0_lep_1_mass_reco_OUTSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_pT_balance_reco_OUTSIDE->Fill(pT_balance_reco, final_weighting);
+					h_DeltaPhi_reco_OUTSIDE->Fill(DeltaPhi_reco, final_weighting);
+					h_Mass_DeltaPhi_Combination_OUTSIDE_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
-			if (outside_leptons) {
+				} else {
 
-				h_lep_0_lep_1_mass_reco_OUTSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
-				h_pT_balance_reco_OUTSIDE->Fill(pT_balance_reco, final_weighting);
-				h_DeltaPhi_reco_OUTSIDE->Fill(DeltaPhi_reco, final_weighting);
-				h_Mass_DeltaPhi_Combination_OUTSIDE_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+					h_lep_0_lep_1_mass_reco_INSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_pT_balance_reco_INSIDE->Fill(pT_balance_reco, final_weighting);
+					h_DeltaPhi_reco_INSIDE->Fill(DeltaPhi_reco, final_weighting);
+					h_Mass_DeltaPhi_Combination_INSIDE_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
-			} else {
-
-				h_lep_0_lep_1_mass_reco_INSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
-				h_pT_balance_reco_INSIDE->Fill(pT_balance_reco, final_weighting);
-				h_DeltaPhi_reco_INSIDE->Fill(DeltaPhi_reco, final_weighting);
-				h_Mass_DeltaPhi_Combination_INSIDE_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+				}
 
 			}
 
 		}
 
-	}
+		///----- CONTROL region filling -----///
+		if (Cuts("control")) {
 
-	///----- CONTROL region filling -----///
-	if (Cuts("control")) {
+			#include "_FillAllData_ControlCut.h"
 
-		#include "_FillAllData_ControlCut.h"
-
-		//ptvar cone histograms
-		h_lep_1_iso_ptvarcone40_CONTROL->Fill(lep_1_iso_ptvarcone40, final_weighting);
-		h_lep_0_iso_ptvarcone40_CONTROL->Fill(lep_0_iso_ptvarcone40, final_weighting);
+			//ptvar cone histograms
+			h_lep_1_iso_ptvarcone40_CONTROL->Fill(lep_1_iso_ptvarcone40, final_weighting);
+			h_lep_0_iso_ptvarcone40_CONTROL->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 
-		//Invariant mass
-		h_lep_0_lep_1_mass_CONTROL->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
-		h_jet_0_jet_1_mass_CONTROL->Fill(jet_0_jet_1_mass, final_weighting); // two jets
+			//Invariant mass
+			h_lep_0_lep_1_mass_CONTROL->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+			h_jet_0_jet_1_mass_CONTROL->Fill(jet_0_jet_1_mass, final_weighting); // two jets
 
-		//Combined 
-		h_RapidityDilepton_CONTROL->Fill(RapidityDilepton, final_weighting); // lepton (elec) dilepton rapidity
-		h_RapidityDijet_CONTROL->Fill(RapidityDijet, final_weighting); // ljet dijet rapidity
-		h_lep_0_lep_1_pt_CONTROL->Fill(lep_0_lep_1_pt, final_weighting);
+			//Combined 
+			h_RapidityDilepton_CONTROL->Fill(RapidityDilepton, final_weighting); // lepton (elec) dilepton rapidity
+			h_RapidityDijet_CONTROL->Fill(RapidityDijet, final_weighting); // ljet dijet rapidity
+			h_lep_0_lep_1_pt_CONTROL->Fill(lep_0_lep_1_pt, final_weighting);
 
-		//Delta R for two electrons
-		h_DeltaR_CONTROL->Fill(DeltaR, final_weighting);
+			//Delta R for two electrons
+			h_DeltaR_CONTROL->Fill(DeltaR, final_weighting);
 
-		h_DeltaPhi_CONTROL->Fill(DeltaPhi, final_weighting);
+			h_DeltaPhi_CONTROL->Fill(DeltaPhi, final_weighting);
 
-		// pT balance CONTROL
-		h_pT_balance_3_CONTROL->Fill(pT_balance_3, final_weighting);
+			// pT balance CONTROL
+			h_pT_balance_3_CONTROL->Fill(pT_balance_3, final_weighting);
 		
-		// Centrality CONTROL
-		h_Centrality_CONTROL->Fill(Centrality, final_weighting);
+			// Centrality CONTROL
+			h_Centrality_CONTROL->Fill(Centrality, final_weighting);
 		
-		// MET Centrality CONTROL
-		h_MET_Centrality_CONTROL->Fill(MET_Centrality, final_weighting);
-		 
-		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 CONTROL
-		h_neutrino_0_pt_CONTROL->Fill(neutrino_0_pt,final_weighting);
-		h_neutrino_1_pt_CONTROL->Fill(neutrino_1_pt,final_weighting);
+			// MET Centrality CONTROL
+			h_MET_Centrality_CONTROL->Fill(MET_Centrality, final_weighting);
+			 
+			// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 CONTROL
+			h_neutrino_0_pt_CONTROL->Fill(neutrino_0_pt,final_weighting);
+			h_neutrino_1_pt_CONTROL->Fill(neutrino_1_pt,final_weighting);
 
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
-			h_MET_Type_Favour_CONTROL->Fill(MET_Type_Favour, final_weighting);
+				h_MET_Type_Favour_CONTROL->Fill(MET_Type_Favour, final_weighting);
 
-			if (outside_leptons) {
-				h_MET_Type_Favour_OUTSIDE_CONTROL->Fill(MET_Type_Favour, final_weighting);
+				if (outside_leptons) {
+					h_MET_Type_Favour_OUTSIDE_CONTROL->Fill(MET_Type_Favour, final_weighting);
 
-			} else {
-				h_MET_Type_Favour_INSIDE_CONTROL->Fill(MET_Type_Favour, final_weighting);
+				} else {
+					h_MET_Type_Favour_INSIDE_CONTROL->Fill(MET_Type_Favour, final_weighting);
 
-			}
-
-		}
-
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
-
-			h_lep_0_lep_1_mass_reco_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
-			h_lep_0_lep_1_pt_reco_CONTROL->Fill(lep_0_lep_1_pt_reco, final_weighting);
-			h_DeltaR_reco_CONTROL->Fill(DeltaR_reco, final_weighting);
-			h_Centrality_reco_CONTROL->Fill(Centrality_reco, final_weighting);
-			h_DeltaPhi_reco_CONTROL->Fill(DeltaPhi_reco, final_weighting);
-
-			if (outside_leptons) {
-
-				h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
-				h_DeltaPhi_reco_OUTSIDE_CONTROL->Fill(DeltaPhi_reco, final_weighting);
-
-			} else {
-
-				h_lep_0_lep_1_mass_reco_INSIDE_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
-				h_DeltaPhi_reco_INSIDE_CONTROL->Fill(DeltaPhi_reco, final_weighting);
+				}
 
 			}
 
-		}
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
+				h_lep_0_lep_1_mass_reco_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_lep_0_lep_1_pt_reco_CONTROL->Fill(lep_0_lep_1_pt_reco, final_weighting);
+				h_DeltaR_reco_CONTROL->Fill(DeltaR_reco, final_weighting);
+				h_Centrality_reco_CONTROL->Fill(Centrality_reco, final_weighting);
+				h_DeltaPhi_reco_CONTROL->Fill(DeltaPhi_reco, final_weighting);
 
-	}
+				if (outside_leptons) {
 
-	if (Cuts("bjet")) {
+					h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_DeltaPhi_reco_OUTSIDE_CONTROL->Fill(DeltaPhi_reco, final_weighting);
 
-		#include "_FillAllData_BJET.h"
+				} else {
 
-		//ptvar cone histograms BJET
-		h_lep_1_iso_ptvarcone40_BJET->Fill(lep_1_iso_ptvarcone40, final_weighting);
-		h_lep_0_iso_ptvarcone40_BJET->Fill(lep_0_iso_ptvarcone40, final_weighting);
+					h_lep_0_lep_1_mass_reco_INSIDE_CONTROL->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_DeltaPhi_reco_INSIDE_CONTROL->Fill(DeltaPhi_reco, final_weighting);
 
-		//Invariant mass BJET
-		h_lep_0_lep_1_mass_BJET->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
-		h_jet_0_jet_1_mass_BJET->Fill(jet_0_jet_1_mass, final_weighting); // two jets
+				}
 
-		//Combined lepton BJET
-		h_RapidityDilepton_BJET->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
-		h_RapidityDijet_BJET->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
-		h_lep_0_lep_1_pt_BJET->Fill(lep_0_lep_1_pt, final_weighting);
+			}
 
-		//Delta R for two electrons BJET
-		h_DeltaR_BJET->Fill(DeltaR, final_weighting);
-
-		// pT balance BJET
-		h_pT_balance_BJET->Fill(pT_balance, final_weighting);	
-		h_pT_balance_reco_BJET->Fill(pT_balance_reco, final_weighting);	
-
-		//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
-
-		// Centrality BJET
-		h_Centrality_BJET->Fill(Centrality, final_weighting);
-
-		// MET Centrality BJET
-		h_MET_Centrality_BJET->Fill(MET_Centrality, final_weighting);
-
-		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
-		h_neutrino_0_pt_BJET->Fill(neutrino_0_pt,final_weighting);
-		h_neutrino_1_pt_BJET->Fill(neutrino_1_pt,final_weighting);
-
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
-
-			h_MET_Type_Favour_BJET->Fill(MET_Type_Favour, final_weighting);
 
 		}
 
 
+		if (Cuts("high_energy")) {
 
-	}
+			#include "_FillAllData_HIGH_E.h"
 
-	if (Cuts("high_energy")) {
+			//Invariant mass HIGH_E
+			h_lep_0_lep_1_mass_HIGH_E->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+			h_jet_0_jet_1_mass_HIGH_E->Fill(jet_0_jet_1_mass, final_weighting); // two jets
 
-		#include "_FillAllData_HIGH_E.h"
+			h_lep_0_lep_1_pt_HIGH_E->Fill(lep_0_lep_1_pt, final_weighting);
 
-		//Invariant mass HIGH_E
-		h_lep_0_lep_1_mass_HIGH_E->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
-		h_jet_0_jet_1_mass_HIGH_E->Fill(jet_0_jet_1_mass, final_weighting); // two jets
+			//Delta R for two electrons HIGH_E
+			h_DeltaR_HIGH_E->Fill(DeltaR, final_weighting);
 
-		h_lep_0_lep_1_pt_HIGH_E->Fill(lep_0_lep_1_pt, final_weighting);
-
-		//Delta R for two electrons HIGH_E
-		h_DeltaR_HIGH_E->Fill(DeltaR, final_weighting);
-
-		// pT balance HIGH_E
-		h_pT_balance_HIGH_E->Fill(pT_balance, final_weighting);	
-		h_pT_balance_reco_HIGH_E->Fill(pT_balance_reco, final_weighting);
+			// pT balance HIGH_E
+			h_pT_balance_HIGH_E->Fill(pT_balance, final_weighting);	
+			h_pT_balance_reco_HIGH_E->Fill(pT_balance_reco, final_weighting);
 	
-		//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+			//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
 
-		// Centrality HIGH_E
-		h_Centrality_HIGH_E->Fill(Centrality, final_weighting);
+			// Centrality HIGH_E
+			h_Centrality_HIGH_E->Fill(Centrality, final_weighting);
 
-		// MET Centrality HIGH_E
-		h_MET_Centrality_HIGH_E->Fill(MET_Centrality, final_weighting);
+			// MET Centrality HIGH_E
+			h_MET_Centrality_HIGH_E->Fill(MET_Centrality, final_weighting);
 
-		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
-		h_neutrino_0_pt_HIGH_E->Fill(neutrino_0_pt,final_weighting);
-		h_neutrino_1_pt_HIGH_E->Fill(neutrino_1_pt,final_weighting);
+			// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
+			h_neutrino_0_pt_HIGH_E->Fill(neutrino_0_pt,final_weighting);
+			h_neutrino_1_pt_HIGH_E->Fill(neutrino_1_pt,final_weighting);
 
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
-			h_MET_Type_Favour_HIGH_E->Fill(MET_Type_Favour, final_weighting);
+				h_MET_Type_Favour_HIGH_E->Fill(MET_Type_Favour, final_weighting);
 
-		}
+			}
 
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
-			h_lep_0_lep_1_mass_reco_HIGH_E->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_lep_0_lep_1_mass_reco_HIGH_E->Fill(lep_0_lep_1_mass_reco, final_weighting);
+
+			}
 
 		}
 
 	}
 
-	if (Cuts("truth")) {
+	if (region == "bjet") {
 
-		#include "_FillAllData_TRUTH.h"
+		if (Cuts("bjet")) {
 
-		//ptvar cone histograms TRUTH
-		h_lep_1_iso_ptvarcone40_TRUTH->Fill(lep_1_iso_ptvarcone40, final_weighting);
-		h_lep_0_iso_ptvarcone40_TRUTH->Fill(lep_0_iso_ptvarcone40, final_weighting);
+			#include "_FillAllData_BJET.h"
 
-		//Invariant mass TRUTH
-		h_lep_0_lep_1_mass_TRUTH->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
-		h_jet_0_jet_1_mass_TRUTH->Fill(jet_0_jet_1_mass, final_weighting); // two jets
+			//ptvar cone histograms BJET
+			h_lep_1_iso_ptvarcone40_BJET->Fill(lep_1_iso_ptvarcone40, final_weighting);
+			h_lep_0_iso_ptvarcone40_BJET->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
-		//Combined lepton TRUTH
-		h_RapidityDilepton_TRUTH->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
-		h_RapidityDijet_TRUTH->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
-		h_lep_0_lep_1_pt_TRUTH->Fill(lep_0_lep_1_pt, final_weighting);
+			//Invariant mass BJET
+			h_lep_0_lep_1_mass_BJET->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+			h_jet_0_jet_1_mass_BJET->Fill(jet_0_jet_1_mass, final_weighting); // two jets
 
-		//Delta R for two electrons TRUTH
-		h_DeltaR_TRUTH->Fill(DeltaR, final_weighting);
+			//Combined lepton BJET
+			h_RapidityDilepton_BJET->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
+			h_RapidityDijet_BJET->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
+			h_lep_0_lep_1_pt_BJET->Fill(lep_0_lep_1_pt, final_weighting);
 
-		h_DeltaPhi_TRUTH->Fill(DeltaPhi, final_weighting);
+			//Delta R for two electrons BJET
+			h_DeltaR_BJET->Fill(DeltaR, final_weighting);
 
-		// pT balance TRUTH
-		h_pT_balance_TRUTH->Fill(pT_balance, final_weighting);	
-		h_pT_balance_reco_TRUTH->Fill(pT_balance_reco, final_weighting);	
+			// pT balance BJET
+			h_pT_balance_BJET->Fill(pT_balance, final_weighting);	
+			h_pT_balance_reco_BJET->Fill(pT_balance_reco, final_weighting);	
 
-		//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+			//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
 
-		// Centrality TRUTH
-		h_Centrality_TRUTH->Fill(Centrality, final_weighting);
+			// Centrality BJET
+			h_Centrality_BJET->Fill(Centrality, final_weighting);
 
-		// MET Centrality TRUTH
-		h_MET_Centrality_TRUTH->Fill(MET_Centrality, final_weighting);
+			// MET Centrality BJET
+			h_MET_Centrality_BJET->Fill(MET_Centrality, final_weighting);
 
-		// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 TRUTH
-		h_neutrino_0_pt_TRUTH->Fill(neutrino_0_pt,final_weighting);
-		h_neutrino_1_pt_TRUTH->Fill(neutrino_1_pt,final_weighting);
+			// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 BJET
+			h_neutrino_0_pt_BJET->Fill(neutrino_0_pt,final_weighting);
+			h_neutrino_1_pt_BJET->Fill(neutrino_1_pt,final_weighting);
 
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
 
-			h_MET_Type_Favour_TRUTH->Fill(MET_Type_Favour, final_weighting);
-			h_Mass_Favour_Combination_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+				h_MET_Type_Favour_BJET->Fill(MET_Type_Favour, final_weighting);
 
-			if (outside_leptons) {
-				h_MET_Type_Favour_OUTSIDE_TRUTH->Fill(MET_Type_Favour, final_weighting);
-				h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+			}
+		}
+	}
 
-			} else {
-				h_MET_Type_Favour_INSIDE_TRUTH->Fill(MET_Type_Favour, final_weighting);
-				h_Mass_Favour_Combination_INSIDE_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+	if (region == "truth") {
+
+		if (Cuts("truth")) {
+
+			#include "_FillAllData_TRUTH.h"
+
+			//ptvar cone histograms TRUTH
+			h_lep_1_iso_ptvarcone40_TRUTH->Fill(lep_1_iso_ptvarcone40, final_weighting);
+			h_lep_0_iso_ptvarcone40_TRUTH->Fill(lep_0_iso_ptvarcone40, final_weighting);
+
+			//Invariant mass TRUTH
+			h_lep_0_lep_1_mass_TRUTH->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
+			h_jet_0_jet_1_mass_TRUTH->Fill(jet_0_jet_1_mass, final_weighting); // two jets
+
+			//Combined lepton TRUTH
+			h_RapidityDilepton_TRUTH->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
+			h_RapidityDijet_TRUTH->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
+			h_lep_0_lep_1_pt_TRUTH->Fill(lep_0_lep_1_pt, final_weighting);
+
+			//Delta R for two electrons TRUTH
+			h_DeltaR_TRUTH->Fill(DeltaR, final_weighting);
+
+			h_DeltaPhi_TRUTH->Fill(DeltaPhi, final_weighting);
+
+			// pT balance TRUTH
+			h_pT_balance_TRUTH->Fill(pT_balance, final_weighting);	
+			h_pT_balance_reco_TRUTH->Fill(pT_balance_reco, final_weighting);	
+
+			//if(pT_balance > 0.15) cout << "HOW COULD THIS HAPPEN TO ME" << endl;
+
+			// Centrality TRUTH
+			h_Centrality_TRUTH->Fill(Centrality, final_weighting);
+
+			// MET Centrality TRUTH
+			h_MET_Centrality_TRUTH->Fill(MET_Centrality, final_weighting);
+
+			// missing energy for neutrino 1 and 2 taken from the vector VectorMissingEnergy12 TRUTH
+			h_neutrino_0_pt_TRUTH->Fill(neutrino_0_pt,final_weighting);
+			h_neutrino_1_pt_TRUTH->Fill(neutrino_1_pt,final_weighting);
+
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronTau") {
+
+				h_MET_Type_Favour_TRUTH->Fill(MET_Type_Favour, final_weighting);
+				h_Mass_Favour_Combination_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+
+				if (outside_leptons) {
+					h_MET_Type_Favour_OUTSIDE_TRUTH->Fill(MET_Type_Favour, final_weighting);
+					h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+
+				} else {
+					h_MET_Type_Favour_INSIDE_TRUTH->Fill(MET_Type_Favour, final_weighting);
+					h_Mass_Favour_Combination_INSIDE_2D_TRUTH->Fill(MET_Type_Favour,lep_0_lep_1_mass_reco, final_weighting);
+
+				}
 
 			}
 
-		}
+			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
-		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
+				h_lep_0_lep_1_mass_reco_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_lep_0_lep_1_pt_reco_TRUTH->Fill(lep_0_lep_1_pt_reco, final_weighting);
+				h_DeltaR_reco_TRUTH->Fill(DeltaR_reco, final_weighting);
+				h_Centrality_reco_TRUTH->Fill(Centrality_reco, final_weighting);
+				h_DeltaPhi_reco_TRUTH->Fill(DeltaPhi_reco, final_weighting);
+				h_pT_balance_reco_TRUTH->Fill(pT_balance_reco, final_weighting);
+				h_Mass_DeltaPhi_Combination_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
-			h_lep_0_lep_1_mass_reco_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
-			h_lep_0_lep_1_pt_reco_TRUTH->Fill(lep_0_lep_1_pt_reco, final_weighting);
-			h_DeltaR_reco_TRUTH->Fill(DeltaR_reco, final_weighting);
-			h_Centrality_reco_TRUTH->Fill(Centrality_reco, final_weighting);
-			h_DeltaPhi_reco_TRUTH->Fill(DeltaPhi_reco, final_weighting);
-			h_pT_balance_reco_TRUTH->Fill(pT_balance_reco, final_weighting);
-			h_Mass_DeltaPhi_Combination_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+				if (outside_leptons) {
 
-			if (outside_leptons) {
+					h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_DeltaPhi_reco_OUTSIDE_TRUTH->Fill(DeltaPhi_reco, final_weighting);
+					h_pT_balance_reco_OUTSIDE_TRUTH->Fill(pT_balance_reco, final_weighting);
+					h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
-				h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
-				h_DeltaPhi_reco_OUTSIDE_TRUTH->Fill(DeltaPhi_reco, final_weighting);
-				h_pT_balance_reco_OUTSIDE_TRUTH->Fill(pT_balance_reco, final_weighting);
-				h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+				} else {
 
-			} else {
+					h_lep_0_lep_1_mass_reco_INSIDE_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_pT_balance_reco_INSIDE_TRUTH->Fill(pT_balance_reco, final_weighting);
+					h_DeltaPhi_reco_INSIDE_TRUTH->Fill(DeltaPhi_reco, final_weighting);
+					h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
-				h_lep_0_lep_1_mass_reco_INSIDE_TRUTH->Fill(lep_0_lep_1_mass_reco, final_weighting);
-				h_pT_balance_reco_INSIDE_TRUTH->Fill(pT_balance_reco, final_weighting);
-				h_DeltaPhi_reco_INSIDE_TRUTH->Fill(DeltaPhi_reco, final_weighting);
-				h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+				}
 
 			}
 
-		}
 
+		}
 
 	}
 
