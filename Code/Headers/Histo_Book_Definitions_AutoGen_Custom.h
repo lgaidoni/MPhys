@@ -593,6 +593,14 @@ vector<string>	hv_Mass_DeltaPhi_Combination_OUTSIDE_2D_names; // HISTOGRAM NAME 
 
 /// ------------------- TRUTHRECONSTRUCTIONCHECKS ---------------- ///
 
+/// ------------------- lep_1_vis_mass: ---------------- ///
+
+/// ------------------- lep_0_vis_mass: ---------------- ///
+
+/// ------------------- lep_1_invis_mass: ---------------- ///
+
+/// ------------------- lep_0_invis_mass: ---------------- ///
+
 // -- the invariant mass of the TRUTH visible and invisible tau 0
 double lep_0_invis_vis_mass;
 

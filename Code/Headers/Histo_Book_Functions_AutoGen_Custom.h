@@ -1235,6 +1235,14 @@ void MC_Analysis::Book_Mass_DeltaPhi_Combination_OUTSIDE_2D(int xbins, double xm
 
 /// ------------------- TRUTHRECONSTRUCTIONCHECKS ---------------- ///
 
+/// ------------------- lep_1_vis_mass: ---------------- ///
+
+/// ------------------- lep_0_vis_mass: ---------------- ///
+
+/// ------------------- lep_1_invis_mass: ---------------- ///
+
+/// ------------------- lep_0_invis_mass: ---------------- ///
+
 // -- the invariant mass of the TRUTH visible and invisible tau 0
 void MC_Analysis::Book_lep_0_invis_vis_mass(int bins, double min, double max) {
 	h_lep_0_invis_vis_mass = new TH1F("h_lep_0_invis_vis_mass", "", bins, min, max);
