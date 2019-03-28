@@ -423,10 +423,14 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & tau_0_truth;
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
+		lep_0_vis_p4 = tau_0_truth_p4;
+		lep_0_invis_p4 = new TLorentzVector(0.0000001,0.0000001,0.0000001,0.0000001);
 
 		lep_1 = & tau_1_truth;	
 		lep_1_p4 = tau_1_truth_p4;
 		lep_1_q = & tau_1_truth_q;
+		lep_1_vis_p4 = tau_1_truth_p4;
+		lep_1_invis_p4 = new TLorentzVector(0.0000001,0.0000001,0.0000001,0.0000001);
 
 		if (tau_0_truth > 0 && tau_1_truth > 0) n_leptons = 2;
 		else n_leptons = 0;
@@ -437,6 +441,8 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & tau_0_truth; 
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
+		lep_0_vis_p4 = tau_0_truth_p4;
+		lep_0_invis_p4 = new TLorentzVector(0.0000001,0.0000001,0.0000001,0.0000001);
 
 		lep_1 = & elec_0_matched_truth_lepTau;
 		lep_1_p4 = elec_0_matched_truth_lepTau_p4;
@@ -453,6 +459,8 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & tau_0_truth; 
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
+		lep_0_vis_p4 = tau_0_truth_p4;
+		lep_0_invis_p4 = new TLorentzVector(0.0000001,0.0000001,0.0000001,0.0000001);
 
 		lep_1 = & muon_0_matched_truth_lepTau;
 		lep_1_p4 = muon_0_matched_truth_lepTau_p4;
@@ -644,15 +652,7 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	if (truth) {
 		lep_0_reco_p4 = lep_0_p4; //uses LepTau_p4
 		lep_1_reco_p4 = lep_1_p4; //uses LepTau_p4
-	}
 
-	//Invariant Mass
-  	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
-	lep_0_lep_1_mass_reco = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
-	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
-
-	// TRUTH
-	if (truth){
 		// TLorentzVectors
 		TLorentzVector* lep_0_invis_vis_TLV = merge_two_TLV(lep_0_vis_p4, lep_0_invis_p4); // TLorentzVector for total tau (invis and vis)
 		TLorentzVector* lep_1_invis_vis_TLV = merge_two_TLV(lep_1_vis_p4, lep_1_invis_p4); // TLorentzVector for total tau (invis and vis)
@@ -662,9 +662,12 @@ void MC_Analysis::GenerateVariables(bool truth) {
 		met_truth_mass = met_truth_p4->M(); // invariant mass of the TRUTH missing energy
 		// Invariant mass of the di-lepton system (lep 0 and lep 1)
 		lep_0_lep_1_invis_vis_mass = InvariantMass(lep_0_invis_vis_TLV, lep_1_invis_vis_TLV); // TLorentz vector of the invariant mass of di-tau
-
-
 	}
+
+	//Invariant Mass
+  	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
+	lep_0_lep_1_mass_reco = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
+	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
 
 	// Delta R
 	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
@@ -968,39 +971,102 @@ void MC_Analysis::Fill(string region) {
 		bool EXCEPT_Z_mass_condition = false;
 		bool EXCEPT_DeltaPhi_condition = false;
 		bool EXCEPT_pT_balance_reco_condition = false;
+		bool EXCEPT_Centrality_condition = false;
+		bool EXCEPT_Jet_mass_condition = false;
 
 		///----- EXCEPT region filling -----///
 		if (Cuts("EXCEPT_Z_mass_condition")) {
-			h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);		//Fill the EXCEPT histogram for mass
-			EXCEPT_Z_mass_condition = true;
+								 h_lep_0_lep_1_mass_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting);		//Fill the EXCEPT histogram for mass
+								 h_lep_0_lep_1_mass_EXCEPT_FINE->Fill(lep_0_lep_1_mass, final_weighting);
+								 EXCEPT_Z_mass_condition = true;
 		}
-		if (Cuts("EXCEPT_combined_lepton_pt")) 		h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);			//Fill the EXCEPT histogram for combined lepton pt
-		if (Cuts("EXCEPT_leading_jets_invariant_mass")) h_jet_0_jet_1_mass_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);		//Fill the EXCEPT histogram for leading jets combined invariant mass
-		if (Cuts("EXCEPT_ptvarcone_40_0")) 		h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 0
-		if (Cuts("EXCEPT_ptvarcone_40_1")) 		h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
-		if (Cuts("EXCEPT_pT_balance_limit")) 		h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
-		if (Cuts("EXCEPT_pT_balance_3_limit")) 		h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
-		if (Cuts("EXCEPT_centrality_condition")) 	h_Centrality_EXCEPT->Fill(Centrality, final_weighting);				//Fill the EXCEPT histogram for centrality	
+		if (Cuts("EXCEPT_combined_lepton_pt")) {
+								 h_lep_0_lep_1_pt_EXCEPT->Fill(lep_0_lep_1_pt, final_weighting);			//Fill the EXCEPT histogram for combined lepton pt
+								 h_lep_0_lep_1_pt_EXCEPT_FINE->Fill(lep_0_lep_1_pt, final_weighting);
+		}
+		if (Cuts("EXCEPT_leading_jets_invariant_mass")) {
+								 h_jet_0_jet_1_mass_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);		//Fill the EXCEPT histogram for leading jets combined invariant mass
+								 h_jet_0_jet_1_mass_EXCEPT_FINE->Fill(jet_0_jet_1_mass, final_weighting);
+								 EXCEPT_Jet_mass_condition = true;
+		}
+		if (Cuts("EXCEPT_ptvarcone_40_0")) {
+								 h_lep_0_iso_ptvarcone40_EXCEPT->Fill(lep_0_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 0
+								 h_lep_0_iso_ptvarcone40_EXCEPT_FINE->Fill(lep_0_iso_ptvarcone40, final_weighting);
+		}
+		if (Cuts("EXCEPT_ptvarcone_40_1")) {
+								 h_lep_1_iso_ptvarcone40_EXCEPT->Fill(lep_1_iso_ptvarcone40, final_weighting);	//Fill the EXCEPT histogram for isolation cone on lepton 1
+								 h_lep_1_iso_ptvarcone40_EXCEPT_FINE->Fill(lep_1_iso_ptvarcone40, final_weighting);
+		}
+		if (Cuts("EXCEPT_pT_balance_limit")) {
+								 h_pT_balance_EXCEPT->Fill(pT_balance, final_weighting);				//Fill the EXCEPT histogram for pt balance
+								 h_pT_balance_EXCEPT_FINE->Fill(pT_balance, final_weighting);
+		}
+		if (Cuts("EXCEPT_pT_balance_3_limit")) {
+								 h_pT_balance_3_EXCEPT->Fill(pT_balance_3, final_weighting);			//Fill the EXCEPT histogram for pt balance 3 (extra jet, control region)
+								 h_pT_balance_3_EXCEPT_FINE->Fill(pT_balance_3, final_weighting);	
+		}
+		if (Cuts("EXCEPT_centrality_condition")) {
+								 h_Centrality_EXCEPT->Fill(Centrality, final_weighting);				//Fill the EXCEPT histogram for centrality	
+								 h_Centrality_EXCEPT_FINE->Fill(Centrality, final_weighting);	
+								 EXCEPT_Centrality_condition = true;
+		}
 		if (Cuts("EXCEPT_delta_phi_condition")) {
-			h_DeltaPhi_EXCEPT->Fill(DeltaPhi, final_weighting);				//Fill the EXCEPT histogram for delta phi	
-			EXCEPT_DeltaPhi_condition = true;
+								h_DeltaPhi_EXCEPT->Fill(DeltaPhi, final_weighting);				//Fill the EXCEPT histogram for delta phi	
+								h_DeltaPhi_EXCEPT_FINE->Fill(DeltaPhi, final_weighting);	
+								EXCEPT_DeltaPhi_condition = true;
 		}
 
 		if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
-			if (EXCEPT_Z_mass_condition) h_lep_0_lep_1_mass_reco_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
-			if (EXCEPT_DeltaPhi_condition) h_DeltaPhi_reco_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+
+			if (EXCEPT_Z_mass_condition) {
+				h_lep_0_lep_1_mass_reco_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
+				h_lep_0_lep_1_mass_reco_EXCEPT_FINE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+			}
+
+			if (EXCEPT_DeltaPhi_condition) {
+				h_DeltaPhi_reco_EXCEPT->Fill(DeltaPhi_reco, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
+				h_DeltaPhi_reco_EXCEPT_FINE->Fill(DeltaPhi_reco, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
+			}
+
 			if (Cuts("EXCEPT_pT_balance_reco_condition")) {
-				h_pT_balance_reco_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+				h_pT_balance_reco_EXCEPT->Fill(pT_balance_reco, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
+				h_pT_balance_reco_EXCEPT_FINE->Fill(pT_balance_reco, final_weighting);
 				EXCEPT_pT_balance_reco_condition = true;
 			}
+
 			if (outside_leptons) {
+
 				if (EXCEPT_Z_mass_condition) h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
 				if (EXCEPT_DeltaPhi_condition) h_DeltaPhi_reco_OUTSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
 				if (EXCEPT_pT_balance_reco_condition) h_pT_balance_reco_OUTSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+
 			} else {
-				if (EXCEPT_Z_mass_condition) h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
-				if (EXCEPT_DeltaPhi_condition) h_DeltaPhi_reco_INSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
-				if (EXCEPT_pT_balance_reco_condition) h_pT_balance_reco_INSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting);				//Fill the EXCEPT histogram for DeltaPhi
+
+				if (EXCEPT_Z_mass_condition) {
+					h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
+					h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT_FINE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				}
+
+				if (EXCEPT_DeltaPhi_condition) {
+					h_DeltaPhi_reco_INSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);	/Fill the EXCEPT histogram for DeltaPhi
+					h_DeltaPhi_reco_INSIDE_EXCEPT_FINE->Fill(DeltaPhi_reco, final_weighting);
+				}
+
+				if (EXCEPT_pT_balance_reco_condition) {
+					h_pT_balance_reco_INSIDE_EXCEPT->Fill(pT_balance_reco, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
+					h_pT_balance_reco_INSIDE_EXCEPT_FINE->Fill(pT_balance_reco, final_weighting);	
+				}
+
+				if (EXCEPT_Centrality_condition) {
+					h_Centrality_INSIDE_EXCEPT->Fill(Centrality, final_weighting);				//Fill the EXCEPT histogram for centrality	
+					h_Centrality_INSIDE_EXCEPT_FINE->Fill(Centrality, final_weighting);	
+				}
+
+				if (EXCEPT_Jet_mass_condition) {
+					h_jet_0_jet_1_mass_INSIDE_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);		//Fill the EXCEPT histogram for leading jets combined invariant mass
+					h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE->Fill(jet_0_jet_1_mass, final_weighting);
+				}
+
 			}
 
 		}
@@ -1077,15 +1143,19 @@ void MC_Analysis::Fill(string region) {
 				if (outside_leptons) {
 
 					h_lep_0_lep_1_mass_reco_OUTSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_jet_0_jet_1_mass_OUTSIDE->Fill(jet_0_jet_1_mass, final_weighting); 	// two jets
 					h_pT_balance_reco_OUTSIDE->Fill(pT_balance_reco, final_weighting);
 					h_DeltaPhi_reco_OUTSIDE->Fill(DeltaPhi_reco, final_weighting);
+					h_Centrality_OUTSIDE->Fill(Centrality, final_weighting);
 					h_Mass_DeltaPhi_Combination_OUTSIDE_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
 				} else {
 
 					h_lep_0_lep_1_mass_reco_INSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_jet_0_jet_1_mass_INSIDE->Fill(jet_0_jet_1_mass, final_weighting); 	// two jets
 					h_pT_balance_reco_INSIDE->Fill(pT_balance_reco, final_weighting);
 					h_DeltaPhi_reco_INSIDE->Fill(DeltaPhi_reco, final_weighting);
+					h_Centrality_INSIDE->Fill(Centrality, final_weighting);
 					h_Mass_DeltaPhi_Combination_INSIDE_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
 
 				}
@@ -1485,6 +1555,21 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_neutrino_1_pt_HIGH_E, "h_neutrino_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Type_Favour_HIGH_E, "h_MET_Type_Favour_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_0_lep_1_mass_reco_HIGH_E, "h_lep_0_lep_1_mass_reco_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+
+	//EXCEPT FINE Graphs
+	DrawHistogram(h_lep_0_lep_1_mass_EXCEPT_FINE, "h_lep_0_lep_1_mass_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_EXCEPT_FINE, "h_lep_0_lep_1_mass_reco_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT_FINE, "h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_jet_0_jet_1_mass_EXCEPT_FINE, "h_jet_0_jet_1_mass_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE, "h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_EXCEPT_FINE, "h_pT_balance_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_EXCEPT_FINE, "h_pT_balance_reco_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_INSIDE_EXCEPT_FINE, "h_pT_balance_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_3_EXCEPT_FINE, "h_pT_balance_3_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_Centrality_EXCEPT_FINE, "h_Centrality_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_Centrality_INSIDE_EXCEPT_FINE, "h_Centrality_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_EXCEPT_FINE, "h_DeltaPhi_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_INSIDE_EXCEPT_FINE, "h_DeltaPhi_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
 
 	//TRUTH GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_TRUTH, "h_lep_1_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType);

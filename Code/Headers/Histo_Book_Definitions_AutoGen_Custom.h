@@ -15,6 +15,7 @@ TH1F	*h_DeltaR; // SEARCH VERSION
 TH1F	*h_DeltaR_PRE; // PRE VERSION
 TH1F	*h_DeltaR_CONTROL; // CONTROL VERSION
 TH1F	*h_DeltaR_EXCEPT; // EXCEPT VERSION
+TH1F	*h_DeltaR_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_DeltaR_BJET; // BJET VERSION
 TH1F	*h_DeltaR_HIGH_E; // HIGH_E VERSION
 TH1F	*h_DeltaR_TRUTH; // TRUTH VERSION
@@ -29,6 +30,7 @@ TH1F	*h_DeltaPhi; // SEARCH VERSION
 TH1F	*h_DeltaPhi_PRE; // PRE VERSION
 TH1F	*h_DeltaPhi_CONTROL; // CONTROL VERSION
 TH1F	*h_DeltaPhi_EXCEPT; // EXCEPT VERSION
+TH1F	*h_DeltaPhi_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_DeltaPhi_BJET; // BJET VERSION
 TH1F	*h_DeltaPhi_HIGH_E; // HIGH_E VERSION
 TH1F	*h_DeltaPhi_TRUTH; // TRUTH VERSION
@@ -43,6 +45,7 @@ TH1F	*h_pT_balance; // SEARCH VERSION
 TH1F	*h_pT_balance_PRE; // PRE VERSION
 TH1F	*h_pT_balance_CONTROL; // CONTROL VERSION
 TH1F	*h_pT_balance_EXCEPT; // EXCEPT VERSION
+TH1F	*h_pT_balance_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_pT_balance_BJET; // BJET VERSION
 TH1F	*h_pT_balance_HIGH_E; // HIGH_E VERSION
 TH1F	*h_pT_balance_TRUTH; // TRUTH VERSION
@@ -57,6 +60,7 @@ TH1F	*h_pT_balance_3; // SEARCH VERSION
 TH1F	*h_pT_balance_3_PRE; // PRE VERSION
 TH1F	*h_pT_balance_3_CONTROL; // CONTROL VERSION
 TH1F	*h_pT_balance_3_EXCEPT; // EXCEPT VERSION
+TH1F	*h_pT_balance_3_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_pT_balance_3_BJET; // BJET VERSION
 TH1F	*h_pT_balance_3_HIGH_E; // HIGH_E VERSION
 TH1F	*h_pT_balance_3_TRUTH; // TRUTH VERSION
@@ -71,6 +75,7 @@ TH1F	*h_Centrality; // SEARCH VERSION
 TH1F	*h_Centrality_PRE; // PRE VERSION
 TH1F	*h_Centrality_CONTROL; // CONTROL VERSION
 TH1F	*h_Centrality_EXCEPT; // EXCEPT VERSION
+TH1F	*h_Centrality_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_Centrality_BJET; // BJET VERSION
 TH1F	*h_Centrality_HIGH_E; // HIGH_E VERSION
 TH1F	*h_Centrality_TRUTH; // TRUTH VERSION
@@ -85,6 +90,7 @@ TH1F	*h_Centrality_INSIDE; // SEARCH VERSION
 TH1F	*h_Centrality_INSIDE_PRE; // PRE VERSION
 TH1F	*h_Centrality_INSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_Centrality_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_Centrality_INSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_Centrality_INSIDE_BJET; // BJET VERSION
 TH1F	*h_Centrality_INSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_Centrality_INSIDE_TRUTH; // TRUTH VERSION
@@ -99,6 +105,7 @@ TH1F	*h_Centrality_OUTSIDE; // SEARCH VERSION
 TH1F	*h_Centrality_OUTSIDE_PRE; // PRE VERSION
 TH1F	*h_Centrality_OUTSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_Centrality_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_Centrality_OUTSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_Centrality_OUTSIDE_BJET; // BJET VERSION
 TH1F	*h_Centrality_OUTSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_Centrality_OUTSIDE_TRUTH; // TRUTH VERSION
@@ -113,6 +120,7 @@ TH1F	*h_RapidityDijet; // SEARCH VERSION
 TH1F	*h_RapidityDijet_PRE; // PRE VERSION
 TH1F	*h_RapidityDijet_CONTROL; // CONTROL VERSION
 TH1F	*h_RapidityDijet_EXCEPT; // EXCEPT VERSION
+TH1F	*h_RapidityDijet_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_RapidityDijet_BJET; // BJET VERSION
 TH1F	*h_RapidityDijet_HIGH_E; // HIGH_E VERSION
 TH1F	*h_RapidityDijet_TRUTH; // TRUTH VERSION
@@ -127,6 +135,7 @@ TH1F	*h_RapidityDilepton; // SEARCH VERSION
 TH1F	*h_RapidityDilepton_PRE; // PRE VERSION
 TH1F	*h_RapidityDilepton_CONTROL; // CONTROL VERSION
 TH1F	*h_RapidityDilepton_EXCEPT; // EXCEPT VERSION
+TH1F	*h_RapidityDilepton_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_RapidityDilepton_BJET; // BJET VERSION
 TH1F	*h_RapidityDilepton_HIGH_E; // HIGH_E VERSION
 TH1F	*h_RapidityDilepton_TRUTH; // TRUTH VERSION
@@ -143,6 +152,7 @@ TH1F	*h_lep_0_lep_1_mass; // SEARCH VERSION
 TH1F	*h_lep_0_lep_1_mass_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_mass_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_lep_1_mass_BJET; // BJET VERSION
 TH1F	*h_lep_0_lep_1_mass_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_lep_1_mass_TRUTH; // TRUTH VERSION
@@ -157,6 +167,7 @@ TH1F	*h_lep_0_lep_1_pt; // SEARCH VERSION
 TH1F	*h_lep_0_lep_1_pt_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_pt_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_pt_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_pt_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_lep_1_pt_BJET; // BJET VERSION
 TH1F	*h_lep_0_lep_1_pt_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_lep_1_pt_TRUTH; // TRUTH VERSION
@@ -171,6 +182,7 @@ TH1F	*h_lep_0_iso_ptvarcone40; // SEARCH VERSION
 TH1F	*h_lep_0_iso_ptvarcone40_PRE; // PRE VERSION
 TH1F	*h_lep_0_iso_ptvarcone40_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_iso_ptvarcone40_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_iso_ptvarcone40_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_iso_ptvarcone40_BJET; // BJET VERSION
 TH1F	*h_lep_0_iso_ptvarcone40_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_iso_ptvarcone40_TRUTH; // TRUTH VERSION
@@ -185,6 +197,7 @@ TH1F	*h_lep_1_iso_ptvarcone40; // SEARCH VERSION
 TH1F	*h_lep_1_iso_ptvarcone40_PRE; // PRE VERSION
 TH1F	*h_lep_1_iso_ptvarcone40_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_1_iso_ptvarcone40_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_1_iso_ptvarcone40_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_1_iso_ptvarcone40_BJET; // BJET VERSION
 TH1F	*h_lep_1_iso_ptvarcone40_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_1_iso_ptvarcone40_TRUTH; // TRUTH VERSION
@@ -201,6 +214,7 @@ TH1F	*h_jet_0_jet_1_mass; // SEARCH VERSION
 TH1F	*h_jet_0_jet_1_mass_PRE; // PRE VERSION
 TH1F	*h_jet_0_jet_1_mass_CONTROL; // CONTROL VERSION
 TH1F	*h_jet_0_jet_1_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_jet_0_jet_1_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_jet_0_jet_1_mass_BJET; // BJET VERSION
 TH1F	*h_jet_0_jet_1_mass_HIGH_E; // HIGH_E VERSION
 TH1F	*h_jet_0_jet_1_mass_TRUTH; // TRUTH VERSION
@@ -215,6 +229,7 @@ TH1F	*h_jet_0_jet_1_mass_INSIDE; // SEARCH VERSION
 TH1F	*h_jet_0_jet_1_mass_INSIDE_PRE; // PRE VERSION
 TH1F	*h_jet_0_jet_1_mass_INSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_jet_0_jet_1_mass_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_jet_0_jet_1_mass_INSIDE_BJET; // BJET VERSION
 TH1F	*h_jet_0_jet_1_mass_INSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_jet_0_jet_1_mass_INSIDE_TRUTH; // TRUTH VERSION
@@ -229,6 +244,7 @@ TH1F	*h_jet_0_jet_1_mass_OUTSIDE; // SEARCH VERSION
 TH1F	*h_jet_0_jet_1_mass_OUTSIDE_PRE; // PRE VERSION
 TH1F	*h_jet_0_jet_1_mass_OUTSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_jet_0_jet_1_mass_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_jet_0_jet_1_mass_OUTSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_jet_0_jet_1_mass_OUTSIDE_BJET; // BJET VERSION
 TH1F	*h_jet_0_jet_1_mass_OUTSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_jet_0_jet_1_mass_OUTSIDE_TRUTH; // TRUTH VERSION
@@ -243,6 +259,7 @@ TH1F	*h_jet_0_p4_Pt; // SEARCH VERSION
 TH1F	*h_jet_0_p4_Pt_PRE; // PRE VERSION
 TH1F	*h_jet_0_p4_Pt_CONTROL; // CONTROL VERSION
 TH1F	*h_jet_0_p4_Pt_EXCEPT; // EXCEPT VERSION
+TH1F	*h_jet_0_p4_Pt_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_jet_0_p4_Pt_BJET; // BJET VERSION
 TH1F	*h_jet_0_p4_Pt_HIGH_E; // HIGH_E VERSION
 TH1F	*h_jet_0_p4_Pt_TRUTH; // TRUTH VERSION
@@ -257,6 +274,7 @@ TH1F	*h_jet_1_p4_Pt; // SEARCH VERSION
 TH1F	*h_jet_1_p4_Pt_PRE; // PRE VERSION
 TH1F	*h_jet_1_p4_Pt_CONTROL; // CONTROL VERSION
 TH1F	*h_jet_1_p4_Pt_EXCEPT; // EXCEPT VERSION
+TH1F	*h_jet_1_p4_Pt_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_jet_1_p4_Pt_BJET; // BJET VERSION
 TH1F	*h_jet_1_p4_Pt_HIGH_E; // HIGH_E VERSION
 TH1F	*h_jet_1_p4_Pt_TRUTH; // TRUTH VERSION
@@ -273,6 +291,7 @@ TH1F	*h_MET_Centrality; // SEARCH VERSION
 TH1F	*h_MET_Centrality_PRE; // PRE VERSION
 TH1F	*h_MET_Centrality_CONTROL; // CONTROL VERSION
 TH1F	*h_MET_Centrality_EXCEPT; // EXCEPT VERSION
+TH1F	*h_MET_Centrality_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_MET_Centrality_BJET; // BJET VERSION
 TH1F	*h_MET_Centrality_HIGH_E; // HIGH_E VERSION
 TH1F	*h_MET_Centrality_TRUTH; // TRUTH VERSION
@@ -287,6 +306,7 @@ TH1F	*h_neutrino_0_pt; // SEARCH VERSION
 TH1F	*h_neutrino_0_pt_PRE; // PRE VERSION
 TH1F	*h_neutrino_0_pt_CONTROL; // CONTROL VERSION
 TH1F	*h_neutrino_0_pt_EXCEPT; // EXCEPT VERSION
+TH1F	*h_neutrino_0_pt_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_neutrino_0_pt_BJET; // BJET VERSION
 TH1F	*h_neutrino_0_pt_HIGH_E; // HIGH_E VERSION
 TH1F	*h_neutrino_0_pt_TRUTH; // TRUTH VERSION
@@ -301,6 +321,7 @@ TH1F	*h_neutrino_1_pt; // SEARCH VERSION
 TH1F	*h_neutrino_1_pt_PRE; // PRE VERSION
 TH1F	*h_neutrino_1_pt_CONTROL; // CONTROL VERSION
 TH1F	*h_neutrino_1_pt_EXCEPT; // EXCEPT VERSION
+TH1F	*h_neutrino_1_pt_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_neutrino_1_pt_BJET; // BJET VERSION
 TH1F	*h_neutrino_1_pt_HIGH_E; // HIGH_E VERSION
 TH1F	*h_neutrino_1_pt_TRUTH; // TRUTH VERSION
@@ -315,6 +336,7 @@ TH1F	*h_MET_Type_Favour; // SEARCH VERSION
 TH1F	*h_MET_Type_Favour_PRE; // PRE VERSION
 TH1F	*h_MET_Type_Favour_CONTROL; // CONTROL VERSION
 TH1F	*h_MET_Type_Favour_EXCEPT; // EXCEPT VERSION
+TH1F	*h_MET_Type_Favour_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_MET_Type_Favour_BJET; // BJET VERSION
 TH1F	*h_MET_Type_Favour_HIGH_E; // HIGH_E VERSION
 TH1F	*h_MET_Type_Favour_TRUTH; // TRUTH VERSION
@@ -329,6 +351,7 @@ TH1F	*h_MET_Type_Favour_INSIDE; // SEARCH VERSION
 TH1F	*h_MET_Type_Favour_INSIDE_PRE; // PRE VERSION
 TH1F	*h_MET_Type_Favour_INSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_MET_Type_Favour_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_MET_Type_Favour_INSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_MET_Type_Favour_INSIDE_BJET; // BJET VERSION
 TH1F	*h_MET_Type_Favour_INSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_MET_Type_Favour_INSIDE_TRUTH; // TRUTH VERSION
@@ -343,6 +366,7 @@ TH1F	*h_MET_Type_Favour_OUTSIDE; // SEARCH VERSION
 TH1F	*h_MET_Type_Favour_OUTSIDE_PRE; // PRE VERSION
 TH1F	*h_MET_Type_Favour_OUTSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_MET_Type_Favour_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_MET_Type_Favour_OUTSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_MET_Type_Favour_OUTSIDE_BJET; // BJET VERSION
 TH1F	*h_MET_Type_Favour_OUTSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_MET_Type_Favour_OUTSIDE_TRUTH; // TRUTH VERSION
@@ -359,6 +383,7 @@ TH1F	*h_DeltaPhi_reco; // SEARCH VERSION
 TH1F	*h_DeltaPhi_reco_PRE; // PRE VERSION
 TH1F	*h_DeltaPhi_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_DeltaPhi_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_DeltaPhi_reco_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_DeltaPhi_reco_BJET; // BJET VERSION
 TH1F	*h_DeltaPhi_reco_HIGH_E; // HIGH_E VERSION
 TH1F	*h_DeltaPhi_reco_TRUTH; // TRUTH VERSION
@@ -373,6 +398,7 @@ TH1F	*h_DeltaPhi_reco_INSIDE; // SEARCH VERSION
 TH1F	*h_DeltaPhi_reco_INSIDE_PRE; // PRE VERSION
 TH1F	*h_DeltaPhi_reco_INSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_DeltaPhi_reco_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_DeltaPhi_reco_INSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_DeltaPhi_reco_INSIDE_BJET; // BJET VERSION
 TH1F	*h_DeltaPhi_reco_INSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_DeltaPhi_reco_INSIDE_TRUTH; // TRUTH VERSION
@@ -387,6 +413,7 @@ TH1F	*h_DeltaPhi_reco_OUTSIDE; // SEARCH VERSION
 TH1F	*h_DeltaPhi_reco_OUTSIDE_PRE; // PRE VERSION
 TH1F	*h_DeltaPhi_reco_OUTSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_DeltaPhi_reco_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_DeltaPhi_reco_OUTSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_DeltaPhi_reco_OUTSIDE_BJET; // BJET VERSION
 TH1F	*h_DeltaPhi_reco_OUTSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_DeltaPhi_reco_OUTSIDE_TRUTH; // TRUTH VERSION
@@ -401,6 +428,7 @@ TH1F	*h_pT_balance_reco; // SEARCH VERSION
 TH1F	*h_pT_balance_reco_PRE; // PRE VERSION
 TH1F	*h_pT_balance_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_pT_balance_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_pT_balance_reco_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_pT_balance_reco_BJET; // BJET VERSION
 TH1F	*h_pT_balance_reco_HIGH_E; // HIGH_E VERSION
 TH1F	*h_pT_balance_reco_TRUTH; // TRUTH VERSION
@@ -415,6 +443,7 @@ TH1F	*h_pT_balance_reco_INSIDE; // SEARCH VERSION
 TH1F	*h_pT_balance_reco_INSIDE_PRE; // PRE VERSION
 TH1F	*h_pT_balance_reco_INSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_pT_balance_reco_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_pT_balance_reco_INSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_pT_balance_reco_INSIDE_BJET; // BJET VERSION
 TH1F	*h_pT_balance_reco_INSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_pT_balance_reco_INSIDE_TRUTH; // TRUTH VERSION
@@ -429,6 +458,7 @@ TH1F	*h_pT_balance_reco_OUTSIDE; // SEARCH VERSION
 TH1F	*h_pT_balance_reco_OUTSIDE_PRE; // PRE VERSION
 TH1F	*h_pT_balance_reco_OUTSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_pT_balance_reco_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_pT_balance_reco_OUTSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_pT_balance_reco_OUTSIDE_BJET; // BJET VERSION
 TH1F	*h_pT_balance_reco_OUTSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_pT_balance_reco_OUTSIDE_TRUTH; // TRUTH VERSION
@@ -443,6 +473,7 @@ TH1F	*h_lep_0_lep_1_mass_reco; // SEARCH VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_BJET; // BJET VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_TRUTH; // TRUTH VERSION
@@ -457,6 +488,7 @@ TH1F	*h_lep_0_lep_1_mass_reco_INSIDE; // SEARCH VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_BJET; // BJET VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_INSIDE_TRUTH; // TRUTH VERSION
@@ -471,6 +503,7 @@ TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE; // SEARCH VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_BJET; // BJET VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH; // TRUTH VERSION
@@ -485,6 +518,7 @@ TH1F	*h_DeltaR_reco; // SEARCH VERSION
 TH1F	*h_DeltaR_reco_PRE; // PRE VERSION
 TH1F	*h_DeltaR_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_DeltaR_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_DeltaR_reco_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_DeltaR_reco_BJET; // BJET VERSION
 TH1F	*h_DeltaR_reco_HIGH_E; // HIGH_E VERSION
 TH1F	*h_DeltaR_reco_TRUTH; // TRUTH VERSION
@@ -499,6 +533,7 @@ TH1F	*h_lep_0_lep_1_pt_reco; // SEARCH VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_pt_reco_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_BJET; // BJET VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_lep_1_pt_reco_TRUTH; // TRUTH VERSION
@@ -513,6 +548,7 @@ TH1F	*h_Centrality_reco; // SEARCH VERSION
 TH1F	*h_Centrality_reco_PRE; // PRE VERSION
 TH1F	*h_Centrality_reco_CONTROL; // CONTROL VERSION
 TH1F	*h_Centrality_reco_EXCEPT; // EXCEPT VERSION
+TH1F	*h_Centrality_reco_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_Centrality_reco_BJET; // BJET VERSION
 TH1F	*h_Centrality_reco_HIGH_E; // HIGH_E VERSION
 TH1F	*h_Centrality_reco_TRUTH; // TRUTH VERSION
@@ -609,6 +645,7 @@ TH1F	*h_lep_0_invis_vis_mass; // SEARCH VERSION
 TH1F	*h_lep_0_invis_vis_mass_PRE; // PRE VERSION
 TH1F	*h_lep_0_invis_vis_mass_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_invis_vis_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_invis_vis_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_invis_vis_mass_BJET; // BJET VERSION
 TH1F	*h_lep_0_invis_vis_mass_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_invis_vis_mass_TRUTH; // TRUTH VERSION
@@ -623,6 +660,7 @@ TH1F	*h_lep_1_invis_vis_mass; // SEARCH VERSION
 TH1F	*h_lep_1_invis_vis_mass_PRE; // PRE VERSION
 TH1F	*h_lep_1_invis_vis_mass_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_1_invis_vis_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_1_invis_vis_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_1_invis_vis_mass_BJET; // BJET VERSION
 TH1F	*h_lep_1_invis_vis_mass_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_1_invis_vis_mass_TRUTH; // TRUTH VERSION
@@ -637,6 +675,7 @@ TH1F	*h_lep_0_lep_1_invis_vis_mass; // SEARCH VERSION
 TH1F	*h_lep_0_lep_1_invis_vis_mass_PRE; // PRE VERSION
 TH1F	*h_lep_0_lep_1_invis_vis_mass_CONTROL; // CONTROL VERSION
 TH1F	*h_lep_0_lep_1_invis_vis_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_invis_vis_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_lep_0_lep_1_invis_vis_mass_BJET; // BJET VERSION
 TH1F	*h_lep_0_lep_1_invis_vis_mass_HIGH_E; // HIGH_E VERSION
 TH1F	*h_lep_0_lep_1_invis_vis_mass_TRUTH; // TRUTH VERSION
@@ -651,6 +690,7 @@ TH1F	*h_met_truth_mass; // SEARCH VERSION
 TH1F	*h_met_truth_mass_PRE; // PRE VERSION
 TH1F	*h_met_truth_mass_CONTROL; // CONTROL VERSION
 TH1F	*h_met_truth_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_met_truth_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
 TH1F	*h_met_truth_mass_BJET; // BJET VERSION
 TH1F	*h_met_truth_mass_HIGH_E; // HIGH_E VERSION
 TH1F	*h_met_truth_mass_TRUTH; // TRUTH VERSION
