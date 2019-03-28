@@ -6,6 +6,8 @@ DeltaPhi:Separation of the two candidate leptons in phi space
 pT_balance:PT Balance - Normalised transverse momentum balance between the two leptons and the two highest transverse momentum jets
 pT_balance_3:PT Balance Three - Normalised transverse momentum balance between the two leptons and the three highest transverse momentum jets
 Centrality:Centrality of pseudorapidity of Z boson between two leading jets
+Centrality_INSIDE:Centrality of pseudorapidity of Z boson between two leading jets
+Centrality_OUTSIDE:Centrality of pseudorapidity of Z boson between two leading jets
 RapidityDijet:Rapidity of a dijet pair
 RapidityDilepton:Rapidity of a dilepton pair
 ##LEPTONS
@@ -15,6 +17,8 @@ lep_0_iso_ptvarcone40:Isolation cone for the lepton 0, size 40
 lep_1_iso_ptvarcone40:Isolation cone for the lepton 1, size 40
 ##JETS
 jet_0_jet_1_mass:Invariant mass of two leading jets (leading and subleading)
+jet_0_jet_1_mass_INSIDE:Invariant mass of two leading jets (leading and subleading)
+jet_0_jet_1_mass_OUTSIDE:Invariant mass of two leading jets (leading and subleading)
 jet_0_p4_Pt:Leading jet transverse momentum
 jet_1_p4_Pt:Subleading jet transverse momentum
 ##MISSINGENERGY

@@ -13,6 +13,7 @@
 #include <TFile.h>
 #include <vector>
 #include <ctime>
+#include <sstream>
 
 // Header file for the classes stored in the TTree if any.
 #include "TLorentzVector.h"
