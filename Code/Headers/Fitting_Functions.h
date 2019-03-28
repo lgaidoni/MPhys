@@ -132,6 +132,119 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 
 }
 
+void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_0_bla bla)
+
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<string> DataTypes; // vector for the DataTypes
+	string histogram_name;
+
+	// Initialise number of events so sets back to zero for the next DataType
+	double totalEW = 0;
+	double totalQCD = 0;
+	double totalOther = 0;
+	double totalTTBAR = 0;
+	double ttbar = 0;
+	double Wtaunu = 0;
+	double Wmunu = 0;
+	double Wenu = 0;
+	double ZqqZll = 0;
+	double EWZtautau = 0;
+	double EWZee = 0;
+	double EWZmumu = 0;
+	double QCDZtautau = 0;
+	double QCDZee = 0;
+	double QCDZmumu = 0;
+
+	DataTypes.push_back("lep_0_lep_1_mass");
+	DataTypes.push_back("lep_0_lep_1_mass_reco");
+	DataTypes.push_back("pT_balance");
+	DataTypes.push_back("pT_balance_reco_INSIDE");
+	DataTypes.push_back("pT_balance_reco_OUTSIDE");
+	DataTypes.push_back("lep_0_lep_1_mass_HIGH_E");
+	DataTypes.push_back("lep_0_lep_1_mass_reco_HIGH_E");
+
+	for (int i = 0; i < DataTypes.size(); i++) { // FOR LOOP FOR EACH DATATYPE
+
+		string DataType = DataTypes[i]; // define the data type as the ith element in the DataTypes vector
+		vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files); // Want to use all processes this time
+		vector<double> EventsInProcess; // vector to add up the number of events
+		double N_events = 0; // initilize number of events
+
+		for (int j=0; j<11; j++) {  // FOR LOOP FOR EACH PROCESS
+
+			TH1F* histogram = histograms[j]; // get the processes from the histograms vector
+			N_events = histogram->Integral(); // gets no of events by integrating
+			EventsInProcess.push_back(N_events); // put them in a vector of all events for all processes
+		
+			if (j == 0) { histogram_name = "t#bar{t}"; }
+			if (j == 1) { histogram_name = "Wtaunu"; }
+			if (j == 2) { histogram_name = "Wmunu"; }
+			if (j == 3) { histogram_name = "Wenu"; }
+			if (j == 4) { histogram_name = "ZqqZll"; }
+			if (j == 5) { histogram_name = "EW Z#tau#tau"; }
+			if (j == 6) { histogram_name = "EW Z#mu#mu"; }
+			if (j == 7) { histogram_name = "EW Zee"; }
+			if (j == 8) { histogram_name = "QCD Z#tau#tau"; }
+			if (j == 9) { histogram_name = "QCD Z#mu#mu"; }
+			if (j == 10) { histogram_name = "QCD Zee"; }
+
+			// save to file
+			//fstream output("../../Output-Files/Final_Graphs/MuonTau_N_events_AllProcesses.txt", output.out | output.app);
+			//output << "Data Type: " << DataType << endl;
+			//output << "Process: " << histogram_name << "\t" << "Number of Events: " << EventsInProcess[j] << "\n" << endl; // may be breaking it
+			//output.close();
+			}
+
+		ttbar = EventsInProcess[0];
+		Wtaunu = EventsInProcess[1];
+		Wmunu = EventsInProcess[2];
+		Wenu = EventsInProcess[3];
+		ZqqZll = EventsInProcess[4];
+		EWZtautau = EventsInProcess[5];
+		EWZmumu = EventsInProcess[6];
+		EWZee = EventsInProcess[7];
+		QCDZtautau = EventsInProcess[8];
+		QCDZmumu = EventsInProcess[9];
+		QCDZee = EventsInProcess[10];
+
+		totalEW = EWZtautau + EWZmumu + EWZee;
+		totalQCD = QCDZtautau + QCDZmumu + QCDZee;
+		totalOther = Wtaunu + Wmunu + Wenu + ZqqZll;
+		totalTTBAR = ttbar;
+
+		fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Nevents_InGroups.txt", output.out | output.app);
+		output << "******************************************" << endl;
+		output << "\nData Type: " << DataType  << " for " + AnalysisType + " selection\n" << endl;
+
+		output << "EW: "<< endl; 
+			output << "\t" << "\t" << "Consisting of: " << endl;
+			output << "\t" << "\t" << "EWZtautau: " << EWZtautau << endl;
+			output << "\t" << "\t" << "EWZmumu  : " << EWZmumu << endl;
+			output << "\t" << "\t" << "EWZee    : " << EWZee << endl;
+			output << "\t" << "\t" << "Total number of events in EW: " << totalEW << "\n" << endl; 
+		output << "QCD: " << endl; 
+			output << "\t" << "\t" <<  "Consisting of: " << endl;
+			output << "\t" << "\t" <<  "QCDZtautau: " << QCDZtautau << endl;
+			output << "\t" << "\t" <<  "QCDZmumu  : " << QCDZmumu << endl;
+			output << "\t" << "\t" <<  "QCDZee    : " << QCDZee << endl;
+			output << "\t" << "\t" << "Total number of events in QCD: " << totalQCD << "\n" << endl; 
+		output << "Other: " << endl; 
+			output << "\t" << "\t" <<  "Consisting of: " << endl;
+			output << "\t" << "\t" <<  "Wtaunu: " << Wtaunu << endl;
+			output << "\t" << "\t" <<  "Wmunu : " << Wmunu << endl;
+			output << "\t" << "\t" <<  "Wenu  : " << Wenu << endl;
+			output << "\t" << "\t" <<  "ZqqZll: " << ZqqZll<< endl;
+			output << "\t" << "\t" << "Total number of events in Other: " << totalOther << "\n" << endl; 
+
+		output << "ttBar: " << endl; 
+			output << "\t" << "\t" <<  "ttbar: " << ttbar << endl;
+			output << "\t" << "\t" << "Total number of events in ttbar: " << totalTTBAR << "\n" << endl; 
+
+		output.close();
+
+	}
+}
+
 void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process) {
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);
