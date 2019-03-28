@@ -136,7 +136,6 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_0_bla bla)
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<string> DataTypes; // vector for the DataTypes
 	string histogram_name;
 
 	// Initialise number of events so sets back to zero for the next DataType
@@ -156,27 +155,58 @@ void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_
 	double QCDZee = 0;
 	double QCDZmumu = 0;
 
+	vector<string> Region;
+	Region.push_back("_TRUTH");
+	Region.push_back("");
+	Region.push_back("_EXCEPT");
+	Region.push_back("_HIGH_E");
+	Region.push_back("_BJET");
+	Region.push_back("_CONTROL");
+
+	vector<string> DataTypes; // vector for the DataTypes
 	DataTypes.push_back("lep_0_lep_1_mass");
-	DataTypes.push_back("lep_0_lep_1_mass_reco");
+	DataTypes.push_back("silly_histogram");
+	/*DataTypes.push_back("lep_0_lep_1_mass_reco");
 	DataTypes.push_back("pT_balance");
 	DataTypes.push_back("pT_balance_reco_INSIDE");
 	DataTypes.push_back("pT_balance_reco_OUTSIDE");
 	DataTypes.push_back("lep_0_lep_1_mass_HIGH_E");
 	DataTypes.push_back("lep_0_lep_1_mass_reco_HIGH_E");
+	*/
+	vector<string> FullHistName;
 
-	for (int i = 0; i < DataTypes.size(); i++) { // FOR LOOP FOR EACH DATATYPE
-
-		string DataType = DataTypes[i]; // define the data type as the ith element in the DataTypes vector
+	for (int i = 0; i < DataTypes.size(); i++){
+		for (int j = 0; j < Region.size(); j++){
+			string FullName = DataTypes[i] + Region[j];	
+			FullHistName.push_back(FullName);
+		}
+	}
+	
+	for (int i = 0; i < FullHistName.size(); i++) { // FOR LOOP FOR EACH DATATYPE
+		
+		string DataType = FullHistName[i]; // define the data type as the ith element in the DataTypes vector
 		vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files); // Want to use all processes this time
 		vector<double> EventsInProcess; // vector to add up the number of events
-		double N_events = 0; // initilize number of events
+		double N_events = 0; // initilize number of event
+	
+		cout << DataType << endl;
+
+		try
+		{
+			histograms[0]->GetMaximum();
+		} 
+		catch(...) 
+		{ 
+			cout << "\nOops! Histogram: '" << DataType << "' doesnt exist!" << endl << endl;
+			continue; 
+		}
 
 		for (int j=0; j<11; j++) {  // FOR LOOP FOR EACH PROCESS
 
 			TH1F* histogram = histograms[j]; // get the processes from the histograms vector
 			N_events = histogram->Integral(); // gets no of events by integrating
 			EventsInProcess.push_back(N_events); // put them in a vector of all events for all processes
-		
+
 			if (j == 0) { histogram_name = "t#bar{t}"; }
 			if (j == 1) { histogram_name = "Wtaunu"; }
 			if (j == 2) { histogram_name = "Wmunu"; }
@@ -189,12 +219,7 @@ void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_
 			if (j == 9) { histogram_name = "QCD Z#mu#mu"; }
 			if (j == 10) { histogram_name = "QCD Zee"; }
 
-			// save to file
-			//fstream output("../../Output-Files/Final_Graphs/MuonTau_N_events_AllProcesses.txt", output.out | output.app);
-			//output << "Data Type: " << DataType << endl;
-			//output << "Process: " << histogram_name << "\t" << "Number of Events: " << EventsInProcess[j] << "\n" << endl; // may be breaking it
-			//output.close();
-			}
+		}
 
 		ttbar = EventsInProcess[0];
 		Wtaunu = EventsInProcess[1];
@@ -215,7 +240,7 @@ void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_
 
 		fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Nevents_InGroups.txt", output.out | output.app);
 		output << "******************************************" << endl;
-		output << "\nData Type: " << DataType  << " for " + AnalysisType + " selection\n" << endl;
+		output << "\nData Type and Region: " << DataType  << " for " + AnalysisType + " selection\n" << endl;
 
 		output << "EW: "<< endl; 
 			output << "\t" << "\t" << "Consisting of: " << endl;
@@ -223,12 +248,14 @@ void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_
 			output << "\t" << "\t" << "EWZmumu  : " << EWZmumu << endl;
 			output << "\t" << "\t" << "EWZee    : " << EWZee << endl;
 			output << "\t" << "\t" << "Total number of events in EW: " << totalEW << "\n" << endl; 
+
 		output << "QCD: " << endl; 
 			output << "\t" << "\t" <<  "Consisting of: " << endl;
 			output << "\t" << "\t" <<  "QCDZtautau: " << QCDZtautau << endl;
 			output << "\t" << "\t" <<  "QCDZmumu  : " << QCDZmumu << endl;
 			output << "\t" << "\t" <<  "QCDZee    : " << QCDZee << endl;
 			output << "\t" << "\t" << "Total number of events in QCD: " << totalQCD << "\n" << endl; 
+
 		output << "Other: " << endl; 
 			output << "\t" << "\t" <<  "Consisting of: " << endl;
 			output << "\t" << "\t" <<  "Wtaunu: " << Wtaunu << endl;
@@ -245,6 +272,38 @@ void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_
 
 	}
 }
+/*
+void EventsInRegion(string AnalysisType) {
+
+	vector<TFile*> root_files = Root_Files(AnalysisType); // gets root files ready
+
+	vector<string> Region;
+	Region.push_back("_TRUTH");
+	Region.push_back("");
+	Region.push_back("_EXCEPT");
+	Region.push_back("_HIGH_E");
+	Region.push_back("_BJET");
+	Region.push_back("_CONTROL");
+ 	string DataType = "lep_0_lep_1_mass";
+	string FullHistName;
+
+	for (j=0; j=Region.size(); j++){
+
+		FullHistName = DataType + Region[j];
+
+		vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, FullHistName, root_files); // vector of region histograms
+		THStack *Stack = new THStack("Stack", "");
+
+		for (int i=0; i < 11; i++) {	//Add the histograms from the vector to the stack
+			Stack->Add(histograms[i], "hist");
+		}
+
+		N_events = Stack->Integral(); // gets total no of events of the histogram in stack for [i].
+		
+	}
+
+}
+*/
 
 void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process) {
 

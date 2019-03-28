@@ -51,32 +51,45 @@ void All_Cross_Section_Calculation_QCD_EW_ll_Specific() {
 
 }
 
-/*void All_Generate_Significance_Values() {
+void AllSignificanceCalc(string AnalysisType) {
 
-	double alpha;
+	int selected_process;
+	if (AnalysisType == "Electron") selected_process = 7;
+	if (AnalysisType == "Muon") selected_process = 6;
+	if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
 
-	vector<string> types;
-	types.push_back("lep_0_lep_1_mass");
-	types.push_back("lep_0_lep_1_mass_reco");
-	types.push_back("pT_balance");
-	types.push_back("pT_balance_reco_INSIDE");
-	types.push_back("pT_balance_reco_OUTSIDE");
-	types.push_back("lep_0_lep_1_mass_HIGH_E");
-	types.push_back("lep_0_lep_1_mass_reco_HIGH_E");
+	vector<string> DataTypes;
+	DataTypes.push_back("lep_0_lep_1_mass");
+	DataTypes.push_back("lep_0_lep_1_mass_reco");
+	DataTypes.push_back("pT_balance");
+	DataTypes.push_back("pT_balance_reco_INSIDE");
+	DataTypes.push_back("pT_balance_reco_OUTSIDE");
+	DataTypes.push_back("lep_0_lep_1_mass_HIGH_E");
+	DataTypes.push_back("lep_0_lep_1_mass_reco_HIGH_E");
 
-	for (int i = 0; i < types.size(); i++) { 
-		// calculate 
-		alpha
-		alpha = SignificanceLevelCalc("MuonTau", types[i], 5);	
+	for (int i = 0; i < DataTypes.size(); i++) { 
+
+		string DataType = DataTypes[i]; // define the data type as the ith element in the DataTypes vector
+		vector<double> SignificanceVector;
+		double Sig = 0;// initilize significance
+
+		for (int i=0; i<DataTypes.size(); i++) {  // FOR LOOP FOR EACH PROCESS
+
+			// calculate alpha
+			Sig = SignificanceLevelCalc(AnalysisType, DataTypes[i], selected_process);
+			SignificanceVector.push_back(Sig);
+
+		}
+
 		// save to file
-		fstream output("../../Output-Files/Final_Graphs/MuonTau_Significance.txt", output.out | output.app);
-		output << types[i] << "\t" << alpha << "\n" << endl;
+		fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Significance_values.txt", output.out | output.app);
+		output << "Data Type: " << DataTypes[i] << "\t" << "Significance: " << SignificanceVector[i] << endl << endl;
 		output.close();
 
 	}
 
 }
-*/
+
 
 
 

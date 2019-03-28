@@ -375,6 +375,7 @@ vector<TH2F*> Histogram_Return_Given_File_2D(string AnalysisType, string DataTyp
 }
 
 double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedProcess) { // 5,6,7 for ee, mumu, tautau
+
 	vector<TFile*> root_files = Root_Files(AnalysisType);
 	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
 	
@@ -383,24 +384,24 @@ double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedP
 	double N_signal = 0;
 	double significance = 0;
 
-	cout << "\nALL DATA TYPES: Alpha level calc!" << endl;
+	//cout << "\nALL DATA TYPES: Alpha level calc!" << endl;
 	for (int i=0; i<11; i++) { //loop over the histograms for different data sets
 		TH1F* histogram = histograms[i];
 		if (i != SelectedProcess) { //if NOT the selected process, calculate the background
 
 			N_events = histogram->Integral(); // gets no of events by integrating
 			N_bkg += N_events;
-			cout << "Events for histogram" << i << ": " << N_events << endl;
-			cout << "Total background events: " << N_bkg << endl;
+			//cout << "Events for histogram" << i << ": " << N_events << endl;
+			//cout << "Total background events: " << N_bkg << endl;
 		}
 
 		else { N_signal = histogram->Integral();  // should get the signal number of events
-		cout << "\nTotal signal events: " << N_signal << endl;
+		//cout << "\nTotal signal events: " << N_signal << endl;
 		}
 	}
 
 	significance = N_signal/pow(N_signal+N_bkg,0.5);
-	cout << "\nSignificance: " << significance << endl;
+	//cout << "\nSignificance: " << significance << endl;
 	return significance;
 
 }
@@ -1421,7 +1422,6 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
 	t.SetTextFont(42);  					//Set font
 	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
 	t.SetTextSize(0.035);  					//Set font size
-
 	canvas->SetRightMargin(0.15);
 
 	//Create the legend and draw the region information

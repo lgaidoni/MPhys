@@ -72,6 +72,10 @@ void MC_Analysis::BookHistos() {
 	int lep_1_invis_vis_mass_Min = 0, lep_1_invis_vis_mass_Max = 1000;
 	int lep_0_lep_1_invis_vis_mass_Min = 0, lep_0_lep_1_invis_vis_mass_Max = 1000;
 	int met_truth_mass_Min = 0, met_truth_mass_Max = 1000;
+	int lep_0_vis_mass_Min = 0, lep_0_vis_mass_Max = 1000;
+	int lep_1_vis_mass_Min = 0, lep_1_vis_mass_Max = 1000;
+	int lep_0_invis_mass_Min = 0, lep_0_invis_mass_Max = 1000;
+	int lep_1_invis_mass_Min = 0, lep_1_invis_mass_Max = 1000;	
 
 	//Values for the 2D histograms
 	int xbins = 50;
@@ -1131,6 +1135,10 @@ void MC_Analysis::Fill(string region) {
 				h_pT_balance_reco->Fill(pT_balance_reco, final_weighting);
 				h_DeltaPhi_reco->Fill(DeltaPhi_reco, final_weighting);
 				h_Mass_DeltaPhi_Combination_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
+				h_lep_0_invis_vis_mass->Fill(lep_0_invis_vis_mass, final_weighting);
+				h_lep_0_invis_vis_mass->Fill(lep_0_invis_vis_mass, final_weighting);
+				h_lep_0_lep_1_invis_vis_mass->Fill(lep_0_lep_1_invis_vis_mass, final_weighting);
+				h_met_truth_mass->Fill(met_truth_mass, final_weighting);
 
 				if (outside_leptons) {
 
