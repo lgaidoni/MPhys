@@ -1341,6 +1341,52 @@ void Inside_Outside_Overlay(string AnalysisType, string DataType, string mode, s
 
 }
 
+	
+void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataType2, string FileName, vector<TFile*> root_files){
+	// checking if the TRUTH tau adds up to the TRUTH invis and vis 
+
+	string Region = "TRUTH";
+
+	//String for name of the histograms in the root file
+	string Name1 = DataType1 + "_TRUTH"; // lep invis vis truth
+	string Name2 = DataType2 + "_TRUTH"; // lep tau truth
+	//Create the canvas
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+	vector<TH1F*> Histograms1 = Histogram_Return_Given_File(AnalysisType, Name1, root_files);
+	vector<TH1F*> Histograms2 = Histogram_Return_Given_File(AnalysisType, Name2, root_files);
+
+	THStack *Stack1 = new THStack("Stack1", "");
+	THStack *Stack2 = new THStack("Stack2", "");
+
+	Histograms1 = Set_Histogram_Styles(Histograms1);
+	Histograms2 = Set_Histogram_Styles(Histograms2);
+
+	for (int i = 0; i<11; i++){
+		Stack1->Add(Histograms1[i], "hist");
+		Stack2->Add(Histograms2[i], "hist");
+  }
+
+	//Draw the stack, actually stacking (no "nostack")
+	Stack1->Draw("");
+	Stack2->Draw("same noclear");
+	Draw_Region(DataType1, 0.037, 0.70, 0.86, 0.70, 0.80, 0.70, 0.73); /// same for both as both truth so only need one
+	t.SetTextSize(0.035);  					//Set font size
+	canvas->SetRightMargin(0.15);
+
+	//Create the legend and draw the region information
+	t.DrawLatex(0.86, 0.86, Name1.c_str());
+	Legend_Creator(Histograms1, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
+
+	t.DrawLatex(0.86, 0.61, Name2.c_str());
+	Legend_Creator(Histograms2, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+  
+}
 void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
 
 	//String for name of the histograms in the root file
@@ -1435,7 +1481,6 @@ void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, st
 	t2.SetTextFont(42);  					//Set font
 	t2.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
 	t2.SetTextSize(0.037);  				//Set font size
-
 	t2.DrawLatex(0.70, 0.67, DeltaSignificanceString.c_str());
 
 	TLatex t;  						//Create a latex object
@@ -1511,6 +1556,11 @@ void DrawStackedProcesses(string AnalysisType) {
 	IN_OUT_graphs.push_back("lep_0_lep_1_mass_reco");
 	IN_OUT_graphs.push_back("pT_balance_reco");
 
+	vector<string> TRUTH_compare_graphs;
+	TRUTH_compare_graphs.push_back("lep_0_lep_1_invis_vis_mass");
+	TRUTH_compare_graphs.push_back("lep_0_lep_1_mass_TRUTH"); // should be for truth
+	TRUTH_compare_graphs.push_back("MET_truth_p4");
+  
 	vector<string> EXCEPT_SIGNAL_graphs;
 	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass");
 	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass_reco");
@@ -1597,7 +1647,16 @@ void DrawStackedProcesses(string AnalysisType) {
 					fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_EW.pdf";
 					Inside_Outside_Overlay(AnalysisType, line, "EW", fileName, root_files);
 				}
+			}
 
+			for (int i = 0; i <= TRUTH_compare_graphs.size(); i++) {
+
+				fileName =  line + "_" + AnalysisType + "_INVIS_VIS_TAU_TRUTH_mass_Comparison.pdf";
+				TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[1], "invis_vis_tau_mass_comparison", root_files);
+
+				fileName =  line + "_" + AnalysisType + "_INVIS_MET_TRUTH_Comparison.pdf";					
+				TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[1], TRUTH_compare_graphs[2], "invis_MET_TRUTH_mass_comparison", root_files);
+			
 			}
 
 			for (int i = 0; i <= EXCEPT_SIGNAL_graphs.size(); i++) {
@@ -2153,15 +2212,15 @@ TLorentzVector* neutrino_TLV(double p_x, double p_y, double p_z){ // 4 momentum 
 
 }
 
-TLorentzVector* reconstucted_tau_candidate_TLV(TLorentzVector *Vector1,TLorentzVector *Vector2){ // takes TLorentzVector of tau candidate and neutrino
+TLorentzVector* merge_two_TLV(TLorentzVector *Vector1,TLorentzVector *Vector2){ // takes TLorentzVector of tau candidate and neutrino
 	double p_x = Vector1->Px() + Vector2->Px();// total p_x of both
 	double p_y = Vector1->Py() + Vector2->Py();// total p_y of both
 	double p_z = Vector1->Pz() + Vector2->Pz();// total p_z of both
 	double Energy = Vector1->Energy() + Vector2->Energy();// total E of both
 	
-	TLorentzVector* reconstucted_tau_candidate_TLV = new TLorentzVector(p_x, p_y, p_z, Energy);
+	TLorentzVector* merge_two_TLV = new TLorentzVector(p_x, p_y, p_z, Energy);
 	
-	return reconstucted_tau_candidate_TLV;
+	return merge_two_TLV;
 
 }
 

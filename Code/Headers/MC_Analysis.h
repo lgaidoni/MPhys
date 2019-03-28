@@ -65,8 +65,13 @@ public :
 
 	TLorentzVector	*lep_0_reco_matched_p4;
 	TLorentzVector	*lep_1_reco_matched_p4;
+	TLorentzVector  *lep_0_invis_p4;
+	TLorentzVector  *lep_1_invis_p4;
+	TLorentzVector  *lep_0_vis_p4;
+	TLorentzVector  *lep_1_vis_p4;
 
 	TLorentzVector  *met_p4;
+	//TLorentzVector  *met_truth_p4; already exists
 
 	/////--------------JET INFORMATION--------------/////
 
