@@ -1333,14 +1333,6 @@ void Inside_Outside_Overlay(string AnalysisType, string DataType, string mode, s
 	else if (DataType.find("TRUTH") != string::npos) Region = "TRUTH";
 	else Region = "SEARCH";
 
-	int selected_process;
-	if (AnalysisType == "Electron") selected_process = 7;
-	if (AnalysisType == "Muon") selected_process = 6;
-	if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
-
-	double Except_Significance = SignificanceLevelCalc(AnalysisType, 
-	double Signal_Significance = 
-
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
@@ -1409,36 +1401,69 @@ void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, st
 	ExceptStack->Draw("");
 	SignalStack->Draw("same");
 
-	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.70, 0.73);
+	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
+
+	canvas->SetRightMargin(0.15);
+
+	int selected_process;
+	if (AnalysisType == "Electron") selected_process = 7;
+	if (AnalysisType == "Muon") selected_process = 6;
+	if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
+
+	double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, ExceptHistograms);
+	double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, SignalHistograms);
+
+	cout << Except_Significance << endl;
+	cout << Signal_Significance << endl;
+
+	stringstream ExceptSig;
+	ExceptSig << setprecision(3) << Except_Significance;
+
+	stringstream SignalSig;
+	SignalSig << setprecision(3) <<  Signal_Significance;
+
+	string ExceptLegend = "Except: S = " + ExceptSig.str();
+	string SignalLegend = "Signal: S = " + SignalSig.str();
+
+	double Delta_Significance = Signal_Significance - Except_Significance;
+
+	stringstream DeltaSig;
+	DeltaSig << setprecision(3) <<  Delta_Significance;
+	string DeltaSignificanceString = "#DeltaS = " + DeltaSig.str();
+
+	TLatex t2;  						//Create a latex object
+	t2.SetTextFont(42);  					//Set font
+	t2.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
+	t2.SetTextSize(0.037);  				//Set font size
+
+	t2.DrawLatex(0.70, 0.67, DeltaSignificanceString.c_str());
 
 	TLatex t;  						//Create a latex object
 	t.SetTextFont(42);  					//Set font
 	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-	t.SetTextSize(0.035);  					//Set font size
-
-	canvas->SetRightMargin(0.15);
+	t.SetTextSize(0.025);  					//Set font size
 
 	//Create the legend and draw the region information
 	if (mode == "QCD_EW") {
-		t.DrawLatex(0.86, 0.86, "Except");
+		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
 		Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
 
-		t.DrawLatex(0.86, 0.61, "Signal");
+		t.DrawLatex(0.86, 0.61, SignalLegend.c_str());
 		Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
 	}
 	else if (mode == "EW") {
 
-		t.DrawLatex(0.86, 0.86, "Except");
+		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
 		Legend_Creator_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
 
-		t.DrawLatex(0.86, 0.71, "Signal");
+		t.DrawLatex(0.86, 0.71, SignalLegend.c_str());
 		Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
 	}
 	else {
-		t.DrawLatex(0.86, 0.86, "Except");
+		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
 		Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
 
-		t.DrawLatex(0.86, 0.46, "Signal");
+		t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
 		Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
 	}
 
@@ -1452,9 +1477,8 @@ void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, st
 	else if (DataType.find("TRUTH") != string::npos) Region = "TRUTH";
 	else Region = "SEARCH";
 
-
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
@@ -1486,6 +1510,24 @@ void DrawStackedProcesses(string AnalysisType) {
 	vector<string> IN_OUT_graphs;
 	IN_OUT_graphs.push_back("lep_0_lep_1_mass_reco");
 	IN_OUT_graphs.push_back("pT_balance_reco");
+
+	vector<string> EXCEPT_SIGNAL_graphs;
+	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass");
+	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass_reco");
+	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass_reco_INSIDE");
+	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_pT");
+	EXCEPT_SIGNAL_graphs.push_back("jet_0_jet_1_mass");
+	EXCEPT_SIGNAL_graphs.push_back("jet_0_jet_1_mass_INSIDE");
+	EXCEPT_SIGNAL_graphs.push_back("lep_0_iso_ptvarcone40");
+	EXCEPT_SIGNAL_graphs.push_back("lep_1_iso_ptvarcone40");
+	EXCEPT_SIGNAL_graphs.push_back("pT_balance");
+	EXCEPT_SIGNAL_graphs.push_back("pT_balance_reco");	
+	EXCEPT_SIGNAL_graphs.push_back("pT_balance_reco_INSIDE");	
+	EXCEPT_SIGNAL_graphs.push_back("pT_balance_3");
+	EXCEPT_SIGNAL_graphs.push_back("Centrality");
+	EXCEPT_SIGNAL_graphs.push_back("Centrality_INSIDE");
+	EXCEPT_SIGNAL_graphs.push_back("DeltaPhi");
+	EXCEPT_SIGNAL_graphs.push_back("DeltaPhi_reco_INSIDE");
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);
 	
@@ -1554,6 +1596,17 @@ void DrawStackedProcesses(string AnalysisType) {
 
 					fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_EW.pdf";
 					Inside_Outside_Overlay(AnalysisType, line, "EW", fileName, root_files);
+				}
+
+			}
+
+			for (int i = 0; i <= EXCEPT_SIGNAL_graphs.size(); i++) {
+				if (line == EXCEPT_SIGNAL_graphs[i]) {
+					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_FULL.pdf";
+					Except_Signal_Overlay(AnalysisType, line, "", fileName, root_files);
+
+					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_QCD_EW.pdf";
+					Except_Signal_Overlay(AnalysisType, line, "QCD_EW", fileName, root_files);
 				}
 
 			}

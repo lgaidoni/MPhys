@@ -152,6 +152,64 @@ void MC_Analysis::Book_Centrality(int bins, double min, double max) {
 }
 
 
+// -- Centrality of pseudorapidity of Z boson between two leading jets
+void MC_Analysis::Book_Centrality_INSIDE(int bins, double min, double max) {
+	h_Centrality_INSIDE = new TH1F("h_Centrality_INSIDE", "", bins, min, max);
+	h_Centrality_INSIDE_PRE = new TH1F("h_Centrality_INSIDE_PRE", "", bins, min, max);
+	h_Centrality_INSIDE_CONTROL = new TH1F("h_Centrality_INSIDE_CONTROL", "", bins, min, max);
+	h_Centrality_INSIDE_EXCEPT = new TH1F("h_Centrality_INSIDE_EXCEPT", "", bins, min, max);
+	h_Centrality_INSIDE_BJET = new TH1F("h_Centrality_INSIDE_BJET", "", bins, min, max);
+	h_Centrality_INSIDE_HIGH_E = new TH1F("h_Centrality_INSIDE_HIGH_E", "", bins, min, max);
+	h_Centrality_INSIDE_TRUTH = new TH1F("h_Centrality_INSIDE_TRUTH", "", bins, min, max);
+
+	hv_Centrality_INSIDE.push_back(h_Centrality_INSIDE);
+	hv_Centrality_INSIDE.push_back(h_Centrality_INSIDE_CONTROL);
+	hv_Centrality_INSIDE.push_back(h_Centrality_INSIDE_EXCEPT);
+	hv_Centrality_INSIDE.push_back(h_Centrality_INSIDE_PRE);
+	hv_Centrality_INSIDE.push_back(h_Centrality_INSIDE_BJET);
+	hv_Centrality_INSIDE.push_back(h_Centrality_INSIDE_HIGH_E);
+	hv_Centrality_INSIDE.push_back(h_Centrality_INSIDE_TRUTH);
+
+	hv_Centrality_INSIDE_names.push_back("h_Centrality_INSIDE");
+	hv_Centrality_INSIDE_names.push_back("h_Centrality_INSIDE_CONTROL");
+	hv_Centrality_INSIDE_names.push_back("h_Centrality_INSIDE_EXCEPT");
+	hv_Centrality_INSIDE_names.push_back("h_Centrality_INSIDE_PRE");
+	hv_Centrality_INSIDE_names.push_back("h_Centrality_INSIDE_BJET");
+	hv_Centrality_INSIDE_names.push_back("h_Centrality_INSIDE_HIGH_E");
+	hv_Centrality_INSIDE_names.push_back("h_Centrality_INSIDE_TRUTH");
+
+}
+
+
+// -- Centrality of pseudorapidity of Z boson between two leading jets
+void MC_Analysis::Book_Centrality_OUTSIDE(int bins, double min, double max) {
+	h_Centrality_OUTSIDE = new TH1F("h_Centrality_OUTSIDE", "", bins, min, max);
+	h_Centrality_OUTSIDE_PRE = new TH1F("h_Centrality_OUTSIDE_PRE", "", bins, min, max);
+	h_Centrality_OUTSIDE_CONTROL = new TH1F("h_Centrality_OUTSIDE_CONTROL", "", bins, min, max);
+	h_Centrality_OUTSIDE_EXCEPT = new TH1F("h_Centrality_OUTSIDE_EXCEPT", "", bins, min, max);
+	h_Centrality_OUTSIDE_BJET = new TH1F("h_Centrality_OUTSIDE_BJET", "", bins, min, max);
+	h_Centrality_OUTSIDE_HIGH_E = new TH1F("h_Centrality_OUTSIDE_HIGH_E", "", bins, min, max);
+	h_Centrality_OUTSIDE_TRUTH = new TH1F("h_Centrality_OUTSIDE_TRUTH", "", bins, min, max);
+
+	hv_Centrality_OUTSIDE.push_back(h_Centrality_OUTSIDE);
+	hv_Centrality_OUTSIDE.push_back(h_Centrality_OUTSIDE_CONTROL);
+	hv_Centrality_OUTSIDE.push_back(h_Centrality_OUTSIDE_EXCEPT);
+	hv_Centrality_OUTSIDE.push_back(h_Centrality_OUTSIDE_PRE);
+	hv_Centrality_OUTSIDE.push_back(h_Centrality_OUTSIDE_BJET);
+	hv_Centrality_OUTSIDE.push_back(h_Centrality_OUTSIDE_HIGH_E);
+	hv_Centrality_OUTSIDE.push_back(h_Centrality_OUTSIDE_TRUTH);
+
+	hv_Centrality_OUTSIDE_names.push_back("h_Centrality_OUTSIDE");
+	hv_Centrality_OUTSIDE_names.push_back("h_Centrality_OUTSIDE_CONTROL");
+	hv_Centrality_OUTSIDE_names.push_back("h_Centrality_OUTSIDE_EXCEPT");
+	hv_Centrality_OUTSIDE_names.push_back("h_Centrality_OUTSIDE_PRE");
+	hv_Centrality_OUTSIDE_names.push_back("h_Centrality_OUTSIDE_BJET");
+	hv_Centrality_OUTSIDE_names.push_back("h_Centrality_OUTSIDE_HIGH_E");
+	hv_Centrality_OUTSIDE_names.push_back("h_Centrality_OUTSIDE_TRUTH");
+
+}
+
+
 // -- Rapidity of a dijet pair
 void MC_Analysis::Book_RapidityDijet(int bins, double min, double max) {
 	h_RapidityDijet = new TH1F("h_RapidityDijet", "", bins, min, max);
@@ -355,6 +413,64 @@ void MC_Analysis::Book_jet_0_jet_1_mass(int bins, double min, double max) {
 	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass_BJET");
 	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass_HIGH_E");
 	hv_jet_0_jet_1_mass_names.push_back("h_jet_0_jet_1_mass_TRUTH");
+
+}
+
+
+// -- Invariant mass of two leading jets (leading and subleading)
+void MC_Analysis::Book_jet_0_jet_1_mass_INSIDE(int bins, double min, double max) {
+	h_jet_0_jet_1_mass_INSIDE = new TH1F("h_jet_0_jet_1_mass_INSIDE", "", bins, min, max);
+	h_jet_0_jet_1_mass_INSIDE_PRE = new TH1F("h_jet_0_jet_1_mass_INSIDE_PRE", "", bins, min, max);
+	h_jet_0_jet_1_mass_INSIDE_CONTROL = new TH1F("h_jet_0_jet_1_mass_INSIDE_CONTROL", "", bins, min, max);
+	h_jet_0_jet_1_mass_INSIDE_EXCEPT = new TH1F("h_jet_0_jet_1_mass_INSIDE_EXCEPT", "", bins, min, max);
+	h_jet_0_jet_1_mass_INSIDE_BJET = new TH1F("h_jet_0_jet_1_mass_INSIDE_BJET", "", bins, min, max);
+	h_jet_0_jet_1_mass_INSIDE_HIGH_E = new TH1F("h_jet_0_jet_1_mass_INSIDE_HIGH_E", "", bins, min, max);
+	h_jet_0_jet_1_mass_INSIDE_TRUTH = new TH1F("h_jet_0_jet_1_mass_INSIDE_TRUTH", "", bins, min, max);
+
+	hv_jet_0_jet_1_mass_INSIDE.push_back(h_jet_0_jet_1_mass_INSIDE);
+	hv_jet_0_jet_1_mass_INSIDE.push_back(h_jet_0_jet_1_mass_INSIDE_CONTROL);
+	hv_jet_0_jet_1_mass_INSIDE.push_back(h_jet_0_jet_1_mass_INSIDE_EXCEPT);
+	hv_jet_0_jet_1_mass_INSIDE.push_back(h_jet_0_jet_1_mass_INSIDE_PRE);
+	hv_jet_0_jet_1_mass_INSIDE.push_back(h_jet_0_jet_1_mass_INSIDE_BJET);
+	hv_jet_0_jet_1_mass_INSIDE.push_back(h_jet_0_jet_1_mass_INSIDE_HIGH_E);
+	hv_jet_0_jet_1_mass_INSIDE.push_back(h_jet_0_jet_1_mass_INSIDE_TRUTH);
+
+	hv_jet_0_jet_1_mass_INSIDE_names.push_back("h_jet_0_jet_1_mass_INSIDE");
+	hv_jet_0_jet_1_mass_INSIDE_names.push_back("h_jet_0_jet_1_mass_INSIDE_CONTROL");
+	hv_jet_0_jet_1_mass_INSIDE_names.push_back("h_jet_0_jet_1_mass_INSIDE_EXCEPT");
+	hv_jet_0_jet_1_mass_INSIDE_names.push_back("h_jet_0_jet_1_mass_INSIDE_PRE");
+	hv_jet_0_jet_1_mass_INSIDE_names.push_back("h_jet_0_jet_1_mass_INSIDE_BJET");
+	hv_jet_0_jet_1_mass_INSIDE_names.push_back("h_jet_0_jet_1_mass_INSIDE_HIGH_E");
+	hv_jet_0_jet_1_mass_INSIDE_names.push_back("h_jet_0_jet_1_mass_INSIDE_TRUTH");
+
+}
+
+
+// -- Invariant mass of two leading jets (leading and subleading)
+void MC_Analysis::Book_jet_0_jet_1_mass_OUTSIDE(int bins, double min, double max) {
+	h_jet_0_jet_1_mass_OUTSIDE = new TH1F("h_jet_0_jet_1_mass_OUTSIDE", "", bins, min, max);
+	h_jet_0_jet_1_mass_OUTSIDE_PRE = new TH1F("h_jet_0_jet_1_mass_OUTSIDE_PRE", "", bins, min, max);
+	h_jet_0_jet_1_mass_OUTSIDE_CONTROL = new TH1F("h_jet_0_jet_1_mass_OUTSIDE_CONTROL", "", bins, min, max);
+	h_jet_0_jet_1_mass_OUTSIDE_EXCEPT = new TH1F("h_jet_0_jet_1_mass_OUTSIDE_EXCEPT", "", bins, min, max);
+	h_jet_0_jet_1_mass_OUTSIDE_BJET = new TH1F("h_jet_0_jet_1_mass_OUTSIDE_BJET", "", bins, min, max);
+	h_jet_0_jet_1_mass_OUTSIDE_HIGH_E = new TH1F("h_jet_0_jet_1_mass_OUTSIDE_HIGH_E", "", bins, min, max);
+	h_jet_0_jet_1_mass_OUTSIDE_TRUTH = new TH1F("h_jet_0_jet_1_mass_OUTSIDE_TRUTH", "", bins, min, max);
+
+	hv_jet_0_jet_1_mass_OUTSIDE.push_back(h_jet_0_jet_1_mass_OUTSIDE);
+	hv_jet_0_jet_1_mass_OUTSIDE.push_back(h_jet_0_jet_1_mass_OUTSIDE_CONTROL);
+	hv_jet_0_jet_1_mass_OUTSIDE.push_back(h_jet_0_jet_1_mass_OUTSIDE_EXCEPT);
+	hv_jet_0_jet_1_mass_OUTSIDE.push_back(h_jet_0_jet_1_mass_OUTSIDE_PRE);
+	hv_jet_0_jet_1_mass_OUTSIDE.push_back(h_jet_0_jet_1_mass_OUTSIDE_BJET);
+	hv_jet_0_jet_1_mass_OUTSIDE.push_back(h_jet_0_jet_1_mass_OUTSIDE_HIGH_E);
+	hv_jet_0_jet_1_mass_OUTSIDE.push_back(h_jet_0_jet_1_mass_OUTSIDE_TRUTH);
+
+	hv_jet_0_jet_1_mass_OUTSIDE_names.push_back("h_jet_0_jet_1_mass_OUTSIDE");
+	hv_jet_0_jet_1_mass_OUTSIDE_names.push_back("h_jet_0_jet_1_mass_OUTSIDE_CONTROL");
+	hv_jet_0_jet_1_mass_OUTSIDE_names.push_back("h_jet_0_jet_1_mass_OUTSIDE_EXCEPT");
+	hv_jet_0_jet_1_mass_OUTSIDE_names.push_back("h_jet_0_jet_1_mass_OUTSIDE_PRE");
+	hv_jet_0_jet_1_mass_OUTSIDE_names.push_back("h_jet_0_jet_1_mass_OUTSIDE_BJET");
+	hv_jet_0_jet_1_mass_OUTSIDE_names.push_back("h_jet_0_jet_1_mass_OUTSIDE_HIGH_E");
+	hv_jet_0_jet_1_mass_OUTSIDE_names.push_back("h_jet_0_jet_1_mass_OUTSIDE_TRUTH");
 
 }
 

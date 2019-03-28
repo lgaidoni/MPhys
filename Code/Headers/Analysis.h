@@ -36,6 +36,8 @@ void MC_Analysis::BookHistos() {
 	int pT_balance_reco_OUTSIDE_Min = 0, pT_balance_reco_OUTSIDE_Max = 1;
 	int pT_balance_3_Min = 0, pT_balance_3_Max = 1;
 	int Centrality_Min = -8, Centrality_Max = 8;
+	int Centrality_INSIDE_Min = -8, Centrality_INSIDE_Max = 8;
+	int Centrality_OUTSIDE_Min = -8, Centrality_OUTSIDE_Max = 8;
 	int MET_Centrality_Min = -4, MET_Centrality_Max = 4;
 	double RapidityDijet_Min = 0, RapidityDijet_Max = 4.5;
 	double RapidityDilepton_Min = 0, RapidityDilepton_Max = 4.5;
@@ -44,6 +46,8 @@ void MC_Analysis::BookHistos() {
 	int lep_0_iso_ptvarcone40_Min = 0, lep_0_iso_ptvarcone40_Max = 20000;
 	int lep_1_iso_ptvarcone40_Min = 0, lep_1_iso_ptvarcone40_Max = 20000;
 	int jet_0_jet_1_mass_Min = 0,  jet_0_jet_1_mass_Max = 4500;
+	int jet_0_jet_1_mass_INSIDE_Min = 0,  jet_0_jet_1_mass_INSIDE_Max = 4500;
+	int jet_0_jet_1_mass_OUTSIDE_Min = 0,  jet_0_jet_1_mass_OUTSIDE_Max = 4500;
 	int jet_0_p4_Pt_Min = 0,  jet_0_p4_Pt_Max = 1000;
 	int jet_1_p4_Pt_Min = 0,  jet_1_p4_Pt_Max = 1000;
 	int TOT_pT_UnitVector_Min = 0, TOT_pT_UnitVector_Max = 1000;
