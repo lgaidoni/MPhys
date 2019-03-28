@@ -1048,7 +1048,7 @@ void MC_Analysis::Fill(string region) {
 				}
 
 				if (EXCEPT_DeltaPhi_condition) {
-					h_DeltaPhi_reco_INSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);	/Fill the EXCEPT histogram for DeltaPhi
+					h_DeltaPhi_reco_INSIDE_EXCEPT->Fill(DeltaPhi_reco, final_weighting);	//Fill the EXCEPT histogram for DeltaPhi
 					h_DeltaPhi_reco_INSIDE_EXCEPT_FINE->Fill(DeltaPhi_reco, final_weighting);
 				}
 
@@ -1569,7 +1569,7 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_Centrality_EXCEPT_FINE, "h_Centrality_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_Centrality_INSIDE_EXCEPT_FINE, "h_Centrality_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_DeltaPhi_EXCEPT_FINE, "h_DeltaPhi_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_DeltaPhi_INSIDE_EXCEPT_FINE, "h_DeltaPhi_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_reco_INSIDE_EXCEPT_FINE, "h_DeltaPhi_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
 
 	//TRUTH GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_TRUTH, "h_lep_1_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
