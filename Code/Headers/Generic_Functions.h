@@ -426,6 +426,37 @@ double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedP
 
 }
 
+double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int SelectedProcess, vector<TFile*> root_files, vector<TH1F*> histograms, double min, double max) {
+
+	double N_events = 0;
+	double N_bkg = 0;
+	double N_signal = 0;
+	double significance = 0;
+
+	for (int i=0; i<11; i++) { //loop over the histograms for different data sets
+		TH1F* histogram = histograms[i];
+		if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+			N_events = histogram->Integral(min, max); // gets no of events by integrating
+			N_bkg += N_events;
+		}
+		else N_signal = histogram->Integral(min, max);  // should get the signal number of events
+	}
+
+	significance = N_signal/pow(N_signal+N_bkg,0.5);
+	return significance;
+
+}
+
+void Cut_Optimisation(string AnalysisType, string DataType) {
+
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+
+	cout << SignificanceLevelCalc(AnalysisType, DataType, 5, root_files, histograms) << endl;
+	cout << EXCEPT_Significance_Calc(AnalysisType, DataType, 5, root_files, histograms, 60, 120) << endl;
+
+}
+
 void Histogram_Remove_Negative_Events(TH1F* histogram) {
 
 	int bins = histogram->GetSize() - 2;

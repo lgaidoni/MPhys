@@ -1661,6 +1661,8 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
 
+	bool File_Found = false;
+
 	if (tree == 0) {
 		TFile *f;
 
@@ -1672,6 +1674,7 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
 			if (!f || !f->IsOpen()) {
 				f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
 			}
+			File_Found = true;
 
 		}
 
@@ -1683,11 +1686,12 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
 			if (!f || !f->IsOpen()) {
 				f = new TFile("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
 			}
+			File_Found = true;
 		}
 
-		f->GetObject("NOMINAL",tree);
+		if(File_Found) f->GetObject("NOMINAL",tree);
 	}
-	Init(tree);
+	if(File_Found) Init(tree);
 
 }
 
