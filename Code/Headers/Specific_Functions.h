@@ -65,7 +65,8 @@ void All_Cross_Section_Calculation_QCD_EW_ll_Specific() {
 	types.push_back("lep_0_lep_1_mass_reco_HIGH_E");
 
 	for (int i = 0; i < types.size(); i++) { 
-		// calculate alpha
+		// calculate 
+		alpha
 		alpha = SignificanceLevelCalc("MuonTau", types[i], 5);	
 		// save to file
 		fstream output("../../Output-Files/Final_Graphs/MuonTau_Significance.txt", output.out | output.app);

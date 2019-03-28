@@ -64,6 +64,10 @@ void MC_Analysis::BookHistos() {
 	double DeltaPhi_reco_OUTSIDE_Min = 0, DeltaPhi_reco_OUTSIDE_Max = pi;
 	int lep_0_lep_1_pt_reco_Min = 0, lep_0_lep_1_pt_reco_Max = 300;
 	int Centrality_reco_Min = -8, Centrality_reco_Max = 8;
+	int lep_0_invis_vis_mass_Min = 0, lep_0_invis_vis_mass_Max = 1000;
+	int lep_1_invis_vis_mass_Min = 0, lep_1_invis_vis_mass_Max = 1000;
+	int lep_0_lep_1_invis_vis_mass_Min = 0, lep_0_lep_1_invis_vis_mass_Max = 1000;
+	int met_truth_mass_Min = 0, met_truth_mass_Max = 1000;
 
 	//Values for the 2D histograms
 	int xbins = 50;
@@ -357,6 +361,8 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 	lep_0_iso_ptvarcone40 = 0;
 	lep_1_iso_ptvarcone40 = 0;
 	met_p4 = met_truth_p4;
+	// add variables here
+	
 
 	if (AnalysisType == "Electron") {
 
@@ -391,10 +397,14 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & muon_0_matched_truth_lepTau;
 		lep_0_p4 = muon_0_matched_truth_lepTau_p4;
 		lep_0_q = & muon_0_matched_truth_lepTau_q;	
+		lep_0_invis_p4 = muon_0_matched_truth_lepTau_invis_p4;
+		lep_0_vis_p4 = muon_0_matched_truth_lepTau_vis_p4;
 
 		lep_1 = & elec_0_matched_truth_lepTau;
 		lep_1_p4 = elec_0_matched_truth_lepTau_p4;
 		lep_1_q = & elec_0_matched_truth_lepTau_q;	
+		lep_1_invis_p4 = elec_0_matched_truth_lepTau_invis_p4;
+		lep_1_vis_p4 = elec_0_matched_truth_lepTau_vis_p4;
 
 		if (muon_0_matched_truth_lepTau > 0 && elec_0_matched_truth_lepTau > 0 && muon_1_matched_truth_lepTau == 0 && elec_1_matched_truth_lepTau == 0) n_leptons = 2;
 		else n_leptons = 0;
@@ -423,6 +433,8 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_1 = & elec_0_matched_truth_lepTau;
 		lep_1_p4 = elec_0_matched_truth_lepTau_p4;
 		lep_1_q = & elec_0_matched_truth_lepTau_q;
+		lep_1_invis_p4 = elec_0_matched_truth_lepTau_invis_p4;
+		lep_1_vis_p4 = elec_0_matched_truth_lepTau_vis_p4;
 
 		if (tau_0_truth > 0 && elec_0_matched_truth_lepTau > 0 && tau_1_truth == 0 && elec_1_matched_truth_lepTau == 0) n_leptons = 2;
 		else n_leptons = 0;
@@ -437,6 +449,8 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_1 = & muon_0_matched_truth_lepTau;
 		lep_1_p4 = muon_0_matched_truth_lepTau_p4;
 		lep_1_q = & muon_0_matched_truth_lepTau_q;
+		lep_1_invis_p4 = muon_0_matched_truth_lepTau_invis_p4;
+		lep_1_vis_p4 = muon_0_matched_truth_lepTau_vis_p4;
 
 		if (tau_0_truth > 0 && muon_0_matched_truth_lepTau > 0 && tau_1_truth == 0 && muon_1_matched_truth_lepTau == 0) n_leptons = 2;
 		else n_leptons = 0;
@@ -510,7 +524,7 @@ void MC_Analysis::GenerateVariables(bool truth) {
 
 	// Missing transverse momentum centrality
 	MET_Centrality = METCentrality(met_p4, lep_0_p4, lep_1_p4);
-	
+
 	// InorOut = true means the E_t is outside of the phi interval 
 	// Change these to TLorentzVector as needed for Z boson mass reconstruction
 	double Et_along_0;
@@ -616,19 +630,33 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	TLorentzVector* neutrino_1_TLV = neutrino_TLV(neutrino_1_x_p, neutrino_1_y_p, neutrino_1_z_p); // TLorentzVector (TLV) 4 momentum px,py,pz,E (E=p_tot) of neutrino 2
 
 	// reconstruct tau candidate with tau lepton and neutrino
-	lep_0_reco_p4 = reconstucted_tau_candidate_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
-	lep_1_reco_p4 = reconstucted_tau_candidate_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
+	lep_0_reco_p4 = merge_two_TLV(lep_0_p4, neutrino_0_TLV); // new TLV for tau candidate with lepton 0 and neutrino 0
+	lep_1_reco_p4 = merge_two_TLV(lep_1_p4, neutrino_1_TLV); // new TLV for tau candidate with lepton 1 and neutrino 1
 
 	if (truth) {
-		lep_0_reco_p4 = lep_0_p4;
-		lep_1_reco_p4 = lep_1_p4;	
+		lep_0_reco_p4 = lep_0_p4; //uses LepTau_p4
+		lep_1_reco_p4 = lep_1_p4; //uses LepTau_p4
 	}
 
 	//Invariant Mass
   	lep_0_lep_1_mass = InvariantMass(lep_0_p4, lep_1_p4);
 	lep_0_lep_1_mass_reco = InvariantMass(lep_0_reco_p4 , lep_1_reco_p4);
-
 	jet_0_jet_1_mass = InvariantMass(jet_0_p4, jet_1_p4);
+
+	// TRUTH
+	if (truth){
+		// TLorentzVectors
+		TLorentzVector* lep_0_invis_vis_TLV = merge_two_TLV(lep_0_vis_p4, lep_0_invis_p4); // TLorentzVector for total tau (invis and vis)
+		TLorentzVector* lep_1_invis_vis_TLV = merge_two_TLV(lep_1_vis_p4, lep_1_invis_p4); // TLorentzVector for total tau (invis and vis)
+		// Invariant mass (takes TLorentzVectors as inputs)
+		lep_0_invis_vis_mass = InvariantMass(lep_0_vis_p4, lep_0_invis_p4); //uses LepTau_p4_invis and vis for lep 0
+		lep_1_invis_vis_mass = InvariantMass(lep_1_vis_p4, lep_1_invis_p4); //uses LepTau_p4_invis and vis for lep 1
+		met_truth_mass = met_truth_p4->M(); // invariant mass of the TRUTH missing energy
+		// Invariant mass of the di-lepton system (lep 0 and lep 1)
+		lep_0_lep_1_invis_vis_mass = InvariantMass(lep_0_invis_vis_TLV, lep_1_invis_vis_TLV); // TLorentz vector of the invariant mass of di-tau
+
+
+	}
 
 	// Delta R
 	DeltaR = DeltaRCalc(lep_0_p4, lep_1_p4);
@@ -696,6 +724,7 @@ void MC_Analysis::FillAllData_PreCut() {
 	//Invariant mass
 	h_lep_0_lep_1_mass_PRE->Fill(lep_0_lep_1_mass, final_weighting);
 	h_jet_0_jet_1_mass_PRE->Fill(jet_0_jet_1_mass, final_weighting);
+
 
 	// Combined
 	h_RapidityDilepton_PRE->Fill(RapidityDilepton, final_weighting);// dilepton rapidity
@@ -1215,6 +1244,12 @@ void MC_Analysis::Fill() {
 		h_lep_0_lep_1_mass_TRUTH->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
 		h_jet_0_jet_1_mass_TRUTH->Fill(jet_0_jet_1_mass, final_weighting); // two jets
 
+		// Missing energy invariant mass TRUTH
+		h_lep_0_invis_vis_mass->Fill(lep_0_invis_vis_mass, final_weighting); // tau_0 invisible and visable invar mass
+		h_lep_1_invis_vis_mass->Fill(lep_1_invis_vis_mass, final_weighting); // tau_1 invisible and visable invar mass
+		h_lep_0_lep_1_invis_vis_mass->Fill(lep_0_lep_1_invis_vis_mass, final_weighting); // di-tau invar mass
+		h_met_truth_mass->Fill(met_truth_mass, final_weighting); // Missing energy truth
+
 		//Combined lepton TRUTH
 		h_RapidityDilepton_TRUTH->Fill(RapidityDilepton, final_weighting);// (elec) dilepton rapidity
 		h_RapidityDijet_TRUTH->Fill(RapidityDijet, final_weighting);// (jet) dijet rapidity
@@ -1441,6 +1476,10 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_neutrino_0_pt_TRUTH, "h_neutrino_0_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_neutrino_1_pt_TRUTH, "h_neutrino_1_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Type_Favour_TRUTH, "h_MET_Type_Favour_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_invis_vis_mass, "h_lep_0_invis_vis_mass", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_1_invis_vis_mass, "h_lep_1_invis_vis_mass", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_invis_vis_mass, "h_lep_0_lep_1_invis_vis_mass", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_met_truth_mass, "h_met_truth_mass", ";;Events", false, true, ChainName, AnalysisType);
 
 	// 2D POLAR TRUTH HISTOGRAMS
   	DrawHistogram2D(h_Mass_Favour_Combination_2D_TRUTH, "h_Mass_Favour_Combination_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);

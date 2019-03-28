@@ -220,3 +220,15 @@
 	//Histogram Bookings for Mass_DeltaPhi_Combination_OUTSIDE_2D
 	Book_Mass_DeltaPhi_Combination_OUTSIDE_2D(xbins, Mass_DeltaPhi_Combination_OUTSIDE_2D_xMin, Mass_DeltaPhi_Combination_OUTSIDE_2D_xMax, ybins, Mass_DeltaPhi_Combination_OUTSIDE_2D_yMin, Mass_DeltaPhi_Combination_OUTSIDE_2D_yMax);
 
+	//Histogram Bookings for lep_0_invis_vis_mass
+	Book_lep_0_invis_vis_mass(bins, lep_0_invis_vis_mass_Min, lep_0_invis_vis_mass_Max);
+
+	//Histogram Bookings for lep_1_invis_vis_mass
+	Book_lep_1_invis_vis_mass(bins, lep_1_invis_vis_mass_Min, lep_1_invis_vis_mass_Max);
+
+	//Histogram Bookings for lep_0_lep_1_invis_vis_mass
+	Book_lep_0_lep_1_invis_vis_mass(bins, lep_0_lep_1_invis_vis_mass_Min, lep_0_lep_1_invis_vis_mass_Max);
+
+	//Histogram Bookings for met_truth_mass
+	Book_met_truth_mass(bins, met_truth_mass_Min, met_truth_mass_Max);
+
