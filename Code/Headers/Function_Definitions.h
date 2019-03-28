@@ -8,4 +8,4 @@
 	virtual void FillAllData_PreCut();
 	virtual void DrawHistos();
 	virtual bool Cuts(string region);
-	virtual void Fill();
+	virtual void Fill(string region);

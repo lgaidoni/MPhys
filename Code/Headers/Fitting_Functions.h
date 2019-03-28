@@ -132,74 +132,6 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 
 }
 
-void SignificanceLevelCalc(string AnalysisType, int SelectedProcess) { // 5,6,7 for ee, mumu, tautau
-	
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-
-	
-	double N_events = 0;
-	double N_bkg = 0;
-	double N_signal = 0;
-	double significance = 0;
-	//double alpha;
-
-	vector<string> DataTypes;
-
-	DataTypes.push_back("lep_0_lep_1_mass");
-	DataTypes.push_back("lep_0_lep_1_mass_reco");
-	DataTypes.push_back("pT_balance");
-	DataTypes.push_back("pT_balance_reco_INSIDE");
-	DataTypes.push_back("pT_balance_reco_OUTSIDE");
-	DataTypes.push_back("lep_0_lep_1_mass_HIGH_E");
-	DataTypes.push_back("lep_0_lep_1_mass_reco_HIGH_E");
-
-
-	for (int i = 0; i < DataTypes.size(); i++) { 
-
-		string DataType = DataTypes[i]; // define the data type as the ith element in the DataTypes vector
-		vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
-		TH1F* histogram = histograms[i];
-		//cout << "\nALL DATA TYPES: Alpha level calc!" << endl;
-		for (int j=0; j<11; j++) { //loop over the histograms for different data sets
-
-			if (j != SelectedProcess) { //if NOT the selected process, calculate the background
-
-				N_events = histogram->Integral(); // gets no of events by integrating
-				N_bkg += N_events;
-			//	cout << "Events for histogram" << i << ": " << N_events << endl;
-			//	cout << "Total background events: " << N_bkg << endl;
-			}
-
-			else { N_signal = histogram->Integral(); }  // should get the signal number of events
-			//cout << "\nTotal signal events: " << N_signal << endl;
-			// calculate alpha
-			//alpha = SignificanceLevelCalc("MuonTau", types[i], 5);	
-			// save to file
-			//fstream output("../../Output-Files/Final_Graphs/MuonTau_Significance.txt", output.out | output.app);
-			//output << types[i] << "\t" << alpha << "\n" << endl;
-			//output.close();
-			
-			
-		}
-	
-	significance = N_signal/pow(N_signal+N_bkg,0.5);
-
-	fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Significance.txt", output.out | output.app);
-	output << "******************************************" << endl;
-	output << "Significance Calculation for " + AnalysisType + " selection\n" << endl;
-	output << "Number of background events: " << N_bkg;
-	output << "Number of signal events: " << N_signal;
-	output << "Significance: " << significance;
-
-	}
-
-
-
-	//return significance;
-
-}
-
-
 void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_0_bla bla)
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);
@@ -312,8 +244,6 @@ void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_
 
 	}
 }
-
-
 
 void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process) {
 

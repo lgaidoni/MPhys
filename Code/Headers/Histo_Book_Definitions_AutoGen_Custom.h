@@ -77,6 +77,34 @@ TH1F	*h_Centrality_TRUTH; // TRUTH VERSION
 vector<TH1F*>	hv_Centrality; // HISTOGRAM VECTOR
 vector<string>	hv_Centrality_names; // HISTOGRAM NAME VECTOR
 
+// -- Centrality of pseudorapidity of Z boson between two leading jets
+double Centrality_INSIDE;
+
+virtual void Book_Centrality_INSIDE(int bins, double min, double max);
+TH1F	*h_Centrality_INSIDE; // SEARCH VERSION
+TH1F	*h_Centrality_INSIDE_PRE; // PRE VERSION
+TH1F	*h_Centrality_INSIDE_CONTROL; // CONTROL VERSION
+TH1F	*h_Centrality_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_Centrality_INSIDE_BJET; // BJET VERSION
+TH1F	*h_Centrality_INSIDE_HIGH_E; // HIGH_E VERSION
+TH1F	*h_Centrality_INSIDE_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_Centrality_INSIDE; // HISTOGRAM VECTOR
+vector<string>	hv_Centrality_INSIDE_names; // HISTOGRAM NAME VECTOR
+
+// -- Centrality of pseudorapidity of Z boson between two leading jets
+double Centrality_OUTSIDE;
+
+virtual void Book_Centrality_OUTSIDE(int bins, double min, double max);
+TH1F	*h_Centrality_OUTSIDE; // SEARCH VERSION
+TH1F	*h_Centrality_OUTSIDE_PRE; // PRE VERSION
+TH1F	*h_Centrality_OUTSIDE_CONTROL; // CONTROL VERSION
+TH1F	*h_Centrality_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_Centrality_OUTSIDE_BJET; // BJET VERSION
+TH1F	*h_Centrality_OUTSIDE_HIGH_E; // HIGH_E VERSION
+TH1F	*h_Centrality_OUTSIDE_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_Centrality_OUTSIDE; // HISTOGRAM VECTOR
+vector<string>	hv_Centrality_OUTSIDE_names; // HISTOGRAM NAME VECTOR
+
 // -- Rapidity of a dijet pair
 double RapidityDijet;
 
@@ -178,6 +206,34 @@ TH1F	*h_jet_0_jet_1_mass_HIGH_E; // HIGH_E VERSION
 TH1F	*h_jet_0_jet_1_mass_TRUTH; // TRUTH VERSION
 vector<TH1F*>	hv_jet_0_jet_1_mass; // HISTOGRAM VECTOR
 vector<string>	hv_jet_0_jet_1_mass_names; // HISTOGRAM NAME VECTOR
+
+// -- Invariant mass of two leading jets (leading and subleading)
+double jet_0_jet_1_mass_INSIDE;
+
+virtual void Book_jet_0_jet_1_mass_INSIDE(int bins, double min, double max);
+TH1F	*h_jet_0_jet_1_mass_INSIDE; // SEARCH VERSION
+TH1F	*h_jet_0_jet_1_mass_INSIDE_PRE; // PRE VERSION
+TH1F	*h_jet_0_jet_1_mass_INSIDE_CONTROL; // CONTROL VERSION
+TH1F	*h_jet_0_jet_1_mass_INSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_jet_0_jet_1_mass_INSIDE_BJET; // BJET VERSION
+TH1F	*h_jet_0_jet_1_mass_INSIDE_HIGH_E; // HIGH_E VERSION
+TH1F	*h_jet_0_jet_1_mass_INSIDE_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_jet_0_jet_1_mass_INSIDE; // HISTOGRAM VECTOR
+vector<string>	hv_jet_0_jet_1_mass_INSIDE_names; // HISTOGRAM NAME VECTOR
+
+// -- Invariant mass of two leading jets (leading and subleading)
+double jet_0_jet_1_mass_OUTSIDE;
+
+virtual void Book_jet_0_jet_1_mass_OUTSIDE(int bins, double min, double max);
+TH1F	*h_jet_0_jet_1_mass_OUTSIDE; // SEARCH VERSION
+TH1F	*h_jet_0_jet_1_mass_OUTSIDE_PRE; // PRE VERSION
+TH1F	*h_jet_0_jet_1_mass_OUTSIDE_CONTROL; // CONTROL VERSION
+TH1F	*h_jet_0_jet_1_mass_OUTSIDE_EXCEPT; // EXCEPT VERSION
+TH1F	*h_jet_0_jet_1_mass_OUTSIDE_BJET; // BJET VERSION
+TH1F	*h_jet_0_jet_1_mass_OUTSIDE_HIGH_E; // HIGH_E VERSION
+TH1F	*h_jet_0_jet_1_mass_OUTSIDE_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_jet_0_jet_1_mass_OUTSIDE; // HISTOGRAM VECTOR
+vector<string>	hv_jet_0_jet_1_mass_OUTSIDE_names; // HISTOGRAM NAME VECTOR
 
 // -- Leading jet transverse momentum
 double jet_0_p4_Pt;

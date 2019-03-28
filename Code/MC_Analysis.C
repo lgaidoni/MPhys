@@ -193,7 +193,7 @@ void MC_Analysis::Loop() {
 		JetSet(false);
 		GenerateVariables(false);	//Generate all variables
 		FillAllData_PreCut();	//Fill all the pre-cut data
-		Fill();			//Fill all the post-cut data
+		Fill("normal");			//Fill all the post-cut data
 
 
 
@@ -201,7 +201,7 @@ void MC_Analysis::Loop() {
 	else if (InitialCut(true, false) == false) {
 		JetSet(true);
 		GenerateVariables(false);	//Generate all variables
-		Fill();			//Fill all the post-cut data
+		Fill("bjet");			//Fill all the post-cut data
 		//if (n_jets < n_bjets) cout << endl << endl << "LESS JETS THAN BJETS" << endl << endl;
 		//if (bjet_0_p4->Pt() < ljet_0_p4->Pt()) cout << endl << endl << "BJET PT LESS THAN LJET PT" << endl << endl;
 
@@ -212,7 +212,7 @@ void MC_Analysis::Loop() {
 		if (InitialCut(false, true) == false) {
 			JetSet_TRUTH();
 			GenerateVariables(true);	//Generate all variables
-			Fill();			//Fill all the post-cut data
+			Fill("truth");			//Fill all the post-cut data
 		}
 	}	
 	

@@ -121,6 +121,12 @@
 	//Histogram Bookings for Centrality
 	Book_Centrality(bins, Centrality_Min, Centrality_Max);
 
+	//Histogram Bookings for Centrality_INSIDE
+	Book_Centrality_INSIDE(bins, Centrality_INSIDE_Min, Centrality_INSIDE_Max);
+
+	//Histogram Bookings for Centrality_OUTSIDE
+	Book_Centrality_OUTSIDE(bins, Centrality_OUTSIDE_Min, Centrality_OUTSIDE_Max);
+
 	//Histogram Bookings for RapidityDijet
 	Book_RapidityDijet(bins, RapidityDijet_Min, RapidityDijet_Max);
 
@@ -141,6 +147,12 @@
 
 	//Histogram Bookings for jet_0_jet_1_mass
 	Book_jet_0_jet_1_mass(bins, jet_0_jet_1_mass_Min, jet_0_jet_1_mass_Max);
+
+	//Histogram Bookings for jet_0_jet_1_mass_INSIDE
+	Book_jet_0_jet_1_mass_INSIDE(bins, jet_0_jet_1_mass_INSIDE_Min, jet_0_jet_1_mass_INSIDE_Max);
+
+	//Histogram Bookings for jet_0_jet_1_mass_OUTSIDE
+	Book_jet_0_jet_1_mass_OUTSIDE(bins, jet_0_jet_1_mass_OUTSIDE_Min, jet_0_jet_1_mass_OUTSIDE_Max);
 
 	//Histogram Bookings for jet_0_p4_Pt
 	Book_jet_0_p4_Pt(bins, jet_0_p4_Pt_Min, jet_0_p4_Pt_Max);
