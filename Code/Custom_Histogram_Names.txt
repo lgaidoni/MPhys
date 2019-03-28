@@ -52,4 +52,3 @@ lep_0_invis_vis_mass:the invariant mass of the TRUTH visible and invisible tau 0
 lep_1_invis_vis_mass:the invariant mass of the TRUTH visible and invisible tau 1
 lep_0_lep_1_invis_vis_mass: invariant mass of the TRUTH di-tau
 met_truth_mass:invariant mass of the TRUTH missing energy
-

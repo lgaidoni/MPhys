@@ -447,15 +447,34 @@ double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int Select
 
 }
 
+/*
+
 void Cut_Optimisation(string AnalysisType, string DataType) {
 
 	vector<TFile*> root_files = Root_Files(AnalysisType);
 	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	
+	double xmax = histograms[0]->GetXaxis()->GetXmax();
+	double xbins = histograms[0]->GetNbinsX();
+
+	double desired_xbins = xmax/0.1;
+
+	double rebin_factor = desired_xbins/xbins;
+
+	cout << rebin_factor << endl;
+	
+	vector<TH1F*>
+
+	for (int i = 0; i < 11; i++) {
+		TH1F *histogram = 
+	}
 
 	cout << SignificanceLevelCalc(AnalysisType, DataType, 5, root_files, histograms) << endl;
-	cout << EXCEPT_Significance_Calc(AnalysisType, DataType, 5, root_files, histograms, 60, 120) << endl;
+	cout << EXCEPT_Significance_Calc(AnalysisType, DataType, 5, root_files, histograms, 30, 60) << endl;
 
 }
+
+*/
 
 void Histogram_Remove_Negative_Events(TH1F* histogram) {
 
@@ -975,7 +994,7 @@ void Process_Combiner(string AnalysisType, string Process) {
 // need to give it the analysis type and then for given, tells it the path
 void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged, string mode) {
 
-	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
+	cout << "Drawing " << DataType << " histogram" << endl;
 
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
@@ -1122,8 +1141,6 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 // need to give it the analysis type and then for given, tells it the path
 void Process_Combiner_2D(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files) {
 
-	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
-
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
 
@@ -1177,8 +1194,6 @@ void Process_Combiner_2D(string AnalysisType, string DataType, string DataTypeHi
 // need to give it the analysis type and then for given, tells it the path
 void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool log) {
 
-	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
-
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
 
@@ -1222,8 +1237,6 @@ void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string Dat
 
 void Process_Combiner_2D_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool log) {
 
-	cout << "Drawing " << AnalysisType << " Histogram for " << DataType << endl;
-
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
 
@@ -1262,6 +1275,8 @@ void Process_Combiner_2D_EW(string AnalysisType, string DataType, string DataTyp
 }
 
 void Inside_Outside_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
+
+	cout << "Drawing In Out Overlay for " << DataType << " histogram" << endl;
 
 	//String for name of the histograms in the root file
 	string InsideName = DataType + "_INSIDE";
@@ -1395,13 +1410,18 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
 	for (int i = 0; i<11; i++){
 		Stack1->Add(Histograms1[i], "hist");
 		Stack2->Add(Histograms2[i], "hist");
-  }
+  	}
 
 	//Draw the stack, actually stacking (no "nostack")
 	Stack1->Draw("");
 	Stack2->Draw("same noclear");
 	Draw_Region(DataType1, 0.037, 0.70, 0.86, 0.70, 0.80, 0.70, 0.73); /// same for both as both truth so only need one
+
+	TLatex t;  						//Create a latex object
+	t.SetTextFont(42);  					//Set font
+	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
 	t.SetTextSize(0.035);  					//Set font size
+
 	canvas->SetRightMargin(0.15);
 
 	//Create the legend and draw the region information
@@ -1418,7 +1438,10 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
 	canvas->SaveAs(FullOutputFilePath.c_str());
   
 }
+
 void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
+
+	cout << "Drawing Except_Signal " << DataType << " histogram" << endl;
 
 	//String for name of the histograms in the root file
 	string ExceptName = DataType + "_EXCEPT";
@@ -1589,7 +1612,7 @@ void DrawStackedProcesses(string AnalysisType) {
 
 	vector<string> TRUTH_compare_graphs;
 	TRUTH_compare_graphs.push_back("lep_0_lep_1_invis_vis_mass");
-	TRUTH_compare_graphs.push_back("lep_0_lep_1_mass_TRUTH"); // should be for truth
+	TRUTH_compare_graphs.push_back("lep_0_lep_1_mass"); // should be for truth
 	TRUTH_compare_graphs.push_back("MET_truth_p4");
   
 	vector<string> EXCEPT_SIGNAL_graphs;
@@ -1680,16 +1703,6 @@ void DrawStackedProcesses(string AnalysisType) {
 				}
 			}
 
-			for (int i = 0; i <= TRUTH_compare_graphs.size(); i++) {
-
-				fileName =  line + "_" + AnalysisType + "_INVIS_VIS_TAU_TRUTH_mass_Comparison.pdf";
-				TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[1], "invis_vis_tau_mass_comparison", root_files);
-
-				fileName =  line + "_" + AnalysisType + "_INVIS_MET_TRUTH_Comparison.pdf";					
-				TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[1], TRUTH_compare_graphs[2], "invis_MET_TRUTH_mass_comparison", root_files);
-			
-			}
-
 			for (int i = 0; i <= EXCEPT_SIGNAL_graphs.size(); i++) {
 				if (line == EXCEPT_SIGNAL_graphs[i]) {
 					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_FULL.pdf";
@@ -1702,6 +1715,13 @@ void DrawStackedProcesses(string AnalysisType) {
 			}
 		}
 	}
+	
+	string INVIS_VIS_fileName =  line + "_" + AnalysisType + "_INVIS_VIS_TAU_TRUTH_mass_Comparison.pdf";
+	TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[1], INVIS_VIS_fileName, root_files);
+
+	string INVIS_MET_fileName =  line + "_" + AnalysisType + "_INVIS_MET_TRUTH_Comparison.pdf";					
+	TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[2], INVIS_MET_fileName, root_files);
+	
 }
 
 //Combine all the different chains belonging to each different process
