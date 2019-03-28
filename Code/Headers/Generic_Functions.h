@@ -1389,8 +1389,8 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
 	THStack *Stack1 = new THStack("Stack1", "");
 	THStack *Stack2 = new THStack("Stack2", "");
 
-	Histograms1 = Set_Histogram_Styles(Histograms1);
-	Histograms2 = Set_Histogram_Styles(Histograms2);
+	Histograms1 = Set_Histogram_Styles_Full_Alpha(Histograms1);
+	Histograms2 = Set_Histogram_Styles_Light_Alpha(Histograms2);
 
 	for (int i = 0; i<11; i++){
 		Stack1->Add(Histograms1[i], "hist");
