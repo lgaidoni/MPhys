@@ -377,10 +377,14 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & elec_0_matched;
 		lep_0_p4 = elec_0_matched_p4;
 		lep_0_q = & elec_0_matched_q;	
+		lep_0_invis_p4 = elec_0_matched_truth_lepTau_invis_p4;
+		lep_0_vis_p4 = elec_0_matched_truth_lepTau_vis_p4;
 
 		lep_1 = & elec_1_matched;
 		lep_1_p4 = elec_1_matched_p4;
-		lep_1_q = & elec_1_matched_q;	
+		lep_1_q = & elec_1_matched_q;
+		lep_1_invis_p4 = elec_1_matched_truth_lepTau_invis_p4;
+		lep_1_vis_p4 = elec_1_matched_truth_lepTau_vis_p4;
 	
 		if (elec_0_matched > 0 && elec_1_matched > 0) n_leptons = 2;
 		else n_leptons = 0;
@@ -391,10 +395,14 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & muon_0_matched;
 		lep_0_p4 = muon_0_matched_p4;
 		lep_0_q = & muon_0_matched_q;	
+		lep_0_invis_p4 = muon_0_matched_truth_lepTau_invis_p4;
+		lep_0_vis_p4 = muon_0_matched_truth_lepTau_vis_p4;
 
 		lep_1 = & muon_1_matched;
 		lep_1_p4 = muon_1_matched_p4;
 		lep_1_q = & muon_1_matched_q;	
+		lep_1_invis_p4 = muon_1_matched_truth_lepTau_invis_p4;
+		lep_1_vis_p4 = muon_1_matched_truth_lepTau_vis_p4;
 	
 		if (muon_0_matched > 0 && muon_1_matched > 0) n_leptons = 2;
 		else n_leptons = 0;
