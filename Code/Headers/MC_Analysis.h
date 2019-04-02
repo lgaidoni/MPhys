@@ -2,7 +2,7 @@
 // This class has been automatically generated on
 // Thu Oct  4 10:20:38 2018 by ROOT version 6.10/04
 // from TTree NOMINAL/NOMINAL
-// found on file: /pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root
+// found on file: /pc2012-data1/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root
 //////////////////////////////////////////////////////////
 
 #ifndef MC_Analysis_h
@@ -1671,13 +1671,13 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
 	if (tree == 0) {
 		TFile *f;
 
-		if (gSystem->AccessPathName("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root")) {
-			cout << "PC2014 DATA DOES NOT EXIST" << endl << endl;
+		if (gSystem->AccessPathName("/pc2012-data1/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root")) {
+			cout << "PC2012 DATA DOES NOT EXIST" << endl << endl;
 		} else {
-			cout << "PC2014 DATA EXISTS" << endl;
-			f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+			cout << "PC2012 DATA EXISTS" << endl;
+			f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2012-data1/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
 			if (!f || !f->IsOpen()) {
-				f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+				f = new TFile("/pc2012-data1/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
 			}
 			File_Found = true;
 
@@ -1719,10 +1719,10 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, dou
 
 		} else {
 
-			TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+			TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/pc2012-data1/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
 			if (!f || !f->IsOpen()) {
 
-				f = new TFile("/pc2014-data4/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
+				f = new TFile("/pc2012-data1/sam/VBF_Ztt/HIGG8D1/v5.0/mc/user.sdysch.v5.0.mc16_13TeV.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_e5984_s3126_r9364_r9315_p3563.sv1_hist/user.sdysch.14361308._000001.hist-output.root");
 			}
 
 			f->GetObject("NOMINAL",tree);
