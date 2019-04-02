@@ -1439,236 +1439,98 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
   
 }
 
-void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
 
-	cout << "Drawing Except_Signal " << DataType << " histogram" << endl;
-
-	//String for name of the histograms in the root file
-	string ExceptName = DataType + "_EXCEPT";
-	string SignalName = DataType;
-
-	//Create the canvas
-	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
-
-	vector<TH1F*> ExceptHistograms = Histogram_Return_Given_File(AnalysisType, ExceptName, root_files);
-
-	vector<TH1F*> SignalHistograms = Histogram_Return_Given_File(AnalysisType, SignalName, root_files);
-
-	THStack *ExceptStack = new THStack("ExceptStack", "");
-	THStack *SignalStack = new THStack("SignalStack", "");
-
-	ExceptHistograms = Set_Histogram_Styles_Light_Alpha(ExceptHistograms);
-	SignalHistograms = Set_Histogram_Styles_Full_Alpha(SignalHistograms);
-
-	if (mode == "QCD_EW") {
-		ExceptStack->Add(ExceptHistograms[5], "hist");
-		ExceptStack->Add(ExceptHistograms[6], "hist");
-		ExceptStack->Add(ExceptHistograms[7], "hist");
-		ExceptStack->Add(ExceptHistograms[8], "hist");
-		ExceptStack->Add(ExceptHistograms[9], "hist");
-		ExceptStack->Add(ExceptHistograms[10], "hist");
-
-		SignalStack->Add(SignalHistograms[5], "hist");
-		SignalStack->Add(SignalHistograms[6], "hist");
-		SignalStack->Add(SignalHistograms[7], "hist");
-		SignalStack->Add(SignalHistograms[8], "hist");
-		SignalStack->Add(SignalHistograms[9], "hist");
-		SignalStack->Add(SignalHistograms[10], "hist");
-
-	}
-	else if (mode == "EW") {
-
-		ExceptStack->Add(ExceptHistograms[5], "hist");
-		ExceptStack->Add(ExceptHistograms[6], "hist");
-		ExceptStack->Add(ExceptHistograms[7], "hist");
-
-		SignalStack->Add(SignalHistograms[5], "hist");
-		SignalStack->Add(SignalHistograms[6], "hist");
-		SignalStack->Add(SignalHistograms[7], "hist");
-	}
-	else {
-		//Add the histograms from the vector to the stack
-		for (int i=0; i < 11; i++) {
-			ExceptStack->Add(ExceptHistograms[i], "hist");
-		}
-
-		for (int i=0; i < 11; i++) {
-			SignalStack->Add(SignalHistograms[i], "hist");
-		}
-	}
-
-	//Draw the stack, actually stacking (no "nostack")
-	ExceptStack->Draw("");
-	SignalStack->Draw("same");
-
-	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
-
-	canvas->SetRightMargin(0.15);
-
-	int selected_process;
-	if (AnalysisType == "Electron") selected_process = 7;
-	if (AnalysisType == "Muon") selected_process = 6;
-	if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
-
-	double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, ExceptHistograms);
-	double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, SignalHistograms);
-
-	cout << Except_Significance << endl;
-	cout << Signal_Significance << endl;
-
-	stringstream ExceptSig;
-	ExceptSig << setprecision(3) << Except_Significance;
-
-	stringstream SignalSig;
-	SignalSig << setprecision(3) <<  Signal_Significance;
-
-	string ExceptLegend = "Except: S = " + ExceptSig.str();
-	string SignalLegend = "Signal: S = " + SignalSig.str();
-
-	double Delta_Significance = Signal_Significance - Except_Significance;
-
-	stringstream DeltaSig;
-	DeltaSig << setprecision(3) <<  Delta_Significance;
-	string DeltaSignificanceString = "#DeltaS = " + DeltaSig.str();
-
-	TLatex t2;  						//Create a latex object
-	t2.SetTextFont(42);  					//Set font
-	t2.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-	t2.SetTextSize(0.037);  				//Set font size
-	t2.DrawLatex(0.70, 0.67, DeltaSignificanceString.c_str());
-
-	TLatex t;  						//Create a latex object
-	t.SetTextFont(42);  					//Set font
-	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-	t.SetTextSize(0.025);  					//Set font size
-
-	//Create the legend and draw the region information
-	if (mode == "QCD_EW") {
-		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-		Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
-
-		t.DrawLatex(0.86, 0.61, SignalLegend.c_str());
-		Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
-	}
-	else if (mode == "EW") {
-
-		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-		Legend_Creator_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
-
-		t.DrawLatex(0.86, 0.71, SignalLegend.c_str());
-		Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
-	}
-	else {
-		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-		Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
-
-		t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
-		Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
-	}
-
-	string Region;
-
-	if (DataType.find("CONTROL") != string::npos) Region = "CONTROL";
-	else if (DataType.find("PRE") != string::npos) Region = "PRE";
-	else if (DataType.find("EXCEPT") != string::npos) Region = "EXCEPT";
-	else if (DataType.find("HIGH_E") != string::npos) Region = "HIGH_E";
-	else if (DataType.find("BJET") != string::npos) Region = "BJET";
-	else if (DataType.find("TRUTH") != string::npos) Region = "TRUTH";
-	else Region = "SEARCH";
-
-	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
-
-	//Write out to a PDF file
-	canvas->SaveAs(FullOutputFilePath.c_str());
-
-}
 /*
-void Except_Shaded_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) { // Shading in the cut region
+void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_files) { // Shading in the cut region
 	// ONLY NEED SIGNAL FOR SIGNIFICANCE VALUES DONT DRAW
+	vector<string> DataType; // Depending on whether or not the cut as two regions depends what function it will use
 
-	cout << "Drawing Except_Shaded " << DataType << " histogram" << endl;
+	DataType.push_back("lep_0_lep_1_mass");
+	DataType.push_back("lep_0_lep_1_reco_mass_INSIDE");
+	DataType.push_back("jet_0_jet_1_mass");
+	DataType.push_back("jet_0_jet_1_mass_INSIDE");
+	DataType.push_back("pT_balance");
+	DataType.push_back("DeltaPhi_EXCEPT");
+	DataType.push_back("DeltaPhi_reco_INSIDE_EXCEPT");
+	DataType.push_back("pT_balance_reco");
+	DataType.push_back("pT_balance_reco_INSIDE");
+	DataType.push_back("pT_balance_3");
+	DataType.push_back("Centrality");
+	DataType.push_back("Centrality_INSIDE_EXCEPT");
+	DataType.push_back("DeltaPhi");
 
-	//String for name of the histograms in the root file
-	string ExceptName = DataType + "_EXCEPT";
-	string SignalName = DataType;
+	for (int i=0; i < DataType.size(); i++){
 
-	//Create the canvas
-	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+		cout << "Drawing Except_Shaded " << DataType[i] << " histogram" << endl;
 
-	vector<TH1F*> ExceptHistograms = Histogram_Return_Given_File(AnalysisType, ExceptName, root_files);
-	vector<TH1F*> SignalHistograms = Histogram_Return_Given_File(AnalysisType, SignalName, root_files);
+		//String for name of the histograms in the root file
+		string ExceptName = DataType[i] + "_EXCEPT";
+		string SignalName = DataType[i];
 
-	THStack *ExceptStack = new THStack("ExceptStack", "");
-	THStack *SignalStack = new THStack("SignalStack", "");
+		//Create the canvas
+		TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
-	ExceptHistograms = Set_Histogram_Styles(ExceptHistograms);
-	//SignalHistograms = Set_Histogram_Styles_Full_Alpha(SignalHistograms);
+		vector<TH1F*> ExceptHistograms = Histogram_Return_Given_File(AnalysisType, ExceptName, root_files);
+		vector<TH1F*> SignalHistograms = Histogram_Return_Given_File(AnalysisType, SignalName, root_files);
 
-	if (mode == "QCD_EW") {
-		ExceptStack->Add(ExceptHistograms[5], "hist");
-		ExceptStack->Add(ExceptHistograms[6], "hist");
-		ExceptStack->Add(ExceptHistograms[7], "hist");
-		ExceptStack->Add(ExceptHistograms[8], "hist");
-		ExceptStack->Add(ExceptHistograms[9], "hist");
-		ExceptStack->Add(ExceptHistograms[10], "hist");
+		THStack *ExceptStack = new THStack("ExceptStack", "");
+		THStack *SignalStack = new THStack("SignalStack", "");
 
-		SignalStack->Add(SignalHistograms[5], "hist");
-		SignalStack->Add(SignalHistograms[6], "hist");
-		SignalStack->Add(SignalHistograms[7], "hist");
-		SignalStack->Add(SignalHistograms[8], "hist");
-		SignalStack->Add(SignalHistograms[9], "hist");
-		SignalStack->Add(SignalHistograms[10], "hist");
+		ExceptHistograms = Set_Histogram_Styles(ExceptHistograms);
+		//SignalHistograms = Set_Histogram_Styles_Full_Alpha(SignalHistograms);
 
-	}
-	else if (mode == "EW") {
+		if (mode == "QCD_EW") {
+			ExceptStack->Add(ExceptHistograms[5], "hist");
+			ExceptStack->Add(ExceptHistograms[6], "hist");
+			ExceptStack->Add(ExceptHistograms[7], "hist");
+			ExceptStack->Add(ExceptHistograms[8], "hist");
+			ExceptStack->Add(ExceptHistograms[9], "hist");
+			ExceptStack->Add(ExceptHistograms[10], "hist");
 
-		ExceptStack->Add(ExceptHistograms[5], "hist");
-		ExceptStack->Add(ExceptHistograms[6], "hist");
-		ExceptStack->Add(ExceptHistograms[7], "hist");
+			SignalStack->Add(SignalHistograms[5], "hist");
+			SignalStack->Add(SignalHistograms[6], "hist");
+			SignalStack->Add(SignalHistograms[7], "hist");
+			SignalStack->Add(SignalHistograms[8], "hist");
+			SignalStack->Add(SignalHistograms[9], "hist");
+			SignalStack->Add(SignalHistograms[10], "hist");
 
-		SignalStack->Add(SignalHistograms[5], "hist");
-		SignalStack->Add(SignalHistograms[6], "hist");
-		SignalStack->Add(SignalHistograms[7], "hist");
-	}
-	else {
-		//Add the histograms from the vector to the stack
-		for (int i=0; i < 11; i++) {
-			ExceptStack->Add(ExceptHistograms[i], "hist");
+		}
+		else if (mode == "EW") {
+
+			ExceptStack->Add(ExceptHistograms[5], "hist");
+			ExceptStack->Add(ExceptHistograms[6], "hist");
+			ExceptStack->Add(ExceptHistograms[7], "hist");
+
+			SignalStack->Add(SignalHistograms[5], "hist");
+			SignalStack->Add(SignalHistograms[6], "hist");
+			SignalStack->Add(SignalHistograms[7], "hist");
+		}
+		else {
+			//Add the histograms from the vector to the stack
+			for (int i=0; i < 11; i++) {
+				ExceptStack->Add(ExceptHistograms[i], "hist");
+			}
+
+			for (int i=0; i < 11; i++) {
+				SignalStack->Add(SignalHistograms[i], "hist");
+			}
 		}
 
-		for (int i=0; i < 11; i++) {
-			SignalStack->Add(SignalHistograms[i], "hist");
-		}
-	}
+		//Draw the stack, actually stacking (no "nostack")
+		ExceptStack->Draw("");
+		//SignalStack->Draw("same"); 
 
-	//Draw the stack, actually stacking (no "nostack")
-	ExceptStack->Draw("");
-	//SignalStack->Draw("same"); 
+		Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
 
-	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
+		canvas->SetRightMargin(0.15);
 
-	canvas->SetRightMargin(0.15);
-
-	vector<string> Type; // Depending on whether or not the cut as two regions depends what function it will use
-	Type.push_back("lep_0_lep_1_mass");
-	Type.push_back("lep_0_lep_1_reco_mass");
-	Type.push_back("jet_0_jet_1_mass");
-	Type.push_back("pT_balance");
-	Type.push_back("pT_balance_reco");
-	Type.push_back("pT_balance_3");
-	Type.push_back("Centrality");
-	Type.push_back("DeltaPhi");
-
-	for (int i=0; ExceptHistograms.size(); i++){// these histograms have one limit in them
-
-		TH1F *HistogramShaded = (TH1F*)histogram->Clone();
+		// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
 
 		if (find(Type.begin(), Type.end(), string("pT_balance")) != Type.end()) {
-			HistogramShaded = CutShadedRegiononelimit(ExceptHistogram[i],0,0.15);
+			HistogramShaded = CutShadedRegiononelimit(ExceptHistograms[i], 0, 0.15);
 		}
 
-		/*if (Type == "pT_balance_reco") { // these histograms have two limits in them
+		if (Type == "pT_balance_reco") { // these histograms have two limits in them
 			HistogramShaded = CutShadedRegiononelimit(ExceptHistogram[i],0,0.2);
 		}
 		if (Type == "jet_0_jet_1_mass") { // these histograms have two limits in them
@@ -1676,94 +1538,94 @@ void Except_Shaded_Overlay(string AnalysisType, string DataType, string mode, st
 		}
 		if (Type == "DeltaPhi") { // these histograms have two limits in them
 			HistogramShaded = CutShadedRegiononelimit(ExceptHistogram[i],0,2);
-		}*/
-	}
+		}
+	
 
-/*	for (int i=0; ExceptHistograms[i]; i++){// these histograms have two limits in them
+
 		if (Type == "lep_0_lep_1_mass" || "lep_0_lep_1_reco_mass"){
 		HistogramShaded = CutShadedRegiontwolimits(ExceptHistogram[i],0,81,81,101);
 		}
 		if (Type == "Centrality") { // these histograms have two limits in them
 			HistogramShaded = CutShadedRegiontwolimits(ExceptHistogram[i], -4,-2,-2,4);
 		}
-	}
-*/
-	int selected_process;
-	if (AnalysisType == "Electron") selected_process = 7;
-	if (AnalysisType == "Muon") selected_process = 6;
-	if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
+	
+		
+		int selected_process;
+		if (AnalysisType == "Electron") selected_process = 7;
+		if (AnalysisType == "Muon") selected_process = 6;
+		if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
 
-	double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, ExceptHistograms);
-	double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, SignalHistograms);
+		double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, ExceptHistograms);
+		double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, SignalHistograms);
 
-	cout << Except_Significance << endl;
-	cout << Signal_Significance << endl;
+		cout << Except_Significance << endl;
+		cout << Signal_Significance << endl;
 
-	stringstream ExceptSig;
-	ExceptSig << setprecision(3) << Except_Significance;
+		stringstream ExceptSig;
+		ExceptSig << setprecision(3) << Except_Significance;
 
-	stringstream SignalSig;
-	SignalSig << setprecision(3) <<  Signal_Significance;
+		stringstream SignalSig;
+		SignalSig << setprecision(3) <<  Signal_Significance;
 
-	string ExceptLegend = "Except: S = " + ExceptSig.str();
-	//string SignalLegend = "Signal: S = " + SignalSig.str();
+		string ExceptLegend = "Except: S = " + ExceptSig.str();
+		//string SignalLegend = "Signal: S = " + SignalSig.str();
 
-	double Delta_Significance = Signal_Significance - Except_Significance;
+		double Delta_Significance = Signal_Significance - Except_Significance;
 
-	stringstream DeltaSig;
-	DeltaSig << setprecision(3) <<  Delta_Significance;
-	string DeltaSignificanceString = "#DeltaS = " + DeltaSig.str();
+		stringstream DeltaSig;
+		DeltaSig << setprecision(3) <<  Delta_Significance;
+		string DeltaSignificanceString = "#DeltaS = " + DeltaSig.str();
 
-	TLatex t2;  						//Create a latex object
-	t2.SetTextFont(42);  					//Set font
-	t2.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-	t2.SetTextSize(0.037);  				//Set font size
-	t2.DrawLatex(0.70, 0.67, DeltaSignificanceString.c_str());
+		TLatex t2;  						//Create a latex object
+		t2.SetTextFont(42);  					//Set font
+		t2.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
+		t2.SetTextSize(0.037);  				//Set font size
+		t2.DrawLatex(0.70, 0.67, DeltaSignificanceString.c_str());
 
-	TLatex t;  						//Create a latex object
-	t.SetTextFont(42);  					//Set font
-	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-	t.SetTextSize(0.025);  					//Set font size
+		TLatex t;  						//Create a latex object
+		t.SetTextFont(42);  					//Set font
+		t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
+		t.SetTextSize(0.025);  					//Set font size
 
-	//Create the legend and draw the region information
-	if (mode == "QCD_EW") {
-		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-		Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
+		//Create the legend and draw the region information
+		if (mode == "QCD_EW") {
+			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+			Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
 
-		t.DrawLatex(0.86, 0.61, SignalLegend.c_str());
-		Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
-	}
-	else if (mode == "EW") {
+			t.DrawLatex(0.86, 0.61, SignalLegend.c_str());
+			Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
+		}
+		else if (mode == "EW") {
 
-		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-		Legend_Creator_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
+			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+			Legend_Creator_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
 
-		t.DrawLatex(0.86, 0.71, SignalLegend.c_str());
-		Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
-	}
-	else {
-		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-		Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
+			t.DrawLatex(0.86, 0.71, SignalLegend.c_str());
+			Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
+		}
+		else {
+			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+			Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
 
-		t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
-		Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
-	}
+			t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
+			Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
+		}
 
-	string Region;
+		string Region;
 
-	if (DataType.find("CONTROL") != string::npos) Region = "CONTROL";
-	else if (DataType.find("PRE") != string::npos) Region = "PRE";
-	else if (DataType.find("EXCEPT") != string::npos) Region = "EXCEPT";
-	else if (DataType.find("HIGH_E") != string::npos) Region = "HIGH_E";
-	else if (DataType.find("BJET") != string::npos) Region = "BJET";
-	else if (DataType.find("TRUTH") != string::npos) Region = "TRUTH";
-	else Region = "SEARCH";
+		if (DataType.find("CONTROL") != string::npos) Region = "CONTROL";
+		else if (DataType.find("PRE") != string::npos) Region = "PRE";
+		else if (DataType.find("EXCEPT") != string::npos) Region = "EXCEPT";
+		else if (DataType.find("HIGH_E") != string::npos) Region = "HIGH_E";
+		else if (DataType.find("BJET") != string::npos) Region = "BJET";
+		else if (DataType.find("TRUTH") != string::npos) Region = "TRUTH";
+		else Region = "SEARCH";
 
-	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE-SHADED/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+		//Create the full output file path
+		string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE-SHADED/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
-	//Write out to a PDF file
-	canvas->SaveAs(FullOutputFilePath.c_str());
+		//Write out to a PDF file
+		canvas->SaveAs(FullOutputFilePath.c_str());
 
 }
 
@@ -1775,14 +1637,159 @@ void CutShadedRegiononelimit(TH2F *histogram, double lowermin, double uppermin){
 
 }
 
-/*void CutShadedRegiontwolimits(TH2F *histogram, double lowermin, double uppermin, double lowermax, double uppermax){
+void CutShadedRegiontwolimits(TH2F *histogram, double lowermin, double uppermin, double lowermax, double uppermax){
 
 	
 
 
 }
 */
-*/
+
+void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
+	
+	cout << "Drawing Except_Signal " << DataType << " histogram" << endl;
+	
+	//String for name of the histograms in the root file
+	string ExceptName = DataType + "_EXCEPT";
+	string SignalName = DataType;
+	
+	//Create the canvas
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+	
+	vector<TH1F*> ExceptHistograms = Histogram_Return_Given_File(AnalysisType, ExceptName, root_files);
+	
+	vector<TH1F*> SignalHistograms = Histogram_Return_Given_File(AnalysisType, SignalName, root_files);
+	
+	THStack *ExceptStack = new THStack("ExceptStack", "");
+	THStack *SignalStack = new THStack("SignalStack", "");
+	
+	ExceptHistograms = Set_Histogram_Styles_Light_Alpha(ExceptHistograms);
+	SignalHistograms = Set_Histogram_Styles_Full_Alpha(SignalHistograms);
+	
+	if (mode == "QCD_EW") {
+		ExceptStack->Add(ExceptHistograms[5], "hist");
+		ExceptStack->Add(ExceptHistograms[6], "hist");
+		ExceptStack->Add(ExceptHistograms[7], "hist");
+		ExceptStack->Add(ExceptHistograms[8], "hist");
+		ExceptStack->Add(ExceptHistograms[9], "hist");
+		ExceptStack->Add(ExceptHistograms[10], "hist");
+	
+		SignalStack->Add(SignalHistograms[5], "hist");
+		SignalStack->Add(SignalHistograms[6], "hist");
+		SignalStack->Add(SignalHistograms[7], "hist");
+		SignalStack->Add(SignalHistograms[8], "hist");
+		SignalStack->Add(SignalHistograms[9], "hist");
+		SignalStack->Add(SignalHistograms[10], "hist");
+	
+	}
+	else if (mode == "EW") {
+	
+		ExceptStack->Add(ExceptHistograms[5], "hist");
+		ExceptStack->Add(ExceptHistograms[6], "hist");
+		ExceptStack->Add(ExceptHistograms[7], "hist");
+	
+		SignalStack->Add(SignalHistograms[5], "hist");
+		SignalStack->Add(SignalHistograms[6], "hist");
+		SignalStack->Add(SignalHistograms[7], "hist");
+	}
+	else {
+		//Add the histograms from the vector to the stack
+		for (int i=0; i < 11; i++) {
+			ExceptStack->Add(ExceptHistograms[i], "hist");
+		}
+	
+		for (int i=0; i < 11; i++) {
+			SignalStack->Add(SignalHistograms[i], "hist");
+		}
+	}
+	
+	//Draw the stack, actually stacking (no "nostack")
+	ExceptStack->Draw("");
+	SignalStack->Draw("same");
+	
+	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
+	
+	canvas->SetRightMargin(0.15);
+	
+	int selected_process;
+	if (AnalysisType == "Electron") selected_process = 7;
+	if (AnalysisType == "Muon") selected_process = 6;
+	if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
+	
+	double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, ExceptHistograms);
+	double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, SignalHistograms);
+	
+	cout << Except_Significance << endl;
+	cout << Signal_Significance << endl;
+	
+	stringstream ExceptSig;
+	ExceptSig << setprecision(3) << Except_Significance;
+	
+	stringstream SignalSig;
+	SignalSig << setprecision(3) <<  Signal_Significance;
+	
+	string ExceptLegend = "Except: S = " + ExceptSig.str();
+	string SignalLegend = "Signal: S = " + SignalSig.str();
+	
+	double Delta_Significance = Signal_Significance - Except_Significance;
+	
+	stringstream DeltaSig;
+	DeltaSig << setprecision(3) <<  Delta_Significance;
+	string DeltaSignificanceString = "#DeltaS = " + DeltaSig.str();
+	
+	TLatex t2;   //Create a latex object
+	t2.SetTextFont(42);   //Set font
+	t2.SetNDC(kTRUE);   //Ensure position is relative (0-1 rather than coordinate based)
+	t2.SetTextSize(0.037);   //Set font size
+	t2.DrawLatex(0.70, 0.67, DeltaSignificanceString.c_str());
+	
+	TLatex t;   //Create a latex object
+	t.SetTextFont(42);   //Set font
+	t.SetNDC(kTRUE);   //Ensure position is relative (0-1 rather than coordinate based)
+	t.SetTextSize(0.025);   //Set font size
+	
+	//Create the legend and draw the region information
+	if (mode == "QCD_EW") {
+		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+		Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
+	
+		t.DrawLatex(0.86, 0.61, SignalLegend.c_str());
+		Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
+	}
+	else if (mode == "EW") {
+	
+		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+		Legend_Creator_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
+	
+		t.DrawLatex(0.86, 0.71, SignalLegend.c_str());
+		Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
+	}
+	else {
+		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+		Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
+	
+		t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
+		Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
+	}
+	
+	string Region;
+	
+	if (DataType.find("CONTROL") != string::npos) Region = "CONTROL";
+	else if (DataType.find("PRE") != string::npos) Region = "PRE";
+	else if (DataType.find("EXCEPT") != string::npos) Region = "EXCEPT";
+	else if (DataType.find("HIGH_E") != string::npos) Region = "HIGH_E";
+	else if (DataType.find("BJET") != string::npos) Region = "BJET";
+	else if (DataType.find("TRUTH") != string::npos) Region = "TRUTH";
+	else Region = "SEARCH";
+	
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+	
+}
+
 //Draw the stacked graphs for all the desired variables
 void DrawStackedProcesses(string AnalysisType) {
 
@@ -1831,7 +1838,7 @@ void DrawStackedProcesses(string AnalysisType) {
 	EXCEPT_SIGNAL_graphs.push_back("Centrality_INSIDE");
 	EXCEPT_SIGNAL_graphs.push_back("DeltaPhi");
 	EXCEPT_SIGNAL_graphs.push_back("DeltaPhi_reco_INSIDE");
-
+	
 	vector<TFile*> root_files = Root_Files(AnalysisType);
 	
 	while(!DataTypeFile.eof()) {  		//While not at the end of the file
@@ -1929,7 +1936,19 @@ void DrawStackedProcesses(string AnalysisType) {
 			}
 		}
 	}
-	
+/*
+	cout << "Drawing Final Stacked EXCEPT SHADED Comparison Histogram for: " << line << endl;
+	fileName =  line + "_" + AnalysisType + "_EXCEPT_SHADED_Comparison_FULL.pdf";
+	Except_Shaded_Region(AnalysisType, "", root_files, lower, upper);
+
+	cout << "Drawing Final Stacked QCD_EW EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
+	fileName =  line + "_" + AnalysisType + "_EXCEPT_SHADED_Comparison_QCD_EW.pdf";
+	Except_Shaded_Region(AnalysisType, "QCD_EW", root_files, lower, upper);
+
+	cout << "Drawing Final Stacked EW EXCEPT SHADED Comparison Histogram for: " << line << endl;
+	fileName =  line + "_" + AnalysisType + "_EXCEPT_SHADED_Comparison_EW.pdf";
+	Except_Shaded_Region(AnalysisType, "EW", root_files, lower, upper);
+*/
 	string INVIS_VIS_fileName =  TRUTH_compare_graphs[0] + "_" + AnalysisType + "_INVIS_VIS_TAU_TRUTH_mass_Comparison.pdf";
 	TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[1], INVIS_VIS_fileName, root_files);
 
