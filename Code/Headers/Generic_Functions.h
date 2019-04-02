@@ -448,34 +448,178 @@ double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int Select
 
 }
 
-/*
+double EXCEPT_FINE_Significance(string AnalysisType, string DataType, int SelectedProcess, double minval, double maxval, vector<TFile*> root_files, vector<TH1F*> histograms) {
 
-void Cut_Optimisation(string AnalysisType, string DataType) {
-
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
-	
 	double xmax = histograms[0]->GetXaxis()->GetXmax();
 	double xbins = histograms[0]->GetNbinsX();
 
-	double desired_xbins = xmax/0.1;
+	double minbin = (minval/xmax) * xbins;
+	double maxbin = (maxval/xmax) * xbins;
 
-	double rebin_factor = desired_xbins/xbins;
+	double minbinint = (int) round(minbin);
+	double maxbinint = (int) round(maxbinint);
 
-	cout << rebin_factor << endl;
-	
-	vector<TH1F*>
+	//cout << SignificanceLevelCalc(AnalysisType, DataType, 5, root_files, histograms) << endl;
+	//cout << EXCEPT_Significance_Calc(AnalysisType, DataType, 5, root_files, histograms, minbin, maxbin) << endl;
 
-	for (int i = 0; i < 11; i++) {
-		TH1F *histogram = 
-	}
+	double significance = EXCEPT_Significance_Calc(AnalysisType, DataType, SelectedProcess, root_files, histograms, minbin, maxbin);
 
-	cout << SignificanceLevelCalc(AnalysisType, DataType, 5, root_files, histograms) << endl;
-	cout << EXCEPT_Significance_Calc(AnalysisType, DataType, 5, root_files, histograms, 30, 60) << endl;
+	return significance;
 
 }
 
-*/
+//This function will optimise the significance
+void Optimise_Significance_Minval(string AnalysisType, string DataType, int SelectedProcess, double initial_minval, double maxval, bool full) {
+
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+
+	cout << "Full Except Significance = " << SignificanceLevelCalc(AnalysisType, DataType, SelectedProcess, root_files, histograms) << endl;
+	cout << "Desired Range Significance = " << EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, initial_minval, maxval, root_files, histograms) << endl;
+
+	//Setup of initial variables
+	double highest_significance = 0.0;
+	double highest_significance_minval;
+
+	double xmax = histograms[0]->GetXaxis()->GetXmax();
+	double xmin = histograms[0]->GetXaxis()->GetXmin();
+
+	cout << "X-Min = " << xmin << "\t X-Max = " << xmax << endl;
+
+	double initial_minval_range = xmax * 0.05;
+
+	cout << "Range around minval = +/-" << initial_minval_range << endl;
+
+	double loop_start = initial_minval - initial_minval_range;
+	double loop_end = initial_minval + initial_minval_range;
+
+	if (initial_minval - initial_minval_range < xmin) loop_start = xmin;
+	if (initial_minval + initial_minval_range > xmax) loop_end = xmax;
+
+	if (full) {
+		loop_start = xmin;
+		loop_end = xmax;
+	}
+
+	cout << "Loop Start = " << loop_start << "\t Loop End = " << loop_end << endl;
+
+	for(double minval = loop_start; minval <= loop_end; minval += initial_minval_range/10) {
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms);
+		if (significance > highest_significance) {
+			cout << minval << "\tS = " << significance << "\t Coarse\t - New Highest" << endl;
+			highest_significance = significance;		
+			highest_significance_minval = minval;
+		}
+	}
+
+	double fine_minval_range = xmax * 0.005;
+
+	loop_start = highest_significance_minval - fine_minval_range;
+	loop_end = highest_significance_minval + fine_minval_range;
+
+	if (highest_significance_minval - fine_minval_range < xmin) loop_start = xmin;
+	if (highest_significance_minval + fine_minval_range > xmax) loop_end = xmax;
+
+	if (full) {
+		loop_start = xmin;
+		loop_end = xmax;
+	}
+
+	cout << endl << "Fine range around minval = +/-" << fine_minval_range << endl;
+	cout << "Loop Start = " << loop_start << "\t Loop End = " << loop_end << endl << endl;
+
+	for(double minval = loop_start; minval <= loop_end; minval += fine_minval_range/10) {
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms);
+		cout << "S = " << significance << "\t Fine";
+		if (significance > highest_significance) {
+			cout << " - New Highest";
+			highest_significance = significance;		
+			highest_significance_minval = minval;
+		}
+		cout << endl;
+	}
+
+	cout << highest_significance << " " << highest_significance_minval << endl;
+
+}
+
+//This function will optimise the significance
+void Optimise_Significance_Maxval(string AnalysisType, string DataType, int SelectedProcess, double minval, double initial_maxval, bool full) {
+
+	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+
+	cout << "Full Except Significance = " << SignificanceLevelCalc(AnalysisType, DataType, SelectedProcess, root_files, histograms) << endl;
+	cout << "Desired Range Significance = " << EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, initial_maxval, root_files, histograms) << endl;
+
+	//Setup of initial variables
+	double highest_significance = 0.0;
+	double highest_significance_maxval;
+
+	double xmax = histograms[0]->GetXaxis()->GetXmax();
+	double xmin = histograms[0]->GetXaxis()->GetXmin();
+
+	cout << "X-Min = " << xmin << "\t X-Max = " << xmax << endl;
+
+	double initial_maxval_range = xmax * 0.05;
+
+	cout << "Range around maxval = +/-" << initial_maxval_range << endl;
+
+	double loop_start = initial_maxval - initial_maxval_range;
+	double loop_end = initial_maxval + initial_maxval_range;
+
+	if (initial_maxval - initial_maxval_range < xmin) loop_start = xmin;
+	if (initial_maxval + initial_maxval_range > xmax) loop_end = xmax;
+
+	if (full) {
+		loop_start = xmin;
+		loop_end = xmax;
+	}
+
+	cout << "Loop Start = " << loop_start << "\t Loop End = " << loop_end << endl;
+
+	for(double maxval = loop_start; maxval <= loop_end; maxval += initial_maxval_range/10) {
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms);
+
+		if (significance > highest_significance) {
+			cout << maxval << "\tS = " << significance << "\t Coarse\t - New Highest" << endl;
+			highest_significance = significance;		
+			highest_significance_maxval = maxval;
+		}
+	}
+
+	double fine_maxval_range = xmax * 0.005;
+
+	loop_start = highest_significance_maxval - fine_maxval_range;
+	loop_end = highest_significance_maxval + fine_maxval_range;
+
+	if (highest_significance_maxval - fine_maxval_range < xmin) loop_start = xmin;
+	if (highest_significance_maxval + fine_maxval_range > xmax) loop_end = xmax;
+
+	if (full) {
+		loop_start = xmin;
+		loop_end = xmax;
+	}
+
+	cout << endl << "Fine range around minval = +/-" << fine_maxval_range << endl;
+	cout << "Loop Start = " << loop_start << "\t Loop End = " << loop_end << endl << endl;
+
+	for(double maxval = loop_start; maxval <= loop_end; maxval += fine_maxval_range/10) {
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms);
+		cout << "S = " << significance << "\t Fine";
+		if (significance > highest_significance) {
+			cout << " - New Highest";
+			highest_significance = significance;		
+			highest_significance_maxval = maxval;
+		}
+		cout << endl;
+	}
+
+	cout << highest_significance << " " << highest_significance_maxval << endl;
+
+}
+
+
 
 void Histogram_Remove_Negative_Events(TH1F* histogram) {
 
@@ -1118,6 +1262,18 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	}
 
 	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
+	/*
+	TBox *b = new TBox(histogramStack->GetXaxis()->GetXmin(), canvas->GetUymin(), 60, canvas->GetUymax());
+	b->SetFillStyle(3003);
+	b->SetFillColor(kRed);
+	b->Draw();
+
+	TBox *b2 = new TBox(120,canvas->GetUymin(), histogramStack->GetXaxis()->GetXmax(), canvas->GetUymax());
+	b2->SetFillStyle(3003);
+	b2->SetFillColor(kRed);
+	b2->Draw();
+	*/
+	canvas->Update();
 
 	string Region;
 
@@ -1637,6 +1793,8 @@ void DrawStackedProcesses(string AnalysisType) {
 	
 	while(!DataTypeFile.eof()) {  		//While not at the end of the file
 		getline(DataTypeFile, line);  	//Get the file line
+
+		if (line.find("FINE") != string::npos) continue;
 
 		if (line.find("2D") != string::npos) {
 
