@@ -1395,8 +1395,8 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
 	string Region = "TRUTH";
 
 	//String for name of the histograms in the root file
-	string Name1 = DataType1 + "_TRUTH"; // lep invis vis truth
-	string Name2 = DataType2 + "_TRUTH"; // lep tau truth
+	string Name1 = DataType1 + ""; // lep invis vis truth
+	string Name2 = DataType2 + ""; // lep tau truth
 	//Create the canvas
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 	vector<TH1F*> Histograms1 = Histogram_Return_Given_File(AnalysisType, Name1, root_files);
@@ -1613,7 +1613,7 @@ void DrawStackedProcesses(string AnalysisType) {
 	vector<string> TRUTH_compare_graphs;
 	TRUTH_compare_graphs.push_back("lep_0_lep_1_invis_vis_mass");
 	TRUTH_compare_graphs.push_back("lep_0_lep_1_mass"); // should be for truth
-	TRUTH_compare_graphs.push_back("MET_truth_p4");
+	TRUTH_compare_graphs.push_back("met_truth_mass");
   
 	vector<string> EXCEPT_SIGNAL_graphs;
 	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass");
@@ -1647,15 +1647,19 @@ void DrawStackedProcesses(string AnalysisType) {
 				for (int i = 0; i <= QCD_EW_graphs.size(); i++) {
 					if (line.find(QCD_EW_graphs[i]) != string::npos) {
 
+						cout << "Drawing Final Stacked QCD_EW 2D Histogram for: " << line << endl;
 						string FileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
 						Process_Combiner_2D_QCD_EW(AnalysisType, line, FileName, root_files, false);
 
+						cout << "Drawing Final Stacked QCD_EW 2D (Logged) Histogram for: " << line << endl;
 						FileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW_Logged.pdf";
 						Process_Combiner_2D_QCD_EW(AnalysisType, line, FileName, root_files, true);
 
+						cout << "Drawing Final Stacked EW 2D Histogram for: " << line << endl;
 						FileName =  line + "_" + AnalysisType + "_Final_Stacked_EW.pdf";
 						Process_Combiner_2D_EW(AnalysisType, line, FileName, root_files, false);
 
+						cout << "Drawing Final Stacked EW 2D (Logged) Histogram for: " << line << endl;
 						FileName =  line + "_" + AnalysisType + "_Final_Stacked_EW_Logged.pdf";
 						Process_Combiner_2D_EW(AnalysisType, line, FileName, root_files, true);
 
@@ -1668,12 +1672,14 @@ void DrawStackedProcesses(string AnalysisType) {
 		}
 
 		if (line != "") {  		//If not looking at the last line	
+			cout << "Drawing Final Stacked Histogram for: " << line << endl;
 			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
 			Process_Stacker(AnalysisType, line, fileName, root_files, true, "");
 
 			for (int i = 0; i <= logless_names.size(); i++) {
 
 				if (line.find(logless_names[i]) != string::npos) {
+					cout << "Drawing Final Stacked (Logged) Histogram for: " << line << endl;
 					string loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_Logless.pdf";
 					Process_Stacker(AnalysisType, line, loglessFileName, root_files, false, "");
 				}
@@ -1683,9 +1689,11 @@ void DrawStackedProcesses(string AnalysisType) {
 			for (int i = 0; i <= QCD_EW_graphs.size(); i++) {
 
 				if (line.find(QCD_EW_graphs[i]) != string::npos) {
+					cout << "Drawing Final Stacked QCD_EW Histogram for: " << line << endl;
 					string QCD_EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
 					Process_Stacker(AnalysisType, line, QCD_EW_loglessFileName, root_files, false, "QCD_EW");
 
+					cout << "Drawing Final Stacked EW Histogram for: " << line << endl;
 					string EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_EW.pdf";
 					Process_Stacker(AnalysisType, line, EW_loglessFileName, root_files, false, "EW");
 
@@ -1695,31 +1703,38 @@ void DrawStackedProcesses(string AnalysisType) {
 
 			for (int i = 0; i <= IN_OUT_graphs.size(); i++) {
 				if (line == IN_OUT_graphs[i]) {
-					fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_QCD_EW.pdf";
-					Inside_Outside_Overlay(AnalysisType, line, "QCD_EW", fileName, root_files);
+					cout << "Drawing Final Stacked QCD_EW INSIDE OUTSIDE Comparison Histogram for: " << line << endl;
+					string in_out_QCD_EW_fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_QCD_EW.pdf";
+					Inside_Outside_Overlay(AnalysisType, line, "QCD_EW", in_out_QCD_EW_fileName, root_files);
 
-					fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_EW.pdf";
-					Inside_Outside_Overlay(AnalysisType, line, "EW", fileName, root_files);
+					cout << "Drawing Final Stacked EW INSIDE OUTSIDE Comparison Histogram for: " << line << endl;
+					string in_out_EW_fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_EW.pdf";
+					Inside_Outside_Overlay(AnalysisType, line, "EW", in_out_EW_fileName, root_files);
 				}
 			}
 
 			for (int i = 0; i <= EXCEPT_SIGNAL_graphs.size(); i++) {
 				if (line == EXCEPT_SIGNAL_graphs[i]) {
+					cout << "Drawing Final Stacked EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
 					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_FULL.pdf";
 					Except_Signal_Overlay(AnalysisType, line, "", fileName, root_files);
 
+					cout << "Drawing Final Stacked QCD_EW EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
 					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_QCD_EW.pdf";
 					Except_Signal_Overlay(AnalysisType, line, "QCD_EW", fileName, root_files);
-				}
 
+					cout << "Drawing Final Stacked EW EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
+					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_EW.pdf";
+					Except_Signal_Overlay(AnalysisType, line, "EW", fileName, root_files);
+				}
 			}
 		}
 	}
 	
-	string INVIS_VIS_fileName =  line + "_" + AnalysisType + "_INVIS_VIS_TAU_TRUTH_mass_Comparison.pdf";
+	string INVIS_VIS_fileName =  TRUTH_compare_graphs[0] + "_" + AnalysisType + "_INVIS_VIS_TAU_TRUTH_mass_Comparison.pdf";
 	TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[1], INVIS_VIS_fileName, root_files);
 
-	string INVIS_MET_fileName =  line + "_" + AnalysisType + "_INVIS_MET_TRUTH_Comparison.pdf";					
+	string INVIS_MET_fileName =  TRUTH_compare_graphs[0] + "_" + AnalysisType + "_INVIS_MET_TRUTH_Comparison.pdf";					
 	TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[2], INVIS_MET_fileName, root_files);
 	
 }
