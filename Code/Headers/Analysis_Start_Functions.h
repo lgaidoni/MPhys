@@ -1,454 +1,19 @@
 #ifndef Analysis_Start_Functions_h
 #define Analysis_Start_Functions_h
 
-void Start_Sh221_PDF30_Ztt_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
+void Start_Sh221_PDF30_Ztt2jets_Min_N_TChannel_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV1000_E_CMS_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364141", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV1000_E_CMS(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Ztt_MV1000_E_CMS", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV1000_E_CMS->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV1000_E_CMS->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV1000_E_CMS->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_ZqqZll_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_ZqqZll_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("363356", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZll(), 36200);
-	MC_Analysis *Sh221_PDF30_ZqqZll = new MC_Analysis(Chain_Sh221_PDF30_ZqqZll(), AnalysisType, "Sh221_PDF30_ZqqZll", lum_weight, draw, Higgs);
-	Sh221_PDF30_ZqqZll->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_ZqqZll->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_ZqqZll->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364191", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV0_70_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364129", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV0_70_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV140_280_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364176", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV140_280_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV140_280_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV140_280_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV1000_E_CMS_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364169", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV1000_E_CMS(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Wmunu_MV1000_E_CMS", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV1000_E_CMS->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV1000_E_CMS->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV1000_E_CMS->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV70_140_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364103", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV140_280_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV140_280_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364135", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_CFilBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV140_280_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV140_280_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV140_280_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV280_500_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364124", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV280_500_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_CFilBVet(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV280_500_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV140_280_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364164", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV140_280_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV140_280_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV140_280_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV280_500_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364137", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV280_500_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV70_140_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364159", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV70_140_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364131", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV70_140_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV0_70_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364102", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV0_70_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV0_70_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364116", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV0_70_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV0_70_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV0_70_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmm2jets_Min_N_TChannel_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmm2jets_Min_N_TChannel_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("308093", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmm2jets_Min_N_TChannel(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmm2jets_Min_N_TChannel = new MC_Analysis(Chain_Sh221_PDF30_Zmm2jets_Min_N_TChannel(), AnalysisType, "Sh221_PDF30_Zmm2jets_Min_N_TChannel", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmm2jets_Min_N_TChannel->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmm2jets_Min_N_TChannel->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmm2jets_Min_N_TChannel->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV140_280_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364122", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV140_280_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV280_500_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364167", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Wmunu_MV280_500_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV280_500_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV280_500_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV280_500_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV280_500_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364179", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV280_500_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV280_500_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV280_500_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV0_70_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364156", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364194", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV280_500_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364123", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV280_500_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV140_280_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364178", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV140_280_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV140_280_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV140_280_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV500_1000_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364168", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV500_1000(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV500_1000(), AnalysisType, "Sh221_PDF30_Wmunu_MV500_1000", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV500_1000->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV500_1000->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV500_1000->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV140_280_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364108", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV140_280_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV0_70_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364171", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV0_70_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV0_70_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV0_70_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV0_70_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364186", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV0_70_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV0_70_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364101", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV0_70_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364130", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV0_70_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV140_280_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364107", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_CFilBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt2jets_Min_N_TChannel_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("308094", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt2jets_Min_N_TChannel(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt2jets_Min_N_TChannel = new MC_Analysis(Chain_Sh221_PDF30_Ztt2jets_Min_N_TChannel(), AnalysisType, "Sh221_PDF30_Ztt2jets_Min_N_TChannel", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt2jets_Min_N_TChannel->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt2jets_Min_N_TChannel->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt2jets_Min_N_TChannel->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
 }
 
 void Start_Sh221_PDF30_Ztt_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
@@ -466,109 +31,49 @@ void Start_Sh221_PDF30_Ztt_MV140_280_BFil_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 }
 
-void Start_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+void Start_PoPy8_A14_ttb_nonallh_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV140_280_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364106", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/PoPy8_A14_ttb_nonallh_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("410501", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy8_A14_ttb_nonallh(), 36200);
+	MC_Analysis *PoPy8_A14_ttb_nonallh = new MC_Analysis(Chain_PoPy8_A14_ttb_nonallh(), AnalysisType, "PoPy8_A14_ttb_nonallh", lum_weight, draw, Higgs);
+	PoPy8_A14_ttb_nonallh->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
+	PoPy8_A14_ttb_nonallh->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
+	PoPy8_A14_ttb_nonallh->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
 }
 
-void Start_Sh221_PDF30_Zmumu_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
+void Start_Sh221_PDF30_Wenu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV1000_E_CMS_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364113", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV1000_E_CMS(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Zmumu_MV1000_E_CMS", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV1000_E_CMS->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV1000_E_CMS->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV1000_E_CMS->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV0_70_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364171", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV0_70_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV0_70_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV0_70_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
-void Start_Sh221_PDF30_Zee_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+void Start_Sh221_PDF30_Zee_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV0_70_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364115", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV0_70_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV0_70_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV0_70_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV500_1000_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364196", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV500_1000(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV500_1000(), AnalysisType, "Sh221_PDF30_Wtaunu_MV500_1000", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV500_1000->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV500_1000->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV500_1000->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV0_70_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364158", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV0_70_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV140_280_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364162", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV1000_E_CMS_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364127", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV1000_E_CMS(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Zee_MV1000_E_CMS", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV1000_E_CMS->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV1000_E_CMS->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV1000_E_CMS->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV140_280_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364122", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV140_280_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV140_280_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV140_280_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 }
 
 void Start_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
@@ -586,396 +91,6 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
-void Start_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364188", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV70_140_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364117", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV70_140_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV70_140_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV70_140_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV280_500_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364139", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV280_500_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV0_70_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364100", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV0_70_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364157", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV280_500_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364109", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV70_140_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364175", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_BFil(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV70_140_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV70_140_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV70_140_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV140_280_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364120", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV140_280_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364184", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV70_140_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364118", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV70_140_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_CFilBVet(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV70_140_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV70_140_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV70_140_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV70_140_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364105", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_BFil(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV70_140_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV70_140_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV70_140_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV500_1000_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364140", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV500_1000(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV500_1000(), AnalysisType, "Sh221_PDF30_Ztt_MV500_1000", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV500_1000->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV500_1000->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV500_1000->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV70_140_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364133", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_BFil = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_BFil(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV70_140_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV70_140_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364132", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_CFilBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV70_140_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV140_280_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364192", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV140_280_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV280_500_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364110", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_CFilBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV280_500_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364125", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV280_500_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV70_140_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364173", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV70_140_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV70_140_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV70_140_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV280_500_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364138", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_CFilBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV280_500_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV500_1000_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364126", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV500_1000(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV500_1000(), AnalysisType, "Sh221_PDF30_Zee_MV500_1000", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV500_1000->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV500_1000->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV500_1000->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee_MV140_280_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV140_280_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364121", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee_MV140_280_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_CFilBVet(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee_MV140_280_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV0_70_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364170", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV0_70_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV0_70_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV0_70_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_PoPy8_A14_ttb_nonallh_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/PoPy8_A14_ttb_nonallh_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("410501", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy8_A14_ttb_nonallh(), 36200);
-	MC_Analysis *PoPy8_A14_ttb_nonallh = new MC_Analysis(Chain_PoPy8_A14_ttb_nonallh(), AnalysisType, "PoPy8_A14_ttb_nonallh", lum_weight, draw, Higgs);
-	PoPy8_A14_ttb_nonallh->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
-	PoPy8_A14_ttb_nonallh->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
-	PoPy8_A14_ttb_nonallh->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV70_140_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364160", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_CFilBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364187", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV70_140_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364189", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_BFil(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV70_140_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-}
-
 void Start_Sh221_PDF30_Wenu_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
 	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV70_140_CFilBVet_completion.txt";
@@ -989,171 +104,6 @@ void Start_Sh221_PDF30_Wenu_MV70_140_CFilBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV70_140_CFilBVet->DrawHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV500_1000_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364182", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV500_1000(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV500_1000(), AnalysisType, "Sh221_PDF30_Wenu_MV500_1000", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV500_1000->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV500_1000->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV500_1000->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV140_280_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364134", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV140_280_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV140_280_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV140_280_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364190", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zee2jets_Min_N_TChannel_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee2jets_Min_N_TChannel_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("308092", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee2jets_Min_N_TChannel(), 36200);
-	MC_Analysis *Sh221_PDF30_Zee2jets_Min_N_TChannel = new MC_Analysis(Chain_Sh221_PDF30_Zee2jets_Min_N_TChannel(), AnalysisType, "Sh221_PDF30_Zee2jets_Min_N_TChannel", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zee2jets_Min_N_TChannel->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee2jets_Min_N_TChannel->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee2jets_Min_N_TChannel->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364193", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364185", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_CFilBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt2jets_Min_N_TChannel_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt2jets_Min_N_TChannel_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("308094", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt2jets_Min_N_TChannel(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt2jets_Min_N_TChannel = new MC_Analysis(Chain_Sh221_PDF30_Ztt2jets_Min_N_TChannel(), AnalysisType, "Sh221_PDF30_Ztt2jets_Min_N_TChannel", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt2jets_Min_N_TChannel->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt2jets_Min_N_TChannel->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt2jets_Min_N_TChannel->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Wenu_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV1000_E_CMS_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364183", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV1000_E_CMS(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Wenu_MV1000_E_CMS", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV1000_E_CMS->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV1000_E_CMS->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV1000_E_CMS->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV280_500_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364111", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV280_500_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Ztt_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV0_70_CVetBVet_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364128", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CVetBVet(), 36200);
-	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_CVetBVet", lum_weight, draw, Higgs);
-	Sh221_PDF30_Ztt_MV0_70_CVetBVet->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_CVetBVet->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_CVetBVet->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-}
-
-void Start_Sh221_PDF30_Zmumu_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
-	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV500_1000_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364112", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV500_1000(), 36200);
-	MC_Analysis *Sh221_PDF30_Zmumu_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV500_1000(), AnalysisType, "Sh221_PDF30_Zmumu_MV500_1000", lum_weight, draw, Higgs);
-	Sh221_PDF30_Zmumu_MV500_1000->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV500_1000->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV500_1000->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
 }
 
 void Start_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
@@ -1171,6 +121,366 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
+void Start_Sh221_PDF30_Zee_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV70_140_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364117", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV70_140_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV70_140_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV70_140_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV0_70_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364116", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV0_70_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV0_70_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV0_70_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV0_70_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364158", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV0_70_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV0_70_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV0_70_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee2jets_Min_N_TChannel_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee2jets_Min_N_TChannel_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("308092", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee2jets_Min_N_TChannel(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee2jets_Min_N_TChannel = new MC_Analysis(Chain_Sh221_PDF30_Zee2jets_Min_N_TChannel(), AnalysisType, "Sh221_PDF30_Zee2jets_Min_N_TChannel", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee2jets_Min_N_TChannel->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee2jets_Min_N_TChannel->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee2jets_Min_N_TChannel->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364194", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV0_70_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364102", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV0_70_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV0_70_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV0_70_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV500_1000_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364196", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV500_1000(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV500_1000(), AnalysisType, "Sh221_PDF30_Wtaunu_MV500_1000", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV500_1000->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV500_1000->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV500_1000->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV70_140_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364160", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_CFilBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wenu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV70_140_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364173", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV70_140_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV70_140_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV70_140_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV280_500_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364139", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV280_500_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV280_500_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV280_500_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364184", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV70_140_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364132", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_CFilBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV70_140_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV70_140_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV70_140_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV0_70_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364128", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV0_70_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV0_70_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV0_70_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV70_140_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364105", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_BFil(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV70_140_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV70_140_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV70_140_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV280_500_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364137", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV280_500_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV280_500_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV280_500_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV500_1000_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364168", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV500_1000(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV500_1000(), AnalysisType, "Sh221_PDF30_Wmunu_MV500_1000", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV500_1000->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV500_1000->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV500_1000->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV0_70_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364130", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV0_70_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV0_70_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV0_70_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV500_1000_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364140", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV500_1000(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV500_1000(), AnalysisType, "Sh221_PDF30_Ztt_MV500_1000", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV500_1000->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV500_1000->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV500_1000->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV140_280_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364106", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV140_280_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364107", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_CFilBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV140_280_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364164", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV140_280_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV140_280_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV140_280_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV140_280_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364108", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV140_280_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV140_280_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV140_280_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV140_280_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364192", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV140_280_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV140_280_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV140_280_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wenu_MV140_280_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV140_280_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364178", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_BFil(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV140_280_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV140_280_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV140_280_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
+}
+
 void Start_Sh221_PDF30_Wenu_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
 	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV280_500_CFilBVet_completion.txt";
@@ -1184,6 +494,51 @@ void Start_Sh221_PDF30_Wenu_MV280_500_CFilBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV280_500_CFilBVet->DrawHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV1000_E_CMS_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364127", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV1000_E_CMS(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Zee_MV1000_E_CMS", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV1000_E_CMS->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV1000_E_CMS->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV1000_E_CMS->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV0_70_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364101", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364188", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
 void Start_Sh221_PDF30_Zee_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
@@ -1201,6 +556,171 @@ void Start_Sh221_PDF30_Zee_MV0_70_CVetBVet_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
+void Start_Sh221_PDF30_Wenu_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV280_500_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364179", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV280_500_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV280_500_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV280_500_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV140_280_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364162", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV500_1000_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364112", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV500_1000(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV500_1000(), AnalysisType, "Sh221_PDF30_Zmumu_MV500_1000", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV500_1000->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV500_1000->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV500_1000->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wenu_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV500_1000_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364182", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV500_1000(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV500_1000(), AnalysisType, "Sh221_PDF30_Wenu_MV500_1000", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV500_1000->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV500_1000->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV500_1000->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV0_70_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364156", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV0_70_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364129", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV0_70_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV0_70_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV0_70_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV0_70_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364100", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV280_500_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364111", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV280_500_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV280_500_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV280_500_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364193", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV280_500_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364124", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV280_500_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_CFilBVet(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV280_500_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV280_500_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV280_500_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV1000_E_CMS_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364141", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV1000_E_CMS(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Ztt_MV1000_E_CMS", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV1000_E_CMS->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV1000_E_CMS->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV1000_E_CMS->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+}
+
 void Start_Sh221_PDF30_Wenu_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
 	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV0_70_BFil_completion.txt";
@@ -1216,19 +736,79 @@ void Start_Sh221_PDF30_Wenu_MV0_70_BFil_Analysis(string AnalysisType, bool draw,
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 }
 
-void Start_Sh221_PDF30_Wenu_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+void Start_Sh221_PDF30_Zee_MV500_1000_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
-	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV280_500_BFil_completion.txt";
-	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	vector<double> luminosity_info = csv_reader("364181", false);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_BFil(), 36200);
-	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_BFil", lum_weight, draw, Higgs);
-	Sh221_PDF30_Wenu_MV280_500_BFil->BookHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV280_500_BFil->Loop();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV280_500_BFil->DrawHistos();
-	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV500_1000_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364126", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV500_1000(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV500_1000 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV500_1000(), AnalysisType, "Sh221_PDF30_Zee_MV500_1000", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV500_1000->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV500_1000->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV500_1000->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wenu_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV1000_E_CMS_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364183", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV1000_E_CMS(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Wenu_MV1000_E_CMS", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV1000_E_CMS->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV1000_E_CMS->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV1000_E_CMS->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wenu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV0_70_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364170", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_CVetBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV0_70_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV0_70_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV0_70_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV1000_E_CMS_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364113", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV1000_E_CMS(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Zmumu_MV1000_E_CMS", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV1000_E_CMS->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV1000_E_CMS->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV1000_E_CMS->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV280_500_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364125", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV280_500_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV280_500_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV280_500_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 }
 
 void Start_Sh221_PDF30_Zee_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
@@ -1246,6 +826,411 @@ void Start_Sh221_PDF30_Zee_MV70_140_BFil_Analysis(string AnalysisType, bool draw
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 }
 
+void Start_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV280_500_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364109", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV280_500_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV280_500_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364123", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV280_500_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_CVetBVet(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV280_500_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV280_500_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV280_500_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV140_280_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV140_280_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364121", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV140_280_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_CFilBVet(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV140_280_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV140_280_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV140_280_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV140_280_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV140_280_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364135", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_CFilBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV140_280_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV140_280_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV140_280_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364187", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmm2jets_Min_N_TChannel_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmm2jets_Min_N_TChannel_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("308093", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmm2jets_Min_N_TChannel(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmm2jets_Min_N_TChannel = new MC_Analysis(Chain_Sh221_PDF30_Zmm2jets_Min_N_TChannel(), AnalysisType, "Sh221_PDF30_Zmm2jets_Min_N_TChannel", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmm2jets_Min_N_TChannel->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmm2jets_Min_N_TChannel->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmm2jets_Min_N_TChannel->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV70_140_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV70_140_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364118", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV70_140_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_CFilBVet(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV70_140_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV70_140_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV70_140_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV70_140_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364159", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV70_140_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364189", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_BFil(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV70_140_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV70_140_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV70_140_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV280_500_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364167", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Wmunu_MV280_500_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV280_500_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV280_500_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV280_500_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV140_280_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364120", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV140_280_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV140_280_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV140_280_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364185", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV140_280_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364134", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV140_280_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV140_280_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV140_280_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_ZqqZll_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_ZqqZll_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("363356", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZll(), 36200);
+	MC_Analysis *Sh221_PDF30_ZqqZll = new MC_Analysis(Chain_Sh221_PDF30_ZqqZll(), AnalysisType, "Sh221_PDF30_ZqqZll", lum_weight, draw, Higgs);
+	Sh221_PDF30_ZqqZll->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_ZqqZll->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_ZqqZll->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zee_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zee_MV0_70_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364115", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zee_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zee_MV0_70_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV0_70_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zee_MV0_70_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV280_500_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364138", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_CFilBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV280_500_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV280_500_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV280_500_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wenu_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV70_140_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364175", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_BFil(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV70_140_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV70_140_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV70_140_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV70_140_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV70_140_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364133", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_BFil = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_BFil(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV70_140_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV70_140_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV70_140_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wenu_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV140_280_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364176", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV140_280_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV140_280_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV140_280_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV280_500_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364110", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_CFilBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV0_70_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364157", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_CFilBVet(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364190", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364191", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_CFilBVet = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_CFilBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Ztt_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Ztt_MV70_140_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364131", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Ztt_MV70_140_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV70_140_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Ztt_MV70_140_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Zmumu_MV70_140_CVetBVet_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364103", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CVetBVet(), 36200);
+	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_CVetBVet = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_CVetBVet(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_CVetBVet", lum_weight, draw, Higgs);
+	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wmunu_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wmunu_MV1000_E_CMS_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364169", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV1000_E_CMS(), 36200);
+	MC_Analysis *Sh221_PDF30_Wmunu_MV1000_E_CMS = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV1000_E_CMS(), AnalysisType, "Sh221_PDF30_Wmunu_MV1000_E_CMS", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wmunu_MV1000_E_CMS->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV1000_E_CMS->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wmunu_MV1000_E_CMS->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wtaunu_MV0_70_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV0_70_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364186", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_BFil(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wtaunu_MV0_70_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV0_70_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wtaunu_MV0_70_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
+}
+
 void Start_Sh221_PDF30_Wtaunu_MV1000_E_CMS_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	gErrorIgnoreLevel = kError;
 	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wtaunu_MV1000_E_CMS_completion.txt";
@@ -1259,6 +1244,21 @@ void Start_Sh221_PDF30_Wtaunu_MV1000_E_CMS_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV1000_E_CMS->DrawHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
+}
+
+void Start_Sh221_PDF30_Wenu_MV280_500_BFil_Analysis(string AnalysisType, bool draw, bool Higgs) {
+	gErrorIgnoreLevel = kError;
+	string completion_file = "../../Completion_Files/" + AnalysisType + "/Sh221_PDF30_Wenu_MV280_500_BFil_completion.txt";
+	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	vector<double> luminosity_info = csv_reader("364181", false);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_BFil(), 36200);
+	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_BFil = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_BFil(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_BFil", lum_weight, draw, Higgs);
+	Sh221_PDF30_Wenu_MV280_500_BFil->BookHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV280_500_BFil->Loop();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
+	Sh221_PDF30_Wenu_MV280_500_BFil->DrawHistos();
+	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 }
 
 void Start_DATA_Analysis(string AnalysisType, bool draw, bool Higgs) {
