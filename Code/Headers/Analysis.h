@@ -847,7 +847,7 @@ bool MC_Analysis::Cuts(string region) {
 	//pt balance limit Cut Condition
 	if (pT_balance < 0.15) pT_balance_limit = true;
 
-	if (pT_balance_reco < 0.2) pT_balance_reco_condition = true;
+	if (pT_balance_reco < 0.13) pT_balance_reco_condition = true;
 
 	//pt balance 3 Cut Condition
 	if (pT_balance_3 < 0.15) pT_balance_3_limit = true;
@@ -859,7 +859,7 @@ bool MC_Analysis::Cuts(string region) {
 	//Centrality cuts
 	if (Centrality >= -2 && Centrality <= 2) centrality_condition = true;
 	
-	if (DeltaPhi < 2) delta_phi_condition = true;
+	if (DeltaPhi < 2.72825) delta_phi_condition = true;
 
 	//If the region is an except region, make the relevant condition always true to see more of that histogram.
 	if (region == "EXCEPT_Z_mass_condition" && !(bjets_region)) 		Z_mass_condition = true;
@@ -879,7 +879,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "high_energy") {
 
 		leading_jets_invariant_mass = false;
-		if (jet_0_jet_1_mass > 1000) leading_jets_invariant_mass = true;
+		if (jet_0_jet_1_mass > 1449.75) leading_jets_invariant_mass = true;
 
 	}
 
