@@ -365,12 +365,11 @@ void MC_Analysis::ParticleSelection() {
 void MC_Analysis::ParticleSelection_TRUTH() {
 
 	//For the desired output particles, set the generic lepton information to those specific leptons
-
+	met_p4 = met_truth_p4;
 	lep_0_iso_ptvarcone40 = 0;
 	lep_1_iso_ptvarcone40 = 0;
-	met_p4 = met_truth_p4;
+
 	// add variables here
-	
 
 	if (AnalysisType == "Electron") {
 
@@ -431,14 +430,14 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & tau_0_truth;
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
-		lep_0_vis_p4 = tau_0_truth_p4;
-		lep_0_invis_p4 = new TLorentzVector(0.0000001,0.0000001,0.0000001,0.0000001);
+		lep_0_vis_p4 = tau_0_truth_vis_p4;
+		lep_0_invis_p4 = new TLorentzVector(0,0,0,0); // for hadronic tau only
 
 		lep_1 = & tau_1_truth;	
 		lep_1_p4 = tau_1_truth_p4;
 		lep_1_q = & tau_1_truth_q;
-		lep_1_vis_p4 = tau_1_truth_p4;
-		lep_1_invis_p4 = new TLorentzVector(0.0000001,0.0000001,0.0000001,0.0000001);
+		lep_1_vis_p4 = tau_1_truth_vis_p4;
+		lep_1_invis_p4 = new TLorentzVector(0,0,0,0);
 
 		if (tau_0_truth > 0 && tau_1_truth > 0) n_leptons = 2;
 		else n_leptons = 0;
@@ -449,8 +448,8 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & tau_0_truth; 
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
-		lep_0_vis_p4 = tau_0_truth_p4;
-		lep_0_invis_p4 = new TLorentzVector(0.0000001,0.0000001,0.0000001,0.0000001);
+		lep_0_vis_p4 = tau_0_truth_vis_p4;
+		lep_0_invis_p4 = new TLorentzVector(0,0,0,0);
 
 		lep_1 = & elec_0_matched_truth_lepTau;
 		lep_1_p4 = elec_0_matched_truth_lepTau_p4;
@@ -467,8 +466,8 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		lep_0 = & tau_0_truth; 
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
-		lep_0_vis_p4 = tau_0_truth_p4;
-		lep_0_invis_p4 = new TLorentzVector(0.0000001,0.0000001,0.0000001,0.0000001);
+		lep_0_vis_p4 = tau_0_truth_vis_p4;
+		lep_0_invis_p4 = new TLorentzVector(0,0,0,0);
 
 		lep_1 = & muon_0_matched_truth_lepTau;
 		lep_1_p4 = muon_0_matched_truth_lepTau_p4;
@@ -665,9 +664,9 @@ void MC_Analysis::GenerateVariables(bool truth) {
 		TLorentzVector* lep_0_invis_vis_TLV = merge_two_TLV(lep_0_vis_p4, lep_0_invis_p4); // TLorentzVector for total tau (invis and vis)
 		TLorentzVector* lep_1_invis_vis_TLV = merge_two_TLV(lep_1_vis_p4, lep_1_invis_p4); // TLorentzVector for total tau (invis and vis)
 		// Invariant mass (takes TLorentzVectors as inputs)
-		lep_0_invis_vis_mass = InvariantMass(lep_0_vis_p4, lep_0_invis_p4); //uses LepTau_p4_invis and vis for lep 0
-		lep_1_invis_vis_mass = InvariantMass(lep_1_vis_p4, lep_1_invis_p4); //uses LepTau_p4_invis and vis for lep 1
-		met_truth_mass = met_truth_p4->M(); // invariant mass of the TRUTH missing energy
+		lep_0_invis_vis_mass = InvariantMass(lep_0_vis_p4, lep_0_invis_p4); //uses TLorentzVectors
+		lep_1_invis_vis_mass = InvariantMass(lep_1_vis_p4, lep_1_invis_p4); //uses TLorentzVectors
+		met_truth_mass = (met_p4)->M(); // invariant mass of the TRUTH missing energy
 		// Invariant mass of the di-lepton system (lep 0 and lep 1)
 		lep_0_lep_1_invis_vis_mass = InvariantMass(lep_0_invis_vis_TLV, lep_1_invis_vis_TLV); // TLorentz vector of the invariant mass of di-tau
 	}
@@ -743,7 +742,6 @@ void MC_Analysis::FillAllData_PreCut() {
 	//Invariant mass
 	h_lep_0_lep_1_mass_PRE->Fill(lep_0_lep_1_mass, final_weighting);
 	h_jet_0_jet_1_mass_PRE->Fill(jet_0_jet_1_mass, final_weighting);
-
 
 	// Combined
 	h_RapidityDilepton_PRE->Fill(RapidityDilepton, final_weighting);// dilepton rapidity
@@ -1351,10 +1349,17 @@ void MC_Analysis::Fill(string region) {
 			h_lep_0_iso_ptvarcone40_TRUTH->Fill(lep_0_iso_ptvarcone40, final_weighting);
 
 			// Missing energy invariant mass TRUTH
-			h_lep_0_invis_vis_mass->Fill(lep_0_invis_vis_mass, final_weighting); // tau_0 invisible and visable invar mass
-			h_lep_1_invis_vis_mass->Fill(lep_1_invis_vis_mass, final_weighting); // tau_1 invisible and visable invar mass
-			h_lep_0_lep_1_invis_vis_mass->Fill(lep_0_lep_1_invis_vis_mass, final_weighting); // di-tau invar mass
-			h_met_truth_mass->Fill(met_truth_mass, final_weighting); // Missing energy truth
+			h_lep_0_invis_vis_mass_TRUTH->Fill(lep_0_invis_vis_mass, final_weighting); // tau_0 invisible and visable invar mass
+			//cout << "lep_0_invis_vis_mass: " << lep_0_invis_vis_mass << endl;
+
+			h_lep_1_invis_vis_mass_TRUTH->Fill(lep_1_invis_vis_mass, final_weighting); // tau_1 invisible and visable invar mass
+			//cout << "lep_1_invis_vis_mass: " << lep_1_invis_vis_mass << endl;
+
+			h_lep_0_lep_1_invis_vis_mass_TRUTH->Fill(lep_0_lep_1_invis_vis_mass, final_weighting); // di-tau invar mass
+			//cout << "lep_0_lep_1_invis_vis_mass: " << lep_0_lep_1_invis_vis_mass << endl;
+			
+			h_met_truth_mass_TRUTH->Fill(met_truth_mass, final_weighting); // Missing energy truth
+			cout << "met_truth_mass: " << met_truth_mass << endl;
 
 			//Invariant mass TRUTH
 			h_lep_0_lep_1_mass_TRUTH->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
@@ -1604,10 +1609,10 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_neutrino_0_pt_TRUTH, "h_neutrino_0_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_neutrino_1_pt_TRUTH, "h_neutrino_1_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_MET_Type_Favour_TRUTH, "h_MET_Type_Favour_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_invis_vis_mass, "h_lep_0_invis_vis_mass", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_1_invis_vis_mass, "h_lep_1_invis_vis_mass", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_lep_1_invis_vis_mass, "h_lep_0_lep_1_invis_vis_mass", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_met_truth_mass, "h_met_truth_mass", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_invis_vis_mass_TRUTH, "h_lep_0_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_1_invis_vis_mass_TRUTH, "h_lep_1_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_invis_vis_mass_TRUTH, "h_lep_0_lep_1_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_met_truth_mass_TRUTH, "h_met_truth_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 
 	// 2D POLAR TRUTH HISTOGRAMS
   	DrawHistogram2D(h_Mass_Favour_Combination_2D_TRUTH, "h_Mass_Favour_Combination_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
