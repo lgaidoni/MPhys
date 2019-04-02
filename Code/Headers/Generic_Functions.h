@@ -1262,17 +1262,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	}
 
 	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
-	/*
-	TBox *b = new TBox(histogramStack->GetXaxis()->GetXmin(), canvas->GetUymin(), 60, canvas->GetUymax());
-	b->SetFillStyle(3003);
-	b->SetFillColor(kRed);
-	b->Draw();
 
-	TBox *b2 = new TBox(120,canvas->GetUymin(), histogramStack->GetXaxis()->GetXmax(), canvas->GetUymax());
-	b2->SetFillStyle(3003);
-	b2->SetFillColor(kRed);
-	b2->Draw();
-	*/
 	canvas->Update();
 
 	string Region;
@@ -1595,25 +1585,22 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
   
 }
 
-
-/*
 void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_files) { // Shading in the cut region
 	// ONLY NEED SIGNAL FOR SIGNIFICANCE VALUES DONT DRAW
 	vector<string> DataType; // Depending on whether or not the cut as two regions depends what function it will use
 
 	DataType.push_back("lep_0_lep_1_mass");
-	DataType.push_back("lep_0_lep_1_reco_mass_INSIDE");
+	DataType.push_back("lep_0_lep_1_mass_reco_INSIDE");
 	DataType.push_back("jet_0_jet_1_mass");
-	DataType.push_back("jet_0_jet_1_mass_INSIDE");
+	//DataType.push_back("jet_0_jet_1_mass_INSIDE");
 	DataType.push_back("pT_balance");
-	DataType.push_back("DeltaPhi_EXCEPT");
-	DataType.push_back("DeltaPhi_reco_INSIDE_EXCEPT");
 	DataType.push_back("pT_balance_reco");
 	DataType.push_back("pT_balance_reco_INSIDE");
-	DataType.push_back("pT_balance_3");
-	DataType.push_back("Centrality");
-	DataType.push_back("Centrality_INSIDE_EXCEPT");
-	DataType.push_back("DeltaPhi");
+	DataType.push_back("DeltaPhi"); // same as reco
+	DataType.push_back("DeltaPhi_reco_INSIDE");
+	DataType.push_back("Centrality"); // same as reco
+	//DataType.push_back("Centrality_INSIDE");
+
 
 	for (int i=0; i < DataType.size(); i++){
 
@@ -1676,43 +1663,17 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 		ExceptStack->Draw("");
 		//SignalStack->Draw("same"); 
 
-		Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
+		Draw_Region(DataType[i], 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
 
 		canvas->SetRightMargin(0.15);
 
-		// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
-
-		if (find(Type.begin(), Type.end(), string("pT_balance")) != Type.end()) {
-			HistogramShaded = CutShadedRegiononelimit(ExceptHistograms[i], 0, 0.15);
-		}
-
-		if (Type == "pT_balance_reco") { // these histograms have two limits in them
-			HistogramShaded = CutShadedRegiononelimit(ExceptHistogram[i],0,0.2);
-		}
-		if (Type == "jet_0_jet_1_mass") { // these histograms have two limits in them
-			HistogramShaded = CutShadedRegiononelimit(ExceptHistogram[i],0,250);
-		}
-		if (Type == "DeltaPhi") { // these histograms have two limits in them
-			HistogramShaded = CutShadedRegiononelimit(ExceptHistogram[i],0,2);
-		}
-	
-
-
-		if (Type == "lep_0_lep_1_mass" || "lep_0_lep_1_reco_mass"){
-		HistogramShaded = CutShadedRegiontwolimits(ExceptHistogram[i],0,81,81,101);
-		}
-		if (Type == "Centrality") { // these histograms have two limits in them
-			HistogramShaded = CutShadedRegiontwolimits(ExceptHistogram[i], -4,-2,-2,4);
-		}
-	
-		
 		int selected_process;
 		if (AnalysisType == "Electron") selected_process = 7;
 		if (AnalysisType == "Muon") selected_process = 6;
 		if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
 
-		double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, ExceptHistograms);
-		double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, SignalHistograms);
+		double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms);
+		double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, SignalHistograms);
 
 		cout << Except_Significance << endl;
 		cout << Signal_Significance << endl;
@@ -1748,58 +1709,61 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
 			Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
 
-			t.DrawLatex(0.86, 0.61, SignalLegend.c_str());
-			Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
+			//t.DrawLatex(0.86, 0.61, SignalLegend.c_str());
+			//Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
 		}
 		else if (mode == "EW") {
 
 			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
 			Legend_Creator_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
 
-			t.DrawLatex(0.86, 0.71, SignalLegend.c_str());
-			Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
+			//t.DrawLatex(0.86, 0.71, SignalLegend.c_str());
+			//Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
 		}
 		else {
 			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
 			Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
 
-			t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
-			Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
+			//t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
+			//Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
 		}
+		
+		double x1;
+		double x2;
 
-		string Region;
+		// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
+		if (DataType[i] == "lep_0_lep_1_mass") { x1 = 81; x2 = 101; }
+		if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
+		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; }
+		//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
+		if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.15; }
+		if (DataType[i] == "pT_balance_reco")  { x1 = 0; x2 = 0.13; }
+		if (DataType[i] == "pT_balance_reco_INSIDE")  { x1 = 0; x2 = 0.13; }
+		if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
+		if (DataType[i] == "DeltaPhi_reco_INSIDE") { x1 = 0; x2 = 2.72825; }
+		if (DataType[i] == "Centrality"){ x1 = -2; x2 = 2; }
+		//if (DataType[i] == "Centrality_INSIDE") DrawBox(ExceptStack, canvas, -2, 2);
+		// HIGH E for now leave 2/03/19
+		
+		cout << "x1: " << x1 << "x2: " << x2 << endl;
+		TBox *b = new TBox(ExceptStack->GetXaxis()->GetXmin(), canvas->GetUymin(), x1, canvas->GetUymax());
+		b->SetFillStyle(3003);
+		b->SetFillColor(kRed);
+		b->Draw();
 
-		if (DataType.find("CONTROL") != string::npos) Region = "CONTROL";
-		else if (DataType.find("PRE") != string::npos) Region = "PRE";
-		else if (DataType.find("EXCEPT") != string::npos) Region = "EXCEPT";
-		else if (DataType.find("HIGH_E") != string::npos) Region = "HIGH_E";
-		else if (DataType.find("BJET") != string::npos) Region = "BJET";
-		else if (DataType.find("TRUTH") != string::npos) Region = "TRUTH";
-		else Region = "SEARCH";
+		TBox *b2 = new TBox(x2,canvas->GetUymin(), ExceptStack->GetXaxis()->GetXmax(), canvas->GetUymax());
+		b2->SetFillStyle(3003);
+		b2->SetFillColor(kRed);
+		b2->Draw();
 
 		//Create the full output file path
-		string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE-SHADED/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+		string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE-SHADED/" + DataType[i] + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 		//Write out to a PDF file
 		canvas->SaveAs(FullOutputFilePath.c_str());
+	}
 
 }
-
-void CutShadedRegiononelimit(TH2F *histogram, double lowermin, double uppermin){
-
-	histogram->SetFillColor(42);
-	histogram->GetXaxis()->SetRange(lowermin, uppermin);
-	histogram->Draw("Same");
-
-}
-
-void CutShadedRegiontwolimits(TH2F *histogram, double lowermin, double uppermin, double lowermax, double uppermax){
-
-	
-
-
-}
-*/
 
 void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
 	
