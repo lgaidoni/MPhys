@@ -6,7 +6,7 @@ void Start_Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364197", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
@@ -21,7 +21,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201_Higgs_Analysis(string An
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364190", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -36,7 +36,7 @@ void Start_Sh221_PDF30_Ztt_MV500_1000_r9364_Higgs_Analysis(string AnalysisType, 
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV500_1000_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364140", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV500_1000_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV500_1000_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV500_1000_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV500_1000_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV500_1000_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV500_1000_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
@@ -51,7 +51,7 @@ void Start_Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("308092", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee2jets_Min_N_TChannel_r10201"; 	completion.flush(); 	completion.close();
@@ -66,7 +66,7 @@ void Start_Sh222_PDF30_llvv_r9364_Higgs_Analysis(string AnalysisType, bool draw,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh222_PDF30_llvv_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh222_PDF30_llvv_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364254", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_llvv_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_llvv_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh222_PDF30_llvv_r9364 = new MC_Analysis(Chain_Sh222_PDF30_llvv_r9364_Higgs(), AnalysisType, "Sh222_PDF30_llvv_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh222_PDF30_llvv_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh222_PDF30_llvv_r9364"; 	completion.flush(); 	completion.close();
@@ -81,7 +81,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364132", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -96,7 +96,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364171", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -111,7 +111,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_BFil_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV70_140_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364105", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV70_140_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -126,7 +126,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_BFil_r9364_Higgs_Analysis(string AnalysisType,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV0_70_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364130", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV0_70_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -141,7 +141,7 @@ void Start_Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("308093", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmm2jets_Min_N_TChannel_r9364"; 	completion.flush(); 	completion.close();
@@ -156,7 +156,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364174", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -171,7 +171,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_BFil_r9364_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV0_70_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364102", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV0_70_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -186,7 +186,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364114", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -201,7 +201,7 @@ void Start_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364194", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -216,7 +216,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364185", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -231,7 +231,7 @@ void Start_Sh221_PDF30_Zee_MV500_1000_r9364_Higgs_Analysis(string AnalysisType, 
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV500_1000_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364126", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV500_1000_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV500_1000_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV500_1000_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV500_1000_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV500_1000_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV500_1000_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
@@ -246,7 +246,7 @@ void Start_Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("308094", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt2jets_Min_N_TChannel_r9364"; 	completion.flush(); 	completion.close();
@@ -261,7 +261,7 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364166", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -276,7 +276,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364107", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -291,7 +291,7 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_BFil_r9364_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV280_500_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364167", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV280_500_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV280_500_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV280_500_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV280_500_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -306,7 +306,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364131", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -321,7 +321,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_BFil_r10201_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV0_70_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364172", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV0_70_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -336,7 +336,7 @@ void Start_Sh222_PDF30_lllv_r9364_Higgs_Analysis(string AnalysisType, bool draw,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh222_PDF30_lllv_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh222_PDF30_lllv_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364253", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_lllv_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_lllv_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh222_PDF30_lllv_r9364 = new MC_Analysis(Chain_Sh222_PDF30_lllv_r9364_Higgs(), AnalysisType, "Sh222_PDF30_lllv_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh222_PDF30_lllv_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh222_PDF30_lllv_r9364"; 	completion.flush(); 	completion.close();
@@ -351,7 +351,7 @@ void Start_Sh221_PDF30_Wmunu_MV500_1000_r9364_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV500_1000_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364168", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV500_1000_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV500_1000_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV500_1000_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV500_1000_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV500_1000_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV500_1000_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
@@ -366,7 +366,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364104", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -381,7 +381,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_BFil_r9364_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV70_140_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364175", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV70_140_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -396,7 +396,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364103", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -411,7 +411,7 @@ void Start_Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("308094", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt2jets_Min_N_TChannel_r10201"; 	completion.flush(); 	completion.close();
@@ -426,7 +426,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364101", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -441,7 +441,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364179", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -456,7 +456,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364114", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -471,7 +471,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364123", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -486,7 +486,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364106", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -501,7 +501,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364100", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -516,7 +516,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364189", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -531,7 +531,7 @@ void Start_Sh221_PDF30_Wmunu_MV500_1000_r10201_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV500_1000_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364168", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV500_1000_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV500_1000_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV500_1000_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV500_1000_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV500_1000_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV500_1000_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
@@ -546,7 +546,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364132", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -561,7 +561,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_BFil_r10201_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV0_70_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364116", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV0_70_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV0_70_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -576,7 +576,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_BFil_r10201_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV70_140_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364119", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV70_140_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV70_140_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -591,7 +591,7 @@ void Start_Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364197", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
@@ -606,7 +606,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364120", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -621,7 +621,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364180", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -636,7 +636,7 @@ void Start_Sh221_PDF30_Ztt_MV1000_E_CMS_r10201_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV1000_E_CMS_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364141", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV1000_E_CMS_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV1000_E_CMS_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV1000_E_CMS_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV1000_E_CMS_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV1000_E_CMS_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV1000_E_CMS_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
@@ -651,7 +651,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364192", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -666,7 +666,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364186", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -681,7 +681,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_BFil_r9364_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV140_280_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364122", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV140_280_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV140_280_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -696,7 +696,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364121", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -711,7 +711,7 @@ void Start_Sh221_PDF30_Wtaunu_MV500_1000_r9364_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV500_1000_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364196", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV500_1000_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV500_1000_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV500_1000_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV500_1000_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV500_1000_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV500_1000_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
@@ -726,7 +726,7 @@ void Start_PoPy_P2012_Wt_incl_atop_r9364_Higgs_Analysis(string AnalysisType, boo
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_Wt_incl_atop_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_Wt_incl_atop_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410014", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_incl_atop_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_incl_atop_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy_P2012_Wt_incl_atop_r9364 = new MC_Analysis(Chain_PoPy_P2012_Wt_incl_atop_r9364_Higgs(), AnalysisType, "PoPy_P2012_Wt_incl_atop_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_Wt_incl_atop_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_Wt_incl_atop_r9364"; 	completion.flush(); 	completion.close();
@@ -741,7 +741,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364101", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -756,7 +756,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364106", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -771,7 +771,7 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364165", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -786,7 +786,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364109", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -801,7 +801,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_BFil_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV280_500_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364181", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV280_500_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -816,7 +816,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364135", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -831,7 +831,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364156", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -846,7 +846,7 @@ void Start_Sh221_PDF30_Zmumu_MV500_1000_r9364_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV500_1000_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364112", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV500_1000_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV500_1000_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV500_1000_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV500_1000_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV500_1000_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV500_1000_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
@@ -861,7 +861,7 @@ void Start_PoPy_P2012_Wt_incl_top_r9364_Higgs_Analysis(string AnalysisType, bool
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_Wt_incl_top_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_Wt_incl_top_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410013", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_incl_top_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_incl_top_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy_P2012_Wt_incl_top_r9364 = new MC_Analysis(Chain_PoPy_P2012_Wt_incl_top_r9364_Higgs(), AnalysisType, "PoPy_P2012_Wt_incl_top_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_Wt_incl_top_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_Wt_incl_top_r9364"; 	completion.flush(); 	completion.close();
@@ -876,7 +876,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_BFil_r10201_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV140_280_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364108", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV140_280_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -891,7 +891,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364128", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -906,7 +906,7 @@ void Start_Sh221_PDF30_Zee_MV1000_E_CMS_r10201_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV1000_E_CMS_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364127", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV1000_E_CMS_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV1000_E_CMS_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV1000_E_CMS_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV1000_E_CMS_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV1000_E_CMS_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV1000_E_CMS_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
@@ -921,7 +921,7 @@ void Start_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364162", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -936,7 +936,7 @@ void Start_Sh222_PDF30_lvvv_r9364_Higgs_Analysis(string AnalysisType, bool draw,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh222_PDF30_lvvv_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh222_PDF30_lvvv_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364255", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_lvvv_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_lvvv_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh222_PDF30_lvvv_r9364 = new MC_Analysis(Chain_Sh222_PDF30_lvvv_r9364_Higgs(), AnalysisType, "Sh222_PDF30_lvvv_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh222_PDF30_lvvv_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh222_PDF30_lvvv_r9364"; 	completion.flush(); 	completion.close();
@@ -951,7 +951,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_BFil_r10201_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV0_70_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364158", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV0_70_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -966,7 +966,7 @@ void Start_Sh221_PDF30_ZqqZvv_r10201_Higgs_Analysis(string AnalysisType, bool dr
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_ZqqZvv_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_ZqqZvv_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363355", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZvv_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZvv_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_ZqqZvv_r10201 = new MC_Analysis(Chain_Sh221_PDF30_ZqqZvv_r10201_Higgs(), AnalysisType, "Sh221_PDF30_ZqqZvv_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_ZqqZvv_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_ZqqZvv_r10201"; 	completion.flush(); 	completion.close();
@@ -981,7 +981,7 @@ void Start_Sh221_PDF30_Wenu_MV500_1000_r9364_Higgs_Analysis(string AnalysisType,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV500_1000_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364182", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV500_1000_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV500_1000_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV500_1000_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV500_1000_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV500_1000_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV500_1000_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV500_1000_r9364"; 	completion.flush(); 	completion.close();
@@ -996,7 +996,7 @@ void Start_Sh221_PDF30_Wenu_MV140_280_BFil_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV140_280_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364178", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV140_280_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1011,7 +1011,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_BFil_r10201_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV0_70_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364130", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV0_70_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1026,7 +1026,7 @@ void Start_PoPy_P2012_STSchan_noAllHad_atop_r9364_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_STSchan_noAllHad_atop_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_STSchan_noAllHad_atop_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410026", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_STSchan_noAllHad_atop_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_STSchan_noAllHad_atop_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy_P2012_STSchan_noAllHad_atop_r9364 = new MC_Analysis(Chain_PoPy_P2012_STSchan_noAllHad_atop_r9364_Higgs(), AnalysisType, "PoPy_P2012_STSchan_noAllHad_atop_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_STSchan_noAllHad_atop_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_STSchan_noAllHad_atop_r9364"; 	completion.flush(); 	completion.close();
@@ -1041,7 +1041,7 @@ void Start_Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364113", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
@@ -1056,7 +1056,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364157", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1071,7 +1071,7 @@ void Start_PoPy_P2012_st_tchan_lept_atop_r9364_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_st_tchan_lept_atop_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_st_tchan_lept_atop_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410012", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_st_tchan_lept_atop_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_st_tchan_lept_atop_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy_P2012_st_tchan_lept_atop_r9364 = new MC_Analysis(Chain_PoPy_P2012_st_tchan_lept_atop_r9364_Higgs(), AnalysisType, "PoPy_P2012_st_tchan_lept_atop_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_st_tchan_lept_atop_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_st_tchan_lept_atop_r9364"; 	completion.flush(); 	completion.close();
@@ -1086,7 +1086,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_BFil_r10201_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV280_500_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364139", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV280_500_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1101,7 +1101,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364118", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1116,7 +1116,7 @@ void Start_Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364176", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1131,7 +1131,7 @@ void Start_Sh222_PDF30_llvv_r10201_Higgs_Analysis(string AnalysisType, bool draw
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh222_PDF30_llvv_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh222_PDF30_llvv_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364254", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_llvv_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_llvv_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh222_PDF30_llvv_r10201 = new MC_Analysis(Chain_Sh222_PDF30_llvv_r10201_Higgs(), AnalysisType, "Sh222_PDF30_llvv_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh222_PDF30_llvv_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh222_PDF30_llvv_r10201"; 	completion.flush(); 	completion.close();
@@ -1146,7 +1146,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364137", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1161,7 +1161,7 @@ void Start_Sh221_PDF30_Zee_MV500_1000_r10201_Higgs_Analysis(string AnalysisType,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV500_1000_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364126", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV500_1000_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV500_1000_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV500_1000_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV500_1000_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV500_1000_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV500_1000_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
@@ -1176,7 +1176,7 @@ void Start_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201_Higgs_Analysis(string An
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364194", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1191,7 +1191,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364117", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1206,7 +1206,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364170", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1221,7 +1221,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364134", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1236,7 +1236,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364120", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1251,7 +1251,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_BFil_r9364_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV140_280_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364136", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV140_280_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -1266,7 +1266,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_BFil_r10201_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV280_500_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364111", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV280_500_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1281,7 +1281,7 @@ void Start_PoPy_P2012_Wt_incl_top_r10201_Higgs_Analysis(string AnalysisType, boo
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_Wt_incl_top_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_Wt_incl_top_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410013", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_incl_top_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_incl_top_r10201_Higgs(), 43587.3);
 	MC_Analysis *PoPy_P2012_Wt_incl_top_r10201 = new MC_Analysis(Chain_PoPy_P2012_Wt_incl_top_r10201_Higgs(), AnalysisType, "PoPy_P2012_Wt_incl_top_r10201_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_Wt_incl_top_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_Wt_incl_top_r10201"; 	completion.flush(); 	completion.close();
@@ -1296,7 +1296,7 @@ void Start_Sh221_PDF30_Wmunu_MV70_140_BFil_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV70_140_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364161", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV70_140_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1311,7 +1311,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364157", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1326,7 +1326,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_BFil_r10201_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV140_280_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364122", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV140_280_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV140_280_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1341,7 +1341,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364173", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1356,7 +1356,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_BFil_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV70_140_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364105", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV70_140_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -1371,7 +1371,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364188", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1386,7 +1386,7 @@ void Start_Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364195", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -1401,7 +1401,7 @@ void Start_PoPy_P2012_Wt_incl_atop_r10201_Higgs_Analysis(string AnalysisType, bo
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_Wt_incl_atop_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_Wt_incl_atop_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410014", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_incl_atop_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_incl_atop_r10201_Higgs(), 43587.3);
 	MC_Analysis *PoPy_P2012_Wt_incl_atop_r10201 = new MC_Analysis(Chain_PoPy_P2012_Wt_incl_atop_r10201_Higgs(), AnalysisType, "PoPy_P2012_Wt_incl_atop_r10201_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_Wt_incl_atop_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_Wt_incl_atop_r10201"; 	completion.flush(); 	completion.close();
@@ -1416,7 +1416,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_BFil_r10201_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV280_500_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364125", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV280_500_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV280_500_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1431,7 +1431,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364100", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1446,7 +1446,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_BFil_r9364_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV280_500_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364111", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV280_500_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -1461,7 +1461,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364138", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1476,7 +1476,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364115", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1491,7 +1491,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_BFil_r9364_Higgs_Analysis(string AnalysisType,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV0_70_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364116", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV0_70_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV0_70_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -1506,7 +1506,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364124", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1521,7 +1521,7 @@ void Start_Sh221_PDF30_ZqqZll_r9364_Higgs_Analysis(string AnalysisType, bool dra
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_ZqqZll_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_ZqqZll_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363356", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZll_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZll_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_ZqqZll_r9364 = new MC_Analysis(Chain_Sh221_PDF30_ZqqZll_r9364_Higgs(), AnalysisType, "Sh221_PDF30_ZqqZll_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_ZqqZll_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_ZqqZll_r9364"; 	completion.flush(); 	completion.close();
@@ -1536,7 +1536,7 @@ void Start_PoPy_P2012_st_tchan_lept_top_r9364_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_st_tchan_lept_top_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_st_tchan_lept_top_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410011", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_st_tchan_lept_top_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_st_tchan_lept_top_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy_P2012_st_tchan_lept_top_r9364 = new MC_Analysis(Chain_PoPy_P2012_st_tchan_lept_top_r9364_Higgs(), AnalysisType, "PoPy_P2012_st_tchan_lept_top_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_st_tchan_lept_top_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_st_tchan_lept_top_r9364"; 	completion.flush(); 	completion.close();
@@ -1551,7 +1551,7 @@ void Start_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364159", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1566,7 +1566,7 @@ void Start_Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("308092", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee2jets_Min_N_TChannel_r9364"; 	completion.flush(); 	completion.close();
@@ -1581,7 +1581,7 @@ void Start_Sh222_PDF30_lllv_r10201_Higgs_Analysis(string AnalysisType, bool draw
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh222_PDF30_lllv_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh222_PDF30_lllv_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364253", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_lllv_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_lllv_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh222_PDF30_lllv_r10201 = new MC_Analysis(Chain_Sh222_PDF30_lllv_r10201_Higgs(), AnalysisType, "Sh222_PDF30_lllv_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh222_PDF30_lllv_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh222_PDF30_lllv_r10201"; 	completion.flush(); 	completion.close();
@@ -1596,7 +1596,7 @@ void Start_Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364163", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1611,7 +1611,7 @@ void Start_Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364113", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
@@ -1626,7 +1626,7 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_BFil_r10201_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV280_500_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364167", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV280_500_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV280_500_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV280_500_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV280_500_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1641,7 +1641,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201_Higgs_Analysis(string An
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364191", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1656,7 +1656,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_BFil_r9364_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV140_280_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364108", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV140_280_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -1671,7 +1671,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364180", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1686,7 +1686,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364191", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1701,7 +1701,7 @@ void Start_Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364195", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -1716,7 +1716,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364117", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1731,7 +1731,7 @@ void Start_PoPy_P2012_STSchan_noAllHad_top_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_STSchan_noAllHad_top_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_STSchan_noAllHad_top_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410025", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_STSchan_noAllHad_top_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_STSchan_noAllHad_top_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy_P2012_STSchan_noAllHad_top_r9364 = new MC_Analysis(Chain_PoPy_P2012_STSchan_noAllHad_top_r9364_Higgs(), AnalysisType, "PoPy_P2012_STSchan_noAllHad_top_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_STSchan_noAllHad_top_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_STSchan_noAllHad_top_r9364"; 	completion.flush(); 	completion.close();
@@ -1746,7 +1746,7 @@ void Start_Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364169", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
@@ -1761,7 +1761,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_BFil_r9364_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV280_500_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364139", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV280_500_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -1776,7 +1776,7 @@ void Start_Sh221_PDF30_WqqZvv_r9364_Higgs_Analysis(string AnalysisType, bool dra
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_WqqZvv_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_WqqZvv_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363357", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WqqZvv_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WqqZvv_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_WqqZvv_r9364 = new MC_Analysis(Chain_Sh221_PDF30_WqqZvv_r9364_Higgs(), AnalysisType, "Sh221_PDF30_WqqZvv_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_WqqZvv_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_WqqZvv_r9364"; 	completion.flush(); 	completion.close();
@@ -1791,7 +1791,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364103", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1806,7 +1806,7 @@ void Start_Sh222_PDF30_llll_r9364_Higgs_Analysis(string AnalysisType, bool draw,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh222_PDF30_llll_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh222_PDF30_llll_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364250", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_llll_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_llll_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh222_PDF30_llll_r9364 = new MC_Analysis(Chain_Sh222_PDF30_llll_r9364_Higgs(), AnalysisType, "Sh222_PDF30_llll_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh222_PDF30_llll_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh222_PDF30_llll_r9364"; 	completion.flush(); 	completion.close();
@@ -1821,7 +1821,7 @@ void Start_PoPy_P2012_Wt_dilepton_atop_r10201_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_Wt_dilepton_atop_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_Wt_dilepton_atop_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410016", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_dilepton_atop_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_dilepton_atop_r10201_Higgs(), 43587.3);
 	MC_Analysis *PoPy_P2012_Wt_dilepton_atop_r10201 = new MC_Analysis(Chain_PoPy_P2012_Wt_dilepton_atop_r10201_Higgs(), AnalysisType, "PoPy_P2012_Wt_dilepton_atop_r10201_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_Wt_dilepton_atop_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_Wt_dilepton_atop_r10201"; 	completion.flush(); 	completion.close();
@@ -1836,7 +1836,7 @@ void Start_Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("308093", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmm2jets_Min_N_TChannel_r10201"; 	completion.flush(); 	completion.close();
@@ -1851,7 +1851,7 @@ void Start_Sh221_PDF30_Wenu_MV1000_E_CMS_r9364_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV1000_E_CMS_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364183", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV1000_E_CMS_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV1000_E_CMS_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV1000_E_CMS_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV1000_E_CMS_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV1000_E_CMS_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV1000_E_CMS_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
@@ -1866,7 +1866,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364121", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1881,7 +1881,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364137", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1896,7 +1896,7 @@ void Start_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364193", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1911,7 +1911,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364170", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1926,7 +1926,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_BFil_r9364_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV70_140_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364133", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV70_140_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -1941,7 +1941,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364123", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -1956,7 +1956,7 @@ void Start_PoPy_P2012_Wt_dilepton_top_r10201_Higgs_Analysis(string AnalysisType,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_Wt_dilepton_top_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_Wt_dilepton_top_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410015", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_dilepton_top_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_dilepton_top_r10201_Higgs(), 43587.3);
 	MC_Analysis *PoPy_P2012_Wt_dilepton_top_r10201 = new MC_Analysis(Chain_PoPy_P2012_Wt_dilepton_top_r10201_Higgs(), AnalysisType, "PoPy_P2012_Wt_dilepton_top_r10201_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_Wt_dilepton_top_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_Wt_dilepton_top_r10201"; 	completion.flush(); 	completion.close();
@@ -1971,7 +1971,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364184", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -1986,7 +1986,7 @@ void Start_PoPy_P2012_Wt_dilepton_top_r9364_Higgs_Analysis(string AnalysisType, 
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_Wt_dilepton_top_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_Wt_dilepton_top_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410015", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_dilepton_top_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_dilepton_top_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy_P2012_Wt_dilepton_top_r9364 = new MC_Analysis(Chain_PoPy_P2012_Wt_dilepton_top_r9364_Higgs(), AnalysisType, "PoPy_P2012_Wt_dilepton_top_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_Wt_dilepton_top_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_Wt_dilepton_top_r9364"; 	completion.flush(); 	completion.close();
@@ -2001,7 +2001,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364110", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2016,7 +2016,7 @@ void Start_Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364177", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2031,7 +2031,7 @@ void Start_Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364176", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2046,7 +2046,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364190", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2061,7 +2061,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364185", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2076,7 +2076,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_BFil_r10201_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV70_140_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364175", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV70_140_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -2091,7 +2091,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364187", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2106,7 +2106,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364188", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2121,7 +2121,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_BFil_r10201_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV140_280_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364136", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV140_280_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -2136,7 +2136,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364134", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2151,7 +2151,7 @@ void Start_Sh221_PDF30_WlvZqq_r10201_Higgs_Analysis(string AnalysisType, bool dr
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_WlvZqq_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_WlvZqq_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363489", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WlvZqq_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WlvZqq_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_WlvZqq_r10201 = new MC_Analysis(Chain_Sh221_PDF30_WlvZqq_r10201_Higgs(), AnalysisType, "Sh221_PDF30_WlvZqq_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_WlvZqq_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_WlvZqq_r10201"; 	completion.flush(); 	completion.close();
@@ -2166,7 +2166,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364129", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2181,7 +2181,7 @@ void Start_Sh221_PDF30_Wmunu_MV140_280_BFil_r10201_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV140_280_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364164", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV140_280_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -2196,7 +2196,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364156", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2211,7 +2211,7 @@ void Start_Sh221_PDF30_Wmunu_MV70_140_BFil_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV70_140_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364161", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV70_140_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -2226,7 +2226,7 @@ void Start_Sh221_PDF30_Wenu_MV140_280_BFil_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV140_280_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364178", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV140_280_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -2241,7 +2241,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364118", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2256,7 +2256,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_BFil_r10201_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV70_140_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364133", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV70_140_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -2271,7 +2271,7 @@ void Start_Sh221_PDF30_Wtaunu_MV500_1000_r10201_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV500_1000_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364196", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV500_1000_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV500_1000_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV500_1000_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV500_1000_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV500_1000_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV500_1000_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
@@ -2286,7 +2286,7 @@ void Start_Sh221_PDF30_ZqqZll_r10201_Higgs_Analysis(string AnalysisType, bool dr
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_ZqqZll_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_ZqqZll_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363356", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZll_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZll_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_ZqqZll_r10201 = new MC_Analysis(Chain_Sh221_PDF30_ZqqZll_r10201_Higgs(), AnalysisType, "Sh221_PDF30_ZqqZll_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_ZqqZll_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_ZqqZll_r10201"; 	completion.flush(); 	completion.close();
@@ -2301,7 +2301,7 @@ void Start_PoPy_P2012_STSchan_noAllHad_top_r10201_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_STSchan_noAllHad_top_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_STSchan_noAllHad_top_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410025", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_STSchan_noAllHad_top_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_STSchan_noAllHad_top_r10201_Higgs(), 43587.3);
 	MC_Analysis *PoPy_P2012_STSchan_noAllHad_top_r10201 = new MC_Analysis(Chain_PoPy_P2012_STSchan_noAllHad_top_r10201_Higgs(), AnalysisType, "PoPy_P2012_STSchan_noAllHad_top_r10201_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_STSchan_noAllHad_top_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_STSchan_noAllHad_top_r10201"; 	completion.flush(); 	completion.close();
@@ -2316,7 +2316,7 @@ void Start_Sh221_PDF30_Zee_MV1000_E_CMS_r9364_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV1000_E_CMS_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364127", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV1000_E_CMS_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV1000_E_CMS_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV1000_E_CMS_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV1000_E_CMS_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV1000_E_CMS_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV1000_E_CMS_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
@@ -2331,7 +2331,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364107", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2346,7 +2346,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364187", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2361,7 +2361,7 @@ void Start_Sh221_PDF30_WlvZqq_r9364_Higgs_Analysis(string AnalysisType, bool dra
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_WlvZqq_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_WlvZqq_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363489", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WlvZqq_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WlvZqq_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_WlvZqq_r9364 = new MC_Analysis(Chain_Sh221_PDF30_WlvZqq_r9364_Higgs(), AnalysisType, "Sh221_PDF30_WlvZqq_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_WlvZqq_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_WlvZqq_r9364"; 	completion.flush(); 	completion.close();
@@ -2376,7 +2376,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_BFil_r10201_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV0_70_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364102", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV0_70_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV0_70_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV0_70_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV0_70_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV0_70_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -2391,7 +2391,7 @@ void Start_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364162", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2406,7 +2406,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_BFil_r9364_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV280_500_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364125", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV280_500_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV280_500_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -2421,7 +2421,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364192", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -2436,7 +2436,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_BFil_r9364_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV0_70_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364158", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV0_70_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV0_70_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV0_70_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV0_70_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV0_70_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -2451,7 +2451,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364186", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -2466,7 +2466,7 @@ void Start_Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364177", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2481,7 +2481,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364109", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2496,7 +2496,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364104", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2511,7 +2511,7 @@ void Start_Sh222_PDF30_llll_r10201_Higgs_Analysis(string AnalysisType, bool draw
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh222_PDF30_llll_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh222_PDF30_llll_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364250", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_llll_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_llll_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh222_PDF30_llll_r10201 = new MC_Analysis(Chain_Sh222_PDF30_llll_r10201_Higgs(), AnalysisType, "Sh222_PDF30_llll_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh222_PDF30_llll_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh222_PDF30_llll_r10201"; 	completion.flush(); 	completion.close();
@@ -2526,7 +2526,7 @@ void Start_Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364169", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
@@ -2541,7 +2541,7 @@ void Start_Sh221_PDF30_Ztt_MV1000_E_CMS_r9364_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV1000_E_CMS_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364141", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV1000_E_CMS_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV1000_E_CMS_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV1000_E_CMS_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV1000_E_CMS_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV1000_E_CMS_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV1000_E_CMS_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV1000_E_CMS_r9364"; 	completion.flush(); 	completion.close();
@@ -2556,7 +2556,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364135", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2571,7 +2571,7 @@ void Start_Sh221_PDF30_Wmunu_MV140_280_BFil_r9364_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV140_280_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364164", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV140_280_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -2586,7 +2586,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364_Higgs_Analysis(string Analysis
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364171", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2601,7 +2601,7 @@ void Start_Sh222_PDF30_lvvv_r10201_Higgs_Analysis(string AnalysisType, bool draw
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh222_PDF30_lvvv_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh222_PDF30_lvvv_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364255", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_lvvv_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh222_PDF30_lvvv_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh222_PDF30_lvvv_r10201 = new MC_Analysis(Chain_Sh222_PDF30_lvvv_r10201_Higgs(), AnalysisType, "Sh222_PDF30_lvvv_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh222_PDF30_lvvv_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh222_PDF30_lvvv_r10201"; 	completion.flush(); 	completion.close();
@@ -2616,7 +2616,7 @@ void Start_Sh221_PDF30_WqqZll_r9364_Higgs_Analysis(string AnalysisType, bool dra
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_WqqZll_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_WqqZll_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363358", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WqqZll_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WqqZll_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_WqqZll_r9364 = new MC_Analysis(Chain_Sh221_PDF30_WqqZll_r9364_Higgs(), AnalysisType, "Sh221_PDF30_WqqZll_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_WqqZll_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_WqqZll_r9364"; 	completion.flush(); 	completion.close();
@@ -2631,7 +2631,7 @@ void Start_Sh221_PDF30_Wenu_MV500_1000_r10201_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV500_1000_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364182", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV500_1000_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV500_1000_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV500_1000_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV500_1000_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV500_1000_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV500_1000_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
@@ -2646,7 +2646,7 @@ void Start_Sh221_PDF30_WqqZll_r10201_Higgs_Analysis(string AnalysisType, bool dr
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_WqqZll_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_WqqZll_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363358", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WqqZll_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WqqZll_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_WqqZll_r10201 = new MC_Analysis(Chain_Sh221_PDF30_WqqZll_r10201_Higgs(), AnalysisType, "Sh221_PDF30_WqqZll_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_WqqZll_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_WqqZll_r10201"; 	completion.flush(); 	completion.close();
@@ -2661,7 +2661,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364174", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2676,7 +2676,7 @@ void Start_Sh221_PDF30_Wenu_MV1000_E_CMS_r10201_Higgs_Analysis(string AnalysisTy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV1000_E_CMS_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364183", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV1000_E_CMS_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV1000_E_CMS_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV1000_E_CMS_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV1000_E_CMS_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV1000_E_CMS_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV1000_E_CMS_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV1000_E_CMS_r10201"; 	completion.flush(); 	completion.close();
@@ -2691,7 +2691,7 @@ void Start_Sh221_PDF30_WqqZvv_r10201_Higgs_Analysis(string AnalysisType, bool dr
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_WqqZvv_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_WqqZvv_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363357", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WqqZvv_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_WqqZvv_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_WqqZvv_r10201 = new MC_Analysis(Chain_Sh221_PDF30_WqqZvv_r10201_Higgs(), AnalysisType, "Sh221_PDF30_WqqZvv_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_WqqZvv_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_WqqZvv_r10201"; 	completion.flush(); 	completion.close();
@@ -2706,7 +2706,7 @@ void Start_Sh221_PDF30_Ztt_MV500_1000_r10201_Higgs_Analysis(string AnalysisType,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV500_1000_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364140", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV500_1000_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV500_1000_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV500_1000_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV500_1000_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV500_1000_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV500_1000_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
@@ -2721,7 +2721,7 @@ void Start_PhPy8_A14_ttb_nonallh_r10201_Higgs_Analysis(string AnalysisType, bool
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PhPy8_A14_ttb_nonallh_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PhPy8_A14_ttb_nonallh_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410470", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PhPy8_A14_ttb_nonallh_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PhPy8_A14_ttb_nonallh_r10201_Higgs(), 43587.3);
 	MC_Analysis *PhPy8_A14_ttb_nonallh_r10201 = new MC_Analysis(Chain_PhPy8_A14_ttb_nonallh_r10201_Higgs(), AnalysisType, "PhPy8_A14_ttb_nonallh_r10201_Higgs", lum_weight, draw, Higgs);
 	PhPy8_A14_ttb_nonallh_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PhPy8_A14_ttb_nonallh_r10201"; 	completion.flush(); 	completion.close();
@@ -2736,7 +2736,7 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364166", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2751,7 +2751,7 @@ void Start_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364159", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2766,7 +2766,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364179", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2781,7 +2781,7 @@ void Start_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364160", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2796,7 +2796,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_BFil_r9364_Higgs_Analysis(string AnalysisType
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV0_70_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364172", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV0_70_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV0_70_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV0_70_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV0_70_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV0_70_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -2811,7 +2811,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364129", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2826,7 +2826,7 @@ void Start_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364160", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2841,7 +2841,7 @@ void Start_Sh221_PDF30_Zmumu_MV500_1000_r10201_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV500_1000_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364112", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV500_1000_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV500_1000_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV500_1000_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV500_1000_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV500_1000_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV500_1000_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV500_1000_r10201"; 	completion.flush(); 	completion.close();
@@ -2856,7 +2856,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364110", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2871,7 +2871,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201_Higgs_Analysis(string Analysi
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364189", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_BFil_r10201"; 	completion.flush(); 	completion.close();
@@ -2886,7 +2886,7 @@ void Start_PoPy_P2012_Wt_dilepton_atop_r9364_Higgs_Analysis(string AnalysisType,
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy_P2012_Wt_dilepton_atop_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy_P2012_Wt_dilepton_atop_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410016", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_dilepton_atop_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy_P2012_Wt_dilepton_atop_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy_P2012_Wt_dilepton_atop_r9364 = new MC_Analysis(Chain_PoPy_P2012_Wt_dilepton_atop_r9364_Higgs(), AnalysisType, "PoPy_P2012_Wt_dilepton_atop_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy_P2012_Wt_dilepton_atop_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy_P2012_Wt_dilepton_atop_r9364"; 	completion.flush(); 	completion.close();
@@ -2901,7 +2901,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364138", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CFilBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2916,7 +2916,7 @@ void Start_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201_Higgs_Analysis(string An
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364193", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2931,7 +2931,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364128", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2946,7 +2946,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364131", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -2961,7 +2961,7 @@ void Start_PoPy8_A14_ttb_nonallh_r9364_Higgs_Analysis(string AnalysisType, bool 
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/PoPy8_A14_ttb_nonallh_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started PoPy8_A14_ttb_nonallh_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("410501", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy8_A14_ttb_nonallh_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_PoPy8_A14_ttb_nonallh_r9364_Higgs(), 36236.9);
 	MC_Analysis *PoPy8_A14_ttb_nonallh_r9364 = new MC_Analysis(Chain_PoPy8_A14_ttb_nonallh_r9364_Higgs(), AnalysisType, "PoPy8_A14_ttb_nonallh_r9364_Higgs", lum_weight, draw, Higgs);
 	PoPy8_A14_ttb_nonallh_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy8_A14_ttb_nonallh_r9364"; 	completion.flush(); 	completion.close();
@@ -2976,7 +2976,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364173", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_CVetBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -2991,7 +2991,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201_Higgs_Analysis(string Analy
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364184", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -3006,7 +3006,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364_Higgs_Analysis(string Analys
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364124", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -3021,7 +3021,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364115", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -3036,7 +3036,7 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201_Higgs_Analysis(string Ana
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364165", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201_Higgs(), 43587.3);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_CVetBVet_r10201"; 	completion.flush(); 	completion.close();
@@ -3051,7 +3051,7 @@ void Start_Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364_Higgs_Analysis(string Anal
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364163", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_CFilBVet_r9364"; 	completion.flush(); 	completion.close();
@@ -3066,7 +3066,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_BFil_r9364_Higgs_Analysis(string AnalysisTyp
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Zee_MV70_140_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Zee_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364119", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Zee_MV70_140_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Zee_MV70_140_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Zee_MV70_140_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Zee_MV70_140_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Zee_MV70_140_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_BFil_r9364"; 	completion.flush(); 	completion.close();
@@ -3081,7 +3081,7 @@ void Start_Sh221_PDF30_ZqqZvv_r9364_Higgs_Analysis(string AnalysisType, bool dra
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_ZqqZvv_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_ZqqZvv_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("363355", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZvv_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_ZqqZvv_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_ZqqZvv_r9364 = new MC_Analysis(Chain_Sh221_PDF30_ZqqZvv_r9364_Higgs(), AnalysisType, "Sh221_PDF30_ZqqZvv_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_ZqqZvv_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_ZqqZvv_r9364"; 	completion.flush(); 	completion.close();
@@ -3096,7 +3096,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_BFil_r9364_Higgs_Analysis(string AnalysisT
 	string completion_file = "../../Completion_Files/" + AnalysisType + "_Higgs/Sh221_PDF30_Wenu_MV280_500_BFil_r9364_completion.txt";
 	fstream completion(completion_file, completion.out | completion.trunc); 	completion << "Started Sh221_PDF30_Wenu_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();
 	vector<double> luminosity_info = csv_reader("364181", true);
-	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_BFil_r9364_Higgs(), 36200);
+	double lum_weight = luminosity_weighting_function(luminosity_info, N_Sh221_PDF30_Wenu_MV280_500_BFil_r9364_Higgs(), 36236.9);
 	MC_Analysis *Sh221_PDF30_Wenu_MV280_500_BFil_r9364 = new MC_Analysis(Chain_Sh221_PDF30_Wenu_MV280_500_BFil_r9364_Higgs(), AnalysisType, "Sh221_PDF30_Wenu_MV280_500_BFil_r9364_Higgs", lum_weight, draw, Higgs);
 	Sh221_PDF30_Wenu_MV280_500_BFil_r9364->BookHistos();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_BFil_r9364"; 	completion.flush(); 	completion.close();

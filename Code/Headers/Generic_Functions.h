@@ -1590,7 +1590,7 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 	vector<string> DataType; // Depending on whether or not the cut as two regions depends what function it will use
 
 	DataType.push_back("lep_0_lep_1_mass");
-	DataType.push_back("lep_0_lep_1_mass_reco_INSIDE");
+	DataType.push_back("lep_0_lep_1_mass_reco");
 	DataType.push_back("jet_0_jet_1_mass");
 	//DataType.push_back("jet_0_jet_1_mass_INSIDE");
 	DataType.push_back("pT_balance");
@@ -1663,14 +1663,51 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 		ExceptStack->Draw("");
 		//SignalStack->Draw("same"); 
 
-		Draw_Region(DataType[i], 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
-
 		canvas->SetRightMargin(0.15);
 
 		int selected_process;
 		if (AnalysisType == "Electron") selected_process = 7;
 		if (AnalysisType == "Muon") selected_process = 6;
 		if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
+		
+		double x1;
+		double x2;
+
+		// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
+		if (DataType[i] == "lep_0_lep_1_mass") { x1 = 81; x2 = 101; }
+		if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
+		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; }
+		//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
+		if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.15; }
+		if (DataType[i] == "pT_balance_reco")  { x1 = 0; x2 = 0.13; }
+		if (DataType[i] == "pT_balance_reco_INSIDE")  { x1 = 0; x2 = 0.13; }
+		if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
+		if (DataType[i] == "DeltaPhi_reco_INSIDE") { x1 = 0; x2 = 2.72825; }
+		if (DataType[i] == "Centrality"){ x1 = -2; x2 = 2; }
+		//if (DataType[i] == "Centrality_INSIDE") DrawBox(ExceptStack, canvas, -2, 2);
+		// HIGH E for now leave 2/03/19
+		
+		cout << "x1: " << x1 << "x2: " << x2 << endl;
+
+		TBox *b1 = new TBox(ExceptStack->GetXaxis()->GetXmin(), canvas->GetUymin(), x1, canvas->GetUymax());
+		b1->SetFillStyle(1001);
+		b1->SetFillColorAlpha(kRed, 0.25);
+		b1->Draw();
+
+		TBox *b2 = new TBox(x2,canvas->GetUymin(), ExceptStack->GetXaxis()->GetXmax(), canvas->GetUymax());
+		b2->SetFillStyle(1001);
+		b2->SetFillColorAlpha(kRed, 0.25);
+		b2->Draw();
+
+		TLine *l1 = new TLine(x1, canvas->GetUymin(), x1, canvas->GetUymax());
+		l1->SetLineWidth(2);
+		l1->Draw();
+
+		TLine *l2 = new TLine(x2, canvas->GetUymin(), x2, canvas->GetUymax());
+		l2->SetLineWidth(2);
+		l2->Draw();
+
+		Draw_Region(DataType[i], 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
 
 		double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms);
 		double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, SignalHistograms);
@@ -1685,7 +1722,7 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 		SignalSig << setprecision(3) <<  Signal_Significance;
 
 		string ExceptLegend = "Except: S = " + ExceptSig.str();
-		//string SignalLegend = "Signal: S = " + SignalSig.str();
+		string SignalLegend = "Signal:  S = " + SignalSig.str();
 
 		double Delta_Significance = Signal_Significance - Except_Significance;
 
@@ -1707,54 +1744,26 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 		//Create the legend and draw the region information
 		if (mode == "QCD_EW") {
 			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+			t.DrawLatex(0.86, 0.88, SignalLegend.c_str());
 			Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
 
-			//t.DrawLatex(0.86, 0.61, SignalLegend.c_str());
 			//Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
 		}
 		else if (mode == "EW") {
 
 			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+			t.DrawLatex(0.86, 0.88, SignalLegend.c_str());
 			Legend_Creator_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
 
-			//t.DrawLatex(0.86, 0.71, SignalLegend.c_str());
 			//Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
 		}
 		else {
 			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
+			t.DrawLatex(0.86, 0.88, SignalLegend.c_str());
 			Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
 
-			//t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
 			//Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
 		}
-		
-		double x1;
-		double x2;
-
-		// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
-		if (DataType[i] == "lep_0_lep_1_mass") { x1 = 81; x2 = 101; }
-		if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
-		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; }
-		//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
-		if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.15; }
-		if (DataType[i] == "pT_balance_reco")  { x1 = 0; x2 = 0.13; }
-		if (DataType[i] == "pT_balance_reco_INSIDE")  { x1 = 0; x2 = 0.13; }
-		if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
-		if (DataType[i] == "DeltaPhi_reco_INSIDE") { x1 = 0; x2 = 2.72825; }
-		if (DataType[i] == "Centrality"){ x1 = -2; x2 = 2; }
-		//if (DataType[i] == "Centrality_INSIDE") DrawBox(ExceptStack, canvas, -2, 2);
-		// HIGH E for now leave 2/03/19
-		
-		cout << "x1: " << x1 << "x2: " << x2 << endl;
-		TBox *b = new TBox(ExceptStack->GetXaxis()->GetXmin(), canvas->GetUymin(), x1, canvas->GetUymax());
-		b->SetFillStyle(3003);
-		b->SetFillColor(kRed);
-		b->Draw();
-
-		TBox *b2 = new TBox(x2,canvas->GetUymin(), ExceptStack->GetXaxis()->GetXmax(), canvas->GetUymax());
-		b2->SetFillStyle(3003);
-		b2->SetFillColor(kRed);
-		b2->Draw();
 
 		//Create the full output file path
 		string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE-SHADED/" + DataType[i] + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
