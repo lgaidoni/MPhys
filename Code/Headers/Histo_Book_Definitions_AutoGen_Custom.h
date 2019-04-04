@@ -629,9 +629,35 @@ vector<string>	hv_Mass_DeltaPhi_Combination_OUTSIDE_2D_names; // HISTOGRAM NAME 
 
 /// ------------------- TRUTHRECONSTRUCTIONCHECKS ---------------- ///
 
-/// ------------------- lep_1_vis_mass: ---------------- ///
+// -- the invariant mass of the TRUTH visible tau 0
+double lep_1_vis_mass;
 
-/// ------------------- lep_0_vis_mass: ---------------- ///
+virtual void Book_lep_1_vis_mass(int bins, double min, double max);
+TH1F	*h_lep_1_vis_mass; // SEARCH VERSION
+TH1F	*h_lep_1_vis_mass_PRE; // PRE VERSION
+TH1F	*h_lep_1_vis_mass_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_1_vis_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_1_vis_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_lep_1_vis_mass_BJET; // BJET VERSION
+TH1F	*h_lep_1_vis_mass_HIGH_E; // HIGH_E VERSION
+TH1F	*h_lep_1_vis_mass_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_lep_1_vis_mass; // HISTOGRAM VECTOR
+vector<string>	hv_lep_1_vis_mass_names; // HISTOGRAM NAME VECTOR
+
+// -- the invariant mass of the TRUTH visible tau 1
+double lep_0_vis_mass;
+
+virtual void Book_lep_0_vis_mass(int bins, double min, double max);
+TH1F	*h_lep_0_vis_mass; // SEARCH VERSION
+TH1F	*h_lep_0_vis_mass_PRE; // PRE VERSION
+TH1F	*h_lep_0_vis_mass_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_0_vis_mass_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_vis_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_lep_0_vis_mass_BJET; // BJET VERSION
+TH1F	*h_lep_0_vis_mass_HIGH_E; // HIGH_E VERSION
+TH1F	*h_lep_0_vis_mass_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_lep_0_vis_mass; // HISTOGRAM VECTOR
+vector<string>	hv_lep_0_vis_mass_names; // HISTOGRAM NAME VECTOR
 
 /// ------------------- lep_1_invis_mass: ---------------- ///
 
@@ -682,19 +708,49 @@ TH1F	*h_lep_0_lep_1_invis_vis_mass_TRUTH; // TRUTH VERSION
 vector<TH1F*>	hv_lep_0_lep_1_invis_vis_mass; // HISTOGRAM VECTOR
 vector<string>	hv_lep_0_lep_1_invis_vis_mass_names; // HISTOGRAM NAME VECTOR
 
-// -- invariant mass of the TRUTH missing energy
-double met_truth_mass;
+// -- energy of the TRUTH missing energy
+double met_truth_energy;
 
-virtual void Book_met_truth_mass(int bins, double min, double max);
-TH1F	*h_met_truth_mass; // SEARCH VERSION
-TH1F	*h_met_truth_mass_PRE; // PRE VERSION
-TH1F	*h_met_truth_mass_CONTROL; // CONTROL VERSION
-TH1F	*h_met_truth_mass_EXCEPT; // EXCEPT VERSION
-TH1F	*h_met_truth_mass_EXCEPT_FINE; // EXCEPT_FINE VERSION
-TH1F	*h_met_truth_mass_BJET; // BJET VERSION
-TH1F	*h_met_truth_mass_HIGH_E; // HIGH_E VERSION
-TH1F	*h_met_truth_mass_TRUTH; // TRUTH VERSION
-vector<TH1F*>	hv_met_truth_mass; // HISTOGRAM VECTOR
-vector<string>	hv_met_truth_mass_names; // HISTOGRAM NAME VECTOR
+virtual void Book_met_truth_energy(int bins, double min, double max);
+TH1F	*h_met_truth_energy; // SEARCH VERSION
+TH1F	*h_met_truth_energy_PRE; // PRE VERSION
+TH1F	*h_met_truth_energy_CONTROL; // CONTROL VERSION
+TH1F	*h_met_truth_energy_EXCEPT; // EXCEPT VERSION
+TH1F	*h_met_truth_energy_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_met_truth_energy_BJET; // BJET VERSION
+TH1F	*h_met_truth_energy_HIGH_E; // HIGH_E VERSION
+TH1F	*h_met_truth_energy_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_met_truth_energy; // HISTOGRAM VECTOR
+vector<string>	hv_met_truth_energy_names; // HISTOGRAM NAME VECTOR
+
+// -- energy of TRUTH invis tau 0
+double lep_0_invis_energy;
+
+virtual void Book_lep_0_invis_energy(int bins, double min, double max);
+TH1F	*h_lep_0_invis_energy; // SEARCH VERSION
+TH1F	*h_lep_0_invis_energy_PRE; // PRE VERSION
+TH1F	*h_lep_0_invis_energy_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_0_invis_energy_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_invis_energy_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_lep_0_invis_energy_BJET; // BJET VERSION
+TH1F	*h_lep_0_invis_energy_HIGH_E; // HIGH_E VERSION
+TH1F	*h_lep_0_invis_energy_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_lep_0_invis_energy; // HISTOGRAM VECTOR
+vector<string>	hv_lep_0_invis_energy_names; // HISTOGRAM NAME VECTOR
+
+// -- energy of TRUTH invis tau 1
+double lep_1_invis_energy;
+
+virtual void Book_lep_1_invis_energy(int bins, double min, double max);
+TH1F	*h_lep_1_invis_energy; // SEARCH VERSION
+TH1F	*h_lep_1_invis_energy_PRE; // PRE VERSION
+TH1F	*h_lep_1_invis_energy_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_1_invis_energy_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_1_invis_energy_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_lep_1_invis_energy_BJET; // BJET VERSION
+TH1F	*h_lep_1_invis_energy_HIGH_E; // HIGH_E VERSION
+TH1F	*h_lep_1_invis_energy_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_lep_1_invis_energy; // HISTOGRAM VECTOR
+vector<string>	hv_lep_1_invis_energy_names; // HISTOGRAM NAME VECTOR
 
 #endif

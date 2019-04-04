@@ -48,11 +48,13 @@ $$Mass_DeltaPhi_Combination_2D,DeltaPhi_reco,lep_0_lep_1_mass_reco:2D plot of De
 $$Mass_DeltaPhi_Combination_INSIDE_2D,DeltaPhi_reco,lep_0_lep_1_mass_reco:2D plot of Delta Phi between two candidate leptons and the dilepton invariant mass
 $$Mass_DeltaPhi_Combination_OUTSIDE_2D,DeltaPhi_reco,lep_0_lep_1_mass_reco:2D plot of Delta Phi between two candidate leptons and the dilepton invariant mass
 ##TRUTHRECONSTRUCTIONCHECKS
-##lep_1_vis_mass:
-##lep_0_vis_mass:
+lep_1_vis_mass:the invariant mass of the TRUTH visible tau 0
+lep_0_vis_mass:the invariant mass of the TRUTH visible tau 1
 ##lep_1_invis_mass:
 ##lep_0_invis_mass:
 lep_0_invis_vis_mass:the invariant mass of the TRUTH visible and invisible tau 0
 lep_1_invis_vis_mass:the invariant mass of the TRUTH visible and invisible tau 1
 lep_0_lep_1_invis_vis_mass: invariant mass of the TRUTH di-tau
-met_truth_mass:invariant mass of the TRUTH missing energy
+met_truth_energy:energy of the TRUTH missing energy
+lep_0_invis_energy:energy of TRUTH invis tau 0
+lep_1_invis_energy:energy of TRUTH invis tau 1
