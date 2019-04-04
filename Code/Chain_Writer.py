@@ -81,6 +81,15 @@ def process_chains_writer(AnalysisType):
 	
 
 def analysis_start_function_writer(inputFile, IDtag, Name):
+
+	Luminosity = 36236.9
+
+	if higgs_bool:
+		if Name.find("r9364") != -1:
+			Luminosity = 36236.9
+		elif Name.find("r10201") != -1:
+			Luminosity = 43587.3
+
 	inputFile.write("void Start_" + Name + higgs + "_Analysis(string AnalysisType, bool draw, bool Higgs) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
@@ -92,7 +101,7 @@ def analysis_start_function_writer(inputFile, IDtag, Name):
 	inputFile.write("\tcompletion.close();\n")
 
 	inputFile.write("\tvector<double> luminosity_info = csv_reader(\"" + IDtag + "\", " + higgs_bool + ");\n")
-	inputFile.write("\tdouble lum_weight = luminosity_weighting_function(luminosity_info, N_" + Name + higgs + "(), 36200);\n")
+	inputFile.write("\tdouble lum_weight = luminosity_weighting_function(luminosity_info, N_" + Name + higgs + "(), " + str(Luminosity) + ");\n")
 		
 	inputFile.write("\tMC_Analysis *" + Name + " = new MC_Analysis(Chain_" + Name + higgs + "(), AnalysisType, \"" + Name + higgs + "\", lum_weight, draw, Higgs);\n")
 

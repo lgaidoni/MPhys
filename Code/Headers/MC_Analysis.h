@@ -47,6 +47,7 @@ public :
 	bool outside_leptons;
 	bool draw_histograms;
 	bool higgs_analysis;
+	bool signal_event_selected;
 
 	/////----------LEPTON INFORMATION------------/////
 

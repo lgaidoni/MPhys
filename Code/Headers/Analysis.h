@@ -1091,6 +1091,8 @@ void MC_Analysis::Fill(string region) {
 
 			#include "_FillAllData_PostCut.h"
 
+			signal_event_selected = true;
+
 			//ptvar cone histograms
 			h_lep_1_iso_ptvarcone40->Fill(lep_1_iso_ptvarcone40, final_weighting);
 			h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, final_weighting);
@@ -1345,7 +1347,7 @@ void MC_Analysis::Fill(string region) {
 
 	if (region == "truth") {
 
-		if (Cuts("truth")) {
+		if (signal_event_selected) {
 
 			#include "_FillAllData_TRUTH.h"
 
@@ -1444,7 +1446,6 @@ void MC_Analysis::Fill(string region) {
 
 			}
 
-
 		}
 
 	}
@@ -1509,6 +1510,7 @@ void MC_Analysis::DrawHistos() {
 
 	// Centrality histograms
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, h_Centrality_EXCEPT, "Centrality", "Pre-Cut", "Post Cut", "Control", "Except", "h_Centrality", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
+
 
 	// MET Centrality histogram
 	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", ";MET_Centrality;Events", false, draw_histograms, ChainName, AnalysisType);

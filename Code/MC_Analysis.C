@@ -108,6 +108,9 @@ void MC_Analysis::Loop() {
       double entry_count = jentry;	//Current entry number
       double max_entries = nentries;	//Total number of entries
 
+
+      signal_event_selected = false;
+
 	//If the current time minus the start time is greater than the averaging time
 	if ((clock() - start)/CLOCKS_PER_SEC >= second_ticker) {
 		second_ticker += 5;							//Add 5 seconds to the second ticker
@@ -188,13 +191,15 @@ void MC_Analysis::Loop() {
 	///------------------- PERFORM ANALYSIS -----------------///
 	////////////////////////////////////////////////////////////
 
+	bool fill_truth = false;
+
 	ParticleSelection();	//The particle selection function, selecting the desired particles
 	if (InitialCut(false, false) == false) {
 		JetSet(false);
 		GenerateVariables(false);	//Generate all variables
 		FillAllData_PreCut();	//Fill all the pre-cut data
 		Fill("normal");			//Fill all the post-cut data
-
+		fill_truth = true;
 
 
 	}
@@ -209,7 +214,7 @@ void MC_Analysis::Loop() {
 
 	if (ChainName.find("DATA") == string::npos) {
 		ParticleSelection_TRUTH();	//The particle selection function, selecting the desired particles
-		if (InitialCut(false, true) == false) {
+		if (fill_truth) {
 			JetSet_TRUTH();
 			GenerateVariables(true);	//Generate all variables
 			Fill("truth");			//Fill all the post-cut data
