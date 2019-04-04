@@ -256,3 +256,18 @@
 	//Histogram Bookings for lep_1_invis_energy
 	Book_lep_1_invis_energy(bins, lep_1_invis_energy_Min, lep_1_invis_energy_Max);
 
+	//Histogram Bookings for BDT_test
+	Book_BDT_test(bins, BDT_test_Min, BDT_test_Max);
+
+	//Histogram Bookings for BDT_test1
+	Book_BDT_test1(bins, BDT_test1_Min, BDT_test1_Max);
+
+	//Histogram Bookings for BDT_test2
+	Book_BDT_test2(bins, BDT_test2_Min, BDT_test2_Max);
+
+	//Histogram Bookings for BDT_test3
+	Book_BDT_test3(bins, BDT_test3_Min, BDT_test3_Max);
+
+	//Histogram Bookings for BDT_test4
+	Book_BDT_test4(bins, BDT_test4_Min, BDT_test4_Max);
+
