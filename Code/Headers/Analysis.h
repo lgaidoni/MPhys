@@ -15,6 +15,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::BookHistos() {
 
+	// BDT stuff TEST
+	int BDT_test_Min = 0, BDT_test_Max = 20000;
+	int BDT_test1_Min = 0, BDT_test1_Max = 20000;
+	int BDT_test2_Min = 0, BDT_test2_Max = 20000;
+	int BDT_test3_Min = 0, BDT_test3_Max = 20000;
+	int BDT_test4_Min = 0, BDT_test4_Max = 20000;
+
 
 	//Values for the automatically generated TLorentzVector histograms (ljets and bjets)
 	int bins = 50;
@@ -448,13 +455,13 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		else n_leptons = 0;
 	}
 
-	if (AnalysisType == "ElectronTau") {
+	if (AnalysisType == "ElectronTau") { // 0 is always hadronic
 
 		lep_0 = & tau_0_truth; 
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
 		lep_0_vis_p4 = tau_0_truth_vis_p4;
-		lep_0_invis_p4 = new TLorentzVector(0,0,0,0);
+		lep_0_invis_p4 = new TLorentzVector(0,0,0,0); // make it as it doesnt exist
 
 		lep_1 = & elec_0_matched_truth_lepTau;
 		lep_1_p4 = elec_0_matched_truth_lepTau_p4;
@@ -549,6 +556,13 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 ///--------------------- RELEVANT VARIABLE CALCULATION FUNCTION ---------------------///
 ////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::GenerateVariables(bool truth) {
+
+	// BDT STUFF
+	BDT_test = tau_0_ele_BDTEleScoreTrans_run2;
+	BDT_test1 = tau_0_ele_bdt_loose;
+	BDT_test2 = tau_0_ele_bdt_medium;
+	BDT_test3 = tau_0_ele_bdt_score;
+	BDT_test4 = tau_0_ele_bdt_tight;
 
 	// Missing transverse momentum centrality
 	MET_Centrality = METCentrality(met_p4, lep_0_p4, lep_1_p4);
@@ -671,6 +685,8 @@ void MC_Analysis::GenerateVariables(bool truth) {
 		// Invariant mass (takes TLorentzVectors as inputs)
 		lep_0_invis_vis_mass = InvariantMass(lep_0_vis_p4, lep_0_invis_p4); //uses TLorentzVectors
 		lep_1_invis_vis_mass = InvariantMass(lep_1_vis_p4, lep_1_invis_p4); //uses TLorentzVectors
+		lep_0_vis_mass = lep_0_vis_p4->M();
+		lep_1_vis_mass = lep_1_vis_p4->M();
 
 		met_truth_energy = (met_p4)->E(); // energy of the TRUTH missing energy
 		lep_0_invis_energy = (lep_0_invis_p4)->E(); // Energy of the invisible ntuple for truth tau
@@ -967,8 +983,6 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "truth" && !(bjets_region) && truth_region) {
 		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
-
-	
 	
 	return false;
 
@@ -1093,6 +1107,13 @@ void MC_Analysis::Fill(string region) {
 
 			signal_event_selected = true;
 
+			// BDT STUFF
+			h_BDT_test->Fill(BDT_test, final_weighting);
+			h_BDT_test1->Fill(BDT_test1, final_weighting);
+			h_BDT_test2->Fill(BDT_test2, final_weighting);
+			h_BDT_test3->Fill(BDT_test3, final_weighting);
+			h_BDT_test4->Fill(BDT_test4, final_weighting);
+
 			//ptvar cone histograms
 			h_lep_1_iso_ptvarcone40->Fill(lep_1_iso_ptvarcone40, final_weighting);
 			h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, final_weighting);
@@ -1114,7 +1135,7 @@ void MC_Analysis::Fill(string region) {
 			// pT balance
 			h_pT_balance->Fill(pT_balance, final_weighting);	
 	
-		//	if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
+			// if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
 			// Centrality
 			h_Centrality->Fill(Centrality, final_weighting);
@@ -1357,13 +1378,10 @@ void MC_Analysis::Fill(string region) {
 
 			// Missing energy invariant mass TRUTH
 			h_lep_0_invis_vis_mass_TRUTH->Fill(lep_0_invis_vis_mass, final_weighting); // tau_0 invisible and visable invar mass
-			//cout << "lep_0_invis_vis_mass: " << lep_0_invis_vis_mass << endl;
-
 			h_lep_1_invis_vis_mass_TRUTH->Fill(lep_1_invis_vis_mass, final_weighting); // tau_1 invisible and visable invar mass
-			//cout << "lep_1_invis_vis_mass: " << lep_1_invis_vis_mass << endl;
-
 			h_lep_0_lep_1_invis_vis_mass_TRUTH->Fill(lep_0_lep_1_invis_vis_mass, final_weighting); // di-tau invar mass
-			//cout << "lep_0_lep_1_invis_vis_mass: " << lep_0_lep_1_invis_vis_mass << endl;
+			h_lep_0_vis_mass_TRUTH->Fill(lep_0_vis_mass, final_weighting);
+			h_lep_1_vis_mass_TRUTH->Fill(lep_1_vis_mass, final_weighting);
 
 			// ENERGY
 			h_met_truth_energy_TRUTH->Fill(met_truth_energy, final_weighting);
@@ -1463,6 +1481,13 @@ void MC_Analysis::DrawHistos() {
 	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
 	#include "_DrawHistos.h"
+
+	// BDT histograms
+	DrawHistogram(h_BDT_test, "h_BDT_test", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_BDT_test1, "h_BDT_test1", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_BDT_test2, "h_BDT_test2", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_BDT_test3, "h_BDT_test3", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_BDT_test4, "h_BDT_test4", ";;Events", false, true, ChainName, AnalysisType);
 
 	//ptvar cone histograms
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType);	
@@ -1620,6 +1645,8 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_MET_Type_Favour_TRUTH, "h_MET_Type_Favour_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_0_invis_vis_mass_TRUTH, "h_lep_0_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_1_invis_vis_mass_TRUTH, "h_lep_1_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_vis_mass_TRUTH, "h_lep_0_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_1_vis_mass_TRUTH, "h_lep_1_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_0_lep_1_invis_vis_mass_TRUTH, "h_lep_0_lep_1_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_met_truth_energy_TRUTH, "h_met_truth_energy_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 	DrawHistogram(h_lep_0_invis_energy_TRUTH, "h_lep_0_invis_energy_TRUTH", ";;Events", false, true, ChainName, AnalysisType);

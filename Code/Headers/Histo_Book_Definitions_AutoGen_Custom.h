@@ -753,4 +753,79 @@ TH1F	*h_lep_1_invis_energy_TRUTH; // TRUTH VERSION
 vector<TH1F*>	hv_lep_1_invis_energy; // HISTOGRAM VECTOR
 vector<string>	hv_lep_1_invis_energy_names; // HISTOGRAM NAME VECTOR
 
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+double BDT_test;
+
+virtual void Book_BDT_test(int bins, double min, double max);
+TH1F	*h_BDT_test; // SEARCH VERSION
+TH1F	*h_BDT_test_PRE; // PRE VERSION
+TH1F	*h_BDT_test_CONTROL; // CONTROL VERSION
+TH1F	*h_BDT_test_EXCEPT; // EXCEPT VERSION
+TH1F	*h_BDT_test_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_BDT_test_BJET; // BJET VERSION
+TH1F	*h_BDT_test_HIGH_E; // HIGH_E VERSION
+TH1F	*h_BDT_test_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_BDT_test; // HISTOGRAM VECTOR
+vector<string>	hv_BDT_test_names; // HISTOGRAM NAME VECTOR
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+double BDT_test1;
+
+virtual void Book_BDT_test1(int bins, double min, double max);
+TH1F	*h_BDT_test1; // SEARCH VERSION
+TH1F	*h_BDT_test1_PRE; // PRE VERSION
+TH1F	*h_BDT_test1_CONTROL; // CONTROL VERSION
+TH1F	*h_BDT_test1_EXCEPT; // EXCEPT VERSION
+TH1F	*h_BDT_test1_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_BDT_test1_BJET; // BJET VERSION
+TH1F	*h_BDT_test1_HIGH_E; // HIGH_E VERSION
+TH1F	*h_BDT_test1_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_BDT_test1; // HISTOGRAM VECTOR
+vector<string>	hv_BDT_test1_names; // HISTOGRAM NAME VECTOR
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+double BDT_test2;
+
+virtual void Book_BDT_test2(int bins, double min, double max);
+TH1F	*h_BDT_test2; // SEARCH VERSION
+TH1F	*h_BDT_test2_PRE; // PRE VERSION
+TH1F	*h_BDT_test2_CONTROL; // CONTROL VERSION
+TH1F	*h_BDT_test2_EXCEPT; // EXCEPT VERSION
+TH1F	*h_BDT_test2_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_BDT_test2_BJET; // BJET VERSION
+TH1F	*h_BDT_test2_HIGH_E; // HIGH_E VERSION
+TH1F	*h_BDT_test2_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_BDT_test2; // HISTOGRAM VECTOR
+vector<string>	hv_BDT_test2_names; // HISTOGRAM NAME VECTOR
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+double BDT_test3;
+
+virtual void Book_BDT_test3(int bins, double min, double max);
+TH1F	*h_BDT_test3; // SEARCH VERSION
+TH1F	*h_BDT_test3_PRE; // PRE VERSION
+TH1F	*h_BDT_test3_CONTROL; // CONTROL VERSION
+TH1F	*h_BDT_test3_EXCEPT; // EXCEPT VERSION
+TH1F	*h_BDT_test3_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_BDT_test3_BJET; // BJET VERSION
+TH1F	*h_BDT_test3_HIGH_E; // HIGH_E VERSION
+TH1F	*h_BDT_test3_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_BDT_test3; // HISTOGRAM VECTOR
+vector<string>	hv_BDT_test3_names; // HISTOGRAM NAME VECTOR
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+double BDT_test4;
+
+virtual void Book_BDT_test4(int bins, double min, double max);
+TH1F	*h_BDT_test4; // SEARCH VERSION
+TH1F	*h_BDT_test4_PRE; // PRE VERSION
+TH1F	*h_BDT_test4_CONTROL; // CONTROL VERSION
+TH1F	*h_BDT_test4_EXCEPT; // EXCEPT VERSION
+TH1F	*h_BDT_test4_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_BDT_test4_BJET; // BJET VERSION
+TH1F	*h_BDT_test4_HIGH_E; // HIGH_E VERSION
+TH1F	*h_BDT_test4_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_BDT_test4; // HISTOGRAM VECTOR
+vector<string>	hv_BDT_test4_names; // HISTOGRAM NAME VECTOR
+
 #endif
