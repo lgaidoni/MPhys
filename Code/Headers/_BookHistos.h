@@ -238,6 +238,12 @@
 	//Histogram Bookings for Mass_DeltaPhi_Combination_OUTSIDE_2D
 	Book_Mass_DeltaPhi_Combination_OUTSIDE_2D(xbins, Mass_DeltaPhi_Combination_OUTSIDE_2D_xMin, Mass_DeltaPhi_Combination_OUTSIDE_2D_xMax, ybins, Mass_DeltaPhi_Combination_OUTSIDE_2D_yMin, Mass_DeltaPhi_Combination_OUTSIDE_2D_yMax);
 
+	//Histogram Bookings for lep_1_vis_mass
+	Book_lep_1_vis_mass(bins, lep_1_vis_mass_Min, lep_1_vis_mass_Max);
+
+	//Histogram Bookings for lep_0_vis_mass
+	Book_lep_0_vis_mass(bins, lep_0_vis_mass_Min, lep_0_vis_mass_Max);
+
 	//Histogram Bookings for lep_0_invis_vis_mass
 	Book_lep_0_invis_vis_mass(bins, lep_0_invis_vis_mass_Min, lep_0_invis_vis_mass_Max);
 
@@ -247,6 +253,27 @@
 	//Histogram Bookings for lep_0_lep_1_invis_vis_mass
 	Book_lep_0_lep_1_invis_vis_mass(bins, lep_0_lep_1_invis_vis_mass_Min, lep_0_lep_1_invis_vis_mass_Max);
 
-	//Histogram Bookings for met_truth_mass
-	Book_met_truth_mass(bins, met_truth_mass_Min, met_truth_mass_Max);
+	//Histogram Bookings for met_truth_energy
+	Book_met_truth_energy(bins, met_truth_energy_Min, met_truth_energy_Max);
+
+	//Histogram Bookings for lep_0_invis_energy
+	Book_lep_0_invis_energy(bins, lep_0_invis_energy_Min, lep_0_invis_energy_Max);
+
+	//Histogram Bookings for lep_1_invis_energy
+	Book_lep_1_invis_energy(bins, lep_1_invis_energy_Min, lep_1_invis_energy_Max);
+
+	//Histogram Bookings for BDT_test
+	Book_BDT_test(bins, BDT_test_Min, BDT_test_Max);
+
+	//Histogram Bookings for BDT_test1
+	Book_BDT_test1(bins, BDT_test1_Min, BDT_test1_Max);
+
+	//Histogram Bookings for BDT_test2
+	Book_BDT_test2(bins, BDT_test2_Min, BDT_test2_Max);
+
+	//Histogram Bookings for BDT_test3
+	Book_BDT_test3(bins, BDT_test3_Min, BDT_test3_Max);
+
+	//Histogram Bookings for BDT_test4
+	Book_BDT_test4(bins, BDT_test4_Min, BDT_test4_Max);
 

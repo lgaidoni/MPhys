@@ -142,7 +142,7 @@ void NumberEventsCalc(string AnalysisType, string higgs_suffix) { // Analysis ty
 	double totalEW = 0;
 	double totalQCD = 0;
 	double totalOther = 0;
-	double totalTTBAR = 0;
+	double totalTTbar = 0;
 	double ttbar = 0;
 	double Wtaunu = 0;
 	double Wmunu = 0;
@@ -154,6 +154,11 @@ void NumberEventsCalc(string AnalysisType, string higgs_suffix) { // Analysis ty
 	double QCDZtautau = 0;
 	double QCDZee = 0;
 	double QCDZmumu = 0;
+	double compEW = 0;
+	double compQCD = 0;
+	double compOther = 0;
+	double compTTbar = 0;
+	double totalALL = 0;
 
 	vector<string> Region;
 	Region.push_back("_TRUTH");
@@ -165,14 +170,10 @@ void NumberEventsCalc(string AnalysisType, string higgs_suffix) { // Analysis ty
 
 	vector<string> DataTypes; // vector for the DataTypes
 	DataTypes.push_back("lep_0_lep_1_mass");
-	DataTypes.push_back("silly_histogram");
-	/*DataTypes.push_back("lep_0_lep_1_mass_reco");
+	DataTypes.push_back("lep_0_lep_1_mass_reco");
 	DataTypes.push_back("pT_balance");
-	DataTypes.push_back("pT_balance_reco_INSIDE");
-	DataTypes.push_back("pT_balance_reco_OUTSIDE");
-	DataTypes.push_back("lep_0_lep_1_mass_HIGH_E");
-	DataTypes.push_back("lep_0_lep_1_mass_reco_HIGH_E");
-	*/
+	DataTypes.push_back("pT_balance_reco");
+
 	vector<string> FullHistName;
 
 	for (int i = 0; i < DataTypes.size(); i++){
@@ -181,7 +182,10 @@ void NumberEventsCalc(string AnalysisType, string higgs_suffix) { // Analysis ty
 			FullHistName.push_back(FullName);
 		}
 	}
-	
+
+	fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Nevents_InGroups.txt", output.out);
+	fstream output2("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Nevents_Composition.txt", output2.out);
+
 	for (int i = 0; i < FullHistName.size(); i++) { // FOR LOOP FOR EACH DATATYPE
 		
 		string DataType = FullHistName[i]; // define the data type as the ith element in the DataTypes vector
@@ -236,41 +240,41 @@ void NumberEventsCalc(string AnalysisType, string higgs_suffix) { // Analysis ty
 		totalEW = EWZtautau + EWZmumu + EWZee;
 		totalQCD = QCDZtautau + QCDZmumu + QCDZee;
 		totalOther = Wtaunu + Wmunu + Wenu + ZqqZll;
-		totalTTBAR = ttbar;
+		totalTTbar = ttbar;
+		totalALL = totalEW + totalQCD + totalOther + totalTTbar;
 
-		fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Nevents_InGroups.txt", output.out | output.app);
+		// Compositions
+		compEW = totalEW/totalALL*100;
+		compQCD = totalQCD/totalALL*100;
+		compOther = totalOther/totalALL*100;
+		compTTbar = totalTTbar/totalALL*100;
+		
+		// Number of events per inverse femtobarns
+
+
+		// OUTPUT Number of events for all data types and all data sets
+
 		output << "******************************************" << endl;
-		output << "\nData Type and Region: " << DataType  << " for " + AnalysisType + " selection\n" << endl;
-
-		output << "EW: "<< endl; 
-			output << "\t" << "\t" << "Consisting of: " << endl;
-			output << "\t" << "\t" << "EWZtautau: " << EWZtautau << endl;
-			output << "\t" << "\t" << "EWZmumu  : " << EWZmumu << endl;
-			output << "\t" << "\t" << "EWZee    : " << EWZee << endl;
-			output << "\t" << "\t" << "Total number of events in EW: " << totalEW << "\n" << endl; 
-
+		output << DataType << endl;
+		output << "EW: " << endl; 
+		output << "\t" << "EWZtautau = " << EWZtautau << "\t" << "EWZmumu = " << EWZmumu << "\t" << "EWZee = " << EWZee << "\t" << "Total = " << totalEW << endl;
 		output << "QCD: " << endl; 
-			output << "\t" << "\t" <<  "Consisting of: " << endl;
-			output << "\t" << "\t" <<  "QCDZtautau: " << QCDZtautau << endl;
-			output << "\t" << "\t" <<  "QCDZmumu  : " << QCDZmumu << endl;
-			output << "\t" << "\t" <<  "QCDZee    : " << QCDZee << endl;
-			output << "\t" << "\t" << "Total number of events in QCD: " << totalQCD << "\n" << endl; 
-
+		output << "\t" << "QCDZtautau = " << QCDZtautau << "\t" << "QCDZmumu = " << QCDZmumu << "\t" << "QCDZee = " << QCDZee << "\t" << "Total = " << totalQCD << endl;
 		output << "Other: " << endl; 
-			output << "\t" << "\t" <<  "Consisting of: " << endl;
-			output << "\t" << "\t" <<  "Wtaunu: " << Wtaunu << endl;
-			output << "\t" << "\t" <<  "Wmunu : " << Wmunu << endl;
-			output << "\t" << "\t" <<  "Wenu  : " << Wenu << endl;
-			output << "\t" << "\t" <<  "ZqqZll: " << ZqqZll<< endl;
-			output << "\t" << "\t" << "Total number of events in Other: " << totalOther << "\n" << endl; 
-
+		output << "\t" << "Wtaunu = " << Wtaunu << "\t" << "Wmunu = " << Wmunu << "\t" << "Wenu = " << Wenu << "\t" << "ZqqZll = " << ZqqZll << "\t" << "Total = " << totalOther << endl;
 		output << "ttBar: " << endl; 
-			output << "\t" << "\t" <<  "ttbar: " << ttbar << endl;
-			output << "\t" << "\t" << "Total number of events in ttbar: " << totalTTBAR << "\n" << endl; 
+		output << "\t" << "ttbar = " << ttbar << "\t" << "Total = " << totalTTbar << endl; 
 
-		output.close();
-
+		// OUTPUT Number of events in terms of composition
+		output2 << "******************************************" << endl;
+		output2 << DataType << " :" << endl;
+		output2 << "EW : \t\t" << compEW << " %" << endl;
+		output2 << "QCD : \t\t" << compQCD<< " %" <<endl;
+		output2 << "Other : \t" << compOther<< " %" <<endl;
+		output2 << "TTbar : \t" << compTTbar<< " %" <<endl;
 	}
+	output.close();
+	output2.close();
 }
 /*
 void EventsInRegion(string AnalysisType) {

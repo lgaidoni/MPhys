@@ -15,6 +15,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::BookHistos() {
 
+	// BDT stuff TEST
+	int BDT_test_Min = 0, BDT_test_Max = 20000;
+	int BDT_test1_Min = 0, BDT_test1_Max = 20000;
+	int BDT_test2_Min = 0, BDT_test2_Max = 20000;
+	int BDT_test3_Min = 0, BDT_test3_Max = 20000;
+	int BDT_test4_Min = 0, BDT_test4_Max = 20000;
+
 
 	//Values for the automatically generated TLorentzVector histograms (ljets and bjets)
 	int bins = 50;
@@ -65,19 +72,24 @@ void MC_Analysis::BookHistos() {
   	int lep_0_lep_1_mass_reco_INSIDE_Min = 0, lep_0_lep_1_mass_reco_INSIDE_Max = 200;
   	int lep_0_lep_1_mass_reco_OUTSIDE_Min = 0, lep_0_lep_1_mass_reco_OUTSIDE_Max = 200;
 	int DeltaR_reco_Min = 0, DeltaR_reco_Max = 10;
+
 	double DeltaPhi_reco_Min = 0, DeltaPhi_reco_Max = pi;
 	double DeltaPhi_reco_INSIDE_Min = 0, DeltaPhi_reco_INSIDE_Max = pi;
 	double DeltaPhi_reco_OUTSIDE_Min = 0, DeltaPhi_reco_OUTSIDE_Max = pi;
+
 	int lep_0_lep_1_pt_reco_Min = 0, lep_0_lep_1_pt_reco_Max = 300;
 	int Centrality_reco_Min = -8, Centrality_reco_Max = 8;
 	int lep_0_invis_vis_mass_Min = 0, lep_0_invis_vis_mass_Max = 1000;
 	int lep_1_invis_vis_mass_Min = 0, lep_1_invis_vis_mass_Max = 1000;
 	int lep_0_lep_1_invis_vis_mass_Min = 0, lep_0_lep_1_invis_vis_mass_Max = 1000;
-	int met_truth_mass_Min = 0, met_truth_mass_Max = 1000;
 	int lep_0_vis_mass_Min = 0, lep_0_vis_mass_Max = 1000;
 	int lep_1_vis_mass_Min = 0, lep_1_vis_mass_Max = 1000;
-	int lep_0_invis_mass_Min = 0, lep_0_invis_mass_Max = 1000;
-	int lep_1_invis_mass_Min = 0, lep_1_invis_mass_Max = 1000;	
+	//int lep_0_invis_mass_Min = 0, lep_0_invis_mass_Max = 1000;
+	//int lep_1_invis_mass_Min = 0, lep_1_invis_mass_Max = 1000;
+
+	int met_truth_energy_Min = 0, met_truth_energy_Max = 1000;	
+	int lep_0_invis_energy_Min = 0, lep_0_invis_energy_Max = 1000; 
+	int lep_1_invis_energy_Min = 0, lep_1_invis_energy_Max = 1000;
 
 	//Values for the 2D histograms
 	int xbins = 50;
@@ -445,13 +457,13 @@ void MC_Analysis::ParticleSelection_TRUTH() {
 		else n_leptons = 0;
 	}
 
-	if (AnalysisType == "ElectronTau") {
+	if (AnalysisType == "ElectronTau") { // 0 is always hadronic
 
 		lep_0 = & tau_0_truth; 
 		lep_0_p4 = tau_0_truth_p4;
 		lep_0_q = & tau_0_truth_q;
 		lep_0_vis_p4 = tau_0_truth_vis_p4;
-		lep_0_invis_p4 = new TLorentzVector(0,0,0,0);
+		lep_0_invis_p4 = new TLorentzVector(0,0,0,0); // make it as it doesnt exist
 
 		lep_1 = & elec_0_matched_truth_lepTau;
 		lep_1_p4 = elec_0_matched_truth_lepTau_p4;
@@ -546,6 +558,13 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 ///--------------------- RELEVANT VARIABLE CALCULATION FUNCTION ---------------------///
 ////////////////////////////////////////////////////////////////////////////////////////
 void MC_Analysis::GenerateVariables(bool truth) {
+
+	// BDT STUFF
+	BDT_test = tau_0_ele_BDTEleScoreTrans_run2;
+	BDT_test1 = tau_0_ele_bdt_loose;
+	BDT_test2 = tau_0_ele_bdt_medium;
+	BDT_test3 = tau_0_ele_bdt_score;
+	BDT_test4 = tau_0_ele_bdt_tight;
 
 	// Missing transverse momentum centrality
 	MET_Centrality = METCentrality(met_p4, lep_0_p4, lep_1_p4);
@@ -668,7 +687,13 @@ void MC_Analysis::GenerateVariables(bool truth) {
 		// Invariant mass (takes TLorentzVectors as inputs)
 		lep_0_invis_vis_mass = InvariantMass(lep_0_vis_p4, lep_0_invis_p4); //uses TLorentzVectors
 		lep_1_invis_vis_mass = InvariantMass(lep_1_vis_p4, lep_1_invis_p4); //uses TLorentzVectors
-		met_truth_mass = (met_p4)->M(); // invariant mass of the TRUTH missing energy
+		lep_0_vis_mass = lep_0_vis_p4->M();
+		lep_1_vis_mass = lep_1_vis_p4->M();
+
+		met_truth_energy = (met_p4)->E(); // energy of the TRUTH missing energy
+		lep_0_invis_energy = (lep_0_invis_p4)->E(); // Energy of the invisible ntuple for truth tau
+		lep_1_invis_energy = (lep_1_invis_p4)->E(); // Energy of the invisible ntuple for truth tau
+
 		// Invariant mass of the di-lepton system (lep 0 and lep 1)
 		lep_0_lep_1_invis_vis_mass = InvariantMass(lep_0_invis_vis_TLV, lep_1_invis_vis_TLV); // TLorentz vector of the invariant mass of di-tau
 	}
@@ -973,8 +998,6 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "truth" && !(bjets_region) && truth_region) {
 		if (common_cuts && custom_cuts && rap_int_condition && pT_balance_limit) return true;
 	}
-
-	
 	
 	return false;
 
@@ -1111,6 +1134,13 @@ void MC_Analysis::Fill(string region) {
 
 			signal_event_selected = true;
 
+			// BDT STUFF
+			h_BDT_test->Fill(BDT_test, final_weighting);
+			h_BDT_test1->Fill(BDT_test1, final_weighting);
+			h_BDT_test2->Fill(BDT_test2, final_weighting);
+			h_BDT_test3->Fill(BDT_test3, final_weighting);
+			h_BDT_test4->Fill(BDT_test4, final_weighting);
+
 			//ptvar cone histograms
 			h_lep_1_iso_ptvarcone40->Fill(lep_1_iso_ptvarcone40, final_weighting);
 			h_lep_0_iso_ptvarcone40->Fill(lep_0_iso_ptvarcone40, final_weighting);
@@ -1132,7 +1162,7 @@ void MC_Analysis::Fill(string region) {
 			// pT balance
 			h_pT_balance->Fill(pT_balance, final_weighting);	
 	
-		//	if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
+			// if(pT_balance > 0.15) cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
 			// Centrality
 			h_Centrality->Fill(Centrality, final_weighting);
@@ -1171,10 +1201,6 @@ void MC_Analysis::Fill(string region) {
 				h_pT_balance_reco->Fill(pT_balance_reco, final_weighting);
 				h_DeltaPhi_reco->Fill(DeltaPhi_reco, final_weighting);
 				h_Mass_DeltaPhi_Combination_2D->Fill(DeltaPhi_reco, lep_0_lep_1_mass_reco, final_weighting);
-				h_lep_0_invis_vis_mass->Fill(lep_0_invis_vis_mass, final_weighting);
-				h_lep_0_invis_vis_mass->Fill(lep_0_invis_vis_mass, final_weighting);
-				h_lep_0_lep_1_invis_vis_mass->Fill(lep_0_lep_1_invis_vis_mass, final_weighting);
-				h_met_truth_mass->Fill(met_truth_mass, final_weighting);
 
 				if (outside_leptons) {
 
@@ -1381,16 +1407,15 @@ void MC_Analysis::Fill(string region) {
 
 			// Missing energy invariant mass TRUTH
 			h_lep_0_invis_vis_mass_TRUTH->Fill(lep_0_invis_vis_mass, final_weighting); // tau_0 invisible and visable invar mass
-			//cout << "lep_0_invis_vis_mass: " << lep_0_invis_vis_mass << endl;
-
 			h_lep_1_invis_vis_mass_TRUTH->Fill(lep_1_invis_vis_mass, final_weighting); // tau_1 invisible and visable invar mass
-			//cout << "lep_1_invis_vis_mass: " << lep_1_invis_vis_mass << endl;
-
 			h_lep_0_lep_1_invis_vis_mass_TRUTH->Fill(lep_0_lep_1_invis_vis_mass, final_weighting); // di-tau invar mass
-			//cout << "lep_0_lep_1_invis_vis_mass: " << lep_0_lep_1_invis_vis_mass << endl;
-		
-			h_met_truth_mass_TRUTH->Fill(met_truth_mass, final_weighting); // Missing energy truth
-			//cout << "met_truth_mass: " << met_truth_mass << endl;
+			h_lep_0_vis_mass_TRUTH->Fill(lep_0_vis_mass, final_weighting);
+			h_lep_1_vis_mass_TRUTH->Fill(lep_1_vis_mass, final_weighting);
+
+			// ENERGY
+			h_met_truth_energy_TRUTH->Fill(met_truth_energy, final_weighting);
+			h_lep_0_invis_energy_TRUTH->Fill(lep_0_invis_energy, final_weighting);
+			h_lep_1_invis_energy_TRUTH->Fill(lep_1_invis_energy, final_weighting);
 
 			//Invariant mass TRUTH
 			h_lep_0_lep_1_mass_TRUTH->Fill(lep_0_lep_1_mass, final_weighting); // two electrons
@@ -1485,6 +1510,13 @@ void MC_Analysis::DrawHistos(string higgs_suffix) {
 	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
 
 	#include "_DrawHistos.h"
+
+	// BDT histograms
+	DrawHistogram(h_BDT_test, "h_BDT_test", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_BDT_test1, "h_BDT_test1", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_BDT_test2, "h_BDT_test2", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_BDT_test3, "h_BDT_test3", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_BDT_test4, "h_BDT_test4", ";;Events", false, true, ChainName, AnalysisType);
 
 	//ptvar cone histograms
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
@@ -1619,34 +1651,38 @@ void MC_Analysis::DrawHistos(string higgs_suffix) {
 	DrawHistogram(h_DeltaPhi_reco_INSIDE_EXCEPT_FINE, "h_DeltaPhi_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
 
 	//TRUTH GRAPHS
-	DrawHistogram(h_lep_1_iso_ptvarcone40_TRUTH, "h_lep_1_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_0_iso_ptvarcone40_TRUTH, "h_lep_0_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_0_lep_1_mass_TRUTH, "h_lep_0_lep_1_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_0_lep_1_mass_reco_TRUTH, "h_lep_0_lep_1_mass_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_0_lep_1_mass_reco_INSIDE_TRUTH, "h_lep_0_lep_1_mass_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH, "h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_jet_0_jet_1_mass_TRUTH, "h_jet_0_jet_1_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_RapidityDilepton_TRUTH, "h_RapidityDilepton_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_RapidityDijet_TRUTH, "h_RapidityDijet_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_0_lep_1_pt_TRUTH, "h_lep_0_lep_1_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_DeltaR_TRUTH, "h_DeltaR_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_DeltaPhi_TRUTH, "h_DeltaPhi_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_DeltaPhi_reco_TRUTH, "h_DeltaPhi_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_DeltaPhi_reco_INSIDE_TRUTH, "h_DeltaPhi_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_DeltaPhi_reco_OUTSIDE_TRUTH, "h_DeltaPhi_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_pT_balance_TRUTH, "h_pT_balance_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_pT_balance_reco_TRUTH, "h_pT_balance_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_pT_balance_reco_INSIDE_TRUTH, "h_pT_balance_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_pT_balance_reco_OUTSIDE_TRUTH, "h_pT_balance_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_Centrality_TRUTH, "h_Centrality_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_MET_Centrality_TRUTH, "h_MET_Centrality_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_neutrino_0_pt_TRUTH, "h_neutrino_0_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_neutrino_1_pt_TRUTH, "h_neutrino_1_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_MET_Type_Favour_TRUTH, "h_MET_Type_Favour_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_0_invis_vis_mass_TRUTH, "h_lep_0_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_1_invis_vis_mass_TRUTH, "h_lep_1_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_lep_0_lep_1_invis_vis_mass_TRUTH, "h_lep_0_lep_1_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_met_truth_mass_TRUTH, "h_met_truth_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_1_iso_ptvarcone40_TRUTH, "h_lep_1_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_iso_ptvarcone40_TRUTH, "h_lep_0_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_TRUTH, "h_lep_0_lep_1_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_TRUTH, "h_lep_0_lep_1_mass_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_INSIDE_TRUTH, "h_lep_0_lep_1_mass_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH, "h_lep_0_lep_1_mass_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_jet_0_jet_1_mass_TRUTH, "h_jet_0_jet_1_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton_TRUTH, "h_RapidityDilepton_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_TRUTH, "h_RapidityDijet_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_pt_TRUTH, "h_lep_0_lep_1_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaR_TRUTH, "h_DeltaR_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_TRUTH, "h_DeltaPhi_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_reco_TRUTH, "h_DeltaPhi_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_reco_INSIDE_TRUTH, "h_DeltaPhi_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_DeltaPhi_reco_OUTSIDE_TRUTH, "h_DeltaPhi_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_TRUTH, "h_pT_balance_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_TRUTH, "h_pT_balance_reco_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_INSIDE_TRUTH, "h_pT_balance_reco_INSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_pT_balance_reco_OUTSIDE_TRUTH, "h_pT_balance_reco_OUTSIDE_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_Centrality_TRUTH, "h_Centrality_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_MET_Centrality_TRUTH, "h_MET_Centrality_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrino_0_pt_TRUTH, "h_neutrino_0_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_neutrino_1_pt_TRUTH, "h_neutrino_1_pt_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_MET_Type_Favour_TRUTH, "h_MET_Type_Favour_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_invis_vis_mass_TRUTH, "h_lep_0_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_1_invis_vis_mass_TRUTH, "h_lep_1_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_vis_mass_TRUTH, "h_lep_0_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_1_vis_mass_TRUTH, "h_lep_1_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_invis_vis_mass_TRUTH, "h_lep_0_lep_1_invis_vis_mass_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_met_truth_energy_TRUTH, "h_met_truth_energy_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_invis_energy_TRUTH, "h_lep_0_invis_energy_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_1_invis_energy_TRUTH, "h_lep_1_invis_energy_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 
 	// 2D POLAR TRUTH HISTOGRAMS
   	DrawHistogram2D(h_Mass_Favour_Combination_2D_TRUTH, "h_Mass_Favour_Combination_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);

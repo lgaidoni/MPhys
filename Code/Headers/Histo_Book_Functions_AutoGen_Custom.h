@@ -1407,9 +1407,69 @@ void MC_Analysis::Book_Mass_DeltaPhi_Combination_OUTSIDE_2D(int xbins, double xm
 
 /// ------------------- TRUTHRECONSTRUCTIONCHECKS ---------------- ///
 
-/// ------------------- lep_1_vis_mass: ---------------- ///
+// -- the invariant mass of the TRUTH visible tau 0
+void MC_Analysis::Book_lep_1_vis_mass(int bins, double min, double max) {
+	h_lep_1_vis_mass = new TH1F("h_lep_1_vis_mass", "", bins, min, max);
+	h_lep_1_vis_mass_PRE = new TH1F("h_lep_1_vis_mass_PRE", "", bins, min, max);
+	h_lep_1_vis_mass_CONTROL = new TH1F("h_lep_1_vis_mass_CONTROL", "", bins, min, max);
+	h_lep_1_vis_mass_EXCEPT = new TH1F("h_lep_1_vis_mass_EXCEPT", "", bins, min, max);
+	h_lep_1_vis_mass_EXCEPT_FINE = new TH1F("h_lep_1_vis_mass_EXCEPT_FINE", "", 1000, min, max);
+	h_lep_1_vis_mass_BJET = new TH1F("h_lep_1_vis_mass_BJET", "", bins, min, max);
+	h_lep_1_vis_mass_HIGH_E = new TH1F("h_lep_1_vis_mass_HIGH_E", "", bins, min, max);
+	h_lep_1_vis_mass_TRUTH = new TH1F("h_lep_1_vis_mass_TRUTH", "", bins, min, max);
 
-/// ------------------- lep_0_vis_mass: ---------------- ///
+	hv_lep_1_vis_mass.push_back(h_lep_1_vis_mass);
+	hv_lep_1_vis_mass.push_back(h_lep_1_vis_mass_CONTROL);
+	hv_lep_1_vis_mass.push_back(h_lep_1_vis_mass_EXCEPT);
+	hv_lep_1_vis_mass.push_back(h_lep_1_vis_mass_EXCEPT_FINE);
+	hv_lep_1_vis_mass.push_back(h_lep_1_vis_mass_PRE);
+	hv_lep_1_vis_mass.push_back(h_lep_1_vis_mass_BJET);
+	hv_lep_1_vis_mass.push_back(h_lep_1_vis_mass_HIGH_E);
+	hv_lep_1_vis_mass.push_back(h_lep_1_vis_mass_TRUTH);
+
+	hv_lep_1_vis_mass_names.push_back("h_lep_1_vis_mass");
+	hv_lep_1_vis_mass_names.push_back("h_lep_1_vis_mass_CONTROL");
+	hv_lep_1_vis_mass_names.push_back("h_lep_1_vis_mass_EXCEPT");
+	hv_lep_1_vis_mass_names.push_back("h_lep_1_vis_mass_EXCEPT_FINE");
+	hv_lep_1_vis_mass_names.push_back("h_lep_1_vis_mass_PRE");
+	hv_lep_1_vis_mass_names.push_back("h_lep_1_vis_mass_BJET");
+	hv_lep_1_vis_mass_names.push_back("h_lep_1_vis_mass_HIGH_E");
+	hv_lep_1_vis_mass_names.push_back("h_lep_1_vis_mass_TRUTH");
+
+}
+
+
+// -- the invariant mass of the TRUTH visible tau 1
+void MC_Analysis::Book_lep_0_vis_mass(int bins, double min, double max) {
+	h_lep_0_vis_mass = new TH1F("h_lep_0_vis_mass", "", bins, min, max);
+	h_lep_0_vis_mass_PRE = new TH1F("h_lep_0_vis_mass_PRE", "", bins, min, max);
+	h_lep_0_vis_mass_CONTROL = new TH1F("h_lep_0_vis_mass_CONTROL", "", bins, min, max);
+	h_lep_0_vis_mass_EXCEPT = new TH1F("h_lep_0_vis_mass_EXCEPT", "", bins, min, max);
+	h_lep_0_vis_mass_EXCEPT_FINE = new TH1F("h_lep_0_vis_mass_EXCEPT_FINE", "", 1000, min, max);
+	h_lep_0_vis_mass_BJET = new TH1F("h_lep_0_vis_mass_BJET", "", bins, min, max);
+	h_lep_0_vis_mass_HIGH_E = new TH1F("h_lep_0_vis_mass_HIGH_E", "", bins, min, max);
+	h_lep_0_vis_mass_TRUTH = new TH1F("h_lep_0_vis_mass_TRUTH", "", bins, min, max);
+
+	hv_lep_0_vis_mass.push_back(h_lep_0_vis_mass);
+	hv_lep_0_vis_mass.push_back(h_lep_0_vis_mass_CONTROL);
+	hv_lep_0_vis_mass.push_back(h_lep_0_vis_mass_EXCEPT);
+	hv_lep_0_vis_mass.push_back(h_lep_0_vis_mass_EXCEPT_FINE);
+	hv_lep_0_vis_mass.push_back(h_lep_0_vis_mass_PRE);
+	hv_lep_0_vis_mass.push_back(h_lep_0_vis_mass_BJET);
+	hv_lep_0_vis_mass.push_back(h_lep_0_vis_mass_HIGH_E);
+	hv_lep_0_vis_mass.push_back(h_lep_0_vis_mass_TRUTH);
+
+	hv_lep_0_vis_mass_names.push_back("h_lep_0_vis_mass");
+	hv_lep_0_vis_mass_names.push_back("h_lep_0_vis_mass_CONTROL");
+	hv_lep_0_vis_mass_names.push_back("h_lep_0_vis_mass_EXCEPT");
+	hv_lep_0_vis_mass_names.push_back("h_lep_0_vis_mass_EXCEPT_FINE");
+	hv_lep_0_vis_mass_names.push_back("h_lep_0_vis_mass_PRE");
+	hv_lep_0_vis_mass_names.push_back("h_lep_0_vis_mass_BJET");
+	hv_lep_0_vis_mass_names.push_back("h_lep_0_vis_mass_HIGH_E");
+	hv_lep_0_vis_mass_names.push_back("h_lep_0_vis_mass_TRUTH");
+
+}
+
 
 /// ------------------- lep_1_invis_mass: ---------------- ///
 
@@ -1511,34 +1571,258 @@ void MC_Analysis::Book_lep_0_lep_1_invis_vis_mass(int bins, double min, double m
 }
 
 
-// -- invariant mass of the TRUTH missing energy
-void MC_Analysis::Book_met_truth_mass(int bins, double min, double max) {
-	h_met_truth_mass = new TH1F("h_met_truth_mass", "", bins, min, max);
-	h_met_truth_mass_PRE = new TH1F("h_met_truth_mass_PRE", "", bins, min, max);
-	h_met_truth_mass_CONTROL = new TH1F("h_met_truth_mass_CONTROL", "", bins, min, max);
-	h_met_truth_mass_EXCEPT = new TH1F("h_met_truth_mass_EXCEPT", "", bins, min, max);
-	h_met_truth_mass_EXCEPT_FINE = new TH1F("h_met_truth_mass_EXCEPT_FINE", "", 1000, min, max);
-	h_met_truth_mass_BJET = new TH1F("h_met_truth_mass_BJET", "", bins, min, max);
-	h_met_truth_mass_HIGH_E = new TH1F("h_met_truth_mass_HIGH_E", "", bins, min, max);
-	h_met_truth_mass_TRUTH = new TH1F("h_met_truth_mass_TRUTH", "", bins, min, max);
+// -- energy of the TRUTH missing energy
+void MC_Analysis::Book_met_truth_energy(int bins, double min, double max) {
+	h_met_truth_energy = new TH1F("h_met_truth_energy", "", bins, min, max);
+	h_met_truth_energy_PRE = new TH1F("h_met_truth_energy_PRE", "", bins, min, max);
+	h_met_truth_energy_CONTROL = new TH1F("h_met_truth_energy_CONTROL", "", bins, min, max);
+	h_met_truth_energy_EXCEPT = new TH1F("h_met_truth_energy_EXCEPT", "", bins, min, max);
+	h_met_truth_energy_EXCEPT_FINE = new TH1F("h_met_truth_energy_EXCEPT_FINE", "", 1000, min, max);
+	h_met_truth_energy_BJET = new TH1F("h_met_truth_energy_BJET", "", bins, min, max);
+	h_met_truth_energy_HIGH_E = new TH1F("h_met_truth_energy_HIGH_E", "", bins, min, max);
+	h_met_truth_energy_TRUTH = new TH1F("h_met_truth_energy_TRUTH", "", bins, min, max);
 
-	hv_met_truth_mass.push_back(h_met_truth_mass);
-	hv_met_truth_mass.push_back(h_met_truth_mass_CONTROL);
-	hv_met_truth_mass.push_back(h_met_truth_mass_EXCEPT);
-	hv_met_truth_mass.push_back(h_met_truth_mass_EXCEPT_FINE);
-	hv_met_truth_mass.push_back(h_met_truth_mass_PRE);
-	hv_met_truth_mass.push_back(h_met_truth_mass_BJET);
-	hv_met_truth_mass.push_back(h_met_truth_mass_HIGH_E);
-	hv_met_truth_mass.push_back(h_met_truth_mass_TRUTH);
+	hv_met_truth_energy.push_back(h_met_truth_energy);
+	hv_met_truth_energy.push_back(h_met_truth_energy_CONTROL);
+	hv_met_truth_energy.push_back(h_met_truth_energy_EXCEPT);
+	hv_met_truth_energy.push_back(h_met_truth_energy_EXCEPT_FINE);
+	hv_met_truth_energy.push_back(h_met_truth_energy_PRE);
+	hv_met_truth_energy.push_back(h_met_truth_energy_BJET);
+	hv_met_truth_energy.push_back(h_met_truth_energy_HIGH_E);
+	hv_met_truth_energy.push_back(h_met_truth_energy_TRUTH);
 
-	hv_met_truth_mass_names.push_back("h_met_truth_mass");
-	hv_met_truth_mass_names.push_back("h_met_truth_mass_CONTROL");
-	hv_met_truth_mass_names.push_back("h_met_truth_mass_EXCEPT");
-	hv_met_truth_mass_names.push_back("h_met_truth_mass_EXCEPT_FINE");
-	hv_met_truth_mass_names.push_back("h_met_truth_mass_PRE");
-	hv_met_truth_mass_names.push_back("h_met_truth_mass_BJET");
-	hv_met_truth_mass_names.push_back("h_met_truth_mass_HIGH_E");
-	hv_met_truth_mass_names.push_back("h_met_truth_mass_TRUTH");
+	hv_met_truth_energy_names.push_back("h_met_truth_energy");
+	hv_met_truth_energy_names.push_back("h_met_truth_energy_CONTROL");
+	hv_met_truth_energy_names.push_back("h_met_truth_energy_EXCEPT");
+	hv_met_truth_energy_names.push_back("h_met_truth_energy_EXCEPT_FINE");
+	hv_met_truth_energy_names.push_back("h_met_truth_energy_PRE");
+	hv_met_truth_energy_names.push_back("h_met_truth_energy_BJET");
+	hv_met_truth_energy_names.push_back("h_met_truth_energy_HIGH_E");
+	hv_met_truth_energy_names.push_back("h_met_truth_energy_TRUTH");
+
+}
+
+
+// -- energy of TRUTH invis tau 0
+void MC_Analysis::Book_lep_0_invis_energy(int bins, double min, double max) {
+	h_lep_0_invis_energy = new TH1F("h_lep_0_invis_energy", "", bins, min, max);
+	h_lep_0_invis_energy_PRE = new TH1F("h_lep_0_invis_energy_PRE", "", bins, min, max);
+	h_lep_0_invis_energy_CONTROL = new TH1F("h_lep_0_invis_energy_CONTROL", "", bins, min, max);
+	h_lep_0_invis_energy_EXCEPT = new TH1F("h_lep_0_invis_energy_EXCEPT", "", bins, min, max);
+	h_lep_0_invis_energy_EXCEPT_FINE = new TH1F("h_lep_0_invis_energy_EXCEPT_FINE", "", 1000, min, max);
+	h_lep_0_invis_energy_BJET = new TH1F("h_lep_0_invis_energy_BJET", "", bins, min, max);
+	h_lep_0_invis_energy_HIGH_E = new TH1F("h_lep_0_invis_energy_HIGH_E", "", bins, min, max);
+	h_lep_0_invis_energy_TRUTH = new TH1F("h_lep_0_invis_energy_TRUTH", "", bins, min, max);
+
+	hv_lep_0_invis_energy.push_back(h_lep_0_invis_energy);
+	hv_lep_0_invis_energy.push_back(h_lep_0_invis_energy_CONTROL);
+	hv_lep_0_invis_energy.push_back(h_lep_0_invis_energy_EXCEPT);
+	hv_lep_0_invis_energy.push_back(h_lep_0_invis_energy_EXCEPT_FINE);
+	hv_lep_0_invis_energy.push_back(h_lep_0_invis_energy_PRE);
+	hv_lep_0_invis_energy.push_back(h_lep_0_invis_energy_BJET);
+	hv_lep_0_invis_energy.push_back(h_lep_0_invis_energy_HIGH_E);
+	hv_lep_0_invis_energy.push_back(h_lep_0_invis_energy_TRUTH);
+
+	hv_lep_0_invis_energy_names.push_back("h_lep_0_invis_energy");
+	hv_lep_0_invis_energy_names.push_back("h_lep_0_invis_energy_CONTROL");
+	hv_lep_0_invis_energy_names.push_back("h_lep_0_invis_energy_EXCEPT");
+	hv_lep_0_invis_energy_names.push_back("h_lep_0_invis_energy_EXCEPT_FINE");
+	hv_lep_0_invis_energy_names.push_back("h_lep_0_invis_energy_PRE");
+	hv_lep_0_invis_energy_names.push_back("h_lep_0_invis_energy_BJET");
+	hv_lep_0_invis_energy_names.push_back("h_lep_0_invis_energy_HIGH_E");
+	hv_lep_0_invis_energy_names.push_back("h_lep_0_invis_energy_TRUTH");
+
+}
+
+
+// -- energy of TRUTH invis tau 1
+void MC_Analysis::Book_lep_1_invis_energy(int bins, double min, double max) {
+	h_lep_1_invis_energy = new TH1F("h_lep_1_invis_energy", "", bins, min, max);
+	h_lep_1_invis_energy_PRE = new TH1F("h_lep_1_invis_energy_PRE", "", bins, min, max);
+	h_lep_1_invis_energy_CONTROL = new TH1F("h_lep_1_invis_energy_CONTROL", "", bins, min, max);
+	h_lep_1_invis_energy_EXCEPT = new TH1F("h_lep_1_invis_energy_EXCEPT", "", bins, min, max);
+	h_lep_1_invis_energy_EXCEPT_FINE = new TH1F("h_lep_1_invis_energy_EXCEPT_FINE", "", 1000, min, max);
+	h_lep_1_invis_energy_BJET = new TH1F("h_lep_1_invis_energy_BJET", "", bins, min, max);
+	h_lep_1_invis_energy_HIGH_E = new TH1F("h_lep_1_invis_energy_HIGH_E", "", bins, min, max);
+	h_lep_1_invis_energy_TRUTH = new TH1F("h_lep_1_invis_energy_TRUTH", "", bins, min, max);
+
+	hv_lep_1_invis_energy.push_back(h_lep_1_invis_energy);
+	hv_lep_1_invis_energy.push_back(h_lep_1_invis_energy_CONTROL);
+	hv_lep_1_invis_energy.push_back(h_lep_1_invis_energy_EXCEPT);
+	hv_lep_1_invis_energy.push_back(h_lep_1_invis_energy_EXCEPT_FINE);
+	hv_lep_1_invis_energy.push_back(h_lep_1_invis_energy_PRE);
+	hv_lep_1_invis_energy.push_back(h_lep_1_invis_energy_BJET);
+	hv_lep_1_invis_energy.push_back(h_lep_1_invis_energy_HIGH_E);
+	hv_lep_1_invis_energy.push_back(h_lep_1_invis_energy_TRUTH);
+
+	hv_lep_1_invis_energy_names.push_back("h_lep_1_invis_energy");
+	hv_lep_1_invis_energy_names.push_back("h_lep_1_invis_energy_CONTROL");
+	hv_lep_1_invis_energy_names.push_back("h_lep_1_invis_energy_EXCEPT");
+	hv_lep_1_invis_energy_names.push_back("h_lep_1_invis_energy_EXCEPT_FINE");
+	hv_lep_1_invis_energy_names.push_back("h_lep_1_invis_energy_PRE");
+	hv_lep_1_invis_energy_names.push_back("h_lep_1_invis_energy_BJET");
+	hv_lep_1_invis_energy_names.push_back("h_lep_1_invis_energy_HIGH_E");
+	hv_lep_1_invis_energy_names.push_back("h_lep_1_invis_energy_TRUTH");
+
+}
+
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+void MC_Analysis::Book_BDT_test(int bins, double min, double max) {
+	h_BDT_test = new TH1F("h_BDT_test", "", bins, min, max);
+	h_BDT_test_PRE = new TH1F("h_BDT_test_PRE", "", bins, min, max);
+	h_BDT_test_CONTROL = new TH1F("h_BDT_test_CONTROL", "", bins, min, max);
+	h_BDT_test_EXCEPT = new TH1F("h_BDT_test_EXCEPT", "", bins, min, max);
+	h_BDT_test_EXCEPT_FINE = new TH1F("h_BDT_test_EXCEPT_FINE", "", 1000, min, max);
+	h_BDT_test_BJET = new TH1F("h_BDT_test_BJET", "", bins, min, max);
+	h_BDT_test_HIGH_E = new TH1F("h_BDT_test_HIGH_E", "", bins, min, max);
+	h_BDT_test_TRUTH = new TH1F("h_BDT_test_TRUTH", "", bins, min, max);
+
+	hv_BDT_test.push_back(h_BDT_test);
+	hv_BDT_test.push_back(h_BDT_test_CONTROL);
+	hv_BDT_test.push_back(h_BDT_test_EXCEPT);
+	hv_BDT_test.push_back(h_BDT_test_EXCEPT_FINE);
+	hv_BDT_test.push_back(h_BDT_test_PRE);
+	hv_BDT_test.push_back(h_BDT_test_BJET);
+	hv_BDT_test.push_back(h_BDT_test_HIGH_E);
+	hv_BDT_test.push_back(h_BDT_test_TRUTH);
+
+	hv_BDT_test_names.push_back("h_BDT_test");
+	hv_BDT_test_names.push_back("h_BDT_test_CONTROL");
+	hv_BDT_test_names.push_back("h_BDT_test_EXCEPT");
+	hv_BDT_test_names.push_back("h_BDT_test_EXCEPT_FINE");
+	hv_BDT_test_names.push_back("h_BDT_test_PRE");
+	hv_BDT_test_names.push_back("h_BDT_test_BJET");
+	hv_BDT_test_names.push_back("h_BDT_test_HIGH_E");
+	hv_BDT_test_names.push_back("h_BDT_test_TRUTH");
+
+}
+
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+void MC_Analysis::Book_BDT_test1(int bins, double min, double max) {
+	h_BDT_test1 = new TH1F("h_BDT_test1", "", bins, min, max);
+	h_BDT_test1_PRE = new TH1F("h_BDT_test1_PRE", "", bins, min, max);
+	h_BDT_test1_CONTROL = new TH1F("h_BDT_test1_CONTROL", "", bins, min, max);
+	h_BDT_test1_EXCEPT = new TH1F("h_BDT_test1_EXCEPT", "", bins, min, max);
+	h_BDT_test1_EXCEPT_FINE = new TH1F("h_BDT_test1_EXCEPT_FINE", "", 1000, min, max);
+	h_BDT_test1_BJET = new TH1F("h_BDT_test1_BJET", "", bins, min, max);
+	h_BDT_test1_HIGH_E = new TH1F("h_BDT_test1_HIGH_E", "", bins, min, max);
+	h_BDT_test1_TRUTH = new TH1F("h_BDT_test1_TRUTH", "", bins, min, max);
+
+	hv_BDT_test1.push_back(h_BDT_test1);
+	hv_BDT_test1.push_back(h_BDT_test1_CONTROL);
+	hv_BDT_test1.push_back(h_BDT_test1_EXCEPT);
+	hv_BDT_test1.push_back(h_BDT_test1_EXCEPT_FINE);
+	hv_BDT_test1.push_back(h_BDT_test1_PRE);
+	hv_BDT_test1.push_back(h_BDT_test1_BJET);
+	hv_BDT_test1.push_back(h_BDT_test1_HIGH_E);
+	hv_BDT_test1.push_back(h_BDT_test1_TRUTH);
+
+	hv_BDT_test1_names.push_back("h_BDT_test1");
+	hv_BDT_test1_names.push_back("h_BDT_test1_CONTROL");
+	hv_BDT_test1_names.push_back("h_BDT_test1_EXCEPT");
+	hv_BDT_test1_names.push_back("h_BDT_test1_EXCEPT_FINE");
+	hv_BDT_test1_names.push_back("h_BDT_test1_PRE");
+	hv_BDT_test1_names.push_back("h_BDT_test1_BJET");
+	hv_BDT_test1_names.push_back("h_BDT_test1_HIGH_E");
+	hv_BDT_test1_names.push_back("h_BDT_test1_TRUTH");
+
+}
+
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+void MC_Analysis::Book_BDT_test2(int bins, double min, double max) {
+	h_BDT_test2 = new TH1F("h_BDT_test2", "", bins, min, max);
+	h_BDT_test2_PRE = new TH1F("h_BDT_test2_PRE", "", bins, min, max);
+	h_BDT_test2_CONTROL = new TH1F("h_BDT_test2_CONTROL", "", bins, min, max);
+	h_BDT_test2_EXCEPT = new TH1F("h_BDT_test2_EXCEPT", "", bins, min, max);
+	h_BDT_test2_EXCEPT_FINE = new TH1F("h_BDT_test2_EXCEPT_FINE", "", 1000, min, max);
+	h_BDT_test2_BJET = new TH1F("h_BDT_test2_BJET", "", bins, min, max);
+	h_BDT_test2_HIGH_E = new TH1F("h_BDT_test2_HIGH_E", "", bins, min, max);
+	h_BDT_test2_TRUTH = new TH1F("h_BDT_test2_TRUTH", "", bins, min, max);
+
+	hv_BDT_test2.push_back(h_BDT_test2);
+	hv_BDT_test2.push_back(h_BDT_test2_CONTROL);
+	hv_BDT_test2.push_back(h_BDT_test2_EXCEPT);
+	hv_BDT_test2.push_back(h_BDT_test2_EXCEPT_FINE);
+	hv_BDT_test2.push_back(h_BDT_test2_PRE);
+	hv_BDT_test2.push_back(h_BDT_test2_BJET);
+	hv_BDT_test2.push_back(h_BDT_test2_HIGH_E);
+	hv_BDT_test2.push_back(h_BDT_test2_TRUTH);
+
+	hv_BDT_test2_names.push_back("h_BDT_test2");
+	hv_BDT_test2_names.push_back("h_BDT_test2_CONTROL");
+	hv_BDT_test2_names.push_back("h_BDT_test2_EXCEPT");
+	hv_BDT_test2_names.push_back("h_BDT_test2_EXCEPT_FINE");
+	hv_BDT_test2_names.push_back("h_BDT_test2_PRE");
+	hv_BDT_test2_names.push_back("h_BDT_test2_BJET");
+	hv_BDT_test2_names.push_back("h_BDT_test2_HIGH_E");
+	hv_BDT_test2_names.push_back("h_BDT_test2_TRUTH");
+
+}
+
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+void MC_Analysis::Book_BDT_test3(int bins, double min, double max) {
+	h_BDT_test3 = new TH1F("h_BDT_test3", "", bins, min, max);
+	h_BDT_test3_PRE = new TH1F("h_BDT_test3_PRE", "", bins, min, max);
+	h_BDT_test3_CONTROL = new TH1F("h_BDT_test3_CONTROL", "", bins, min, max);
+	h_BDT_test3_EXCEPT = new TH1F("h_BDT_test3_EXCEPT", "", bins, min, max);
+	h_BDT_test3_EXCEPT_FINE = new TH1F("h_BDT_test3_EXCEPT_FINE", "", 1000, min, max);
+	h_BDT_test3_BJET = new TH1F("h_BDT_test3_BJET", "", bins, min, max);
+	h_BDT_test3_HIGH_E = new TH1F("h_BDT_test3_HIGH_E", "", bins, min, max);
+	h_BDT_test3_TRUTH = new TH1F("h_BDT_test3_TRUTH", "", bins, min, max);
+
+	hv_BDT_test3.push_back(h_BDT_test3);
+	hv_BDT_test3.push_back(h_BDT_test3_CONTROL);
+	hv_BDT_test3.push_back(h_BDT_test3_EXCEPT);
+	hv_BDT_test3.push_back(h_BDT_test3_EXCEPT_FINE);
+	hv_BDT_test3.push_back(h_BDT_test3_PRE);
+	hv_BDT_test3.push_back(h_BDT_test3_BJET);
+	hv_BDT_test3.push_back(h_BDT_test3_HIGH_E);
+	hv_BDT_test3.push_back(h_BDT_test3_TRUTH);
+
+	hv_BDT_test3_names.push_back("h_BDT_test3");
+	hv_BDT_test3_names.push_back("h_BDT_test3_CONTROL");
+	hv_BDT_test3_names.push_back("h_BDT_test3_EXCEPT");
+	hv_BDT_test3_names.push_back("h_BDT_test3_EXCEPT_FINE");
+	hv_BDT_test3_names.push_back("h_BDT_test3_PRE");
+	hv_BDT_test3_names.push_back("h_BDT_test3_BJET");
+	hv_BDT_test3_names.push_back("h_BDT_test3_HIGH_E");
+	hv_BDT_test3_names.push_back("h_BDT_test3_TRUTH");
+
+}
+
+
+// --  Boosted decision stuff for mis identified electrons as taus (test run)
+void MC_Analysis::Book_BDT_test4(int bins, double min, double max) {
+	h_BDT_test4 = new TH1F("h_BDT_test4", "", bins, min, max);
+	h_BDT_test4_PRE = new TH1F("h_BDT_test4_PRE", "", bins, min, max);
+	h_BDT_test4_CONTROL = new TH1F("h_BDT_test4_CONTROL", "", bins, min, max);
+	h_BDT_test4_EXCEPT = new TH1F("h_BDT_test4_EXCEPT", "", bins, min, max);
+	h_BDT_test4_EXCEPT_FINE = new TH1F("h_BDT_test4_EXCEPT_FINE", "", 1000, min, max);
+	h_BDT_test4_BJET = new TH1F("h_BDT_test4_BJET", "", bins, min, max);
+	h_BDT_test4_HIGH_E = new TH1F("h_BDT_test4_HIGH_E", "", bins, min, max);
+	h_BDT_test4_TRUTH = new TH1F("h_BDT_test4_TRUTH", "", bins, min, max);
+
+	hv_BDT_test4.push_back(h_BDT_test4);
+	hv_BDT_test4.push_back(h_BDT_test4_CONTROL);
+	hv_BDT_test4.push_back(h_BDT_test4_EXCEPT);
+	hv_BDT_test4.push_back(h_BDT_test4_EXCEPT_FINE);
+	hv_BDT_test4.push_back(h_BDT_test4_PRE);
+	hv_BDT_test4.push_back(h_BDT_test4_BJET);
+	hv_BDT_test4.push_back(h_BDT_test4_HIGH_E);
+	hv_BDT_test4.push_back(h_BDT_test4_TRUTH);
+
+	hv_BDT_test4_names.push_back("h_BDT_test4");
+	hv_BDT_test4_names.push_back("h_BDT_test4_CONTROL");
+	hv_BDT_test4_names.push_back("h_BDT_test4_EXCEPT");
+	hv_BDT_test4_names.push_back("h_BDT_test4_EXCEPT_FINE");
+	hv_BDT_test4_names.push_back("h_BDT_test4_PRE");
+	hv_BDT_test4_names.push_back("h_BDT_test4_BJET");
+	hv_BDT_test4_names.push_back("h_BDT_test4_HIGH_E");
+	hv_BDT_test4_names.push_back("h_BDT_test4_TRUTH");
 
 }
 
