@@ -10,9 +10,13 @@ def gui(window):
 	types = ["Electron", "ElectronMuon", "ElectronTau", "Muon", "MuonTau", "Electron_Higgs", "ElectronMuon_Higgs", "ElectronTau_Higgs", "Muon_Higgs", "MuonTau_Higgs"]
 	processes = ["Zee", "Zee2jets", "Zmumu", "Zmm2jets", "Ztt", "Ztt2jets", "ttb", "Wenu", "Wmunu", "Wtaunu", "ZqqZll", "DATA", "Incomplete Analyses", "No Histograms"]
 	DATA_chains = []
+	HIGGS_DATA_chains = []
 	
 	for x in range(0,30):
 		DATA_chains.append("DATA_" + str(x) + "_")
+
+	for x in range(0,81):
+		HIGGS_DATA_chains.append("DATA_" + str(x) + "_")
 
 	mode = "types"
 	AnalysisType = ""
@@ -106,6 +110,7 @@ def gui(window):
 			counter = 0
 
 			HiggsAddition = ""
+			TrueAnalysisType = AnalysisType[0:AnalysisType.find("_")]
 
 			if (HiggsMode == "true"):
 				HiggsAddition = "_Higgs"
@@ -122,23 +127,33 @@ def gui(window):
 							window.addstr(line)
 
 					counter += 1
-
 			elif mode == "DATA":
-				for line in DATA_chains:
-					if counter == selected:
-						window.addstr(line[0:len(line) - 1] + "\n", curses.A_STANDOUT)
-						ChainName = line
-					else:
-						window.addstr(line[0:len(line) - 1] + "\n")
+				if (HiggsMode == "true"):
+					for line in HIGGS_DATA_chains:
+						if counter == selected:
+							window.addstr(line[0:len(line) - 1] + "\n", curses.A_STANDOUT)
+							ChainName = line
+						else:
+							window.addstr(line[0:len(line) - 1] + "\n")
 
-					counter += 1
+						counter += 1
+				else:
+					for line in DATA_chains:
+						if counter == selected:
+							window.addstr(line[0:len(line) - 1] + "\n", curses.A_STANDOUT)
+							ChainName = line
+						else:
+							window.addstr(line[0:len(line) - 1] + "\n")
+
+						counter += 1
 
 			elif mode == "Incomplete Analyses":
 				incomplete_analyses = []
-				for root, dirs, files in os.walk("../../Completion_Files/" + AnalysisType + HiggsAddition):
+				window.addstr("../../Completion_Files/" + AnalysisType + HiggsAddition + "\n", curses.A_STANDOUT)
+				for root, dirs, files in os.walk("../../Completion_Files/" + AnalysisType):
 					for file in files:
 						file_name = os.path.join(root, file)
-						chain_name = file_name[file_name.find(AnalysisType + HiggsAddition + "/") + len(AnalysisType) + 1:file_name.find("_completion.txt")]
+						chain_name = file_name[file_name.find(AnalysisType + "/") + len(AnalysisType) + 1:file_name.find("_completion.txt")]
 						open_file = open(file_name, "r")
 						for line in open_file:
 							if (line.find("Finished") == -1):
@@ -206,6 +221,8 @@ def gui(window):
 
 			window.addstr("Histograms Drawn to PDF: " + str(file_counter) + "\n")
 
+			window.addstr("Command to be executed: " + "root \"Start_Analysis.C(\\\"Start_" + ChainName[0:len(ChainName) - 1] + HiggsAddition  + "_Analysis\\\",\\\"" + TrueAnalysisType + "\\\", true, " + HiggsMode + ")\" -l -b -q" + "\n")
+
 			window.refresh()
 
 			c = window.getch()
@@ -216,7 +233,7 @@ def gui(window):
 				selected -= 1
 			elif c == curses.KEY_RIGHT:
 				temporary_command_file = open("temporary_command_file.sh", "w")
-				temporary_command_file.write("root \"Start_Analysis.C(\\\"Start_" + ChainName[0:len(ChainName) - 1] + "_Analysis\\\",\\\"" + AnalysisType + "\\\", true, " + HiggsMode + ")\" -l -b -q")
+				temporary_command_file.write("root \"Start_Analysis.C(\\\"Start_" + ChainName[0:len(ChainName) - 1] + HiggsAddition + "_Analysis\\\",\\\"" + TrueAnalysisType + "\\\", true, " + HiggsMode + ")\" -l -b -q")
 				temporary_command_file.close()
 				subprocess.Popen('gnome-terminal -x "bash" -c ". temporary_command_file.sh"', shell=True)
 			elif c == curses.KEY_LEFT:

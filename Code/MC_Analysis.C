@@ -48,8 +48,6 @@ void MC_Analysis::Loop() {
    time_t now = time(0);			//Get the current time
    char* time = ctime(&now);			//Turn the current time into a Char to be cout-able
 
-   if (higgs_analysis == true) AnalysisType = AnalysisType  + "_Higgs";
-
    //--- Loop Running Indicator ---//
 
    int current_indicator = 0;
@@ -201,7 +199,6 @@ void MC_Analysis::Loop() {
 		Fill("normal");			//Fill all the post-cut data
 		fill_truth = true;
 
-
 	}
 	else if (InitialCut(true, false) == false) {
 		JetSet(true);
@@ -212,14 +209,18 @@ void MC_Analysis::Loop() {
 
 	}
 
-	if (ChainName.find("DATA") == string::npos) {
-		ParticleSelection_TRUTH();	//The particle selection function, selecting the desired particles
-		if (fill_truth) {
-			JetSet_TRUTH();
-			GenerateVariables(true);	//Generate all variables
-			Fill("truth");			//Fill all the post-cut data
-		}
-	}	
+	if (!(higgs_analysis)) {
+
+		if (ChainName.find("DATA") == string::npos) {
+			ParticleSelection_TRUTH();	//The particle selection function, selecting the desired particles
+			if (fill_truth) {
+				JetSet_TRUTH();
+				GenerateVariables(true);	//Generate all variables
+				Fill("truth");			//Fill all the post-cut data
+			}
+		}	
+
+	}
 	
    }
 

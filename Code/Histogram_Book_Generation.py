@@ -108,12 +108,12 @@ def AnalysisAutoGen_TLorentz(InputTLorentzName, DesiredTLorentzName, Units):
 
 		#To fill the _DrawHistos Function inside SOMETHING_Analysis.h
 		_DrawHistos.write("\t//Histogram Draw (Quiet) Functions for " + leafName + "_" + TLorentzName + "\n")
-		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + ", \"h_" + leafName + "_" + TLorentzName + "\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n")
-		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_PRE, \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n")
-		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n")
-		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_BJET, \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n\n")
-		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_HIGH_E, \"h_" + leafName + "_" + TLorentzName + "_HIGH_E\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n\n")
-		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_TRUTH, \"h_" + leafName + "_" + TLorentzName + "_TRUTH\", \"" + Units + "\", false, true, ChainName, AnalysisType);\n\n")
+		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + ", \"h_" + leafName + "_" + TLorentzName + "\", \"" + Units + "\", false, true, ChainName, AnalysisType, higgs_suffix);\n")
+		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_PRE, \"h_" + leafName + "_" + TLorentzName + "_PRE\", \"" + Units + "\", false, true, ChainName, AnalysisType, higgs_suffix);\n")
+		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_CONTROL, \"h_" + leafName + "_" + TLorentzName + "_CONTROL\", \"" + Units + "\", false, true, ChainName, AnalysisType, higgs_suffix);\n")
+		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_BJET, \"h_" + leafName + "_" + TLorentzName + "_BJET\", \"" + Units + "\", false, true, ChainName, AnalysisType, higgs_suffix);\n\n")
+		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_HIGH_E, \"h_" + leafName + "_" + TLorentzName + "_HIGH_E\", \"" + Units + "\", false, true, ChainName, AnalysisType, higgs_suffix);\n\n")
+		_DrawHistos.write("\tDrawHistogram(h_" + leafName + "_" + TLorentzName + "_TRUTH, \"h_" + leafName + "_" + TLorentzName + "_TRUTH\", \"" + Units + "\", false, true, ChainName, AnalysisType, higgs_suffix);\n\n")
 
 def AnalysisAutoGen_Custom(name):
 	_BookHistos.write("\t//Histogram Bookings for " + name + "\n")

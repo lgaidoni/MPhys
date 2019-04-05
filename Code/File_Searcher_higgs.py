@@ -6,7 +6,7 @@ chain_names = open("Chain_Names_Higgs.txt", "w")
 prevpath = ""
 prevID = ""
 
-for root, dirs, files in os.walk("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc"):
+for root, dirs, files in os.walk("/higgs-data3/sam/forTomRyunAliceLuca/v03/mc"):
 	for file in files:
 		path = os.path.join(root, file)
 
@@ -35,14 +35,14 @@ for root, dirs, files in os.walk("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc"):
 prevpath = ""
 prevID = ""
 
-for root, dirs, files in os.walk("/higgs-data3/sam/forTomRyunAliceLuca/v02/data"):
+for root, dirs, files in os.walk("/higgs-data3/sam/forTomRyunAliceLuca/v03/data"):
 	for file in files:
 		path = os.path.join(root, file)
 
-		ID_Location = len("/higgs-data3/sam/forTomRyunAliceLuca/v02/data/user.sdysch.mphys_v2.") + 13
+		ID_Location = len("/higgs-data3/sam/forTomRyunAliceLuca/v03/data/user.sdysch.mphys_v2.") + 13
 		ID = path[ID_Location:ID_Location + 8]
 
-		Name_Location = len("/higgs-data3/sam/forTomRyunAliceLuca/v02/data/user.sdysch.mphys_v2.")
+		Name_Location = len("/higgs-data3/sam/forTomRyunAliceLuca/v03/data/user.sdysch.mphys_v2.")
 		Name = path[Name_Location:ID_Location + 8]
 
 		r_version = ""
