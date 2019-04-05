@@ -12,7 +12,7 @@ void Start_Sh221_PDF30_Ztt2jets_Min_N_TChannel_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt2jets_Min_N_TChannel->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt2jets_Min_N_TChannel->DrawHistos();
+	Sh221_PDF30_Ztt2jets_Min_N_TChannel->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
 }
 
@@ -27,7 +27,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_BFil_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV140_280_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV140_280_BFil->DrawHistos();
+	Sh221_PDF30_Ztt_MV140_280_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -42,7 +42,7 @@ void Start_PoPy8_A14_ttb_nonallh_Analysis(string AnalysisType, bool draw, bool H
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
 	PoPy8_A14_ttb_nonallh->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
-	PoPy8_A14_ttb_nonallh->DrawHistos();
+	PoPy8_A14_ttb_nonallh->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished PoPy8_A14_ttb_nonallh"; 	completion.flush(); 	completion.close();
 }
 
@@ -57,7 +57,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool d
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV0_70_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV0_70_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wenu_MV0_70_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -72,7 +72,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_BFil_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV140_280_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_BFil->DrawHistos();
+	Sh221_PDF30_Zee_MV140_280_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -87,7 +87,7 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_CVetBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV280_500_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV280_500_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wmunu_MV280_500_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -102,7 +102,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_CFilBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV70_140_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV70_140_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wenu_MV70_140_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -117,7 +117,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_CFilBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV70_140_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV70_140_CFilBVet->DrawHistos();
+	Sh221_PDF30_Zmumu_MV70_140_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -132,7 +132,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_CVetBVet_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV70_140_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV70_140_CVetBVet->DrawHistos();
+	Sh221_PDF30_Zee_MV70_140_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -147,7 +147,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_BFil_Analysis(string AnalysisType, bool draw, 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV0_70_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV0_70_BFil->DrawHistos();
+	Sh221_PDF30_Zee_MV0_70_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -162,7 +162,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_BFil_Analysis(string AnalysisType, bool draw
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV0_70_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_BFil->DrawHistos();
+	Sh221_PDF30_Wmunu_MV0_70_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -177,7 +177,7 @@ void Start_Sh221_PDF30_Zee2jets_Min_N_TChannel_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee2jets_Min_N_TChannel->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee2jets_Min_N_TChannel->DrawHistos();
+	Sh221_PDF30_Zee2jets_Min_N_TChannel->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
 }
 
@@ -192,7 +192,7 @@ void Start_Sh221_PDF30_Wtaunu_MV280_500_CFilBVet_Analysis(string AnalysisType, b
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV280_500_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -207,7 +207,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_BFil_Analysis(string AnalysisType, bool draw
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV0_70_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_BFil->DrawHistos();
+	Sh221_PDF30_Zmumu_MV0_70_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -222,7 +222,7 @@ void Start_Sh221_PDF30_Wtaunu_MV500_1000_Analysis(string AnalysisType, bool draw
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV500_1000->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV500_1000->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV500_1000->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV500_1000"; 	completion.flush(); 	completion.close();
 }
 
@@ -237,7 +237,7 @@ void Start_Sh221_PDF30_Wmunu_MV70_140_CFilBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wmunu_MV70_140_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -252,7 +252,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_CVetBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV70_140_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV70_140_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wenu_MV70_140_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -267,7 +267,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_BFil_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV280_500_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_BFil->DrawHistos();
+	Sh221_PDF30_Ztt_MV280_500_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -282,7 +282,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV0_70_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -297,7 +297,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_CFilBVet_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV70_140_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_CFilBVet->DrawHistos();
+	Sh221_PDF30_Ztt_MV70_140_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -312,7 +312,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_CVetBVet_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV0_70_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_CVetBVet->DrawHistos();
+	Sh221_PDF30_Ztt_MV0_70_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -327,7 +327,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_BFil_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV70_140_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV70_140_BFil->DrawHistos();
+	Sh221_PDF30_Zmumu_MV70_140_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -342,7 +342,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_CVetBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV280_500_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_CVetBVet->DrawHistos();
+	Sh221_PDF30_Ztt_MV280_500_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -357,7 +357,7 @@ void Start_Sh221_PDF30_Wmunu_MV500_1000_Analysis(string AnalysisType, bool draw,
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV500_1000->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV500_1000->DrawHistos();
+	Sh221_PDF30_Wmunu_MV500_1000->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV500_1000"; 	completion.flush(); 	completion.close();
 }
 
@@ -372,7 +372,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_BFil_Analysis(string AnalysisType, bool draw, 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV0_70_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_BFil->DrawHistos();
+	Sh221_PDF30_Ztt_MV0_70_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -387,7 +387,7 @@ void Start_Sh221_PDF30_Ztt_MV500_1000_Analysis(string AnalysisType, bool draw, b
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV500_1000->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV500_1000->DrawHistos();
+	Sh221_PDF30_Ztt_MV500_1000->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV500_1000"; 	completion.flush(); 	completion.close();
 }
 
@@ -402,7 +402,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_CVetBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->DrawHistos();
+	Sh221_PDF30_Zmumu_MV140_280_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -417,7 +417,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_CFilBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->DrawHistos();
+	Sh221_PDF30_Zmumu_MV140_280_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -432,7 +432,7 @@ void Start_Sh221_PDF30_Wmunu_MV140_280_BFil_Analysis(string AnalysisType, bool d
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV140_280_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV140_280_BFil->DrawHistos();
+	Sh221_PDF30_Wmunu_MV140_280_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -447,7 +447,7 @@ void Start_Sh221_PDF30_Zmumu_MV140_280_BFil_Analysis(string AnalysisType, bool d
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV140_280_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV140_280_BFil->DrawHistos();
+	Sh221_PDF30_Zmumu_MV140_280_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -462,7 +462,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_BFil_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV140_280_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_BFil->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV140_280_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -477,7 +477,7 @@ void Start_Sh221_PDF30_Wenu_MV140_280_BFil_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV140_280_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV140_280_BFil->DrawHistos();
+	Sh221_PDF30_Wenu_MV140_280_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV140_280_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -492,7 +492,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_CFilBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV280_500_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV280_500_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wenu_MV280_500_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -507,7 +507,7 @@ void Start_Sh221_PDF30_Zee_MV1000_E_CMS_Analysis(string AnalysisType, bool draw,
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV1000_E_CMS->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV1000_E_CMS->DrawHistos();
+	Sh221_PDF30_Zee_MV1000_E_CMS->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 }
 
@@ -522,7 +522,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->DrawHistos();
+	Sh221_PDF30_Zmumu_MV0_70_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -537,7 +537,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_CFilBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV70_140_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -552,7 +552,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_CVetBVet_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV0_70_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV0_70_CVetBVet->DrawHistos();
+	Sh221_PDF30_Zee_MV0_70_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -567,7 +567,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_CVetBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV280_500_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV280_500_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wenu_MV280_500_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -582,7 +582,7 @@ void Start_Sh221_PDF30_Wmunu_MV140_280_CVetBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wmunu_MV140_280_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -597,7 +597,7 @@ void Start_Sh221_PDF30_Zmumu_MV500_1000_Analysis(string AnalysisType, bool draw,
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV500_1000->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV500_1000->DrawHistos();
+	Sh221_PDF30_Zmumu_MV500_1000->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV500_1000"; 	completion.flush(); 	completion.close();
 }
 
@@ -612,7 +612,7 @@ void Start_Sh221_PDF30_Wenu_MV500_1000_Analysis(string AnalysisType, bool draw, 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV500_1000->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV500_1000->DrawHistos();
+	Sh221_PDF30_Wenu_MV500_1000->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV500_1000"; 	completion.flush(); 	completion.close();
 }
 
@@ -627,7 +627,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wmunu_MV0_70_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -642,7 +642,7 @@ void Start_Sh221_PDF30_Ztt_MV0_70_CFilBVet_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV0_70_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV0_70_CFilBVet->DrawHistos();
+	Sh221_PDF30_Ztt_MV0_70_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -657,7 +657,7 @@ void Start_Sh221_PDF30_Zmumu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->DrawHistos();
+	Sh221_PDF30_Zmumu_MV0_70_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -672,7 +672,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_BFil_Analysis(string AnalysisType, bool d
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV280_500_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_BFil->DrawHistos();
+	Sh221_PDF30_Zmumu_MV280_500_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -687,7 +687,7 @@ void Start_Sh221_PDF30_Wtaunu_MV280_500_CVetBVet_Analysis(string AnalysisType, b
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV280_500_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -702,7 +702,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_CFilBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV280_500_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_CFilBVet->DrawHistos();
+	Sh221_PDF30_Zee_MV280_500_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -717,7 +717,7 @@ void Start_Sh221_PDF30_Ztt_MV1000_E_CMS_Analysis(string AnalysisType, bool draw,
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV1000_E_CMS->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV1000_E_CMS->DrawHistos();
+	Sh221_PDF30_Ztt_MV1000_E_CMS->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 }
 
@@ -732,7 +732,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_BFil_Analysis(string AnalysisType, bool draw,
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV0_70_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV0_70_BFil->DrawHistos();
+	Sh221_PDF30_Wenu_MV0_70_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -747,7 +747,7 @@ void Start_Sh221_PDF30_Zee_MV500_1000_Analysis(string AnalysisType, bool draw, b
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV500_1000->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV500_1000->DrawHistos();
+	Sh221_PDF30_Zee_MV500_1000->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV500_1000"; 	completion.flush(); 	completion.close();
 }
 
@@ -762,7 +762,7 @@ void Start_Sh221_PDF30_Wenu_MV1000_E_CMS_Analysis(string AnalysisType, bool draw
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV1000_E_CMS->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV1000_E_CMS->DrawHistos();
+	Sh221_PDF30_Wenu_MV1000_E_CMS->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 }
 
@@ -777,7 +777,7 @@ void Start_Sh221_PDF30_Wenu_MV0_70_CVetBVet_Analysis(string AnalysisType, bool d
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV0_70_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV0_70_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wenu_MV0_70_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV0_70_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -792,7 +792,7 @@ void Start_Sh221_PDF30_Zmumu_MV1000_E_CMS_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV1000_E_CMS->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV1000_E_CMS->DrawHistos();
+	Sh221_PDF30_Zmumu_MV1000_E_CMS->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 }
 
@@ -807,7 +807,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_BFil_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV280_500_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_BFil->DrawHistos();
+	Sh221_PDF30_Zee_MV280_500_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -822,7 +822,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_BFil_Analysis(string AnalysisType, bool draw
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV70_140_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV70_140_BFil->DrawHistos();
+	Sh221_PDF30_Zee_MV70_140_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -837,7 +837,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_CVetBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->DrawHistos();
+	Sh221_PDF30_Zmumu_MV280_500_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -852,7 +852,7 @@ void Start_Sh221_PDF30_Zee_MV280_500_CVetBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV280_500_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV280_500_CVetBVet->DrawHistos();
+	Sh221_PDF30_Zee_MV280_500_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV280_500_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -867,7 +867,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_CFilBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV140_280_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_CFilBVet->DrawHistos();
+	Sh221_PDF30_Zee_MV140_280_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -882,7 +882,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_CFilBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV140_280_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV140_280_CFilBVet->DrawHistos();
+	Sh221_PDF30_Ztt_MV140_280_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -897,7 +897,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_CVetBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV70_140_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -912,7 +912,7 @@ void Start_Sh221_PDF30_Zmm2jets_Min_N_TChannel_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmm2jets_Min_N_TChannel->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmm2jets_Min_N_TChannel->DrawHistos();
+	Sh221_PDF30_Zmm2jets_Min_N_TChannel->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmm2jets_Min_N_TChannel"; 	completion.flush(); 	completion.close();
 }
 
@@ -927,7 +927,7 @@ void Start_Sh221_PDF30_Zee_MV70_140_CFilBVet_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV70_140_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV70_140_CFilBVet->DrawHistos();
+	Sh221_PDF30_Zee_MV70_140_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV70_140_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -942,7 +942,7 @@ void Start_Sh221_PDF30_Wmunu_MV70_140_CVetBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wmunu_MV70_140_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -957,7 +957,7 @@ void Start_Sh221_PDF30_Wtaunu_MV70_140_BFil_Analysis(string AnalysisType, bool d
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV70_140_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV70_140_BFil->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV70_140_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -972,7 +972,7 @@ void Start_Sh221_PDF30_Wmunu_MV280_500_BFil_Analysis(string AnalysisType, bool d
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV280_500_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV280_500_BFil->DrawHistos();
+	Sh221_PDF30_Wmunu_MV280_500_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -987,7 +987,7 @@ void Start_Sh221_PDF30_Zee_MV140_280_CVetBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV140_280_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV140_280_CVetBVet->DrawHistos();
+	Sh221_PDF30_Zee_MV140_280_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1002,7 +1002,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV0_70_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1017,7 +1017,7 @@ void Start_Sh221_PDF30_Ztt_MV140_280_CVetBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV140_280_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV140_280_CVetBVet->DrawHistos();
+	Sh221_PDF30_Ztt_MV140_280_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1032,7 +1032,7 @@ void Start_Sh221_PDF30_ZqqZll_Analysis(string AnalysisType, bool draw, bool Higg
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_ZqqZll->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_ZqqZll->DrawHistos();
+	Sh221_PDF30_ZqqZll->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_ZqqZll"; 	completion.flush(); 	completion.close();
 }
 
@@ -1047,7 +1047,7 @@ void Start_Sh221_PDF30_Zee_MV0_70_CFilBVet_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zee_MV0_70_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zee_MV0_70_CFilBVet->DrawHistos();
+	Sh221_PDF30_Zee_MV0_70_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zee_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1062,7 +1062,7 @@ void Start_Sh221_PDF30_Ztt_MV280_500_CFilBVet_Analysis(string AnalysisType, bool
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV280_500_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV280_500_CFilBVet->DrawHistos();
+	Sh221_PDF30_Ztt_MV280_500_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1077,7 +1077,7 @@ void Start_Sh221_PDF30_Wenu_MV70_140_BFil_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV70_140_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV70_140_BFil->DrawHistos();
+	Sh221_PDF30_Wenu_MV70_140_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -1092,7 +1092,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_BFil_Analysis(string AnalysisType, bool draw
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV70_140_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_BFil->DrawHistos();
+	Sh221_PDF30_Ztt_MV70_140_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -1107,7 +1107,7 @@ void Start_Sh221_PDF30_Wenu_MV140_280_CVetBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV140_280_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV140_280_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wenu_MV140_280_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1122,7 +1122,7 @@ void Start_Sh221_PDF30_Zmumu_MV280_500_CFilBVet_Analysis(string AnalysisType, bo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->DrawHistos();
+	Sh221_PDF30_Zmumu_MV280_500_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV280_500_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1137,7 +1137,7 @@ void Start_Sh221_PDF30_Wmunu_MV0_70_CFilBVet_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wmunu_MV0_70_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV0_70_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1152,7 +1152,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_CVetBVet_Analysis(string AnalysisType, b
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV140_280_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1167,7 +1167,7 @@ void Start_Sh221_PDF30_Wtaunu_MV140_280_CFilBVet_Analysis(string AnalysisType, b
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV140_280_CFilBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV140_280_CFilBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1182,7 +1182,7 @@ void Start_Sh221_PDF30_Ztt_MV70_140_CVetBVet_Analysis(string AnalysisType, bool 
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Ztt_MV70_140_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Ztt_MV70_140_CVetBVet->DrawHistos();
+	Sh221_PDF30_Ztt_MV70_140_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Ztt_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1197,7 +1197,7 @@ void Start_Sh221_PDF30_Zmumu_MV70_140_CVetBVet_Analysis(string AnalysisType, boo
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->DrawHistos();
+	Sh221_PDF30_Zmumu_MV70_140_CVetBVet->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Zmumu_MV70_140_CVetBVet"; 	completion.flush(); 	completion.close();
 }
 
@@ -1212,7 +1212,7 @@ void Start_Sh221_PDF30_Wmunu_MV1000_E_CMS_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wmunu_MV1000_E_CMS->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wmunu_MV1000_E_CMS->DrawHistos();
+	Sh221_PDF30_Wmunu_MV1000_E_CMS->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wmunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 }
 
@@ -1227,7 +1227,7 @@ void Start_Sh221_PDF30_Wtaunu_MV0_70_BFil_Analysis(string AnalysisType, bool dra
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV0_70_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV0_70_BFil->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV0_70_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV0_70_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -1242,7 +1242,7 @@ void Start_Sh221_PDF30_Wtaunu_MV1000_E_CMS_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wtaunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wtaunu_MV1000_E_CMS->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wtaunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wtaunu_MV1000_E_CMS->DrawHistos();
+	Sh221_PDF30_Wtaunu_MV1000_E_CMS->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wtaunu_MV1000_E_CMS"; 	completion.flush(); 	completion.close();
 }
 
@@ -1257,7 +1257,7 @@ void Start_Sh221_PDF30_Wenu_MV280_500_BFil_Analysis(string AnalysisType, bool dr
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 	Sh221_PDF30_Wenu_MV280_500_BFil->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
-	Sh221_PDF30_Wenu_MV280_500_BFil->DrawHistos();
+	Sh221_PDF30_Wenu_MV280_500_BFil->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished Sh221_PDF30_Wenu_MV280_500_BFil"; 	completion.flush(); 	completion.close();
 }
 
@@ -1270,7 +1270,7 @@ void Start_DATA_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA"; 	completion.flush(); 	completion.close();
 	DATA->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA"; 	completion.flush(); 	completion.close();
-	DATA->DrawHistos();
+	DATA->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA"; 	completion.flush(); 	completion.close();
 }
 
@@ -1283,7 +1283,7 @@ void Start_DATA_0_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_0"; 	completion.flush(); 	completion.close();
 	DATA_0->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_0"; 	completion.flush(); 	completion.close();
-	DATA_0->DrawHistos();
+	DATA_0->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_0"; 	completion.flush(); 	completion.close();
 }
 
@@ -1296,7 +1296,7 @@ void Start_DATA_1_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_1"; 	completion.flush(); 	completion.close();
 	DATA_1->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_1"; 	completion.flush(); 	completion.close();
-	DATA_1->DrawHistos();
+	DATA_1->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_1"; 	completion.flush(); 	completion.close();
 }
 
@@ -1309,7 +1309,7 @@ void Start_DATA_2_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_2"; 	completion.flush(); 	completion.close();
 	DATA_2->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_2"; 	completion.flush(); 	completion.close();
-	DATA_2->DrawHistos();
+	DATA_2->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_2"; 	completion.flush(); 	completion.close();
 }
 
@@ -1322,7 +1322,7 @@ void Start_DATA_3_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_3"; 	completion.flush(); 	completion.close();
 	DATA_3->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_3"; 	completion.flush(); 	completion.close();
-	DATA_3->DrawHistos();
+	DATA_3->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_3"; 	completion.flush(); 	completion.close();
 }
 
@@ -1335,7 +1335,7 @@ void Start_DATA_4_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_4"; 	completion.flush(); 	completion.close();
 	DATA_4->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_4"; 	completion.flush(); 	completion.close();
-	DATA_4->DrawHistos();
+	DATA_4->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_4"; 	completion.flush(); 	completion.close();
 }
 
@@ -1348,7 +1348,7 @@ void Start_DATA_5_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_5"; 	completion.flush(); 	completion.close();
 	DATA_5->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_5"; 	completion.flush(); 	completion.close();
-	DATA_5->DrawHistos();
+	DATA_5->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_5"; 	completion.flush(); 	completion.close();
 }
 
@@ -1361,7 +1361,7 @@ void Start_DATA_6_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_6"; 	completion.flush(); 	completion.close();
 	DATA_6->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_6"; 	completion.flush(); 	completion.close();
-	DATA_6->DrawHistos();
+	DATA_6->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_6"; 	completion.flush(); 	completion.close();
 }
 
@@ -1374,7 +1374,7 @@ void Start_DATA_7_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_7"; 	completion.flush(); 	completion.close();
 	DATA_7->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_7"; 	completion.flush(); 	completion.close();
-	DATA_7->DrawHistos();
+	DATA_7->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_7"; 	completion.flush(); 	completion.close();
 }
 
@@ -1387,7 +1387,7 @@ void Start_DATA_8_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_8"; 	completion.flush(); 	completion.close();
 	DATA_8->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_8"; 	completion.flush(); 	completion.close();
-	DATA_8->DrawHistos();
+	DATA_8->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_8"; 	completion.flush(); 	completion.close();
 }
 
@@ -1400,7 +1400,7 @@ void Start_DATA_9_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_9"; 	completion.flush(); 	completion.close();
 	DATA_9->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_9"; 	completion.flush(); 	completion.close();
-	DATA_9->DrawHistos();
+	DATA_9->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_9"; 	completion.flush(); 	completion.close();
 }
 
@@ -1413,7 +1413,7 @@ void Start_DATA_10_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_10"; 	completion.flush(); 	completion.close();
 	DATA_10->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_10"; 	completion.flush(); 	completion.close();
-	DATA_10->DrawHistos();
+	DATA_10->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_10"; 	completion.flush(); 	completion.close();
 }
 
@@ -1426,7 +1426,7 @@ void Start_DATA_11_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_11"; 	completion.flush(); 	completion.close();
 	DATA_11->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_11"; 	completion.flush(); 	completion.close();
-	DATA_11->DrawHistos();
+	DATA_11->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_11"; 	completion.flush(); 	completion.close();
 }
 
@@ -1439,7 +1439,7 @@ void Start_DATA_12_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_12"; 	completion.flush(); 	completion.close();
 	DATA_12->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_12"; 	completion.flush(); 	completion.close();
-	DATA_12->DrawHistos();
+	DATA_12->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_12"; 	completion.flush(); 	completion.close();
 }
 
@@ -1452,7 +1452,7 @@ void Start_DATA_13_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_13"; 	completion.flush(); 	completion.close();
 	DATA_13->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_13"; 	completion.flush(); 	completion.close();
-	DATA_13->DrawHistos();
+	DATA_13->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_13"; 	completion.flush(); 	completion.close();
 }
 
@@ -1465,7 +1465,7 @@ void Start_DATA_14_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_14"; 	completion.flush(); 	completion.close();
 	DATA_14->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_14"; 	completion.flush(); 	completion.close();
-	DATA_14->DrawHistos();
+	DATA_14->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_14"; 	completion.flush(); 	completion.close();
 }
 
@@ -1478,7 +1478,7 @@ void Start_DATA_15_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_15"; 	completion.flush(); 	completion.close();
 	DATA_15->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_15"; 	completion.flush(); 	completion.close();
-	DATA_15->DrawHistos();
+	DATA_15->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_15"; 	completion.flush(); 	completion.close();
 }
 
@@ -1491,7 +1491,7 @@ void Start_DATA_16_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_16"; 	completion.flush(); 	completion.close();
 	DATA_16->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_16"; 	completion.flush(); 	completion.close();
-	DATA_16->DrawHistos();
+	DATA_16->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_16"; 	completion.flush(); 	completion.close();
 }
 
@@ -1504,7 +1504,7 @@ void Start_DATA_17_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_17"; 	completion.flush(); 	completion.close();
 	DATA_17->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_17"; 	completion.flush(); 	completion.close();
-	DATA_17->DrawHistos();
+	DATA_17->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_17"; 	completion.flush(); 	completion.close();
 }
 
@@ -1517,7 +1517,7 @@ void Start_DATA_18_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_18"; 	completion.flush(); 	completion.close();
 	DATA_18->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_18"; 	completion.flush(); 	completion.close();
-	DATA_18->DrawHistos();
+	DATA_18->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_18"; 	completion.flush(); 	completion.close();
 }
 
@@ -1530,7 +1530,7 @@ void Start_DATA_19_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_19"; 	completion.flush(); 	completion.close();
 	DATA_19->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_19"; 	completion.flush(); 	completion.close();
-	DATA_19->DrawHistos();
+	DATA_19->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_19"; 	completion.flush(); 	completion.close();
 }
 
@@ -1543,7 +1543,7 @@ void Start_DATA_20_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_20"; 	completion.flush(); 	completion.close();
 	DATA_20->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_20"; 	completion.flush(); 	completion.close();
-	DATA_20->DrawHistos();
+	DATA_20->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_20"; 	completion.flush(); 	completion.close();
 }
 
@@ -1556,7 +1556,7 @@ void Start_DATA_21_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_21"; 	completion.flush(); 	completion.close();
 	DATA_21->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_21"; 	completion.flush(); 	completion.close();
-	DATA_21->DrawHistos();
+	DATA_21->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_21"; 	completion.flush(); 	completion.close();
 }
 
@@ -1569,7 +1569,7 @@ void Start_DATA_22_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_22"; 	completion.flush(); 	completion.close();
 	DATA_22->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_22"; 	completion.flush(); 	completion.close();
-	DATA_22->DrawHistos();
+	DATA_22->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_22"; 	completion.flush(); 	completion.close();
 }
 
@@ -1582,7 +1582,7 @@ void Start_DATA_23_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_23"; 	completion.flush(); 	completion.close();
 	DATA_23->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_23"; 	completion.flush(); 	completion.close();
-	DATA_23->DrawHistos();
+	DATA_23->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_23"; 	completion.flush(); 	completion.close();
 }
 
@@ -1595,7 +1595,7 @@ void Start_DATA_24_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_24"; 	completion.flush(); 	completion.close();
 	DATA_24->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_24"; 	completion.flush(); 	completion.close();
-	DATA_24->DrawHistos();
+	DATA_24->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_24"; 	completion.flush(); 	completion.close();
 }
 
@@ -1608,7 +1608,7 @@ void Start_DATA_25_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_25"; 	completion.flush(); 	completion.close();
 	DATA_25->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_25"; 	completion.flush(); 	completion.close();
-	DATA_25->DrawHistos();
+	DATA_25->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_25"; 	completion.flush(); 	completion.close();
 }
 
@@ -1621,7 +1621,7 @@ void Start_DATA_26_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_26"; 	completion.flush(); 	completion.close();
 	DATA_26->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_26"; 	completion.flush(); 	completion.close();
-	DATA_26->DrawHistos();
+	DATA_26->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_26"; 	completion.flush(); 	completion.close();
 }
 
@@ -1634,7 +1634,7 @@ void Start_DATA_27_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_27"; 	completion.flush(); 	completion.close();
 	DATA_27->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_27"; 	completion.flush(); 	completion.close();
-	DATA_27->DrawHistos();
+	DATA_27->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_27"; 	completion.flush(); 	completion.close();
 }
 
@@ -1647,7 +1647,7 @@ void Start_DATA_28_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_28"; 	completion.flush(); 	completion.close();
 	DATA_28->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_28"; 	completion.flush(); 	completion.close();
-	DATA_28->DrawHistos();
+	DATA_28->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_28"; 	completion.flush(); 	completion.close();
 }
 
@@ -1660,7 +1660,7 @@ void Start_DATA_29_Analysis(string AnalysisType, bool draw, bool Higgs) {
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysing DATA_29"; 	completion.flush(); 	completion.close();
 	DATA_29->Loop();
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Analysed DATA_29"; 	completion.flush(); 	completion.close();
-	DATA_29->DrawHistos();
+	DATA_29->DrawHistos("");
 	completion.open(completion_file, completion.out | completion.trunc); 	completion << "Finished DATA_29"; 	completion.flush(); 	completion.close();
 }
 

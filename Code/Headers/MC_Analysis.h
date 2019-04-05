@@ -47,6 +47,7 @@ public :
 	bool outside_leptons;
 	bool draw_histograms;
 	bool higgs_analysis;
+	string higgs_suffix;
 	bool signal_event_selected;
 
 	/////----------LEPTON INFORMATION------------/////
@@ -1684,13 +1685,13 @@ MC_Analysis::MC_Analysis(TTree *tree) : fChain(0)
 
 		}
 
-		if (gSystem->AccessPathName("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root")) {
+		if (gSystem->AccessPathName("/higgs-data3/sam/forTomRyunAliceLuca/v03/mc/user.sdysch.mphys_v3.0.mc.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_s3126_r10201_p3563.sv1_Le/user.sdysch.17403122._000001.LepUniv_ttbar.root")) {
 			cout << "HIGGS DATA DOES NOT EXIST" << endl << endl;
 		} else {
 			cout << "HIGGS DATA EXISTS" << endl;
-			f = (TFile*)gROOT->GetListOfFiles()->FindObject("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
+			f = (TFile*)gROOT->GetListOfFiles()->FindObject("/higgs-data3/sam/forTomRyunAliceLuca/v03/mc/user.sdysch.mphys_v3.0.mc.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_s3126_r10201_p3563.sv1_Le/user.sdysch.17403122._000001.LepUniv_ttbar.root");
 			if (!f || !f->IsOpen()) {
-				f = new TFile("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
+				f = new TFile("/higgs-data3/sam/forTomRyunAliceLuca/v03/mc/user.sdysch.mphys_v3.0.mc.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_s3126_r10201_p3563.sv1_Le/user.sdysch.17403122._000001.LepUniv_ttbar.root");
 			}
 			File_Found = true;
 		}
@@ -1710,10 +1711,10 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, dou
 
 		if (Higgs) {
 
-			TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
+			TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("/higgs-data3/sam/forTomRyunAliceLuca/v03/mc/user.sdysch.mphys_v3.0.mc.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_s3126_r10201_p3563.sv1_Le/user.sdysch.17403122._000001.LepUniv_ttbar.root");
 			if (!f || !f->IsOpen()) {
 
-				f = new TFile("/higgs-data3/sam/forTomRyunAliceLuca/v02/mc/user.sdysch.mphys_v2.mc.364197.Sh221_PDF30_Wtaunu_MV1000_E_CMS.D1.e5340_e5984_s3126_r10201_r10210_p3480.sv1_hist/user.sdysch.16340986._000002.hist-output.root");
+				f = new TFile("/higgs-data3/sam/forTomRyunAliceLuca/v03/mc/user.sdysch.mphys_v3.0.mc.308094.Sh221_PDF30_Ztt2jets_Min_N_TChannel.D1.e5767_s3126_r10201_p3563.sv1_Le/user.sdysch.17403122._000001.LepUniv_ttbar.root");
 			}
 
 			f->GetObject("NOMINAL",tree);
@@ -1737,6 +1738,9 @@ MC_Analysis::MC_Analysis(TTree *tree, string analysistype, string chainname, dou
 	Luminosity_Weight = luminosity_weight;
 	draw_histograms = draw;
 	higgs_analysis = Higgs;
+
+	if(higgs_analysis) higgs_suffix = "_Higgs";
+	else higgs_suffix = "";
 
 	if (ChainName.find("DATA") != string::npos) {
 

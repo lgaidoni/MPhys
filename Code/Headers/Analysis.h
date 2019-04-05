@@ -67,6 +67,8 @@ void MC_Analysis::BookHistos() {
 	int MET_Type_Favour_OUTSIDE_Min = -1, MET_Type_Favour_OUTSIDE_Max = 2;
 
   	int lep_0_lep_1_mass_reco_Min = 0, lep_0_lep_1_mass_reco_Max = 200;
+  	int lep_0_lep_1_mass_non_reco_Min = 0, lep_0_lep_1_mass_non_reco_Max = 200;
+  	int lep_0_lep_1_mass_non_reco_INSIDE_Min = 0, lep_0_lep_1_mass_non_reco_INSIDE_Max = 200;
   	int lep_0_lep_1_mass_reco_INSIDE_Min = 0, lep_0_lep_1_mass_reco_INSIDE_Max = 200;
   	int lep_0_lep_1_mass_reco_OUTSIDE_Min = 0, lep_0_lep_1_mass_reco_OUTSIDE_Max = 200;
 	int DeltaR_reco_Min = 0, DeltaR_reco_Max = 10;
@@ -894,7 +896,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "EXCEPT_ptvarcone_40_1" && !(bjets_region)) 		ptvarcone_40_1 = true;
 	if (region == "EXCEPT_pT_balance_limit" && !(bjets_region)) 		pT_balance_limit = true;
 	if (region == "EXCEPT_pT_balance_3_limit" && !(bjets_region)) 		pT_balance_3_limit = true;
-	if (region == "EXCEPT_centrality_condition" && !(bjets_region)) 		centrality_condition = true;
+	if (region == "EXCEPT_centrality_condition" && !(bjets_region)) 	centrality_condition = true;
 	if (region == "EXCEPT_delta_phi_condition" && !(bjets_region)) 		delta_phi_condition = true;
 
 	//If the region is the bjet region, make the mass condition true, so that the full mass spectrum can be seen 
@@ -917,15 +919,28 @@ bool MC_Analysis::Cuts(string region) {
 
 		//This is only here in order to see the full mass spectrum represented in the rest of the cuts, and should be changed when appropriate
 		Z_mass_condition = false;
-		if (lep_0_lep_1_mass_reco >= 60 && lep_0_lep_1_mass_reco <= 120) Z_mass_condition = true;
 
-		if (region == "EXCEPT_Z_mass_condition" && bjets_region == false) Z_mass_condition = true;	
+		//This condition will remove events where the non recosntructed mass falls within the Z mass range
+		bool non_reconstructed_mass_condition = true; //Default is true, because inside the range makes this false, failing custom cuts
+
+
+		if (lep_0_lep_1_mass_reco >= 60 && lep_0_lep_1_mass_reco <= 120) Z_mass_condition = true;
+		if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101) non_reconstructed_mass_condition = false;
+
+		if (region == "EXCEPT_Z_mass_condition" && bjets_region == false) {
+			Z_mass_condition = true;	
+		}
+
+		if (region == "EXCEPT_non_reconstructed_mass_condition" && !(bjets_region)) {
+			non_reconstructed_mass_condition = true;
+		}
+
 		if (region == "EXCEPT_pT_balance_reco_condition" && bjets_region == false) pT_balance_reco_condition = true;
 
 		custom_cuts = false;
 
 		if (region == "EXCEPT_delta_phi_condition" && bjets_region == false) delta_phi_condition = true;
-		if (centrality_condition && delta_phi_condition && pT_balance_reco_condition) custom_cuts = true;
+		if (centrality_condition && delta_phi_condition && pT_balance_reco_condition & non_reconstructed_mass_condition) custom_cuts = true;
 		
 		pT_balance_limit = true; // pT balance cut taken out
 		pT_balance_3_limit = true; // pT balance 3 cut taken out
@@ -1002,6 +1017,7 @@ void MC_Analysis::Fill(string region) {
 		bool EXCEPT_pT_balance_reco_condition = false;
 		bool EXCEPT_Centrality_condition = false;
 		bool EXCEPT_Jet_mass_condition = false;
+		bool EXCEPT_non_reconstructed_mass_condition = false;
 
 		///----- EXCEPT region filling -----///
 		if (Cuts("EXCEPT_Z_mass_condition")) {
@@ -1063,6 +1079,12 @@ void MC_Analysis::Fill(string region) {
 				EXCEPT_pT_balance_reco_condition = true;
 			}
 
+			if (Cuts("EXCEPT_non_reconstructed_mass_condition")) {
+				h_lep_0_lep_1_mass_non_reco_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
+				h_lep_0_lep_1_mass_non_reco_EXCEPT_FINE->Fill(lep_0_lep_1_mass, final_weighting);
+				EXCEPT_non_reconstructed_mass_condition = true;
+			}
+
 			if (outside_leptons) {
 
 				if (EXCEPT_Z_mass_condition) h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT->Fill(lep_0_lep_1_mass_reco, final_weighting);	//Fill the EXCEPT histogram for reconstructed mass
@@ -1094,6 +1116,11 @@ void MC_Analysis::Fill(string region) {
 				if (EXCEPT_Jet_mass_condition) {
 					h_jet_0_jet_1_mass_INSIDE_EXCEPT->Fill(jet_0_jet_1_mass, final_weighting);		//Fill the EXCEPT histogram for leading jets combined invariant mass
 					h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE->Fill(jet_0_jet_1_mass, final_weighting);
+				}
+
+				if (EXCEPT_non_reconstructed_mass_condition) {
+					h_lep_0_lep_1_mass_non_reco_INSIDE_EXCEPT->Fill(lep_0_lep_1_mass, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
+					h_lep_0_lep_1_mass_non_reco_INSIDE_EXCEPT_FINE->Fill(lep_0_lep_1_mass, final_weighting);
 				}
 
 			}
@@ -1167,6 +1194,7 @@ void MC_Analysis::Fill(string region) {
 			if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 
 				h_lep_0_lep_1_mass_reco->Fill(lep_0_lep_1_mass_reco, final_weighting);
+				h_lep_0_lep_1_mass_non_reco->Fill(lep_0_lep_1_mass, final_weighting);
 				h_lep_0_lep_1_pt_reco->Fill(lep_0_lep_1_pt_reco, final_weighting);
 				h_DeltaR_reco->Fill(DeltaR_reco, final_weighting);
 				h_Centrality_reco->Fill(Centrality_reco, final_weighting);
@@ -1186,6 +1214,7 @@ void MC_Analysis::Fill(string region) {
 				} else {
 
 					h_lep_0_lep_1_mass_reco_INSIDE->Fill(lep_0_lep_1_mass_reco, final_weighting);
+					h_lep_0_lep_1_mass_non_reco_INSIDE->Fill(lep_0_lep_1_mass, final_weighting);
 					h_jet_0_jet_1_mass_INSIDE->Fill(jet_0_jet_1_mass, final_weighting); 	// two jets
 					h_pT_balance_reco_INSIDE->Fill(pT_balance_reco, final_weighting);
 					h_DeltaPhi_reco_INSIDE->Fill(DeltaPhi_reco, final_weighting);
@@ -1471,10 +1500,10 @@ void MC_Analysis::Fill(string region) {
 }
 
 //This functinon will Draw all the histograms, and write them to a file
-void MC_Analysis::DrawHistos() {
+void MC_Analysis::DrawHistos(string higgs_suffix) {
 
 	TFile *Histograms;
-	string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/" + ChainName + "_Histograms.root";
+	string ROOTFilePath = "../../Root-Files/" + AnalysisType + higgs_suffix + "/" + ChainName + "_Histograms.root";
 
 	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
 	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
@@ -1490,133 +1519,136 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_BDT_test4, "h_BDT_test4", ";;Events", false, true, ChainName, AnalysisType);
 
 	//ptvar cone histograms
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_iso_ptvarcone40_PRE, h_lep_0_iso_ptvarcone40, h_lep_0_iso_ptvarcone40_CONTROL, h_lep_0_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 0", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
 	// lep 0 & lep 1 invariant mass 
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_PRE, h_lep_0_lep_1_mass, h_lep_0_lep_1_mass_CONTROL, h_lep_0_lep_1_mass_EXCEPT, "Dilepton Pair Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass", ";Invariant Mass [GeV/c^{2}];Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	//combined lepton lep 0 & lep 1 momentum
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_pt_PRE, h_lep_0_lep_1_pt, h_lep_0_lep_1_pt_CONTROL, h_lep_0_lep_1_pt_EXCEPT, "Combined Lepton Momentum", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
 	//leading jets ljet_0 ljet_1 invariant masses
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_jet_0_jet_1_mass_PRE, h_jet_0_jet_1_mass, h_jet_0_jet_1_mass_CONTROL, h_jet_0_jet_1_mass_EXCEPT, "Leading Jets Combined Invariant Mass", "Pre Cut", "Post Cut", "Control", "Except", "h_jet_0_jet_1_mass", ";Invariant Mass [GeV/c^{2}];Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	//leading jets ljet_0 ljet_1 transverse momentum < already exists in DrawHistos.h
-	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_0_p4_Pt_PRE, h_ljet_0_p4_Pt, h_ljet_0_p4_Pt_CONTROL, "Leading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_0_p4_Pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_ljet_1_p4_Pt_PRE, h_ljet_1_p4_Pt, h_ljet_1_p4_Pt_CONTROL, "Subleading Jet Pt", "Pre Cut", "Post Cut", "Control", "h_ljet_1_p4_Pt", ";Momentum [GeV/c];Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	// Dilepton Rapidity
-	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDilepton_PRE, "h_RapidityDilepton_PRE", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_RapidityDilepton, "h_RapidityDilepton", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_RapidityDilepton_CONTROL, "h_RapidityDilepton_CONTROL", ";Dilepton Rapidity [rads];Events", false, true, ChainName, AnalysisType, higgs_suffix);
 
 	// Dijet Rapidity
-	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", ";Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_RapidityDijet_PRE, "h_RapidityDijet_PRE", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_RapidityDijet, "h_RapidityDijet", ";Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_RapidityDijet_CONTROL, "h_RapidityDijet_CONTROL", ";Dijet Rapidity [rads];Events", false, true, ChainName, AnalysisType, higgs_suffix);
 
 	//Delta R Histograms
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_PRE, h_DeltaR, h_DeltaR_CONTROL, "\\Delta R", "Pre-Cut", "Post Cut", "Control", "h_DeltaR", ";Delta R;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	//Delta Phi Histograms
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_PRE, h_DeltaPhi, h_DeltaPhi_CONTROL, h_DeltaPhi_EXCEPT, "\\Delta Phi", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi", ";Delta Phi;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_PRE, h_DeltaPhi, h_DeltaPhi_CONTROL, h_DeltaPhi_EXCEPT, "\\Delta Phi", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi", ";Delta Phi;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	// pT balance
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_PRE, h_pT_balance, h_pT_balance_CONTROL, h_pT_balance_EXCEPT, "p_{T}^{balance}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance", ";pT Balance;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 	
 	// pT balance reconstructed	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_PRE, h_pT_balance_reco, h_pT_balance_reco_CONTROL, h_pT_balance_reco_EXCEPT, "p_{T}^{balance} reconstructed", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco", ";pT Balance reconstructed;Events", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_INSIDE_PRE, h_pT_balance_reco_INSIDE, h_pT_balance_reco_INSIDE_CONTROL, h_pT_balance_reco_INSIDE_EXCEPT, "p_{T}^{balance} reconstructed_INSIDE", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco_INSIDE", ";pT Balance reconstructed_INSIDE;Events", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_OUTSIDE_PRE, h_pT_balance_reco_OUTSIDE, h_pT_balance_reco_OUTSIDE_CONTROL, h_pT_balance_reco_OUTSIDE_EXCEPT, "p_{T}^{balance} reconstructed_OUTSIDE", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco_OUTSIDE", ";pT Balance reconstructed_OUTSIDE;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_PRE, h_pT_balance_reco, h_pT_balance_reco_CONTROL, h_pT_balance_reco_EXCEPT, "p_{T}^{balance} reconstructed", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco", ";pT Balance reconstructed;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_INSIDE_PRE, h_pT_balance_reco_INSIDE, h_pT_balance_reco_INSIDE_CONTROL, h_pT_balance_reco_INSIDE_EXCEPT, "p_{T}^{balance} reconstructed_INSIDE", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco_INSIDE", ";pT Balance reconstructed_INSIDE;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_reco_OUTSIDE_PRE, h_pT_balance_reco_OUTSIDE, h_pT_balance_reco_OUTSIDE_CONTROL, h_pT_balance_reco_OUTSIDE_EXCEPT, "p_{T}^{balance} reconstructed_OUTSIDE", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_reco_OUTSIDE", ";pT Balance reconstructed_OUTSIDE;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 	
 	// pT balance 3
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", ";pT Balance 3;Events", false, draw_histograms, ChainName, AnalysisType);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_pT_balance_3_PRE, h_pT_balance_3, h_pT_balance_3_CONTROL, h_pT_balance_3_EXCEPT, "p_{T}^{balance, 3}", "Pre Cut", "Post Cut", "Control", "Except", "h_pT_balance_3", ";pT Balance 3;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
 	// Centrality histograms
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, h_Centrality_EXCEPT, "Centrality", "Pre-Cut", "Post Cut", "Control", "Except", "h_Centrality", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_Centrality_PRE, h_Centrality, h_Centrality_CONTROL, h_Centrality_EXCEPT, "Centrality", "Pre-Cut", "Post Cut", "Control", "Except", "h_Centrality", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 
 	// MET Centrality histogram
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", ";MET_Centrality;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Centrality_PRE, h_MET_Centrality, h_MET_Centrality_CONTROL, "MET Centrality", "Pre-Cut", "Post Cut", "Control", "h_MET_Centrality", ";MET_Centrality;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	// missing energy for neutrino 1 
-	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_0_pt_PRE, h_neutrino_0_pt, h_neutrino_0_pt_CONTROL, "neutrino_0_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_0_pt", ";Missing Energy of neutrino 1;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_0_pt_PRE, h_neutrino_0_pt, h_neutrino_0_pt_CONTROL, "neutrino_0_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_0_pt", ";Missing Energy of neutrino 1;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	// missing energy for neutrino 2
-	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_1_pt_PRE, h_neutrino_1_pt, h_neutrino_1_pt_CONTROL, "neutrino_1_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_1_pt", ";Missing Energy of neutrino 2;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_neutrino_1_pt_PRE, h_neutrino_1_pt, h_neutrino_1_pt_CONTROL, "neutrino_1_pt", "Pre-Cut", "Post Cut", "Control", "h_neutrino_1_pt", ";Missing Energy of neutrino 2;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	// Met Type Favour, whether the missing energy vector points towards the lepton or hadronic tau
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_INSIDE_PRE, h_MET_Type_Favour_INSIDE, h_MET_Type_Favour_INSIDE_CONTROL, "MET_Type_Favour_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_INSIDE", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_OUTSIDE_PRE, h_MET_Type_Favour_OUTSIDE, h_MET_Type_Favour_OUTSIDE_CONTROL, "MET_Type_Favour_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_OUTSIDE", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_PRE, h_MET_Type_Favour, h_MET_Type_Favour_CONTROL, "MET_Type_Favour", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_INSIDE_PRE, h_MET_Type_Favour_INSIDE, h_MET_Type_Favour_INSIDE_CONTROL, "MET_Type_Favour_INSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_INSIDE", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_MET_Type_Favour_OUTSIDE_PRE, h_MET_Type_Favour_OUTSIDE, h_MET_Type_Favour_OUTSIDE_CONTROL, "MET_Type_Favour_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "h_MET_Type_Favour_OUTSIDE", ";Missing Energy Tau or Lepton;Events", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	// reconstructed Z mass with tau candidates and neutrinos
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, h_lep_0_lep_1_mass_reco_EXCEPT, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_OUTSIDE_PRE, h_lep_0_lep_1_mass_reco_OUTSIDE, h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL, h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT, "lep_0_lep_1_mass_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco_OUTSIDE", ";Z mass incl neutrinos Inside;Events", true, draw_histograms, ChainName, AnalysisType);		
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_INSIDE_PRE, h_lep_0_lep_1_mass_reco_INSIDE, h_lep_0_lep_1_mass_reco_INSIDE_CONTROL, h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT, "lep_0_lep_1_mass_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco_INSIDE", ";Z mass incl neutrinos Outside;Events", true, draw_histograms, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reco_PRE, h_DeltaR_reco, h_DeltaR_reco_CONTROL, "\\Delta R_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reco", ";Delta R;Events",true, draw_histograms, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reco_PRE, h_Centrality_reco, h_Centrality_reco_CONTROL, "Centrality_reco", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reco", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reco_PRE, h_lep_0_lep_1_pt_reco, h_lep_0_lep_1_pt_reco_CONTROL, "lep_0_lep_1_pt_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reco", ";Z momentum incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType);	
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_PRE, h_DeltaPhi_reco, h_DeltaPhi_reco_CONTROL, h_DeltaPhi_reco_EXCEPT, "\\Delta Phi_reco", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco", ";Delta Phi_reco;Events", true, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_INSIDE_PRE, h_DeltaPhi_reco_INSIDE, h_DeltaPhi_reco_INSIDE_CONTROL, h_DeltaPhi_reco_INSIDE_EXCEPT, "\\Delta Phi_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco_INSIDE", ";Delta Phi_reco_INSIDE;Events", true, draw_histograms, ChainName, AnalysisType);
-	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_OUTSIDE_PRE, h_DeltaPhi_reco_OUTSIDE, h_DeltaPhi_reco_OUTSIDE_CONTROL, h_DeltaPhi_reco_OUTSIDE_EXCEPT, "\\Delta Phi_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco_OUTSIDE", ";Delta Phi_reco_OUTSIDE;Events", true, draw_histograms, ChainName, AnalysisType);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_PRE, h_lep_0_lep_1_mass_reco, h_lep_0_lep_1_mass_reco_CONTROL, h_lep_0_lep_1_mass_reco_EXCEPT, "lep_0_lep_1_mass_reco", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco", ";Z mass incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_OUTSIDE_PRE, h_lep_0_lep_1_mass_reco_OUTSIDE, h_lep_0_lep_1_mass_reco_OUTSIDE_CONTROL, h_lep_0_lep_1_mass_reco_OUTSIDE_EXCEPT, "lep_0_lep_1_mass_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco_OUTSIDE", ";Z mass incl neutrinos OUTSIDE;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);		
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_reco_INSIDE_PRE, h_lep_0_lep_1_mass_reco_INSIDE, h_lep_0_lep_1_mass_reco_INSIDE_CONTROL, h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT, "lep_0_lep_1_mass_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_reco_INSIDE", ";Z mass incl neutrinos INSIDE;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_non_reco_PRE, h_lep_0_lep_1_mass_non_reco, h_lep_0_lep_1_mass_non_reco_CONTROL, h_lep_0_lep_1_mass_non_reco_EXCEPT, "lep_0_lep_1_mass_non_reco", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_non_reco", ";Z mass;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_0_lep_1_mass_non_reco_INSIDE_PRE, h_lep_0_lep_1_mass_non_reco_INSIDE, h_lep_0_lep_1_mass_non_reco_INSIDE_CONTROL, h_lep_0_lep_1_mass_non_reco_INSIDE_EXCEPT, "lep_0_lep_1_mass_non_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_lep_0_lep_1_mass_non_reco_INSIDE", ";Z mass;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_DeltaR_reco_PRE, h_DeltaR_reco, h_DeltaR_reco_CONTROL, "\\Delta R_reco", "Pre-Cut", "Post Cut", "Control", "h_DeltaR_reco", ";Delta R;Events",true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+	DrawHistogram_PRE_SEARCH_CONTROL(h_Centrality_reco_PRE, h_Centrality_reco, h_Centrality_reco_CONTROL, "Centrality_reco", "Pre-Cut", "Post Cut", "Control", "h_Centrality_reco", ";Centrality;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram_PRE_SEARCH_CONTROL(h_lep_0_lep_1_pt_reco_PRE, h_lep_0_lep_1_pt_reco, h_lep_0_lep_1_pt_reco_CONTROL, "lep_0_lep_1_pt_reco", "Pre-Cut", "Post Cut", "Control", "h_lep_0_lep_1_pt_reco", ";Z momentum incl neutrinos;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_PRE, h_DeltaPhi_reco, h_DeltaPhi_reco_CONTROL, h_DeltaPhi_reco_EXCEPT, "\\Delta Phi_reco", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco", ";Delta Phi_reco;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_INSIDE_PRE, h_DeltaPhi_reco_INSIDE, h_DeltaPhi_reco_INSIDE_CONTROL, h_DeltaPhi_reco_INSIDE_EXCEPT, "\\Delta Phi_reco_INSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco_INSIDE", ";Delta Phi_reco_INSIDE;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_OUTSIDE_PRE, h_DeltaPhi_reco_OUTSIDE, h_DeltaPhi_reco_OUTSIDE_CONTROL, h_DeltaPhi_reco_OUTSIDE_EXCEPT, "\\Delta Phi_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco_OUTSIDE", ";Delta Phi_reco_OUTSIDE;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	// 2D POLAR HISTOGRAMS
-  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
+  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D, "h_Mass_DeltaPhi_Combination_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D, "h_Mass_DeltaPhi_Combination_INSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D, "h_Mass_DeltaPhi_Combination_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D, "h_Mass_DeltaPhi_Combination_INSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
 
 	//BJET GRAPHS
-	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_lep_1_mass_BJET, "h_lep_0_lep_1_mass_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_jet_0_jet_1_mass_BJET, "h_jet_0_jet_1_mass_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDilepton_BJET, "h_RapidityDilepton_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_RapidityDijet_BJET, "h_RapidityDijet_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_lep_1_pt_BJET, "h_lep_0_lep_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_DeltaR_BJET, "h_DeltaR_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_pT_balance_BJET, "h_pT_balance_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_pT_balance_reco_BJET, "h_pT_balance_reco_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_Centrality_BJET, "h_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_neutrino_0_pt_BJET, "h_neutrino_0_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_neutrino_1_pt_BJET, "h_neutrino_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_MET_Type_Favour_BJET, "h_MET_Type_Favour_BJET", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_1_iso_ptvarcone40_BJET, "h_lep_1_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_0_iso_ptvarcone40_BJET, "h_lep_0_iso_ptvarcone40_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_0_lep_1_mass_BJET, "h_lep_0_lep_1_mass_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_jet_0_jet_1_mass_BJET, "h_jet_0_jet_1_mass_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_RapidityDilepton_BJET, "h_RapidityDilepton_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_RapidityDijet_BJET, "h_RapidityDijet_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_0_lep_1_pt_BJET, "h_lep_0_lep_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_DeltaR_BJET, "h_DeltaR_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_pT_balance_BJET, "h_pT_balance_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_pT_balance_reco_BJET, "h_pT_balance_reco_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_Centrality_BJET, "h_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_MET_Centrality_BJET, "h_MET_Centrality_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_neutrino_0_pt_BJET, "h_neutrino_0_pt_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_neutrino_1_pt_BJET, "h_neutrino_1_pt_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_MET_Type_Favour_BJET, "h_MET_Type_Favour_BJET", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
 
 	//HIGH_E Graphs
-	DrawHistogram(h_lep_0_lep_1_mass_HIGH_E, "h_lep_0_lep_1_mass_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_jet_0_jet_1_mass_HIGH_E, "h_jet_0_jet_1_mass_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_lep_1_pt_HIGH_E, "h_lep_0_lep_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_DeltaR_HIGH_E, "h_DeltaR_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_pT_balance_HIGH_E, "h_pT_balance_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_pT_balance_reco_HIGH_E, "h_pT_balance_reco_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_Centrality_HIGH_E, "h_Centrality_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_MET_Centrality_HIGH_E, "h_MET_Centrality_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_neutrino_0_pt_HIGH_E, "h_neutrino_0_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_neutrino_1_pt_HIGH_E, "h_neutrino_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_MET_Type_Favour_HIGH_E, "h_MET_Type_Favour_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_lep_1_mass_reco_HIGH_E, "h_lep_0_lep_1_mass_reco_HIGH_E", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_HIGH_E, "h_lep_0_lep_1_mass_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_jet_0_jet_1_mass_HIGH_E, "h_jet_0_jet_1_mass_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_0_lep_1_pt_HIGH_E, "h_lep_0_lep_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_DeltaR_HIGH_E, "h_DeltaR_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_pT_balance_HIGH_E, "h_pT_balance_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_pT_balance_reco_HIGH_E, "h_pT_balance_reco_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_Centrality_HIGH_E, "h_Centrality_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_MET_Centrality_HIGH_E, "h_MET_Centrality_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_neutrino_0_pt_HIGH_E, "h_neutrino_0_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_neutrino_1_pt_HIGH_E, "h_neutrino_1_pt_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_MET_Type_Favour_HIGH_E, "h_MET_Type_Favour_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_HIGH_E, "h_lep_0_lep_1_mass_reco_HIGH_E", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
 
 	//EXCEPT FINE Graphs
-	DrawHistogram(h_lep_0_lep_1_mass_EXCEPT_FINE, "h_lep_0_lep_1_mass_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_lep_1_mass_reco_EXCEPT_FINE, "h_lep_0_lep_1_mass_reco_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT_FINE, "h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_jet_0_jet_1_mass_EXCEPT_FINE, "h_jet_0_jet_1_mass_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE, "h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_pT_balance_EXCEPT_FINE, "h_pT_balance_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_pT_balance_reco_EXCEPT_FINE, "h_pT_balance_reco_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_pT_balance_reco_INSIDE_EXCEPT_FINE, "h_pT_balance_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_pT_balance_3_EXCEPT_FINE, "h_pT_balance_3_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_Centrality_EXCEPT_FINE, "h_Centrality_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_Centrality_INSIDE_EXCEPT_FINE, "h_Centrality_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_DeltaPhi_EXCEPT_FINE, "h_DeltaPhi_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
-	DrawHistogram(h_DeltaPhi_reco_INSIDE_EXCEPT_FINE, "h_DeltaPhi_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType);
+	DrawHistogram(h_lep_0_lep_1_mass_EXCEPT_FINE, "h_lep_0_lep_1_mass_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_EXCEPT_FINE, "h_lep_0_lep_1_mass_reco_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_0_lep_1_mass_non_reco_EXCEPT_FINE, "h_lep_0_lep_1_mass_non_reco_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT_FINE, "h_lep_0_lep_1_mass_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_jet_0_jet_1_mass_EXCEPT_FINE, "h_jet_0_jet_1_mass_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE, "h_jet_0_jet_1_mass_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_pT_balance_EXCEPT_FINE, "h_pT_balance_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_pT_balance_reco_EXCEPT_FINE, "h_pT_balance_reco_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_pT_balance_reco_INSIDE_EXCEPT_FINE, "h_pT_balance_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_pT_balance_3_EXCEPT_FINE, "h_pT_balance_3_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_Centrality_EXCEPT_FINE, "h_Centrality_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_Centrality_INSIDE_EXCEPT_FINE, "h_Centrality_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_DeltaPhi_EXCEPT_FINE, "h_DeltaPhi_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_DeltaPhi_reco_INSIDE_EXCEPT_FINE, "h_DeltaPhi_reco_INSIDE_EXCEPT_FINE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
 
 	//TRUTH GRAPHS
 	DrawHistogram(h_lep_1_iso_ptvarcone40_TRUTH, "h_lep_1_iso_ptvarcone40_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
@@ -1653,13 +1685,13 @@ void MC_Analysis::DrawHistos() {
 	DrawHistogram(h_lep_1_invis_energy_TRUTH, "h_lep_1_invis_energy_TRUTH", ";;Events", false, true, ChainName, AnalysisType);
 
 	// 2D POLAR TRUTH HISTOGRAMS
-  	DrawHistogram2D(h_Mass_Favour_Combination_2D_TRUTH, "h_Mass_Favour_Combination_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D_TRUTH, "h_Mass_Favour_Combination_INSIDE_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH, "h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
+  	DrawHistogram2D(h_Mass_Favour_Combination_2D_TRUTH, "h_Mass_Favour_Combination_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D_TRUTH, "h_Mass_Favour_Combination_INSIDE_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH, "h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D_TRUTH, "h_Mass_DeltaPhi_Combination_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType);	
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D_TRUTH, "h_Mass_DeltaPhi_Combination_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
 
 	Histograms->Close();

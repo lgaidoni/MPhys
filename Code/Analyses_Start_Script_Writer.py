@@ -40,7 +40,7 @@ for data_type in data_types:
 
 for data_type in data_types:
 	run_analyses_v3 = open("Run_" + data_type + "_Analyses_V3.sh", "w")
-	run_analyses_v3.write("cat xarg_input_files/" + data_type + "_xarg_inputs.sh | while read i; do printf \"%q\\n\" \"$i\"; done | xargs -I CMD --max-procs=10 bash -c CMD &\n")
+	run_analyses_v3.write("cat xarg_input_files/" + data_type + "_xarg_inputs.sh | while read i; do printf \"%q\\n\" \"$i\"; done | xargs -I CMD --max-procs=20 bash -c CMD &\n")
 
 
 run_analyses_v3 = open("Run_All_Analyses_V3.sh", "w")

@@ -6,6 +6,6 @@
 	virtual bool InitialCut(bool bjets, bool truth);
 	virtual void GenerateVariables(bool truth);
 	virtual void FillAllData_PreCut();
-	virtual void DrawHistos();
+	virtual void DrawHistos(string higgs_suffix);
 	virtual bool Cuts(string region);
 	virtual void Fill(string region);

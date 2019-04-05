@@ -119,7 +119,7 @@ def analysis_start_function_writer(inputFile, IDtag, Name):
 	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
-	inputFile.write("\t" + Name + "->DrawHistos();\n")
+	inputFile.write("\t" + Name + "->DrawHistos(\"" + higgs + "\");\n")
 
 	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc); ")
 	inputFile.write("\tcompletion << \"Finished " + Name + "\"; ");
@@ -129,7 +129,7 @@ def analysis_start_function_writer(inputFile, IDtag, Name):
 	inputFile.write("}\n\n")
 
 def analysis_start_function_writer_data(inputFile, IDtag, Name):
-	inputFile.write("void Start_" + Name + higgs + "_Analysis(string AnalysisType, bool draw, bool Higgs) {\n")
+	inputFile.write("void Start_" + Name + "_Analysis(string AnalysisType, bool draw, bool Higgs) {\n")
 	inputFile.write("\tgErrorIgnoreLevel = kError;\n")
 
    	inputFile.write("\tstring completion_file = \"../../Completion_Files/\" + AnalysisType + \"" + higgs + "/" + Name + "_completion.txt\";\n");
@@ -155,7 +155,7 @@ def analysis_start_function_writer_data(inputFile, IDtag, Name):
 	inputFile.write("\tcompletion.flush(); ")
 	inputFile.write("\tcompletion.close();\n")
 
-	inputFile.write("\t" + Name + "->DrawHistos();\n")
+	inputFile.write("\t" + Name + "->DrawHistos(\"" + higgs + "\");\n")
 
 	inputFile.write("\tcompletion.open(completion_file, completion.out | completion.trunc); ")
 	inputFile.write("\tcompletion << \"Finished " + Name + "\"; ");
@@ -218,8 +218,8 @@ for line in mc_locations:
 
 		for Type in Types:
 			try:
-				os.makedirs("../../Output-Files/" + Type + higgs +  "/" + name)
-				#print("../../Output-Files/" + Type +  "/" + name + " Created")
+				os.makedirs("../../Output-Files/" + Type + higgs + "/" + name + higgs)
+				#print("../../Output-Files/" + Type + higgs + "/" + name + " Created")
 			except:
 				#print("../../Output-Files/" + Type +  "/" + name + " Already Exists")
 				value = 1
@@ -249,13 +249,13 @@ N_functions.write("#endif")
 
 mc_locations.close()
 
-name = "DATA"
+name = "DATA" + higgs
 ID = ""
 counter = 0
 
 for Type in Types:
 	try:
-		os.makedirs("../../Output-Files/" + Type + higgs + "/DATA")
+		os.makedirs("../../Output-Files/" + Type + higgs + "/DATA" + higgs)
 		#print("../../Output-Files/" + Type +  "/DATA Created")
 	except:
 		#print("../../Output-Files/" + Type +  "/DATA Already Exists")
@@ -318,11 +318,11 @@ for line in data_locations:
 			chain_functions.write("TChain *Chain_" + name + "() {\n\n")
 			chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
 
-			Electron_data_chain_locations.write("../../Root-Files/Electron" + higgs + "/" + name + "_Histograms.root\n")
-			ElectronMuon_data_chain_locations.write("../../Root-Files/ElectronMuon" + higgs + "/" + name + "_Histograms.root\n")
-			ElectronTau_data_chain_locations.write("../../Root-Files/ElectronTau" + higgs + "/" + name + "_Histograms.root\n")
-			Muon_data_chain_locations.write("../../Root-Files/Muon" + higgs + "/" + name + "_Histograms.root\n")
-			MuonTau_data_chain_locations.write("../../Root-Files/MuonTau" + higgs + "/" + name + "_Histograms.root\n")
+			Electron_data_chain_locations.write("../../Root-Files/Electron/" + name + "_Histograms.root\n")
+			ElectronMuon_data_chain_locations.write("../../Root-Files/ElectronMuon/" + name + "_Histograms.root\n")
+			ElectronTau_data_chain_locations.write("../../Root-Files/ElectronTau/" + name + "_Histograms.root\n")
+			Muon_data_chain_locations.write("../../Root-Files/Muon/" + name + "_Histograms.root\n")
+			MuonTau_data_chain_locations.write("../../Root-Files/MuonTau/" + name + "_Histograms.root\n")
 
 		chain_functions.write("\tNOMINAL->Add(\"" + line[0:len(line)-1]  + "\");\n")
 		data_loop_counter += 1

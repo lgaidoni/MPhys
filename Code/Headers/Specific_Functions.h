@@ -3,30 +3,30 @@
 //This file contains specific functions that don't belong to the MC_Analysis Class
 
 //Comnine all the different chains for each different process for each analysis type
-void CombineAllProcesses() {
+void CombineAllProcesses(string higgs_suffix) {
 
-	CombineAllProcesses_AnalysisType("Electron");
-	CombineAllProcesses_AnalysisType("Muon");
+	CombineAllProcesses_AnalysisType("Electron", higgs_suffix);
+	CombineAllProcesses_AnalysisType("Muon", higgs_suffix);
 
-	CombineAllProcesses_AnalysisType("ElectronMuon");
-	CombineAllProcesses_AnalysisType("ElectronTau");
-	CombineAllProcesses_AnalysisType("MuonTau");
+	CombineAllProcesses_AnalysisType("ElectronMuon", higgs_suffix);
+	CombineAllProcesses_AnalysisType("ElectronTau", higgs_suffix);
+	CombineAllProcesses_AnalysisType("MuonTau", higgs_suffix);
 
 }
 
-void Draw_All_Stacked_Processes() {
+void Draw_All_Stacked_Processes(string higgs_suffix) {
 
 	gErrorIgnoreLevel = kError;
 
-	DrawStackedProcesses("Electron");
-	DrawStackedProcesses("Muon");
+	DrawStackedProcesses("Electron", higgs_suffix);
+	DrawStackedProcesses("Muon", higgs_suffix);
 
-	DrawStackedProcesses("ElectronMuon");
-	DrawStackedProcesses("ElectronTau");
-	DrawStackedProcesses("MuonTau");
+	DrawStackedProcesses("ElectronMuon", higgs_suffix);
+	DrawStackedProcesses("ElectronTau", higgs_suffix);
+	DrawStackedProcesses("MuonTau", higgs_suffix);
 
 }
-
+/*
 void All_Draw_Weighted_Histo_And_Ratio() {
 
 	Draw_Weighted_Histo_And_Ratio("Electron", "jet_0_jet_1_mass_CONTROL", "Zee", -0.000240084, 0.996438, 50, false);
@@ -50,8 +50,8 @@ void All_Cross_Section_Calculation_QCD_EW_ll_Specific() {
 	Cross_Section_Calculation_QCD_EW_ll_Specific("Muon", "jet_0_jet_1_mass", "Zmumu", "Zmm2jets", -0.000279242, 1.01748, 50, true, "308093");
 
 }
-
-void AllSignificanceCalc(string AnalysisType) {
+*/
+void AllSignificanceCalc(string AnalysisType, string higgs_suffix) {
 
 	int selected_process;
 	if (AnalysisType == "Electron") selected_process = 7;
@@ -76,14 +76,14 @@ void AllSignificanceCalc(string AnalysisType) {
 		for (int i=0; i<DataTypes.size(); i++) {  // FOR LOOP FOR EACH PROCESS
 
 			// calculate alpha
-			Sig = SignificanceLevelCalc(AnalysisType, DataTypes[i], selected_process);
+			Sig = SignificanceLevelCalc(AnalysisType, higgs_suffix, DataTypes[i], selected_process);
 			SignificanceVector.push_back(Sig);
 
 		}
 
 		// save to file
-		fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Significance_values.txt", output.out | output.app);
-		output << "Data Type: " << DataTypes[i] << "\t" << "Significance: " << SignificanceVector[i] << endl << endl;
+		fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + AnalysisType + higgs_suffix + "_Significance_values.txt", output.out | output.app);
+		output << "Data Type: " << DataTypes[i] + higgs_suffix << "\t" << "Significance: " << SignificanceVector[i] << endl << endl;
 		output.close();
 
 	}

@@ -133,9 +133,9 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 }
 
 
-void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_0_bla bla)
+void NumberEventsCalc(string AnalysisType, string higgs_suffix) { // Analysis type and DataType (lep_0_bla bla)
 
-	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
 	string histogram_name;
 
 	// Initialise number of events so sets back to zero for the next DataType
@@ -189,7 +189,7 @@ void NumberEventsCalc(string AnalysisType) { // Analysis type and DataType (lep_
 	for (int i = 0; i < FullHistName.size(); i++) { // FOR LOOP FOR EACH DATATYPE
 		
 		string DataType = FullHistName[i]; // define the data type as the ith element in the DataTypes vector
-		vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files); // Want to use all processes this time
+		vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files); // Want to use all processes this time
 		vector<double> EventsInProcess; // vector to add up the number of events
 		double N_events = 0; // initilize number of event
 	
@@ -309,10 +309,10 @@ void EventsInRegion(string AnalysisType) {
 }
 */
 
-void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process) {
+void Fit_MC_DATA_Comparison(string AnalysisType, string higgs_suffix, string DataType, string Process) {
 
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -342,10 +342,10 @@ void Fit_MC_DATA_Comparison(string AnalysisType, string DataType, string Process
 
 }
 
-void Process_Weighting(string AnalysisType, string DataType, string Process, double m, double c, double bins) {
+void Process_Weighting(string AnalysisType, string higgs_suffix, string DataType, string Process, double m, double c, double bins) {
 
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -392,10 +392,10 @@ void Process_Weighting(string AnalysisType, string DataType, string Process, dou
 
 }
 
-void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string Process, double m, double c, double bins, bool weight) {
+void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, string DataType, string Process, double m, double c, double bins, bool weight) {
 
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
@@ -531,10 +531,10 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string DataType, string 
 }
 
 //Function to calculate the Cross section for two leptons, takes QCD process as Process1, EW process as Process2
-void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string DataType, string Process1, string Process2, double m, double c, double bins, bool scale, string ID) {
+void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string higgs_suffix, string DataType, string Process1, string Process2, double m, double c, double bins, bool scale, string ID) {
 
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 	gStyle->SetOptStat(0);
 
 	//Selector for the process not to be subtracted

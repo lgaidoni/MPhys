@@ -307,25 +307,25 @@ vector<TH1F*> Set_Histogram_Styles_Light_Alpha(vector<TH1F*> histograms) {
 }
 
 
-vector<TFile*> Root_Files(string AnalysisType) {
+vector<TFile*> Root_Files(string AnalysisType, string higgs_suffix) {
 
 	//Variable creation
 	vector<string> names;
 	vector<TFile*> files;
 
 	//Create the file names for the stack of processes and push them into the names vector
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/ttb_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wtaunu_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wmunu_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Wenu_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/ZqqZll_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Ztt2jets_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zmm2jets_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zee2jets_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Ztt_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zmumu_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/Zee_Histograms.root");
-	names.push_back("../../Root-Files/" + AnalysisType + "/Processes/DATA_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/ttb_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Wtaunu_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Wmunu_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Wenu_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/ZqqZll_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Ztt2jets_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zmm2jets_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zee2jets_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Ztt_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zmumu_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zee_Histograms.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/DATA_Histograms.root");
 
 	//Load in all the files for the different processes, there are 12 into the files vector
 	for (auto name = names.begin(); name < names.end(); name++) {
@@ -337,7 +337,7 @@ vector<TFile*> Root_Files(string AnalysisType) {
 }
 
 //This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
-vector<TH1F*> Histogram_Return_Given_File(string AnalysisType, string DataType, vector<TFile*> root_files) {
+vector<TH1F*> Histogram_Return_Given_File(string DataType, vector<TFile*> root_files) {
 
 	string DataTypeHistName = "h_" + DataType + ";1";  //Name of the desired histogram in the root file
 
@@ -356,7 +356,7 @@ vector<TH1F*> Histogram_Return_Given_File(string AnalysisType, string DataType, 
 }
 
 //This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
-vector<TH2F*> Histogram_Return_Given_File_2D(string AnalysisType, string DataType, vector<TFile*> root_files) {
+vector<TH2F*> Histogram_Return_Given_File_2D(string DataType, vector<TFile*> root_files) {
 
 	string DataTypeHistName = "h_" + DataType + ";1";  //Name of the desired histogram in the root file
 
@@ -374,10 +374,10 @@ vector<TH2F*> Histogram_Return_Given_File_2D(string AnalysisType, string DataTyp
 
 }
 
-double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedProcess) { // 5,6,7 for ee, mumu, tautau
+double SignificanceLevelCalc(string AnalysisType, string higgs_suffix, string DataType, int SelectedProcess) { // 5,6,7 for ee, mumu, tautau
 
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 	
 	double N_events = 0;
 	double N_bkg = 0;
@@ -469,10 +469,10 @@ double EXCEPT_FINE_Significance(string AnalysisType, string DataType, int Select
 }
 
 //This function will optimise the significance
-void Optimise_Significance_Minval(string AnalysisType, string DataType, int SelectedProcess, double initial_minval, double maxval, bool full) {
+void Optimise_Significance_Minval(string AnalysisType, string higgs_suffix, string DataType, int SelectedProcess, double initial_minval, double maxval, bool full) {
 
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
 	cout << "Full Except Significance = " << SignificanceLevelCalc(AnalysisType, DataType, SelectedProcess, root_files, histograms) << endl;
 	cout << "Desired Range Significance = " << EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, initial_minval, maxval, root_files, histograms) << endl;
@@ -544,10 +544,10 @@ void Optimise_Significance_Minval(string AnalysisType, string DataType, int Sele
 }
 
 //This function will optimise the significance
-void Optimise_Significance_Maxval(string AnalysisType, string DataType, int SelectedProcess, double minval, double initial_maxval, bool full) {
+void Optimise_Significance_Maxval(string AnalysisType, string higgs_suffix, string DataType, int SelectedProcess, double minval, double initial_maxval, bool full) {
 
-	vector<TFile*> root_files = Root_Files(AnalysisType);
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
 	cout << "Full Except Significance = " << SignificanceLevelCalc(AnalysisType, DataType, SelectedProcess, root_files, histograms) << endl;
 	cout << "Desired Range Significance = " << EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, initial_maxval, root_files, histograms) << endl;
@@ -705,10 +705,10 @@ void Draw_Region(string DataType, double textsize, double latex1left, double lat
 //This function will draw a generic histogram, for simple histograms, it will be faster to use this
 //Draw histogram function takes the following:
 //DrawHistogram(histogram, histogram name, x axis title, bool for log y axis, bool for quiet, chain name, Analysis Type)
-void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType) {
+void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log, bool quiet, string ChainName, string AnalysisType, string higgs_suffix) {
 
 	string OutputFileName = histogramName + "_" + ChainName + ".pdf";
-	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + higgs_suffix + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Histogram_Remove_Negative_Events(histogram);
@@ -753,7 +753,7 @@ void DrawHistogram(TH1F *histogram, string histogramName, string title, bool log
 //This function will draw a stack of 3 histograms, used for overlaying PRE, SEARCH, and CONTROL
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType) {
+void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, string legendName, string histo1Name, string histo2Name, string histo3Name, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType, string higgs_suffix) {
 
 	//Histogram_Remove_Negative_Events(histogram1);
 	//Histogram_Remove_Negative_Events(histogram2);	
@@ -761,7 +761,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 
 	//Strings for the file names
 	string OutputFileName = histogramName + "_" + ChainName + "_Combo.pdf";
-	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + higgs_suffix + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Names for Pre and Control versions
@@ -818,7 +818,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL(TH1F *histogram1, TH1F *histogram2, TH1F *
 //This function will draw a stack of 4 histograms, used for overlaying PRE, SEARCH, CONTROL, and EXCEPT
 //Draw histogram function takes the following:
 //DrawHistogram(histogram PRE, histogram SEARCH, histogram CONTROL, histogram EXCEPT, canvas name, histogram name, x axis title, canvas x size, canvas y size, bool for log y axis, output file name, Analysis Type)
-void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType) {
+void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2, TH1F *histogram3, TH1F *histogram4, string legendName, string histo1Name, string histo2Name, string histo3Name, string histo4Name, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType, string higgs_suffix) {
 
 	//Histogram_Remove_Negative_Events(histogram1);
 	//Histogram_Remove_Negative_Events(histogram2);
@@ -827,7 +827,7 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 
 	//Strings for the file names
 	string OutputFileName = histogramName + "_" + ChainName + "_Combo.pdf";
-	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + higgs_suffix + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Names for Pre, Control, and Except versions
@@ -895,10 +895,10 @@ void DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(TH1F *histogram1, TH1F *histogram2,
 }
 
 // 2D POLAR HISTOGRAM FUNCTION
-void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType) {
+void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType, string higgs_suffix) {
 
 	string OutputFileName = histogramName + "_" + ChainName + "2D_POLAR.pdf";
-	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + higgs_suffix + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Histogram_Remove_Negative_Events(histogram);
@@ -945,10 +945,10 @@ void DrawHistogram2DPolar(TH2F *histogram, string histogramName, string title, b
 }
 
 // 2D POLAR HISTOGRAM FUNCTION
-void DrawHistogram2D(TH2F *histogram, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType) {
+void DrawHistogram2D(TH2F *histogram, string histogramName, string title, bool log, bool draw, string ChainName, string AnalysisType, string higgs_suffix) {
 
 	string OutputFileName = histogramName + "_" + ChainName + "2D.pdf";
-	string OutputFilePath = "../../Output-Files/" + AnalysisType + "/";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + higgs_suffix + "/";
 	string FullOutputFilePath = OutputFilePath + ChainName + "/" + OutputFileName;
 
 	//Histogram_Remove_Negative_Events(histogram);
@@ -1046,13 +1046,15 @@ void Process_Combiner_Checker(string AnalysisType, string FileName) {
 }
 
 //This function will combine processes and write them out to a new .root file
-void Process_Combiner(string AnalysisType, string Process) {
+void Process_Combiner(string AnalysisType, string higgs_suffix, string Process) {
 
 	//Vector of files that can be looped over
 	vector<TFile*> files;
 
 	//String for the root file path
-	string ROOTFilePath = "../../Root-Files/" + AnalysisType + "/Processes/" + Process + "_Histograms.root";
+	string ROOTFilePath = "../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/" + Process + "_Histograms.root";
+
+	cout << "Writing To File " << ROOTFilePath << endl;
 
 	TFile *Histograms;
 
@@ -1062,8 +1064,10 @@ void Process_Combiner(string AnalysisType, string Process) {
 	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
 	
 	//Various strings
-	string ProcessFileName = "../../MPhys/Processes/" + AnalysisType + "/" + Process + "_Chains.txt";
+	string ProcessFileName = "../../MPhys/Processes/" + AnalysisType + higgs_suffix + "/" + Process + "_Chains" + higgs_suffix + ".txt";
 	string line;
+
+	cout << "Process File Name = " << ProcessFileName << endl;
 
 	//Open the file
 	ifstream file (ProcessFileName);
@@ -1084,7 +1088,7 @@ void Process_Combiner(string AnalysisType, string Process) {
 	while(!DataTypeFile.eof()) {  		//While not at the end of the file
 		getline(DataTypeFile, line);  	//Get the file line
 		if (line != "") {  		//If not looking at the last line	
-
+			cout << "Combining " << line << endl;
 			if (line.find("2D") != string::npos) {
 				//Get the first histogram in the vector
 				string histogramName = "h_" + line + ";1";
@@ -1137,7 +1141,7 @@ void Process_Combiner(string AnalysisType, string Process) {
 
 // Stacking histograms:
 // need to give it the analysis type and then for given, tells it the path
-void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged, string mode) {
+void Process_Stacker(string AnalysisType, string higgs_suffix, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged, string mode) {
 
 	cout << "Drawing " << DataType << " histogram" << endl;
 
@@ -1148,7 +1152,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
 	//Get the vector of histograms for the given AnalysisType and DataType
-	vector<TH1F*> histograms = Histogram_Return_Given_File(AnalysisType, DataType, root_files);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
 	//Create the stacked histogram
 	THStack *histogramStack = new THStack("histogramStack", "");
@@ -1276,7 +1280,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 	else Region = "SEARCH";
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + Region + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 	if (logged) canvas->SetLogy();  //Log the y axis
 
@@ -1286,7 +1290,7 @@ void Process_Stacker(string AnalysisType, string DataType, string DataTypeHistog
 }
 
 // need to give it the analysis type and then for given, tells it the path
-void Process_Combiner_2D(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files) {
+void Process_Combiner_2D(string AnalysisType, string higgs_suffix, string DataType, string DataTypeHistogram, vector<TFile*> root_files) {
 
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
@@ -1295,7 +1299,7 @@ void Process_Combiner_2D(string AnalysisType, string DataType, string DataTypeHi
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
 	//Get the vector of histograms for the given AnalysisType and DataType
-	vector<TH2F*> histograms = Histogram_Return_Given_File_2D(AnalysisType, DataType, root_files);
+	vector<TH2F*> histograms = Histogram_Return_Given_File_2D(DataType, root_files);
 	TH2F *histogramMaster = histograms[0]; 
 	TH2F *histogramData = histograms[11];
 
@@ -1326,20 +1330,20 @@ void Process_Combiner_2D(string AnalysisType, string DataType, string DataTypeHi
 	histogramMaster->GetXaxis()->SetTitleOffset(1.2);
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
 	TCanvas *datacanvas = new TCanvas("Data_Canvas", "", 600, 400);
 	RebinnedData->Draw("colz");
-	string FullDATAOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/DATA_" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullDATAOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/DATA_" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	datacanvas->SaveAs(FullDATAOutputFilePath.c_str());
 
 }
 
 // need to give it the analysis type and then for given, tells it the path
-void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool log) {
+void Process_Combiner_2D_QCD_EW(string AnalysisType, string higgs_suffix, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool log) {
 
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
@@ -1348,7 +1352,7 @@ void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string Dat
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
 	//Get the vector of histograms for the given AnalysisType and DataType
-	vector<TH2F*> histograms = Histogram_Return_Given_File_2D(AnalysisType, DataType, root_files);
+	vector<TH2F*> histograms = Histogram_Return_Given_File_2D(DataType, root_files);
 	TH2F *histogramMaster = histograms[5]; 
 	histogramMaster->Add(histograms[6]);
 	histogramMaster->Add(histograms[7]);
@@ -1375,14 +1379,14 @@ void Process_Combiner_2D_QCD_EW(string AnalysisType, string DataType, string Dat
 	histogramMaster->GetXaxis()->SetTitleOffset(1.2);
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
 }
 
-void Process_Combiner_2D_EW(string AnalysisType, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool log) {
+void Process_Combiner_2D_EW(string AnalysisType, string higgs_suffix, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool log) {
 
 	//String for name of the histogram in the root file
 	string DataTypeHistName = "h_" + DataType + ";1";
@@ -1391,7 +1395,7 @@ void Process_Combiner_2D_EW(string AnalysisType, string DataType, string DataTyp
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
 	//Get the vector of histograms for the given AnalysisType and DataType
-	vector<TH2F*> histograms = Histogram_Return_Given_File_2D(AnalysisType, DataType, root_files);
+	vector<TH2F*> histograms = Histogram_Return_Given_File_2D(DataType, root_files);
 	TH2F *histogramMaster = histograms[5]; 
 	histogramMaster->Add(histograms[6]);
 	histogramMaster->Add(histograms[7]);
@@ -1414,14 +1418,14 @@ void Process_Combiner_2D_EW(string AnalysisType, string DataType, string DataTyp
 	histogramMaster->GetXaxis()->SetTitleOffset(1.2);
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + DataTypeHistogram; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
 
 }
 
-void Inside_Outside_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
+void Inside_Outside_Overlay(string AnalysisType, string higgs_suffix, string DataType, string mode, string FileName, vector<TFile*> root_files) {
 
 	cout << "Drawing In Out Overlay for " << DataType << " histogram" << endl;
 
@@ -1432,9 +1436,9 @@ void Inside_Outside_Overlay(string AnalysisType, string DataType, string mode, s
 	//Create the canvas
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
-	vector<TH1F*> InsideHistograms = Histogram_Return_Given_File(AnalysisType, InsideName, root_files);
+	vector<TH1F*> InsideHistograms = Histogram_Return_Given_File(InsideName, root_files);
 
-	vector<TH1F*> OutsideHistograms = Histogram_Return_Given_File(AnalysisType, OutsideName, root_files);
+	vector<TH1F*> OutsideHistograms = Histogram_Return_Given_File(OutsideName, root_files);
 
 	THStack *InsideStack = new THStack("InsideStack", "");
 	THStack *OutsideStack = new THStack("OutsideStack", "");
@@ -1527,7 +1531,7 @@ void Inside_Outside_Overlay(string AnalysisType, string DataType, string mode, s
 	else Region = "SEARCH";
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
@@ -1535,7 +1539,7 @@ void Inside_Outside_Overlay(string AnalysisType, string DataType, string mode, s
 }
 
 	
-void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataType2, string FileName, vector<TFile*> root_files){
+void TruthDataCheckFunction(string AnalysisType, string higgs_suffix, string DataType1, string DataType2, string FileName, vector<TFile*> root_files){
 	// checking if the TRUTH tau adds up to the TRUTH invis and vis 
 
 	string Region = "TRUTH";
@@ -1545,8 +1549,8 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
 	string Name2 = DataType2 + "_TRUTH"; // lep tau truth
 	//Create the canvas
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
-	vector<TH1F*> Histograms1 = Histogram_Return_Given_File(AnalysisType, Name1, root_files);
-	vector<TH1F*> Histograms2 = Histogram_Return_Given_File(AnalysisType, Name2, root_files);
+	vector<TH1F*> Histograms1 = Histogram_Return_Given_File(Name1, root_files);
+	vector<TH1F*> Histograms2 = Histogram_Return_Given_File(Name2, root_files);
 
 	THStack *Stack1 = new THStack("Stack1", "");
 	THStack *Stack2 = new THStack("Stack2", "");
@@ -1578,14 +1582,14 @@ void TruthDataCheckFunction(string AnalysisType, string DataType1, string DataTy
 	Legend_Creator(Histograms2, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
   
 }
 
-void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_files) { // Shading in the cut region
+void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode, vector<TFile*> root_files) { // Shading in the cut region
 	// ONLY NEED SIGNAL FOR SIGNIFICANCE VALUES DONT DRAW
 	vector<string> DataType; // Depending on whether or not the cut as two regions depends what function it will use
 
@@ -1613,8 +1617,8 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 		//Create the canvas
 		TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
-		vector<TH1F*> ExceptHistograms = Histogram_Return_Given_File(AnalysisType, ExceptName, root_files);
-		vector<TH1F*> SignalHistograms = Histogram_Return_Given_File(AnalysisType, SignalName, root_files);
+		vector<TH1F*> ExceptHistograms = Histogram_Return_Given_File(ExceptName, root_files);
+		vector<TH1F*> SignalHistograms = Histogram_Return_Given_File(SignalName, root_files);
 
 		THStack *ExceptStack = new THStack("ExceptStack", "");
 		THStack *SignalStack = new THStack("SignalStack", "");
@@ -1666,24 +1670,39 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 		canvas->SetRightMargin(0.15);
 
 		int selected_process;
-		if (AnalysisType == "Electron") selected_process = 7;
-		if (AnalysisType == "Muon") selected_process = 6;
-		if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
-		
-		double x1;
-		double x2;
 
-		// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
-		if (DataType[i] == "lep_0_lep_1_mass") { x1 = 81; x2 = 101; }
-		if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
-		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; }
-		//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
-		if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.15; }
-		if (DataType[i] == "pT_balance_reco")  { x1 = 0; x2 = 0.13; }
-		if (DataType[i] == "pT_balance_reco_INSIDE")  { x1 = 0; x2 = 0.13; }
-		if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
-		if (DataType[i] == "DeltaPhi_reco_INSIDE") { x1 = 0; x2 = 2.72825; }
+		double x1 = ExceptStack->GetXaxis()->GetXmin();
+		double x2 = ExceptStack->GetXaxis()->GetXmax();
+
 		if (DataType[i] == "Centrality"){ x1 = -2; x2 = 2; }
+		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; }
+		if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
+
+		if (AnalysisType == "Electron" || AnalysisType == "Muon") {
+
+			if (AnalysisType == "Electron") selected_process = 7;
+			if (AnalysisType == "Muon") selected_process = 6;
+
+			if (DataType[i] == "lep_0_lep_1_mass") { x1 = 81; x2 = 101; }
+			if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.15; }
+
+		}
+		if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") {
+			
+			selected_process = 5;
+
+			// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
+
+			if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
+
+			//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
+
+			if (DataType[i] == "pT_balance_reco")  { x1 = 0; x2 = 0.13; }
+			if (DataType[i] == "pT_balance_reco_INSIDE")  { x1 = 0; x2 = 0.13; }
+			if (DataType[i] == "DeltaPhi_reco_INSIDE") { x1 = 0; x2 = 2.72825; }
+
+		}
+
 		//if (DataType[i] == "Centrality_INSIDE") DrawBox(ExceptStack, canvas, -2, 2);
 		// HIGH E for now leave 2/03/19
 		
@@ -1766,7 +1785,7 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 		}
 
 		//Create the full output file path
-		string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE-SHADED/" + DataType[i] + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
+		string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/SIGNIFICANCE-SHADED/" + DataType[i] + "_" + AnalysisType + higgs_suffix + "_" + mode + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 		//Write out to a PDF file
 		canvas->SaveAs(FullOutputFilePath.c_str());
@@ -1774,7 +1793,7 @@ void Except_Shaded_Region(string AnalysisType, string mode, vector<TFile*> root_
 
 }
 
-void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, string FileName, vector<TFile*> root_files) {
+void Except_Signal_Overlay(string AnalysisType, string higgs_suffix, string DataType, string mode, string FileName, vector<TFile*> root_files) {
 	
 	cout << "Drawing Except_Signal " << DataType << " histogram" << endl;
 	
@@ -1785,9 +1804,9 @@ void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, st
 	//Create the canvas
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 	
-	vector<TH1F*> ExceptHistograms = Histogram_Return_Given_File(AnalysisType, ExceptName, root_files);
+	vector<TH1F*> ExceptHistograms = Histogram_Return_Given_File(ExceptName, root_files);
 	
-	vector<TH1F*> SignalHistograms = Histogram_Return_Given_File(AnalysisType, SignalName, root_files);
+	vector<TH1F*> SignalHistograms = Histogram_Return_Given_File(SignalName, root_files);
 	
 	THStack *ExceptStack = new THStack("ExceptStack", "");
 	THStack *SignalStack = new THStack("SignalStack", "");
@@ -1912,7 +1931,7 @@ void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, st
 	else Region = "SEARCH";
 	
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + "/SIGNIFICANCE/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/SIGNIFICANCE/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
@@ -1920,7 +1939,7 @@ void Except_Signal_Overlay(string AnalysisType, string DataType, string mode, st
 }
 
 //Draw the stacked graphs for all the desired variables
-void DrawStackedProcesses(string AnalysisType) {
+void DrawStackedProcesses(string AnalysisType, string higgs_suffix) {
 
 	//Open the list of DataTypes to be stacked and drawn
 	string DataTypeFileName = "../../MPhys/DataTypes/Common_DataTypes.txt";
@@ -1968,7 +1987,7 @@ void DrawStackedProcesses(string AnalysisType) {
 	EXCEPT_SIGNAL_graphs.push_back("DeltaPhi");
 	EXCEPT_SIGNAL_graphs.push_back("DeltaPhi_reco_INSIDE");
 	
-	vector<TFile*> root_files = Root_Files(AnalysisType);
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
 	
 	while(!DataTypeFile.eof()) {  		//While not at the end of the file
 		getline(DataTypeFile, line);  	//Get the file line
@@ -1978,27 +1997,27 @@ void DrawStackedProcesses(string AnalysisType) {
 		if (line.find("2D") != string::npos) {
 
 			if (line != "") {  		//If not looking at the last line	
-				string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
-				Process_Combiner_2D(AnalysisType, line, fileName, root_files);
+				string fileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked.pdf";
+				Process_Combiner_2D(AnalysisType, higgs_suffix, line, fileName, root_files);
 
 				for (int i = 0; i <= QCD_EW_graphs.size(); i++) {
 					if (line.find(QCD_EW_graphs[i]) != string::npos) {
 
 						cout << "Drawing Final Stacked QCD_EW 2D Histogram for: " << line << endl;
-						string FileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
-						Process_Combiner_2D_QCD_EW(AnalysisType, line, FileName, root_files, false);
+						string FileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked_QCD_EW.pdf";
+						Process_Combiner_2D_QCD_EW(AnalysisType, higgs_suffix, line, FileName, root_files, false);
 
 						cout << "Drawing Final Stacked QCD_EW 2D (Logged) Histogram for: " << line << endl;
-						FileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW_Logged.pdf";
-						Process_Combiner_2D_QCD_EW(AnalysisType, line, FileName, root_files, true);
+						FileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked_QCD_EW_Logged.pdf";
+						Process_Combiner_2D_QCD_EW(AnalysisType, higgs_suffix, line, FileName, root_files, true);
 
 						cout << "Drawing Final Stacked EW 2D Histogram for: " << line << endl;
-						FileName =  line + "_" + AnalysisType + "_Final_Stacked_EW.pdf";
-						Process_Combiner_2D_EW(AnalysisType, line, FileName, root_files, false);
+						FileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked_EW.pdf";
+						Process_Combiner_2D_EW(AnalysisType, higgs_suffix, line, FileName, root_files, false);
 
 						cout << "Drawing Final Stacked EW 2D (Logged) Histogram for: " << line << endl;
-						FileName =  line + "_" + AnalysisType + "_Final_Stacked_EW_Logged.pdf";
-						Process_Combiner_2D_EW(AnalysisType, line, FileName, root_files, true);
+						FileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked_EW_Logged.pdf";
+						Process_Combiner_2D_EW(AnalysisType, higgs_suffix, line, FileName, root_files, true);
 
 					}
 				}
@@ -2010,15 +2029,15 @@ void DrawStackedProcesses(string AnalysisType) {
 
 		if (line != "") {  		//If not looking at the last line	
 			cout << "Drawing Final Stacked Histogram for: " << line << endl;
-			string fileName =  line + "_" + AnalysisType + "_Final_Stacked.pdf";
-			Process_Stacker(AnalysisType, line, fileName, root_files, true, "");
+			string fileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked.pdf";
+			Process_Stacker(AnalysisType, higgs_suffix, line, fileName, root_files, true, "");
 
 			for (int i = 0; i <= logless_names.size(); i++) {
 
 				if (line.find(logless_names[i]) != string::npos) {
 					cout << "Drawing Final Stacked (Logged) Histogram for: " << line << endl;
-					string loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_Logless.pdf";
-					Process_Stacker(AnalysisType, line, loglessFileName, root_files, false, "");
+					string loglessFileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked_Logless.pdf";
+					Process_Stacker(AnalysisType, higgs_suffix, line, loglessFileName, root_files, false, "");
 				}
 
 			}
@@ -2027,12 +2046,12 @@ void DrawStackedProcesses(string AnalysisType) {
 
 				if (line.find(QCD_EW_graphs[i]) != string::npos) {
 					cout << "Drawing Final Stacked QCD_EW Histogram for: " << line << endl;
-					string QCD_EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_QCD_EW.pdf";
-					Process_Stacker(AnalysisType, line, QCD_EW_loglessFileName, root_files, false, "QCD_EW");
+					string QCD_EW_loglessFileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked_QCD_EW.pdf";
+					Process_Stacker(AnalysisType, higgs_suffix, line, QCD_EW_loglessFileName, root_files, false, "QCD_EW");
 
 					cout << "Drawing Final Stacked EW Histogram for: " << line << endl;
-					string EW_loglessFileName =  line + "_" + AnalysisType + "_Final_Stacked_EW.pdf";
-					Process_Stacker(AnalysisType, line, EW_loglessFileName, root_files, false, "EW");
+					string EW_loglessFileName =  line + "_" + AnalysisType + higgs_suffix + "_Final_Stacked_EW.pdf";
+					Process_Stacker(AnalysisType, higgs_suffix, line, EW_loglessFileName, root_files, false, "EW");
 
 				}
 
@@ -2041,68 +2060,65 @@ void DrawStackedProcesses(string AnalysisType) {
 			for (int i = 0; i <= IN_OUT_graphs.size(); i++) {
 				if (line == IN_OUT_graphs[i]) {
 					cout << "Drawing Final Stacked QCD_EW INSIDE OUTSIDE Comparison Histogram for: " << line << endl;
-					string in_out_QCD_EW_fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_QCD_EW.pdf";
-					Inside_Outside_Overlay(AnalysisType, line, "QCD_EW", in_out_QCD_EW_fileName, root_files);
+					string in_out_QCD_EW_fileName =  line + "_" + AnalysisType + higgs_suffix + "_INSIDE_OUTSIDE_Comparison_QCD_EW.pdf";
+					Inside_Outside_Overlay(AnalysisType, higgs_suffix, line, "QCD_EW", in_out_QCD_EW_fileName, root_files);
 
 					cout << "Drawing Final Stacked EW INSIDE OUTSIDE Comparison Histogram for: " << line << endl;
-					string in_out_EW_fileName =  line + "_" + AnalysisType + "_INSIDE_OUTSIDE_Comparison_EW.pdf";
-					Inside_Outside_Overlay(AnalysisType, line, "EW", in_out_EW_fileName, root_files);
+					string in_out_EW_fileName =  line + "_" + AnalysisType + higgs_suffix + "_INSIDE_OUTSIDE_Comparison_EW.pdf";
+					Inside_Outside_Overlay(AnalysisType, higgs_suffix, line, "EW", in_out_EW_fileName, root_files);
 				}
 			}
 
 			for (int i = 0; i <= EXCEPT_SIGNAL_graphs.size(); i++) {
 				if (line == EXCEPT_SIGNAL_graphs[i]) {
 					cout << "Drawing Final Stacked EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
-					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_FULL.pdf";
-					Except_Signal_Overlay(AnalysisType, line, "", fileName, root_files);
+					fileName =  line + "_" + AnalysisType + higgs_suffix + "_EXCEPT_SIGNAL_Comparison_FULL.pdf";
+					Except_Signal_Overlay(AnalysisType, higgs_suffix, line, "", fileName, root_files);
 
 					cout << "Drawing Final Stacked QCD_EW EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
-					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_QCD_EW.pdf";
-					Except_Signal_Overlay(AnalysisType, line, "QCD_EW", fileName, root_files);
+					fileName =  line + "_" + AnalysisType + higgs_suffix + "_EXCEPT_SIGNAL_Comparison_QCD_EW.pdf";
+					Except_Signal_Overlay(AnalysisType, higgs_suffix, line, "QCD_EW", fileName, root_files);
 
 					cout << "Drawing Final Stacked EW EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
-					fileName =  line + "_" + AnalysisType + "_EXCEPT_SIGNAL_Comparison_EW.pdf";
-					Except_Signal_Overlay(AnalysisType, line, "EW", fileName, root_files);
+					fileName =  line + "_" + AnalysisType + higgs_suffix + "_EXCEPT_SIGNAL_Comparison_EW.pdf";
+					Except_Signal_Overlay(AnalysisType, higgs_suffix, line, "EW", fileName, root_files);
 				}
 			}
 		}
 	}
-/*
+
 	cout << "Drawing Final Stacked EXCEPT SHADED Comparison Histogram for: " << line << endl;
-	fileName =  line + "_" + AnalysisType + "_EXCEPT_SHADED_Comparison_FULL.pdf";
-	Except_Shaded_Region(AnalysisType, "", root_files, lower, upper);
+	Except_Shaded_Region(AnalysisType, higgs_suffix, "", root_files);
 
 	cout << "Drawing Final Stacked QCD_EW EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
-	fileName =  line + "_" + AnalysisType + "_EXCEPT_SHADED_Comparison_QCD_EW.pdf";
-	Except_Shaded_Region(AnalysisType, "QCD_EW", root_files, lower, upper);
+	Except_Shaded_Region(AnalysisType, higgs_suffix, "QCD_EW", root_files);
 
 	cout << "Drawing Final Stacked EW EXCEPT SHADED Comparison Histogram for: " << line << endl;
-	fileName =  line + "_" + AnalysisType + "_EXCEPT_SHADED_Comparison_EW.pdf";
-	Except_Shaded_Region(AnalysisType, "EW", root_files, lower, upper);
-*/
+	Except_Shaded_Region(AnalysisType, higgs_suffix, "EW", root_files);
+/*
 	string INVIS_VIS_fileName =  TRUTH_compare_graphs[0] + "_" + AnalysisType + "_INVIS_VIS_TAU_TRUTH_mass_Comparison.pdf";
 	TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[1], INVIS_VIS_fileName, root_files);
 
 	string INVIS_MET_fileName =  TRUTH_compare_graphs[0] + "_" + AnalysisType + "_INVIS_MET_TRUTH_Comparison.pdf";					
 	TruthDataCheckFunction(AnalysisType, TRUTH_compare_graphs[0], TRUTH_compare_graphs[2], INVIS_MET_fileName, root_files);
-	
+*/	
 }
 
 //Combine all the different chains belonging to each different process
-void CombineAllProcesses_AnalysisType(string AnalysisType) {
+void CombineAllProcesses_AnalysisType(string AnalysisType, string higgs_suffix) {
 
-	Process_Combiner(AnalysisType, "Zee");
-	Process_Combiner(AnalysisType, "Zee2jets");
-	Process_Combiner(AnalysisType, "Zmumu");
-	Process_Combiner(AnalysisType, "Zmm2jets");
-	Process_Combiner(AnalysisType, "Ztt");
-	Process_Combiner(AnalysisType, "Ztt2jets");
-	Process_Combiner(AnalysisType, "ZqqZll");
-	Process_Combiner(AnalysisType, "ttb");
-	Process_Combiner(AnalysisType, "Wenu");
-	Process_Combiner(AnalysisType, "Wmunu");
-	Process_Combiner(AnalysisType, "Wtaunu");
-	Process_Combiner(AnalysisType, "DATA");
+	Process_Combiner(AnalysisType, higgs_suffix, "Zee");
+	Process_Combiner(AnalysisType, higgs_suffix, "Zee2jets");
+	Process_Combiner(AnalysisType, higgs_suffix, "Zmumu");
+	Process_Combiner(AnalysisType, higgs_suffix, "Zmm2jets");
+	Process_Combiner(AnalysisType, higgs_suffix, "Ztt");
+	Process_Combiner(AnalysisType, higgs_suffix, "Ztt2jets");
+	Process_Combiner(AnalysisType, higgs_suffix, "ZqqZll");
+	Process_Combiner(AnalysisType, higgs_suffix, "ttb");
+	Process_Combiner(AnalysisType, higgs_suffix, "Wenu");
+	Process_Combiner(AnalysisType, higgs_suffix, "Wmunu");
+	Process_Combiner(AnalysisType, higgs_suffix, "Wtaunu");
+	Process_Combiner(AnalysisType, higgs_suffix, "DATA");
 
 }
 
