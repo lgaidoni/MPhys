@@ -255,15 +255,11 @@ void NumberEventsCalc(string AnalysisType, string higgs_suffix) { // Analysis ty
 		// OUTPUT Number of events for all data types and all data sets
 
 		output << "******************************************" << endl;
-		output << DataType << endl;
-		output << "EW: " << endl; 
-		output << "\t" << "EWZtautau = " << EWZtautau << "\t" << "EWZmumu = " << EWZmumu << "\t" << "EWZee = " << EWZee << "\t" << "Total = " << totalEW << endl;
-		output << "QCD: " << endl; 
-		output << "\t" << "QCDZtautau = " << QCDZtautau << "\t" << "QCDZmumu = " << QCDZmumu << "\t" << "QCDZee = " << QCDZee << "\t" << "Total = " << totalQCD << endl;
-		output << "Other: " << endl; 
-		output << "\t" << "Wtaunu = " << Wtaunu << "\t" << "Wmunu = " << Wmunu << "\t" << "Wenu = " << Wenu << "\t" << "ZqqZll = " << ZqqZll << "\t" << "Total = " << totalOther << endl;
-		output << "ttBar: " << endl; 
-		output << "\t" << "ttbar = " << ttbar << "\t" << "Total = " << totalTTbar << endl; 
+		output << DataType << " Grand Total: " << totalALL << endl << endl;
+		output << "EW: " << "\t" << "EWZtautau = " << EWZtautau << "\t" << "EWZmumu = " << EWZmumu << "\t" << "EWZee = " << EWZee << "\t" << "Total = " << totalEW << endl;
+		output << "QCD: " << "\t" << "QCDZtautau = " << QCDZtautau << "\t" << "QCDZmumu = " << QCDZmumu << "\t" << "QCDZee = " << QCDZee << "\t" << "Total = " << totalQCD << endl;
+		output << "Other: " << "\t" << "Wtaunu = " << Wtaunu << "\t" << "Wmunu = " << Wmunu << "\t" << "Wenu = " << Wenu << "\t" << "ZqqZll = " << ZqqZll << "\t" << "Total = " << totalOther << endl;
+		output << "ttBar: " << "\t" << "ttbar = " << ttbar << "\t" << "Total = " << totalTTbar << endl; 
 
 		// OUTPUT Number of events in terms of composition
 		output2 << "******************************************" << endl;
