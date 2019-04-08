@@ -44,86 +44,168 @@ void Process_Selector_Confirmation(int SelectedProcess) {
 }
 
 //This function will return the histogram that is the Data Process divided by the MC Process
-TH1F* MC_DATA_Comparison(vector<TH1F*> histograms, int SelectedProcess) {
+TH1F* MC_DATA_Comparison(vector<TH1F*> histograms, int SelectedProcess, string higgs_suffix) {
 	
 	//Get the data histogram from the vector
 	TH1F *dataHistogram = (TH1F*)histograms[11]->Clone();
 
-	//For all the non-data histograms in the histogram vector
-	for (int i=0; i < 11; i++) {
-		//If the process isn't the selected process
-		if (i != SelectedProcess) {
-			TH1F *histogram = histograms[i];
-			dataHistogram->Add(histogram, -1);
-		}
-	}
+	if (higgs_suffix == "_Higgs") {
 
-	//For all the non-data histograms in the histogram vector
-	for (int i=0; i < 11; i++) {
-		//If the process isn't the selected process
-		if (i == SelectedProcess) {
-			TH1F *histogram = histograms[i]; 
-			/*
-			for (int j=0; j < 50; j++) {
-
-				cout << j << ": MC Process = " << histograms[i]->GetBinContent(j) << " DATA Process = " << dataHistogram->GetBinContent(j) << " Ratio: " << dataHistogram->GetBinContent(j)/histograms[i]->GetBinContent(j) << endl;
-
+				//For all the non-data histograms in the histogram vector
+		for (int i=0; i <= 15; i++) {
+			if (i != 11) {
+				//If the process isn't the selected process
+				if (i != SelectedProcess) {
+					TH1F *histogram = histograms[i];
+					dataHistogram->Add(histogram, -1);
+				}
 			}
-			*/
-			dataHistogram->Divide(histogram);  //Divide the reduced data histogram by the selected process's histogram
+		}
+
+		//For all the non-data histograms in the histogram vector
+		for (int i=0; i <= 15; i++) {
+			if (i != 11) {
+				//If the process isn't the selected process
+				if (i == SelectedProcess) {
+					TH1F *histogram = histograms[i]; 
+					/*
+					for (int j=0; j < 50; j++) {
+
+						cout << j << ": MC Process = " << histograms[i]->GetBinContent(j) << " DATA Process = " << dataHistogram->GetBinContent(j) << " Ratio: " << dataHistogram->GetBinContent(j)/histograms[i]->GetBinContent(j) << endl;
+
+					}
+					*/
+					dataHistogram->Divide(histogram);  //Divide the reduced data histogram by the selected process's histogram
+				}
+			}
+		}
+
+	}
+	else {
+		//For all the non-data histograms in the histogram vector
+		for (int i=0; i < 11; i++) {
+			//If the process isn't the selected process
+			if (i != SelectedProcess) {
+				TH1F *histogram = histograms[i];
+				dataHistogram->Add(histogram, -1);
+			}
+		}
+
+		//For all the non-data histograms in the histogram vector
+		for (int i=0; i < 11; i++) {
+			//If the process isn't the selected process
+			if (i == SelectedProcess) {
+				TH1F *histogram = histograms[i]; 
+				/*
+				for (int j=0; j < 50; j++) {
+
+					cout << j << ": MC Process = " << histograms[i]->GetBinContent(j) << " DATA Process = " << dataHistogram->GetBinContent(j) << " Ratio: " << dataHistogram->GetBinContent(j)/histograms[i]->GetBinContent(j) << endl;
+
+				}
+				*/
+				dataHistogram->Divide(histogram);  //Divide the reduced data histogram by the selected process's histogram
+			}
 		}
 	}
+
+
+
 
 	return dataHistogram;
 
 }
 
 //This function will return the histogram that is the Data Process divided by the MC Process
-TH1F* Two_Process_Data_Subtraction(vector<TH1F*> histograms, int SelectedProcess1, int SelectedProcess2) {
+TH1F* Two_Process_Data_Subtraction(vector<TH1F*> histograms, int SelectedProcess1, int SelectedProcess2, string higgs_suffix) {
 	
 	//Get the data histogram from the vector
 	TH1F *dataHistogram = (TH1F*)histograms[11]->Clone();
 
-	//For all the non-data histograms in the histogram vector
-	for (int i=0; i < 11; i++) {
-		//If the process isn't the selected process
-		if (!(i == SelectedProcess1 || i == SelectedProcess2)) {
-			//Process_Selector_Confirmation(i);
-			TH1F *histogram = histograms[i];
-			dataHistogram->Add(histogram, -1);
+	if (higgs_suffix == "_Higgs") {
+		//For all the non-data histograms in the histogram vector
+		for (int i=0; i < 15; i++) {
+			if (i != 11) {
+				//If the process isn't the selected process
+				if (!(i == SelectedProcess1 || i == SelectedProcess2)) {
+					//Process_Selector_Confirmation(i);
+					TH1F *histogram = histograms[i];
+					dataHistogram->Add(histogram, -1);
+				}
+			}
+		}
+	} else {
+		//For all the non-data histograms in the histogram vector
+		for (int i=0; i < 11; i++) {
+			//If the process isn't the selected process
+			if (!(i == SelectedProcess1 || i == SelectedProcess2)) {
+				//Process_Selector_Confirmation(i);
+				TH1F *histogram = histograms[i];
+				dataHistogram->Add(histogram, -1);
+			}
 		}
 	}
+
 
 	return dataHistogram;
 
 }
 
-TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, double m, double c, double bins) { 
+TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, double m, double c, double bins, string higgs_suffix) { 
 
 	TH1F *histogram;
 
-	for (int i=0; i < 11; i++) {
-		if (i == SelectedProcess) {
+	if(higgs_suffix == "_Higgs") {
+		for (int i=0; i <= 15; i++) {
+			if (i != 11) {
+				if (i == SelectedProcess) {
 
-			histogram = histograms[i];
+					histogram = histograms[i];
 
-			double xmin = histogram->GetXaxis()->GetXmin();
-			double xmax = histogram->GetXaxis()->GetXmax();
-			double binwidth = (xmax - xmin)/bins;
+					double xmin = histogram->GetXaxis()->GetXmin();
+					double xmax = histogram->GetXaxis()->GetXmax();
+					double binwidth = (xmax - xmin)/bins;
 
-			for(int j=0; j < bins + 1; j++) {
+					for(int j=0; j < bins + 1; j++) {
 
-				double bin_centre = binwidth * j;
-				double bin_content = histogram->GetBinContent(j);
-				double fit_y = m * bin_centre + c;
-				/*
-				cout << "Bin centre: " << bin_centre << " ";
-				cout << "Bin content: " << bin_content << " ";
-				cout << "fit_y: " << fit_y << " ";
-				cout << "nbc: " << fit_y * bin_content << endl;
-				*/
-				histogram->SetBinContent(j, fit_y * bin_content);
+						double bin_centre = binwidth * j;
+						double bin_content = histogram->GetBinContent(j);
+						double fit_y = m * bin_centre + c;
+						/*
+						cout << "Bin centre: " << bin_centre << " ";
+						cout << "Bin content: " << bin_content << " ";
+						cout << "fit_y: " << fit_y << " ";
+						cout << "nbc: " << fit_y * bin_content << endl;
+						*/
+						histogram->SetBinContent(j, fit_y * bin_content);
 
+					}
+				}
+			}
+		}
+	} else {
+		for (int i=0; i < 11; i++) {
+			if (i == SelectedProcess) {
+
+				histogram = histograms[i];
+
+				double xmin = histogram->GetXaxis()->GetXmin();
+				double xmax = histogram->GetXaxis()->GetXmax();
+				double binwidth = (xmax - xmin)/bins;
+
+				for(int j=0; j < bins + 1; j++) {
+
+					double bin_centre = binwidth * j;
+					double bin_content = histogram->GetBinContent(j);
+					double fit_y = m * bin_centre + c;
+					/*
+					cout << "Bin centre: " << bin_centre << " ";
+					cout << "Bin content: " << bin_content << " ";
+					cout << "fit_y: " << fit_y << " ";
+					cout << "nbc: " << fit_y * bin_content << endl;
+					*/
+					histogram->SetBinContent(j, fit_y * bin_content);
+
+				}
 			}
 		}
 	}
@@ -183,8 +265,8 @@ void NumberEventsCalc(string AnalysisType, string higgs_suffix) { // Analysis ty
 		}
 	}
 
-	fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Nevents_InGroups.txt", output.out);
-	fstream output2("../../Output-Files/Final_Graphs/" + AnalysisType + "/" + AnalysisType + "_Nevents_Composition.txt", output2.out);
+	fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + AnalysisType + higgs_suffix + "_Nevents_InGroups.txt", output.out);
+	fstream output2("../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + AnalysisType + higgs_suffix + "_Nevents_Composition.txt", output2.out);
 
 	for (int i = 0; i < FullHistName.size(); i++) { // FOR LOOP FOR EACH DATATYPE
 		
@@ -320,7 +402,7 @@ void Fit_MC_DATA_Comparison(string AnalysisType, string higgs_suffix, string Dat
 	int SelectedProcess = Process_Selector(Process);
 
 	//Get the data histogram from the vector
-	TH1F *comparisonHistogram = MC_DATA_Comparison(histograms, SelectedProcess);
+	TH1F *comparisonHistogram = MC_DATA_Comparison(histograms, SelectedProcess, higgs_suffix);
 
 	gStyle->SetOptFit(1111);
 	comparisonHistogram->SetMinimum(0);
@@ -355,20 +437,37 @@ void Process_Weighting(string AnalysisType, string higgs_suffix, string DataType
 	//Get the data histogram from the vector
 	TH1F *dataHistogram = histograms[11];
 
-	for (int i=0; i < 11; i++) {
-		if (i == SelectedProcess) {
-			histograms[i] = Weight_Process_Histogram(histograms, SelectedProcess, m, c, bins);
+	if (higgs_suffix == "_Higgs") {
+		for (int i=0; i <= 15; i++) {
+			if (i != 11) {
+				if (i == SelectedProcess) {
+					histograms[i] = Weight_Process_Histogram(histograms, SelectedProcess, m, c, bins, higgs_suffix);
+				}
+			}
+		}
+	} else {
+		for (int i=0; i < 11; i++) {
+			if (i == SelectedProcess) {
+				histograms[i] = Weight_Process_Histogram(histograms, SelectedProcess, m, c, bins, higgs_suffix);
+			}
 		}
 	}
 
 	//Create the stacked histogram
 	THStack *histogramStack = new THStack("histogramStack", "");
 
-	histograms = Set_Histogram_Styles(histograms);
+	histograms = Set_Histogram_Styles(histograms, higgs_suffix);
 
-	//  and add to the stack
-	for (int i=0; i < 11; i++) {
-		histogramStack->Add(histograms[i], "hist");
+	if (higgs_suffix == "_Higgs") {
+		//  and add to the stack
+		for (int i=0; i <= 15; i++) {
+			if (i != 11) histogramStack->Add(histograms[i], "hist");
+		}
+	} else {
+		//  and add to the stack
+		for (int i=0; i < 11; i++) {
+			histogramStack->Add(histograms[i], "hist");
+		}
 	}
 
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
@@ -378,11 +477,11 @@ void Process_Weighting(string AnalysisType, string higgs_suffix, string DataType
 
 	histograms[11]->Draw("SAME");
 
-	Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0);
+	Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0, higgs_suffix);
 
 	canvas->SetLogy();
 
-	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
+	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75, higgs_suffix);
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_" + AnalysisType + "_Final_Stacked_Weighted.pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
@@ -426,11 +525,22 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 	TH1F *dataHistogram = histograms[11];
 	
 	if (weight) {
-		for (int i=0; i < 11; i++) {
-			if (i == SelectedProcess) {
-				histograms[i] = Weight_Process_Histogram(histograms, SelectedProcess, m, c, bins);
-			}
-		}	
+
+		if (higgs_suffix == "_Higgs"){ 
+			for (int i=0; i <= 15; i++) {
+				if (i != 15) {
+					if (i == SelectedProcess) {
+						histograms[i] = Weight_Process_Histogram(histograms, SelectedProcess, m, c, bins, higgs_suffix);
+					}
+				}
+			}	
+		} else {
+			for (int i=0; i < 11; i++) {
+				if (i == SelectedProcess) {
+					histograms[i] = Weight_Process_Histogram(histograms, SelectedProcess, m, c, bins, higgs_suffix);
+				}
+			}	
+		}
 	}
 
 	gPad->SetLogy();
@@ -438,13 +548,19 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 	//Create the stacked histogram
 	THStack *histogramStack = new THStack("histogramStack", "");
 
-	histograms = Set_Histogram_Styles(histograms);
+	histograms = Set_Histogram_Styles(histograms, higgs_suffix);
 
-	//  and add to the stack
-	for (int i=0; i < 11; i++) {
-		histogramStack->Add(histograms[i], "hist");
+	if (higgs_suffix == "_Higgs") {
+		//  and add to the stack
+		for (int i=0; i <= 15; i++) {
+			if (i != 11) histogramStack->Add(histograms[i], "hist");
+		}
+	} else {
+		//  and add to the stack
+		for (int i=0; i < 11; i++) {
+			histogramStack->Add(histograms[i], "hist");
+		}
 	}
-
 	histogramStack->SetMinimum(5);
 	histogramStack->SetMaximum(10000);
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
@@ -467,14 +583,14 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 
 	pad1->Update();
 
-	Legend_Creator(histograms, 0.93, 0.925, 0.83, 0.40, 0.05, 0);
-	Draw_Region(DataType, 0.05, 0.675, 0.90, 0.675, 0.81, 0.675, 0.72);
+	Legend_Creator(histograms, 0.93, 0.925, 0.83, 0.40, 0.05, 0, higgs_suffix);
+	Draw_Region(DataType, 0.05, 0.675, 0.90, 0.675, 0.81, 0.675, 0.72, higgs_suffix);
 
 	canvas->cd();
 	pad2->cd();
 
 	//Get the data histogram from the vector
-	TH1F *comparisonHistogram = MC_DATA_Comparison(histograms, SelectedProcess);
+	TH1F *comparisonHistogram = MC_DATA_Comparison(histograms, SelectedProcess, higgs_suffix);
 
 	comparisonHistogram->SetMinimum(0);
 	comparisonHistogram->SetMaximum(3);
@@ -518,12 +634,12 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 	if (weight) weighted = "_Weighted";
 
 
-	fstream output("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + "_Fitted" + weighted + "_Parameters.txt", output.out);
+	fstream output("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + higgs_suffix + "_Fitted" + weighted + "_Parameters.txt", output.out);
 	output << fit->GetParameter(0) << endl << fit->GetParError(0) << endl << fit->GetParameter(1) << endl << fit->GetParError(1) << endl << fit->GetNDF() << endl << fit->GetChisquare() << endl << fit->GetProb();
 	output.close();
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_" + AnalysisType + "_Fitted" + weighted + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_" + AnalysisType + higgs_suffix + "_Fitted" + weighted + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
@@ -541,7 +657,7 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string hi
 	int SelectedProcess1 = Process_Selector(Process1);
 	int SelectedProcess2 = Process_Selector(Process2);
 
-	histograms[SelectedProcess1] = Weight_Process_Histogram(histograms, SelectedProcess1, m, c, bins);
+	histograms[SelectedProcess1] = Weight_Process_Histogram(histograms, SelectedProcess1, m, c, bins, higgs_suffix);
 
 	TH1F *data = (TH1F*)histograms[11]->Clone();
 	TH1F *h1 = (TH1F*)histograms[SelectedProcess1]->Clone();
@@ -605,7 +721,7 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string hi
 	//Create the stacked histogram
 	THStack *histogramStack = new THStack("histogramStack", "");
 
-	histograms = Set_Histogram_Styles(histograms);
+	histograms = Set_Histogram_Styles(histograms, higgs_suffix);
 
 	//and add to the stack
 	histogramStack->Add(histograms[SelectedProcess2], "hist");
@@ -627,23 +743,23 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string hi
 
 	Histogram_Namer(histogramStack, DataType);
 
-	TH1F *TwoProcessSubtractedDataHistogram = Two_Process_Data_Subtraction(histograms, SelectedProcess1, SelectedProcess2);
+	TH1F *TwoProcessSubtractedDataHistogram = Two_Process_Data_Subtraction(histograms, SelectedProcess1, SelectedProcess2, higgs_suffix);
 
 	TwoProcessSubtractedDataHistogram->Draw("SAME");
 
 	Legend_Creator_For_Two(histograms, SelectedProcess1, SelectedProcess2);
 
-	Draw_Region(DataType, 0.035, 0.62, 0.85, 0.62, 0.785, 0.62, 0.72);
+	Draw_Region(DataType, 0.035, 0.62, 0.85, 0.62, 0.785, 0.62, 0.72, higgs_suffix);
 
 	string scaled = "";
 	if (scale) scaled = "_Scaled";
 
-	fstream output("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + "_Sigma_Search" + scaled + "_Parameters.txt", output.out);
+	fstream output("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + higgs_suffix + "_Sigma_Search" + scaled + "_Parameters.txt", output.out);
 	output << scale_factor_Process1 << endl << scale_factor_Process2;
 	output.close();
 
 	//Create the full output file path
-	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_" + AnalysisType + "_Sigma_Search" + scaled + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_" + AnalysisType + higgs_suffix + "_Sigma_Search" + scaled + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	
 	//Write out to a PDF file
 	canvas2->SaveAs(FullOutputFilePath.c_str());
@@ -659,7 +775,7 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string hi
 
 	cout << "EW Cross Section:     " << info[1] * scale_factor_Process2 << " +/- " << cross_section_error << endl;
 
-	fstream output2("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + "_Cross_Section.txt", output2.out);
+	fstream output2("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + higgs_suffix + "_Cross_Section.txt", output2.out);
 	output2 << "MC Cross Section:     " << info[1] << endl;
 	output2 << "QCD Scale Factor:     " << scale_factor_Process1 << " +/- " << scale_factor_Process1_Error << endl;
 	output2 << "EW Scale Factor:      " << scale_factor_Process2 << " +/- " << scale_factor_Process2_Error << endl;

@@ -18,10 +18,8 @@
 ../../Root-Files/Electron_Higgs/Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r9364_Higgs_Histograms.root
 ../../Root-Files/Electron_Higgs/Sh221_PDF30_Zmumu_MV140_280_BFil_r10201_Higgs_Histograms.root
 ../../Root-Files/Electron_Higgs/Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r10201_Higgs_Histograms.root
-../../Root-Files/Electron_Higgs/PoPy8_Zmumu_r9364_Higgs_Histograms.root
 ../../Root-Files/Electron_Higgs/Sh221_PDF30_Zmumu_MV0_70_BFil_r10201_Higgs_Histograms.root
 ../../Root-Files/Electron_Higgs/Sh221_PDF30_Zmumu_MV500_1000_r9364_Higgs_Histograms.root
-../../Root-Files/Electron_Higgs/PoPy8_Zmumu_r10201_Higgs_Histograms.root
 ../../Root-Files/Electron_Higgs/Sh221_PDF30_Zmumu_MV140_280_CVetBVet_r9364_Higgs_Histograms.root
 ../../Root-Files/Electron_Higgs/Sh221_PDF30_Zmumu_MV70_140_CVetBVet_r10201_Higgs_Histograms.root
 ../../Root-Files/Electron_Higgs/Sh221_PDF30_Zmumu_MV140_280_CFilBVet_r9364_Higgs_Histograms.root

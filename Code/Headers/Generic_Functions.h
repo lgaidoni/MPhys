@@ -13,7 +13,7 @@
 
 //This function will create the legend on the currently active canvas
 //This function takes the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-void Legend_Creator(vector<TH1F*> histograms, double xmax, double ymax, double xmin, double ymin, double textsize, double bordersize) {
+void Legend_Creator(vector<TH1F*> histograms, double xmax, double ymax, double xmin, double ymin, double textsize, double bordersize, string higgs_suffix) {
 
 	//Create the legend
 	auto legend = new TLegend(xmax,ymax,xmin,ymin);
@@ -35,6 +35,13 @@ void Legend_Creator(vector<TH1F*> histograms, double xmax, double ymax, double x
 	legend->AddEntry(histograms[2], "Wmunu");
 	legend->AddEntry(histograms[1], "Wtaunu");
 	legend->AddEntry(histograms[0], "t#bar{t}");
+
+	if (higgs_suffix == "_Higgs"){
+		legend->AddEntry(histograms[12], "llll");
+		legend->AddEntry(histograms[13], "lllv");
+		legend->AddEntry(histograms[14], "llvv");
+		legend->AddEntry(histograms[15], "lvvv");
+	}
 
 	legend->Draw(); //Draw the legend to the currently active canvas
 
@@ -113,7 +120,7 @@ void Legend_Creator_For_Two(vector<TH1F*> histograms, int SelectedProcess1, int 
 }
 
 //This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
+vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms, string higgs_suffix) {
 	
 
 	//ttb
@@ -177,12 +184,35 @@ vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms) {
 	histograms[11]->SetMarkerStyle(8);
 	histograms[11]->SetMarkerSize(0.3);
 
+	if (higgs_suffix == "_Higgs") {
+		//llll
+		histograms[12]->SetLineColor(kBlack);
+		histograms[12]->SetFillColor(kGray);
+		histograms[12]->SetFillStyle(1001);
+		
+		//lllv
+		histograms[13]->SetLineColor(kBlack);
+		histograms[13]->SetFillColor(kGray+1);
+		histograms[13]->SetFillStyle(1001);
+
+		//llvv
+		histograms[14]->SetLineColor(kBlack);
+		histograms[14]->SetFillColor(kGray+2);
+		histograms[14]->SetFillStyle(1001);
+
+		//lvvv
+		histograms[15]->SetLineColor(kBlack);
+		histograms[15]->SetFillColor(kGray+3);
+		histograms[15]->SetFillStyle(1001);
+		
+	}
+
 	return histograms;
 
 }
 
 //This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-vector<TH1F*> Set_Histogram_Styles_Full_Alpha(vector<TH1F*> histograms) {	
+vector<TH1F*> Set_Histogram_Styles_Full_Alpha(vector<TH1F*> histograms, string higgs_suffix) {	
 
 	//ttb
 	histograms[0]->SetLineColor(kBlack);
@@ -234,12 +264,31 @@ vector<TH1F*> Set_Histogram_Styles_Full_Alpha(vector<TH1F*> histograms) {
 	histograms[11]->SetMarkerStyle(8);
 	histograms[11]->SetMarkerSize(0.3);
 
+	if (higgs_suffix == "_Higgs") {
+		//llll
+		histograms[12]->SetLineColor(kBlack);
+		histograms[12]->SetFillColorAlpha(kGray,0.99);
+		
+		//lllv
+		histograms[13]->SetLineColor(kBlack);
+		histograms[13]->SetFillColorAlpha(kGray+1,0.99);
+
+		//llvv
+		histograms[14]->SetLineColor(kBlack);
+		histograms[14]->SetFillColorAlpha(kGray+2,0.99);
+
+		//lvvv
+		histograms[15]->SetLineColor(kBlack);
+		histograms[15]->SetFillColorAlpha(kGray+3,0.99);
+		
+	}
+
 	return histograms;
 
 }
 
 //This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
-vector<TH1F*> Set_Histogram_Styles_Light_Alpha(vector<TH1F*> histograms) {
+vector<TH1F*> Set_Histogram_Styles_Light_Alpha(vector<TH1F*> histograms, string higgs_suffix) {
 
 	//ttb
 	histograms[0]->SetLineColor(kBlack);
@@ -302,6 +351,25 @@ vector<TH1F*> Set_Histogram_Styles_Light_Alpha(vector<TH1F*> histograms) {
 	histograms[11]->SetMarkerStyle(8);
 	histograms[11]->SetMarkerSize(0.3);
 
+	if (higgs_suffix == "_Higgs") {
+		//llll
+		histograms[12]->SetLineColor(kBlack);
+		histograms[12]->SetFillColorAlpha(kGray,0.25);
+		
+		//lllv
+		histograms[13]->SetLineColor(kBlack);
+		histograms[13]->SetFillColorAlpha(kGray+1,0.25);
+
+		//llvv
+		histograms[14]->SetLineColor(kBlack);
+		histograms[14]->SetFillColorAlpha(kGray+2,0.25);
+
+		//lvvv
+		histograms[15]->SetLineColor(kBlack);
+		histograms[15]->SetFillColorAlpha(kGray+3,0.25);
+		
+	}
+
 	return histograms;
 
 }
@@ -326,6 +394,13 @@ vector<TFile*> Root_Files(string AnalysisType, string higgs_suffix) {
 	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zmumu_Histograms.root");
 	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zee_Histograms.root");
 	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/DATA_Histograms.root");
+
+	if(higgs_suffix == "_Higgs") {
+		names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/llll_Histograms.root");
+		names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/lllv_Histograms.root");
+		names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/llvv_Histograms.root");
+		names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/lvvv_Histograms.root");
+	}
 
 	//Load in all the files for the different processes, there are 12 into the files vector
 	for (auto name = names.begin(); name < names.end(); name++) {
@@ -384,20 +459,30 @@ double SignificanceLevelCalc(string AnalysisType, string higgs_suffix, string Da
 	double N_signal = 0;
 	double significance = 0;
 
-	//cout << "\nALL DATA TYPES: Alpha level calc!" << endl;
-	for (int i=0; i<11; i++) { //loop over the histograms for different data sets
-		TH1F* histogram = histograms[i];
-		if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+	if (higgs_suffix == "_Higgs") {
 
-			N_events = histogram->Integral(); // gets no of events by integrating
-			N_bkg += N_events;
-			//cout << "Events for histogram" << i << ": " << N_events << endl;
-			//cout << "Total background events: " << N_bkg << endl;
+		for (int i=0; i<=15; i++) { //loop over the histograms for different data sets
+			if (i != 11) {
+				TH1F* histogram = histograms[i];
+				if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+					N_events = histogram->Integral(); // gets no of events by integrating
+					N_bkg += N_events;
+				}
+				else N_signal = histogram->Integral();  // should get the signal number of events
+			}
+		}
+	
+	} else {
+
+		for (int i=0; i<11; i++) { //loop over the histograms for different data sets
+			TH1F* histogram = histograms[i];
+			if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+				N_events = histogram->Integral(); // gets no of events by integrating
+				N_bkg += N_events;
+			}
+			else N_signal = histogram->Integral();  // should get the signal number of events
 		}
 
-		else { N_signal = histogram->Integral();  // should get the signal number of events
-		//cout << "\nTotal signal events: " << N_signal << endl;
-		}
 	}
 
 	significance = N_signal/pow(N_signal+N_bkg,0.5);
@@ -406,20 +491,37 @@ double SignificanceLevelCalc(string AnalysisType, string higgs_suffix, string Da
 
 }
 
-double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedProcess, vector<TFile*> root_files, vector<TH1F*> histograms) { // 5,6,7 for ee, mumu, tautau
+double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedProcess, vector<TFile*> root_files, vector<TH1F*> histograms, string higgs_suffix) { // 5,6,7 for ee, mumu, tautau
 
 	double N_events = 0;
 	double N_bkg = 0;
 	double N_signal = 0;
 	double significance = 0;
 
-	for (int i=0; i<11; i++) { //loop over the histograms for different data sets
-		TH1F* histogram = histograms[i];
-		if (i != SelectedProcess) { //if NOT the selected process, calculate the background
-			N_events = histogram->Integral(); // gets no of events by integrating
-			N_bkg += N_events;
+	if (higgs_suffix == "_Higgs") {
+
+		for (int i=0; i<=15; i++) { //loop over the histograms for different data sets
+			if (i != 11) {
+				TH1F* histogram = histograms[i];
+				if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+					N_events = histogram->Integral(); // gets no of events by integrating
+					N_bkg += N_events;
+				}
+				else N_signal = histogram->Integral();  // should get the signal number of events
+			}
 		}
-		else N_signal = histogram->Integral();  // should get the signal number of events
+	
+	} else {
+
+		for (int i=0; i<11; i++) { //loop over the histograms for different data sets
+			TH1F* histogram = histograms[i];
+			if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+				N_events = histogram->Integral(); // gets no of events by integrating
+				N_bkg += N_events;
+			}
+			else N_signal = histogram->Integral();  // should get the signal number of events
+		}
+
 	}
 
 	significance = N_signal/pow(N_signal+N_bkg,0.5);
@@ -427,20 +529,37 @@ double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedP
 
 }
 
-double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int SelectedProcess, vector<TFile*> root_files, vector<TH1F*> histograms, double min, double max) {
+double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int SelectedProcess, vector<TFile*> root_files, vector<TH1F*> histograms, double min, double max, string higgs_suffix) {
 
 	double N_events = 0;
 	double N_bkg = 0;
 	double N_signal = 0;
 	double significance = 0;
 
-	for (int i=0; i<11; i++) { //loop over the histograms for different data sets
-		TH1F* histogram = histograms[i];
-		if (i != SelectedProcess) { //if NOT the selected process, calculate the background
-			N_events = histogram->Integral(min, max); // gets no of events by integrating
-			N_bkg += N_events;
+	if (higgs_suffix == "_Higgs") {
+
+		for (int i=0; i<=15; i++) { //loop over the histograms for different data sets
+			if (i != 11) {
+				TH1F* histogram = histograms[i];
+				if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+					N_events = histogram->Integral(min, max); // gets no of events by integrating
+					N_bkg += N_events;
+				}
+				else N_signal = histogram->Integral(min, max);  // should get the signal number of events
+			}
 		}
-		else N_signal = histogram->Integral(min, max);  // should get the signal number of events
+	
+	} else {
+
+		for (int i=0; i<11; i++) { //loop over the histograms for different data sets
+			TH1F* histogram = histograms[i];
+			if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+				N_events = histogram->Integral(min, max); // gets no of events by integrating
+				N_bkg += N_events;
+			}
+			else N_signal = histogram->Integral(min, max);  // should get the signal number of events
+		}
+
 	}
 
 	significance = N_signal/pow(N_signal+N_bkg,0.5);
@@ -448,7 +567,7 @@ double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int Select
 
 }
 
-double EXCEPT_FINE_Significance(string AnalysisType, string DataType, int SelectedProcess, double minval, double maxval, vector<TFile*> root_files, vector<TH1F*> histograms) {
+double EXCEPT_FINE_Significance(string AnalysisType, string DataType, int SelectedProcess, double minval, double maxval, vector<TFile*> root_files, vector<TH1F*> histograms, string higgs_suffix) {
 
 	double xmax = histograms[0]->GetXaxis()->GetXmax();
 	double xbins = histograms[0]->GetNbinsX();
@@ -462,7 +581,7 @@ double EXCEPT_FINE_Significance(string AnalysisType, string DataType, int Select
 	//cout << SignificanceLevelCalc(AnalysisType, DataType, 5, root_files, histograms) << endl;
 	//cout << EXCEPT_Significance_Calc(AnalysisType, DataType, 5, root_files, histograms, minbin, maxbin) << endl;
 
-	double significance = EXCEPT_Significance_Calc(AnalysisType, DataType, SelectedProcess, root_files, histograms, minbin, maxbin);
+	double significance = EXCEPT_Significance_Calc(AnalysisType, DataType, SelectedProcess, root_files, histograms, minbin, maxbin, higgs_suffix);
 
 	return significance;
 
@@ -474,8 +593,8 @@ void Optimise_Significance_Minval(string AnalysisType, string higgs_suffix, stri
 	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
 	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
-	cout << "Full Except Significance = " << SignificanceLevelCalc(AnalysisType, DataType, SelectedProcess, root_files, histograms) << endl;
-	cout << "Desired Range Significance = " << EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, initial_minval, maxval, root_files, histograms) << endl;
+	cout << "Full Except Significance = " << SignificanceLevelCalc(AnalysisType, DataType, SelectedProcess, root_files, histograms, higgs_suffix) << endl;
+	cout << "Desired Range Significance = " << EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, initial_minval, maxval, root_files, histograms, higgs_suffix) << endl;
 
 	//Setup of initial variables
 	double highest_significance = 0.0;
@@ -504,7 +623,7 @@ void Optimise_Significance_Minval(string AnalysisType, string higgs_suffix, stri
 	cout << "Loop Start = " << loop_start << "\t Loop End = " << loop_end << endl;
 
 	for(double minval = loop_start; minval <= loop_end; minval += initial_minval_range/10) {
-		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms);
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms, higgs_suffix);
 		if (significance > highest_significance) {
 			cout << minval << "\tS = " << significance << "\t Coarse\t - New Highest" << endl;
 			highest_significance = significance;		
@@ -529,7 +648,7 @@ void Optimise_Significance_Minval(string AnalysisType, string higgs_suffix, stri
 	cout << "Loop Start = " << loop_start << "\t Loop End = " << loop_end << endl << endl;
 
 	for(double minval = loop_start; minval <= loop_end; minval += fine_minval_range/10) {
-		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms);
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms, higgs_suffix);
 		cout << "S = " << significance << "\t Fine";
 		if (significance > highest_significance) {
 			cout << " - New Highest";
@@ -549,8 +668,8 @@ void Optimise_Significance_Maxval(string AnalysisType, string higgs_suffix, stri
 	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
 	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
-	cout << "Full Except Significance = " << SignificanceLevelCalc(AnalysisType, DataType, SelectedProcess, root_files, histograms) << endl;
-	cout << "Desired Range Significance = " << EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, initial_maxval, root_files, histograms) << endl;
+	cout << "Full Except Significance = " << SignificanceLevelCalc(AnalysisType, DataType, SelectedProcess, root_files, histograms, higgs_suffix) << endl;
+	cout << "Desired Range Significance = " << EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, initial_maxval, root_files, histograms, higgs_suffix) << endl;
 
 	//Setup of initial variables
 	double highest_significance = 0.0;
@@ -579,7 +698,7 @@ void Optimise_Significance_Maxval(string AnalysisType, string higgs_suffix, stri
 	cout << "Loop Start = " << loop_start << "\t Loop End = " << loop_end << endl;
 
 	for(double maxval = loop_start; maxval <= loop_end; maxval += initial_maxval_range/10) {
-		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms);
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms, higgs_suffix);
 
 		if (significance > highest_significance) {
 			cout << maxval << "\tS = " << significance << "\t Coarse\t - New Highest" << endl;
@@ -605,7 +724,7 @@ void Optimise_Significance_Maxval(string AnalysisType, string higgs_suffix, stri
 	cout << "Loop Start = " << loop_start << "\t Loop End = " << loop_end << endl << endl;
 
 	for(double maxval = loop_start; maxval <= loop_end; maxval += fine_maxval_range/10) {
-		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms);
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms, higgs_suffix);
 		cout << "S = " << significance << "\t Fine";
 		if (significance > highest_significance) {
 			cout << " - New Highest";
@@ -677,7 +796,7 @@ string Histogram_Namer(string DataType) {
 
 //This function will draw the box containing information about the data used to produce graphs
 //It will draw the box to the currently active canvas
-void Draw_Region(string DataType, double textsize, double latex1left, double latex1right, double latex2left, double latex2right, double latex3left, double latex3right) {
+void Draw_Region(string DataType, double textsize, double latex1left, double latex1right, double latex2left, double latex2right, double latex3left, double latex3right, string higgs_suffix) {
 
 	string region;
 
@@ -697,7 +816,8 @@ void Draw_Region(string DataType, double textsize, double latex1left, double lat
 	t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
 	t.SetTextSize(textsize);  					//Set font size
 	t.DrawLatex(latex1left, latex1right, latexLine.c_str());  		//Draw line 1
-	t.DrawLatex(latex2left, latex2right, "#scale[0.7]{#int}L dt = 36.2fb^{-1}");  	//Draw line 2
+	if (higgs_suffix == "_Higgs") t.DrawLatex(latex2left, latex2right, "#scale[0.7]{#int}L dt = 80fb^{-1}");  	//Draw line 2
+	else t.DrawLatex(latex2left, latex2right, "#scale[0.7]{#int}L dt = 36.2fb^{-1}");  	//Draw line 2
 	t.DrawLatex(latex3left, latex3right, "#sqrt{s} = 13 TeV");  		//Draw line 3
 
 }
@@ -1006,6 +1126,9 @@ void Process_Combiner_Checker(string AnalysisType, string FileName) {
 		getline(DataTypeFile, line);  	//Get the file line
 		if (line != "") {  		//If not looking at the last line
 			if (line.find("2D") != string::npos) {
+
+				cout << line << endl;	
+
 				//Get the first histogram in the vector
 				string histogramName = "h_" + line + ";1";
 				TH2F *histogramMaster = (TH2F*)files[0]->Get(histogramName.c_str()); 
@@ -1050,6 +1173,7 @@ void Process_Combiner(string AnalysisType, string higgs_suffix, string Process) 
 
 	//Vector of files that can be looped over
 	vector<TFile*> files;
+	vector<string> names;
 
 	//String for the root file path
 	string ROOTFilePath = "../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/" + Process + "_Histograms.root";
@@ -1076,6 +1200,7 @@ void Process_Combiner(string AnalysisType, string higgs_suffix, string Process) 
 		getline(file, line);  //Get the file line
 		if (line != "") {  //If not looking at the last line
 			files.push_back(new TFile(line.c_str()));  //Add the file to the vector
+			names.push_back(line);
 		}
 	}
 
@@ -1116,11 +1241,20 @@ void Process_Combiner(string AnalysisType, string higgs_suffix, string Process) 
 				string histogramName = "h_" + line + ";1";
 				TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
 
+				int counter = 1;			
+
 				//For all the files in the vector not counting the first...
 				for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
 
 					//Get the histogram
 					TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
+
+					//Create the canvas
+					TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+					cout << names[counter] << endl;
+					histogram->Draw();
+					canvas->Close();
+					counter++;
 
 					//Add it to the master histogram 
 					histogramMaster->Add(histogram);
@@ -1158,7 +1292,7 @@ void Process_Stacker(string AnalysisType, string higgs_suffix, string DataType, 
 	THStack *histogramStack = new THStack("histogramStack", "");
 
 	//Set the histogram styles
-	histograms = Set_Histogram_Styles(histograms);
+	histograms = Set_Histogram_Styles(histograms, higgs_suffix);
 
 
 	if (mode == "QCD_EW") {
@@ -1177,9 +1311,16 @@ void Process_Stacker(string AnalysisType, string higgs_suffix, string DataType, 
 		histogramStack->Add(histograms[7], "hist");
 	}
 	else {
-		//Add the histograms from the vector to the stack
-		for (int i=0; i < 11; i++) {
-			histogramStack->Add(histograms[i], "hist");
+		if (higgs_suffix == "_Higgs") {
+			//Add the histograms from the vector to the stack
+			for (int i=0; i <= 15; i++) {
+				if (i != 11) histogramStack->Add(histograms[i], "hist");
+			}
+		} else {
+			//Add the histograms from the vector to the stack
+			for (int i=0; i < 11; i++) {
+				histogramStack->Add(histograms[i], "hist");
+			}
 		}
 	}
 
@@ -1262,10 +1403,10 @@ void Process_Stacker(string AnalysisType, string higgs_suffix, string DataType, 
 		Legend_Creator_EW(histograms, 0.84, 0.89, 0.78, 0.71, 0.037, 0);
 	}
 	else {
-		Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0);
+		Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0, higgs_suffix);
 	}
 
-	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75);
+	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75, higgs_suffix);
 
 	canvas->Update();
 
@@ -1305,11 +1446,17 @@ void Process_Combiner_2D(string AnalysisType, string higgs_suffix, string DataTy
 
 	int counter = 1;
 	//For all the files in the vector not counting the first...
-	for (int i = 1; i < 11; i++) {
 
-		//Add it to the master histogram 
-		histogramMaster->Add(histograms[i]);
-
+	if (higgs_suffix == "_Higgs") {
+		//Add the histograms from the vector to the stack
+		for (int i=1; i <= 15; i++) {
+			if (i != 11) histogramMaster->Add(histograms[i]);
+		}
+	} else {
+		//Add the histograms from the vector to the stack
+		for (int i=1; i < 11; i++) {
+			histogramMaster->Add(histograms[i]);
+		}
 	}
 
 	TH2 *RebinnedData = histogramData->Rebin2D(1,1,"newname");
@@ -1443,8 +1590,8 @@ void Inside_Outside_Overlay(string AnalysisType, string higgs_suffix, string Dat
 	THStack *InsideStack = new THStack("InsideStack", "");
 	THStack *OutsideStack = new THStack("OutsideStack", "");
 
-	InsideHistograms = Set_Histogram_Styles_Full_Alpha(InsideHistograms);
-	OutsideHistograms = Set_Histogram_Styles_Light_Alpha(OutsideHistograms);
+	InsideHistograms = Set_Histogram_Styles_Full_Alpha(InsideHistograms, higgs_suffix);
+	OutsideHistograms = Set_Histogram_Styles_Light_Alpha(OutsideHistograms, higgs_suffix);
 
 	if (mode == "QCD_EW") {
 		InsideStack->Add(InsideHistograms[5], "hist");
@@ -1473,13 +1620,18 @@ void Inside_Outside_Overlay(string AnalysisType, string higgs_suffix, string Dat
 		OutsideStack->Add(OutsideHistograms[7], "hist");
 	}
 	else {
-		//Add the histograms from the vector to the stack
-		for (int i=0; i < 11; i++) {
-			InsideStack->Add(InsideHistograms[i], "hist");
-		}
-
-		for (int i=0; i < 11; i++) {
-			OutsideStack->Add(OutsideHistograms[i], "hist");
+		if (higgs_suffix == "_Higgs") {
+			//Add the histograms from the vector to the stack
+			for (int i=0; i <= 15; i++) {
+				if (i != 11) InsideStack->Add(InsideHistograms[i], "hist");
+				if (i != 11) OutsideStack->Add(OutsideHistograms[i], "hist");
+			}
+		} else {
+			//Add the histograms from the vector to the stack
+			for (int i=0; i < 11; i++) {
+				InsideStack->Add(InsideHistograms[i], "hist");
+				OutsideStack->Add(OutsideHistograms[i], "hist");
+			}
 		}
 	}
 
@@ -1487,7 +1639,7 @@ void Inside_Outside_Overlay(string AnalysisType, string higgs_suffix, string Dat
 	InsideStack->Draw("");
 	OutsideStack->Draw("same noclear");
 
-	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.70, 0.73);
+	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.70, 0.73, higgs_suffix);
 
 	TLatex t;  						//Create a latex object
 	t.SetTextFont(42);  					//Set font
@@ -1514,10 +1666,10 @@ void Inside_Outside_Overlay(string AnalysisType, string higgs_suffix, string Dat
 	}
 	else {
 		t.DrawLatex(0.86, 0.86, "Inside");
-		Legend_Creator(InsideHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
+		Legend_Creator(InsideHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0, higgs_suffix);
 
 		t.DrawLatex(0.86, 0.46, "Outside");
-		Legend_Creator(InsideHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
+		Legend_Creator(InsideHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0, higgs_suffix);
 	}
 
 	string Region;
@@ -1555,8 +1707,8 @@ void TruthDataCheckFunction(string AnalysisType, string higgs_suffix, string Dat
 	THStack *Stack1 = new THStack("Stack1", "");
 	THStack *Stack2 = new THStack("Stack2", "");
 
-	Histograms1 = Set_Histogram_Styles_Full_Alpha(Histograms1);
-	Histograms2 = Set_Histogram_Styles_Light_Alpha(Histograms2);
+	Histograms1 = Set_Histogram_Styles_Full_Alpha(Histograms1, higgs_suffix);
+	Histograms2 = Set_Histogram_Styles_Light_Alpha(Histograms2, higgs_suffix);
 
 	for (int i = 0; i<11; i++){
 		Stack1->Add(Histograms1[i], "hist");
@@ -1566,7 +1718,7 @@ void TruthDataCheckFunction(string AnalysisType, string higgs_suffix, string Dat
 	//Draw the stack, actually stacking (no "nostack")
 	Stack1->Draw("");
 	Stack2->Draw("same noclear");
-	Draw_Region(DataType1, 0.037, 0.70, 0.86, 0.70, 0.80, 0.70, 0.73); /// same for both as both truth so only need one
+	Draw_Region(DataType1, 0.037, 0.70, 0.86, 0.70, 0.80, 0.70, 0.73, higgs_suffix); /// same for both as both truth so only need one
 
 	TLatex t;  						//Create a latex object
 	t.SetTextFont(42);  					//Set font
@@ -1576,10 +1728,10 @@ void TruthDataCheckFunction(string AnalysisType, string higgs_suffix, string Dat
 
 	//Create the legend and draw the region information
 	t.DrawLatex(0.86, 0.86, Name1.c_str());
-	Legend_Creator(Histograms1, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
+	Legend_Creator(Histograms1, 1.0, 0.85, 0.86, 0.65, 0.035, 0, higgs_suffix);
 
 	t.DrawLatex(0.86, 0.61, Name2.c_str());
-	Legend_Creator(Histograms2, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
+	Legend_Creator(Histograms2, 1.0, 0.60, 0.86, 0.40, 0.035, 0, higgs_suffix);
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + Region + "/" + FileName; // Need to create directory to save the Data Types into their own folders (if thats easier)
@@ -1595,6 +1747,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 
 	DataType.push_back("lep_0_lep_1_mass");
 	DataType.push_back("lep_0_lep_1_mass_reco");
+	DataType.push_back("lep_0_lep_1_mass_non_reco");
 	DataType.push_back("jet_0_jet_1_mass");
 	//DataType.push_back("jet_0_jet_1_mass_INSIDE");
 	DataType.push_back("pT_balance");
@@ -1623,7 +1776,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		THStack *ExceptStack = new THStack("ExceptStack", "");
 		THStack *SignalStack = new THStack("SignalStack", "");
 
-		ExceptHistograms = Set_Histogram_Styles(ExceptHistograms);
+		ExceptHistograms = Set_Histogram_Styles(ExceptHistograms, higgs_suffix);
 		//SignalHistograms = Set_Histogram_Styles_Full_Alpha(SignalHistograms);
 
 		if (mode == "QCD_EW") {
@@ -1653,19 +1806,26 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			SignalStack->Add(SignalHistograms[7], "hist");
 		}
 		else {
-			//Add the histograms from the vector to the stack
-			for (int i=0; i < 11; i++) {
-				ExceptStack->Add(ExceptHistograms[i], "hist");
-			}
-
-			for (int i=0; i < 11; i++) {
-				SignalStack->Add(SignalHistograms[i], "hist");
+			if (higgs_suffix == "_Higgs") {
+				//Add the histograms from the vector to the stack
+				for (int i=0; i <= 15; i++) {
+					if (i != 11) ExceptStack->Add(ExceptHistograms[i], "hist");
+					if (i != 11) SignalStack->Add(SignalHistograms[i], "hist");
+				}
+			} else {
+				//Add the histograms from the vector to the stack
+				for (int i=0; i < 11; i++) {
+					ExceptStack->Add(ExceptHistograms[i], "hist");
+					SignalStack->Add(SignalHistograms[i], "hist");
+				}
 			}
 		}
 
 		//Draw the stack, actually stacking (no "nostack")
 		ExceptStack->Draw("");
 		//SignalStack->Draw("same"); 
+
+		ExceptHistograms[11]->Draw("SAME");
 
 		canvas->SetRightMargin(0.15);
 
@@ -1674,8 +1834,18 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		double x1 = ExceptStack->GetXaxis()->GetXmin();
 		double x2 = ExceptStack->GetXaxis()->GetXmax();
 
+		double ymin = canvas->GetUymin();
+		double ymax = canvas->GetUymax();
+
+		double x3 = 0;
+		double x4 = 0;
+
 		if (DataType[i] == "Centrality"){ x1 = -2; x2 = 2; }
-		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; }
+		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; canvas->SetLogy(); 
+			double current_y_max = ExceptStack->GetMaximum();
+			ExceptStack->SetMaximum(current_y_max * 1.5);
+			ymax = current_y_max * 2.4;
+		}
 		if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
 
 		if (AnalysisType == "Electron" || AnalysisType == "Muon") {
@@ -1693,7 +1863,8 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 
 			// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
 
-			if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
+			if (DataType[i] == "lep_0_lep_1_mass") { x1 = 60; x2 = 120; }
+			if (DataType[i] == "lep_0_lep_1_mass_non_reco") { x3 = 81; x4 = 101; }
 
 			//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
 
@@ -1708,28 +1879,44 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		
 		cout << "x1: " << x1 << "x2: " << x2 << endl;
 
-		TBox *b1 = new TBox(ExceptStack->GetXaxis()->GetXmin(), canvas->GetUymin(), x1, canvas->GetUymax());
+		TBox *b1 = new TBox(ExceptStack->GetXaxis()->GetXmin(), ymin, x1, ymax);
 		b1->SetFillStyle(1001);
 		b1->SetFillColorAlpha(kRed, 0.25);
 		b1->Draw();
 
-		TBox *b2 = new TBox(x2,canvas->GetUymin(), ExceptStack->GetXaxis()->GetXmax(), canvas->GetUymax());
+		TBox *b2 = new TBox(x2,ymin, ExceptStack->GetXaxis()->GetXmax(), ymax);
 		b2->SetFillStyle(1001);
 		b2->SetFillColorAlpha(kRed, 0.25);
 		b2->Draw();
 
-		TLine *l1 = new TLine(x1, canvas->GetUymin(), x1, canvas->GetUymax());
+		TBox *b3 = new TBox(x3,ymin, x4, ymax);
+		TLine *l3 = new TLine(x3, ymin, x3, ymax);
+		TLine *l4 = new TLine(x4, ymin, x4, ymax);
+
+		if ((AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") && DataType[i] == "lep_0_lep_1_mass_non_reco") {
+			b3->SetFillStyle(1001);
+			b3->SetFillColorAlpha(kRed, 0.25);
+			b3->Draw();
+
+			l3->SetLineWidth(2);
+			l4->SetLineWidth(2);
+
+			l3->Draw();
+			l4->Draw();
+		}
+
+		TLine *l1 = new TLine(x1, ymin, x1, ymax);
 		l1->SetLineWidth(2);
 		l1->Draw();
 
-		TLine *l2 = new TLine(x2, canvas->GetUymin(), x2, canvas->GetUymax());
+		TLine *l2 = new TLine(x2, ymin, x2, ymax);
 		l2->SetLineWidth(2);
 		l2->Draw();
 
-		Draw_Region(DataType[i], 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
+		Draw_Region(DataType[i], 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73, higgs_suffix);
 
-		double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms);
-		double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, SignalHistograms);
+		double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms, higgs_suffix);
+		double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, SignalHistograms, higgs_suffix);
 
 		cout << Except_Significance << endl;
 		cout << Signal_Significance << endl;
@@ -1779,7 +1966,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		else {
 			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
 			t.DrawLatex(0.86, 0.88, SignalLegend.c_str());
-			Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
+			Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.40, 0.035, 0, higgs_suffix);
 
 			//Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
 		}
@@ -1811,8 +1998,8 @@ void Except_Signal_Overlay(string AnalysisType, string higgs_suffix, string Data
 	THStack *ExceptStack = new THStack("ExceptStack", "");
 	THStack *SignalStack = new THStack("SignalStack", "");
 	
-	ExceptHistograms = Set_Histogram_Styles_Light_Alpha(ExceptHistograms);
-	SignalHistograms = Set_Histogram_Styles_Full_Alpha(SignalHistograms);
+	ExceptHistograms = Set_Histogram_Styles_Light_Alpha(ExceptHistograms, higgs_suffix);
+	SignalHistograms = Set_Histogram_Styles_Full_Alpha(SignalHistograms, higgs_suffix);
 	
 	if (mode == "QCD_EW") {
 		ExceptStack->Add(ExceptHistograms[5], "hist");
@@ -1855,7 +2042,7 @@ void Except_Signal_Overlay(string AnalysisType, string higgs_suffix, string Data
 	ExceptStack->Draw("");
 	SignalStack->Draw("same");
 	
-	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73);
+	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73, higgs_suffix);
 	
 	canvas->SetRightMargin(0.15);
 	
@@ -1864,8 +2051,8 @@ void Except_Signal_Overlay(string AnalysisType, string higgs_suffix, string Data
 	if (AnalysisType == "Muon") selected_process = 6;
 	if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") selected_process = 5;
 	
-	double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, ExceptHistograms);
-	double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, SignalHistograms);
+	double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, ExceptHistograms, higgs_suffix);
+	double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType, selected_process, root_files, SignalHistograms, higgs_suffix);
 	
 	cout << Except_Significance << endl;
 	cout << Signal_Significance << endl;
@@ -1914,10 +2101,10 @@ void Except_Signal_Overlay(string AnalysisType, string higgs_suffix, string Data
 	}
 	else {
 		t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-		Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0);
+		Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.50, 0.035, 0, higgs_suffix);
 	
 		t.DrawLatex(0.86, 0.46, SignalLegend.c_str());
-		Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
+		Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0, higgs_suffix);
 	}
 	
 	string Region;
@@ -1959,6 +2146,7 @@ void DrawStackedProcesses(string AnalysisType, string higgs_suffix) {
 	QCD_EW_graphs.push_back("Mass_DeltaPhi_Combination_INSIDE_2D");
 	QCD_EW_graphs.push_back("Mass_DeltaPhi_Combination_OUTSIDE_2D");
 	QCD_EW_graphs.push_back("pT_balance");
+	QCD_EW_graphs.push_back("BDT");
 
 	vector<string> IN_OUT_graphs;
 	IN_OUT_graphs.push_back("lep_0_lep_1_mass_reco");
@@ -2068,22 +2256,6 @@ void DrawStackedProcesses(string AnalysisType, string higgs_suffix) {
 					Inside_Outside_Overlay(AnalysisType, higgs_suffix, line, "EW", in_out_EW_fileName, root_files);
 				}
 			}
-
-			for (int i = 0; i <= EXCEPT_SIGNAL_graphs.size(); i++) {
-				if (line == EXCEPT_SIGNAL_graphs[i]) {
-					cout << "Drawing Final Stacked EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
-					fileName =  line + "_" + AnalysisType + higgs_suffix + "_EXCEPT_SIGNAL_Comparison_FULL.pdf";
-					Except_Signal_Overlay(AnalysisType, higgs_suffix, line, "", fileName, root_files);
-
-					cout << "Drawing Final Stacked QCD_EW EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
-					fileName =  line + "_" + AnalysisType + higgs_suffix + "_EXCEPT_SIGNAL_Comparison_QCD_EW.pdf";
-					Except_Signal_Overlay(AnalysisType, higgs_suffix, line, "QCD_EW", fileName, root_files);
-
-					cout << "Drawing Final Stacked EW EXCEPT SIGNAL Comparison Histogram for: " << line << endl;
-					fileName =  line + "_" + AnalysisType + higgs_suffix + "_EXCEPT_SIGNAL_Comparison_EW.pdf";
-					Except_Signal_Overlay(AnalysisType, higgs_suffix, line, "EW", fileName, root_files);
-				}
-			}
 		}
 	}
 
@@ -2119,6 +2291,13 @@ void CombineAllProcesses_AnalysisType(string AnalysisType, string higgs_suffix) 
 	Process_Combiner(AnalysisType, higgs_suffix, "Wmunu");
 	Process_Combiner(AnalysisType, higgs_suffix, "Wtaunu");
 	Process_Combiner(AnalysisType, higgs_suffix, "DATA");
+
+	if(higgs_suffix == "_Higgs") {
+		Process_Combiner(AnalysisType, higgs_suffix, "llll");
+		Process_Combiner(AnalysisType, higgs_suffix, "lllv");
+		Process_Combiner(AnalysisType, higgs_suffix, "llvv");
+		Process_Combiner(AnalysisType, higgs_suffix, "lvvv");
+	}
 
 }
 

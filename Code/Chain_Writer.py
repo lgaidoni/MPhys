@@ -43,6 +43,10 @@ def process_chains_writer(AnalysisType):
 	ZqqZll_process_chains = open("../Processes/" + AnalysisType + higgs + "/ZqqZll_Chains" + higgs + ".txt", "w")
 	Ztt2jets_process_chains = open("../Processes/" + AnalysisType + higgs + "/Ztt2jets_Chains" + higgs + ".txt", "w")
 	Ztt_process_chains = open("../Processes/" + AnalysisType + higgs + "/Ztt_Chains" + higgs + ".txt", "w")
+	llll_process_chains = open("../Processes/" + AnalysisType + higgs + "/llll_Chains" + higgs + ".txt", "w")
+	lllv_process_chains = open("../Processes/" + AnalysisType + higgs + "/lllv_Chains" + higgs + ".txt", "w")
+	llvv_process_chains = open("../Processes/" + AnalysisType + higgs + "/llvv_Chains" + higgs + ".txt", "w")
+	lvvv_process_chains = open("../Processes/" + AnalysisType + higgs + "/lvvv_Chains" + higgs + ".txt", "w")
 	
 	mc_locations = open("MC_Paths" + higgs + ".txt", "r")
 
@@ -55,17 +59,24 @@ def process_chains_writer(AnalysisType):
 		if line[0:2] == "##":
 			counter = 0
 			name = line[2:len(line)-1]
+
 			process_line_writer(ttb_process_chains, line, name, AnalysisType, "_ttb_")
 			process_line_writer(Wenu_process_chains, line, name, AnalysisType, "_Wenu_")
 			process_line_writer(Wmunu_process_chains, line, name, AnalysisType, "_Wmunu_")
 			process_line_writer(Wtaunu_process_chains, line, name, AnalysisType, "_Wtaunu_")
 			process_line_writer(Zee2jets_process_chains, line, name, AnalysisType, "_Zee2jets_")
-			process_line_writer(Zee_process_chains, line, name, AnalysisType, "_Zee_")
+			if not (name.find("Zee") != -1 and name.find("PoPy") != -1):
+				process_line_writer(Zee_process_chains, line, name, AnalysisType, "_Zee_")
 			process_line_writer(Zmm2jets_process_chains, line, name, AnalysisType, "_Zmm2jets_")
-			process_line_writer(Zmumu_process_chains, line, name, AnalysisType, "_Zmumu_")
+			if not (name.find("Zmumu") != -1 and name.find("PoPy") != -1):
+				process_line_writer(Zmumu_process_chains, line, name, AnalysisType, "_Zmumu_")
 			process_line_writer(ZqqZll_process_chains, line, name, AnalysisType, "_ZqqZll")
 			process_line_writer(Ztt2jets_process_chains, line, name, AnalysisType, "_Ztt2jets_")
 			process_line_writer(Ztt_process_chains, line, name, AnalysisType, "_Ztt_")
+			process_line_writer(llll_process_chains, line, name, AnalysisType, "_llll_")
+			process_line_writer(lllv_process_chains, line, name, AnalysisType, "_lllv_")
+			process_line_writer(llvv_process_chains, line, name, AnalysisType, "_llvv_")
+			process_line_writer(lvvv_process_chains, line, name, AnalysisType, "_lvvv_")
 
 	ttb_process_chains.close()
 	Wenu_process_chains.close()
@@ -78,6 +89,10 @@ def process_chains_writer(AnalysisType):
 	ZqqZll_process_chains.close()
 	Ztt2jets_process_chains.close()
 	Ztt_process_chains.close()
+	llll_process_chains.close()
+	lllv_process_chains.close()
+	llvv_process_chains.close()
+	lvvv_process_chains.close()
 	
 
 def analysis_start_function_writer(inputFile, IDtag, Name):
@@ -318,11 +333,11 @@ for line in data_locations:
 			chain_functions.write("TChain *Chain_" + name + "() {\n\n")
 			chain_functions.write("\tTChain *NOMINAL = new TChain(\"NOMINAL\");\n\n")
 
-			Electron_data_chain_locations.write("../../Root-Files/Electron/" + name + "_Histograms.root\n")
-			ElectronMuon_data_chain_locations.write("../../Root-Files/ElectronMuon/" + name + "_Histograms.root\n")
-			ElectronTau_data_chain_locations.write("../../Root-Files/ElectronTau/" + name + "_Histograms.root\n")
-			Muon_data_chain_locations.write("../../Root-Files/Muon/" + name + "_Histograms.root\n")
-			MuonTau_data_chain_locations.write("../../Root-Files/MuonTau/" + name + "_Histograms.root\n")
+			Electron_data_chain_locations.write("../../Root-Files/Electron" + higgs + "/" + name + "_Histograms.root\n")
+			ElectronMuon_data_chain_locations.write("../../Root-Files/ElectronMuon" + higgs + "/" + name + "_Histograms.root\n")
+			ElectronTau_data_chain_locations.write("../../Root-Files/ElectronTau" + higgs + "/" + name + "_Histograms.root\n")
+			Muon_data_chain_locations.write("../../Root-Files/Muon" + higgs + "/" + name + "_Histograms.root\n")
+			MuonTau_data_chain_locations.write("../../Root-Files/MuonTau" + higgs + "/" + name + "_Histograms.root\n")
 
 		chain_functions.write("\tNOMINAL->Add(\"" + line[0:len(line)-1]  + "\");\n")
 		data_loop_counter += 1
