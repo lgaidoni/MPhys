@@ -26,31 +26,55 @@ void Draw_All_Stacked_Processes(string higgs_suffix) {
 	DrawStackedProcesses("MuonTau", higgs_suffix);
 
 }
-/*
+
 void All_Draw_Weighted_Histo_And_Ratio() {
 
-	Draw_Weighted_Histo_And_Ratio("Electron", "jet_0_jet_1_mass_CONTROL", "Zee", -0.000240084, 0.996438, 50, false);
-	Draw_Weighted_Histo_And_Ratio("Electron", "jet_0_jet_1_mass_CONTROL", "Zee", -0.000240084, 0.996438, 50, true);
-	Draw_Weighted_Histo_And_Ratio("Electron", "jet_0_jet_1_mass", "Zee", -0.000240084, 0.996438, 50, false);
-	Draw_Weighted_Histo_And_Ratio("Electron", "jet_0_jet_1_mass", "Zee", -0.000240084, 0.996438, 50, true);
+	Draw_Weighted_Histo_And_Ratio("Electron", "", "jet_0_jet_1_mass_CONTROL", "Zee", -0.000240084, 0.996438, 50, false);
+	Draw_Weighted_Histo_And_Ratio("Electron", "", "jet_0_jet_1_mass_CONTROL", "Zee", -0.000240084, 0.996438, 50, true);
+	Draw_Weighted_Histo_And_Ratio("Electron", "", "jet_0_jet_1_mass", "Zee", -0.000240084, 0.996438, 50, false);
+	Draw_Weighted_Histo_And_Ratio("Electron", "", "jet_0_jet_1_mass", "Zee", -0.000240084, 0.996438, 50, true);
 
-	Draw_Weighted_Histo_And_Ratio("Muon", "jet_0_jet_1_mass_CONTROL", "Zmumu", -0.000279242, 1.01748, 50, false);
-	Draw_Weighted_Histo_And_Ratio("Muon", "jet_0_jet_1_mass_CONTROL", "Zmumu", -0.000279242, 1.01748, 50, true);
-	Draw_Weighted_Histo_And_Ratio("Muon", "jet_0_jet_1_mass", "Zmumu", -0.000279242, 1.01748, 50, false);
-	Draw_Weighted_Histo_And_Ratio("Muon", "jet_0_jet_1_mass", "Zmumu", -0.000279242, 1.01748, 50, true);
+	Draw_Weighted_Histo_And_Ratio("Muon", "", "jet_0_jet_1_mass_CONTROL", "Zmumu", -0.000279242, 1.01748, 50, false);
+	Draw_Weighted_Histo_And_Ratio("Muon", "", "jet_0_jet_1_mass_CONTROL", "Zmumu", -0.000279242, 1.01748, 50, true);
+	Draw_Weighted_Histo_And_Ratio("Muon", "", "jet_0_jet_1_mass", "Zmumu", -0.000279242, 1.01748, 50, false);
+	Draw_Weighted_Histo_And_Ratio("Muon", "", "jet_0_jet_1_mass", "Zmumu", -0.000279242, 1.01748, 50, true);
 
 }
 
 void All_Cross_Section_Calculation_QCD_EW_ll_Specific() {
 
-	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "jet_0_jet_1_mass", "Zee", "Zee2jets", -0.000240084, 0.996438, 50, false, "308092");
-	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "jet_0_jet_1_mass", "Zee", "Zee2jets", -0.000240084, 0.996438, 50, true, "308092");
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "", "jet_0_jet_1_mass", "Zee", "Zee2jets", -0.000240084, 0.996438, 50, false, "308092");
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "", "jet_0_jet_1_mass", "Zee", "Zee2jets", -0.000240084, 0.996438, 50, true, "308092");
 
-	Cross_Section_Calculation_QCD_EW_ll_Specific("Muon", "jet_0_jet_1_mass", "Zmumu", "Zmm2jets", -0.000279242, 1.01748, 50, false, "308093");
-	Cross_Section_Calculation_QCD_EW_ll_Specific("Muon", "jet_0_jet_1_mass", "Zmumu", "Zmm2jets", -0.000279242, 1.01748, 50, true, "308093");
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Muon", "", "jet_0_jet_1_mass", "Zmumu", "Zmm2jets", -0.000279242, 1.01748, 50, false, "308093");
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Muon", "", "jet_0_jet_1_mass", "Zmumu", "Zmm2jets", -0.000279242, 1.01748, 50, true, "308093");
 
 }
-*/
+
+void All_Draw_Weighted_Histo_And_Ratio_HIGGS() {
+
+	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zee", 0, 1, 50, false);
+	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zee", 0, 1, 50, true);
+	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", 0, 1, 50, false);
+	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", 0, 1, 50, true);
+
+	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zmumu", 0, 1, 50, false);
+	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zmumu", 0, 1, 50, true);
+	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass", "Zmumu", 0, 1, 50, false);
+	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass", "Zmumu", 0, 1, 50, true);
+
+}
+
+void All_Cross_Section_Calculation_QCD_EW_ll_Specific_HIGGS() {
+
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", "Zee2jets", 0, 1, 50, false, "308092");
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", "Zee2jets", 0, 1, 50, true, "308092");
+
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Muon", "_Higgs", "jet_0_jet_1_mass", "Zmumu", "Zmm2jets", 0, 1, 50, false, "308093");
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Muon", "_Higgs", "jet_0_jet_1_mass", "Zmumu", "Zmm2jets", 0, 1, 50, true, "308093");
+
+}
+
 void AllSignificanceCalc(string AnalysisType, string higgs_suffix) {
 
 	int selected_process;
@@ -91,6 +115,33 @@ void AllSignificanceCalc(string AnalysisType, string higgs_suffix) {
 }
 
 
+void Generate_All_TXT_Files() {
+
+	//NumberEventsCalc("Electron", "_Higgs");
+	//NumberEventsCalc("MuonTau", "_Higgs");
+	//NumberEventsCalc("Muon", "_Higgs");
+
+	//NumberEventsCalc("Electron", "");
+	//NumberEventsCalc("ElectronTau", "");
+	//NumberEventsCalc("MuonTau", "");
+	//NumberEventsCalc("Muon", "");
+
+	//AllSignificanceCalc("Electron", "_Higgs");
+	//AllSignificanceCalc("MuonTau", "_Higgs");
+	//AllSignificanceCalc("Muon", "_Higgs");
+
+	//AllSignificanceCalc("Electron", "");
+	//AllSignificanceCalc("ElectronTau", "");
+	//AllSignificanceCalc("MuonTau", "");
+	//AllSignificanceCalc("Muon", "");
+
+	All_Draw_Weighted_Histo_And_Ratio_HIGGS();
+	All_Draw_Weighted_Histo_And_Ratio();
+
+	All_Cross_Section_Calculation_QCD_EW_ll_Specific_HIGGS();
+	All_Cross_Section_Calculation_QCD_EW_ll_Specific();
+
+}
 
 
 #endif

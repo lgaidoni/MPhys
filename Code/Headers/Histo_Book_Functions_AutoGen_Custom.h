@@ -1667,162 +1667,130 @@ void MC_Analysis::Book_lep_1_invis_energy(int bins, double min, double max) {
 }
 
 
-// --  Boosted decision stuff for mis identified electrons as taus (test run)
-void MC_Analysis::Book_BDT_test(int bins, double min, double max) {
-	h_BDT_test = new TH1F("h_BDT_test", "", bins, min, max);
-	h_BDT_test_PRE = new TH1F("h_BDT_test_PRE", "", bins, min, max);
-	h_BDT_test_CONTROL = new TH1F("h_BDT_test_CONTROL", "", bins, min, max);
-	h_BDT_test_EXCEPT = new TH1F("h_BDT_test_EXCEPT", "", bins, min, max);
-	h_BDT_test_EXCEPT_FINE = new TH1F("h_BDT_test_EXCEPT_FINE", "", 1000, min, max);
-	h_BDT_test_BJET = new TH1F("h_BDT_test_BJET", "", bins, min, max);
-	h_BDT_test_HIGH_E = new TH1F("h_BDT_test_HIGH_E", "", bins, min, max);
-	h_BDT_test_TRUTH = new TH1F("h_BDT_test_TRUTH", "", bins, min, max);
+// --  misidentified electron run2 tag (trans)
+void MC_Analysis::Book_tau_0_ele_BDT_SCORE_TRANS(int bins, double min, double max) {
+	h_tau_0_ele_BDT_SCORE_TRANS = new TH1F("h_tau_0_ele_BDT_SCORE_TRANS", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_TRANS_PRE = new TH1F("h_tau_0_ele_BDT_SCORE_TRANS_PRE", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_TRANS_CONTROL = new TH1F("h_tau_0_ele_BDT_SCORE_TRANS_CONTROL", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_TRANS_EXCEPT = new TH1F("h_tau_0_ele_BDT_SCORE_TRANS_EXCEPT", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_TRANS_EXCEPT_FINE = new TH1F("h_tau_0_ele_BDT_SCORE_TRANS_EXCEPT_FINE", "", 1000, min, max);
+	h_tau_0_ele_BDT_SCORE_TRANS_BJET = new TH1F("h_tau_0_ele_BDT_SCORE_TRANS_BJET", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_TRANS_HIGH_E = new TH1F("h_tau_0_ele_BDT_SCORE_TRANS_HIGH_E", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_TRANS_TRUTH = new TH1F("h_tau_0_ele_BDT_SCORE_TRANS_TRUTH", "", bins, min, max);
 
-	hv_BDT_test.push_back(h_BDT_test);
-	hv_BDT_test.push_back(h_BDT_test_CONTROL);
-	hv_BDT_test.push_back(h_BDT_test_EXCEPT);
-	hv_BDT_test.push_back(h_BDT_test_EXCEPT_FINE);
-	hv_BDT_test.push_back(h_BDT_test_PRE);
-	hv_BDT_test.push_back(h_BDT_test_BJET);
-	hv_BDT_test.push_back(h_BDT_test_HIGH_E);
-	hv_BDT_test.push_back(h_BDT_test_TRUTH);
+	hv_tau_0_ele_BDT_SCORE_TRANS.push_back(h_tau_0_ele_BDT_SCORE_TRANS);
+	hv_tau_0_ele_BDT_SCORE_TRANS.push_back(h_tau_0_ele_BDT_SCORE_TRANS_CONTROL);
+	hv_tau_0_ele_BDT_SCORE_TRANS.push_back(h_tau_0_ele_BDT_SCORE_TRANS_EXCEPT);
+	hv_tau_0_ele_BDT_SCORE_TRANS.push_back(h_tau_0_ele_BDT_SCORE_TRANS_EXCEPT_FINE);
+	hv_tau_0_ele_BDT_SCORE_TRANS.push_back(h_tau_0_ele_BDT_SCORE_TRANS_PRE);
+	hv_tau_0_ele_BDT_SCORE_TRANS.push_back(h_tau_0_ele_BDT_SCORE_TRANS_BJET);
+	hv_tau_0_ele_BDT_SCORE_TRANS.push_back(h_tau_0_ele_BDT_SCORE_TRANS_HIGH_E);
+	hv_tau_0_ele_BDT_SCORE_TRANS.push_back(h_tau_0_ele_BDT_SCORE_TRANS_TRUTH);
 
-	hv_BDT_test_names.push_back("h_BDT_test");
-	hv_BDT_test_names.push_back("h_BDT_test_CONTROL");
-	hv_BDT_test_names.push_back("h_BDT_test_EXCEPT");
-	hv_BDT_test_names.push_back("h_BDT_test_EXCEPT_FINE");
-	hv_BDT_test_names.push_back("h_BDT_test_PRE");
-	hv_BDT_test_names.push_back("h_BDT_test_BJET");
-	hv_BDT_test_names.push_back("h_BDT_test_HIGH_E");
-	hv_BDT_test_names.push_back("h_BDT_test_TRUTH");
-
-}
-
-
-// --  Boosted decision stuff for mis identified electrons as taus (test run)
-void MC_Analysis::Book_BDT_test1(int bins, double min, double max) {
-	h_BDT_test1 = new TH1F("h_BDT_test1", "", bins, min, max);
-	h_BDT_test1_PRE = new TH1F("h_BDT_test1_PRE", "", bins, min, max);
-	h_BDT_test1_CONTROL = new TH1F("h_BDT_test1_CONTROL", "", bins, min, max);
-	h_BDT_test1_EXCEPT = new TH1F("h_BDT_test1_EXCEPT", "", bins, min, max);
-	h_BDT_test1_EXCEPT_FINE = new TH1F("h_BDT_test1_EXCEPT_FINE", "", 1000, min, max);
-	h_BDT_test1_BJET = new TH1F("h_BDT_test1_BJET", "", bins, min, max);
-	h_BDT_test1_HIGH_E = new TH1F("h_BDT_test1_HIGH_E", "", bins, min, max);
-	h_BDT_test1_TRUTH = new TH1F("h_BDT_test1_TRUTH", "", bins, min, max);
-
-	hv_BDT_test1.push_back(h_BDT_test1);
-	hv_BDT_test1.push_back(h_BDT_test1_CONTROL);
-	hv_BDT_test1.push_back(h_BDT_test1_EXCEPT);
-	hv_BDT_test1.push_back(h_BDT_test1_EXCEPT_FINE);
-	hv_BDT_test1.push_back(h_BDT_test1_PRE);
-	hv_BDT_test1.push_back(h_BDT_test1_BJET);
-	hv_BDT_test1.push_back(h_BDT_test1_HIGH_E);
-	hv_BDT_test1.push_back(h_BDT_test1_TRUTH);
-
-	hv_BDT_test1_names.push_back("h_BDT_test1");
-	hv_BDT_test1_names.push_back("h_BDT_test1_CONTROL");
-	hv_BDT_test1_names.push_back("h_BDT_test1_EXCEPT");
-	hv_BDT_test1_names.push_back("h_BDT_test1_EXCEPT_FINE");
-	hv_BDT_test1_names.push_back("h_BDT_test1_PRE");
-	hv_BDT_test1_names.push_back("h_BDT_test1_BJET");
-	hv_BDT_test1_names.push_back("h_BDT_test1_HIGH_E");
-	hv_BDT_test1_names.push_back("h_BDT_test1_TRUTH");
+	hv_tau_0_ele_BDT_SCORE_TRANS_names.push_back("h_tau_0_ele_BDT_SCORE_TRANS");
+	hv_tau_0_ele_BDT_SCORE_TRANS_names.push_back("h_tau_0_ele_BDT_SCORE_TRANS_CONTROL");
+	hv_tau_0_ele_BDT_SCORE_TRANS_names.push_back("h_tau_0_ele_BDT_SCORE_TRANS_EXCEPT");
+	hv_tau_0_ele_BDT_SCORE_TRANS_names.push_back("h_tau_0_ele_BDT_SCORE_TRANS_EXCEPT_FINE");
+	hv_tau_0_ele_BDT_SCORE_TRANS_names.push_back("h_tau_0_ele_BDT_SCORE_TRANS_PRE");
+	hv_tau_0_ele_BDT_SCORE_TRANS_names.push_back("h_tau_0_ele_BDT_SCORE_TRANS_BJET");
+	hv_tau_0_ele_BDT_SCORE_TRANS_names.push_back("h_tau_0_ele_BDT_SCORE_TRANS_HIGH_E");
+	hv_tau_0_ele_BDT_SCORE_TRANS_names.push_back("h_tau_0_ele_BDT_SCORE_TRANS_TRUTH");
 
 }
 
 
-// --  Boosted decision stuff for mis identified electrons as taus (test run)
-void MC_Analysis::Book_BDT_test2(int bins, double min, double max) {
-	h_BDT_test2 = new TH1F("h_BDT_test2", "", bins, min, max);
-	h_BDT_test2_PRE = new TH1F("h_BDT_test2_PRE", "", bins, min, max);
-	h_BDT_test2_CONTROL = new TH1F("h_BDT_test2_CONTROL", "", bins, min, max);
-	h_BDT_test2_EXCEPT = new TH1F("h_BDT_test2_EXCEPT", "", bins, min, max);
-	h_BDT_test2_EXCEPT_FINE = new TH1F("h_BDT_test2_EXCEPT_FINE", "", 1000, min, max);
-	h_BDT_test2_BJET = new TH1F("h_BDT_test2_BJET", "", bins, min, max);
-	h_BDT_test2_HIGH_E = new TH1F("h_BDT_test2_HIGH_E", "", bins, min, max);
-	h_BDT_test2_TRUTH = new TH1F("h_BDT_test2_TRUTH", "", bins, min, max);
+// --  misidentified electron tag
+void MC_Analysis::Book_tau_0_ele_BDT_SCORE(int bins, double min, double max) {
+	h_tau_0_ele_BDT_SCORE = new TH1F("h_tau_0_ele_BDT_SCORE", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_PRE = new TH1F("h_tau_0_ele_BDT_SCORE_PRE", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_CONTROL = new TH1F("h_tau_0_ele_BDT_SCORE_CONTROL", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_EXCEPT = new TH1F("h_tau_0_ele_BDT_SCORE_EXCEPT", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_EXCEPT_FINE = new TH1F("h_tau_0_ele_BDT_SCORE_EXCEPT_FINE", "", 1000, min, max);
+	h_tau_0_ele_BDT_SCORE_BJET = new TH1F("h_tau_0_ele_BDT_SCORE_BJET", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_HIGH_E = new TH1F("h_tau_0_ele_BDT_SCORE_HIGH_E", "", bins, min, max);
+	h_tau_0_ele_BDT_SCORE_TRUTH = new TH1F("h_tau_0_ele_BDT_SCORE_TRUTH", "", bins, min, max);
 
-	hv_BDT_test2.push_back(h_BDT_test2);
-	hv_BDT_test2.push_back(h_BDT_test2_CONTROL);
-	hv_BDT_test2.push_back(h_BDT_test2_EXCEPT);
-	hv_BDT_test2.push_back(h_BDT_test2_EXCEPT_FINE);
-	hv_BDT_test2.push_back(h_BDT_test2_PRE);
-	hv_BDT_test2.push_back(h_BDT_test2_BJET);
-	hv_BDT_test2.push_back(h_BDT_test2_HIGH_E);
-	hv_BDT_test2.push_back(h_BDT_test2_TRUTH);
+	hv_tau_0_ele_BDT_SCORE.push_back(h_tau_0_ele_BDT_SCORE);
+	hv_tau_0_ele_BDT_SCORE.push_back(h_tau_0_ele_BDT_SCORE_CONTROL);
+	hv_tau_0_ele_BDT_SCORE.push_back(h_tau_0_ele_BDT_SCORE_EXCEPT);
+	hv_tau_0_ele_BDT_SCORE.push_back(h_tau_0_ele_BDT_SCORE_EXCEPT_FINE);
+	hv_tau_0_ele_BDT_SCORE.push_back(h_tau_0_ele_BDT_SCORE_PRE);
+	hv_tau_0_ele_BDT_SCORE.push_back(h_tau_0_ele_BDT_SCORE_BJET);
+	hv_tau_0_ele_BDT_SCORE.push_back(h_tau_0_ele_BDT_SCORE_HIGH_E);
+	hv_tau_0_ele_BDT_SCORE.push_back(h_tau_0_ele_BDT_SCORE_TRUTH);
 
-	hv_BDT_test2_names.push_back("h_BDT_test2");
-	hv_BDT_test2_names.push_back("h_BDT_test2_CONTROL");
-	hv_BDT_test2_names.push_back("h_BDT_test2_EXCEPT");
-	hv_BDT_test2_names.push_back("h_BDT_test2_EXCEPT_FINE");
-	hv_BDT_test2_names.push_back("h_BDT_test2_PRE");
-	hv_BDT_test2_names.push_back("h_BDT_test2_BJET");
-	hv_BDT_test2_names.push_back("h_BDT_test2_HIGH_E");
-	hv_BDT_test2_names.push_back("h_BDT_test2_TRUTH");
-
-}
-
-
-// --  Boosted decision stuff for mis identified electrons as taus (test run)
-void MC_Analysis::Book_BDT_test3(int bins, double min, double max) {
-	h_BDT_test3 = new TH1F("h_BDT_test3", "", bins, min, max);
-	h_BDT_test3_PRE = new TH1F("h_BDT_test3_PRE", "", bins, min, max);
-	h_BDT_test3_CONTROL = new TH1F("h_BDT_test3_CONTROL", "", bins, min, max);
-	h_BDT_test3_EXCEPT = new TH1F("h_BDT_test3_EXCEPT", "", bins, min, max);
-	h_BDT_test3_EXCEPT_FINE = new TH1F("h_BDT_test3_EXCEPT_FINE", "", 1000, min, max);
-	h_BDT_test3_BJET = new TH1F("h_BDT_test3_BJET", "", bins, min, max);
-	h_BDT_test3_HIGH_E = new TH1F("h_BDT_test3_HIGH_E", "", bins, min, max);
-	h_BDT_test3_TRUTH = new TH1F("h_BDT_test3_TRUTH", "", bins, min, max);
-
-	hv_BDT_test3.push_back(h_BDT_test3);
-	hv_BDT_test3.push_back(h_BDT_test3_CONTROL);
-	hv_BDT_test3.push_back(h_BDT_test3_EXCEPT);
-	hv_BDT_test3.push_back(h_BDT_test3_EXCEPT_FINE);
-	hv_BDT_test3.push_back(h_BDT_test3_PRE);
-	hv_BDT_test3.push_back(h_BDT_test3_BJET);
-	hv_BDT_test3.push_back(h_BDT_test3_HIGH_E);
-	hv_BDT_test3.push_back(h_BDT_test3_TRUTH);
-
-	hv_BDT_test3_names.push_back("h_BDT_test3");
-	hv_BDT_test3_names.push_back("h_BDT_test3_CONTROL");
-	hv_BDT_test3_names.push_back("h_BDT_test3_EXCEPT");
-	hv_BDT_test3_names.push_back("h_BDT_test3_EXCEPT_FINE");
-	hv_BDT_test3_names.push_back("h_BDT_test3_PRE");
-	hv_BDT_test3_names.push_back("h_BDT_test3_BJET");
-	hv_BDT_test3_names.push_back("h_BDT_test3_HIGH_E");
-	hv_BDT_test3_names.push_back("h_BDT_test3_TRUTH");
+	hv_tau_0_ele_BDT_SCORE_names.push_back("h_tau_0_ele_BDT_SCORE");
+	hv_tau_0_ele_BDT_SCORE_names.push_back("h_tau_0_ele_BDT_SCORE_CONTROL");
+	hv_tau_0_ele_BDT_SCORE_names.push_back("h_tau_0_ele_BDT_SCORE_EXCEPT");
+	hv_tau_0_ele_BDT_SCORE_names.push_back("h_tau_0_ele_BDT_SCORE_EXCEPT_FINE");
+	hv_tau_0_ele_BDT_SCORE_names.push_back("h_tau_0_ele_BDT_SCORE_PRE");
+	hv_tau_0_ele_BDT_SCORE_names.push_back("h_tau_0_ele_BDT_SCORE_BJET");
+	hv_tau_0_ele_BDT_SCORE_names.push_back("h_tau_0_ele_BDT_SCORE_HIGH_E");
+	hv_tau_0_ele_BDT_SCORE_names.push_back("h_tau_0_ele_BDT_SCORE_TRUTH");
 
 }
 
 
-// --  Boosted decision stuff for mis identified electrons as taus (test run)
-void MC_Analysis::Book_BDT_test4(int bins, double min, double max) {
-	h_BDT_test4 = new TH1F("h_BDT_test4", "", bins, min, max);
-	h_BDT_test4_PRE = new TH1F("h_BDT_test4_PRE", "", bins, min, max);
-	h_BDT_test4_CONTROL = new TH1F("h_BDT_test4_CONTROL", "", bins, min, max);
-	h_BDT_test4_EXCEPT = new TH1F("h_BDT_test4_EXCEPT", "", bins, min, max);
-	h_BDT_test4_EXCEPT_FINE = new TH1F("h_BDT_test4_EXCEPT_FINE", "", 1000, min, max);
-	h_BDT_test4_BJET = new TH1F("h_BDT_test4_BJET", "", bins, min, max);
-	h_BDT_test4_HIGH_E = new TH1F("h_BDT_test4_HIGH_E", "", bins, min, max);
-	h_BDT_test4_TRUTH = new TH1F("h_BDT_test4_TRUTH", "", bins, min, max);
+// --  misidentified jet tag
+void MC_Analysis::Book_tau_0_jet_BDT_SCORE(int bins, double min, double max) {
+	h_tau_0_jet_BDT_SCORE = new TH1F("h_tau_0_jet_BDT_SCORE", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_PRE = new TH1F("h_tau_0_jet_BDT_SCORE_PRE", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_CONTROL = new TH1F("h_tau_0_jet_BDT_SCORE_CONTROL", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_EXCEPT = new TH1F("h_tau_0_jet_BDT_SCORE_EXCEPT", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_EXCEPT_FINE = new TH1F("h_tau_0_jet_BDT_SCORE_EXCEPT_FINE", "", 1000, min, max);
+	h_tau_0_jet_BDT_SCORE_BJET = new TH1F("h_tau_0_jet_BDT_SCORE_BJET", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_HIGH_E = new TH1F("h_tau_0_jet_BDT_SCORE_HIGH_E", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_TRUTH = new TH1F("h_tau_0_jet_BDT_SCORE_TRUTH", "", bins, min, max);
 
-	hv_BDT_test4.push_back(h_BDT_test4);
-	hv_BDT_test4.push_back(h_BDT_test4_CONTROL);
-	hv_BDT_test4.push_back(h_BDT_test4_EXCEPT);
-	hv_BDT_test4.push_back(h_BDT_test4_EXCEPT_FINE);
-	hv_BDT_test4.push_back(h_BDT_test4_PRE);
-	hv_BDT_test4.push_back(h_BDT_test4_BJET);
-	hv_BDT_test4.push_back(h_BDT_test4_HIGH_E);
-	hv_BDT_test4.push_back(h_BDT_test4_TRUTH);
+	hv_tau_0_jet_BDT_SCORE.push_back(h_tau_0_jet_BDT_SCORE);
+	hv_tau_0_jet_BDT_SCORE.push_back(h_tau_0_jet_BDT_SCORE_CONTROL);
+	hv_tau_0_jet_BDT_SCORE.push_back(h_tau_0_jet_BDT_SCORE_EXCEPT);
+	hv_tau_0_jet_BDT_SCORE.push_back(h_tau_0_jet_BDT_SCORE_EXCEPT_FINE);
+	hv_tau_0_jet_BDT_SCORE.push_back(h_tau_0_jet_BDT_SCORE_PRE);
+	hv_tau_0_jet_BDT_SCORE.push_back(h_tau_0_jet_BDT_SCORE_BJET);
+	hv_tau_0_jet_BDT_SCORE.push_back(h_tau_0_jet_BDT_SCORE_HIGH_E);
+	hv_tau_0_jet_BDT_SCORE.push_back(h_tau_0_jet_BDT_SCORE_TRUTH);
 
-	hv_BDT_test4_names.push_back("h_BDT_test4");
-	hv_BDT_test4_names.push_back("h_BDT_test4_CONTROL");
-	hv_BDT_test4_names.push_back("h_BDT_test4_EXCEPT");
-	hv_BDT_test4_names.push_back("h_BDT_test4_EXCEPT_FINE");
-	hv_BDT_test4_names.push_back("h_BDT_test4_PRE");
-	hv_BDT_test4_names.push_back("h_BDT_test4_BJET");
-	hv_BDT_test4_names.push_back("h_BDT_test4_HIGH_E");
-	hv_BDT_test4_names.push_back("h_BDT_test4_TRUTH");
+	hv_tau_0_jet_BDT_SCORE_names.push_back("h_tau_0_jet_BDT_SCORE");
+	hv_tau_0_jet_BDT_SCORE_names.push_back("h_tau_0_jet_BDT_SCORE_CONTROL");
+	hv_tau_0_jet_BDT_SCORE_names.push_back("h_tau_0_jet_BDT_SCORE_EXCEPT");
+	hv_tau_0_jet_BDT_SCORE_names.push_back("h_tau_0_jet_BDT_SCORE_EXCEPT_FINE");
+	hv_tau_0_jet_BDT_SCORE_names.push_back("h_tau_0_jet_BDT_SCORE_PRE");
+	hv_tau_0_jet_BDT_SCORE_names.push_back("h_tau_0_jet_BDT_SCORE_BJET");
+	hv_tau_0_jet_BDT_SCORE_names.push_back("h_tau_0_jet_BDT_SCORE_HIGH_E");
+	hv_tau_0_jet_BDT_SCORE_names.push_back("h_tau_0_jet_BDT_SCORE_TRUTH");
+
+}
+
+
+// --  misidentified jet tag (trans)
+void MC_Analysis::Book_tau_0_jet_BDT_SCORE_TRANS(int bins, double min, double max) {
+	h_tau_0_jet_BDT_SCORE_TRANS = new TH1F("h_tau_0_jet_BDT_SCORE_TRANS", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_TRANS_PRE = new TH1F("h_tau_0_jet_BDT_SCORE_TRANS_PRE", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_TRANS_CONTROL = new TH1F("h_tau_0_jet_BDT_SCORE_TRANS_CONTROL", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT = new TH1F("h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT_FINE = new TH1F("h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT_FINE", "", 1000, min, max);
+	h_tau_0_jet_BDT_SCORE_TRANS_BJET = new TH1F("h_tau_0_jet_BDT_SCORE_TRANS_BJET", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_TRANS_HIGH_E = new TH1F("h_tau_0_jet_BDT_SCORE_TRANS_HIGH_E", "", bins, min, max);
+	h_tau_0_jet_BDT_SCORE_TRANS_TRUTH = new TH1F("h_tau_0_jet_BDT_SCORE_TRANS_TRUTH", "", bins, min, max);
+
+	hv_tau_0_jet_BDT_SCORE_TRANS.push_back(h_tau_0_jet_BDT_SCORE_TRANS);
+	hv_tau_0_jet_BDT_SCORE_TRANS.push_back(h_tau_0_jet_BDT_SCORE_TRANS_CONTROL);
+	hv_tau_0_jet_BDT_SCORE_TRANS.push_back(h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT);
+	hv_tau_0_jet_BDT_SCORE_TRANS.push_back(h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT_FINE);
+	hv_tau_0_jet_BDT_SCORE_TRANS.push_back(h_tau_0_jet_BDT_SCORE_TRANS_PRE);
+	hv_tau_0_jet_BDT_SCORE_TRANS.push_back(h_tau_0_jet_BDT_SCORE_TRANS_BJET);
+	hv_tau_0_jet_BDT_SCORE_TRANS.push_back(h_tau_0_jet_BDT_SCORE_TRANS_HIGH_E);
+	hv_tau_0_jet_BDT_SCORE_TRANS.push_back(h_tau_0_jet_BDT_SCORE_TRANS_TRUTH);
+
+	hv_tau_0_jet_BDT_SCORE_TRANS_names.push_back("h_tau_0_jet_BDT_SCORE_TRANS");
+	hv_tau_0_jet_BDT_SCORE_TRANS_names.push_back("h_tau_0_jet_BDT_SCORE_TRANS_CONTROL");
+	hv_tau_0_jet_BDT_SCORE_TRANS_names.push_back("h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT");
+	hv_tau_0_jet_BDT_SCORE_TRANS_names.push_back("h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT_FINE");
+	hv_tau_0_jet_BDT_SCORE_TRANS_names.push_back("h_tau_0_jet_BDT_SCORE_TRANS_PRE");
+	hv_tau_0_jet_BDT_SCORE_TRANS_names.push_back("h_tau_0_jet_BDT_SCORE_TRANS_BJET");
+	hv_tau_0_jet_BDT_SCORE_TRANS_names.push_back("h_tau_0_jet_BDT_SCORE_TRANS_HIGH_E");
+	hv_tau_0_jet_BDT_SCORE_TRANS_names.push_back("h_tau_0_jet_BDT_SCORE_TRANS_TRUTH");
 
 }
 
