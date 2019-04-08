@@ -1598,7 +1598,7 @@ void MC_Analysis::DrawHistos(string higgs_suffix) {
   	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
   	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D, "h_Mass_DeltaPhi_Combination_2D", ";Delta Phi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D, "h_Mass_DeltaPhi_Combination_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
   	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D, "h_Mass_DeltaPhi_Combination_INSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
   	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
