@@ -110,9 +110,10 @@ def gui(window):
 			counter = 0
 
 			HiggsAddition = ""
-			TrueAnalysisType = AnalysisType[0:AnalysisType.find("_")]
+			TrueAnalysisType = AnalysisType
 
 			if (HiggsMode == "true"):
+				TrueAnalysisType = AnalysisType[0:AnalysisType.find("_")]
 				HiggsAddition = "_Higgs"
 
 			chain_names = open("Chain_Names" + HiggsAddition + ".txt","r")
