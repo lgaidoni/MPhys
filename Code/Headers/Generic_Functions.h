@@ -1350,7 +1350,7 @@ void Process_Combiner_36(string AnalysisType, string higgs_suffix, string Proces
 	while(!file.eof()) {  //While not at the end of the file
 		getline(file, line);  //Get the file line
 		if (line != "") {  //If not looking at the last line
-			if (line.find("r9364") != string::npos){
+			if (line.find("r10201") == string::npos){
 				files.push_back(new TFile(line.c_str()));  //Add the file to the vector
 				names.push_back(line);
 			}
@@ -2455,6 +2455,32 @@ void CombineAllProcesses_AnalysisType(string AnalysisType, string higgs_suffix) 
 	}
 
 }
+
+//Combine all the different chains belonging to each different process
+void CombineAllProcesses_AnalysisType_36(string AnalysisType, string higgs_suffix) {
+
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Zee");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Zee2jets");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Zmumu");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Zmm2jets");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Ztt");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Ztt2jets");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "ZqqZll");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "ttb");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Wenu");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Wmunu");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "Wtaunu");
+	Process_Combiner_36(AnalysisType, higgs_suffix, "DATA");
+
+	if(higgs_suffix == "_Higgs") {
+		Process_Combiner_36(AnalysisType, higgs_suffix, "llll");
+		Process_Combiner_36(AnalysisType, higgs_suffix, "lllv");
+		Process_Combiner_36(AnalysisType, higgs_suffix, "llvv");
+		Process_Combiner_36(AnalysisType, higgs_suffix, "lvvv");
+	}
+
+}
+
 
 /////////////////////////////// VARIABLES /////////////////////////////// 
 /////////////////////////////// VARIABLES /////////////////////////////// 

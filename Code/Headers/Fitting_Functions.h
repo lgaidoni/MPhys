@@ -170,6 +170,7 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 						double bin_centre = binwidth * j;
 						double bin_content = histogram->GetBinContent(j);
 						double fit_y = m * bin_centre + c;
+						cout << "fit_y = " << fit_y << "   :   bin_centre = " << bin_centre << endl;
 						/*
 						cout << "Bin centre: " << bin_centre << " ";
 						cout << "Bin content: " << bin_content << " ";
@@ -653,17 +654,19 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string hi
 
 	histograms[SelectedProcess1] = Weight_Process_Histogram(histograms, SelectedProcess1, m, c, bins, higgs_suffix);
 
-	TH1F *data = (TH1F*)histograms[11]->Clone();
+	TH1F *TwoProcessSubtractedDataHistogram = Two_Process_Data_Subtraction(histograms, SelectedProcess1, SelectedProcess2, higgs_suffix);
+
+	TH1F *data = (TH1F*)TwoProcessSubtractedDataHistogram->Clone();
 	TH1F *h1 = (TH1F*)histograms[SelectedProcess1]->Clone();
 	TH1F *h2 = (TH1F*)histograms[SelectedProcess2]->Clone();
 
 	RooRealVar x("x", "x", 250., 3000.);  
 
 	RooDataHist roofit_h1("roofit_h1", "roofit_h1", x, h1);   
-	RooRealVar c1("c1", "c1", 0., 10000000.); 
+	RooRealVar c1("c1", "c1", 0., 500000.); 
 
 	RooDataHist roofit_h2("roofit_h2", "roofit_h2", x, h2);   
-	RooRealVar c2("c2", "c2", 0., 10000000.); 
+	RooRealVar c2("c2", "c2", 0., 500000.); 
 
 	RooHistPdf pdf_roofit_h1("pdf_roofit_h1", "pdf_roofit_h1", x, roofit_h1);   
 	RooHistPdf pdf_roofit_h2("pdf_roofit_h2", "pdf_roofit_h2", x, roofit_h2); 
@@ -736,8 +739,6 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string hi
 	histogramStack->GetXaxis()->SetTitleOffset(1.2);
 
 	Histogram_Namer(histogramStack, DataType);
-
-	TH1F *TwoProcessSubtractedDataHistogram = Two_Process_Data_Subtraction(histograms, SelectedProcess1, SelectedProcess2, higgs_suffix);
 
 	TwoProcessSubtractedDataHistogram->Draw("SAME");
 
