@@ -411,6 +411,42 @@ vector<TFile*> Root_Files(string AnalysisType, string higgs_suffix) {
 
 }
 
+vector<TFile*> Root_Files_36(string AnalysisType, string higgs_suffix) {
+
+	//Variable creation
+	vector<string> names;
+	vector<TFile*> files;
+
+	//Create the file names for the stack of processes and push them into the names vector
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/ttb_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Wtaunu_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Wmunu_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Wenu_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/ZqqZll_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Ztt2jets_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zmm2jets_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zee2jets_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Ztt_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zmumu_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/Zee_Histograms_36.root");
+	names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/DATA_Histograms_36.root");
+
+	if(higgs_suffix == "_Higgs") {
+		names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/llll_Histograms_36.root");
+		names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/lllv_Histograms_36.root");
+		names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/llvv_Histograms_36.root");
+		names.push_back("../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/lvvv_Histograms_36.root");
+	}
+
+	//Load in all the files for the different processes, there are 12 into the files vector
+	for (auto name = names.begin(); name < names.end(); name++) {
+		files.push_back(new TFile(name->c_str()));
+	}
+
+	return files;
+
+}
+
 //This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
 vector<TH1F*> Histogram_Return_Given_File(string DataType, vector<TFile*> root_files) {
 
@@ -1283,6 +1319,113 @@ void Process_Combiner(string AnalysisType, string higgs_suffix, string Process) 
 
 }
 
+//This function will combine processes and write them out to a new .root file
+void Process_Combiner_36(string AnalysisType, string higgs_suffix, string Process) {
+
+	//Vector of files that can be looped over
+	vector<TFile*> files;
+	vector<string> names;
+
+	//String for the root file path
+	string ROOTFilePath = "../../Root-Files/" + AnalysisType + higgs_suffix + "/Processes/" + Process + "_Histograms_36.root";
+
+	cout << "Writing To File " << ROOTFilePath << endl;
+
+	TFile *Histograms;
+
+	//Open/Create the root file
+	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
+	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
+	else cout << "HOW DID THIS HAPPEN TO ME" << endl;
+	
+	//Various strings
+	string ProcessFileName = "../../MPhys/Processes/" + AnalysisType + higgs_suffix + "/" + Process + "_Chains" + higgs_suffix + ".txt";
+	string line;
+
+	cout << "Process File Name = " << ProcessFileName << endl;
+
+	//Open the file
+	ifstream file (ProcessFileName);
+
+	while(!file.eof()) {  //While not at the end of the file
+		getline(file, line);  //Get the file line
+		if (line != "") {  //If not looking at the last line
+			if (line.find("r9364") != string::npos){
+				files.push_back(new TFile(line.c_str()));  //Add the file to the vector
+				names.push_back(line);
+			}
+		}
+	}
+
+	file.close();
+
+	//Open the list of Data Types
+	string DataTypeFileName = "../../MPhys/DataTypes/Common_DataTypes.txt";
+	ifstream DataTypeFile (DataTypeFileName);
+	
+	while(!DataTypeFile.eof()) {  		//While not at the end of the file
+		getline(DataTypeFile, line);  	//Get the file line
+		if (line != "") {  		//If not looking at the last line	
+			cout << "Combining " << line << endl;
+			if (line.find("2D") != string::npos) {
+				//Get the first histogram in the vector
+				string histogramName = "h_" + line + ";1";
+				TH2F *histogramMaster = (TH2F*)files[0]->Get(histogramName.c_str()); 
+
+				//For all the files in the vector not counting the first...
+				for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+
+					//Get the histogram
+					TH2F *histogram = (TH2F*)(*tfile)->Get(histogramName.c_str());
+
+					//Add it to the master histogram 
+					histogramMaster->Add(histogram);
+
+				}
+
+				//Draw the master histogram
+				Histograms->cd();
+				histogramMaster->Draw("HIST");
+				histogramMaster->Write();
+			}
+
+			else {
+				//Get the first histogram in the vector
+				string histogramName = "h_" + line + ";1";
+				TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
+
+				int counter = 1;			
+
+				//For all the files in the vector not counting the first...
+				for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+
+					//Get the histogram
+					TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
+
+					//Create the canvas
+					TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+					cout << names[counter] << endl;
+					histogram->Draw();
+					canvas->Close();
+					counter++;
+
+					//Add it to the master histogram 
+					histogramMaster->Add(histogram);
+
+				}
+
+				//Draw the master histogram
+				Histograms->cd();
+				histogramMaster->Draw("HIST");
+				histogramMaster->Write();
+			}
+		}
+	}
+	
+	Histograms->Close();
+
+}
+
 // Stacking histograms:
 // need to give it the analysis type and then for given, tells it the path
 void Process_Stacker(string AnalysisType, string higgs_suffix, string DataType, string DataTypeHistogram, vector<TFile*> root_files, bool logged, string mode) {
@@ -1382,6 +1525,7 @@ void Process_Stacker(string AnalysisType, string higgs_suffix, string DataType, 
 				if(DataType.find("jet_0_jet_1_mass") != string::npos) histogramStack->SetMinimum(1);
 			}
 			if(DataType.find("ljet_0_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
+			if(DataType.find("BDT") != string::npos) histogramStack->SetMinimum(0.1);
 			if(DataType.find("ljet_1_p4_Pt") != string::npos) histogramStack->SetMinimum(1);
 			if(DataType.find("met_reco_p4_Pt") != string::npos) histogramStack->SetMinimum(0.01);
 			if(DataType.find("lep_0_lep_1_mass_PRE") != string::npos) histogramStack->SetMinimum(50);
@@ -1835,7 +1979,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		ExceptStack->Draw("");
 		//SignalStack->Draw("same"); 
 
-		ExceptHistograms[11]->Draw("SAME");
+		if (mode == "") ExceptHistograms[11]->Draw("SAME");
 
 		canvas->SetRightMargin(0.15);
 
@@ -1850,13 +1994,12 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		double x3 = 0;
 		double x4 = 0;
 
-		if (DataType[i] == "Centrality"){ x1 = -2; x2 = 2; }
 		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; canvas->SetLogy(); 
 			double current_y_max = ExceptStack->GetMaximum();
 			ExceptStack->SetMaximum(current_y_max * 1.5);
 			ymax = current_y_max * 2.4;
 		}
-		if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
+
 
 		if (AnalysisType == "Electron" || AnalysisType == "Muon") {
 
@@ -1872,8 +2015,9 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			selected_process = 5;
 
 			// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
-
-			if (DataType[i] == "lep_0_lep_1_mass") { x1 = 60; x2 = 120; }
+			if (DataType[i] == "Centrality"){ x1 = -2; x2 = 2; }
+			if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
+			if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
 			if (DataType[i] == "lep_0_lep_1_mass_non_reco") { x3 = 81; x4 = 101; }
 
 			//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
@@ -2147,6 +2291,7 @@ void DrawStackedProcesses(string AnalysisType, string higgs_suffix) {
 	logless_names.push_back("lep_0_lep_1_mass");
 	logless_names.push_back("MET_Type_Favour");
 	logless_names.push_back("pT_balance");
+	logless_names.push_back("BDT");	
 
 	vector<string> QCD_EW_graphs;
 	QCD_EW_graphs.push_back("lep_0_lep_1_mass");

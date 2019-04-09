@@ -487,9 +487,8 @@ void Process_Weighting(string AnalysisType, string higgs_suffix, string DataType
 
 }
 
-void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, string DataType, string Process, double m, double c, double bins, bool weight) {
+void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, string DataType, string Process, double m, double c, double bins, bool weight, vector<TFile*> root_files) {
 
-	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
 	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
@@ -643,9 +642,8 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 }
 
 //Function to calculate the Cross section for two leptons, takes QCD process as Process1, EW process as Process2
-void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string higgs_suffix, string DataType, string Process1, string Process2, double m, double c, double bins, bool scale, string ID) {
+void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string higgs_suffix, string DataType, string Process1, string Process2, double m, double c, double bins, bool scale, string ID, vector<TFile*> root_files) {
 
-	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
 	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
 	gStyle->SetOptStat(0);
 
@@ -760,7 +758,10 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string hi
 	//Write out to a PDF file
 	canvas2->SaveAs(FullOutputFilePath.c_str());
 
-	vector<double> info = csv_reader(ID, false);
+	vector<double> info;
+
+	if (higgs_suffix == "_Higgs") info = csv_reader(ID, true);
+	else info = csv_reader(ID, false);
 
 	cout << endl << "MC Cross Section:     " << info[1] << endl;
 	cout << "QCD Scale Factor:     " << scale_factor_Process1 << " +/- " << scale_factor_Process1_Error << endl;
