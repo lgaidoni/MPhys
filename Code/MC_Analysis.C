@@ -106,7 +106,6 @@ void MC_Analysis::Loop() {
       double entry_count = jentry;	//Current entry number
       double max_entries = nentries;	//Total number of entries
 
-
       signal_event_selected = false;
 
 	//If the current time minus the start time is greater than the averaging time
