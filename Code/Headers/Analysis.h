@@ -1022,15 +1022,15 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	}
 
 	if (ChainName.find("_Zee_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = -0.000246552 * jet_0_jet_1_mass + 1.00962;
+		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Zmumu_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = -0.000240527 * jet_0_jet_1_mass + 1.03636;
+		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Ztt_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = -0.000240527 * jet_0_jet_1_mass + 1.03636;
+		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	
