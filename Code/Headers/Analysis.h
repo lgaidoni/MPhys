@@ -509,11 +509,139 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 	double jet_0_pt;
 	double jet_1_pt;
 
+	bool lep_0_pt_greater = false;
+	bool lep_1_pt_greater = false;
+	bool abs_eta_recipe_condition = false;
+	bool isolation_cut = false;
+	bool lepton_certainty_check_1 = false;
+	bool lepton_certainty_check_2 = false;
+	bool no_primary_vertices = false;
+	double eetabe2 = fabs(elec_0_cluster_eta_be2);
+	bool elec_endcap_check = false;
+	bool recipe_cuts = false;
+	recipe_weighting = 1;
+
 	//Is the missing energy physically realistic condition
 	if (AnalysisType == "MuonTau" or AnalysisType == "ElectronMuon" or AnalysisType == "ElectronTau") {
 		phi_realistic_condition = false;
 		phi_realistic_condition = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_p4); // returns true if want to keep (inside), false if outside
 	}
+	
+	if (higgs_analysis){	/////// RECIPE for Higgs Mode ///////
+
+		cout << "RECIPE for Higgs" << endl << endl;
+		// elec_0 is always lep_1 for electron cases
+		// muon_0 is lep_0 for electron cases
+		// muon_0 is lep_1 for tau cases
+		// tau_0 is lep_0 in all tau cases
+		// lep_0 = & muon_0 for ElectronMuon
+		// lep_1 = muon_0 for MuonTau
+
+		if (AnalysisType == "Electron"){ // lep_0 = elec_0, lep_1 = elec_1
+			// Kinematic Cuts
+			if (lep_0_p4->Eta() < 2.47 && lep_1_p4->Eta() < 2.47) abs_eta_recipe_condition = true; // electron eta
+			// isolation cuts = weights
+			if (elec_0_iso_Gradient == 1 && elec_1_iso_Gradient == 1)  isolation_cut = true;
+			//  Lepton reconstruction
+			if (elec_0_id_medium == 1) { // selecting medium electrons
+				lepton_certainty_check_1 = true; 
+				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
+				recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+			}
+			if (elec_1_id_medium == 1) {
+				lepton_certainty_check_2 = true; 
+				recipe_weighting *= elec_1_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
+				recipe_weighting *= elec_1_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+			}
+			// Barrel end-cap transition region veto for every electron we select
+			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;
+		}
+
+		if (AnalysisType == "ElectronTau"){ // lep_1 = elec_0, lep_0 = tau_0
+			// Kinematic Cuts
+			if (lep_0_p4->Eta() < 2.47 && lep_1_p4->Eta() < 2.47) abs_eta_recipe_condition = true; // electron eta
+			// Lepton reconstruction and isolation cuts = weights
+			if (elec_0_iso_Gradient == 1 && elec_1_iso_Gradient == 1)  isolation_cut = true;
+			//  Lepton reconstruction
+			if (elec_0_id_medium == 1) { // selecting medium electrons
+				lepton_certainty_check_1 = true; 
+				lepton_certainty_check_2 = true; // tau case, no check (should this be false?)
+				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
+				recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+			}
+			// Barrel end-cap transition region veto for every electron we select
+			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;
+		}
+
+		if (AnalysisType ==  "ElectronMuon"){ // lep_0 = muon_0, lep_1 = elec_0
+			// Kinematic Cuts
+			if (lep_0_p4->Eta() < 2.7 && lep_1_p4->Eta() < 2.47) abs_eta_recipe_condition = true; // electron eta
+			// isolation cuts = weights
+			if (muon_0_iso_Gradient == 1 && elec_0_iso_Gradient == 1)  isolation_cut = true;
+			//  Lepton reconstruction
+			if (muon_0_id_medium == 1) { // selecting medium muons
+				lepton_certainty_check_1 = true; 
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_Reco_QualMedium; // reco weights
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_IsoGradient; 
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_TTVA; // muon isolation weights
+			}
+			if (elec_0_id_medium == 1) {
+				lepton_certainty_check_2 = true; 
+				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
+				recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+			}
+			// Barrel end-cap transition region veto for every electron we select
+			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;
+		}
+
+		if (AnalysisType == "Muon"){ // for all cases with muon_0 = lep_0, lep_1 = muon_1
+			// Kinematic Cuts
+			if (lep_1_p4->Eta() < 2.7 && lep_0_p4->Eta() < 2.7) abs_eta_recipe_condition = true; // muon / or tau eta
+			// Lepton reconstruction and isolation cuts = weights
+			if (muon_0_iso_Gradient == 1 && muon_1_iso_Gradient == 1)  isolation_cut = true;
+			//  Lepton reconstruction
+			if (muon_0_id_medium == 1) { // selecting medium muons
+				lepton_certainty_check_1 = true; 
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_Reco_QualMedium; // reco weights
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_IsoGradient;
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_TTVA; // muon isolation weights
+			}
+			if (muon_1_id_medium == 1) {
+				lepton_certainty_check_2 = true; 
+				recipe_weighting *= muon_1_NOMINAL_MuEffSF_Reco_QualMedium; // reco weights
+				recipe_weighting *= muon_1_NOMINAL_MuEffSF_IsoGradient; 
+				recipe_weighting *= muon_1_NOMINAL_MuEffSF_TTVA; // muon isolation weights
+			}
+		}
+
+		if (AnalysisType == "MuonTau"){ // for all cases with muon_0 = lep_0, lep_1 = tau_0
+			// Kinematic Cuts
+			if (lep_1_p4->Eta() < 2.7 && lep_0_p4->Eta() < 2.7) abs_eta_recipe_condition = true; // muon / or tau eta
+			// Lepton reconstruction and isolation cuts = weights
+			if (muon_0_iso_Gradient == 1 && muon_1_iso_Gradient == 1)  isolation_cut = true;
+			//  Lepton reconstruction
+			if (muon_0_id_medium == 1) { // selecting medium muons
+				lepton_certainty_check_1 = true; 
+				lepton_certainty_check_2 = true; // tau case, no check (should this be false?)
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_Reco_QualMedium; // reco weights
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_IsoGradient; 
+				recipe_weighting *= muon_0_NOMINAL_MuEffSF_TTVA; // muon isolation weights
+			}		
+		}
+	
+		// Single Lepton Trigger Cuts
+		// NEED TO DO
+
+		// No primary vertices
+		if (n_pvx >= 1) no_primary_vertices = true;
+
+		// When doing bjets
+		if (bjets){
+			recipe_weighting *= jet_NOMINAL_global_effSF_MV2c10*jet_NOMINAL_central_jets_global_effSF_JVT*jet_NOMINAL_forward_jets_global_effSF_JVT;
+			recipe_weighting *= jet_NOMINAL_global_ineffSF_MV2c10*jet_NOMINAL_central_jets_global_ineffSF_JVT*jet_NOMINAL_forward_jets_global_ineffSF_JVT;
+		}
+	}
+	///////END OF RECIPE ///////
 
 	//Condition Checking
 	if (n_leptons == 2) { //If two leptons are found
@@ -545,9 +673,18 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 	//Leading Jet 2 (ljet_1) Cut Condition
 	if (jet_1_pt > 45) jet_1_pt_greater = true;
 
+	// Recipe lep 0 Cut Condition
+	if (lep_0_p4->Pt() > 25) lep_0_pt_greater = true;
+
+	// lep 1 Cut Condition
+	if (lep_1_p4->Pt() > 25) lep_1_pt_greater = true;
+
+	// check? dont cut
+	if (isolation_cut && abs_eta_recipe_condition && lepton_certainty_check_1 && lepton_certainty_check_2 && no_primary_vertices) recipe_cuts = true;
+
 	// If the conditions are met, don't cut
-	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater && phi_realistic_condition) return false;
-	
+	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater && phi_realistic_condition && lep_0_pt_greater && lep_1_pt_greater && recipe_cuts) return false;
+
 	//Otherwise, cut
 	return true;	
 
@@ -759,7 +896,7 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	}
 
 	// Final Weighting
-	final_weighting = Luminosity_Weight * weight_total * QCD_weight_factor;	
+	final_weighting = Luminosity_Weight * weight_total * QCD_weight_factor*recipe_weighting;	
 	
 }	
 
@@ -877,7 +1014,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101) Z_mass_condition = true;	
 
 	//Dilepton Pt Cut
-	if (lep_0_lep_1_pt > 20) combined_lepton_pt = true;
+	if (lep_0_lep_1_pt > 20) combined_lepton_pt = true; 
 
 	// Dijjet mass = Leading Jets Combined Invariant mass
 	if (jet_0_jet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
