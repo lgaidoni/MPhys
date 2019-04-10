@@ -40,6 +40,7 @@ public :
 	string ChainName;
 	double Luminosity_Weight;
 	double final_weighting;
+	double recipe_weighting;
 	bool weight_total_override;
 	string desired_particles;
 	bool bjets_region;
