@@ -612,7 +612,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			// Kinematic Cuts
 			if (lep_0_eta < 2.47 && lep_1_eta < 2.47) abs_eta_recipe_condition = true; // electron eta
 			// Lepton reconstruction and isolation cuts = weights
-			if (elec_0_iso_Gradient == 1) isolation_cut = true;
+			if (elec_0_iso_Gradient == 1 && elec_1_iso_Gradient == 1)  isolation_cut = true;
 			//  Lepton reconstruction
 			if (elec_0_id_medium == 1) { // selecting medium electrons (also selecting medium taus)
 				lepton_certainty_check_1 = true; 
@@ -746,7 +746,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			// Kinematic Cuts
 			if (lep_1_eta < 2.7 && lep_0_eta < 2.7) abs_eta_recipe_condition = true; // muon / or tau eta
 			// Lepton reconstruction and isolation cuts = weights
-			if (muon_0_iso_Gradient == 1)  isolation_cut = true;
+			if (muon_0_iso_Gradient == 1 && muon_1_iso_Gradient == 1)  isolation_cut = true;
 			cout << "muon_0_iso_Gradient : " << muon_0_iso_Gradient << endl;
 			//  Lepton reconstruction
 			if (muon_0_id_medium == 1) { // selecting medium muons (also selecting medium taus)
