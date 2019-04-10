@@ -508,7 +508,10 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 	bool phi_realistic_condition = true;
 	double jet_0_pt;
 	double jet_1_pt;
-
+	double lep_0_pt = lep_0_p4->Pt();
+	double lep_1_pt = lep_1_p4->Pt();
+	double lep_0_eta = lep_0_p4->Eta();
+	double lep_1_eta = lep_1_p4->Eta();
 	bool lep_0_pt_greater = false;
 	bool lep_1_pt_greater = false;
 	bool abs_eta_recipe_condition = false;
@@ -518,7 +521,11 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 	bool no_primary_vertices = false;
 	double eetabe2 = fabs(elec_0_cluster_eta_be2);
 	bool elec_endcap_check = false;
+	bool lep_0_single_lepton_trigger = false;
+	bool lep_1_single_lepton_trigger = false;
+	bool lepton_trigger = false;
 	bool recipe_cuts = false;
+
 	recipe_weighting = 1;
 
 	//Is the missing energy physically realistic condition
@@ -527,7 +534,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 		phi_realistic_condition = EtMiss_OutOfReachCheck(lep_0_p4, lep_1_p4, met_p4); // returns true if want to keep (inside), false if outside
 	}
 	
-	if (higgs_analysis){	/////// RECIPE for Higgs Mode ///////
+	if (higgs_analysis) {	/////// RECIPE for Higgs Mode ///////
 
 		cout << "RECIPE for Higgs" << endl << endl;
 		// elec_0 is always lep_1 for electron cases
@@ -537,9 +544,35 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 		// lep_0 = & muon_0 for ElectronMuon
 		// lep_1 = muon_0 for MuonTau
 
-		if (AnalysisType == "Electron"){ // lep_0 = elec_0, lep_1 = elec_1
+		if (AnalysisType == "Electron") { // lep_0 = elec_0, lep_1 = elec_1
+
+			// Single lepton trigger
+			if (NOMINAL_pileup_random_run_number <= 284484 && NOMINAL_pileup_random_run_number >= 276262 ) {// 2015
+				 if ((HLT_e24_lhmedium_L1EM20VH && lep_0_pt > 25.) || (HLT_e60_lhmedium && lep_0_pt > 61.) || (HLT_e120_lhloose && lep_0_pt > 121.)) {
+					lep_0_single_lepton_trigger = true;
+				 }
+				 if ((HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.)) {
+					lep_1_single_lepton_trigger = true;
+				 }
+			}
+			else if (NOMINAL_pileup_random_run_number <= 311481  && NOMINAL_pileup_random_run_number >= 297730 ) { //2016
+				 if ((HLT_e26_lhtight_nod0_ivarloose && lep_0_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_0_pt  > 61.) || (HLT_e140_lhloose_nod0 && lep_0_pt > 141.)) {
+					lep_0_single_lepton_trigger = true;
+				 }
+				 if ((HLT_e26_lhtight_nod0_ivarloose &&  lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt  > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.)) {
+					lep_1_single_lepton_trigger = true;
+				 }
+			}
+			else if (NOMINAL_pileup_random_run_number <= 341649 && NOMINAL_pileup_random_run_number >= 323427 ) {// 2017
+				if((HLT_e26_lhtight_nod0_ivarloose && lep_0_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_0_pt  > 61.) || (HLT_e140_lhloose_nod0 && lep_0_pt > 141.)) {
+					lep_0_single_lepton_trigger = true;
+				}
+				if((HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt  > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.)) {
+					lep_1_single_lepton_trigger = true;
+				}
+			}
 			// Kinematic Cuts
-			if (lep_0_p4->Eta() < 2.47 && lep_1_p4->Eta() < 2.47) abs_eta_recipe_condition = true; // electron eta
+			if (lep_0_eta < 2.47 && lep_1_eta < 2.47) abs_eta_recipe_condition = true; // electron eta
 			// isolation cuts = weights
 			if (elec_0_iso_Gradient == 1 && elec_1_iso_Gradient == 1)  isolation_cut = true;
 			//  Lepton reconstruction
@@ -557,25 +590,70 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;
 		}
 
-		if (AnalysisType == "ElectronTau"){ // lep_1 = elec_0, lep_0 = tau_0
+		if (AnalysisType == "ElectronTau") { // lep_1 = elec_0, lep_0 = tau_0
+			lep_0_single_lepton_trigger = true;
+			// Single Lepton trigger - electrons only for lep_1
+			if (NOMINAL_pileup_random_run_number <= 284484 && NOMINAL_pileup_random_run_number >= 276262 ) {//2015
+				 if ((HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.)) {
+					lep_1_single_lepton_trigger = true;
+				 }
+			}
+			else if (NOMINAL_pileup_random_run_number <= 311481  && NOMINAL_pileup_random_run_number >= 297730 ) {//2016
+				 if ((HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 > 61. && lep_1_pt  > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.)) {
+					lep_1_single_lepton_trigger = true;
+				 }
+			}
+			else if (NOMINAL_pileup_random_run_number <= 341649 && NOMINAL_pileup_random_run_number >= 323427 ) {//2017
+				if((HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt  > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.)) {
+					lep_1_single_lepton_trigger = true;
+
+				}
+			}
 			// Kinematic Cuts
-			if (lep_0_p4->Eta() < 2.47 && lep_1_p4->Eta() < 2.47) abs_eta_recipe_condition = true; // electron eta
+			if (lep_0_eta < 2.47 && lep_1_eta < 2.47) abs_eta_recipe_condition = true; // electron eta
 			// Lepton reconstruction and isolation cuts = weights
 			if (elec_0_iso_Gradient == 1 && elec_1_iso_Gradient == 1)  isolation_cut = true;
 			//  Lepton reconstruction
-			if (elec_0_id_medium == 1) { // selecting medium electrons
+			if (elec_0_id_medium == 1) { // selecting medium electrons (also selecting medium taus)
 				lepton_certainty_check_1 = true; 
 				lepton_certainty_check_2 = true; // tau case, no check (should this be false?)
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+				recipe_weighting *= tau_0_NOMINAL_TauEffSF_JetBDTmedium; // hadronic tau weighting
 			}
 			// Barrel end-cap transition region veto for every electron we select
 			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;
 		}
 
-		if (AnalysisType ==  "ElectronMuon"){ // lep_0 = muon_0, lep_1 = elec_0
+		if (AnalysisType ==  "ElectronMuon") { // lep_0 = muon_0, lep_1 = elec_0
+
+			// Single Lepton trigger - electrons for lep_1 , muon_0 = lep_0
+			if (NOMINAL_pileup_random_run_number <= 284484 && NOMINAL_pileup_random_run_number >= 276262 ) {//2015
+				if ((HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.)) {//electrons
+					lep_1_single_lepton_trigger = true;
+				}
+				if ((HLT_mu20_iloose_L1MU15 && lep_0_pt > 21.) || (HLT_mu50 && lep_0_pt > 51.)) { // muon
+					lep_0_single_lepton_trigger = true;
+				}
+			}
+			else if (NOMINAL_pileup_random_run_number <= 311481  && NOMINAL_pileup_random_run_number >= 297730 ) {//2016
+				 if ((HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_0_pt  > 61. && lep_1_pt  > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.)) {// electron
+					lep_1_single_lepton_trigger = true;
+				 }
+				if ((HLT_mu26_ivarmedium && lep_0_pt > 27.) || (HLT_mu50 && lep_0_pt > 51.)) {//muon
+					lep_0_single_lepton_trigger = true;
+				}
+			}
+			else if (NOMINAL_pileup_random_run_number <= 341649 && NOMINAL_pileup_random_run_number >= 323427 ) {//2017
+				if((HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt  > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.)) {// electron
+					lep_1_single_lepton_trigger = true;
+				}
+				if ((HLT_mu26_ivarmedium && lep_0_pt > 27. && lep_1_pt > 27.) || (HLT_mu50 && lep_0_pt > 51. && lep_1_pt > 51.)) { // muon
+					lep_0_single_lepton_trigger = true;
+				}
+			}
 			// Kinematic Cuts
-			if (lep_0_p4->Eta() < 2.7 && lep_1_p4->Eta() < 2.47) abs_eta_recipe_condition = true; // electron eta
+			if (lep_0_eta < 2.7 && lep_1_eta < 2.47) abs_eta_recipe_condition = true; // electron eta
 			// isolation cuts = weights
 			if (muon_0_iso_Gradient == 1 && elec_0_iso_Gradient == 1)  isolation_cut = true;
 			//  Lepton reconstruction
@@ -594,9 +672,30 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;
 		}
 
-		if (AnalysisType == "Muon"){ // for all cases with muon_0 = lep_0, lep_1 = muon_1
+		if (AnalysisType == "Muon") { // for all cases with muon_0 = lep_0, lep_1 = muon_1
+
+			// Single lepton trigger
+			if (NOMINAL_pileup_random_run_number <= 284484 && NOMINAL_pileup_random_run_number >= 276262 ) {//2015
+				if ((HLT_mu20_iloose_L1MU15 && lep_0_pt > 21. && lep_1_pt > 21.) || (HLT_mu50 && lep_0_pt > 51. && lep_1_pt > 51.)) {
+					lep_0_single_lepton_trigger = true;
+					lep_1_single_lepton_trigger = true;
+				}
+			}
+			else if (NOMINAL_pileup_random_run_number <= 311481  && NOMINAL_pileup_random_run_number >= 297730 ) {//2016
+				if ((HLT_mu26_ivarmedium && lep_0_pt > 27. && lep_1_pt > 27.) || (HLT_mu50 && lep_0_pt > 51. && lep_1_pt > 51.)) {
+					lep_0_single_lepton_trigger = true;
+					lep_1_single_lepton_trigger = true;
+				}
+			}
+			else if (NOMINAL_pileup_random_run_number <= 341649 && NOMINAL_pileup_random_run_number >= 323427 ) {//2017
+				if ((HLT_mu26_ivarmedium && lep_0_pt > 27. && lep_1_pt > 27.) || (HLT_mu50 && lep_0_pt > 51. && lep_1_pt > 51.)) {
+					lep_0_single_lepton_trigger = true;
+					lep_1_single_lepton_trigger = true;
+				}
+			}
+
 			// Kinematic Cuts
-			if (lep_1_p4->Eta() < 2.7 && lep_0_p4->Eta() < 2.7) abs_eta_recipe_condition = true; // muon / or tau eta
+			if (lep_1_eta < 2.7 && lep_0_eta < 2.7) abs_eta_recipe_condition = true; // muon / or tau eta
 			// Lepton reconstruction and isolation cuts = weights
 			if (muon_0_iso_Gradient == 1 && muon_1_iso_Gradient == 1)  isolation_cut = true;
 			//  Lepton reconstruction
@@ -614,34 +713,52 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			}
 		}
 
-		if (AnalysisType == "MuonTau"){ // for all cases with muon_0 = lep_0, lep_1 = tau_0
+		if (AnalysisType == "MuonTau") { // for all cases with muon_0 = lep_0, lep_1 = tau_0
+			lep_1_single_lepton_trigger = true;
+			// Single lepton trigger
+			if (NOMINAL_pileup_random_run_number <= 284484 && NOMINAL_pileup_random_run_number >= 276262 ) {//2015
+				if ((HLT_mu20_iloose_L1MU15 && lep_0_pt > 21.) || (HLT_mu50 && lep_0_pt > 51.)) {
+					lep_0_single_lepton_trigger = true;
+				}
+			}
+			else if (NOMINAL_pileup_random_run_number <= 311481  && NOMINAL_pileup_random_run_number >= 297730 ) {
+				if ((HLT_mu26_ivarmedium && lep_0_pt > 27.) || (HLT_mu50 && lep_0_pt > 51.)) {
+					lep_0_single_lepton_trigger = true;
+				}
+			}
+			else if (NOMINAL_pileup_random_run_number <= 341649 && NOMINAL_pileup_random_run_number >= 323427 ) {
+				if ((HLT_mu26_ivarmedium && lep_0_pt > 27.) || (HLT_mu50 && lep_0_pt > 51.)) {
+					lep_0_single_lepton_trigger = true;
+				}
+			}
+			
 			// Kinematic Cuts
-			if (lep_1_p4->Eta() < 2.7 && lep_0_p4->Eta() < 2.7) abs_eta_recipe_condition = true; // muon / or tau eta
+			if (lep_1_eta < 2.7 && lep_0_eta < 2.7) abs_eta_recipe_condition = true; // muon / or tau eta
 			// Lepton reconstruction and isolation cuts = weights
 			if (muon_0_iso_Gradient == 1 && muon_1_iso_Gradient == 1)  isolation_cut = true;
 			//  Lepton reconstruction
-			if (muon_0_id_medium == 1) { // selecting medium muons
+			if (muon_0_id_medium == 1) { // selecting medium muons (also selecting medium taus)
 				lepton_certainty_check_1 = true; 
 				lepton_certainty_check_2 = true; // tau case, no check (should this be false?)
 				recipe_weighting *= muon_0_NOMINAL_MuEffSF_Reco_QualMedium; // reco weights
 				recipe_weighting *= muon_0_NOMINAL_MuEffSF_IsoGradient; 
 				recipe_weighting *= muon_0_NOMINAL_MuEffSF_TTVA; // muon isolation weights
+				recipe_weighting *= tau_0_NOMINAL_TauEffSF_JetBDTmedium; // hadronic tau weighting
 			}		
 		}
 	
-		// Single Lepton Trigger Cuts
-		// NEED TO DO
-
 		// No primary vertices
 		if (n_pvx >= 1) no_primary_vertices = true;
 
 		// When doing bjets
-		if (bjets){
+		if (bjets) {
 			recipe_weighting *= jet_NOMINAL_global_effSF_MV2c10*jet_NOMINAL_central_jets_global_effSF_JVT*jet_NOMINAL_forward_jets_global_effSF_JVT;
 			recipe_weighting *= jet_NOMINAL_global_ineffSF_MV2c10*jet_NOMINAL_central_jets_global_ineffSF_JVT*jet_NOMINAL_forward_jets_global_ineffSF_JVT;
 		}
-	}
-	///////END OF RECIPE ///////
+
+		if (lep_0_single_lepton_trigger && lep_1_single_lepton_trigger) lepton_trigger = true;
+
+	}///////END OF RECIPE ///////
 
 	//Condition Checking
 	if (n_leptons == 2) { //If two leptons are found
@@ -674,13 +791,16 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 	if (jet_1_pt > 45) jet_1_pt_greater = true;
 
 	// Recipe lep 0 Cut Condition
-	if (lep_0_p4->Pt() > 25) lep_0_pt_greater = true;
+	if (lep_0_pt > 25) lep_0_pt_greater = true;
 
 	// lep 1 Cut Condition
-	if (lep_1_p4->Pt() > 25) lep_1_pt_greater = true;
+	if (lep_1_pt > 25) lep_1_pt_greater = true;
 
-	// check? dont cut
-	if (isolation_cut && abs_eta_recipe_condition && lepton_certainty_check_1 && lepton_certainty_check_2 && no_primary_vertices) recipe_cuts = true;
+	// recipe check? dont cut
+	if (higgs_analysis) { // make sure all recipe is accepted
+		if (isolation_cut && abs_eta_recipe_condition && lepton_certainty_check_1 && lepton_certainty_check_2 && no_primary_vertices && lepton_trigger) recipe_cuts = true;
+	}
+	else recipe_cuts = true; // not in higgs analysis, so dont want recipe cuts to be accepted, but still make it true
 
 	// If the conditions are met, don't cut
 	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater && phi_realistic_condition && lep_0_pt_greater && lep_1_pt_greater && recipe_cuts) return false;
@@ -894,12 +1014,13 @@ void MC_Analysis::GenerateVariables(bool truth) {
 		QCD_weight_factor = -0.000240527 * jet_0_jet_1_mass + 1.03636;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
+	
+	if (weight_total_override) recipe_weighting = 1; // for data samples
 
 	// Final Weighting
-	final_weighting = Luminosity_Weight * weight_total * QCD_weight_factor*recipe_weighting;	
+	final_weighting = Luminosity_Weight * weight_total * QCD_weight_factor * recipe_weighting;	
 	
-}	
-
+}
 ////////////////////////////////////////////////////////////////////////////////////////
 ///------------- BEFORE VARIABLE CUT HISTOGRAM FILLING (PRE REGION) -----------------///
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -1063,7 +1184,7 @@ bool MC_Analysis::Cuts(string region) {
 	bool custom_cuts = true;	//The custom cuts are true initially, as they are only considered for the "Tau" analyses, "ElectronTau", "MuonTau", "ElectronMuon".
 
 	// common cuts for "Tau"
-	if (AnalysisType == "ElectronMuon" || AnalysisType == "ElectronTau" || AnalysisType == "MuonTau"){
+	if (AnalysisType == "ElectronMuon" || AnalysisType == "ElectronTau" || AnalysisType == "MuonTau") {
 
 		//This is only here in order to see the full mass spectrum represented in the rest of the cuts, and should be changed when appropriate
 		Z_mass_condition = false;
