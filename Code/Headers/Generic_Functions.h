@@ -1994,7 +1994,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		double x3 = 0;
 		double x4 = 0;
 
-		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4500; canvas->SetLogy(); 
+		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4570; canvas->SetLogy(); 
 			double current_y_max = ExceptStack->GetMaximum();
 			ExceptStack->SetMaximum(current_y_max * 1.5);
 			ymax = current_y_max * 2.4;
