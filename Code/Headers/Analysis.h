@@ -683,7 +683,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 	if (isolation_cut && abs_eta_recipe_condition && lepton_certainty_check_1 && lepton_certainty_check_2 && no_primary_vertices) recipe_cuts = true;
 
 	// If the conditions are met, don't cut
-	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater && phi_realistic_condition && lep_0_pt_greater && lep_1_pt_greater) return false;
+	if (two_leptons && two_or_more_jets && leptons_opposite_charges && bjets_requirement && jet_0_pt_greater && jet_0_pt_greater && phi_realistic_condition && lep_0_pt_greater && lep_1_pt_greater && recipe_cuts) return false;
 
 	//Otherwise, cut
 	return true;	
