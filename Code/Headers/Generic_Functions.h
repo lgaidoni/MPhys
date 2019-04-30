@@ -567,6 +567,8 @@ double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedP
 
 double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int SelectedProcess, vector<TFile*> root_files, vector<TH1F*> histograms, double min, double max, string higgs_suffix) {
 
+	//cout << endl;
+
 	double N_events = 0;
 	double N_bkg = 0;
 	double N_signal = 0;
@@ -579,7 +581,9 @@ double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int Select
 				TH1F* histogram = histograms[i];
 				if (i != SelectedProcess) { //if NOT the selected process, calculate the background
 					N_events = histogram->Integral(min, max); // gets no of events by integrating
+					//cout << "N_Events = " << N_events << endl;
 					N_bkg += N_events;
+					//cout << "N_bkg = " << N_bkg << endl;
 				}
 				else N_signal = histogram->Integral(min, max);  // should get the signal number of events
 			}
@@ -598,7 +602,14 @@ double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int Select
 
 	}
 
+	//cout << "N_signal = " << N_signal << endl;
+
 	significance = N_signal/pow(N_signal+N_bkg,0.5);
+
+	//cout << "Significance = " << significance << endl;
+
+	//cout << endl;
+
 	return significance;
 
 }
@@ -798,6 +809,10 @@ void Histogram_Namer(TH1F* histogram, string DataType) {
 	if (DataType.find("Centrality") != string::npos) histogram->GetXaxis()->SetTitle("Centrality");
 	if (DataType.find("DeltaR") != string::npos) histogram->GetXaxis()->SetTitle("#DeltaR");
 	if (DataType.find("DeltaPhi") != string::npos) histogram->GetXaxis()->SetTitle("#Delta#Phi");
+	if (DataType.find("pT_balance") != string::npos)  histogram->GetXaxis()->SetTitle("p_{T}^{balance}");
+	if (DataType.find("pT_balance_reco") != string::npos) histogram->GetXaxis()->SetTitle("p_{T}^{balance, reco}");
+	if (DataType.find("pT_balance_3") != string::npos) histogram->GetXaxis()->SetTitle("p_{T}^{balance, 3}");
+	if (DataType.find("MET_Type_Favour") != string::npos) histogram->GetXaxis()->SetTitle("#Omega (leptonic = 0, hadronic = 1)");
 
 }
 
@@ -810,6 +825,10 @@ void Histogram_Namer(THStack* histogram, string DataType) {
 	if (DataType.find("Centrality") != string::npos) histogram->GetXaxis()->SetTitle("Centrality");
 	if (DataType.find("DeltaR") != string::npos) histogram->GetXaxis()->SetTitle("#DeltaR");
 	if (DataType.find("DeltaPhi") != string::npos) histogram->GetXaxis()->SetTitle("#Delta#Phi");
+	if (DataType.find("pT_balance") != string::npos) histogram->GetXaxis()->SetTitle("p_{T}^{balance}");
+	if (DataType.find("pT_balance_reco") != string::npos) histogram->GetXaxis()->SetTitle("p_{T}^{balance, reco}");
+	if (DataType.find("pT_balance_3") != string::npos) histogram->GetXaxis()->SetTitle("p_{T}^{balance, 3}");
+	if (DataType.find("MET_Type_Favour") != string::npos) histogram->GetXaxis()->SetTitle("#Omega (leptonic = 0, hadronic = 1)");
 
 
 }
@@ -832,10 +851,10 @@ string Histogram_Namer(string DataType) {
 	if (DataType.find("MET_Centrality") != string::npos) Histogram_Name = "C^{MET}";
 	if (DataType.find("DeltaR") != string::npos) Histogram_Name = "#DeltaR";
 	if (DataType.find("DeltaPhi") != string::npos)  Histogram_Name = "#Delta#Phi";
-	if (DataType.find("pT_balance") != string::npos)  Histogram_Name = "p_T^{balance}";
-	if (DataType.find("pT_balance_reco") != string::npos)  Histogram_Name = "p_T^{balance, reco}";
-	if (DataType.find("pT_balance_3") != string::npos)  Histogram_Name = "p_T^{balance, 3}";
-	if (DataType.find("MET_Type_Favour") != string::npos) Histogram_Name = "#Gamma^{MET} (leptonic = 0, hadronic = 1)";
+	if (DataType.find("pT_balance") != string::npos)  Histogram_Name = "p_{T}^{balance}";
+	if (DataType.find("pT_balance_reco") != string::npos)  Histogram_Name = "p_{T}^{balance, reco}";
+	if (DataType.find("pT_balance_3") != string::npos)  Histogram_Name = "p_{T}^{balance, 3}";
+	if (DataType.find("MET_Type_Favour") != string::npos) Histogram_Name = "#Omega (leptonic = 0, hadronic = 1)";
 
 	return Histogram_Name;
 }
@@ -1903,6 +1922,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 	DataType.push_back("lep_0_lep_1_mass_reco");
 	DataType.push_back("lep_0_lep_1_mass_non_reco");
 	DataType.push_back("jet_0_jet_1_mass");
+	DataType.push_back("jet_0_jet_1_mass");
 	//DataType.push_back("jet_0_jet_1_mass_INSIDE");
 	DataType.push_back("pT_balance");
 	DataType.push_back("pT_balance_reco");
@@ -1911,6 +1931,8 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 	DataType.push_back("DeltaPhi_reco_INSIDE");
 	DataType.push_back("Centrality"); // same as reco
 	//DataType.push_back("Centrality_INSIDE");
+
+	bool draw_high_e_jet_mass = false;
 
 
 	for (int i=0; i < DataType.size(); i++){
@@ -1994,12 +2016,24 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		double x3 = 0;
 		double x4 = 0;
 
-		if (DataType[i] == "jet_0_jet_1_mass") { x1 = 250; x2 = 4570; canvas->SetLogy(); 
+		string high_e_name = "";
+
+		if (DataType[i] == "jet_0_jet_1_mass" && draw_high_e_jet_mass) { 
+			x1 = 1500; x2 = 4570; canvas->SetLogy(); 
 			double current_y_max = ExceptStack->GetMaximum();
-			ExceptStack->SetMaximum(current_y_max * 1.5);
-			ymax = current_y_max * 2.4;
+			ExceptStack->SetMaximum(current_y_max);
+			ExceptStack->SetMinimum(0.1);
+			ymax = current_y_max * 10;
+			high_e_name = "_HIGH_MASS";
 		}
 
+		if (DataType[i] == "jet_0_jet_1_mass" && !(draw_high_e_jet_mass)) { 
+			x1 = 250; x2 = 4570; canvas->SetLogy(); 
+			double current_y_max = ExceptStack->GetMaximum();
+			ExceptStack->SetMaximum(current_y_max);
+			ExceptStack->SetMinimum(0.1);
+			ymax = current_y_max * 10;
+		}
 
 		if (AnalysisType == "Electron" || AnalysisType == "Muon") {
 
@@ -2007,7 +2041,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			if (AnalysisType == "Muon") selected_process = 6;
 
 			if (DataType[i] == "lep_0_lep_1_mass") { x1 = 81; x2 = 101; }
-			if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.15; }
+			if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.16; }
 
 		}
 		if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") {
@@ -2015,16 +2049,16 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			selected_process = 5;
 
 			// Histogram Shading part - put boxes on top of the histograms for each of the datatypes
-			if (DataType[i] == "Centrality"){ x1 = -2; x2 = 2; }
-			if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.72825; }
+			if (DataType[i] == "Centrality"){ x1 = -1.92; x2 = 1.92; }
+			if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.5; }
 			if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
 			if (DataType[i] == "lep_0_lep_1_mass_non_reco") { x3 = 81; x4 = 101; }
 
 			//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
 
-			if (DataType[i] == "pT_balance_reco")  { x1 = 0; x2 = 0.13; }
-			if (DataType[i] == "pT_balance_reco_INSIDE")  { x1 = 0; x2 = 0.13; }
-			if (DataType[i] == "DeltaPhi_reco_INSIDE") { x1 = 0; x2 = 2.72825; }
+			if (DataType[i] == "pT_balance_reco")  { x1 = 0; x2 = 0.14; }
+			if (DataType[i] == "pT_balance_reco_INSIDE")  { x1 = 0; x2 = 0.14; }
+			if (DataType[i] == "DeltaPhi_reco_INSIDE") { x1 = 0; x2 = 2.5; }
 
 		}
 
@@ -2066,14 +2100,18 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		TLine *l2 = new TLine(x2, ymin, x2, ymax);
 		l2->SetLineWidth(2);
 		l2->Draw();
+		
+		double Signal_Significance;
 
-		Draw_Region(DataType[i], 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73, higgs_suffix);
+		if (draw_high_e_jet_mass) {
+			Signal_Significance = EXCEPT_Significance_Calc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms, 10, (4570+20)/90, higgs_suffix);
+			draw_high_e_jet_mass = false;
+		}
+		else Signal_Significance = SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, SignalHistograms, higgs_suffix);
+		double Except_Significance =  SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms, higgs_suffix);
 
-		double Except_Significance = SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms, higgs_suffix);
-		double Signal_Significance =  SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, SignalHistograms, higgs_suffix);
-
-		cout << Except_Significance << endl;
-		cout << Signal_Significance << endl;
+		cout << "Except_Significance = " << Except_Significance << endl;
+		cout << "Signal_Significance = " << Signal_Significance << endl;
 
 		stringstream ExceptSig;
 		ExceptSig << setprecision(3) << Except_Significance;
@@ -2083,6 +2121,9 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 
 		string ExceptLegend = "Except: S = " + ExceptSig.str();
 		string SignalLegend = "Signal:  S = " + SignalSig.str();
+
+		cout << ExceptLegend << endl;
+		cout << SignalLegend << endl;
 
 		double Delta_Significance = Signal_Significance - Except_Significance;
 
@@ -2099,34 +2140,56 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		TLatex t;  						//Create a latex object
 		t.SetTextFont(42);  					//Set font
 		t.SetNDC(kTRUE);  					//Ensure position is relative (0-1 rather than coordinate based)
-		t.SetTextSize(0.025);  					//Set font size
+		t.SetTextSize(0.03);  					//Set font size
+
+		//Create the legend
+		auto top_box = new TLegend(1,1,0.0999,0.902);
+		top_box->SetBorderSize(0);
+		top_box->Draw();
+
+		Histogram_Namer(ExceptStack, DataType[i]);
+
+		Draw_Region(DataType[i], 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73, higgs_suffix);
 
 		//Create the legend and draw the region information
 		if (mode == "QCD_EW") {
-			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-			t.DrawLatex(0.86, 0.88, SignalLegend.c_str());
-			Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.65, 0.035, 0);
+			t.DrawLatex(0.86, 0.843, ExceptLegend.c_str());
+			t.DrawLatex(0.86, 0.875, SignalLegend.c_str());
+			Legend_Creator_QCD_EW(ExceptHistograms, 1.0, 0.83, 0.852, 0.63, 0.0365, 0);
 
 			//Legend_Creator_QCD_EW(SignalHistograms, 1.0, 0.60, 0.86, 0.40, 0.035, 0);
 		}
 		else if (mode == "EW") {
 
-			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-			t.DrawLatex(0.86, 0.88, SignalLegend.c_str());
-			Legend_Creator_EW(ExceptHistograms, 1.0, 0.85, 0.86, 0.75, 0.035, 0);
+			t.DrawLatex(0.86, 0.843, ExceptLegend.c_str());
+			t.DrawLatex(0.86, 0.875, SignalLegend.c_str());
+			Legend_Creator_EW(ExceptHistograms, 1.0, 0.83, 0.852, 0.73, 0.0365, 0);
 
 			//Legend_Creator_EW(SignalHistograms, 1.0, 0.70, 0.86, 0.60, 0.035, 0);
 		}
 		else {
-			t.DrawLatex(0.86, 0.86, ExceptLegend.c_str());
-			t.DrawLatex(0.86, 0.88, SignalLegend.c_str());
-			Legend_Creator(ExceptHistograms, 1.0, 0.85, 0.86, 0.40, 0.035, 0, higgs_suffix);
+			t.DrawLatex(0.86, 0.843, ExceptLegend.c_str());
+			t.DrawLatex(0.86, 0.875, SignalLegend.c_str());
+			Legend_Creator(ExceptHistograms, 1.0, 0.83, 0.852, 0.28, 0.0365, 0, higgs_suffix);
 
 			//Legend_Creator(SignalHistograms, 1.0, 0.45, 0.86, 0.10, 0.035, 0);
 		}
 
+		//Set the axis information
+		ExceptStack->GetYaxis()->SetTitle("Events");
+		ExceptStack->GetXaxis()->SetLabelSize(0.05);
+		ExceptStack->GetYaxis()->SetLabelSize(0.05);
+		ExceptStack->GetXaxis()->SetTitleSize(0.037);
+		ExceptStack->GetYaxis()->SetTitleSize(0.04);
+		ExceptStack->GetXaxis()->SetTitleOffset(1.2);
+
+
+		if (DataType[i] == "jet_0_jet_1_mass" && !(draw_high_e_jet_mass)) { 
+			draw_high_e_jet_mass = true;
+		}
+
 		//Create the full output file path
-		string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/SIGNIFICANCE-SHADED/" + DataType[i] + "_" + AnalysisType + higgs_suffix + "_" + mode + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
+		string FullOutputFilePath = "../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/SIGNIFICANCE-SHADED/" + DataType[i] + "_" + AnalysisType + higgs_suffix + "_" + mode + high_e_name + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
 
 		//Write out to a PDF file
 		canvas->SaveAs(FullOutputFilePath.c_str());
