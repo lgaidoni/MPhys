@@ -566,36 +566,43 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			}
 			// Kinematic Cuts
 			if (lep_0_eta < 2.47 && lep_1_eta < 2.47) abs_eta_recipe_condition = true; // electron eta
+			
 			// isolation cuts = weights
 			if (elec_0_iso_Gradient == 1 && elec_1_iso_Gradient == 1)  isolation_cut = true;
+
 			//  Lepton reconstruction
 			if (elec_0_id_medium == 1) { // selecting medium electrons
 				lepton_certainty_check_1 = true; 
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
-				recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+				//cout << "elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient: " << elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient << endl;
 			}
 			if (elec_1_id_medium == 1) {
 				lepton_certainty_check_2 = true; 
 				recipe_weighting *= elec_1_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
-				recipe_weighting *= elec_1_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+				//recipe_weighting *= elec_1_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+				//cout << "elec_1_NOMINAL_EleEffSF_offline_RecoTrk: " << elec_1_NOMINAL_EleEffSF_offline_RecoTrk << endl;
 			}
+
 			// Barrel end-cap transition region veto for every electron we select
 			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;
+
 		}
 
 		if (AnalysisType == "ElectronTau") { // lep_1 = elec_0, lep_0 = tau_0
 			// Single Lepton trigger - electrons only for lep_1
 			if (current_run_number <= 284484 && current_run_number >= 276262 ) {//2015
-				if (eleTrigMatch_1_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_0_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 			}
 			else if (current_run_number <= 311481  && current_run_number >= 297730 ) {//2016
-				if (eleTrigMatch_1_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 			}
 			else if (current_run_number <= 341649 && current_run_number >= 323427 ) {//2017
-				if (eleTrigMatch_1_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 			}
 			// Kinematic Cuts
 			if (lep_0_eta < 2.47 && lep_1_eta < 2.47) abs_eta_recipe_condition = true; // electron eta
+
 			// Lepton reconstruction and isolation cuts = weights
 			if (elec_0_iso_Gradient == 1) isolation_cut = true;
 			//  Lepton reconstruction
@@ -603,7 +610,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 				lepton_certainty_check_1 = true; 
 				lepton_certainty_check_2 = true; // tau case, no check (should this be false?)
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
-				recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
 				recipe_weighting *= tau_0_NOMINAL_TauEffSF_JetBDTmedium; // hadronic tau weighting
 			}
 			// Barrel end-cap transition region veto for every electron we select
@@ -614,15 +621,15 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 
 			// Single Lepton trigger - electrons for lep_1 , muon_0 = lep_0
 			if (current_run_number <= 284484 && current_run_number >= 276262 ) {//2015
-				if (eleTrigMatch_1_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_0_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 				else if (muTrigMatch_0_trigger_matched && ( (HLT_mu20_iloose_L1MU15 && lep_0_pt > 21.) || (HLT_mu50 && lep_0_pt > 51.) ) ) { lep_0_trig = true; single_lepton_trigger = true; }
 			}
 			else if (current_run_number <= 311481  && current_run_number >= 297730 ) {//2016
-				if (eleTrigMatch_1_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 				else if (muTrigMatch_0_trigger_matched && ( (HLT_mu26_ivarmedium && lep_0_pt > 27.) || (HLT_mu50 && lep_0_pt > 51.) ) ) { lep_0_trig = true; single_lepton_trigger = true; }
 			}
 			else if (current_run_number <= 341649 && current_run_number >= 323427 ) {//2017
-				if (eleTrigMatch_1_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 				else if (muTrigMatch_0_trigger_matched && ( (HLT_mu26_ivarmedium && lep_0_pt > 27. ) || (HLT_mu50 && lep_0_pt > 51.) ) ) { lep_0_trig = true; single_lepton_trigger = true; }
 			}
 			// Kinematic Cuts
@@ -639,7 +646,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			if (elec_0_id_medium == 1) {
 				lepton_certainty_check_2 = true; 
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
-				recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
+				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
 			}
 			// Barrel end-cap transition region veto for every electron we select
 			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;
@@ -714,8 +721,22 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 
 		// Trigger weighting
 		if ( (lep_0_trig || lep_1_trig) && !(lep_0_trig && lep_1_trig) ) {
-			recipe_weighting *= elec_0_NOMINAL_EleEffSF_SINGLE_E_2015_e24_lhmedium_L1EM20VH_OR_e60_lhmedium_OR_e120_lhloose_2016_2017_e26_lhtight_nod0_ivarloose_OR_e60_lhmedium_nod0_OR_e140_lhloose_nod0_MediumLLH_d0z0_v13_isolGradientLoose;
+
+			if (eleTrigMatch_0_trigger_matched) recipe_weighting *= elec_0_NOMINAL_EleEffSF_SINGLE_E_2015_e24_lhmedium_L1EM20VH_OR_e60_lhmedium_OR_e120_lhloose_2016_2017_e26_lhtight_nod0_ivarloose_OR_e60_lhmedium_nod0_OR_e140_lhloose_nod0_MediumLLH_d0z0_v13_isolGradientLoose;
+			else if (eleTrigMatch_1_trigger_matched) recipe_weighting *= elec_1_NOMINAL_EleEffSF_SINGLE_E_2015_e24_lhmedium_L1EM20VH_OR_e60_lhmedium_OR_e120_lhloose_2016_2017_e26_lhtight_nod0_ivarloose_OR_e60_lhmedium_nod0_OR_e140_lhloose_nod0_MediumLLH_d0z0_v13_isolGradientLoose;
+
+			else {
+				if (current_run_number <= 284484 && current_run_number >= 276262 ) { //2015
+					if (muTrigMatch_0_trigger_matched) recipe_weighting *= muon_0_NOMINAL_MuEffSF_HLT_mu20_iloose_L1MU15_OR_HLT_mu40_QualMedium_IsoNone; // 2015
+					else if (muTrigMatch_1_trigger_matched) recipe_weighting *= muon_1_NOMINAL_MuEffSF_HLT_mu20_iloose_L1MU15_OR_HLT_mu40_QualMedium_IsoNone; // 2015
+				}
+				else if ((current_run_number <= 311481  && current_run_number >= 297730 ) || (current_run_number <= 341649 && current_run_number >= 323427) )  {// 2016/17
+					if (muTrigMatch_0_trigger_matched) recipe_weighting *= muon_0_NOMINAL_MuEffSF_HLT_mu26_ivarmedium_OR_HLT_mu50_QualMedium_IsoNone; 
+					else if (muTrigMatch_1_trigger_matched) recipe_weighting *= muon_1_NOMINAL_MuEffSF_HLT_mu26_ivarmedium_OR_HLT_mu50_QualMedium_IsoNone; 
+				}
+			}
 		}
+
 		// No primary vertices
 		if (n_pvx >= 1) no_primary_vertices = true;
 
