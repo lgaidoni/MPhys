@@ -592,13 +592,13 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 		if (AnalysisType == "ElectronTau") { // lep_1 = elec_0, lep_0 = tau_0
 			// Single Lepton trigger - electrons only for lep_1
 			if (current_run_number <= 284484 && current_run_number >= 276262 ) {//2015
-				if (eleTrigMatch_0_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_1_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 			}
 			else if (current_run_number <= 311481  && current_run_number >= 297730 ) {//2016
-				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_1_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 			}
 			else if (current_run_number <= 341649 && current_run_number >= 323427 ) {//2017
-				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_1_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 			}
 			// Kinematic Cuts
 			if (lep_0_eta < 2.47 && lep_1_eta < 2.47) abs_eta_recipe_condition = true; // electron eta
@@ -621,15 +621,15 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 
 			// Single Lepton trigger - electrons for lep_1 , muon_0 = lep_0
 			if (current_run_number <= 284484 && current_run_number >= 276262 ) {//2015
-				if (eleTrigMatch_0_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_1_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 				else if (muTrigMatch_0_trigger_matched && ( (HLT_mu20_iloose_L1MU15 && lep_0_pt > 21.) || (HLT_mu50 && lep_0_pt > 51.) ) ) { lep_0_trig = true; single_lepton_trigger = true; }
 			}
 			else if (current_run_number <= 311481  && current_run_number >= 297730 ) {//2016
-				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_1_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 				else if (muTrigMatch_0_trigger_matched && ( (HLT_mu26_ivarmedium && lep_0_pt > 27.) || (HLT_mu50 && lep_0_pt > 51.) ) ) { lep_0_trig = true; single_lepton_trigger = true; }
 			}
 			else if (current_run_number <= 341649 && current_run_number >= 323427 ) {//2017
-				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
+				if (eleTrigMatch_1_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 				else if (muTrigMatch_0_trigger_matched && ( (HLT_mu26_ivarmedium && lep_0_pt > 27. ) || (HLT_mu50 && lep_0_pt > 51.) ) ) { lep_0_trig = true; single_lepton_trigger = true; }
 			}
 			// Kinematic Cuts
@@ -992,15 +992,15 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	}
 
 	if (ChainName.find("_Zee_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
+		QCD_weight_factor = -0.000246552 * jet_0_jet_1_mass + 1.00962;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Zmumu_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
+		QCD_weight_factor = -0.000240527 * jet_0_jet_1_mass + 1.03636;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Ztt_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
+		QCD_weight_factor = -0.000240527 * jet_0_jet_1_mass + 1.03636;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	
