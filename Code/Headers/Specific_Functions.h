@@ -142,7 +142,8 @@ void AllSignificanceCalc(string AnalysisType, string higgs_suffix) {
 	DataTypes.push_back("lep_0_lep_1_mass_reco_HIGH_E");
 
 	fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + AnalysisType + higgs_suffix + "_Significance_values.txt", output.out);
-	
+	output << "Data Type \t & Significance \t & \t Error" << endl << endl;
+
 	for (int i = 0; i < DataTypes.size(); i++) { 
 
 		string DataType = DataTypes[i]; // define the data type as the ith element in the DataTypes vector
@@ -171,7 +172,7 @@ void AllSignificanceCalc(string AnalysisType, string higgs_suffix) {
 		}
 
 		// save to file
-		output << "Data Type: " << DataTypes[i] + higgs_suffix << " & " << "Significance: " << SignificanceVector[i] << " & " << "Error: " << SignificanceErrorVector[i] << " \\ " << endl << endl;
+		output << DataTypes[i] + higgs_suffix << "\t & " << SignificanceVector[i] << " \t & " << SignificanceErrorVector[i] << endl << endl;
 
 	}
 	output.close();
