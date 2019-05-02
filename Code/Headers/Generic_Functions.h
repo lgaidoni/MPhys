@@ -579,7 +579,16 @@ double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedP
 			TH1F* histogram = histograms[i];
 			if (i != SelectedProcess) { //if NOT the selected process, calculate the background
 				N_events = histogram->Integral(); // gets no of events by integrating
+				double sum = 0;
+				for (int j = 1; j < 51; j++) {
+					double value = histogram->GetBinContent(j);
+					if (!(isnan(value))) sum += value;
+				}
+				N_events_manual = sum;
+				//cout << i << endl;
+				//cout << "N_Events = " << N_events << "   :   N_Events_Manual = " << N_events_manual << endl;
 				N_bkg += N_events;
+				N_bkg_manual += N_events_manual;
 			}
 			else N_signal = histogram->Integral();  // should get the signal number of events
 		}
@@ -592,9 +601,11 @@ double SignificanceLevelCalc(string AnalysisType, string DataType, int SelectedP
 }
 
 double SignificanceErrorCalc(string AnalysisType, string DataType, int SelectedProcess, vector<TFile*> root_files, vector<TH1F*> histograms, string higgs_suffix) { // 5,6,7 for ee, mumu, tautau
-
+	
 	double N_events = 0;
+	double N_events_manual = 0;
 	double N_bkg = 0;
+	double N_bkg_manual = 0;
 	double N_sig = 0;
 	double significance = 0;
 	double Err_N_bkg = 0;
@@ -608,8 +619,6 @@ double SignificanceErrorCalc(string AnalysisType, string DataType, int SelectedP
 	double prop_of_errors = 0;
 	double error = 0;
 
-
-
 	if (higgs_suffix == "_Higgs") {
 
 		for (int i=0; i<=15; i++) { //loop over the histograms for different data sets
@@ -617,19 +626,39 @@ double SignificanceErrorCalc(string AnalysisType, string DataType, int SelectedP
 				TH1F* histogram = histograms[i];
 				if (i != SelectedProcess) { //if NOT the selected process, calculate the background
 					N_events = histogram->Integral(); // gets no of events by integrating
+
+					double sum = 0;
+					for (int j = 1; j < 51; j++) {
+						double value = histogram->GetBinContent(j);
+						if (!(isnan(value))) sum += value;
+					}
+					N_events_manual = sum;
+					//cout << i << endl;
+					//cout << "N_Events = " << N_events << "   :   N_Events_Manual = " << N_events_manual << endl;
 					N_bkg += N_events;
+					N_bkg_manual += N_events_manual;
+					//cout << "N_bkg = " << N_bkg << "   :   N_bkg_manual = " << N_bkg_manual << endl;
 				}
 				else N_sig = histogram->Integral();  // should get the signal number of events
 			}
 		}
-	
+
 	} else {
 
 		for (int i=0; i<11; i++) { //loop over the histograms for different data sets
 			TH1F* histogram = histograms[i];
 			if (i != SelectedProcess) { //if NOT the selected process, calculate the background
 				N_events = histogram->Integral(); // gets no of events by integrating
+				double sum = 0;
+				for (int j = 1; j < 51; j++) {
+					double value = histogram->GetBinContent(j);
+					if (!(isnan(value))) sum += value;
+				}
+				N_events_manual = sum;
+				//cout << i << endl;
+				//cout << "N_Events = " << N_events << "   :   N_Events_Manual = " << N_events_manual << endl;
 				N_bkg += N_events;
+				N_bkg_manual += N_events_manual;
 			}
 			else N_sig = histogram->Integral();  // should get the signal number of events
 		}
@@ -637,21 +666,22 @@ double SignificanceErrorCalc(string AnalysisType, string DataType, int SelectedP
 	}
 
 	//Significance Calculation here
-	significance = N_sig/pow(N_sig+N_bkg,0.5);
+	significance = N_sig/pow(N_sig+N_bkg_manual,0.5);
 
 	// Error propagation here
 	// See Alice Lab book for explanation
 
-	Err_N_bkg = pow(N_bkg, 0.5);
+	Err_N_bkg = pow(N_bkg_manual, 0.5);
 	Err_N_sig = pow(N_sig, 0.5);
 	Err_N_bkg_sqrd = pow(Err_N_bkg, 2);
 	Err_N_sig_sqrd = pow(Err_N_sig, 2);
-	N_tot = N_bkg + N_sig;
+	N_tot = N_bkg_manual + N_sig;
 	Err_denominator = pow((Err_N_bkg_sqrd + Err_N_sig_sqrd),0.5);
 	Num_frac = Err_N_sig / N_sig;
 	Denom_frac = Err_denominator / N_tot;
 	prop_of_errors = pow( (pow(Num_frac, 2) + pow(Denom_frac,2)),0.5);
 	error = significance * prop_of_errors;
+
 
 	return error;
 
