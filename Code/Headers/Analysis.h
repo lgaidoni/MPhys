@@ -576,6 +576,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
 				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
 				//cout << "elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient: " << elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient << endl;
+
 			}
 			if (elec_1_id_medium == 1) {
 				lepton_certainty_check_2 = true; 
@@ -989,15 +990,15 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	}
 
 	if (ChainName.find("_Zee_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = -0.000246552 * jet_0_jet_1_mass + 1.00962;
+		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Zmumu_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = -0.000240527 * jet_0_jet_1_mass + 1.03636;
+		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Ztt_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = -0.000240527 * jet_0_jet_1_mass + 1.03636;
+		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	
@@ -1116,6 +1117,7 @@ bool MC_Analysis::Cuts(string region) {
 	bool pT_balance_limit = false;
 	bool pT_balance_3_limit = false;
 	bool rap_int_condition = RapidityIntervalCheck(jet_0_p4, jet_1_p4, jet_2_p4);
+	bool BDT_condition = false;
 
 	//Z Boson Mass Cut
 	if (lep_0_lep_1_mass >= 81 && lep_0_lep_1_mass <= 101) Z_mass_condition = true;	
@@ -1127,21 +1129,23 @@ bool MC_Analysis::Cuts(string region) {
 	if (jet_0_jet_1_mass > 250) leading_jets_invariant_mass = true; // invariant mass of 2 leading jets required to satisfy m_jj > 250 GeV
 
 	//pt balance limit Cut Condition
-	if (pT_balance < 0.15) pT_balance_limit = true;
+	if (pT_balance < 0.16) pT_balance_limit = true;
 
-	if (pT_balance_reco < 0.13) pT_balance_reco_condition = true;
+	if (pT_balance_reco < 0.14) pT_balance_reco_condition = true;
 
 	//pt balance 3 Cut Condition
-	if (pT_balance_3 < 0.15) pT_balance_3_limit = true;
+	if (pT_balance_3 < 0.16) pT_balance_3_limit = true;
 
 	//ptvarcone cuts
 	if (lep_0_iso_ptvarcone40 < 0.1) ptvarcone_40_0 = true; 
 	if (lep_1_iso_ptvarcone40 < 0.1) ptvarcone_40_1 = true;
 	
 	//Centrality cuts
-	if (Centrality >= -2 && Centrality <= 2) centrality_condition = true;
+	if (Centrality >= -1.92 && Centrality <= 1.92) centrality_condition = true;
 	
-	if (DeltaPhi < 2.72825) delta_phi_condition = true;
+	if (DeltaPhi < 2.5) delta_phi_condition = true;
+
+	if (tau_0_jet_BDT_SCORE > 0) BDT_condition = true;
 
 	//If the region is an except region, make the relevant condition always true to see more of that histogram.
 	if (region == "EXCEPT_Z_mass_condition" && !(bjets_region)) 		Z_mass_condition = true;
@@ -1153,6 +1157,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "EXCEPT_pT_balance_3_limit" && !(bjets_region)) 		pT_balance_3_limit = true;
 	if (region == "EXCEPT_centrality_condition" && !(bjets_region)) 	centrality_condition = true;
 	if (region == "EXCEPT_delta_phi_condition" && !(bjets_region)) 		delta_phi_condition = true;
+	if (region == "EXCEPT_BDT_condition" && !(bjets_region)) 		BDT_condition = true;
 
 	//If the region is the bjet region, make the mass condition true, so that the full mass spectrum can be seen 
 	if (region == "bjet") Z_mass_condition = true;
@@ -1161,7 +1166,7 @@ bool MC_Analysis::Cuts(string region) {
 	if (region == "high_energy") {
 
 		leading_jets_invariant_mass = false;
-		if (jet_0_jet_1_mass > 1449.75) leading_jets_invariant_mass = true;
+		if (jet_0_jet_1_mass > 1500) leading_jets_invariant_mass = true;
 
 	}
 
@@ -1195,7 +1200,7 @@ bool MC_Analysis::Cuts(string region) {
 		custom_cuts = false;
 
 		if (region == "EXCEPT_delta_phi_condition" && bjets_region == false) delta_phi_condition = true;
-		if (centrality_condition && delta_phi_condition && pT_balance_reco_condition & non_reconstructed_mass_condition) custom_cuts = true;
+		if (centrality_condition && delta_phi_condition && pT_balance_reco_condition && non_reconstructed_mass_condition && BDT_condition) custom_cuts = true;
 		
 		pT_balance_limit = true; // pT balance cut taken out
 		pT_balance_3_limit = true; // pT balance 3 cut taken out
@@ -1332,6 +1337,11 @@ void MC_Analysis::Fill(string region) {
 				h_pT_balance_reco_EXCEPT->Fill(pT_balance_reco, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
 				h_pT_balance_reco_EXCEPT_FINE->Fill(pT_balance_reco, final_weighting);
 				EXCEPT_pT_balance_reco_condition = true;
+			}
+
+			if (Cuts("EXCEPT_BDT_condition")) {
+				h_tau_0_jet_BDT_SCORE_EXCEPT->Fill(tau_0_jet_BDT_SCORE, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
+				h_tau_0_jet_BDT_SCORE_EXCEPT_FINE->Fill(tau_0_jet_BDT_SCORE, final_weighting);
 			}
 
 			if (Cuts("EXCEPT_non_reconstructed_mass_condition")) {
