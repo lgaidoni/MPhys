@@ -63,17 +63,17 @@ void All_Draw_Weighted_Histo_And_Ratio_HIGGS() {
 
 	vector<TFile*> ElectronFiles = Root_Files("Electron", "_Higgs");
 
-	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zee", -0.000246552, 1.00962, 50, false, ElectronFiles);
-	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zee", -0.000246552, 1.009621, 50, true, ElectronFiles);
-	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", -0.000246552, 1.00962, 50, false, ElectronFiles);
-	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", -0.000246552, 1.00962, 50, true, ElectronFiles);
+	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zee", 0, 1, 50, false, ElectronFiles);
+	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zee", -0.000246994, 1.04378, 50, true, ElectronFiles);
+	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", 0, 1, 50, false, ElectronFiles);
+	Draw_Weighted_Histo_And_Ratio("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", -0.000246994, 1.04378, 50, true, ElectronFiles);
 
 	vector<TFile*> MuonFiles = Root_Files("Muon", "_Higgs");
 
-	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zmumu", -0.000240527, 1.03636, 50, false, MuonFiles);
-	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zmumu", -0.000240527, 1.03636, 50, true, MuonFiles);
-	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass", "Zmumu", -0.000240527, 1.03636, 50, false, MuonFiles);
-	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass", "Zmumu", -0.000240527, 1.03636, 50, true, MuonFiles);
+	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zmumu", 0, 1, 50, false, MuonFiles);
+	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass_CONTROL", "Zmumu", 0, 1, 50, true, MuonFiles);
+	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass", "Zmumu", 0, 1, 50, false, MuonFiles);
+	Draw_Weighted_Histo_And_Ratio("Muon", "_Higgs", "jet_0_jet_1_mass", "Zmumu", 0, 1, 50, true, MuonFiles);
 
 }
 
@@ -81,8 +81,8 @@ void All_Cross_Section_Calculation_QCD_EW_ll_Specific_HIGGS() {
 
 	vector<TFile*> ElectronFiles = Root_Files("Electron", "_Higgs");
 
-	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", "Zee2jets", -0.000246552, 1.00962, 50, false, "308092", ElectronFiles);
-	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", "Zee2jets", -0.000246552, 1.00962, 50, true, "308092", ElectronFiles);
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", "Zee2jets", -0.000246994, 1.04378, 50, false, "308092", ElectronFiles);
+	Cross_Section_Calculation_QCD_EW_ll_Specific("Electron", "_Higgs", "jet_0_jet_1_mass", "Zee", "Zee2jets", -0.000246994, 1.04378, 50, true, "308092", ElectronFiles);
 
 	vector<TFile*> MuonFiles = Root_Files("Muon", "_Higgs");
 
