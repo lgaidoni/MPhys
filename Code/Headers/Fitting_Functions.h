@@ -563,7 +563,7 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 	histogramStack->GetYaxis()->SetLabelSize(0.);
 
 	//TGaxis(x-Start, y-Start, x-End, y-End, N Divisions, Final Axis Value, 510, "G")
-	TGaxis *axis = new TGaxis(0, 1, 0, 10000, 1, 10000, 510, "G");
+	TGaxis *axis = new TGaxis(70, 1, 70, 10000, 1, 10000, 510, "G");
 	axis->SetLabelFont(43); // Absolute font size in pixel (precision 3)
 	axis->SetLabelSize(17);
 	axis->SetTitleFont(43);
@@ -579,7 +579,7 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 
 	pad1->Update();
 
-	Legend_Creator(histograms, 0.93, 0.925, 0.83, 0.40, 0.05, 0, higgs_suffix);
+	Legend_Creator(histograms, 0.93, 0.939, 0.83, 0.33, 0.05, 0, higgs_suffix);
 	Draw_Region(DataType, 0.05, 0.675, 0.90, 0.675, 0.81, 0.675, 0.72, higgs_suffix);
 
 	canvas->cd();
@@ -599,7 +599,7 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 	string yAxisTitle = "#frac{Data "+ Process + "}{MC " + Process + "}";
 
 	//TGaxis(x-Start, y-Start, x-End, y-End, Initial Axis Value, Final Axis Value, 510, "G")
-	TGaxis *axis2 = new TGaxis(0, 0, 0, 2.999, 0.000001, 2.999, 505, "");
+	TGaxis *axis2 = new TGaxis(70, 0, 70, 2.999, 0.000001, 2.999, 505, "");
 	axis2->SetLabelFont(43); // Absolute font size in pixel (precision 3)
 	axis2->SetLabelSize(16);
 	axis2->SetTitleFont(43);
@@ -609,7 +609,7 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 	axis2->Draw();
 
 	//TGaxis(x-Start, y-Start, x-End, y-End, Initial Axis Value, Final Axis Value, 510, "G")
-	TGaxis *axis3 = new TGaxis(0, 0, comparisonHistogram->GetXaxis()->GetXmax(), 0, 0, comparisonHistogram->GetXaxis()->GetXmax(), 510, "");
+	TGaxis *axis3 = new TGaxis(70, 0, comparisonHistogram->GetXaxis()->GetXmax(), 0, 0, comparisonHistogram->GetXaxis()->GetXmax(), 510, "");
 	axis3->SetLabelFont(43); // Absolute font size in pixel (precision 3)
 	axis3->SetLabelSize(18);
 	axis3->SetTitleFont(43);

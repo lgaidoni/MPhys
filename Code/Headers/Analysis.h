@@ -679,12 +679,20 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 				recipe_weighting *= muon_0_NOMINAL_MuEffSF_Reco_QualMedium; // reco weights
 				recipe_weighting *= muon_0_NOMINAL_MuEffSF_IsoGradient;
 				recipe_weighting *= muon_0_NOMINAL_MuEffSF_TTVA; // muon isolation weights
+
+				//if (muon_0_NOMINAL_MuEffSF_Reco_QualMedium > 1.2 || muon_0_NOMINAL_MuEffSF_Reco_QualMedium < 0.8) cout << endl << "muon_0_NOMINAL_MuEffSF_Reco_QualMedium = " << muon_0_NOMINAL_MuEffSF_Reco_QualMedium << endl << endl;
+				//if (muon_0_NOMINAL_MuEffSF_IsoGradient > 1.2 || muon_0_NOMINAL_MuEffSF_IsoGradient < 0.8) cout << endl << "muon_0_NOMINAL_MuEffSF_IsoGradient = " << muon_0_NOMINAL_MuEffSF_IsoGradient << endl << endl;
+				//if (muon_0_NOMINAL_MuEffSF_TTVA > 1.2 || muon_0_NOMINAL_MuEffSF_TTVA < 0.8) cout << endl << "muon_0_NOMINAL_MuEffSF_TTVA = " << muon_0_NOMINAL_MuEffSF_TTVA << endl << endl;
 			}
 			if (muon_1_id_medium == 1) {
 				lepton_certainty_check_2 = true; 
 				recipe_weighting *= muon_1_NOMINAL_MuEffSF_Reco_QualMedium; // reco weights
 				recipe_weighting *= muon_1_NOMINAL_MuEffSF_IsoGradient; 
 				recipe_weighting *= muon_1_NOMINAL_MuEffSF_TTVA; // muon isolation weights
+
+				//if (muon_1_NOMINAL_MuEffSF_Reco_QualMedium > 1.2 || muon_1_NOMINAL_MuEffSF_Reco_QualMedium < 0.8) cout << endl << "muon_1_NOMINAL_MuEffSF_Reco_QualMedium = " << muon_1_NOMINAL_MuEffSF_Reco_QualMedium << endl << endl;
+				//if (muon_1_NOMINAL_MuEffSF_IsoGradient > 1.2 || muon_1_NOMINAL_MuEffSF_IsoGradient < 0.8) cout << endl << "muon_1_NOMINAL_MuEffSF_IsoGradient = " << muon_1_NOMINAL_MuEffSF_IsoGradient << endl << endl;
+				//if (muon_1_NOMINAL_MuEffSF_TTVA > 1.2 || muon_1_NOMINAL_MuEffSF_TTVA < 0.8) cout << endl << "muon_1_NOMINAL_MuEffSF_TTVA = " << muon_1_NOMINAL_MuEffSF_TTVA << endl << endl;
 			}
 		}
 
@@ -1148,7 +1156,7 @@ bool MC_Analysis::Cuts(string region) {
 	
 	if (DeltaPhi < 2.5) delta_phi_condition = true;
 
-	if (tau_0_jet_BDT_SCORE > 0) BDT_condition = true;
+	if (tau_0_jet_BDT_SCORE_TRANS > 0.3) BDT_condition = true;
 
 	//If the region is an except region, make the relevant condition always true to see more of that histogram.
 	if (region == "EXCEPT_Z_mass_condition" && !(bjets_region)) 		Z_mass_condition = true;
@@ -1201,6 +1209,8 @@ bool MC_Analysis::Cuts(string region) {
 		if (region == "EXCEPT_pT_balance_reco_condition" && bjets_region == false) pT_balance_reco_condition = true;
 
 		custom_cuts = false;
+
+		if (AnalysisType == "ElectronMuon") BDT_condition = true;
 
 		if (region == "EXCEPT_delta_phi_condition" && bjets_region == false) delta_phi_condition = true;
 		if (centrality_condition && delta_phi_condition && pT_balance_reco_condition && non_reconstructed_mass_condition && BDT_condition) custom_cuts = true;
@@ -1343,8 +1353,8 @@ void MC_Analysis::Fill(string region) {
 			}
 
 			if (Cuts("EXCEPT_BDT_condition")) {
-				h_tau_0_jet_BDT_SCORE_EXCEPT->Fill(tau_0_jet_BDT_SCORE, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
-				h_tau_0_jet_BDT_SCORE_EXCEPT_FINE->Fill(tau_0_jet_BDT_SCORE, final_weighting);
+				h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT->Fill(tau_0_jet_BDT_SCORE_TRANS, final_weighting); //Fill the EXCEPT histogram for DeltaPhi
+				h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT_FINE->Fill(tau_0_jet_BDT_SCORE_TRANS, final_weighting);
 			}
 
 			if (Cuts("EXCEPT_non_reconstructed_mass_condition")) {
@@ -1782,7 +1792,9 @@ void MC_Analysis::DrawHistos(string higgs_suffix) {
 	DrawHistogram(h_tau_0_ele_BDT_SCORE_TRANS, "h_tau_0_ele_BDT_SCORE_TRANS", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
 	DrawHistogram(h_tau_0_ele_BDT_SCORE, "h_tau_0_ele_BDT_SCORE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
 	DrawHistogram(h_tau_0_jet_BDT_SCORE, "h_tau_0_jet_BDT_SCORE", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
-	DrawHistogram(h_tau_0_jet_BDT_SCORE_TRANS, "h_tau_0_jet_BDT_SCORE_TRANS", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_tau_0_jet_BDT_SCORE_TRANS, "h_tau_0_jet_BDT_SCORE_TRANS", ";;Events", false, !(draw_histograms), ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT, "h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT", ";;Events", false, !(draw_histograms), ChainName, AnalysisType, higgs_suffix);
+	DrawHistogram(h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT_FINE, "h_tau_0_jet_BDT_SCORE_TRANS_EXCEPT_FINE", ";;Events", false, !(draw_histograms), ChainName, AnalysisType, higgs_suffix);
 
 	//ptvar cone histograms
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_lep_1_iso_ptvarcone40_PRE, h_lep_1_iso_ptvarcone40, h_lep_1_iso_ptvarcone40_CONTROL, h_lep_1_iso_ptvarcone40_EXCEPT, "ptvarcone40 for lepton 1", "Pre Cut", "Post Cut", "Control", "Except", "h_lep_1_iso_ptvarcone40", ";Momentum [GeV/c];Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
@@ -1860,13 +1872,13 @@ void MC_Analysis::DrawHistos(string higgs_suffix) {
 	DrawHistogram_PRE_SEARCH_CONTROL_EXCEPT(h_DeltaPhi_reco_OUTSIDE_PRE, h_DeltaPhi_reco_OUTSIDE, h_DeltaPhi_reco_OUTSIDE_CONTROL, h_DeltaPhi_reco_OUTSIDE_EXCEPT, "\\Delta Phi_reco_OUTSIDE", "Pre-Cut", "Post Cut", "Control", "Except", "h_DeltaPhi_reco_OUTSIDE", ";Delta Phi_reco_OUTSIDE;Events", true, draw_histograms, ChainName, AnalysisType, higgs_suffix);
 
 	// 2D POLAR HISTOGRAMS
-  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
-  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
-  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+  	DrawHistogram2D(h_Mass_Favour_Combination_2D, "h_Mass_Favour_Combination_2D", ";#Omega (0 = leptonic, 1 = hadronic);m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D, "h_Mass_Favour_Combination_INSIDE_2D", ";#Omega (0 = leptonic, 1 = hadronic);m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D, "h_Mass_Favour_Combination_OUTSIDE_2D", ";#Omega (0 = leptonic, 1 = hadronic);m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D, "h_Mass_DeltaPhi_Combination_2D", ";Delta Phi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D, "h_Mass_DeltaPhi_Combination_INSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D, "h_Mass_DeltaPhi_Combination_2D", ";#Delta #Phi;m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D, "h_Mass_DeltaPhi_Combination_INSIDE_2D", ";#Delta #Phi;m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D", ";#Delta #Phi;m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
 
 	//BJET GRAPHS
@@ -1951,13 +1963,13 @@ void MC_Analysis::DrawHistos(string higgs_suffix) {
 	DrawHistogram(h_lep_1_invis_energy_TRUTH, "h_lep_1_invis_energy_TRUTH", ";;Events", false, true, ChainName, AnalysisType, higgs_suffix);
 
 	// 2D POLAR TRUTH HISTOGRAMS
-  	DrawHistogram2D(h_Mass_Favour_Combination_2D_TRUTH, "h_Mass_Favour_Combination_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
-  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D_TRUTH, "h_Mass_Favour_Combination_INSIDE_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
-  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH, "h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH", ";Type Favour (0 = leptonic, 1 = hadronic);Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+  	DrawHistogram2D(h_Mass_Favour_Combination_2D_TRUTH, "h_Mass_Favour_Combination_2D_TRUTH", ";#Omega (0 = leptonic, 1 = hadronic);m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_Favour_Combination_INSIDE_2D_TRUTH, "h_Mass_Favour_Combination_INSIDE_2D_TRUTH", ";#Omega (0 = leptonic, 1 = hadronic);m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH, "h_Mass_Favour_Combination_OUTSIDE_2D_TRUTH", ";#Omega (0 = leptonic, 1 = hadronic);m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D_TRUTH, "h_Mass_DeltaPhi_Combination_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
-  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH", ";DeltaPhi;Reconstructed Invariant Mass[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_2D_TRUTH, "h_Mass_DeltaPhi_Combination_2D_TRUTH", ";#Delta #Phi;m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_INSIDE_2D_TRUTH", ";#Delta #Phi;m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);
+  	DrawHistogram2D(h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH, "h_Mass_DeltaPhi_Combination_OUTSIDE_2D_TRUTH", ";#Delta #Phi;m_{ll}^{reco}[GeV/c^{2}]", false, draw_histograms, ChainName, AnalysisType, higgs_suffix);	
 
 
 	Histograms->Close();
