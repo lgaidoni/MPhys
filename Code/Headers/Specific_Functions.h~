@@ -171,7 +171,7 @@ void AllSignificanceCalc(string AnalysisType, string higgs_suffix) {
 		}
 
 		// save to file
-		output << "Data Type: " << DataTypes[i] + higgs_suffix << " & " << "Significance: " << SignificanceVector[i] << " & " << "Error: " << SignificanceErrorVector[i] << " \\ " << endl << endl;
+		output << "Data Type: " << DataTypes[i] + higgs_suffix << " & " << "Significance: " << SignificanceVector[i] << " & " << "Error: " << SignificanceErrorVector[i] << "\\" << endl << endl;
 
 	}
 	output.close();
