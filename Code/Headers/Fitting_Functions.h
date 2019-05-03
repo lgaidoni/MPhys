@@ -65,7 +65,7 @@ TH1F* MC_DATA_Comparison(vector<TH1F*> histograms, int SelectedProcess, string h
 		//For all the non-data histograms in the histogram vector
 		for (int i=0; i <= 15; i++) {
 			if (i != 11) {
-				//If the process isn't the selected process
+				//If the process is the selected process
 				if (i == SelectedProcess) {
 					TH1F *histogram = histograms[i]; 
 					/*
@@ -116,6 +116,38 @@ TH1F* MC_DATA_Comparison(vector<TH1F*> histograms, int SelectedProcess, string h
 }
 
 //This function will return the histogram that is the Data Process divided by the MC Process
+TH1F* MC_DATA_Comparison_EE_MM(vector<TH1F*> histograms, int SelectedProcess, string higgs_suffix) {
+	
+	//Get the data histogram from the vector
+	TH1F *dataHistogram = (TH1F*)histograms[11]->Clone();
+
+	//For all the non-data histograms in the histogram vector
+	for (int i=0; i <= 15; i++) {
+		if (!(i == 11 || i == 6 || i == 7 || i == 9 || i == 10)) {
+			//If the process is the selected process
+			if (i != 8) {
+				TH1F *histogram = histograms[i];
+				dataHistogram->Add(histogram, -1);
+			}
+		}
+	}
+
+	//For all the non-data histograms in the histogram vector
+	for (int i=0; i <= 15; i++) {
+		if (!(i == 11 || i == 6 || i == 7 || i == 9 || i == 10)) {
+			//If the process isn't the selected process
+			if (i == 8) {
+				TH1F *histogram = histograms[i]; 
+				dataHistogram->Divide(histogram);  //Divide the reduced data histogram by the selected process's histogram
+			}
+		}
+	}
+
+	return dataHistogram;
+
+}
+
+//This function will return the histogram that is the Data Process divided by the MC Process
 TH1F* Two_Process_Data_Subtraction(vector<TH1F*> histograms, int SelectedProcess1, int SelectedProcess2, string higgs_suffix) {
 	
 	//Get the data histogram from the vector
@@ -145,6 +177,28 @@ TH1F* Two_Process_Data_Subtraction(vector<TH1F*> histograms, int SelectedProcess
 		}
 	}
 
+
+	return dataHistogram;
+
+}
+
+//This function will return the histogram that is the Data Process divided by the MC Process
+TH1F* Two_Process_Data_Subtraction_EE_MM(vector<TH1F*> histograms, string higgs_suffix) {
+	
+	//Get the data histogram from the vector
+	TH1F *dataHistogram = (TH1F*)histograms[11]->Clone();
+
+	//For all the non-data histograms in the histogram vector
+	for (int i=0; i < 15; i++) {
+		if (i != 11) {
+			//If the process isn't the selected process
+			if (!(i == 5 || i == 6 || i == 7 || i == 8 || i == 9 || i == 10)) {
+				//Process_Selector_Confirmation(i);
+				TH1F *histogram = histograms[i];
+				dataHistogram->Add(histogram, -1);
+			}
+		}
+	}
 
 	return dataHistogram;
 
@@ -209,6 +263,36 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 				}
 			}
 		}
+	}
+
+	return histogram;
+
+}
+
+TH1F* Weight_Process_Histogram_EE_MM(vector<TH1F*> histograms, double m2, double m, double c, double bins, string higgs_suffix) { 
+
+	TH1F *histogram;
+
+	histogram = histograms[8];
+
+	double xmin = histogram->GetXaxis()->GetXmin();
+	double xmax = histogram->GetXaxis()->GetXmax();
+	double binwidth = (xmax - xmin)/bins;
+
+	for(int j=0; j < bins + 1; j++) {
+
+		double bin_centre = binwidth * j;
+		double bin_content = histogram->GetBinContent(j);
+		double fit_y = m2 * pow(bin_centre, 2) + m * bin_centre + c;
+		cout << "fit_y = " << fit_y << "   :   bin_centre = " << bin_centre << endl;
+		/*
+		cout << "Bin centre: " << bin_centre << " ";
+		cout << "Bin content: " << bin_content << " ";
+		cout << "fit_y: " << fit_y << " ";
+		cout << "nbc: " << fit_y * bin_content << endl;
+		*/
+		histogram->SetBinContent(j, fit_y * bin_content);
+
 	}
 
 	return histogram;
@@ -558,12 +642,12 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 		}
 	}
 	histogramStack->SetMinimum(5);
-	histogramStack->SetMaximum(10000);
+	histogramStack->SetMaximum(30000);
 	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
 	histogramStack->GetYaxis()->SetLabelSize(0.);
 
 	//TGaxis(x-Start, y-Start, x-End, y-End, N Divisions, Final Axis Value, 510, "G")
-	TGaxis *axis = new TGaxis(70, 1, 70, 10000, 1, 10000, 510, "G");
+	TGaxis *axis = new TGaxis(70, 1, 70, 30000, 1, 30000, 510, "G");
 	axis->SetLabelFont(43); // Absolute font size in pixel (precision 3)
 	axis->SetLabelSize(17);
 	axis->SetTitleFont(43);
@@ -576,6 +660,11 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 
 	TH1F *NewDataHistogram = (TH1F*)histograms[11]->Clone();
 	NewDataHistogram->Draw("SAME");
+
+	NewDataHistogram->Sumw2();
+	NewDataHistogram->SetLineColor(kBlack);
+	NewDataHistogram->SetMarkerStyle(8);
+	NewDataHistogram->SetMarkerSize(0.3);
 
 	pad1->Update();
 
@@ -618,9 +707,11 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 	axis3->SetTitle(Histogram_Namer(DataType).c_str());
 	axis3->Draw(); 
 
-	TF1 *fit = new TF1("fit", "pol1", comparisonHistogram->GetXaxis()->GetXmin(), 3000);
+	TF1 *fit = new TF1("fit", "pol1", 250, 4500);
 
 	comparisonHistogram->Fit("fit");
+
+	
 
 	fit->Draw("SAME");
 
@@ -636,6 +727,165 @@ void Draw_Weighted_Histo_And_Ratio(string AnalysisType, string higgs_suffix, str
 
 	//Create the full output file path
 	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_" + AnalysisType + higgs_suffix + "_Fitted" + weighted + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	
+	//Write out to a PDF file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+
+}
+
+void Draw_Weighted_Histo_And_Ratio_EE_MM(string higgs_suffix, string DataType, double m2, double m, double c, double bins, bool weight, vector<TFile*> root_files1, vector<TFile*> root_files2, bool merge) {
+
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files1, root_files2);
+
+	if (merge) {
+		for (int i=0; i <= 15; i++) {
+			histograms[i]->Rebin();
+		}
+	}
+
+	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
+
+	gStyle->SetOptStat(0);
+
+	//TPad(Name, Options, x-min, y-min, x-max, y-max, something else)
+	TPad *pad1 = new TPad("pad1", "", 0.0, 0.25, 1.0, 1.0, 0);
+	TPad *pad2 = new TPad("pad2", "", 0.0, 0.0, 1.0, 0.25, 0);
+
+	pad1->SetTopMargin(0.05);
+	pad1->SetBottomMargin(0);
+	pad1->SetLeftMargin(0.085);
+	pad1->SetRightMargin(0.04);
+	pad1->Draw();
+
+	pad2->SetTopMargin(0);
+	pad2->SetBottomMargin(0.45);
+	pad2->SetLeftMargin(0.085);
+	pad2->SetRightMargin(0.04);
+	pad2->Draw();
+
+	pad1->cd();
+
+	//Selector for the process not to be subtracted
+	int SelectedProcess = Process_Selector("Ztt");
+
+	//Get the data histogram from the vector
+	TH1F *dataHistogram = histograms[11];
+
+	histograms[5]->Add(histograms[6]);
+	histograms[5]->Add(histograms[7]);
+
+	histograms[8]->Add(histograms[9]);
+	histograms[8]->Add(histograms[10]);
+	
+	if (weight) {
+		histograms[8] = Weight_Process_Histogram_EE_MM(histograms, m2, m, c, bins, higgs_suffix);
+	}
+
+	gPad->SetLogy();
+
+	//Create the stacked histogram
+	THStack *histogramStack = new THStack("histogramStack", "");
+
+	histograms = Set_Histogram_Styles(histograms, higgs_suffix);
+
+	//  and add to the stack
+	for (int i=0; i <= 15; i++) {
+		if (!(i == 11 || i == 6 || i == 7 || i == 9 || i == 10)) histogramStack->Add(histograms[i], "hist");
+	}
+
+	histogramStack->SetMinimum(5);
+	histogramStack->SetMaximum(80000);
+
+	histograms[8]->SetLineColor(kBlack);
+	histograms[8]->SetFillColor(kBlue-7);
+	histograms[8]->SetFillStyle(1001);
+
+	histograms[5]->SetLineColor(kBlack);
+	histograms[5]->SetFillColor(kBlue-10);
+	histograms[5]->SetFillStyle(1001);
+
+	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
+	histogramStack->GetYaxis()->SetLabelSize(0.);
+
+	//TGaxis(x-Start, y-Start, x-End, y-End, N Divisions, Final Axis Value, 510, "G")
+	TGaxis *axis = new TGaxis(70, 1, 70, 30000, 1, 30000, 510, "G");
+	axis->SetLabelFont(43); // Absolute font size in pixel (precision 3)
+	axis->SetLabelSize(17);
+	axis->SetTitleFont(43);
+	axis->SetTitleSize(17);
+	axis->SetTitleOffset(0.9);
+	axis->SetTitle("Events");
+	axis->Draw();
+
+	Histogram_Namer(histogramStack, DataType);
+
+	TH1F *NewDataHistogram = (TH1F*)histograms[11]->Clone();
+	NewDataHistogram->Draw("SAME");
+
+	NewDataHistogram->Sumw2();
+	NewDataHistogram->SetLineColor(kBlack);
+	NewDataHistogram->SetMarkerStyle(8);
+	NewDataHistogram->SetMarkerSize(0.3);
+
+	pad1->Update();
+
+	Legend_Creator_Combo(histograms, 0.93, 0.939, 0.83, 0.33, 0.05, 0, higgs_suffix);
+	Draw_Region(DataType, 0.06, 0.65, 0.90, 0.65, 0.81, 0.65, 0.72, higgs_suffix);
+
+	canvas->cd();
+	pad2->cd();
+
+	//Get the data histogram from the vector
+	TH1F *comparisonHistogram = MC_DATA_Comparison_EE_MM(histograms, 8, higgs_suffix);
+
+	comparisonHistogram->SetMinimum(0);
+	comparisonHistogram->SetMaximum(3);
+	comparisonHistogram->Draw();
+	comparisonHistogram->GetXaxis()->SetLabelSize(0.);
+	comparisonHistogram->GetXaxis()->SetTickLength(0);
+	comparisonHistogram->GetYaxis()->SetLabelSize(0.);
+	comparisonHistogram->GetYaxis()->SetTickLength(0);
+
+	string yAxisTitle = "#frac{Data QCD}{MC QCD}";
+
+	//TGaxis(x-Start, y-Start, x-End, y-End, Initial Axis Value, Final Axis Value, 510, "G")
+	TGaxis *axis2 = new TGaxis(70, 0, 70, 2.999, 0.000001, 2.999, 505, "");
+	axis2->SetLabelFont(43); // Absolute font size in pixel (precision 3)
+	axis2->SetLabelSize(16);
+	axis2->SetTitleFont(43);
+	axis2->SetTitleSize(16);
+	axis2->SetTitleOffset(0.75);
+	axis2->SetTitle(yAxisTitle.c_str());
+	axis2->Draw();
+
+	//TGaxis(x-Start, y-Start, x-End, y-End, Initial Axis Value, Final Axis Value, 510, "G")
+	TGaxis *axis3 = new TGaxis(70, 0, comparisonHistogram->GetXaxis()->GetXmax(), 0, 0, comparisonHistogram->GetXaxis()->GetXmax(), 510, "");
+	axis3->SetLabelFont(43); // Absolute font size in pixel (precision 3)
+	axis3->SetLabelSize(18);
+	axis3->SetTitleFont(43);
+	axis3->SetTitleSize(17);
+	axis3->SetTitleOffset(4);
+	axis3->SetTitle(Histogram_Namer(DataType).c_str());
+	axis3->Draw(); 
+
+	TF1 *fit = new TF1("fit", "pol2", comparisonHistogram->GetXaxis()->GetXmin(), 3000);
+
+	comparisonHistogram->Fit("fit");
+
+	fit->Draw("SAME");
+
+	cout << fit->GetParameter(0) << endl;
+
+	string weighted = "";
+	if (weight) weighted = "_Weighted";
+
+
+	fstream output("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_EE_MM" + higgs_suffix + "_Fitted" + weighted + "_Parameters.txt", output.out);
+	output << fit->GetParameter(0) << endl << fit->GetParError(0) << endl << fit->GetParameter(1) << endl << fit->GetParError(1) << endl << fit->GetParameter(2) << endl << fit->GetParError(2) << endl << fit->GetNDF() << endl << fit->GetChisquare() << endl << fit->GetChisquare()/fit->GetNDF() << endl << fit->GetProb();
+	output.close();
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_EE_MM" + higgs_suffix + "_Fitted" + weighted + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
 	
 	//Write out to a PDF file
 	canvas->SaveAs(FullOutputFilePath.c_str());
@@ -774,6 +1024,168 @@ void Cross_Section_Calculation_QCD_EW_ll_Specific(string AnalysisType, string hi
 	cout << "EW Cross Section:     " << info[1] * scale_factor_Process2 << " +/- " << cross_section_error << endl;
 
 	fstream output2("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_" + AnalysisType + higgs_suffix + "_Cross_Section.txt", output2.out);
+	output2 << "MC Cross Section:     " << info[1] << endl;
+	output2 << "QCD Scale Factor:     " << scale_factor_Process1 << " +/- " << scale_factor_Process1_Error << endl;
+	output2 << "EW Scale Factor:      " << scale_factor_Process2 << " +/- " << scale_factor_Process2_Error << endl;
+	output2 << "EW Cross Section:     " << info[1] * scale_factor_Process2 << " +/- " << cross_section_error  << endl;
+	output2.close();
+
+}
+
+//Function to calculate the Cross section for two leptons, takes QCD process as Process1, EW process as Process2
+void Cross_Section_Calculation_QCD_EW_EE_MM(string higgs_suffix, string DataType, double m2, double m, double c, double bins, bool scale, string ID, vector<TFile*> root_files1, vector<TFile*> root_files2) {
+
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files1, root_files2);
+	gStyle->SetOptStat(0);
+
+	//Selector for the process not to be subtracted
+	int SelectedProcess1 = 8;
+	int SelectedProcess2 = 5;
+
+
+	histograms[5]->Add(histograms[6]);
+	histograms[5]->Add(histograms[7]);
+
+	histograms[8]->Add(histograms[9]);
+	histograms[8]->Add(histograms[10]);
+	
+
+	histograms[SelectedProcess1] = Weight_Process_Histogram_EE_MM(histograms, m2, m, c, bins, higgs_suffix);
+
+	TH1F *TwoProcessSubtractedDataHistogram = Two_Process_Data_Subtraction_EE_MM(histograms, higgs_suffix);
+
+	TH1F *data = (TH1F*)TwoProcessSubtractedDataHistogram->Clone();
+	TH1F *h1 = (TH1F*)histograms[SelectedProcess1]->Clone();
+	TH1F *h2 = (TH1F*)histograms[SelectedProcess2]->Clone();
+
+	RooRealVar x("x", "x", 250., 3000.);  
+
+	RooDataHist roofit_h1("roofit_h1", "roofit_h1", x, h1);   
+	RooRealVar c1("c1", "c1", 0., 500000.); 
+
+	RooDataHist roofit_h2("roofit_h2", "roofit_h2", x, h2);   
+	RooRealVar c2("c2", "c2", 0., 500000.); 
+
+	RooHistPdf pdf_roofit_h1("pdf_roofit_h1", "pdf_roofit_h1", x, roofit_h1);   
+	RooHistPdf pdf_roofit_h2("pdf_roofit_h2", "pdf_roofit_h2", x, roofit_h2); 
+
+	RooAddPdf model("model", "(c1*pdf_roofit_h1)+(c2*pdf_roofit_h2)", RooArgList(pdf_roofit_h1, pdf_roofit_h2), RooArgList(c1,c2));  
+
+	RooDataHist datah("datah", "dataset with x", x, data);
+	
+	model.fitTo(datah);
+
+	double n_Process1;
+	double n_Process2;
+
+	double normalised_scale_factor_Process1 = c1.getVal();
+	double normalised_scale_factor_Process1_Error = c1.getError();
+
+	double normalised_scale_factor_Process2 = c2.getVal();
+	double normalised_scale_factor_Process2_Error = c2.getError();
+
+	RooPlot* frame = x.frame();
+	datah.plotOn(frame);
+	model.plotOn(frame);
+
+	roofit_h1.plotOn(frame);
+	n_Process1 = frame->getFitRangeNEvt();
+
+	roofit_h2.plotOn(frame);
+	n_Process2 = frame->getFitRangeNEvt();
+
+	TCanvas *canvas2 = new TCanvas("Canvas2", "", 600, 400);
+
+	gPad->SetLogy();
+
+	double scale_factor_Process1 = normalised_scale_factor_Process1 / n_Process1;
+	double scale_factor_Process1_Error = (normalised_scale_factor_Process1_Error/normalised_scale_factor_Process1)*scale_factor_Process1;
+
+	double scale_factor_Process2 = normalised_scale_factor_Process2 / n_Process2;
+	double scale_factor_Process2_Error = (normalised_scale_factor_Process2_Error/normalised_scale_factor_Process2)*scale_factor_Process2;
+
+	cout << "Scale Factor for QCD: " << scale_factor_Process1 << "+/-" << scale_factor_Process1_Error << endl;
+	cout << "Scale Factor for EW: " << scale_factor_Process2 << "+/-" << scale_factor_Process2_Error << endl << endl;
+
+
+	if (scale) {
+		histograms[SelectedProcess1]->Scale(scale_factor_Process1);
+		histograms[SelectedProcess2]->Scale(scale_factor_Process2);
+	}
+
+	//Create the stacked histogram
+	THStack *histogramStack = new THStack("histogramStack", "");
+
+	histograms = Set_Histogram_Styles(histograms, higgs_suffix);
+
+	histograms[8]->SetLineColor(kBlack);
+	histograms[8]->SetFillColor(kBlue-7);
+	histograms[8]->SetFillStyle(1001);
+
+	histograms[5]->SetLineColor(kBlack);
+	histograms[5]->SetFillColor(kBlue-10);
+	histograms[5]->SetFillStyle(1001);
+
+	//Data
+	TwoProcessSubtractedDataHistogram->Sumw2();
+	TwoProcessSubtractedDataHistogram->SetLineColor(kBlack);
+	TwoProcessSubtractedDataHistogram->SetMarkerStyle(8);
+	TwoProcessSubtractedDataHistogram->SetMarkerSize(0.3);
+
+	//and add to the stack
+	histogramStack->Add(histograms[SelectedProcess2], "hist");
+	histogramStack->Add(histograms[SelectedProcess1], "hist");
+
+	histogramStack->SetMinimum(5);
+	histogramStack->SetMaximum(70000);
+	histogramStack->Draw("");//Draw the stack, actually stacking (no "nostack")
+
+	histogramStack->GetYaxis()->SetTitle("Events");
+
+	histogramStack->GetXaxis()->SetLabelSize(0.05);
+	histogramStack->GetYaxis()->SetLabelSize(0.05);
+
+	histogramStack->GetXaxis()->SetTitleSize(0.037);
+	histogramStack->GetYaxis()->SetTitleSize(0.037);
+
+	histogramStack->GetXaxis()->SetTitleOffset(1.2);
+
+	Histogram_Namer(histogramStack, DataType);
+
+	TwoProcessSubtractedDataHistogram->Draw("SAME");
+
+	Legend_Creator_For_Two(histograms, SelectedProcess1, SelectedProcess2);
+
+	Draw_Region(DataType, 0.035, 0.62, 0.85, 0.62, 0.785, 0.62, 0.72, higgs_suffix);
+
+	string scaled = "";
+	if (scale) scaled = "_Scaled";
+
+	fstream output("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_EE_MM" + higgs_suffix + "_Sigma_Search" + scaled + "_Parameters.txt", output.out);
+	output << scale_factor_Process1 << endl << scale_factor_Process2;
+	output.close();
+
+	//Create the full output file path
+	string FullOutputFilePath = "../../Output-Files/Fit-Graphs/" + DataType + "_EE_MM" + higgs_suffix + "_Sigma_Search" + scaled + ".pdf"; // Need to create directory to save the Data Types into their own folders (if thats easier)
+	
+	//Write out to a PDF file
+	canvas2->SaveAs(FullOutputFilePath.c_str());
+
+	vector<double> info;
+
+	if (higgs_suffix == "_Higgs") info = csv_reader(ID, true);
+	else info = csv_reader(ID, false);
+
+	cout << endl << "MC Cross Section:     " << info[1] << endl;
+	cout << "QCD Scale Factor:     " << scale_factor_Process1 << " +/- " << scale_factor_Process1_Error << endl;
+	cout << "EW Scale Factor:      " << scale_factor_Process2 << " +/- " << scale_factor_Process2_Error << endl;
+
+	double cross_section = info[1] * scale_factor_Process2;
+	double cross_section_error = (scale_factor_Process2_Error/scale_factor_Process2)*cross_section;
+
+	cout << "EW Cross Section:     " << info[1] * scale_factor_Process2 << " +/- " << cross_section_error << endl;
+
+	fstream output2("../../Output-Files/Fit-Graphs/Parameters/" + DataType + "_EE_MM" + higgs_suffix + "_Cross_Section.txt", output2.out);
 	output2 << "MC Cross Section:     " << info[1] << endl;
 	output2 << "QCD Scale Factor:     " << scale_factor_Process1 << " +/- " << scale_factor_Process1_Error << endl;
 	output2 << "EW Scale Factor:      " << scale_factor_Process2 << " +/- " << scale_factor_Process2_Error << endl;

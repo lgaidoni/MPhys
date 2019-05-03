@@ -47,6 +47,38 @@ void Legend_Creator(vector<TH1F*> histograms, double xmax, double ymax, double x
 
 }
 
+//This function will create the legend on the currently active canvas
+//This function takes the vector of histograms created by Histogram_Return(AnalysisType, DataType)
+void Legend_Creator_Combo(vector<TH1F*> histograms, double xmax, double ymax, double xmin, double ymin, double textsize, double bordersize, string higgs_suffix) {
+
+	//Create the legend
+	auto legend = new TLegend(xmax,ymax,xmin,ymin);
+
+	//Minor Formatting
+	legend->SetTextSize(textsize);
+	legend->SetBorderSize(bordersize);
+
+	//Add all the entries to the histogram
+	legend->AddEntry(histograms[11], "Data");
+	legend->AddEntry(histograms[8], "QCD Zll");
+	legend->AddEntry(histograms[5], "EW Zll");
+	legend->AddEntry(histograms[4], "ZqqZll");
+	legend->AddEntry(histograms[3], "Wenu");
+	legend->AddEntry(histograms[2], "Wmunu");
+	legend->AddEntry(histograms[1], "Wtaunu");
+	legend->AddEntry(histograms[0], "t#bar{t}");
+
+	if (higgs_suffix == "_Higgs"){
+		legend->AddEntry(histograms[12], "llll");
+		legend->AddEntry(histograms[13], "lllv");
+		legend->AddEntry(histograms[14], "llvv");
+		legend->AddEntry(histograms[15], "lvvv");
+	}
+
+	legend->Draw(); //Draw the legend to the currently active canvas
+
+}
+
 void Legend_Creator_QCD_EW(vector<TH1F*> histograms, double xmax, double ymax, double xmin, double ymin, double textsize, double bordersize) {
 
 	//Create the legend
@@ -460,6 +492,33 @@ vector<TH1F*> Histogram_Return_Given_File(string DataType, vector<TFile*> root_f
 	for (auto tfile = files.begin(); tfile < files.end(); tfile++) {
 		TH1F *histogram = (TH1F*)(*tfile)->Get(DataTypeHistName.c_str());
 		histograms.push_back(histogram);
+	}
+
+	return histograms;
+
+}
+
+//This function will return a vector of histograms, given AnalysisType ("Electron", "Muon", Etc) and DataType ("ljet_0_ljet_1_mass", Etc)
+vector<TH1F*> Histogram_Return_Given_File(string DataType, vector<TFile*> root_files1, vector<TFile*> root_files2) {
+
+	string DataTypeHistName = "h_" + DataType + ";1";  //Name of the desired histogram in the root file
+
+	//Variable creation
+	vector<TFile*> files1 = root_files1;
+	vector<TFile*> files2 = root_files2;
+	vector<TH1F*> histograms;
+
+	int counter = 0;
+
+	//Get all the histograms from files depending on the Data Type and push them into the histograms vector
+	for (auto tfile = files1.begin(); tfile < files1.end(); tfile++) {
+		TH1F *histogram1 = (TH1F*)(*tfile)->Get(DataTypeHistName.c_str());
+		TH1F *histogram2 = (TH1F*)(*files2[counter]).Get(DataTypeHistName.c_str());
+
+		histogram1->Add(histogram2);
+
+		histograms.push_back(histogram1);
+		counter++;
 	}
 
 	return histograms;
@@ -1345,11 +1404,18 @@ void Process_Combiner(string AnalysisType, string higgs_suffix, string Process) 
 					cout << names[counter] << endl;
 					histogram->Draw();
 					canvas->Close();
-					counter++;
 
 					//Add it to the master histogram 
 					histogramMaster->Add(histogram);
 
+
+					//if (histogramMaster->GetMaximum() > 10000000) {
+					//	cout << names[counter] << endl;
+					//	char *s = new char[1];
+					//	gets(s);
+					//}
+
+					counter++;
 				}
 
 				//Draw the master histogram
@@ -1431,7 +1497,7 @@ void Process_MAXVAL_Checker(string AnalysisType, string higgs_suffix, string Pro
 
 					//Create the canvas
 					TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
-					if (histogram->GetMaximum() > 100000000) {cout << names[counter] << endl;cout << histogram->GetMaximum() << endl << endl;}
+					if (histogram->GetMaximum() > 10000) {cout << names[counter] << endl;cout << histogram->GetMaximum() << endl << endl;}
 					if (histogram->GetMinimum() < -100) {cout << names[counter] << endl;cout << histogram->GetMinimum() << endl << endl;}
 					histogram->Draw();
 					canvas->Close();
@@ -1475,7 +1541,7 @@ void Process_BROKEN_Checker(string AnalysisType, string higgs_suffix, string Pro
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
 	//Get the first histogram in the vector
-	string histogramName = "h_lep_0_lep_1_mass;1";
+	string histogramName = "h_jet_0_jet_1_mass_CONTROL;1";
 
 	int counter = 1;			
 
@@ -2116,6 +2182,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 	DataType.push_back("DeltaPhi_reco_INSIDE");
 	DataType.push_back("Centrality"); // same as reco
 	//DataType.push_back("Centrality_INSIDE");
+	DataType.push_back("tau_0_jet_BDT_SCORE_TRANS");
 
 	bool draw_high_e_jet_mass = false;
 
@@ -2199,13 +2266,15 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		double x1 = ExceptStack->GetXaxis()->GetXmin();
 		double x2 = ExceptStack->GetXaxis()->GetXmax();
 
-		double ymin = canvas->GetUymin();
+		double ymin = 0;
 		double ymax = canvas->GetUymax();
 
 		double x3 = 0;
 		double x4 = 0;
 
 		string high_e_name = "";
+
+		ExceptStack->SetMinimum(0);
 
 		if (DataType[i] == "jet_0_jet_1_mass" && draw_high_e_jet_mass) { 
 			x1 = 1500; x2 = 4570; canvas->SetLogy(); 
@@ -2224,12 +2293,14 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			ymax = current_y_max * 10;
 		}
 
+		if (DataType[i] == "tau_0_jet_BDT_SCORE_TRANS")  { x1 = 0.3; x2 = 1; }
+
 		if (AnalysisType == "Electron" || AnalysisType == "Muon") {
 
 			if (AnalysisType == "Electron") selected_process = 7;
 			if (AnalysisType == "Muon") selected_process = 6;
 
-			if (DataType[i] == "lep_0_lep_1_mass") { x1 = 81; x2 = 101; }
+			if (DataType[i] == "lep_0_lep_1_mass") { x1 = 80; x2 = 100; }
 			if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.16; }
 
 		}
@@ -2241,7 +2312,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			if (DataType[i] == "Centrality"){ x1 = -1.92; x2 = 1.92; }
 			if (DataType[i] == "DeltaPhi") { x1 = 0; x2 = 2.5; }
 			if (DataType[i] == "lep_0_lep_1_mass_reco") { x1 = 60; x2 = 120; }
-			if (DataType[i] == "lep_0_lep_1_mass_non_reco") { x3 = 81; x4 = 101; }
+			if (DataType[i] == "lep_0_lep_1_mass_non_reco") { x3 = 80; x4 = 100; }
 
 			//if (DataType[i] == "jet_0_jet_1_mass_INSIDE") DrawBox(ExceptStack, canvas, 0, 250);
 
