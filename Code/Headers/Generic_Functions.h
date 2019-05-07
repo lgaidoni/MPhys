@@ -151,6 +151,34 @@ void Legend_Creator_For_Two(vector<TH1F*> histograms, int SelectedProcess1, int 
 
 }
 
+void Legend_Creator_For_Two_EE_MM(vector<TH1F*> histograms, int SelectedProcess1, int SelectedProcess2) {
+
+	//Create the legend
+	auto legend = new TLegend(0.89,0.89,0.80,0.70);
+
+	//Minor Formatting
+	legend->SetTextSize(0.03);
+	legend->SetBorderSize(0);
+
+	legend->AddEntry(histograms[11], "Data"); //Add data to the legend
+
+	//If either process is equal to one of the processes listed here, add it to the legend
+	if (SelectedProcess1 == 10 || SelectedProcess2 == 10) legend->AddEntry(histograms[10], "QCD Zee");
+	if (SelectedProcess1 == 9 || SelectedProcess2 == 9) legend->AddEntry(histograms[9], "QCD Z#mu#mu");
+	if (SelectedProcess1 == 8 || SelectedProcess2 == 8) legend->AddEntry(histograms[8], "QCD Zll");
+	if (SelectedProcess1 == 7 || SelectedProcess2 == 7) legend->AddEntry(histograms[7], "EW Zee");
+	if (SelectedProcess1 == 6 || SelectedProcess2 == 6) legend->AddEntry(histograms[6], "EW Z#mu#mu");
+	if (SelectedProcess1 == 5 || SelectedProcess2 == 5) legend->AddEntry(histograms[5], "EW Zll");
+	if (SelectedProcess1 == 4 || SelectedProcess2 == 4) legend->AddEntry(histograms[4], "ZqqZll");
+	if (SelectedProcess1 == 3 || SelectedProcess2 == 3) legend->AddEntry(histograms[3], "Wenu");
+	if (SelectedProcess1 == 2 || SelectedProcess2 == 2) legend->AddEntry(histograms[2], "Wmunu");
+	if (SelectedProcess1 == 1 || SelectedProcess2 == 1) legend->AddEntry(histograms[1], "Wtaunu");
+	if (SelectedProcess1 == 0 || SelectedProcess2 == 0) legend->AddEntry(histograms[0], "t#bar{t}");
+
+	legend->Draw(); //Draw the legend to the currently active canvas
+
+}
+
 //This function will set the histogram styles, given the vector of histograms created by Histogram_Return(AnalysisType, DataType)
 vector<TH1F*> Set_Histogram_Styles(vector<TH1F*> histograms, string higgs_suffix) {
 	
@@ -1582,7 +1610,9 @@ void Process_MAXVAL_Checker(string AnalysisType, string higgs_suffix, string Pro
 				string histogramName = "h_" + line + ";1";
 				TH1F *histogramMaster = (TH1F*)files[0]->Get(histogramName.c_str()); 
 
-				int counter = 1;			
+				int counter = 1;	
+
+				cout << names[counter] << endl;		
 
 				//For all the files in the vector not counting the first...
 				for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
@@ -1593,7 +1623,7 @@ void Process_MAXVAL_Checker(string AnalysisType, string higgs_suffix, string Pro
 
 					//Create the canvas
 					TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
-					if (histogram->GetMaximum() > 10000) {cout << names[counter] << endl;cout << histogram->GetMaximum() << endl << endl;}
+					if (histogram->GetMaximum() > 5000) {cout << names[counter] << endl;cout << histogram->GetMaximum() << endl << endl;}
 					if (histogram->GetMinimum() < -100) {cout << names[counter] << endl;cout << histogram->GetMinimum() << endl << endl;}
 					histogram->Draw();
 					canvas->Close();
@@ -1637,12 +1667,12 @@ void Process_BROKEN_Checker(string AnalysisType, string higgs_suffix, string Pro
 	TCanvas *canvas = new TCanvas("Canvas", "", 600, 400);
 
 	//Get the first histogram in the vector
-	string histogramName = "h_jet_0_jet_1_mass_CONTROL;1";
+	string histogramName = "h_jet_0_jet_1_mass;1";
 
-	int counter = 1;			
+	int counter = 0;			
 
 	//For all the files in the vector not counting the first...
-	for (auto tfile = files.begin() + 1; tfile < files.end(); tfile++) {
+	for (auto tfile = files.begin(); tfile < files.end(); tfile++) {
 
 		//Get the histogram
 		TH1F *histogram = (TH1F*)(*tfile)->Get(histogramName.c_str());
@@ -1825,6 +1855,11 @@ void Process_Stacker(string AnalysisType, string higgs_suffix, string DataType, 
 
 	//Draw the stack, actually stacking (no "nostack")
 	histogramStack->Draw("");
+	if (!(logged)) histogramStack->SetMinimum(0);
+
+
+	canvas->SetRightMargin(0.15);
+
 
 	//Name the histogram stack's x axis according to the DataType
 	Histogram_Namer(histogramStack, DataType);
@@ -1897,16 +1932,16 @@ void Process_Stacker(string AnalysisType, string higgs_suffix, string DataType, 
 
 	//Create the legend and draw the region information
 	if (mode == "QCD_EW") {
-		Legend_Creator_QCD_EW(histograms, 0.84, 0.89, 0.78, 0.57, 0.037, 0);
+		Legend_Creator_QCD_EW(histograms, 1.0, 0.9, 0.852, 0.55, 0.0365, 0);
 	}
 	else if (mode == "EW") {
-		Legend_Creator_EW(histograms, 0.84, 0.89, 0.78, 0.71, 0.037, 0);
+		Legend_Creator_EW(histograms, 1.0, 0.9, 0.852, 0.65, 0.0365, 0);
 	}
 	else {
-		Legend_Creator(histograms, 0.84, 0.89, 0.78, 0.45, 0.037, 0, higgs_suffix);
+		Legend_Creator(histograms, 1.0, 0.9, 0.852, 0.28, 0.0365, 0, higgs_suffix);
 	}
 
-	Draw_Region(DataType, 0.037, 0.62, 0.86, 0.62, 0.80, 0.62, 0.75, higgs_suffix);
+	Draw_Region(DataType, 0.037, 0.70, 0.86, 0.70, 0.80, 0.71, 0.73, higgs_suffix);
 
 	canvas->Update();
 
@@ -2389,7 +2424,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			ymax = current_y_max * 10;
 		}
 
-		if (DataType[i] == "tau_0_jet_BDT_SCORE_TRANS")  { x1 = 0.3; x2 = 1; }
+		if (DataType[i] == "tau_0_jet_BDT_SCORE_TRANS")  { x1 = 0; x2 = 1; }
 
 		if (AnalysisType == "Electron" || AnalysisType == "Muon") {
 
@@ -2460,7 +2495,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		double Signal_Significance;
 
 		if (draw_high_e_jet_mass) {
-			Signal_Significance = EXCEPT_Significance_Calc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms, 10, (4570+20)/90, higgs_suffix);
+			Signal_Significance = EXCEPT_Significance_Calc(AnalysisType, DataType[i], selected_process, root_files, ExceptHistograms, 17, 50, higgs_suffix);
 			draw_high_e_jet_mass = false;
 		}
 		else Signal_Significance = SignificanceLevelCalc(AnalysisType, DataType[i], selected_process, root_files, SignalHistograms, higgs_suffix);

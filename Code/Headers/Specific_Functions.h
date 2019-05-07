@@ -164,6 +164,9 @@ void AllSignificanceCalc(string AnalysisType, string higgs_suffix) {
 	DataTypes.push_back("pT_balance_reco_OUTSIDE");
 	DataTypes.push_back("lep_0_lep_1_mass_HIGH_E");
 	DataTypes.push_back("lep_0_lep_1_mass_reco_HIGH_E");
+	DataTypes.push_back("jet_0_jet_1_mass");
+	DataTypes.push_back("jet_0_jet_1_mass_HIGH_E");
+
 
 	fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + AnalysisType + higgs_suffix + "_Significance_values.txt", output.out);
 	output << "Data Type \t & Significance \t & \t Error" << endl << endl;

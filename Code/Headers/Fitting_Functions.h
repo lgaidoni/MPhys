@@ -1154,7 +1154,7 @@ void Cross_Section_Calculation_QCD_EW_EE_MM(string higgs_suffix, string DataType
 
 	TwoProcessSubtractedDataHistogram->Draw("SAME");
 
-	Legend_Creator_For_Two(histograms, SelectedProcess1, SelectedProcess2);
+	Legend_Creator_For_Two_EE_MM(histograms, SelectedProcess1, SelectedProcess2);
 
 	Draw_Region(DataType, 0.035, 0.62, 0.85, 0.62, 0.785, 0.62, 0.72, higgs_suffix);
 
