@@ -1,1440 +1,276 @@
 	//Histogram Bookings for bjet_0_matched_p4_Phi
 	Book_bjet_0_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_bjet_0_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_bjet_0_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_bjet_0_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for bjet_0_matched_p4_Pt
 	Book_bjet_0_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_bjet_0_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_bjet_0_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_bjet_0_matched_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for bjet_0_matched_p4_Rapidity
 	Book_bjet_0_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_bjet_0_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_bjet_0_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_bjet_0_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for bjet_0_matched_p4_Eta
 	Book_bjet_0_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_bjet_0_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_bjet_0_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_bjet_0_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for bjet_0_p4_Phi
 	Book_bjet_0_p4_Phi(bins, PhiMin, PhiMax);
-	Book_bjet_0_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_bjet_0_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_bjet_0_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for bjet_0_p4_Pt
 	Book_bjet_0_p4_Pt(bins, PtMin, PtMax);
-	Book_bjet_0_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_bjet_0_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_bjet_0_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for bjet_0_p4_Rapidity
 	Book_bjet_0_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_bjet_0_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_bjet_0_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_bjet_0_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for bjet_0_p4_Eta
 	Book_bjet_0_p4_Eta(bins, EtaMin, EtaMax);
-	Book_bjet_0_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_bjet_0_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_bjet_0_p4_Eta_PRE(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for bjet_1_matched_p4_Phi
 	Book_bjet_1_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_bjet_1_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_bjet_1_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_bjet_1_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for bjet_1_matched_p4_Pt
 	Book_bjet_1_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_bjet_1_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_bjet_1_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_bjet_1_matched_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for bjet_1_matched_p4_Rapidity
 	Book_bjet_1_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_bjet_1_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_bjet_1_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_bjet_1_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for bjet_1_matched_p4_Eta
 	Book_bjet_1_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_bjet_1_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_bjet_1_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_bjet_1_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for bjet_1_p4_Phi
 	Book_bjet_1_p4_Phi(bins, PhiMin, PhiMax);
-	Book_bjet_1_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_bjet_1_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_bjet_1_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for bjet_1_p4_Pt
 	Book_bjet_1_p4_Pt(bins, PtMin, PtMax);
-	Book_bjet_1_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_bjet_1_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_bjet_1_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for bjet_1_p4_Rapidity
 	Book_bjet_1_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_bjet_1_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_bjet_1_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_bjet_1_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for bjet_1_p4_Eta
 	Book_bjet_1_p4_Eta(bins, EtaMin, EtaMax);
-	Book_bjet_1_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_bjet_1_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_bjet_1_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_0_matched_p4_Phi
-	Book_elec_0_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_0_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_0_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_0_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_0_matched_p4_Pt
-	Book_elec_0_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_0_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_0_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_0_matched_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_0_matched_p4_Rapidity
-	Book_elec_0_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_0_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_0_matched_p4_Eta
-	Book_elec_0_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_0_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_0_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_0_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_invis_p4_Phi
-	Book_elec_0_matched_truth_lepTau_invis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_0_matched_truth_lepTau_invis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_0_matched_truth_lepTau_invis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_0_matched_truth_lepTau_invis_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_invis_p4_Pt
-	Book_elec_0_matched_truth_lepTau_invis_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_0_matched_truth_lepTau_invis_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_0_matched_truth_lepTau_invis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_0_matched_truth_lepTau_invis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_invis_p4_Rapidity
-	Book_elec_0_matched_truth_lepTau_invis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_0_matched_truth_lepTau_invis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_matched_truth_lepTau_invis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_matched_truth_lepTau_invis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_invis_p4_Eta
-	Book_elec_0_matched_truth_lepTau_invis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_0_matched_truth_lepTau_invis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_0_matched_truth_lepTau_invis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_0_matched_truth_lepTau_invis_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_p4_Phi
-	Book_elec_0_matched_truth_lepTau_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_0_matched_truth_lepTau_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_0_matched_truth_lepTau_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_0_matched_truth_lepTau_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_p4_Pt
-	Book_elec_0_matched_truth_lepTau_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_0_matched_truth_lepTau_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_0_matched_truth_lepTau_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_0_matched_truth_lepTau_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_p4_Rapidity
-	Book_elec_0_matched_truth_lepTau_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_0_matched_truth_lepTau_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_matched_truth_lepTau_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_matched_truth_lepTau_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_p4_Eta
-	Book_elec_0_matched_truth_lepTau_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_0_matched_truth_lepTau_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_0_matched_truth_lepTau_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_0_matched_truth_lepTau_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_vis_p4_Phi
-	Book_elec_0_matched_truth_lepTau_vis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_0_matched_truth_lepTau_vis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_0_matched_truth_lepTau_vis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_0_matched_truth_lepTau_vis_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_vis_p4_Pt
-	Book_elec_0_matched_truth_lepTau_vis_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_0_matched_truth_lepTau_vis_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_0_matched_truth_lepTau_vis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_0_matched_truth_lepTau_vis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_vis_p4_Rapidity
-	Book_elec_0_matched_truth_lepTau_vis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_0_matched_truth_lepTau_vis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_matched_truth_lepTau_vis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_matched_truth_lepTau_vis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_0_matched_truth_lepTau_vis_p4_Eta
-	Book_elec_0_matched_truth_lepTau_vis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_0_matched_truth_lepTau_vis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_0_matched_truth_lepTau_vis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_0_matched_truth_lepTau_vis_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_0_p4_Phi
-	Book_elec_0_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_0_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_0_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_0_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_0_p4_Pt
-	Book_elec_0_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_0_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_0_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_0_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_0_p4_Rapidity
-	Book_elec_0_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_0_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_0_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_0_p4_Eta
-	Book_elec_0_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_0_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_0_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_0_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_1_matched_p4_Phi
-	Book_elec_1_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_1_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_1_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_1_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_1_matched_p4_Pt
-	Book_elec_1_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_1_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_1_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_1_matched_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_1_matched_p4_Rapidity
-	Book_elec_1_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_1_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_1_matched_p4_Eta
-	Book_elec_1_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_1_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_1_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_1_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_invis_p4_Phi
-	Book_elec_1_matched_truth_lepTau_invis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_1_matched_truth_lepTau_invis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_1_matched_truth_lepTau_invis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_1_matched_truth_lepTau_invis_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_invis_p4_Pt
-	Book_elec_1_matched_truth_lepTau_invis_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_1_matched_truth_lepTau_invis_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_1_matched_truth_lepTau_invis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_1_matched_truth_lepTau_invis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_invis_p4_Rapidity
-	Book_elec_1_matched_truth_lepTau_invis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_1_matched_truth_lepTau_invis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_matched_truth_lepTau_invis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_matched_truth_lepTau_invis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_invis_p4_Eta
-	Book_elec_1_matched_truth_lepTau_invis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_1_matched_truth_lepTau_invis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_1_matched_truth_lepTau_invis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_1_matched_truth_lepTau_invis_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_p4_Phi
-	Book_elec_1_matched_truth_lepTau_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_1_matched_truth_lepTau_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_1_matched_truth_lepTau_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_1_matched_truth_lepTau_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_p4_Pt
-	Book_elec_1_matched_truth_lepTau_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_1_matched_truth_lepTau_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_1_matched_truth_lepTau_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_1_matched_truth_lepTau_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_p4_Rapidity
-	Book_elec_1_matched_truth_lepTau_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_1_matched_truth_lepTau_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_matched_truth_lepTau_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_matched_truth_lepTau_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_p4_Eta
-	Book_elec_1_matched_truth_lepTau_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_1_matched_truth_lepTau_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_1_matched_truth_lepTau_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_1_matched_truth_lepTau_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_vis_p4_Phi
-	Book_elec_1_matched_truth_lepTau_vis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_1_matched_truth_lepTau_vis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_1_matched_truth_lepTau_vis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_1_matched_truth_lepTau_vis_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_vis_p4_Pt
-	Book_elec_1_matched_truth_lepTau_vis_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_1_matched_truth_lepTau_vis_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_1_matched_truth_lepTau_vis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_1_matched_truth_lepTau_vis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_vis_p4_Rapidity
-	Book_elec_1_matched_truth_lepTau_vis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_1_matched_truth_lepTau_vis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_matched_truth_lepTau_vis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_matched_truth_lepTau_vis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_1_matched_truth_lepTau_vis_p4_Eta
-	Book_elec_1_matched_truth_lepTau_vis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_1_matched_truth_lepTau_vis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_1_matched_truth_lepTau_vis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_1_matched_truth_lepTau_vis_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for elec_1_p4_Phi
-	Book_elec_1_p4_Phi(bins, PhiMin, PhiMax);
-	Book_elec_1_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_elec_1_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_elec_1_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for elec_1_p4_Pt
-	Book_elec_1_p4_Pt(bins, PtMin, PtMax);
-	Book_elec_1_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_elec_1_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_elec_1_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for elec_1_p4_Rapidity
-	Book_elec_1_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_elec_1_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_elec_1_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for elec_1_p4_Eta
-	Book_elec_1_p4_Eta(bins, EtaMin, EtaMax);
-	Book_elec_1_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_elec_1_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_elec_1_p4_Eta_PRE(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for ljet_0_matched_p4_Phi
 	Book_ljet_0_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_ljet_0_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_ljet_0_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_ljet_0_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for ljet_0_matched_p4_Pt
 	Book_ljet_0_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_ljet_0_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_ljet_0_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_ljet_0_matched_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for ljet_0_matched_p4_Rapidity
 	Book_ljet_0_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_ljet_0_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_0_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_0_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for ljet_0_matched_p4_Eta
 	Book_ljet_0_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_ljet_0_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_ljet_0_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_ljet_0_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for ljet_0_p4_Phi
 	Book_ljet_0_p4_Phi(bins, PhiMin, PhiMax);
-	Book_ljet_0_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_ljet_0_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_ljet_0_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for ljet_0_p4_Pt
 	Book_ljet_0_p4_Pt(bins, PtMin, PtMax);
-	Book_ljet_0_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_ljet_0_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_ljet_0_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for ljet_0_p4_Rapidity
 	Book_ljet_0_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_ljet_0_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_0_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_0_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for ljet_0_p4_Eta
 	Book_ljet_0_p4_Eta(bins, EtaMin, EtaMax);
-	Book_ljet_0_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_ljet_0_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_ljet_0_p4_Eta_PRE(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for ljet_1_matched_p4_Phi
 	Book_ljet_1_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_ljet_1_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_ljet_1_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_ljet_1_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for ljet_1_matched_p4_Pt
 	Book_ljet_1_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_ljet_1_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_ljet_1_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_ljet_1_matched_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for ljet_1_matched_p4_Rapidity
 	Book_ljet_1_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_ljet_1_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_1_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_1_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for ljet_1_matched_p4_Eta
 	Book_ljet_1_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_ljet_1_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_ljet_1_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_ljet_1_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for ljet_1_p4_Phi
 	Book_ljet_1_p4_Phi(bins, PhiMin, PhiMax);
-	Book_ljet_1_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_ljet_1_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_ljet_1_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for ljet_1_p4_Pt
 	Book_ljet_1_p4_Pt(bins, PtMin, PtMax);
-	Book_ljet_1_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_ljet_1_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_ljet_1_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for ljet_1_p4_Rapidity
 	Book_ljet_1_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_ljet_1_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_1_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_1_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for ljet_1_p4_Eta
 	Book_ljet_1_p4_Eta(bins, EtaMin, EtaMax);
-	Book_ljet_1_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_ljet_1_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_ljet_1_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for ljet_2_matched_p4_Phi
-	Book_ljet_2_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_ljet_2_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_ljet_2_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_ljet_2_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for ljet_2_matched_p4_Pt
-	Book_ljet_2_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_ljet_2_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_ljet_2_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_ljet_2_matched_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for ljet_2_matched_p4_Rapidity
-	Book_ljet_2_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_ljet_2_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_2_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_2_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for ljet_2_matched_p4_Eta
-	Book_ljet_2_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_ljet_2_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_ljet_2_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_ljet_2_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for ljet_2_p4_Phi
-	Book_ljet_2_p4_Phi(bins, PhiMin, PhiMax);
-	Book_ljet_2_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_ljet_2_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_ljet_2_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for ljet_2_p4_Pt
-	Book_ljet_2_p4_Pt(bins, PtMin, PtMax);
-	Book_ljet_2_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_ljet_2_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_ljet_2_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for ljet_2_p4_Rapidity
-	Book_ljet_2_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_ljet_2_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_2_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_2_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for ljet_2_p4_Eta
-	Book_ljet_2_p4_Eta(bins, EtaMin, EtaMax);
-	Book_ljet_2_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_ljet_2_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_ljet_2_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for ljet_3_matched_p4_Phi
-	Book_ljet_3_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_ljet_3_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_ljet_3_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_ljet_3_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for ljet_3_matched_p4_Pt
-	Book_ljet_3_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_ljet_3_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_ljet_3_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_ljet_3_matched_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for ljet_3_matched_p4_Rapidity
-	Book_ljet_3_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_ljet_3_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_3_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_3_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for ljet_3_matched_p4_Eta
-	Book_ljet_3_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_ljet_3_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_ljet_3_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_ljet_3_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for ljet_3_p4_Phi
-	Book_ljet_3_p4_Phi(bins, PhiMin, PhiMax);
-	Book_ljet_3_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_ljet_3_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_ljet_3_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for ljet_3_p4_Pt
-	Book_ljet_3_p4_Pt(bins, PtMin, PtMax);
-	Book_ljet_3_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_ljet_3_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_ljet_3_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for ljet_3_p4_Rapidity
-	Book_ljet_3_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_ljet_3_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_3_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_ljet_3_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for ljet_3_p4_Eta
-	Book_ljet_3_p4_Eta(bins, EtaMin, EtaMax);
-	Book_ljet_3_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_ljet_3_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_ljet_3_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for met_hpto_p4_Phi
-	Book_met_hpto_p4_Phi(bins, PhiMin, PhiMax);
-	Book_met_hpto_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_met_hpto_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_met_hpto_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for met_hpto_p4_Pt
-	Book_met_hpto_p4_Pt(bins, PtMin, PtMax);
-	Book_met_hpto_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_met_hpto_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_met_hpto_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for met_hpto_p4_Rapidity
-	Book_met_hpto_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_met_hpto_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_met_hpto_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_met_hpto_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for met_hpto_p4_Eta
-	Book_met_hpto_p4_Eta(bins, EtaMin, EtaMax);
-	Book_met_hpto_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_met_hpto_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_met_hpto_p4_Eta_PRE(bins, EtaMin, EtaMax);
 
 	//Histogram Bookings for met_reco_p4_Phi
 	Book_met_reco_p4_Phi(bins, PhiMin, PhiMax);
-	Book_met_reco_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_met_reco_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_met_reco_p4_Phi_PRE(bins, PhiMin, PhiMax);
 
 	//Histogram Bookings for met_reco_p4_Pt
 	Book_met_reco_p4_Pt(bins, PtMin, PtMax);
-	Book_met_reco_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_met_reco_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_met_reco_p4_Pt_PRE(bins, PtMin, PtMax);
 
 	//Histogram Bookings for met_reco_p4_Rapidity
 	Book_met_reco_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_met_reco_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_met_reco_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_met_reco_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
 
 	//Histogram Bookings for met_reco_p4_Eta
 	Book_met_reco_p4_Eta(bins, EtaMin, EtaMax);
-	Book_met_reco_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
 
-	Book_met_reco_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
+	//Histogram Bookings for DeltaR
+	Book_DeltaR(bins, DeltaR_Min, DeltaR_Max);
 
-	Book_met_reco_p4_Eta_PRE(bins, EtaMin, EtaMax);
+	//Histogram Bookings for DeltaPhi
+	Book_DeltaPhi(bins, DeltaPhi_Min, DeltaPhi_Max);
 
-	//Histogram Bookings for met_truth_p4_Phi
-	Book_met_truth_p4_Phi(bins, PhiMin, PhiMax);
-	Book_met_truth_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
+	//Histogram Bookings for pT_balance
+	Book_pT_balance(bins, pT_balance_Min, pT_balance_Max);
 
-	Book_met_truth_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
+	//Histogram Bookings for pT_balance_3
+	Book_pT_balance_3(bins, pT_balance_3_Min, pT_balance_3_Max);
 
-	Book_met_truth_p4_Phi_PRE(bins, PhiMin, PhiMax);
+	//Histogram Bookings for Centrality
+	Book_Centrality(bins, Centrality_Min, Centrality_Max);
 
-	//Histogram Bookings for met_truth_p4_Pt
-	Book_met_truth_p4_Pt(bins, PtMin, PtMax);
-	Book_met_truth_p4_Pt_CONTROL(bins, PtMin, PtMax);
+	//Histogram Bookings for Centrality_INSIDE
+	Book_Centrality_INSIDE(bins, Centrality_INSIDE_Min, Centrality_INSIDE_Max);
 
-	Book_met_truth_p4_Pt_EXCEPT(bins, PtMin, PtMax);
+	//Histogram Bookings for Centrality_OUTSIDE
+	Book_Centrality_OUTSIDE(bins, Centrality_OUTSIDE_Min, Centrality_OUTSIDE_Max);
 
-	Book_met_truth_p4_Pt_PRE(bins, PtMin, PtMax);
+	//Histogram Bookings for RapidityDijet
+	Book_RapidityDijet(bins, RapidityDijet_Min, RapidityDijet_Max);
 
-	//Histogram Bookings for met_truth_p4_Rapidity
-	Book_met_truth_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_met_truth_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for RapidityDilepton
+	Book_RapidityDilepton(bins, RapidityDilepton_Min, RapidityDilepton_Max);
 
-	Book_met_truth_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for lep_0_lep_1_mass
+	Book_lep_0_lep_1_mass(bins, lep_0_lep_1_mass_Min, lep_0_lep_1_mass_Max);
 
-	Book_met_truth_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for lep_0_lep_1_pt
+	Book_lep_0_lep_1_pt(bins, lep_0_lep_1_pt_Min, lep_0_lep_1_pt_Max);
 
-	//Histogram Bookings for met_truth_p4_Eta
-	Book_met_truth_p4_Eta(bins, EtaMin, EtaMax);
-	Book_met_truth_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
+	//Histogram Bookings for lep_0_iso_ptvarcone40
+	Book_lep_0_iso_ptvarcone40(bins, lep_0_iso_ptvarcone40_Min, lep_0_iso_ptvarcone40_Max);
 
-	Book_met_truth_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
+	//Histogram Bookings for lep_1_iso_ptvarcone40
+	Book_lep_1_iso_ptvarcone40(bins, lep_1_iso_ptvarcone40_Min, lep_1_iso_ptvarcone40_Max);
 
-	Book_met_truth_p4_Eta_PRE(bins, EtaMin, EtaMax);
+	//Histogram Bookings for jet_0_jet_1_mass
+	Book_jet_0_jet_1_mass(bins, jet_0_jet_1_mass_Min, jet_0_jet_1_mass_Max);
 
-	//Histogram Bookings for muon_0_matched_p4_Phi
-	Book_muon_0_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_0_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
+	//Histogram Bookings for jet_0_jet_1_mass_INSIDE
+	Book_jet_0_jet_1_mass_INSIDE(bins, jet_0_jet_1_mass_INSIDE_Min, jet_0_jet_1_mass_INSIDE_Max);
 
-	Book_muon_0_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
+	//Histogram Bookings for jet_0_jet_1_mass_OUTSIDE
+	Book_jet_0_jet_1_mass_OUTSIDE(bins, jet_0_jet_1_mass_OUTSIDE_Min, jet_0_jet_1_mass_OUTSIDE_Max);
 
-	Book_muon_0_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
+	//Histogram Bookings for jet_0_p4_Pt
+	Book_jet_0_p4_Pt(bins, jet_0_p4_Pt_Min, jet_0_p4_Pt_Max);
 
-	//Histogram Bookings for muon_0_matched_p4_Pt
-	Book_muon_0_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_0_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
+	//Histogram Bookings for jet_1_p4_Pt
+	Book_jet_1_p4_Pt(bins, jet_1_p4_Pt_Min, jet_1_p4_Pt_Max);
 
-	Book_muon_0_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
+	//Histogram Bookings for MET_Centrality
+	Book_MET_Centrality(bins, MET_Centrality_Min, MET_Centrality_Max);
 
-	Book_muon_0_matched_p4_Pt_PRE(bins, PtMin, PtMax);
+	//Histogram Bookings for neutrino_0_pt
+	Book_neutrino_0_pt(bins, neutrino_0_pt_Min, neutrino_0_pt_Max);
 
-	//Histogram Bookings for muon_0_matched_p4_Rapidity
-	Book_muon_0_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_0_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for neutrino_1_pt
+	Book_neutrino_1_pt(bins, neutrino_1_pt_Min, neutrino_1_pt_Max);
 
-	Book_muon_0_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for MET_Type_Favour
+	Book_MET_Type_Favour(bins, MET_Type_Favour_Min, MET_Type_Favour_Max);
 
-	Book_muon_0_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for MET_Type_Favour_INSIDE
+	Book_MET_Type_Favour_INSIDE(bins, MET_Type_Favour_INSIDE_Min, MET_Type_Favour_INSIDE_Max);
 
-	//Histogram Bookings for muon_0_matched_p4_Eta
-	Book_muon_0_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_0_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
+	//Histogram Bookings for MET_Type_Favour_OUTSIDE
+	Book_MET_Type_Favour_OUTSIDE(bins, MET_Type_Favour_OUTSIDE_Min, MET_Type_Favour_OUTSIDE_Max);
 
-	Book_muon_0_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
+	//Histogram Bookings for DeltaPhi_reco
+	Book_DeltaPhi_reco(bins, DeltaPhi_reco_Min, DeltaPhi_reco_Max);
 
-	Book_muon_0_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
+	//Histogram Bookings for DeltaPhi_reco_INSIDE
+	Book_DeltaPhi_reco_INSIDE(bins, DeltaPhi_reco_INSIDE_Min, DeltaPhi_reco_INSIDE_Max);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_invis_p4_Phi
-	Book_muon_0_matched_truth_lepTau_invis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_0_matched_truth_lepTau_invis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
+	//Histogram Bookings for DeltaPhi_reco_OUTSIDE
+	Book_DeltaPhi_reco_OUTSIDE(bins, DeltaPhi_reco_OUTSIDE_Min, DeltaPhi_reco_OUTSIDE_Max);
 
-	Book_muon_0_matched_truth_lepTau_invis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
+	//Histogram Bookings for pT_balance_reco
+	Book_pT_balance_reco(bins, pT_balance_reco_Min, pT_balance_reco_Max);
 
-	Book_muon_0_matched_truth_lepTau_invis_p4_Phi_PRE(bins, PhiMin, PhiMax);
+	//Histogram Bookings for pT_balance_reco_INSIDE
+	Book_pT_balance_reco_INSIDE(bins, pT_balance_reco_INSIDE_Min, pT_balance_reco_INSIDE_Max);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_invis_p4_Pt
-	Book_muon_0_matched_truth_lepTau_invis_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_0_matched_truth_lepTau_invis_p4_Pt_CONTROL(bins, PtMin, PtMax);
+	//Histogram Bookings for pT_balance_reco_OUTSIDE
+	Book_pT_balance_reco_OUTSIDE(bins, pT_balance_reco_OUTSIDE_Min, pT_balance_reco_OUTSIDE_Max);
 
-	Book_muon_0_matched_truth_lepTau_invis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
+	//Histogram Bookings for lep_0_lep_1_mass_reco
+	Book_lep_0_lep_1_mass_reco(bins, lep_0_lep_1_mass_reco_Min, lep_0_lep_1_mass_reco_Max);
 
-	Book_muon_0_matched_truth_lepTau_invis_p4_Pt_PRE(bins, PtMin, PtMax);
+	//Histogram Bookings for lep_0_lep_1_mass_non_reco
+	Book_lep_0_lep_1_mass_non_reco(bins, lep_0_lep_1_mass_non_reco_Min, lep_0_lep_1_mass_non_reco_Max);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_invis_p4_Rapidity
-	Book_muon_0_matched_truth_lepTau_invis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_0_matched_truth_lepTau_invis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for lep_0_lep_1_mass_non_reco_INSIDE
+	Book_lep_0_lep_1_mass_non_reco_INSIDE(bins, lep_0_lep_1_mass_non_reco_INSIDE_Min, lep_0_lep_1_mass_non_reco_INSIDE_Max);
 
-	Book_muon_0_matched_truth_lepTau_invis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for lep_0_lep_1_mass_reco_INSIDE
+	Book_lep_0_lep_1_mass_reco_INSIDE(bins, lep_0_lep_1_mass_reco_INSIDE_Min, lep_0_lep_1_mass_reco_INSIDE_Max);
 
-	Book_muon_0_matched_truth_lepTau_invis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for lep_0_lep_1_mass_reco_OUTSIDE
+	Book_lep_0_lep_1_mass_reco_OUTSIDE(bins, lep_0_lep_1_mass_reco_OUTSIDE_Min, lep_0_lep_1_mass_reco_OUTSIDE_Max);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_invis_p4_Eta
-	Book_muon_0_matched_truth_lepTau_invis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_0_matched_truth_lepTau_invis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
+	//Histogram Bookings for DeltaR_reco
+	Book_DeltaR_reco(bins, DeltaR_reco_Min, DeltaR_reco_Max);
 
-	Book_muon_0_matched_truth_lepTau_invis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
+	//Histogram Bookings for lep_0_lep_1_pt_reco
+	Book_lep_0_lep_1_pt_reco(bins, lep_0_lep_1_pt_reco_Min, lep_0_lep_1_pt_reco_Max);
 
-	Book_muon_0_matched_truth_lepTau_invis_p4_Eta_PRE(bins, EtaMin, EtaMax);
+	//Histogram Bookings for Centrality_reco
+	Book_Centrality_reco(bins, Centrality_reco_Min, Centrality_reco_Max);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_p4_Phi
-	Book_muon_0_matched_truth_lepTau_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_0_matched_truth_lepTau_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
+	//Histogram Bookings for Mass_Favour_Combination_2D
+	Book_Mass_Favour_Combination_2D(xbins, Mass_Favour_Combination_2D_xMin, Mass_Favour_Combination_2D_xMax, ybins, Mass_Favour_Combination_2D_yMin, Mass_Favour_Combination_2D_yMax);
 
-	Book_muon_0_matched_truth_lepTau_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
+	//Histogram Bookings for Mass_Favour_Combination_INSIDE_2D
+	Book_Mass_Favour_Combination_INSIDE_2D(xbins, Mass_Favour_Combination_INSIDE_2D_xMin, Mass_Favour_Combination_INSIDE_2D_xMax, ybins, Mass_Favour_Combination_INSIDE_2D_yMin, Mass_Favour_Combination_INSIDE_2D_yMax);
 
-	Book_muon_0_matched_truth_lepTau_p4_Phi_PRE(bins, PhiMin, PhiMax);
+	//Histogram Bookings for Mass_Favour_Combination_OUTSIDE_2D
+	Book_Mass_Favour_Combination_OUTSIDE_2D(xbins, Mass_Favour_Combination_OUTSIDE_2D_xMin, Mass_Favour_Combination_OUTSIDE_2D_xMax, ybins, Mass_Favour_Combination_OUTSIDE_2D_yMin, Mass_Favour_Combination_OUTSIDE_2D_yMax);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_p4_Pt
-	Book_muon_0_matched_truth_lepTau_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_0_matched_truth_lepTau_p4_Pt_CONTROL(bins, PtMin, PtMax);
+	//Histogram Bookings for Mass_DeltaPhi_Combination_2D
+	Book_Mass_DeltaPhi_Combination_2D(xbins, Mass_DeltaPhi_Combination_2D_xMin, Mass_DeltaPhi_Combination_2D_xMax, ybins, Mass_DeltaPhi_Combination_2D_yMin, Mass_DeltaPhi_Combination_2D_yMax);
 
-	Book_muon_0_matched_truth_lepTau_p4_Pt_EXCEPT(bins, PtMin, PtMax);
+	//Histogram Bookings for Mass_DeltaPhi_Combination_INSIDE_2D
+	Book_Mass_DeltaPhi_Combination_INSIDE_2D(xbins, Mass_DeltaPhi_Combination_INSIDE_2D_xMin, Mass_DeltaPhi_Combination_INSIDE_2D_xMax, ybins, Mass_DeltaPhi_Combination_INSIDE_2D_yMin, Mass_DeltaPhi_Combination_INSIDE_2D_yMax);
 
-	Book_muon_0_matched_truth_lepTau_p4_Pt_PRE(bins, PtMin, PtMax);
+	//Histogram Bookings for Mass_DeltaPhi_Combination_OUTSIDE_2D
+	Book_Mass_DeltaPhi_Combination_OUTSIDE_2D(xbins, Mass_DeltaPhi_Combination_OUTSIDE_2D_xMin, Mass_DeltaPhi_Combination_OUTSIDE_2D_xMax, ybins, Mass_DeltaPhi_Combination_OUTSIDE_2D_yMin, Mass_DeltaPhi_Combination_OUTSIDE_2D_yMax);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_p4_Rapidity
-	Book_muon_0_matched_truth_lepTau_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_0_matched_truth_lepTau_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for lep_1_vis_mass
+	Book_lep_1_vis_mass(bins, lep_1_vis_mass_Min, lep_1_vis_mass_Max);
 
-	Book_muon_0_matched_truth_lepTau_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for lep_0_vis_mass
+	Book_lep_0_vis_mass(bins, lep_0_vis_mass_Min, lep_0_vis_mass_Max);
 
-	Book_muon_0_matched_truth_lepTau_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
+	//Histogram Bookings for lep_0_invis_vis_mass
+	Book_lep_0_invis_vis_mass(bins, lep_0_invis_vis_mass_Min, lep_0_invis_vis_mass_Max);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_p4_Eta
-	Book_muon_0_matched_truth_lepTau_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_0_matched_truth_lepTau_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
+	//Histogram Bookings for lep_1_invis_vis_mass
+	Book_lep_1_invis_vis_mass(bins, lep_1_invis_vis_mass_Min, lep_1_invis_vis_mass_Max);
 
-	Book_muon_0_matched_truth_lepTau_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
+	//Histogram Bookings for lep_0_lep_1_invis_vis_mass
+	Book_lep_0_lep_1_invis_vis_mass(bins, lep_0_lep_1_invis_vis_mass_Min, lep_0_lep_1_invis_vis_mass_Max);
 
-	Book_muon_0_matched_truth_lepTau_p4_Eta_PRE(bins, EtaMin, EtaMax);
+	//Histogram Bookings for met_truth_energy
+	Book_met_truth_energy(bins, met_truth_energy_Min, met_truth_energy_Max);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_vis_p4_Phi
-	Book_muon_0_matched_truth_lepTau_vis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_0_matched_truth_lepTau_vis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
+	//Histogram Bookings for lep_0_invis_energy
+	Book_lep_0_invis_energy(bins, lep_0_invis_energy_Min, lep_0_invis_energy_Max);
 
-	Book_muon_0_matched_truth_lepTau_vis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
+	//Histogram Bookings for lep_1_invis_energy
+	Book_lep_1_invis_energy(bins, lep_1_invis_energy_Min, lep_1_invis_energy_Max);
 
-	Book_muon_0_matched_truth_lepTau_vis_p4_Phi_PRE(bins, PhiMin, PhiMax);
+	//Histogram Bookings for tau_0_ele_BDT_SCORE_TRANS
+	Book_tau_0_ele_BDT_SCORE_TRANS(bins, tau_0_ele_BDT_SCORE_TRANS_Min, tau_0_ele_BDT_SCORE_TRANS_Max);
 
-	//Histogram Bookings for muon_0_matched_truth_lepTau_vis_p4_Pt
-	Book_muon_0_matched_truth_lepTau_vis_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_0_matched_truth_lepTau_vis_p4_Pt_CONTROL(bins, PtMin, PtMax);
+	//Histogram Bookings for tau_0_ele_BDT_SCORE
+	Book_tau_0_ele_BDT_SCORE(bins, tau_0_ele_BDT_SCORE_Min, tau_0_ele_BDT_SCORE_Max);
 
-	Book_muon_0_matched_truth_lepTau_vis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
+	//Histogram Bookings for tau_0_jet_BDT_SCORE
+	Book_tau_0_jet_BDT_SCORE(bins, tau_0_jet_BDT_SCORE_Min, tau_0_jet_BDT_SCORE_Max);
 
-	Book_muon_0_matched_truth_lepTau_vis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for muon_0_matched_truth_lepTau_vis_p4_Rapidity
-	Book_muon_0_matched_truth_lepTau_vis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_0_matched_truth_lepTau_vis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_muon_0_matched_truth_lepTau_vis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_muon_0_matched_truth_lepTau_vis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for muon_0_matched_truth_lepTau_vis_p4_Eta
-	Book_muon_0_matched_truth_lepTau_vis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_0_matched_truth_lepTau_vis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_muon_0_matched_truth_lepTau_vis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_muon_0_matched_truth_lepTau_vis_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for muon_0_p4_Phi
-	Book_muon_0_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_0_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_muon_0_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_muon_0_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for muon_0_p4_Pt
-	Book_muon_0_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_0_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_muon_0_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_muon_0_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for muon_0_p4_Rapidity
-	Book_muon_0_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_0_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_muon_0_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_muon_0_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for muon_0_p4_Eta
-	Book_muon_0_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_0_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_muon_0_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_muon_0_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for muon_1_matched_p4_Phi
-	Book_muon_1_matched_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_1_matched_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_muon_1_matched_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_muon_1_matched_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for muon_1_matched_p4_Pt
-	Book_muon_1_matched_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_1_matched_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_muon_1_matched_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_muon_1_matched_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for muon_1_matched_p4_Rapidity
-	Book_muon_1_matched_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_1_matched_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_matched_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_matched_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for muon_1_matched_p4_Eta
-	Book_muon_1_matched_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_1_matched_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_muon_1_matched_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_muon_1_matched_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_invis_p4_Phi
-	Book_muon_1_matched_truth_lepTau_invis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_1_matched_truth_lepTau_invis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_muon_1_matched_truth_lepTau_invis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_muon_1_matched_truth_lepTau_invis_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_invis_p4_Pt
-	Book_muon_1_matched_truth_lepTau_invis_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_1_matched_truth_lepTau_invis_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_muon_1_matched_truth_lepTau_invis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_muon_1_matched_truth_lepTau_invis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_invis_p4_Rapidity
-	Book_muon_1_matched_truth_lepTau_invis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_1_matched_truth_lepTau_invis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_matched_truth_lepTau_invis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_matched_truth_lepTau_invis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_invis_p4_Eta
-	Book_muon_1_matched_truth_lepTau_invis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_1_matched_truth_lepTau_invis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_muon_1_matched_truth_lepTau_invis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_muon_1_matched_truth_lepTau_invis_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_p4_Phi
-	Book_muon_1_matched_truth_lepTau_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_1_matched_truth_lepTau_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_muon_1_matched_truth_lepTau_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_muon_1_matched_truth_lepTau_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_p4_Pt
-	Book_muon_1_matched_truth_lepTau_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_1_matched_truth_lepTau_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_muon_1_matched_truth_lepTau_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_muon_1_matched_truth_lepTau_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_p4_Rapidity
-	Book_muon_1_matched_truth_lepTau_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_1_matched_truth_lepTau_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_matched_truth_lepTau_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_matched_truth_lepTau_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_p4_Eta
-	Book_muon_1_matched_truth_lepTau_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_1_matched_truth_lepTau_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_muon_1_matched_truth_lepTau_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_muon_1_matched_truth_lepTau_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_vis_p4_Phi
-	Book_muon_1_matched_truth_lepTau_vis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_1_matched_truth_lepTau_vis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_muon_1_matched_truth_lepTau_vis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_muon_1_matched_truth_lepTau_vis_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_vis_p4_Pt
-	Book_muon_1_matched_truth_lepTau_vis_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_1_matched_truth_lepTau_vis_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_muon_1_matched_truth_lepTau_vis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_muon_1_matched_truth_lepTau_vis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_vis_p4_Rapidity
-	Book_muon_1_matched_truth_lepTau_vis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_1_matched_truth_lepTau_vis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_matched_truth_lepTau_vis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_matched_truth_lepTau_vis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for muon_1_matched_truth_lepTau_vis_p4_Eta
-	Book_muon_1_matched_truth_lepTau_vis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_1_matched_truth_lepTau_vis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_muon_1_matched_truth_lepTau_vis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_muon_1_matched_truth_lepTau_vis_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for muon_1_p4_Phi
-	Book_muon_1_p4_Phi(bins, PhiMin, PhiMax);
-	Book_muon_1_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_muon_1_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_muon_1_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for muon_1_p4_Pt
-	Book_muon_1_p4_Pt(bins, PtMin, PtMax);
-	Book_muon_1_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_muon_1_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_muon_1_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for muon_1_p4_Rapidity
-	Book_muon_1_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_muon_1_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_muon_1_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for muon_1_p4_Eta
-	Book_muon_1_p4_Eta(bins, EtaMin, EtaMax);
-	Book_muon_1_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_muon_1_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_muon_1_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_0_p4_Phi
-	Book_tau_0_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_0_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_0_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_0_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_0_p4_Pt
-	Book_tau_0_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_0_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_0_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_0_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_0_p4_Rapidity
-	Book_tau_0_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_0_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_0_p4_Eta
-	Book_tau_0_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_0_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_0_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_0_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_0_truth_p4_Phi
-	Book_tau_0_truth_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_0_truth_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_0_truth_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_0_truth_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_0_truth_p4_Pt
-	Book_tau_0_truth_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_0_truth_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_0_truth_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_0_truth_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_0_truth_p4_Rapidity
-	Book_tau_0_truth_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_0_truth_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_truth_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_truth_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_0_truth_p4_Eta
-	Book_tau_0_truth_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_0_truth_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_0_truth_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_0_truth_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_0_truth_vis_charged_p4_Phi
-	Book_tau_0_truth_vis_charged_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_0_truth_vis_charged_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_0_truth_vis_charged_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_0_truth_vis_charged_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_0_truth_vis_charged_p4_Pt
-	Book_tau_0_truth_vis_charged_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_0_truth_vis_charged_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_0_truth_vis_charged_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_0_truth_vis_charged_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_0_truth_vis_charged_p4_Rapidity
-	Book_tau_0_truth_vis_charged_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_0_truth_vis_charged_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_truth_vis_charged_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_truth_vis_charged_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_0_truth_vis_charged_p4_Eta
-	Book_tau_0_truth_vis_charged_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_0_truth_vis_charged_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_0_truth_vis_charged_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_0_truth_vis_charged_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_0_truth_vis_neutral_p4_Phi
-	Book_tau_0_truth_vis_neutral_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_0_truth_vis_neutral_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_0_truth_vis_neutral_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_0_truth_vis_neutral_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_0_truth_vis_neutral_p4_Pt
-	Book_tau_0_truth_vis_neutral_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_0_truth_vis_neutral_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_0_truth_vis_neutral_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_0_truth_vis_neutral_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_0_truth_vis_neutral_p4_Rapidity
-	Book_tau_0_truth_vis_neutral_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_0_truth_vis_neutral_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_truth_vis_neutral_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_truth_vis_neutral_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_0_truth_vis_neutral_p4_Eta
-	Book_tau_0_truth_vis_neutral_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_0_truth_vis_neutral_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_0_truth_vis_neutral_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_0_truth_vis_neutral_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_0_truth_vis_p4_Phi
-	Book_tau_0_truth_vis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_0_truth_vis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_0_truth_vis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_0_truth_vis_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_0_truth_vis_p4_Pt
-	Book_tau_0_truth_vis_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_0_truth_vis_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_0_truth_vis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_0_truth_vis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_0_truth_vis_p4_Rapidity
-	Book_tau_0_truth_vis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_0_truth_vis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_truth_vis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_0_truth_vis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_0_truth_vis_p4_Eta
-	Book_tau_0_truth_vis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_0_truth_vis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_0_truth_vis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_0_truth_vis_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_1_p4_Phi
-	Book_tau_1_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_1_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_1_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_1_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_1_p4_Pt
-	Book_tau_1_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_1_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_1_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_1_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_1_p4_Rapidity
-	Book_tau_1_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_1_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_1_p4_Eta
-	Book_tau_1_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_1_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_1_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_1_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_1_truth_p4_Phi
-	Book_tau_1_truth_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_1_truth_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_1_truth_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_1_truth_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_1_truth_p4_Pt
-	Book_tau_1_truth_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_1_truth_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_1_truth_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_1_truth_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_1_truth_p4_Rapidity
-	Book_tau_1_truth_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_1_truth_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_truth_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_truth_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_1_truth_p4_Eta
-	Book_tau_1_truth_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_1_truth_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_1_truth_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_1_truth_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_1_truth_vis_charged_p4_Phi
-	Book_tau_1_truth_vis_charged_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_1_truth_vis_charged_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_1_truth_vis_charged_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_1_truth_vis_charged_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_1_truth_vis_charged_p4_Pt
-	Book_tau_1_truth_vis_charged_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_1_truth_vis_charged_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_1_truth_vis_charged_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_1_truth_vis_charged_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_1_truth_vis_charged_p4_Rapidity
-	Book_tau_1_truth_vis_charged_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_1_truth_vis_charged_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_truth_vis_charged_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_truth_vis_charged_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_1_truth_vis_charged_p4_Eta
-	Book_tau_1_truth_vis_charged_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_1_truth_vis_charged_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_1_truth_vis_charged_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_1_truth_vis_charged_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_1_truth_vis_neutral_p4_Phi
-	Book_tau_1_truth_vis_neutral_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_1_truth_vis_neutral_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_1_truth_vis_neutral_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_1_truth_vis_neutral_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_1_truth_vis_neutral_p4_Pt
-	Book_tau_1_truth_vis_neutral_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_1_truth_vis_neutral_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_1_truth_vis_neutral_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_1_truth_vis_neutral_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_1_truth_vis_neutral_p4_Rapidity
-	Book_tau_1_truth_vis_neutral_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_1_truth_vis_neutral_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_truth_vis_neutral_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_truth_vis_neutral_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_1_truth_vis_neutral_p4_Eta
-	Book_tau_1_truth_vis_neutral_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_1_truth_vis_neutral_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_1_truth_vis_neutral_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_1_truth_vis_neutral_p4_Eta_PRE(bins, EtaMin, EtaMax);
-
-	//Histogram Bookings for tau_1_truth_vis_p4_Phi
-	Book_tau_1_truth_vis_p4_Phi(bins, PhiMin, PhiMax);
-	Book_tau_1_truth_vis_p4_Phi_CONTROL(bins, PhiMin, PhiMax);
-
-	Book_tau_1_truth_vis_p4_Phi_EXCEPT(bins, PhiMin, PhiMax);
-
-	Book_tau_1_truth_vis_p4_Phi_PRE(bins, PhiMin, PhiMax);
-
-	//Histogram Bookings for tau_1_truth_vis_p4_Pt
-	Book_tau_1_truth_vis_p4_Pt(bins, PtMin, PtMax);
-	Book_tau_1_truth_vis_p4_Pt_CONTROL(bins, PtMin, PtMax);
-
-	Book_tau_1_truth_vis_p4_Pt_EXCEPT(bins, PtMin, PtMax);
-
-	Book_tau_1_truth_vis_p4_Pt_PRE(bins, PtMin, PtMax);
-
-	//Histogram Bookings for tau_1_truth_vis_p4_Rapidity
-	Book_tau_1_truth_vis_p4_Rapidity(bins, RapidityMin, RapidityMax);
-	Book_tau_1_truth_vis_p4_Rapidity_CONTROL(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_truth_vis_p4_Rapidity_EXCEPT(bins, RapidityMin, RapidityMax);
-
-	Book_tau_1_truth_vis_p4_Rapidity_PRE(bins, RapidityMin, RapidityMax);
-
-	//Histogram Bookings for tau_1_truth_vis_p4_Eta
-	Book_tau_1_truth_vis_p4_Eta(bins, EtaMin, EtaMax);
-	Book_tau_1_truth_vis_p4_Eta_CONTROL(bins, EtaMin, EtaMax);
-
-	Book_tau_1_truth_vis_p4_Eta_EXCEPT(bins, EtaMin, EtaMax);
-
-	Book_tau_1_truth_vis_p4_Eta_PRE(bins, EtaMin, EtaMax);
+	//Histogram Bookings for tau_0_jet_BDT_SCORE_TRANS
+	Book_tau_0_jet_BDT_SCORE_TRANS(bins, tau_0_jet_BDT_SCORE_TRANS_Min, tau_0_jet_BDT_SCORE_TRANS_Max);
 

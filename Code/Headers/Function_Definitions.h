@@ -1,0 +1,11 @@
+	virtual void BookHistos();
+	virtual void JetSet(bool bjets);
+	virtual void JetSet_TRUTH();
+	virtual void ParticleSelection();
+	virtual void ParticleSelection_TRUTH();
+	virtual bool InitialCut(bool bjets, bool truth);
+	virtual void GenerateVariables(bool truth);
+	virtual void FillAllData_PreCut();
+	virtual void DrawHistos(string higgs_suffix);
+	virtual bool Cuts(string region);
+	virtual void Fill(string region);

@@ -1,3 +1,261 @@
+///////////////////////////////////////////////////////////////////////////////////////////
+///											///
+///	This file, MC_Analysis.C, is the file which should be called to run the 	///
+///	main program. Included in this file is the main loop where all user 		///
+///	defined functions are called in order to perform the analysis.			///
+///											///
+///////////////////////////////////////////////////////////////////////////////////////////
+
+#define MC_Analysis_cxx
+
+///------ HEADER INCLUDES ------///
+
+#include "Headers/MC_Analysis.h"
+#include "Headers/Analysis.h"
+#include <TH2.h>
+#include <TStyle.h>
+#include <TCanvas.h> 
+
+///------ MAIN PROGRAM BEGINS ---///
+
+void MC_Analysis::Loop() {
+
+   ////////////////////////////////////////////////////////////////////////////////////////
+   ///------------------------------- INITIAL VARIABLE SETUP ---------------------------///
+   ////////////////////////////////////////////////////////////////////////////////////////
+   
+   if (fChain == 0) return;			//If the chain is empty, end the loop
+
+   Long64_t nentries = fChain->GetEntries();	//Get the number of entries
+   Long64_t nbytes = 0, nb = 0;			//Set the number of bytes to zero
+
+   //--- Clock Setup ---//
+
+   clock_t start;				//Used to store the start time of the program
+   clock_t one_second_in;			//Used to store the time one second into a loop
+   clock_t finished;				//Used to store the end time of the program
+   clock_t completion_time;			//Used to store the calculated completion time for the program (time program will finish)
+
+   double entries_per_second;			//Used to store the number of entries per second
+   double completion_time_double;		//Used to store the completion time as a double (time program will finish)
+   double prev_entries = 0;			//Used to store the previous number of entries since the last loop
+   double remaining_entries = 0;		//Used to store the remaining number of entries
+   int second_ticker = 5;			//Time when the average should be calculated
+
+   start = clock();				//Initialise the Start Time
+   completion_time = clock();			//Initialise the Completion Time
+
+   time_t now = time(0);			//Get the current time
+   char* time = ctime(&now);			//Turn the current time into a Char to be cout-able
+
+   //--- Loop Running Indicator ---//
+
+   int current_indicator = 0;
+
+   ////////////////////////////////////////////////////////////////////////////////////////////////
+   ///---------------------------------- INITIAL USER INFORMATION ------------------------------///
+   ////////////////////////////////////////////////////////////////////////////////////////////////
+
+   //--- Generic User Information ---//
+
+   cout << endl << "-------------------- " << AnalysisType << " analysis of " << ChainName << endl << endl;
+   cout << "Number of Entries:   " << nentries << endl;
+   cout << "Analysis Type:       " << AnalysisType << endl;
+   cout << "Chain Name:          " << ChainName << endl;
+   cout << "Luminosity Weight:   " << Luminosity_Weight << endl;
+   cout << "Start Time:          " << start/CLOCKS_PER_SEC << endl;
+   cout << endl << "-------------- " << AnalysisType << endl;
+
+   //--- Status File Output ---//
+
+   //String that stores the location of the status file
+   string status_file = "../../WWW/" + AnalysisType + "_status.txt";
+	
+   fstream output(status_file, output.out | output.app);  //Open the output file either creating it, or appending to it
+
+   string current_progress = "../../Status_Files/" + AnalysisType + "_" + ChainName + "_status.txt";
+   
+   fstream progress(current_progress, progress.out | progress.trunc);
+
+   progress << "Beginning " << AnalysisType << " Analysis of " << ChainName;
+   progress.flush();
+   progress.close();
+
+   //Output information to the status file
+   output << endl << "\"" << AnalysisType << "\" Analysis of " << ChainName << " begun at " << time << endl << endl;
+   output.close();
+
+   /////////////////////////////////////////////////////////////////////////////////////////////
+   ///------------------------------- FOR LOOP USED IN ANALYSIS -----------------------------///
+   /////////////////////////////////////////////////////////////////////////////////////////////
+
+   for (Long64_t jentry=0; jentry<nentries;jentry++) {
+
+      ////////////////////////////////////////////////////////////////////////////////////
+      ///------------------------------- DATA EXISTANCE CHECKS ------------------------///
+      ////////////////////////////////////////////////////////////////////////////////////
+
+      Long64_t ientry = LoadTree(jentry);		//Load the entry in the tree with number jentry
+      if (ientry < 0) break;				//If there is no entry, break the loop
+      nb = fChain->GetEntry(jentry);   nbytes += nb;	//Add the position in bytes to nbytes
+
+      ////////////////////////////////////////////////////////////////////////////////////
+      ///-----------------------USER INFORMATION ABOUT ITERATION ----------------------///
+      ////////////////////////////////////////////////////////////////////////////////////
+
+      double entry_count = jentry;	//Current entry number
+      double max_entries = nentries;	//Total number of entries
+
+      signal_event_selected = false;
+
+	//If the current time minus the start time is greater than the averaging time
+	if ((clock() - start)/CLOCKS_PER_SEC >= second_ticker) {
+		second_ticker += 5;							//Add 5 seconds to the second ticker
+		entries_per_second = entry_count - prev_entries;			//Work out how many entries passed in the time interval
+		prev_entries = entry_count;						//Set the previous number of entries to the current entry count
+		completion_time_double = max_entries/(entries_per_second/5);		//Work out the completion time as a double
+		completion_time = start + completion_time_double*CLOCKS_PER_SEC;	//Work out the completion time (time program will finish)
+	}
+
+	//If the current entry is divisible by 500
+	if (jentry % 500 == 0) {
+
+		double percentage = (entry_count / max_entries) * 100;	//Work out completion as a percentrage
+		int percentageint1 = (int)(percentage/2 + 27);		//Turn the number into an integer
+		int percentageint2 = (int)(percentage/2);		//Turn the number into an integer
+
+		int eta = completion_time/CLOCKS_PER_SEC - clock()/CLOCKS_PER_SEC;
+
+		//Loop between 0 and 76 (Progress bar runs from 26 to 76)
+		for (int i = 0; i < 77; i++) {
+			
+			if (i < 26) cout << " ";				//If not at the progress bar yet, print a space
+			if (i == 26) cout << "[";				//If beginning, print [
+			if (i > 26 && i < percentageint1) cout << "=";		//If completed section, print =
+			if (i == percentageint1) cout << "|";			//If at completion level, print |
+			if (i > percentageint1 && i < 77) cout << "-";		//If not yet completed section, print -
+			if (i == 76) cout << "]";				//If end, print ]
+		}
+
+		cout << "\r";	//Rewind to the beginning of the line
+	
+		//Print a rotating symbol
+		if (current_indicator == 0)      {cout << "               " << "|"; current_indicator = 1;}
+		else if (current_indicator == 1) {cout << "               " << "/"; current_indicator = 2;}
+		else if (current_indicator == 2) {cout << "               " << "—"; current_indicator = 3;}
+		else if (current_indicator == 3) {cout << "               " << "\\"; current_indicator = 0;}
+
+		//Print the completion percentage and the eta
+		cout << " " << setprecision(3) << fixed << percentage << "%\r" << " ETA: " << eta << "\r";		
+		
+		cout.flush();	//Flush cout, pushing it to the terminal
+
+		//If the current entry is divisible by 200,000
+		if (jentry % 200000 == 0) {
+
+			//Open the status file, and output the current completion and eta to it
+			output.open(status_file, output.out | output.app);
+			output << "\"" << AnalysisType << "\" Analysis of " << ChainName << " Completion Information: " << setprecision(3) << percentage << "%  " << " ETA: " << eta << endl;
+			output.close();
+
+		}
+
+		if (jentry % 2000 == 0) {
+
+			progress.open(current_progress, progress.out | progress.trunc);
+
+			for (int i = 0; i < 51; i++) {
+
+				if (i == 0) progress << "[";				//If beginning, print [
+				if (i > 0 && i < percentageint2) progress << "=";		//If completed section, print =
+				if (i == percentageint2) progress << "|";			//If at completion level, print |
+				if (i > percentageint2 && i < 50) progress << "-";		//If not yet completed section, print -
+				if (i == 50) progress << "] ";				//If end, print ]
+
+			}
+
+			progress << " ETA: " << eta;
+			progress << "  :  " << ChainName << " " << AnalysisType << " Completion: " << setprecision(3) << fixed << percentage << "%";
+
+			progress.flush();
+			progress.close();
+
+		}
+
+	}
+
+	////////////////////////////////////////////////////////////
+	///------------------- PERFORM ANALYSIS -----------------///
+	////////////////////////////////////////////////////////////
+
+	bool fill_truth = false;
+
+	ParticleSelection();	//The particle selection function, selecting the desired particles
+	if (InitialCut(false, false) == false) {
+		JetSet(false);
+		GenerateVariables(false);	//Generate all variables
+		FillAllData_PreCut();	//Fill all the pre-cut data
+		Fill("normal");			//Fill all the post-cut data
+		fill_truth = true;
+
+	}
+	else if (InitialCut(true, false) == false) {
+		JetSet(true);
+		GenerateVariables(false);	//Generate all variables
+		Fill("bjet");			//Fill all the post-cut data
+		//if (n_jets < n_bjets) cout << endl << endl << "LESS JETS THAN BJETS" << endl << endl;
+		//if (bjet_0_p4->Pt() < ljet_0_p4->Pt()) cout << endl << endl << "BJET PT LESS THAN LJET PT" << endl << endl;
+
+	}
+
+	if (!(higgs_analysis)) {
+
+		if (ChainName.find("DATA") == string::npos) {
+			ParticleSelection_TRUTH();	//The particle selection function, selecting the desired particles
+			if (fill_truth) {
+				JetSet_TRUTH();
+				GenerateVariables(true);	//Generate all variables
+				Fill("truth");			//Fill all the post-cut data
+			}
+		}	
+
+	}
+	
+   }
+
+   ////////////////////////////////////////////////////////////////////////////////////
+   ///------------------- FINAL USER INFORMATION ABOUT ITERATION -------------------///
+   ////////////////////////////////////////////////////////////////////////////////////
+
+   cout << "               * 100.000% [==================================================]" << endl;
+   cout << "-------------- Complete" << endl << endl;	
+
+   finished = clock();  //Final clock to determine the time of completion
+
+   output.open(status_file, output.out | output.app);  //Open the status file
+
+   ///Output the time it took to complete the analysis to the status file
+   output << endl << "\"" << AnalysisType << "\" Analysis of " << ChainName << " Complete: finished in " << (finished - start)/CLOCKS_PER_SEC << " seconds" << endl << endl;
+
+   output.close();
+
+   progress.open(current_progress, progress.out | progress.trunc);
+
+   progress << "[==================================================]";
+   progress << " Completed in : " << (finished - start)/CLOCKS_PER_SEC;
+   progress << "  :  " << AnalysisType << " " << ChainName << " Completion: 100%";
+
+   progress.flush();
+   progress.close();
+
+   //String that stores the location of the status file
+   string timing_file = "../../WWW/" + AnalysisType + "_timing.txt";
+	
+   fstream timing(timing_file, timing.out | timing.app);  //Open the output file either creating it, or appending to it
+   timing << ChainName << "," << (finished - start)/CLOCKS_PER_SEC << endl;
+
+}
+
 //   In a ROOT session, you can do:
 //      root> .L MC_Analysis.C
 //      root> MC_Analysis t
@@ -21,103 +279,3 @@
 // METHOD2: replace line
 //    fChain->GetEntry(jentry);       //read all branches
 //by  b_branchname->GetEntry(ientry); //read only this branch
-
-
-#define MC_Analysis_cxx
-#include "Headers/MC_Analysis.h"
-#include "Headers/Zee2Jets_Analysis.h"
-#include "Headers/Zmumu2Jets_Analysis.h"
-#include "Headers/Zee_Analysis.h"
-#include "Headers/Zmumu_Analysis.h"
-#include "Headers/AddChainFriend.h"
-#include <TH2.h>
-#include <TStyle.h>
-#include <TCanvas.h> 
-
-void MC_Analysis::Loop() {
-
-   ///------------------------------- DATA EXISTANCE CHECKS ---------------------------///
-
-   if (fChain == 0) return;
-   Long64_t nentries = fChain->GetEntriesFast();
-   Long64_t nbytes = 0, nb = 0;
-
-   ///---------------------------------- ACTUAL FOR LOOP ------------------------------///
-
-
-   cout << endl << "-------------------- " << AnalysisType << endl;
-   int current_indicator = 0;
-
-   //Loop over all the entries in jentry
-   for (Long64_t jentry=0; jentry<nentries;jentry++) {
-
-      ///------------------------------- DATA EXISTANCE CHECKS ------------------------///
-
-      Long64_t ientry = LoadTree(jentry);
-      if (ientry < 0) break;
-      nb = fChain->GetEntry(jentry);   nbytes += nb;
-
-      ///-----------------------USER INFORMATION ABOUT ITERATION ----------------------///
-
-      //Let the user know the program is working, and not just frozen
-      double entry_count = jentry;
-      double max_entries = nentries;
-
-      if (jentry % 500 == 0) { // 1st IF
-	
-	if (current_indicator == 0) {cout << "                     " << "|"; current_indicator = 1;}
-	else if (current_indicator == 1) {cout << "                     " << "/"; current_indicator = 2;}
-	else if (current_indicator == 2) {cout << "                     " << "—"; current_indicator = 3;}
-	else if (current_indicator == 3) {cout << "                     " << "\\"; current_indicator = 0;}
-	cout << " " << setprecision(1) << fixed << (entry_count / max_entries) * 100 << "%\r";
-	cout.flush();
-
-      }
-	///------------------- ACTUAL ANALYSIS -----------------///
-	// EW
- 	/// Zee2Jets
-	if (AnalysisType == "Zee2Jets") {
-		if (Zee2Jets_InitialCut() == false) { // if we're not cutting
-			Zee2Jets_GenerateVariables();
-			Zee2Jets_FillAllData_PreCut();
-			Zee2Jets_CutAndFill();
-		}
-	}
-	/// Zmumu2Jets
-	if (AnalysisType == "Zmumu2Jets") {
-		if (Zmumu2Jets_InitialCut() == false) { // if we're not cutting
-			Zmumu2Jets_GenerateVariables();
-			Zmumu2Jets_FillAllData_PreCut();
-			Zmumu2Jets_CutAndFill();
-		}
-	}
-   
-	// QCD
-	/// Zee
-	if (AnalysisType == "Zee") {
-		if (Zee_InitialCut() == false) { // if we're not cutting
-			Zee_GenerateVariables();
-			Zee_FillAllData_PreCut();
-			Zee_CutAndFill();
-		}
-	}
-   
-
-	/// Zmumu
-	if (AnalysisType == "Zmumu") {
-		if (Zmumu_InitialCut() == false) { // if we're not cutting
-			Zmumu_GenerateVariables();
-			Zmumu_FillAllData_PreCut();
-			Zmumu_CutAndFill();
-		}
-	}
-
-
-
-	
-      } // END of 1st IF
-   cout << "                     * 100.0%" << endl;
-   cout << "-------------------- Complete" << endl << endl;
-   cout << "Number of Entries = " << nentries << endl << endl;    //Output the number of entries
-
-}
