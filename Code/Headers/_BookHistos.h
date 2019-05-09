@@ -199,6 +199,9 @@
 	//Histogram Bookings for lep_0_lep_1_mass_reco
 	Book_lep_0_lep_1_mass_reco(bins, lep_0_lep_1_mass_reco_Min, lep_0_lep_1_mass_reco_Max);
 
+	//Histogram Bookings for lep_0_lep_1_mass_reco_EXTENDED
+	Book_lep_0_lep_1_mass_reco_EXTENDED(bins, lep_0_lep_1_mass_reco_EXTENDED_Min, lep_0_lep_1_mass_reco_EXTENDED_Max);
+
 	//Histogram Bookings for lep_0_lep_1_mass_non_reco
 	Book_lep_0_lep_1_mass_non_reco(bins, lep_0_lep_1_mass_non_reco_Min, lep_0_lep_1_mass_non_reco_Max);
 
