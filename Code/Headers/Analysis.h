@@ -985,9 +985,12 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	Centrality_reco = CentralityCalc(lep_0_reco_p4, lep_1_reco_p4, jet_0_p4, jet_1_p4);
 
 	double QCD_weight_factor = 1;
+	double QCD_scaling_factor = 1;
+	double EW_scaling_factor = 1;
 
 	if (ChainName.find("_Zee_") != string::npos && !(higgs_analysis)) {
 		QCD_weight_factor = -0.000240084 * jet_0_jet_1_mass + 0.996438;
+	
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Zmumu_") != string::npos && !(higgs_analysis)) {
@@ -1000,22 +1003,29 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	}
 
 	if (ChainName.find("_Zee_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
+		QCD_weight_factor = (1.65721e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.000289638 * jet_0_jet_1_mass) + 1.10706;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Zmumu_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
+		QCD_weight_factor = (1.65721e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.000289638 * jet_0_jet_1_mass) + 1.10706;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Ztt_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = 0 * jet_0_jet_1_mass + 1;
+		QCD_weight_factor = (1.65721e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.000289638 * jet_0_jet_1_mass) + 1.10706;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
-	
+
+	if (ChainName.find("_Zee2jets_") != string::npos || ChainName.find("_Zmm2jets_") != string::npos ||ChainName.find("_Ztt2jets_") != string::npos) {
+		EW_scaling_factor = 2.81941;
+	}
+
 	if (weight_total_override) recipe_weighting = 1; // for data samples
 
 	// Final Weighting
-	final_weighting = Luminosity_Weight * weight_total * QCD_weight_factor * recipe_weighting;	
+	final_weighting = Luminosity_Weight * weight_total * QCD_weight_factor * recipe_weighting * QCD_scaling_factor * EW_scaling_factor;	
 	
 }
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -1155,7 +1165,7 @@ bool MC_Analysis::Cuts(string region) {
 	
 	if (DeltaPhi < 2.5) delta_phi_condition = true;
 
-	if (tau_0_jet_BDT_SCORE_TRANS > 0.3) BDT_condition = true;
+	if (tau_0_jet_BDT_SCORE_TRANS > 0) BDT_condition = true;
 
 	//If the region is an except region, make the relevant condition always true to see more of that histogram.
 	if (region == "EXCEPT_Z_mass_condition" && !(bjets_region)) 		Z_mass_condition = true;
