@@ -868,7 +868,7 @@ void Draw_Weighted_Histo_And_Ratio_EE_MM(string higgs_suffix, string DataType, d
 	axis3->SetTitle(Histogram_Namer(DataType).c_str());
 	axis3->Draw(); 
 
-	TF1 *fit = new TF1("fit", "pol2", comparisonHistogram->GetXaxis()->GetXmin(), 3000);
+	TF1 *fit = new TF1("fit", "pol1", comparisonHistogram->GetXaxis()->GetXmin(), 3000);
 
 	comparisonHistogram->Fit("fit");
 
