@@ -36,7 +36,6 @@ pT_balance_reco:PT Balance reconstructed
 pT_balance_reco_INSIDE:PT Balance reconstructed
 pT_balance_reco_OUTSIDE:PT Balance reconstructed
 lep_0_lep_1_mass_reco: reconstructed Z mass with neutrino and z candidates
-lep_0_lep_1_mass_reco_EXTENDED: reconstructed Z mass with neutrino and z candidates in an EXTENDED mass range
 lep_0_lep_1_mass_non_reco:Invariant mass of lepton 0 and lepton 1; non reconstructed when reconstruction happens
 lep_0_lep_1_mass_non_reco_INSIDE:Invariant mass of lepton 0 and lepton 1; non reconstructed when reconstruction happens, inside only
 lep_0_lep_1_mass_reco_INSIDE: reconstructed Z mass with neutrino and z candidates only for inside the two leptons

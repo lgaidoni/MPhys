@@ -480,6 +480,21 @@ TH1F	*h_lep_0_lep_1_mass_reco_TRUTH; // TRUTH VERSION
 vector<TH1F*>	hv_lep_0_lep_1_mass_reco; // HISTOGRAM VECTOR
 vector<string>	hv_lep_0_lep_1_mass_reco_names; // HISTOGRAM NAME VECTOR
 
+// --  reconstructed Z mass with neutrino and z candidates in an EXTENDED mass range
+double lep_0_lep_1_mass_reco_EXTENDED;
+
+virtual void Book_lep_0_lep_1_mass_reco_EXTENDED(int bins, double min, double max);
+TH1F	*h_lep_0_lep_1_mass_reco_EXTENDED; // SEARCH VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXTENDED_PRE; // PRE VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXTENDED_CONTROL; // CONTROL VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT; // EXCEPT VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT_FINE; // EXCEPT_FINE VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXTENDED_BJET; // BJET VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXTENDED_HIGH_E; // HIGH_E VERSION
+TH1F	*h_lep_0_lep_1_mass_reco_EXTENDED_TRUTH; // TRUTH VERSION
+vector<TH1F*>	hv_lep_0_lep_1_mass_reco_EXTENDED; // HISTOGRAM VECTOR
+vector<string>	hv_lep_0_lep_1_mass_reco_EXTENDED_names; // HISTOGRAM NAME VECTOR
+
 // -- Invariant mass of lepton 0 and lepton 1; non reconstructed when reconstruction happens
 double lep_0_lep_1_mass_non_reco;
 
