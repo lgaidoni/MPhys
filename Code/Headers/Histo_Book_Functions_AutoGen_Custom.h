@@ -1007,6 +1007,38 @@ void MC_Analysis::Book_lep_0_lep_1_mass_reco(int bins, double min, double max) {
 }
 
 
+// --  reconstructed Z mass with neutrino and z candidates in an EXTENDED mass range
+void MC_Analysis::Book_lep_0_lep_1_mass_reco_EXTENDED(int bins, double min, double max) {
+	h_lep_0_lep_1_mass_reco_EXTENDED = new TH1F("h_lep_0_lep_1_mass_reco_EXTENDED", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_EXTENDED_PRE = new TH1F("h_lep_0_lep_1_mass_reco_EXTENDED_PRE", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_EXTENDED_CONTROL = new TH1F("h_lep_0_lep_1_mass_reco_EXTENDED_CONTROL", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT = new TH1F("h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT_FINE = new TH1F("h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT_FINE", "", 1000, min, max);
+	h_lep_0_lep_1_mass_reco_EXTENDED_BJET = new TH1F("h_lep_0_lep_1_mass_reco_EXTENDED_BJET", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_EXTENDED_HIGH_E = new TH1F("h_lep_0_lep_1_mass_reco_EXTENDED_HIGH_E", "", bins, min, max);
+	h_lep_0_lep_1_mass_reco_EXTENDED_TRUTH = new TH1F("h_lep_0_lep_1_mass_reco_EXTENDED_TRUTH", "", bins, min, max);
+
+	hv_lep_0_lep_1_mass_reco_EXTENDED.push_back(h_lep_0_lep_1_mass_reco_EXTENDED);
+	hv_lep_0_lep_1_mass_reco_EXTENDED.push_back(h_lep_0_lep_1_mass_reco_EXTENDED_CONTROL);
+	hv_lep_0_lep_1_mass_reco_EXTENDED.push_back(h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT);
+	hv_lep_0_lep_1_mass_reco_EXTENDED.push_back(h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT_FINE);
+	hv_lep_0_lep_1_mass_reco_EXTENDED.push_back(h_lep_0_lep_1_mass_reco_EXTENDED_PRE);
+	hv_lep_0_lep_1_mass_reco_EXTENDED.push_back(h_lep_0_lep_1_mass_reco_EXTENDED_BJET);
+	hv_lep_0_lep_1_mass_reco_EXTENDED.push_back(h_lep_0_lep_1_mass_reco_EXTENDED_HIGH_E);
+	hv_lep_0_lep_1_mass_reco_EXTENDED.push_back(h_lep_0_lep_1_mass_reco_EXTENDED_TRUTH);
+
+	hv_lep_0_lep_1_mass_reco_EXTENDED_names.push_back("h_lep_0_lep_1_mass_reco_EXTENDED");
+	hv_lep_0_lep_1_mass_reco_EXTENDED_names.push_back("h_lep_0_lep_1_mass_reco_EXTENDED_CONTROL");
+	hv_lep_0_lep_1_mass_reco_EXTENDED_names.push_back("h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT");
+	hv_lep_0_lep_1_mass_reco_EXTENDED_names.push_back("h_lep_0_lep_1_mass_reco_EXTENDED_EXCEPT_FINE");
+	hv_lep_0_lep_1_mass_reco_EXTENDED_names.push_back("h_lep_0_lep_1_mass_reco_EXTENDED_PRE");
+	hv_lep_0_lep_1_mass_reco_EXTENDED_names.push_back("h_lep_0_lep_1_mass_reco_EXTENDED_BJET");
+	hv_lep_0_lep_1_mass_reco_EXTENDED_names.push_back("h_lep_0_lep_1_mass_reco_EXTENDED_HIGH_E");
+	hv_lep_0_lep_1_mass_reco_EXTENDED_names.push_back("h_lep_0_lep_1_mass_reco_EXTENDED_TRUTH");
+
+}
+
+
 // -- Invariant mass of lepton 0 and lepton 1; non reconstructed when reconstruction happens
 void MC_Analysis::Book_lep_0_lep_1_mass_non_reco(int bins, double min, double max) {
 	h_lep_0_lep_1_mass_non_reco = new TH1F("h_lep_0_lep_1_mass_non_reco", "", bins, min, max);

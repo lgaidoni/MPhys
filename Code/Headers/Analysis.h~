@@ -9,7 +9,7 @@
 ///											///
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-// 
+
 ////////////////////////////////////////////////////////////////////////////////////////
 ///--------------------------- HISTOGRAM BOOKING FUNCTION ---------------------------///
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -1004,23 +1004,23 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	}
 
 	if (ChainName.find("_Zee_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = (0 * pow(jet_0_jet_1_mass, 2)) + (-0.000231271 * jet_0_jet_1_mass) + 1.07891;
-		QCD_scaling_factor = 1.03766;
+		QCD_weight_factor = (1.65721e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.000289638 * jet_0_jet_1_mass) + 1.10706;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Zmumu_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = (0 * pow(jet_0_jet_1_mass, 2)) + (-0.000231271 * jet_0_jet_1_mass) + 1.07891;
-		QCD_scaling_factor = 1.03766;
+		QCD_weight_factor = (1.65721e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.000289638 * jet_0_jet_1_mass) + 1.10706;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Ztt_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = (0 * pow(jet_0_jet_1_mass, 2)) + (-0.000231271 * jet_0_jet_1_mass) + 1.07891;
-		QCD_scaling_factor = 1.03766;
+		QCD_weight_factor = (1.65721e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.000289638 * jet_0_jet_1_mass) + 1.10706;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 
 	if (ChainName.find("_Zee2jets_") != string::npos || ChainName.find("_Zmm2jets_") != string::npos ||ChainName.find("_Ztt2jets_") != string::npos) {
-		EW_scaling_factor = 2.54884;
+		EW_scaling_factor = 2.81941;
 	}
 
 	if (weight_total_override) recipe_weighting = 1; // for data samples
