@@ -1194,5 +1194,215 @@ void Cross_Section_Calculation_QCD_EW_EE_MM(string higgs_suffix, string DataType
 
 }
 
+void Significance_Plots_Loop(string AnalysisType, string higgs_suffix, string DataType, int SelectedProcess, double initial_minval, double maxval) {
 
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
+	vector<double> x;
+	vector<double> y;
+	vector<double> yerr;
+	vector<double> xerr;
+
+	// create graph objects
+	TCanvas *canvas = new TCanvas("canvas", "", 600, 400);
+
+	//canvas->SetFillColor(42);
+	//canvas->SetGrid();
+
+	string OutputFileName = "Significance_Plot_" + AnalysisType + "_mjj.pdf";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + higgs_suffix + "/";
+	string FullOutputFilePath = OutputFilePath + "/" + OutputFileName;
+
+	double xmax = histograms[0]->GetXaxis()->GetXmax();
+	double xmin = histograms[0]->GetXaxis()->GetXmin();
+
+	double initial_minval_range = xmax * 0.05;
+
+	double loop_start = initial_minval - initial_minval_range;
+	double loop_end = initial_minval + initial_minval_range;
+
+	loop_start = initial_minval;
+	loop_end = maxval;
+	
+	for(double minval = loop_start; minval < loop_end; minval += initial_minval_range/10) {
+		cout << "minval: " << minval << "\tmaxval: " << maxval;
+		double significance = EXCEPT_FINE_Significance(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms, higgs_suffix);
+		double error = EXCEPT_FINE_Significance_ERR(AnalysisType, DataType, SelectedProcess, minval, maxval, root_files, histograms, higgs_suffix);
+		cout << "\tSig: " << significance << "\terror: " << error << endl << endl;
+		x.push_back(minval);
+		y.push_back(significance);
+		yerr.push_back(error);
+	}
+
+	double x_array[x.size()];
+	double y_array[y.size()];
+	double yerr_array[yerr.size()];
+	double xerr_array[x.size()];
+	int n = x.size();
+
+	for (int i = 0; i < n; i++){
+		x_array[i] = x[i];
+		y_array[i] = y[i];
+		xerr_array[i] = 0;
+		yerr_array[i] = yerr[i];
+		//cout << "i : " << i << endl;
+	}
+
+	//TGraph *gr = new TGraph(n,x_array,y_array);
+	TGraphErrors *gr = new TGraphErrors(n,x_array,y_array,xerr_array,yerr_array);
+
+	/*gr->SetLineColor(9);
+	gr->SetLineWidth(2);
+	gr->SetMarkerColor(1);
+	gr->SetMarkerStyle(5);
+	gr->SetTitle("Significance Plot");
+	gr->GetXaxis()->SetTitle("m_{jj}");
+	gr->GetYaxis()->SetTitle("Significance");
+	
+	gr->Draw();
+*/
+	gr->SetLineColor(9);
+	gr->SetLineWidth(2);
+	gr->SetMarkerColor(1);
+	gr->SetMarkerStyle(5);
+	gr->SetMarkerSize(1.5);
+	gr->SetTitle("Significance Plot");
+	gr->GetXaxis()->SetTitle("m_{jj}");
+	gr->GetYaxis()->SetTitle("Significance");
+	//gStyle->SetEndErrorSize(1);
+	gr->SetFillColor(46);
+	gr->SetFillStyle(3005);
+	//gr->Draw();
+	gr->Draw("a3");
+	//gr->Draw();
+   	//gStyle->SetErrorX(1.);
+
+
+	//gr->Draw();
+	//Write out to a ROOT file
+	canvas->SaveAs(FullOutputFilePath.c_str());
+	//sig1
+
+}
+/*
+void All_sig_plots(string higgs_suffix, string DataType, int SelectedProcess, double initial_minval, double maxval){
+
+	TCanvas *c1 = new TCanvas("c1","Exclusion graphs examples",200,10,600,400);
+	c1->SetGrid();
+	
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
+	vector<double> x;
+	vector<double> y;
+	vector<double> yerr;
+	vector<double> xerr;
+
+	// create graph objects
+	TCanvas *canvas = new TCanvas("canvas", "", 600, 400);
+
+	TMultiGraph *mg = new TMultiGraph();
+	mg->SetTitle("Significance graphs");
+
+
+
+	//canvas->SetFillColor(42);
+	//canvas->SetGrid();
+
+	string OutputFileName = "Significance_Plot_" + AnalysisType + "_mjj.pdf";
+	string OutputFilePath = "../../Output-Files/" + AnalysisType + higgs_suffix + "/";
+	string FullOutputFilePath = OutputFilePath + "/" + OutputFileName;
+
+	double xmax = histograms[0]->GetXaxis()->GetXmax();
+	double xmin = histograms[0]->GetXaxis()->GetXmin();
+
+	double initial_minval_range = xmax * 0.05;
+
+	double loop_start = initial_minval - initial_minval_range;
+	double loop_end = initial_minval + initial_minval_range;
+
+	loop_start = initial_minval;
+	loop_end = maxval;
+	vector<string> AnalysisTypes;
+	AnalysisTypes.push_back("MuonTau");//[0]
+	AnalysisTypes.push_back("ElectronMuon");//[1]
+	AnalysisTypes.push_back("ElectronTau");//[2]
+
+	for (i=0, i < AnalysisTypes.size();, i++){
+
+		string AnalysisType = AnalysisTypes[i]
+
+		for(double minval = loop_start; minval < loop_end; minval += initial_minval_range/10) {
+			cout << "minval: " << minval << "\tmaxval: " << maxval;
+			double significance = EXCEPT_FINE_Significance(AnalysisType[i], DataType, SelectedProcess, minval, maxval, root_files, histograms, higgs_suffix);
+			double error = EXCEPT_FINE_Significance_ERR(AnalysisType[i], DataType, SelectedProcess, minval, maxval, root_files, histograms, higgs_suffix);
+			cout << "\tSig: " << significance << "\terror: " << error << endl << endl;
+			x.push_back(minval);
+			y.push_back(significance);
+			yerr.push_back(error);
+		}
+
+		double x_array[x.size()];
+		double y_array[y.size()];
+		double yerr_array[yerr.size()];
+		double xerr_array[x.size()];
+		int n = x.size();
+
+		for (int j = 0; j < n; j++){
+			x_array[j] = x[j];
+			y_array[j] = y[j];
+			xerr_array[j] = 0;
+			yerr_array[j] = yerr[j];
+			//cout << "i : " << i << endl;
+		}
+	}
+
+	double x_MuonTau; double x_ElectronTau; double x_ElectronMuon;
+	double  y_MuonTau; double x_ElectronTau; double x_ElectronMuon;
+	double xerr_MuonTau; double x_ElectronTau; double x_ElectronMuon;
+	double yerr_MuonTau; double x_ElectronTau;  double x_ElectronMuon;
+	x_array[0] = x_MuonTau;
+	y_array[0] = y_MuonTau;
+	xerr_array[0] = xerr_MuonTau;
+	yerr_array[0] = yerr_MuonTau;
+	//TGraph *gr = new TGraph(n,x_array,y_array);
+	TGraphErrors *gr1 = new TGraphErrors(n,x_MuonTau,y_MuonTau,xerr_MuonTau,yerr_MuonTau);
+	gr1->SetLineColor(9);
+	gr1->SetLineWidth(2);
+	gr1->SetMarkerColor(1);
+	gr1->SetMarkerStyle(5);
+	gr1->SetMarkerSize(1.5);
+	mg->Add(gr1);
+	mg->Draw();
+
+	gr->SetFillColor(6);
+	gr->SetFillStyle(3005);
+	gr->Draw("a4");
+
+	TGraph *gr1 = new TGraph(n,xvalues1,yvalues1);
+	gr1->SetLineColor(2);
+	gr1->SetLineWidth(1504);
+	gr1->SetFillStyle(3005);
+	TGraph *gr2 = new TGraph(n,xvalues2,yvalues2);
+	gr2->SetLineColor(4);
+	gr2->SetLineWidth(-2002);
+	gr2->SetFillStyle(3004);
+	gr2->SetFillColor(9);
+	TGraph *gr3 = new TGraph(n,xvalues3,yvalues3);
+	gr3->SetLineColor(5);
+	gr3->SetLineWidth(-802);
+	gr3->SetFillStyle(3002);
+	gr3->SetFillColor(2);
+
+	mg->SetTitle("Significance Plot");
+	mg->GetXaxis()->SetTitle("m_{jj}");
+	mg->GetYaxis()->SetTitle("Significance");
+	mg->Add(gr1);
+	mg->Add(gr2);
+	mg->Add(gr3);
+	mg->Draw("AC");
+return c1;
+	
+
+}
+*/
 #endif

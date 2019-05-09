@@ -823,6 +823,75 @@ double EXCEPT_Significance_Calc(string AnalysisType, string DataType, int Select
 
 }
 
+
+
+double EXCEPT_Significance_Calc_ERR(string AnalysisType, string DataType, int SelectedProcess, vector<TFile*> root_files, vector<TH1F*> histograms, double min, double max, string higgs_suffix) {
+
+	double N_events = 0;
+	double N_bkg = 0;
+	double N_sig = 0;
+	double significance = 0;
+	double N_events_manual = 0;
+	double N_bkg_manual = 0;
+	double Err_N_bkg = 0;
+	double Err_N_sig = 0;
+	double Err_N_bkg_sqrd = 0;
+	double Err_N_sig_sqrd = 0;
+	double N_tot = 0;
+	double Err_denominator = 0;;
+	double Num_frac = 0;
+	double Denom_frac = 0;
+	double prop_of_errors = 0;
+	double error = 0;
+
+	if (higgs_suffix == "_Higgs") {
+
+		for (int i=0; i<=15; i++) { //loop over the histograms for different data sets
+			if (i != 11) {
+				TH1F* histogram = histograms[i];
+				if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+					N_events = histogram->Integral(min, max); // gets no of events by integrating
+					//cout << "N_Events = " << N_events << endl;
+					N_bkg += N_events;
+					//cout << "N_bkg = " << N_bkg << endl;
+				}
+				else N_sig = histogram->Integral(min, max);  // should get the signal number of events
+			}
+		}
+	
+	} else {
+
+		for (int i=0; i<11; i++) { //loop over the histograms for different data sets
+			TH1F* histogram = histograms[i];
+			if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+				N_events = histogram->Integral(min, max); // gets no of events by integrating
+				N_bkg += N_events;
+			}
+			else N_sig = histogram->Integral(min, max);  // should get the signal number of events
+		}
+
+	}
+
+	significance = EXCEPT_Significance_Calc(AnalysisType, DataType, SelectedProcess, root_files, histograms, min, max, higgs_suffix);
+	// Error propagation here
+	// See Alice Lab book for explanation
+
+	Err_N_bkg = pow(N_bkg_manual, 0.5);
+	Err_N_sig = pow(N_sig, 0.5);
+	Err_N_bkg_sqrd = pow(Err_N_bkg, 2);
+	Err_N_sig_sqrd = pow(Err_N_sig, 2);
+	N_tot = N_bkg_manual + N_sig;
+	Err_denominator = pow((Err_N_bkg_sqrd + Err_N_sig_sqrd),0.5);
+	Num_frac = Err_N_sig / N_sig;
+	Denom_frac = Err_denominator / N_tot;
+	prop_of_errors = pow( (pow(Num_frac, 2) + pow(Denom_frac,2)),0.5);
+	error = significance * prop_of_errors;
+
+	return error;
+
+}
+
+
 double EXCEPT_FINE_Significance(string AnalysisType, string DataType, int SelectedProcess, double minval, double maxval, vector<TFile*> root_files, vector<TH1F*> histograms, string higgs_suffix) {
 
 	double xmax = histograms[0]->GetXaxis()->GetXmax();
@@ -841,6 +910,79 @@ double EXCEPT_FINE_Significance(string AnalysisType, string DataType, int Select
 
 	return significance;
 
+}
+
+double EXCEPT_FINE_Significance_ERR(string AnalysisType, string DataType, int SelectedProcess, double minval, double maxval, vector<TFile*> root_files, vector<TH1F*> histograms, string higgs_suffix) {
+
+	double xmax = histograms[0]->GetXaxis()->GetXmax();
+	double xbins = histograms[0]->GetNbinsX();
+
+	double minbin = (minval/xmax) * xbins;
+	double maxbin = (maxval/xmax) * xbins;
+
+	double minbinint = (int) round(minbin);
+	double maxbinint = (int) round(maxbinint);
+
+	double N_events;
+	double N_events_manual;
+	double N_bkg;
+	double N_bkg_manual;
+	double N_sig;
+	double Err_N_bkg;
+	double Err_N_sig;
+	double Err_N_bkg_sqrd;
+	double Err_N_sig_sqrd;
+	double N_tot;
+	double Err_denominator;
+	double Num_frac;
+	double Denom_frac;
+	double prop_of_errors;
+	double error;
+
+
+	//cout << SignificanceLevelCalc(AnalysisType, DataType, 5, root_files, histograms) << endl;
+	//cout << EXCEPT_Significance_Calc(AnalysisType, DataType, 5, root_files, histograms, minbin, maxbin) << endl;
+
+	double significance = EXCEPT_Significance_Calc(AnalysisType, DataType, SelectedProcess, root_files, histograms, minbin, maxbin, higgs_suffix);
+	//double error = EXCEPT_Significance_Calc_ERR(AnalysisType, DataType, SelectedProcess, root_files, histograms, minbin, maxbin, higgs_suffix);
+
+	for (int i=0; i<=15; i++) { //loop over the histograms for different data sets to get number of events SIGNAL and BKG
+		if (i != 11) {
+			TH1F* histogram = histograms[i];
+			if (i != SelectedProcess) { //if NOT the selected process, calculate the background
+				N_events = histogram->Integral(); // gets no of events by integrating
+
+				double sum = 0;
+				for (int j = 1; j < 51; j++) {
+					double value = histogram->GetBinContent(j);
+					if (!(isnan(value))) sum += value;
+				}
+
+				N_events_manual = sum;
+				//cout << i << endl;
+				//cout << "N_Events = " << N_events << "   :   N_Events_Manual = " << N_events_manual << endl;
+				N_bkg += N_events;
+				N_bkg_manual += N_events_manual;
+				//cout << "N_bkg = " << N_bkg << "   :   N_bkg_manual = " << N_bkg_manual << endl;
+			}
+			else N_sig = histogram->Integral();  // should get the signal number of events
+		}
+	}
+
+	// Error propagation here
+	// See Alice Lab book for explanation
+	Err_N_bkg = pow(N_bkg_manual, 0.5);
+	Err_N_sig = pow(N_sig, 0.5);
+	Err_N_bkg_sqrd = pow(Err_N_bkg, 2);
+	Err_N_sig_sqrd = pow(Err_N_sig, 2);
+	N_tot = N_bkg_manual + N_sig;
+	Err_denominator = pow((Err_N_bkg_sqrd + Err_N_sig_sqrd),0.5);
+	Num_frac = Err_N_sig / N_sig;
+	Denom_frac = Err_denominator / N_tot;
+	prop_of_errors = pow( (pow(Num_frac, 2) + pow(Denom_frac,2)),0.5);
+	error = significance * prop_of_errors;
+
+	return error;
 }
 
 //This function will optimise the significance
