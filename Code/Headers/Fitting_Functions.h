@@ -224,7 +224,7 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 						double bin_centre = binwidth * j;
 						double bin_content = histogram->GetBinContent(j);
 						double fit_y = m * bin_centre + c;
-						cout << "fit_y = " << fit_y << "   :   bin_centre = " << bin_centre << endl;
+						//cout << "fit_y = " << fit_y << "   :   bin_centre = " << bin_centre << endl;
 						/*
 						cout << "Bin centre: " << bin_centre << " ";
 						cout << "Bin content: " << bin_content << " ";
@@ -260,6 +260,45 @@ TH1F* Weight_Process_Histogram(vector<TH1F*> histograms, int SelectedProcess, do
 					*/
 					histogram->SetBinContent(j, fit_y * bin_content);
 
+				}
+			}
+		}
+	}
+
+	return histogram;
+
+}
+
+TH1F* Weight_Process_Histogram_QUAD(vector<TH1F*> histograms, int SelectedProcess, double m2, double m, double c, double bins, string higgs_suffix) { 
+
+	TH1F *histogram;
+
+	if(higgs_suffix == "_Higgs") {
+		for (int i=0; i <= 15; i++) {
+			if (i != 11) {
+				if (i == SelectedProcess) {
+
+					histogram = histograms[i];
+
+					double xmin = histogram->GetXaxis()->GetXmin();
+					double xmax = histogram->GetXaxis()->GetXmax();
+					double binwidth = (xmax - xmin)/bins;
+
+					for(int j=0; j < bins + 1; j++) {
+
+						double bin_centre = binwidth * j;
+						double bin_content = histogram->GetBinContent(j);
+						double fit_y = m2 * pow(bin_centre, 2) + m * bin_centre + c;
+						//cout << "fit_y = " << fit_y << "   :   bin_centre = " << bin_centre << endl;
+						/*
+						cout << "Bin centre: " << bin_centre << " ";
+						cout << "Bin content: " << bin_content << " ";
+						cout << "fit_y: " << fit_y << " ";
+						cout << "nbc: " << fit_y * bin_content << endl;
+						*/
+						histogram->SetBinContent(j, fit_y * bin_content);
+
+					}
 				}
 			}
 		}
@@ -868,7 +907,7 @@ void Draw_Weighted_Histo_And_Ratio_EE_MM(string higgs_suffix, string DataType, d
 	axis3->SetTitle(Histogram_Namer(DataType).c_str());
 	axis3->Draw(); 
 
-	TF1 *fit = new TF1("fit", "pol1", comparisonHistogram->GetXaxis()->GetXmin(), 3000);
+	TF1 *fit = new TF1("fit", "pol2", comparisonHistogram->GetXaxis()->GetXmin(), 3000);
 
 	comparisonHistogram->Fit("fit");
 
@@ -1191,6 +1230,73 @@ void Cross_Section_Calculation_QCD_EW_EE_MM(string higgs_suffix, string DataType
 	output2 << "EW Scale Factor:      " << scale_factor_Process2 << " +/- " << scale_factor_Process2_Error << endl;
 	output2 << "EW Cross Section:     " << info[1] * scale_factor_Process2 << " +/- " << cross_section_error  << endl;
 	output2.close();
+
+}
+
+void Systematic_Uncertainty_Calc(string AnalysisType, string DataType) {
+
+	gStyle->SetOptStat(0);
+	string higgs_suffix = "_Higgs";
+
+	///LINEAR
+	vector<TFile*> linear_root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> linear_histograms = Histogram_Return_Given_File(DataType, linear_root_files);
+	cout << linear_histograms[5]->Integral() << endl;
+	linear_histograms[8] = Weight_Process_Histogram(linear_histograms, 8, -0.000231271, 1.07891, 50, higgs_suffix);
+	linear_histograms[9] = Weight_Process_Histogram(linear_histograms, 9, -0.000231271, 1.07891, 50, higgs_suffix);
+	linear_histograms[10] = Weight_Process_Histogram(linear_histograms, 10, -0.000231271, 1.07891, 50, higgs_suffix);
+	
+	linear_histograms[8]->Scale(1.03766);
+	linear_histograms[9]->Scale(1.03766);
+	linear_histograms[10]->Scale(1.03766);
+
+	linear_histograms[5]->Scale(2.54884);
+	linear_histograms[6]->Scale(2.54884);
+	linear_histograms[7]->Scale(2.54884);
+
+	double linear_events = 0;
+
+	for(int i = 0; i <= 15; i++) {
+		if(i != 11) {
+			cout << "Events In Process = " << linear_histograms[i]->Integral();
+			linear_events += linear_histograms[i]->Integral();
+			cout << "\t Linear Events = " << linear_events << endl;
+		}
+	}
+
+	double linearSig = SignificanceLevelCalc(AnalysisType, DataType, 5, linear_root_files, linear_histograms, higgs_suffix);
+	cout << "Linear Significance = " << linearSig << endl;
+	cout << "Linear Total Number of Events = " << linear_events << endl;
+
+	///QUADRATIC
+	vector<TFile*> quadratic_root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> quadratic_histograms = Histogram_Return_Given_File(DataType, quadratic_root_files);
+	cout << quadratic_histograms[5]->Integral() << endl;
+	quadratic_histograms[8] = Weight_Process_Histogram_QUAD(quadratic_histograms, 8, 1.65721e-08, -0.000289638, 1.10706, 50, higgs_suffix);
+	quadratic_histograms[9] = Weight_Process_Histogram_QUAD(quadratic_histograms, 9, 1.65721e-08, -0.000289638, 1.10706, 50, higgs_suffix);
+	quadratic_histograms[10] = Weight_Process_Histogram_QUAD(quadratic_histograms, 10, 1.65721e-08, -0.000289638, 1.10706, 50, higgs_suffix);
+	
+	quadratic_histograms[8]->Scale(1.02499);
+	quadratic_histograms[9]->Scale(1.02499);
+	quadratic_histograms[10]->Scale(1.02499);
+
+	quadratic_histograms[5]->Scale(2.81941);
+	quadratic_histograms[6]->Scale(2.81941);
+	quadratic_histograms[7]->Scale(2.81941);
+
+	double quadratic_events = 0;
+
+	for(int i = 0; i <= 15; i++) {
+		if(i != 11) {
+			cout << "Events In Process = " << quadratic_histograms[i]->Integral();
+			quadratic_events += quadratic_histograms[i]->Integral();
+			cout << "\t quadratic Events = " << quadratic_events << endl;
+		}
+	}
+
+	double quadraticSig = SignificanceLevelCalc(AnalysisType, DataType, 5, quadratic_root_files, quadratic_histograms, higgs_suffix);
+	cout << "quadratic Significance = " << quadraticSig << endl;
+	cout << "quadratic Total Number of Events = " << quadratic_events << endl;
 
 }
 
