@@ -574,7 +574,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			if (elec_0_id_medium == 1) { // selecting medium electrons
 				lepton_certainty_check_1 = true; 
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
-				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights: commented out as always ZERO
+				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
 				//cout << "elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient: " << elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient << endl;
 
 			}
@@ -591,7 +591,6 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 		}
 
 		if (AnalysisType == "ElectronTau") { // lep_1 = elec_0, lep_0 = tau_0
-			// anything with lep_1 is OK as for electron but double check lep_0 stuff as may not be reasonable to make on tau
 			// Single Lepton trigger - electrons only for lep_1
 			if (current_run_number <= 284484 && current_run_number >= 276262 ) {//2015
 				if (eleTrigMatch_0_trigger_matched && ( (HLT_e24_lhmedium_L1EM20VH && lep_1_pt > 25.) || (HLT_e60_lhmedium && lep_1_pt > 61.) || (HLT_e120_lhloose && lep_1_pt > 121.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
@@ -603,7 +602,6 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 				if (eleTrigMatch_0_trigger_matched && ( (HLT_e26_lhtight_nod0_ivarloose && lep_1_pt > 27.) || (HLT_e60_lhmedium_nod0 && lep_1_pt > 61.) || (HLT_e140_lhloose_nod0 && lep_1_pt > 141.) ) ) { lep_1_trig = true; single_lepton_trigger = true; }
 			}
 			// Kinematic Cuts
-			// maybe remove this lep_0 for TAU!
 			if (lep_0_eta < 2.47 && lep_1_eta < 2.47) abs_eta_recipe_condition = true; // electron eta
 
 			// Lepton reconstruction and isolation cuts = weights
@@ -613,7 +611,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 				lepton_certainty_check_1 = true; 
 				lepton_certainty_check_2 = true; // tau case, no check (should this be false?)
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
-				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights commented out as always ZERO
+				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
 				recipe_weighting *= tau_0_NOMINAL_TauEffSF_JetBDTmedium; // hadronic tau weighting
 			}
 			// Barrel end-cap transition region veto for every electron we select
@@ -649,7 +647,7 @@ bool MC_Analysis::InitialCut(bool bjets, bool truth) { // true = cut, false = ke
 			if (elec_0_id_medium == 1) {
 				lepton_certainty_check_2 = true; 
 				recipe_weighting *= elec_0_NOMINAL_EleEffSF_offline_RecoTrk; // reco weights
-				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights:commented out as always ZERO
+				//recipe_weighting *= elec_0_NOMINAL_EleEffSF_Isolation_MediumLLH_d0z0_v13_isolGradient; // electron isolation weights
 			}
 			// Barrel end-cap transition region veto for every electron we select
 			if (eetabe2 > 0 && eetabe2 < 2.47 && !(eetabe2 > 1.37 && eetabe2 < 1.52)) elec_endcap_check = true;

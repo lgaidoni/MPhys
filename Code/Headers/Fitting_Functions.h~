@@ -858,7 +858,7 @@ void Significance_Plots_Loop(string AnalysisType, string higgs_suffix, string Da
 	gr->GetXaxis()->SetTitle("m_{jj}");
 	gr->GetYaxis()->SetTitle("Significance");
 	//gStyle->SetEndErrorSize(1);
-	gr->SetFillColor(46);
+	gr->SetFillColor(11);
 	gr->SetFillStyle(3005);
 	//gr->Draw();
 	gr->Draw("a3");

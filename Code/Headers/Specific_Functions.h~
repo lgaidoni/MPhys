@@ -179,6 +179,34 @@ void AllSignificanceCalc(string AnalysisType, string higgs_suffix) {
 }
 
 
+void AllSignificanceCalc_EXCEPT(string AnalysisType, string higgs_suffix) { // For EXCEPT JET MASS ONLY
+
+	double min = 10;
+	double max = 50;
+
+	vector<TFile*> root_files = Root_Files(AnalysisType, higgs_suffix);
+	vector<TH1F*> histograms = Histogram_Return_Given_File(DataType, root_files);
+
+	string DataType = "jet_0_jet_1_mass_EXCEPT";
+	int SelectedProcess;
+	if (AnalysisType == "Electron") SelectedProcess = 7;
+	if (AnalysisType == "Muon") SelectedProcess = 6;
+	if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") SelectedProcess = 5;
+
+	fstream output("../../Output-Files/Final_Graphs/" + AnalysisType + higgs_suffix + "/" + AnalysisType + higgs_suffix + "_Significance_EXCEPT_values.txt", output.out);
+	output << "Data Type \t & Significance \t & \t Error" << endl << endl;
+
+	// calculate significance and error
+	double Sig = EXCEPT_Significance_Calc(AnalysisType, DataType, SelectedProcess, root_files, histograms, min, max, higgs_suffix);
+	double Err = EXCEPT_Significance_Calc_ERR(AnalysisType, DataType, SelectedProcess, root_files, histograms, min, max, higgs_suffix);
+
+	// save to file
+	output << DataType + higgs_suffix << "\t & Sig: " << Sig << " \t & Err: " << Err << endl << endl;
+	output.close();
+}
+
+
+
 void Generate_All_TXT_Files() {
 
 	//NumberEventsCalc("Electron", "_Higgs");
