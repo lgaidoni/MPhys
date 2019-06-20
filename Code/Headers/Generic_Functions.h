@@ -1696,6 +1696,53 @@ void Process_Combiner(string AnalysisType, string higgs_suffix, string Process) 
 
 }
 
+void Process_Combiner_For_Tau(string higgs_suffix, string Process, int Process_Number) {
+
+	//Vector of files that can be looped over
+	vector<TFile*> files;
+
+	//String for the root file path
+	string ROOTFilePath = "../../Root-Files/Tau" + higgs_suffix + "/Processes/" + Process + "_Histograms.root";
+
+	cout << "Writing To File " << ROOTFilePath << endl;
+
+	TFile *Histograms;
+
+	if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 1) Histograms = new TFile(ROOTFilePath.c_str(),"NEW");
+	else if (gSystem->AccessPathName(ROOTFilePath.c_str()) == 0) Histograms = new TFile(ROOTFilePath.c_str(),"RECREATE");
+
+	vector<TFile*> ElectronTau_Files = Root_Files("ElectronTau", higgs_suffix);
+	vector<TFile*> ElectronMuon_Files = Root_Files("ElectronMuon", higgs_suffix);
+	vector<TFile*> MuonTau_Files = Root_Files("MuonTau", higgs_suffix);
+
+	//Open the list of Data Types
+	string DataTypeFileName = "../../MPhys/DataTypes/Common_DataTypes.txt";
+	string line;
+
+	ifstream DataTypeFile (DataTypeFileName);
+	
+	while(!DataTypeFile.eof()) {  		//While not at the end of the file
+		getline(DataTypeFile, line);  	//Get the file line
+		if (line != "") {  		//If not looking at the last line	
+			cout << "Combining " << line << endl;
+
+			string histogramName = "h_" + line + ";1";
+
+			TH1F *histogramMaster = (TH1F*)ElectronTau_Files[Process_Number]->Get(histogramName.c_str()); 
+			histogramMaster->Add((TH1F*)ElectronMuon_Files[Process_Number]->Get(histogramName.c_str()));
+			histogramMaster->Add((TH1F*)MuonTau_Files[Process_Number]->Get(histogramName.c_str()));
+
+			//Draw the master histogram
+			Histograms->cd();
+			histogramMaster->Draw("HIST");
+			histogramMaster->Write();
+		}
+	}
+
+	Histograms->Close();
+
+}
+
 //This function will combine processes and write them out to a new .root file
 void Process_MAXVAL_Checker(string AnalysisType, string higgs_suffix, string Process) {
 
@@ -2444,6 +2491,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 
 	DataType.push_back("lep_0_lep_1_mass");
 	DataType.push_back("lep_0_lep_1_mass_reco");
+	DataType.push_back("lep_0_lep_1_mass_reco_EXTENDED");
 	DataType.push_back("lep_0_lep_1_mass_non_reco");
 	DataType.push_back("jet_0_jet_1_mass");
 	DataType.push_back("jet_0_jet_1_mass");
@@ -2566,6 +2614,11 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			ymax = current_y_max * 10;
 		}
 
+		if (DataType[i] == "lep_0_lep_1_mass_reco_EXTENDED") {
+			canvas->SetLogy();
+			ExceptStack->SetMinimum(0.1);
+		}
+
 		if (DataType[i] == "tau_0_jet_BDT_SCORE_TRANS")  { x1 = 0; x2 = 1; }
 
 		if (AnalysisType == "Electron" || AnalysisType == "Muon") {
@@ -2577,7 +2630,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 			if (DataType[i] == "pT_balance")  { x1 = 0; x2 = 0.16; }
 
 		}
-		if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") {
+		if (AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon" || AnalysisType == "Tau") {
 			
 			selected_process = 5;
 
@@ -2614,7 +2667,7 @@ void Except_Shaded_Region(string AnalysisType, string higgs_suffix, string mode,
 		TLine *l3 = new TLine(x3, ymin, x3, ymax);
 		TLine *l4 = new TLine(x4, ymin, x4, ymax);
 
-		if ((AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon") && DataType[i] == "lep_0_lep_1_mass_non_reco") {
+		if ((AnalysisType == "ElectronTau" || AnalysisType == "MuonTau" || AnalysisType == "ElectronMuon" || AnalysisType == "Tau") && DataType[i] == "lep_0_lep_1_mass_non_reco") {
 			b3->SetFillStyle(1001);
 			b3->SetFillColorAlpha(kRed, 0.25);
 			b3->Draw();
@@ -2908,6 +2961,7 @@ void DrawStackedProcesses(string AnalysisType, string higgs_suffix) {
 	vector<string> EXCEPT_SIGNAL_graphs;
 	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass");
 	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass_reco");
+	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass_reco_EXTENDED");
 	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_mass_reco_INSIDE");
 	EXCEPT_SIGNAL_graphs.push_back("lep_0_lep_1_pT");
 	EXCEPT_SIGNAL_graphs.push_back("jet_0_jet_1_mass");
@@ -3045,6 +3099,30 @@ void CombineAllProcesses_AnalysisType(string AnalysisType, string higgs_suffix) 
 		Process_Combiner(AnalysisType, higgs_suffix, "lllv");
 		Process_Combiner(AnalysisType, higgs_suffix, "llvv");
 		Process_Combiner(AnalysisType, higgs_suffix, "lvvv");
+	}
+
+}
+
+void CombineAllProcesses_For_Tau(string higgs_suffix) {
+
+	Process_Combiner_For_Tau(higgs_suffix, "Zee", 10);
+	Process_Combiner_For_Tau(higgs_suffix, "Zee2jets", 7);
+	Process_Combiner_For_Tau(higgs_suffix, "Zmumu", 9);
+	Process_Combiner_For_Tau(higgs_suffix, "Zmm2jets", 6);
+	Process_Combiner_For_Tau(higgs_suffix, "Ztt", 8);
+	Process_Combiner_For_Tau(higgs_suffix, "Ztt2jets", 5);
+	Process_Combiner_For_Tau(higgs_suffix, "ZqqZll", 4);
+	Process_Combiner_For_Tau(higgs_suffix, "ttb", 0);
+	Process_Combiner_For_Tau(higgs_suffix, "Wenu", 3);
+	Process_Combiner_For_Tau(higgs_suffix, "Wmunu", 2);
+	Process_Combiner_For_Tau(higgs_suffix, "Wtaunu", 1);
+	Process_Combiner_For_Tau(higgs_suffix, "DATA", 11);
+
+	if(higgs_suffix == "_Higgs") {
+		Process_Combiner_For_Tau(higgs_suffix, "llll", 12);
+		Process_Combiner_For_Tau(higgs_suffix, "lllv", 13);
+		Process_Combiner_For_Tau(higgs_suffix, "llvv", 14);
+		Process_Combiner_For_Tau(higgs_suffix, "lvvv", 15);
 	}
 
 }
