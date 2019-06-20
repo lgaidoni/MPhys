@@ -1004,23 +1004,23 @@ void MC_Analysis::GenerateVariables(bool truth) {
 	}
 
 	if (ChainName.find("_Zee_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = (0 * pow(jet_0_jet_1_mass, 2)) + (-0.000231271 * jet_0_jet_1_mass) + 1.07891;
-		QCD_scaling_factor = 1.03766;
+		QCD_weight_factor = (-1.657e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.0002896 * jet_0_jet_1_mass) + 1.107;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Zmumu_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = (0 * pow(jet_0_jet_1_mass, 2)) + (-0.000231271 * jet_0_jet_1_mass) + 1.07891;
-		QCD_scaling_factor = 1.03766;
+		QCD_weight_factor = (-1.657e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.0002896 * jet_0_jet_1_mass) + 1.107;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 	else if (ChainName.find("_Ztt_") != string::npos && higgs_analysis) {
-		QCD_weight_factor = (0 * pow(jet_0_jet_1_mass, 2)) + (-0.000231271 * jet_0_jet_1_mass) + 1.07891;
-		QCD_scaling_factor = 1.03766;
+		QCD_weight_factor = (-1.657e-08 * pow(jet_0_jet_1_mass, 2)) + (-0.0002896 * jet_0_jet_1_mass) + 1.107;
+		QCD_scaling_factor = 1.02499;
 		//cout << "QCD_WEIGHT_FACTOR = " << QCD_weight_factor << endl << endl;
 	}
 
 	if (ChainName.find("_Zee2jets_") != string::npos || ChainName.find("_Zmm2jets_") != string::npos ||ChainName.find("_Ztt2jets_") != string::npos) {
-		EW_scaling_factor = 2.54884;
+		EW_scaling_factor = 2.81941;
 	}
 
 	if (weight_total_override) recipe_weighting = 1; // for data samples
@@ -1167,7 +1167,7 @@ bool MC_Analysis::Cuts(string region) {
 	
 	if (DeltaPhi < 2.5) delta_phi_condition = true;
 
-	if (tau_0_jet_BDT_SCORE_TRANS > 0) BDT_condition = true;
+	if (tau_0_jet_BDT_SCORE_TRANS > 0.4) BDT_condition = true;
 
 	//If the region is an except region, make the relevant condition always true to see more of that histogram.
 	if (region == "EXCEPT_Z_mass_condition" && !(bjets_region)) 		Z_mass_condition = true;
